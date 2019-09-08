@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import { Route, BrowserRouter } from 'react-router-dom'
+import { Route, BrowserRouter, Link } from 'react-router-dom'
 import { Path } from '../enums/Path'
 import { Home } from '../pages/Home/Home'
 import { About } from '../pages/About/About'
@@ -17,12 +17,57 @@ export const Layout = () => {
 
     const onClickLogout = useCallback(() => setIsAuthorized(false), [])
     const onClickLogin = useCallback(() => setIsAuthorized(true), [])
+    const onClickRegister = useCallback(() => setIsAuthorized(true), [])
 
     const renderHeader = () => {
         return isAuthorized ? (
             <button onClick={onClickLogout}>Выйти</button>
         ) : (
-            <button onClick={onClickLogin}>Войти</button>
+            <>
+                <button onClick={onClickLogin}>Войти</button>
+                <button onClick={onClickRegister}>Зарегистрироваться</button>
+            </>
+        )
+    }
+
+    const renderRoutes = () => {
+        return (
+            <>
+                {renderCommonRoutes()}
+                {isAuthorized && renderAuthorizedRoutes()}
+            </>
+        )
+    }
+
+    const renderLinks = () => {
+        return (
+            <>
+                {renderCommonLinks()}
+                {isAuthorized && renderAuthorizedLinks()}
+            </>
+        )
+    }
+
+    const renderCommonLinks = () => {
+        return (
+            <>
+                <Link to={Path.home}>Главная</Link>
+                <Link to={Path.about}>О нас</Link>
+            </>
+        )
+    }
+
+    const renderAuthorizedLinks = () => {
+        return (
+            <>
+                <Link to={Path.dashboard}>Дашборд</Link>
+                <Link to={Path.calendar}>Календарь</Link>
+                <Link to={Path.activities}>Задачи</Link>
+                <Link to={Path.deals}>Сделки</Link>
+                <Link to={Path.leads}>Лиды</Link>
+                <Link to={Path.contacts}>Контакты</Link>
+                <Link to={Path.products}>Продукты</Link>
+            </>
         )
     }
 
@@ -53,8 +98,8 @@ export const Layout = () => {
         <BrowserRouter>
             <div className={'styles.layout'}>
                 {renderHeader()}
-                {renderCommonRoutes()}
-                {renderAuthorizedRoutes()}
+                {renderRoutes()}
+                {renderLinks()}
             </div>
         </BrowserRouter>
     )
