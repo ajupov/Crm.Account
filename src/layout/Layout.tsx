@@ -10,7 +10,7 @@ import { Leads } from '../pages/Leads/Leads'
 import { Deals } from '../pages/Deals/Deals'
 import { Contacts } from '../pages/Сontacts/Сontacts'
 import { Products } from '../pages/Products/Products'
-// import styles from './Layout.module.less'
+import { GlobalLayoutStyled, LayoutStyled } from './Layout.styles'
 
 export const Layout = () => {
     const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
@@ -96,11 +96,12 @@ export const Layout = () => {
 
     return (
         <BrowserRouter>
-            <div className={'styles.layout'}>
+            <GlobalLayoutStyled />
+            <LayoutStyled>
                 {renderHeader()}
                 {renderRoutes()}
                 {renderLinks()}
-            </div>
+            </LayoutStyled>
         </BrowserRouter>
     )
 }

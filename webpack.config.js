@@ -1,11 +1,10 @@
 const { resolve } = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { HotModuleReplacementPlugin } = require('webpack')
 
-module.exports = (env, options) => {
+module.exports = (_, options) => {
     const isDevelopment = options.mode === 'development'
 
     return {
@@ -37,24 +36,6 @@ module.exports = (env, options) => {
                     test: /\.(ts|tsx)?$/,
                     loader: 'babel-loader',
                     exclude: /node_modules/
-                },
-                {
-                    test: /\.less$/,
-                    use: ExtractTextPlugin.extract({
-                        fallback: 'style-loader',
-                        use: [
-                            {
-                                loader: 'css-loader',
-                                query: {
-                                    modules: true,
-                                    sourceMap: true,
-                                    importLoaders: 1,
-                                    localIdentName: '[name]__[local]___[hash:base64:6]'
-                                }
-                            },
-                            { loader: 'less-loader' }
-                        ]
-                    })
                 },
                 {
                     test: /\.(jpe?g|png|gif|svg)$/,
