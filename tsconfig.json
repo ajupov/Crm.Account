@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "target": "es5",
+        "lib": ["dom", "dom.iterable", "es5", "es2015", "es2016"],
+        "sourceMap": true,
+        "jsx": "react",
+        "moduleResolution": "node",
+        "strict": true,
+        "esModuleInterop": true
+    },
+    "include": ["./src/**/*"],
+    "exclude": ["node_modules", "dist"]
+}
