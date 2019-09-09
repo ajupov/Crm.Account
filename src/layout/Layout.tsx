@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 import { Route, BrowserRouter, Link } from 'react-router-dom'
 import { Path } from '../enums/Path'
 import { Home } from '../pages/Home/Home'
@@ -11,25 +11,11 @@ import { Deals } from '../pages/Deals/Deals'
 import { Contacts } from '../pages/Сontacts/Сontacts'
 import { Products } from '../pages/Products/Products'
 import { GlobalLayoutStyled, LayoutStyled } from './Layout.styles'
-import { Button } from '../@components/Button/Button'
+import { LayoutContextProvider } from './Layout.context'
+import { Nav } from './nav/Nav'
 
 export const Layout = () => {
     const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
-
-    const onClickLogout = useCallback(() => setIsAuthorized(false), [])
-    const onClickLogin = useCallback(() => setIsAuthorized(true), [])
-    const onClickRegister = useCallback(() => setIsAuthorized(true), [])
-
-    const renderHeader = () => {
-        return isAuthorized ? (
-            <Button text="Выйти" onClick={onClickLogout} />
-        ) : (
-            <>
-                <Button text="Войти" onClick={onClickLogin} />
-                <Button text="Зарегистрироваться" onClick={onClickRegister} />
-            </>
-        )
-    }
 
     const renderRoutes = () => {
         return (
@@ -99,9 +85,11 @@ export const Layout = () => {
         <BrowserRouter>
             <GlobalLayoutStyled />
             <LayoutStyled>
-                {renderHeader()}
-                {renderRoutes()}
-                {renderLinks()}
+                <LayoutContextProvider value={{ isAuthorized, setIsAuthorized }}>
+                    <Nav />
+                    {renderRoutes()}
+                    {renderLinks()}
+                </LayoutContextProvider>
             </LayoutStyled>
         </BrowserRouter>
     )
