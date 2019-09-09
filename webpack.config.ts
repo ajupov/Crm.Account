@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { HotModuleReplacementPlugin } = require('webpack')
 
-module.exports = (_, options) => {
+module.exports = (_: any, options: { mode: string }) => {
     const isDevelopment = options.mode === 'development'
 
     return {

@@ -11,6 +11,7 @@ import { Deals } from '../pages/Deals/Deals'
 import { Contacts } from '../pages/Сontacts/Сontacts'
 import { Products } from '../pages/Products/Products'
 import { GlobalLayoutStyled, LayoutStyled } from './Layout.styles'
+import { Button } from '../@components/Button/Button'
 
 export const Layout = () => {
     const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
@@ -21,11 +22,11 @@ export const Layout = () => {
 
     const renderHeader = () => {
         return isAuthorized ? (
-            <button onClick={onClickLogout}>Выйти</button>
+            <Button text="Выйти" onClick={onClickLogout} />
         ) : (
             <>
-                <button onClick={onClickLogin}>Войти</button>
-                <button onClick={onClickRegister}>Зарегистрироваться</button>
+                <Button text="Войти" onClick={onClickLogin} />
+                <Button text="Зарегистрироваться" onClick={onClickRegister} />
             </>
         )
     }
