@@ -67,7 +67,7 @@ module.exports = (_: any, options: { mode: string }) => {
             }),
             new CopyWebpackPlugin([
                 {
-                    from: 'content/**/*',
+                    from: 'public/content/**/*',
                     to: 'content/',
                     flatten: true
                 }

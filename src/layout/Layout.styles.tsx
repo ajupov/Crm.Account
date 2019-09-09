@@ -5,6 +5,7 @@ export const GlobalLayoutStyled = createGlobalStyle`
         margin: 0;
         font-family: Arial, Helvetica, sans-serif;
         font-size: 14px;
+        background: linear-gradient(45deg, #bdc3c7, #2980b9);
     }
 `
 
