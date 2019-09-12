@@ -38,6 +38,10 @@ module.exports = (_: any, options: { mode: string }) => {
                     exclude: /node_modules/
                 },
                 {
+                    test: /\.css$/,
+                    use: ['style-loader', 'css-loader']
+                },
+                {
                     test: /\.(jpe?g|png|gif|svg)$/,
                     loader: 'file-loader'
                 },

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '../../@components/Button/Button'
+import { Button } from 'semantic-ui-react'
 import { LayoutContextConsumer, ILayoutContext } from '../Layout.context'
 
 export const Nav = () => {
@@ -9,11 +9,11 @@ export const Nav = () => {
         const onClickRegister = () => setIsAuthorized(true)
 
         return isAuthorized ? (
-            <Button text="Выйти" onClick={onClickLogout} />
+            <Button basic onClick={onClickLogout}>Выйти</Button>
         ) : (
             <>
-                <Button text="Войти" onClick={onClickLogin} />
-                <Button text="Зарегистрироваться" onClick={onClickRegister} />
+                <Button basic onClick={onClickLogin}>Войти</Button>
+                <Button basic onClick={onClickRegister}>Зарегистрироваться</Button>
             </>
         )
     }
