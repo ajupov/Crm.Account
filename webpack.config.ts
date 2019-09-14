@@ -67,7 +67,7 @@ module.exports = (_: any, options: { mode: string }) => {
             new HotModuleReplacementPlugin(),
             new HtmlWebpackPlugin({
                 template: resolve(__dirname, 'public/index.html'),
-                favicon: resolve(__dirname, 'public/favicon.ico')
+                favicon: resolve(__dirname, 'public/content/images/favicon.ico')
             }),
             new CopyWebpackPlugin([
                 {

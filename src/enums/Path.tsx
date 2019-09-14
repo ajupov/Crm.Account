@@ -1,13 +1,14 @@
 export const Path = {
+    home: '/',
+    about: 'about',
+    careers: 'careers',
+
+    dashboard: '/',
     account: '/account',
-    dashboard: '/dashboard',
     calendar: '/calendar',
     activities: '/activities',
     deals: '/deals',
     leads: '/leads',
     contacts: '/contacts',
-    products: '/products',
-
-    home: '/',
-    about: 'about'
+    products: '/products'
 }
