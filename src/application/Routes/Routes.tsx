@@ -17,7 +17,7 @@ interface IRoutesProps {
     isAuthorized: boolean
 }
 
-const NotAuthorizedRoutes = () => (
+export const NotAuthorizedRoutes = () => (
     <>
         <Route path={Path.home} exact component={Home} />
         <Route path={Path.about} component={About} />

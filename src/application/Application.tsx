@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import { ApplicationContextProvider } from './Application.context'
+import { BrowserRouter, Switch } from 'react-router-dom'
 import { Routes } from './Routes/Routes'
 
 export const Application = () => {
@@ -12,11 +11,9 @@ export const Application = () => {
 
     return (
         <BrowserRouter>
-            <div>
-                <ApplicationContextProvider value={{ isAuthorized }}>
-                    <Routes isAuthorized={isAuthorized} />
-                </ApplicationContextProvider>
-            </div>
+            <Switch>
+                <Routes isAuthorized={isAuthorized} />
+            </Switch>
         </BrowserRouter>
     )
 }
