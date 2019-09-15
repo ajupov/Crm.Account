@@ -1,7 +1,7 @@
 export const Path = {
     home: '/',
-    about: 'about',
-    careers: 'careers',
+    about: '/about',
+    careers: '/careers',
 
     dashboard: '/',
     account: '/account',

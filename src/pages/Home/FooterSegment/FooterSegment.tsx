@@ -8,7 +8,7 @@ export const FooterSegment = () => (
                 <Grid.Row>
                     <Grid.Column width={3}>
                         <Header inverted as="h4">
-                            
+                            Дополнительно
                         </Header>
                         <List link inverted>
                             <List.Item as="a">Карта сайта</List.Item>
@@ -27,7 +27,7 @@ export const FooterSegment = () => (
                     </Grid.Column>
                     <Grid.Column width={7}>
                         <Header as="h4" inverted>
-                            Дополнительно
+                            СМИ
                         </Header>
                         <p>Дополнительная информация о социальных сетях и тд</p>
                     </Grid.Column>

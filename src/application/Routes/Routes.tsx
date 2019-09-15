@@ -11,6 +11,7 @@ import { Deals } from '../../pages/Deals/Deals'
 import { Leads } from '../../pages/Leads/Leads'
 import { Contacts } from '../../pages/Сontacts/Сontacts'
 import { Products } from '../../pages/Products/Products'
+import { Careers } from '../../pages/Careers/Careers'
 
 interface IRoutesProps {
     isAuthorized: boolean
@@ -20,6 +21,7 @@ const NotAuthorizedRoutes = () => (
     <>
         <Route path={Path.home} exact component={Home} />
         <Route path={Path.about} component={About} />
+        <Route path={Path.careers} component={Careers} />
     </>
 )
 
@@ -36,6 +38,5 @@ const AuthorizedRoutes = () => (
     </>
 )
 
-export const Routes = ({ isAuthorized }: IRoutesProps) => {
-    return isAuthorized ? <AuthorizedRoutes /> : <NotAuthorizedRoutes />
-}
+export const Routes = ({ isAuthorized }: IRoutesProps) =>
+    isAuthorized ? <AuthorizedRoutes /> : <NotAuthorizedRoutes />

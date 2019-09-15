@@ -7,8 +7,8 @@ interface INotAuthorizedLayoutProps {
 }
 
 export const NotAuthorizedLayout = ({ children }: INotAuthorizedLayoutProps) => (
-    <>
+    <div style={{ backgroundColor: '#f7f7f7' }}>
         <DesktopContainer>{children}</DesktopContainer>
         <MobileContainer>{children}</MobileContainer>
-    </>
+    </div>
 )

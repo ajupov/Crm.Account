@@ -12,9 +12,11 @@ export const Application = () => {
 
     return (
         <BrowserRouter>
-            <ApplicationContextProvider value={{ isAuthorized }}>
-                <Routes isAuthorized={isAuthorized} />
-            </ApplicationContextProvider>
+            <div>
+                <ApplicationContextProvider value={{ isAuthorized }}>
+                    <Routes isAuthorized={isAuthorized} />
+                </ApplicationContextProvider>
+            </div>
         </BrowserRouter>
     )
 }

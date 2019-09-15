@@ -4,7 +4,7 @@ import { AboutSegment } from './AboutSegment/AboutSegment'
 import { MissionSegment } from './MissionSegment/MissionSegment'
 import { NewsSegment } from './NewsSegment/NewsSegment'
 import { FooterSegment } from './FooterSegment/FooterSegment'
-import { HomeStyled } from './Home.styles'
+import { BannerSegment } from './BannerSegment/BannerSegment'
 
 export const Home = () => {
     useEffect(() => {
@@ -12,13 +12,12 @@ export const Home = () => {
     })
 
     return (
-        <HomeStyled>
-            <NotAuthorizedLayout>
-                <MissionSegment />
-                <AboutSegment />
-                <NewsSegment />
-                <FooterSegment />
-            </NotAuthorizedLayout>
-        </HomeStyled>
+        <NotAuthorizedLayout>
+            <BannerSegment/>
+            <MissionSegment />
+            <AboutSegment />
+            <NewsSegment />
+            <FooterSegment />
+        </NotAuthorizedLayout>
     )
 }

@@ -1,14 +1,14 @@
 import React from 'react'
 import { Menu, Icon, Button } from 'semantic-ui-react'
-import { Path } from '../../../../enums/Path'
-import { ActiveMenuItem } from '../../ActiveMenuItem/ActiveMenuItem'
+import { Path } from '../../../enums/Path'
+import { ActiveMenuItem } from '../ActiveMenuItem/ActiveMenuItem'
 
-interface IMobileMenuPushedProps {
-    onClickShowMenu: () => void
+interface IMobileMenuProps {
+    onClickShow: () => void
 }
 
-export const MobileMenu = () => (
-    <Menu>
+export const MobileSidebarMenu = () => (
+    <>
         <ActiveMenuItem path={Path.home}>Главная</ActiveMenuItem>
         <ActiveMenuItem path={Path.about}>О нас</ActiveMenuItem>
         <ActiveMenuItem path={Path.careers}>Вакансии</ActiveMenuItem>
@@ -18,12 +18,12 @@ export const MobileMenu = () => (
         <Menu.Item as="a" href="https://google.com">
             Зарегистрироваться
         </Menu.Item>
-    </Menu>
+    </>
 )
 
-export const MobileMenuPushed = ({ onClickShowMenu }: IMobileMenuPushedProps) => (
-    <Menu inverted pointing secondary size="large">
-        <Menu.Item onClick={onClickShowMenu}>
+export const MobileMenu = ({ onClickShow }: IMobileMenuProps) => (
+    <>
+        <Menu.Item onClick={onClickShow}>
             <Icon name="sidebar" />
         </Menu.Item>
         <Menu.Item position="right">
@@ -34,5 +34,5 @@ export const MobileMenuPushed = ({ onClickShowMenu }: IMobileMenuPushedProps) =>
                 Зарегистрироваться
             </Button>
         </Menu.Item>
-    </Menu>
+    </>
 )

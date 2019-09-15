@@ -8,7 +8,7 @@ interface IActiveMenuItemProps {
 }
 
 export const ActiveMenuItem = ({ path, children }: IActiveMenuItemProps) => (
-    <Menu.Item active={window.location.pathname === path}>
-        <Link to={path}>{children}</Link>
+    <Menu.Item as={Link} to={path} active={window.location.pathname === path}>
+        {children}
     </Menu.Item>
 )
