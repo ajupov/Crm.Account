@@ -74,6 +74,11 @@ module.exports = (_: any, options: { mode: string }) => {
                     from: 'public/content/**/*',
                     to: 'content/',
                     flatten: true
+                }, 
+                {
+                    from: 'public/*',
+                    to: '',
+                    flatten: true
                 }
             ])
         ]

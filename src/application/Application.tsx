@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter, Switch } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { Routes } from './Routes/Routes'
 
 export const Application = () => {
@@ -11,9 +11,7 @@ export const Application = () => {
 
     return (
         <BrowserRouter>
-            <Switch>
-                <Routes isAuthorized={isAuthorized} />
-            </Switch>
+            <Routes isAuthorized={isAuthorized} />
         </BrowserRouter>
     )
 }

@@ -1,10 +1,34 @@
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Crm</title>
+        <!-- Github Pages redirection -->
+        <script type="text/javascript">
+            var segmentCount = 0
+            var l = window.location
+            
+            l.replace(
+                l.protocol +
+                    '//' +
+                    l.hostname +
+                    (l.port ? ':' + l.port : '') +
+                    l.pathname
+                        .split('/')
+                        .slice(0, 1 + segmentCount)
+                        .join('/') +
+                    '/?p=/' +
+                    l.pathname
+                        .slice(1)
+                        .split('/')
+                        .slice(segmentCount)
+                        .join('/')
+                        .replace(/&/g, '~and~') +
+                    (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+                    l.hash
+            )
+        </script>
     </head>
-    <body>
-        <h1>Не найдено</h1>
-    </body>
+    <body></body>
 </html>

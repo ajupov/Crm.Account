@@ -1,7 +1,7 @@
 export const Path = {
-    home: process.env.PUBLIC_URL + '/',
-    about: process.env.PUBLIC_URL + '/about',
-    careers: process.env.PUBLIC_URL + '/careers',
+    home: '/',
+    about: '/about',
+    careers: '/careers',
 
     dashboard: '/',
     account: '/account',
