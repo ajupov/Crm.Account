@@ -8,7 +8,7 @@ import { BannerSegment } from './BannerSegment/BannerSegment'
 
 export const Home = () => {
     useEffect(() => {
-        document.title = 'LiteCRM'
+        document.title = 'CRM'
     })
 
     return (

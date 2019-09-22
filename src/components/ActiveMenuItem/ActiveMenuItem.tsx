@@ -4,7 +4,7 @@ import { Menu } from 'semantic-ui-react'
 
 interface IActiveMenuItemProps {
     path: string
-    children: JSX.Element | string
+    children: JSX.Element | string | (JSX.Element | string)[]
 }
 
 export const ActiveMenuItem = ({ path, children }: IActiveMenuItemProps) => (

@@ -11,7 +11,3 @@ const initialContext = {
 const { Provider, Consumer } = createContext<IApplicationContext>(initialContext)
 
 export { Provider as ApplicationContextProvider, Consumer as ApplicationContextConsumer }
-
-// const d = (
-//     <ApplicationContextConsumer>{context => <Routes isAuthorized={context.isAuthorized} />}</ApplicationContextConsumer>
-// )

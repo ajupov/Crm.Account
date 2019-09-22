@@ -6,7 +6,9 @@ export const Application = () => {
     const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
 
     useEffect(() => {
-        setIsAuthorized(location.search.indexOf('auth') > 0)
+        const isAuthorized = sessionStorage.getItem('isAuthorized')
+
+        setIsAuthorized(isAuthorized === 'true')
     })
 
     return (

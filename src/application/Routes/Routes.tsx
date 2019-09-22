@@ -13,6 +13,7 @@ import { Contacts } from '../../pages/Сontacts/Сontacts'
 import { Products } from '../../pages/Products/Products'
 import { Careers } from '../../pages/Careers/Careers'
 import { NotFound } from '../../pages/NotFound/NotFound'
+import { Settings } from '../../pages/Settings/Settings'
 
 interface IRoutesProps {
     isAuthorized: boolean
@@ -37,6 +38,7 @@ const AuthorizedRoutes = () => (
         <Route path={Path.leads} component={Leads} />
         <Route path={Path.contacts} component={Contacts} />
         <Route path={Path.products} component={Products} />
+        <Route path={Path.settings} component={Settings} />
         <Route component={NotFound} />
     </Switch>
 )

@@ -10,5 +10,6 @@ export const Path = {
     deals: '/deals',
     leads: '/leads',
     contacts: '/contacts',
-    products: '/products'
+    products: '/products',
+    settings: '/settings'
 }

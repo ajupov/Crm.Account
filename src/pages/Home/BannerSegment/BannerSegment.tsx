@@ -6,7 +6,7 @@ export const BannerSegment = () => (
         <Container text>
             <Header
                 as="h1"
-                content="LiteCRM"
+                content="CRM"
                 inverted
                 style={{
                     fontSize: '4em',

@@ -1,38 +1,48 @@
 import React from 'react'
 import { Menu, Icon, Button } from 'semantic-ui-react'
 import { Path } from '../../../enums/Path'
-import { ActiveMenuItem } from '../ActiveMenuItem/ActiveMenuItem'
+import { ActiveMenuItem } from '../../../components/ActiveMenuItem/ActiveMenuItem'
 
 interface IMobileMenuProps {
     onClickShow: () => void
 }
 
-export const MobileSidebarMenu = () => (
-    <>
-        <ActiveMenuItem path={Path.home}>Главная</ActiveMenuItem>
-        <ActiveMenuItem path={Path.about}>О нас</ActiveMenuItem>
-        <ActiveMenuItem path={Path.careers}>Вакансии</ActiveMenuItem>
-        <Menu.Item as="a" href="https://google.com">
-            Войти
-        </Menu.Item>
-        <Menu.Item as="a" href="https://google.com">
-            Зарегистрироваться
-        </Menu.Item>
-    </>
-)
+export const MobileSidebarMenu = () => {
+    const login = () => {
+        sessionStorage.setItem('isAuthorized', 'true')
+        location.reload()
+    }
 
-export const MobileMenu = ({ onClickShow }: IMobileMenuProps) => (
-    <>
-        <Menu.Item onClick={onClickShow}>
-            <Icon name="sidebar" />
-        </Menu.Item>
-        <Menu.Item position="right">
-            <Button as="a" href="https://google.com" inverted>
-                Войти
-            </Button>
-            <Button as="a" href="https://google.com" inverted style={{ marginLeft: '0.5em' }}>
-                Зарегистрироваться
-            </Button>
-        </Menu.Item>
-    </>
-)
+    return (
+        <>
+            <ActiveMenuItem path={Path.home}>Главная</ActiveMenuItem>
+            <ActiveMenuItem path={Path.about}>О нас</ActiveMenuItem>
+            <ActiveMenuItem path={Path.careers}>Вакансии</ActiveMenuItem>
+            <Menu.Item onClick={login}>Войти</Menu.Item>
+            <Menu.Item onClick={login}>Зарегистрироваться</Menu.Item>
+        </>
+    )
+}
+
+export const MobileMenu = ({ onClickShow }: IMobileMenuProps) => {
+    const login = () => {
+        sessionStorage.setItem('isAuthorized', 'true')
+        location.reload()
+    }
+
+    return (
+        <>
+            <Menu.Item onClick={onClickShow}>
+                <Icon name="sidebar" />
+            </Menu.Item>
+            <Menu.Item position="right">
+                <Button onClick={login} inverted>
+                    Войти
+                </Button>
+                <Button onClick={login} inverted style={{ marginLeft: '0.5em' }}>
+                    Зарегистрироваться
+                </Button>
+            </Menu.Item>
+        </>
+    )
+}
