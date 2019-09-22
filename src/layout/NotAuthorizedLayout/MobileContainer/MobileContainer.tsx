@@ -14,11 +14,19 @@ export const MobileContainer = ({ children }: IMobileContainerProps) => {
 
     return (
         <Responsive as={Sidebar.Pushable} maxWidth={Responsive.onlyMobile.maxWidth}>
-            <Sidebar as={Menu} inverted vertical animation="overlay" visible={isSidebarMenuVisible} onHide={hideMenu}>
+            <Sidebar
+                as={Menu}
+                inverted
+                vertical
+                animation="overlay"
+                visible={isSidebarMenuVisible}
+                onHide={hideMenu}
+                style={{ backgroundColor: '#37474F' }}
+            >
                 <MobileSidebarMenu />
             </Sidebar>
             <Sidebar.Pusher dimmed={isSidebarMenuVisible}>
-                <Segment inverted vertical>
+                <Segment inverted vertical style={{ backgroundColor: '#263238' }}>
                     <Menu inverted pointing secondary>
                         <MobileMenu onClickShow={showMenu} />
                     </Menu>

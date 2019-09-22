@@ -9,7 +9,7 @@ interface IDesktopContainerProps {
 export const DesktopContainer = ({ children }: IDesktopContainerProps) => {
     return (
         <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-            <Segment inverted vertical>
+            <Segment inverted vertical style={{ backgroundColor: '#263238' }}>
                 <Container>
                     <Menu inverted pointing secondary>
                         <DesktopMenu />
