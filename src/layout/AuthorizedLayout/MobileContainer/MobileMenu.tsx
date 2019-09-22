@@ -12,7 +12,7 @@ interface IMobileMenuProps {
 
 const AvatarAndUserElement = (
     <>
-        <Image avatar src="./content/client-avatar-micro.jpg" style={{ marginRight: '1em' }} />
+        <Image avatar src="./content/client-avatar-micro.jpg" style={{ marginRight: '1.4em' }} />
         Усман
     </>
 )

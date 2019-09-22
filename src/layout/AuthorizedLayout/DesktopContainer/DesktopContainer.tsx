@@ -14,7 +14,7 @@ export const DesktopContainer = ({ children }: IDesktopContainerProps) => {
                     <DesktopMenu />
                 </Menu>
             </Segment>
-            <Segment style={{ height: 'calc(100vh - 44px)', paddingBottom: 0 }} vertical>
+            <Segment style={{ height: 'calc(100vh - 44px)', paddingBottom: 0, paddingTop: '10px' }} vertical>
                 <Sidebar.Pushable>
                     <Sidebar
                         as={Menu}

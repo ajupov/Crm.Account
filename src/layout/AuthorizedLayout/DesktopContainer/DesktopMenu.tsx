@@ -1,6 +1,6 @@
 import React from 'react'
 import Clock from 'react-live-clock'
-import { Menu, Image, Icon, Dropdown, Header } from 'semantic-ui-react'
+import { Menu, Image, Icon, Dropdown } from 'semantic-ui-react'
 import { Path } from '../../../enums/Path'
 import { Link } from 'react-router-dom'
 import { GetTitle } from '../../../helpers/TitleHelper'
@@ -8,7 +8,7 @@ import { ActiveMenuItem } from '../../../components/ActiveMenuItem/ActiveMenuIte
 
 const AvatarAndUserElement = (
     <>
-        <Image avatar src="./content/client-avatar-micro.jpg" style={{ marginRight: '1em' }} />
+        <Image avatar src="./content/client-avatar-micro.jpg" style={{ marginRight: '1.4em' }} />
         Усман
     </>
 )
@@ -21,23 +21,20 @@ export const DesktopMenu = () => {
 
     return (
         <>
-            <Menu.Item as={Link} to={Path.dashboard}>
-                <Image size="mini" src="./content/logo.png" style={{ marginRight: '1em' }} />
+            <Menu.Item as={Link} to={Path.dashboard} style={{ width: '115px' }}>
                 {GetTitle()}
             </Menu.Item>
-            <Menu.Item position="right">
-                <Header inverted>
-                    <Clock format="HH:mm" ticking={true} timezone="Europe/Moscow" />
-                </Header>
+            <Menu.Item position="right" header>
+                <Clock format="HH:mm" ticking={true} timezone="Europe/Moscow" />
             </Menu.Item>
             <Menu.Item as={Dropdown} position="right" simple trigger={AvatarAndUserElement}>
                 <Dropdown.Menu>
                     <Dropdown.Item as={Link} to={Path.account}>
-                        <Icon name="user circle"/>
+                        <Icon name="user circle" />
                         Мой аккаунт
                     </Dropdown.Item>
                     <Dropdown.Item onClick={logout}>
-                        <Icon name="log out"/>
+                        <Icon name="log out" />
                         Выйти
                     </Dropdown.Item>
                 </Dropdown.Menu>
