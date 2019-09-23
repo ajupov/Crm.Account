@@ -27,7 +27,7 @@ export const DesktopContainer = ({ children }: IDesktopContainerProps) => {
                     >
                         <DesktopSidebarMenu />
                     </Sidebar>
-                    <Sidebar.Pusher>{children}</Sidebar.Pusher>
+                    <Sidebar.Pusher style={{paddingTop: '10px'}}>{children}</Sidebar.Pusher>
                 </Sidebar.Pushable>
             </Segment>
         </Responsive>
