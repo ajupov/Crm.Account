@@ -1,14 +1,13 @@
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
 import 'semantic-ui-css/semantic.min.css'
-import { Application } from './application/Application'
 
-declare let module: { hot: any }
+import { Application } from './components/Application/Application'
+import React from 'react'
+import ReactDOM from 'react-dom'
 
 ReactDOM.render(<Application />, document.getElementById('root'))
 
 if (module.hot) {
-    module.hot.accept('./application/Application', () => {
+    module.hot.accept('./components/Application/Application', () => {
         ReactDOM.render(<Application />, document.getElementById('root'))
     })
 }

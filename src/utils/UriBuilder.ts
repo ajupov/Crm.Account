@@ -1,9 +1,6 @@
 const slash = '/'
 
-export const UriCombine = (host: string, resource: string, action?: string) =>
-    `${trim(host, slash)}/${trim(resource, slash)}/${trim(action, slash)}`
-
-const trim = (value: string, symbol: string)=> {
+const trim = (value: string, symbol: string): string => {
     if (symbol === ']') {
         symbol = '\\]'
     }
@@ -14,3 +11,6 @@ const trim = (value: string, symbol: string)=> {
 
     return value.replace(new RegExp('^[' + symbol + ']+|[' + symbol + ']+$', 'g'), '')
 }
+
+export const UriCombine = (host: string, resource: string, action?: string): string =>
+    `${trim(host, slash)}/${trim(resource, slash)}/${trim(action ?? '', slash)}`

@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react'
-import { AuthorizedLayout } from '../../layout/AuthorizedLayout/AuthorizedLayout'
+import React, { FC, useEffect } from 'react'
 
-export const Settings = () => {
+import { Layout } from '../../components/Layout/Layout'
+
+export const Settings: FC = () => {
     useEffect(() => {
         document.title = 'Настройки'
     })
 
     return (
-        <AuthorizedLayout>
+        <Layout>
             <h1>Настройки</h1>
-        </AuthorizedLayout>
+        </Layout>
     )
 }

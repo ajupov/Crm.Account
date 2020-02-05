@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { Card, Image, Table, Header, Grid } from 'semantic-ui-react'
-import { AuthorizedLayout } from '../../layout/AuthorizedLayout/AuthorizedLayout'
+import { Card, Grid, Header, Image, Table } from 'semantic-ui-react'
+import React, { FC, useEffect, useState } from 'react'
 
-export const Products = () => {
-    const [products, setProducts] = useState<string[]>([])
+import { Layout } from '../../components/Layout/Layout'
 
+export const Products: FC = () => {
     useEffect(() => {
         document.title = 'Продукты'
     })
 
     return (
-        <AuthorizedLayout>
+        <Layout>
             <Grid columns={2} divided>
                 <Grid.Row>
                     <Grid.Column>
@@ -112,6 +111,6 @@ export const Products = () => {
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
-        </AuthorizedLayout>
+        </Layout>
     )
 }
