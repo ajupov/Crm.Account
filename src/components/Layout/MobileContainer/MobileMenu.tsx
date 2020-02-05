@@ -54,8 +54,8 @@ export const MobileSidebarMenu: FC = () => {
                 Продукты
             </ActiveMenuItem>
             <ActiveMenuItem path="settings">
-                <Icon name="setting" style={{ float: 'left', marginRight: '12px' }} />
-                Настройки
+                <Icon name="user circle" style={{ float: 'left', marginRight: '12px' }} />
+                Настройки аккаунта
             </ActiveMenuItem>
             <Menu.Item as="a" href={configuration.LogoutUrl}>
                 <Icon name="log out" style={{ float: 'left', marginRight: '12px' }} />

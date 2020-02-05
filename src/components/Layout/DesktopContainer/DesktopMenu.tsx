@@ -70,9 +70,5 @@ export const DesktopSidebarMenu: FC = () => (
             <Icon name="list ol" />
             Продукты
         </ActiveMenuItem>
-        <ActiveMenuItem path="settings">
-            <Icon name="setting" />
-            Настройки
-        </ActiveMenuItem>
     </>
 )

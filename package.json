@@ -11,7 +11,7 @@
         "url": "https://github.com/ajupov/Crm.Site.git"
     },
     "scripts": {
-        "start": "webpack-dev-server",
+        "start": "webpack-dev-server --mode=development",
         "build": "webpack --mode=development",
         "build-prod": "webpack --mode=production",
         "eslint": "eslint --cache -f visualstudio --ext .js,.jsx,.ts,.tsx src",

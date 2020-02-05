@@ -1,5 +1,5 @@
 import { Card, Grid, Header, Image, Table } from 'semantic-ui-react'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect } from 'react'
 
 import { Layout } from '../../components/Layout/Layout'
 
