@@ -65,7 +65,7 @@ const webpackConfig: (env: any, options: any) => Configuration = (_, { mode }) =
             template: resolve(__dirname, 'public/index.html'),
             favicon: resolve(__dirname, 'public/content/images/favicon.ico')
         }),
-        new ForkTsCheckerWebpackPlugin({ eslint: true }),
+        new ForkTsCheckerWebpackPlugin({ eslint: true, eslintOptions: { cache: true } }),
         new Dotenv({
             path: resolve(__dirname, `./config/${mode}.env`)
         }),

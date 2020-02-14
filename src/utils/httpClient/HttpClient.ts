@@ -2,9 +2,14 @@ import 'isomorphic-fetch'
 
 import { stringify } from 'query-string'
 
+type HttpMethod = 'GET' | 'POST'
+
+const ApplicationJsonContentType = 'application/json'
+const NoCacheHeaderValue = 'no-cache'
+
 export class HttpClient {
     public async get<T>(uri: string, data?: object): Promise<T> {
-        const params = this.getParams('get')
+        const params = this.getParams('GET')
         const response = await fetch(uri + stringify(data || {}), params)
 
         this.checkError(response)
@@ -14,7 +19,7 @@ export class HttpClient {
     }
 
     public async post<T>(uri: string, body?: object): Promise<T> {
-        const params = this.getParams('post', body)
+        const params = this.getParams('POST', body)
         const response = await fetch(uri, params)
 
         this.checkError(response)
@@ -23,21 +28,21 @@ export class HttpClient {
         return this.convertToJson<T>(response)
     }
 
-    private getParams(method: string, body?: object): any {
+    private getParams(method: HttpMethod, body?: object): any {
         const defaultParams = {
-            credentials: 'include',
             headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                'cache-control': 'no-cache',
-                pragma: 'no-cache'
-            }
+                Accept: ApplicationJsonContentType,
+                'Content-Type': ApplicationJsonContentType,
+                pragma: NoCacheHeaderValue,
+                'cache-control': NoCacheHeaderValue
+            },
+            credentials: 'same-origin',
+            mode: 'cors'
         }
 
-        const result = Object.assign({}, defaultParams, { method })
-
-        if (method === 'post') {
-            return Object.assign({}, result, { body: JSON.stringify(body) })
+        const result = { ...defaultParams, method }
+        if (method === 'POST') {
+            return { ...result, body: JSON.stringify(body) }
         }
 
         return result

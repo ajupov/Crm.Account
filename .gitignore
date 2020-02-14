@@ -1,6 +1,6 @@
 node_modules
 dist
-
+.generated
 .eslintcache
 yarn-error.log
 development.env
