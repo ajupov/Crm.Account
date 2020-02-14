@@ -8,9 +8,15 @@ const ApplicationJsonContentType = 'application/json'
 const NoCacheHeaderValue = 'no-cache'
 
 export class HttpClient {
+    private readonly _host: string | undefined
+
+    constructor(host?: string) {
+        this._host = host
+    }
+
     public async get<T>(uri: string, data?: object): Promise<T> {
         const params = this.getParams('GET')
-        const response = await fetch(uri + stringify(data || {}), params)
+        const response = await fetch(this._host + uri + stringify(data || {}), params)
 
         this.checkError(response)
         this.checkRedirect(response)
@@ -20,7 +26,7 @@ export class HttpClient {
 
     public async post<T>(uri: string, body?: object): Promise<T> {
         const params = this.getParams('POST', body)
-        const response = await fetch(uri, params)
+        const response = await fetch(this._host + uri, params)
 
         this.checkError(response)
         this.checkRedirect(response)
@@ -29,23 +35,21 @@ export class HttpClient {
     }
 
     private getParams(method: HttpMethod, body?: object): any {
-        const defaultParams = {
+        return {
+            method,
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'include',
             headers: {
                 Accept: ApplicationJsonContentType,
                 'Content-Type': ApplicationJsonContentType,
                 pragma: NoCacheHeaderValue,
                 'cache-control': NoCacheHeaderValue
             },
-            credentials: 'same-origin',
-            mode: 'cors'
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            body: method === 'POST' ? JSON.stringify(body) : null
         }
-
-        const result = { ...defaultParams, method }
-        if (method === 'POST') {
-            return { ...result, body: JSON.stringify(body) }
-        }
-
-        return result
     }
 
     private checkError(response: Response): void {

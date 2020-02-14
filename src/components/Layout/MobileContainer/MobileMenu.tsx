@@ -25,7 +25,7 @@ export const MobileSidebarMenu: FC = () => {
             <Menu.Item as={Link} to="settings" style={{ height: '68px', lineHeight: '48px' }}>
                 {AvatarAndUserElement}
             </Menu.Item>
-            <ActiveMenuItem path="dashboard">
+            <ActiveMenuItem path="">
                 <Icon name="dashboard" style={{ float: 'left', marginRight: '12px' }} />
                 Дашбоард
             </ActiveMenuItem>

@@ -1,11 +1,32 @@
 import { Card, Grid, Header, Image, Table } from 'semantic-ui-react'
 import React, { FC, useEffect } from 'react'
 
+import Configuration from '../../config/Configuration'
+import Create from '../../utils/httpClient/Create'
 import { Layout } from '../../components/Layout/Layout'
+import ProductAttributesClient from '../../../.generated/litecrm_api/products/clients/ProductAttributesClient'
+
+// import ProductsClient from '../../../.generated/litecrm_api/products/clients/ProductsClient'
 
 export const Products: FC = () => {
+    const configuration = new Configuration()
+    const httpClientFactory = Create.HttpClientFactory.WithHost(configuration.ApiUrl).Build()
+    // const productsClient = new ProductsClient(httpClientFactory)
+    const productAttributesClient = new ProductAttributesClient(httpClientFactory)
+
+    const getProducts = async (): Promise<void> => {
+        const attributeTypes = await productAttributesClient.GetTypesAsync()
+        // eslint-disable-next-line no-alert
+        alert(JSON.stringify(attributeTypes))
+
+        // const products = await productsClient.GetPagedListAsync()
+        // global.console.log(products)
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         document.title = 'Продукты'
+        getProducts()
     })
 
     return (
@@ -30,11 +51,11 @@ export const Products: FC = () => {
                                             <Table.Row>
                                                 <Table.Cell>
                                                     <Header as="h4" image>
-                                                        <Image
+                                                        {/* <Image
                                                             src="/images/avatar/small/lena.png"
                                                             rounded
                                                             size="mini"
-                                                        />
+                                                        /> */}
                                                         <Header.Content>
                                                             Lena
                                                             <Header.Subheader>Human Resources</Header.Subheader>
@@ -46,11 +67,11 @@ export const Products: FC = () => {
                                             <Table.Row>
                                                 <Table.Cell>
                                                     <Header as="h4" image>
-                                                        <Image
+                                                        {/* <Image
                                                             src="/images/avatar/small/matthew.png"
                                                             rounded
                                                             size="mini"
-                                                        />
+                                                        /> */}
                                                         <Header.Content>
                                                             Matthew
                                                             <Header.Subheader>Fabric Design</Header.Subheader>
@@ -62,11 +83,11 @@ export const Products: FC = () => {
                                             <Table.Row>
                                                 <Table.Cell>
                                                     <Header as="h4" image>
-                                                        <Image
+                                                        {/* <Image
                                                             src="/images/avatar/small/lindsay.png"
                                                             rounded
                                                             size="mini"
-                                                        />
+                                                        /> */}
                                                         <Header.Content>
                                                             Lindsay
                                                             <Header.Subheader>Entertainment</Header.Subheader>
@@ -78,11 +99,11 @@ export const Products: FC = () => {
                                             <Table.Row>
                                                 <Table.Cell>
                                                     <Header as="h4" image>
-                                                        <Image
+                                                        {/* <Image
                                                             src="/images/avatar/small/mark.png"
                                                             rounded
                                                             size="mini"
-                                                        />
+                                                        /> */}
                                                         <Header.Content>
                                                             Mark
                                                             <Header.Subheader>Executive</Header.Subheader>

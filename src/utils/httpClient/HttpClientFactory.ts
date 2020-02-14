@@ -13,7 +13,7 @@ export default class HttpClientFactory implements IHttpClientFactory {
         return this._host
     }
 
-    createClient(): IHttpClient {
-        return new HttpClient()
+    createClient(host: string): IHttpClient {
+        return new HttpClient(host)
     }
 }
