@@ -29,10 +29,8 @@ const Application: FC = () => {
                         <Route path="/leads" component={Leads} />
                         <Route path="/deals" component={Deals} />
                         <Route path="/contacts" component={Contacts} />
-                        <Route path="/products">
-                            <Route path="/products" exact component={Products} />
-                            <Route path="/products/categories" component={ProductCategories} />
-                        </Route>
+                        <Route path="/products" exact component={Products} />
+                        <Route path="/products/categories" component={ProductCategories} />
                         <Route path="/settings" component={Settings} />
                         <Route component={NotFound} />
                     </Switch>

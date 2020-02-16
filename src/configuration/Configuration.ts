@@ -1,7 +1,6 @@
-import { IConfiguration } from './IConfiguration'
 import { combineUrl } from '../utils/url/urlUtils'
 
-export default class Configuration implements IConfiguration {
+export default class Configuration {
     get LoginUrl(): string {
         const authHost = process.env.AUTH_HOST
         const loginPath = process.env.LOGIN_PATH

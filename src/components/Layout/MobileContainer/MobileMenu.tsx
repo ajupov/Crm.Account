@@ -3,11 +3,11 @@ import React, { FC } from 'react'
 
 import Clock from 'react-live-clock'
 
-interface IMobileMenuProps {
+interface MobileMenuProps {
     onClickShow: () => void
 }
 
-const MobileMenu: FC<IMobileMenuProps> = ({ onClickShow }) => (
+const MobileMenu: FC<MobileMenuProps> = ({ onClickShow }) => (
     <>
         <Menu.Item onClick={onClickShow}>
             <Icon name="sidebar" />
