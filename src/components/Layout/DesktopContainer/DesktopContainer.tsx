@@ -1,12 +1,10 @@
-import { DesktopMenu, DesktopSidebarMenu } from './DesktopMenu'
 import { Menu, Responsive, Segment, Sidebar } from 'semantic-ui-react'
 import React, { FC } from 'react'
 
-interface IDesktopContainerProps {
-    children?: JSX.Element | JSX.Element[]
-}
+import DesktopMenu from './DesktopMenu'
+import DesktopSidebarMenu from './DesktopSidebarMenu'
 
-export const DesktopContainer: FC<IDesktopContainerProps> = ({ children }) => (
+const DesktopContainer: FC = ({ children }) => (
     <Responsive minWidth={Responsive.onlyTablet.minWidth}>
         <Segment>
             <Menu fixed="top" inverted style={{ backgroundColor: '#263238' }} borderless={true}>
@@ -31,3 +29,5 @@ export const DesktopContainer: FC<IDesktopContainerProps> = ({ children }) => (
         </Segment>
     </Responsive>
 )
+
+export default DesktopContainer

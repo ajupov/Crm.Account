@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react'
 
-import { Layout } from '../../components/Layout/Layout'
+import Layout from '../../components/layout/Layout'
 
-export const Contacts: FC = () => {
+const Contacts: FC = () => {
     useEffect(() => {
         document.title = 'Контакты'
     })
@@ -13,3 +13,5 @@ export const Contacts: FC = () => {
         </Layout>
     )
 }
+
+export default Contacts

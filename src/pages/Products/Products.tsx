@@ -1,32 +1,11 @@
 import { Card, Grid, Header, Image, Table } from 'semantic-ui-react'
 import React, { FC, useEffect } from 'react'
 
-import Configuration from '../../config/Configuration'
-import Create from '../../utils/httpClient/Create'
-import { Layout } from '../../components/Layout/Layout'
-import ProductAttributesClient from '../../../.generated/litecrm_api/products/clients/ProductAttributesClient'
+import Layout from '../../components/layout/Layout'
 
-// import ProductsClient from '../../../.generated/litecrm_api/products/clients/ProductsClient'
-
-export const Products: FC = () => {
-    const configuration = new Configuration()
-    const httpClientFactory = Create.HttpClientFactory.WithHost(configuration.ApiUrl).Build()
-    // const productsClient = new ProductsClient(httpClientFactory)
-    const productAttributesClient = new ProductAttributesClient(httpClientFactory)
-
-    const getProducts = async (): Promise<void> => {
-        const attributeTypes = await productAttributesClient.GetTypesAsync()
-        // eslint-disable-next-line no-alert
-        alert(JSON.stringify(attributeTypes))
-
-        // const products = await productsClient.GetPagedListAsync()
-        // global.console.log(products)
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+const Products: FC = () => {
     useEffect(() => {
         document.title = 'Продукты'
-        getProducts()
     })
 
     return (
@@ -135,3 +114,5 @@ export const Products: FC = () => {
         </Layout>
     )
 }
+
+export default Products

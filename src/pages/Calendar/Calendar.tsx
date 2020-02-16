@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react'
 
-import { Layout } from '../../components/Layout/Layout'
+import Layout from '../../components/layout/Layout'
 
-export const Calendar: FC = () => {
+const Calendar: FC = () => {
     useEffect(() => {
         document.title = 'Календарь'
     })
@@ -13,3 +13,5 @@ export const Calendar: FC = () => {
         </Layout>
     )
 }
+
+export default Calendar

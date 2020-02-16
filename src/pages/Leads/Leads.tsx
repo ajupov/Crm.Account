@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react'
 
-import { Layout } from '../../components/Layout/Layout'
+import Layout from '../../components/layout/Layout'
 
-export const Leads: FC = () => {
+const Leads: FC = () => {
     useEffect(() => {
         document.title = 'Лиды'
     })
@@ -13,3 +13,5 @@ export const Leads: FC = () => {
         </Layout>
     )
 }
+
+export default Leads

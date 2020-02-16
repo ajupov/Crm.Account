@@ -1,11 +1,13 @@
 import React, { FC, useEffect } from 'react'
 
-import { NotFoundSegment } from './NotFoundSegment/NotFoundSegment'
+import NotFoundSegment from './NotFoundSegment'
 
-export const NotFound: FC = () => {
+const NotFound: FC = () => {
     useEffect(() => {
         document.title = '404'
     })
 
     return <NotFoundSegment />
 }
+
+export default NotFound

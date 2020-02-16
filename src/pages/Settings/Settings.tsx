@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react'
 
-import { Layout } from '../../components/Layout/Layout'
+import Layout from '../../components/layout/Layout'
 
-export const Settings: FC = () => {
+const Settings: FC = () => {
     useEffect(() => {
         document.title = 'Настройки'
     })
@@ -13,3 +13,5 @@ export const Settings: FC = () => {
         </Layout>
     )
 }
+
+export default Settings

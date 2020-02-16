@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react'
 
-import { Layout } from '../../components/Layout/Layout'
+import Layout from '../../components/layout/Layout'
 
-export const Activities: FC = () => {
+const Activities: FC = () => {
     useEffect(() => {
         document.title = 'Задачи'
     })
@@ -13,3 +13,5 @@ export const Activities: FC = () => {
         </Layout>
     )
 }
+
+export default Activities

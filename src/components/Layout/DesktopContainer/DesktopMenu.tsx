@@ -1,20 +1,21 @@
 import { Dropdown, Icon, Image, Menu } from 'semantic-ui-react'
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 
-import { ActiveMenuItem } from '../../../components/ActiveMenuItem/ActiveMenuItem'
 import Clock from 'react-live-clock'
-import Configuration from '../../../config/Configuration'
+import Configuration from '../../../configuration/Configuration'
 import { Link } from 'react-router-dom'
+import UserInfoContext from '../../../contexts/UserInfoContext'
 
-const AvatarAndUserElement = (
-    <>
-        <Image avatar src="./content/client-avatar-micro.jpg" style={{ marginRight: '1.4em' }} />
-        Усман
-    </>
-)
-
-export const DesktopMenu: FC = () => {
+const DesktopMenu: FC = () => {
     const configuration = new Configuration()
+    const userInfo = useContext(UserInfoContext)
+
+    const getUserNameWithAvatar = (): JSX.Element => (
+        <>
+            <Image avatar src="./content/client-avatar-micro.jpg" style={{ marginRight: '1.4em' }} />
+            {userInfo.name}
+        </>
+    )
 
     return (
         <>
@@ -24,7 +25,7 @@ export const DesktopMenu: FC = () => {
             <Menu.Item position="right" header>
                 <Clock format="HH:mm" ticking={true} timezone="Europe/Moscow" />
             </Menu.Item>
-            <Menu.Item as={Dropdown} position="right" simple trigger={AvatarAndUserElement}>
+            <Menu.Item as={Dropdown} position="right" simple trigger={getUserNameWithAvatar()}>
                 <Dropdown.Menu>
                     <Dropdown.Item as={Link} to="settings">
                         <Icon name="user circle" />
@@ -40,35 +41,4 @@ export const DesktopMenu: FC = () => {
     )
 }
 
-export const DesktopSidebarMenu: FC = () => (
-    <>
-        <ActiveMenuItem path="/">
-            <Icon name="dashboard" />
-            Дашбоард
-        </ActiveMenuItem>
-        <ActiveMenuItem path="calendar">
-            <Icon name="calendar" />
-            Календарь
-        </ActiveMenuItem>
-        <ActiveMenuItem path="activities">
-            <Icon name="tasks" />
-            Задачи
-        </ActiveMenuItem>
-        <ActiveMenuItem path="deals">
-            <Icon name="handshake" />
-            Сделки
-        </ActiveMenuItem>
-        <ActiveMenuItem path="leads">
-            <Icon name="filter" />
-            Лиды
-        </ActiveMenuItem>
-        <ActiveMenuItem path="contacts">
-            <Icon name="address book" />
-            Контакты
-        </ActiveMenuItem>
-        <ActiveMenuItem path="products">
-            <Icon name="list ol" />
-            Продукты
-        </ActiveMenuItem>
-    </>
-)
+export default DesktopMenu

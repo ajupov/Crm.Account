@@ -1,5 +1,6 @@
 import 'isomorphic-fetch'
 
+import { combineUrl } from '../url/urlUtils'
 import { stringify } from 'query-string'
 
 type HttpMethod = 'GET' | 'POST'
@@ -16,22 +17,27 @@ export class HttpClient {
 
     public async get<T>(uri: string, data?: object): Promise<T> {
         const params = this.getParams('GET')
-        const response = await fetch(this._host + uri + stringify(data || {}), params)
 
-        this.checkError(response)
+        const response = await fetch(this.getUrl(uri) + stringify(data || {}), params)
+
         this.checkRedirect(response)
+        this.checkError(response)
 
         return this.convertToJson<T>(response)
     }
 
     public async post<T>(uri: string, body?: object): Promise<T> {
         const params = this.getParams('POST', body)
-        const response = await fetch(this._host + uri, params)
+        const response = await fetch(combineUrl(this._host, uri), params)
 
-        this.checkError(response)
         this.checkRedirect(response)
+        this.checkError(response)
 
         return this.convertToJson<T>(response)
+    }
+
+    private getUrl(uri: string): string {
+        return this._host ? combineUrl(this._host, uri) : uri
     }
 
     private getParams(method: HttpMethod, body?: object): any {
@@ -46,7 +52,7 @@ export class HttpClient {
                 pragma: NoCacheHeaderValue,
                 'cache-control': NoCacheHeaderValue
             },
-            redirect: 'follow',
+            redirect: 'manual',
             referrer: 'no-referrer',
             body: method === 'POST' ? JSON.stringify(body) : null
         }

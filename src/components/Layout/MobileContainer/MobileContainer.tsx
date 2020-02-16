@@ -1,12 +1,10 @@
 import { Menu, Responsive, Segment, Sidebar } from 'semantic-ui-react'
-import { MobileMenu, MobileSidebarMenu } from './MobileMenu'
 import React, { FC, useState } from 'react'
 
-interface IMobileContainerProps {
-    children?: JSX.Element | JSX.Element[]
-}
+import MobileMenu from './MobileMenu'
+import MobileSidebarMenu from './MobileSidebarMenu'
 
-export const MobileContainer: FC<IMobileContainerProps> = ({ children }) => {
+const MobileContainer: FC = ({ children }) => {
     const [isSidebarMenuVisible, setSidebarMenuVisible] = useState(false)
 
     const showMenu = (): void => {
@@ -41,3 +39,5 @@ export const MobileContainer: FC<IMobileContainerProps> = ({ children }) => {
         </Responsive>
     )
 }
+
+export default MobileContainer

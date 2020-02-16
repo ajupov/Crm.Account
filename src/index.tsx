@@ -1,6 +1,6 @@
 import 'semantic-ui-css/semantic.min.css'
 
-import { Application } from './components/Application/Application'
+import Application from './components/application/Application'
 import React from 'react'
 import ReactDOM from 'react-dom'
 

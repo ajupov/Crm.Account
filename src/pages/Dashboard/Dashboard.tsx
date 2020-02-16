@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react'
 
-import { Layout } from '../../components/Layout/Layout'
+import Layout from '../../components/layout/Layout'
 
-export const Dashboard: FC = () => {
+const Dashboard: FC = () => {
     useEffect(() => {
         document.title = 'Дашбоард'
     })
@@ -13,3 +13,5 @@ export const Dashboard: FC = () => {
         </Layout>
     )
 }
+
+export default Dashboard

@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react'
 
-import { Layout } from '../../components/Layout/Layout'
+import Layout from '../../components/layout/Layout'
 
-export const Deals: FC = () => {
+const Deals: FC = () => {
     useEffect(() => {
         document.title = 'Сделки'
     })
@@ -13,3 +13,5 @@ export const Deals: FC = () => {
         </Layout>
     )
 }
+
+export default Deals
