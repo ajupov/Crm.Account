@@ -1,17 +1,11 @@
 import React, { FC, useEffect } from 'react'
 
-import Layout from '../../components/layout/Layout'
-
 const Dashboard: FC = () => {
     useEffect(() => {
         document.title = 'Дашбоард'
     })
 
-    return (
-        <Layout>
-            <h1>Дашбоард</h1>
-        </Layout>
-    )
+    return <h1>Дашбоард</h1>
 }
 
 export default Dashboard

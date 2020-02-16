@@ -27,7 +27,7 @@ const DesktopMenu: FC = () => {
             </Menu.Item>
             <Menu.Item as={Dropdown} position="right" simple trigger={getUserNameWithAvatar()}>
                 <Dropdown.Menu>
-                    <Dropdown.Item as={Link} to="settings">
+                    <Dropdown.Item as={Link} to="/settings">
                         <Icon name="user circle" />
                         Настройки аккаунта
                     </Dropdown.Item>

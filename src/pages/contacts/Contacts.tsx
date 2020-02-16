@@ -1,17 +1,11 @@
 import React, { FC, useEffect } from 'react'
 
-import Layout from '../../components/layout/Layout'
-
 const Contacts: FC = () => {
     useEffect(() => {
         document.title = 'Контакты'
     })
 
-    return (
-        <Layout>
-            <h1>Контакты</h1>
-        </Layout>
-    )
+    return <h1>Контакты</h1>
 }
 
 export default Contacts

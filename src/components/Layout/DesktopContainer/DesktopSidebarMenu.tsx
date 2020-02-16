@@ -9,27 +9,27 @@ const DesktopSidebarMenu: FC = () => (
             <Icon name="dashboard" />
             Дашбоард
         </ActiveMenuItem>
-        <ActiveMenuItem path="calendar">
+        <ActiveMenuItem path="/calendar">
             <Icon name="calendar" />
             Календарь
         </ActiveMenuItem>
-        <ActiveMenuItem path="activities">
+        <ActiveMenuItem path="/activities">
             <Icon name="tasks" />
             Задачи
         </ActiveMenuItem>
-        <ActiveMenuItem path="deals">
+        <ActiveMenuItem path="/deals">
             <Icon name="handshake" />
             Сделки
         </ActiveMenuItem>
-        <ActiveMenuItem path="leads">
+        <ActiveMenuItem path="/leads">
             <Icon name="filter" />
             Лиды
         </ActiveMenuItem>
-        <ActiveMenuItem path="contacts">
+        <ActiveMenuItem path="/contacts">
             <Icon name="address book" />
             Контакты
         </ActiveMenuItem>
-        <ActiveMenuItem path="products">
+        <ActiveMenuItem path="/products">
             <Icon name="list ol" />
             Продукты
         </ActiveMenuItem>

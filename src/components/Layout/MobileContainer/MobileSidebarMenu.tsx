@@ -26,31 +26,31 @@ const MobileSidebarMenu: FC = () => {
                 <Icon name="dashboard" style={{ float: 'left', marginRight: '12px' }} />
                 Дашбоард
             </ActiveMenuItem>
-            <ActiveMenuItem path="calendar">
+            <ActiveMenuItem path="/calendar">
                 <Icon name="calendar" style={{ float: 'left', marginRight: '12px' }} />
                 Календарь
             </ActiveMenuItem>
-            <ActiveMenuItem path="activities">
+            <ActiveMenuItem path="/activities">
                 <Icon name="tasks" style={{ float: 'left', marginRight: '12px' }} />
                 Задачи
             </ActiveMenuItem>
-            <ActiveMenuItem path="deals">
+            <ActiveMenuItem path="/deals">
                 <Icon name="handshake" style={{ float: 'left', marginRight: '12px' }} />
                 Сделки
             </ActiveMenuItem>
-            <ActiveMenuItem path="leads">
+            <ActiveMenuItem path="/leads">
                 <Icon name="filter" style={{ float: 'left', marginRight: '12px' }} />
                 Лиды
             </ActiveMenuItem>
-            <ActiveMenuItem path="contacts">
+            <ActiveMenuItem path="/contacts">
                 <Icon name="address book" style={{ float: 'left', marginRight: '12px' }} />
                 Контакты
             </ActiveMenuItem>
-            <ActiveMenuItem path="products">
+            <ActiveMenuItem path="/products">
                 <Icon name="list ol" style={{ float: 'left', marginRight: '12px' }} />
                 Продукты
             </ActiveMenuItem>
-            <ActiveMenuItem path="settings">
+            <ActiveMenuItem path="/settings">
                 <Icon name="user circle" style={{ float: 'left', marginRight: '12px' }} />
                 Настройки аккаунта
             </ActiveMenuItem>

@@ -13,7 +13,7 @@ const webpackConfig: (env: any, options: any) => Configuration = (_, { mode }) =
     output: {
         filename: '[name].[hash].js',
         path: resolve(__dirname, 'dist'),
-        publicPath: ''
+        publicPath: '/'
     },
     devtool: mode === 'development' ? 'inline-source-map' : false,
     resolve: {
