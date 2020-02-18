@@ -1,4 +1,4 @@
-import IHttpClientFactory, { IHttpClient } from './../../../.generated/litecrm_api/IHttpClientFactory'
+import IHttpClientFactory, { IHttpClient } from '../../../api/IHttpClientFactory'
 
 import { HttpClient } from './HttpClient'
 

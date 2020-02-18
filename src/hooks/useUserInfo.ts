@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
 
-import AuthClient from '../../.generated/litecrm_api/auth/clients/AuthClient'
+import AuthClient from '../../api/auth/clients/AuthClient'
 import Configuration from '../configuration/Configuration'
 import Create from '../utils/httpClient/Create'
 import UserInfo from '../models/UserInfo'
-import UserInfoClient from '../../.generated/litecrm_api/userinfo/clients/UserInfoClient'
+import UserInfoClient from '../../api/userinfo/clients/UserInfoClient'
 
 const useUserInfo = (): UserInfo => {
     const configuration = new Configuration()

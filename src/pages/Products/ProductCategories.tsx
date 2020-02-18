@@ -1,4 +1,4 @@
-import { Button, Card, Checkbox, Icon } from 'semantic-ui-react'
+import { Button, Card, Checkbox } from 'semantic-ui-react'
 import React, { FC, useEffect } from 'react'
 
 import ProductsMenuLayout from './ProductsMenu/ProductsMenuLayout'
@@ -21,11 +21,17 @@ const ProductCategories: FC = () => {
                     <Card.Meta>Последнее изменение 2 часа назад</Card.Meta>
                     <Card.Description>
                         <Table
-                            headers={[<Checkbox key={'Название'} />, 'Название']}
+                            headers={[<Checkbox key="Название" />, 'Название', 'Создан', '']}
                             rows={categories.map(category => [
-                                <Checkbox key={category.name} />,
+                                <Checkbox key={category.id} />,
                                 category.name,
-                                <Button key={category.name} as={Icon} name="cart" />
+                                category.createDateTime,
+                                [
+                                    <Button.Group basic size="small" key={category.id}>
+                                        <Button icon="edit" />
+                                        <Button icon="remove" />
+                                    </Button.Group>
+                                ]
                             ])}
                         />
                     </Card.Description>

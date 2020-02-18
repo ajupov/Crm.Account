@@ -12,7 +12,7 @@ const MobileSidebarMenu: FC = () => {
 
     const AvatarAndUserElement = (
         <>
-            <Image avatar src="./content/client-avatar-micro.jpg" style={{ marginRight: '1.4em' }} />
+            <Image avatar src="/content/client-avatar-micro.jpg" style={{ marginRight: '1.4em' }} />
             {userInfo.name}
         </>
     )

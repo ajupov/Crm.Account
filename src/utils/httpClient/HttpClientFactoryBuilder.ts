@@ -1,7 +1,8 @@
+import Configuration from '../../configuration/Configuration'
 import HttpClientFactory from './HttpClientFactory'
-import IHttpClientFactory from './../../../.generated/litecrm_api/IHttpClientFactory'
 
 export class HttpClientFactoryBuilder {
+    private readonly configuration = new Configuration()
     private _host = ''
 
     public WithHost(host: string): HttpClientFactoryBuilder {
@@ -10,7 +11,13 @@ export class HttpClientFactoryBuilder {
         return this
     }
 
-    public Build(): IHttpClientFactory {
+    public WithApiUrl(): HttpClientFactoryBuilder {
+        this._host = this.configuration.ApiUrl
+
+        return this
+    }
+
+    public Build(): HttpClientFactory {
         return new HttpClientFactory(this._host)
     }
 }

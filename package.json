@@ -16,7 +16,7 @@
         "build-prod": "webpack --mode=production",
         "eslint": "eslint --cache -f visualstudio --ext .js,.jsx,.ts,.tsx src",
         "eslint:fix": "eslint --fix",
-        "generate-api-clients": "swagger-to-ts --input=http://localhost:9000/swagger/v1/swagger.json --output=.generated/litecrm_api"
+        "generate-api-clients": "swagger-to-ts --input=http://localhost:9000/swagger/v1/swagger.json --output=api"
     },
     "devDependencies": {
         "@types/clean-webpack-plugin": "^0.1.3",
