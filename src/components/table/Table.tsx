@@ -8,13 +8,14 @@ import TableHeader from './TableHeader'
 interface TableProps {
     headers: any[]
     rows: any[][]
+    totalCount: number
 }
 
-const Table: FC<TableProps> = ({ headers: headerNames, rows }) => (
+const Table: FC<TableProps> = ({ headers, rows, totalCount }) => (
     <SemanticUiTable compact sortable striped stackable padded selectable color="grey">
-        <TableHeader headers={headerNames}></TableHeader>
+        <TableHeader headers={headers}></TableHeader>
         <TableBody rows={rows} />
-        <TableFooter spanCount={rows.length} />
+        <TableFooter spanCount={rows.length} totalCount={totalCount} />
     </SemanticUiTable>
 )
 

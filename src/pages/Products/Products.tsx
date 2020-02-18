@@ -27,6 +27,7 @@ const Products: FC = () => {
                                 ['Продукт 1', '12345678', '12.90'],
                                 ['Продукт 1', '12345678', '12.90']
                             ]}
+                            totalCount={0}
                         />
                     </Card.Description>
                 </Card.Content>

@@ -6,16 +6,17 @@ import React, { FC } from 'react'
 
 interface TableFooter {
     spanCount?: number
+    totalCount: number
 }
 
-const TableFooter: FC<TableFooter> = ({ spanCount }) => {
+const TableFooter: FC<TableFooter> = ({ spanCount, totalCount }) => {
     const renderPagination = (): JSX.Element => (
         <Pagination
             secondary
             defaultActivePage={1}
             firstItem="В начало"
             lastItem={null}
-            totalPages={0}
+            totalPages={totalCount}
             prevItem="Предыдущая"
             nextItem="Следующая"
             onPageChange={(_, data) => {

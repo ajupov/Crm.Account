@@ -11,14 +11,14 @@ const ProductCategories: FC = () => {
     })
 
     // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-    const categories = useProductCategories(0, 5)
+    const { totalCount, lastModifyDateTime, categories } = useProductCategories(0, 5)
 
     return (
         <ProductsMenuLayout>
             <Card fluid>
                 <Card.Content>
                     <Card.Header>Категории</Card.Header>
-                    <Card.Meta>Последнее изменение 2 часа назад</Card.Meta>
+                    <Card.Meta>{`Последнее изменение ${lastModifyDateTime}`}</Card.Meta>
                     <Card.Description>
                         <Table
                             headers={[<Checkbox key="Название" />, 'Название', 'Создан', '']}
@@ -33,6 +33,7 @@ const ProductCategories: FC = () => {
                                     </Button.Group>
                                 ]
                             ])}
+                            totalCount={totalCount}
                         />
                     </Card.Description>
                 </Card.Content>
