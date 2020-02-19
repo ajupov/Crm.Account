@@ -1,39 +1,42 @@
-import { Button, Card, Checkbox } from 'semantic-ui-react'
-import React, { FC, useEffect } from 'react'
+import React, { FC, useCallback, useEffect, useState } from 'react'
 
+import { Card } from 'semantic-ui-react'
 import ProductsMenuLayout from './ProductsMenu/ProductsMenuLayout'
 import Table from '../../components/table/Table'
-import useProductCategories from './hooks/useProductCategories'
+import getLastChangeDateTimeText from '../../helpers/lastChangeTextHelper'
+import useProductCategoriesTableData from './hooks/useProductCategoriesTableData'
+
+const defaultPageSize = 5
 
 const ProductCategories: FC = () => {
+    const [offset, setOffset] = useState<number>(0)
+
+    const onChangePage = (page: number): void => {
+        setOffset((page - 1) * defaultPageSize)
+    }
+
     useEffect(() => {
         document.title = 'Категории'
     })
 
-    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-    const { totalCount, lastModifyDateTime, categories } = useProductCategories(0, 5)
+    const { totalCount, lastModifyDateTime, rows } = useProductCategoriesTableData(offset, defaultPageSize)
 
     return (
         <ProductsMenuLayout>
             <Card fluid>
                 <Card.Content>
                     <Card.Header>Категории</Card.Header>
-                    <Card.Meta>{`Последнее изменение ${lastModifyDateTime}`}</Card.Meta>
+                    <Card.Meta>{getLastChangeDateTimeText(lastModifyDateTime)}</Card.Meta>
                     <Card.Description>
                         <Table
-                            headers={[<Checkbox key="Название" />, 'Название', 'Создан', '']}
-                            rows={categories.map(category => [
-                                <Checkbox key={category.id} />,
-                                category.name,
-                                category.createDateTime,
-                                [
-                                    <Button.Group basic size="small" key={category.id}>
-                                        <Button icon="edit" />
-                                        <Button icon="remove" />
-                                    </Button.Group>
-                                ]
-                            ])}
+                            editable
+                            deletable
+                            multiselectable
                             totalCount={totalCount}
+                            pageSize={defaultPageSize}
+                            onChangePage={onChangePage}
+                            headers={['Наименование', 'Создан']}
+                            rows={rows.map(category => [category.name, category.createDateTime])}
                         />
                     </Card.Description>
                 </Card.Content>

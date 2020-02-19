@@ -3,36 +3,29 @@ import { useCallback, useEffect, useState } from 'react'
 import Create from '../../../utils/httpClient/Create'
 import ProductCategoriesClient from '../../../../api/products/clients/ProductCategoriesClient'
 import ProductCategory from '../../../../api/products/models/ProductCategory'
+import TableData from '../../../models/TableData'
 
-interface UseProductCategoriesReturn {
-    totalCount: number
-    lastModifyDateTime: string
-    categories: ProductCategory[]
-}
+const httpClientFactory = Create.HttpClientFactory.WithApiUrl().Build()
+const productCategoriesClient = new ProductCategoriesClient(httpClientFactory)
 
-const useProductCategories = (offset: number, limit: number): UseProductCategoriesReturn => {
-    const httpClientFactory = Create.HttpClientFactory.WithApiUrl().Build()
-
-    const productCategoriesClient = new ProductCategoriesClient(httpClientFactory)
-
+const useProductCategoriesTableData = (offset: number, limit: number): TableData<ProductCategory> => {
     const [totalCount, setTotalCount] = useState<number>(0)
     const [lastModifyDateTime, setLastModifyDateTime] = useState<string>('')
-    const [categories, setCategories] = useState<ProductCategory[]>([])
+    const [rows, setRows] = useState<ProductCategory[]>([])
 
     const loadCategories = useCallback(async (): Promise<void> => {
         const response = await productCategoriesClient.GetPagedListAsync({ offset, limit, isDeleted: false })
 
         setTotalCount(response.totalCount)
         setLastModifyDateTime(response.lastModifyDateTime ?? '')
-        setCategories(response.categories ?? [])
-    }, [productCategoriesClient, offset, limit])
+        setRows(response.categories ?? [])
+    }, [limit, offset])
 
     useEffect(() => {
         loadCategories()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [loadCategories])
 
-    return { totalCount, lastModifyDateTime, categories }
+    return { totalCount, lastModifyDateTime, rows }
 }
 
-export default useProductCategories
+export default useProductCategoriesTableData

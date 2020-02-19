@@ -28,6 +28,9 @@ const Products: FC = () => {
                                 ['Продукт 1', '12345678', '12.90']
                             ]}
                             totalCount={0}
+                            pageSize={1}
+                            // eslint-disable-next-line react/jsx-no-bind, no-alert
+                            onChangePage={i => alert(i)}
                         />
                     </Card.Description>
                 </Card.Content>

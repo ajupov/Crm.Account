@@ -6,16 +6,30 @@ import TableFooter from './TableFooter'
 import TableHeader from './TableHeader'
 
 interface TableProps {
+    editable?: boolean
+    deletable?: boolean
+    multiselectable?: boolean
+    totalCount: number
+    pageSize: number
+    onChangePage: (page: number) => void
     headers: any[]
     rows: any[][]
-    totalCount: number
 }
 
-const Table: FC<TableProps> = ({ headers, rows, totalCount }) => (
+const Table: FC<TableProps> = ({
+    editable,
+    deletable,
+    multiselectable,
+    totalCount,
+    pageSize,
+    onChangePage,
+    headers,
+    rows
+}) => (
     <SemanticUiTable compact sortable striped stackable padded selectable color="grey">
-        <TableHeader headers={headers}></TableHeader>
-        <TableBody rows={rows} />
-        <TableFooter spanCount={rows.length} totalCount={totalCount} />
+        <TableHeader editable={editable} deletable={deletable} multiselectable={multiselectable} headers={headers} />
+        <TableBody editable={editable} deletable={deletable} multiselectable={multiselectable} rows={rows} />
+        <TableFooter spanCount={rows.length} totalPages={totalCount / pageSize} onChangePage={onChangePage} />
     </SemanticUiTable>
 )
 
