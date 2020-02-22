@@ -1,13 +1,14 @@
 import { Pagination, PaginationProps, Table } from 'semantic-ui-react'
 import React, { FC, useCallback } from 'react'
 
-interface TableFooter {
-    spanCount?: number
-    totalPages: number
+export interface TableFooterProps {
+    pageSize: number
+    totalCount: number
     onChangePage: (page: number) => void
+    onClickDeleteButton?: () => void
 }
 
-const TableFooter: FC<TableFooter> = ({ spanCount, totalPages, onChangePage }) => {
+const TableFooter: FC<TableFooterProps> = ({ pageSize, totalCount, onChangePage }) => {
     const onPageChange = useCallback(
         (_: React.MouseEvent, props: PaginationProps): void => {
             onChangePage(Number(props.activePage))
@@ -15,24 +16,21 @@ const TableFooter: FC<TableFooter> = ({ spanCount, totalPages, onChangePage }) =
         [onChangePage]
     )
 
-    const renderPagination = (): JSX.Element => (
-        <Pagination
-            secondary
-            defaultActivePage={1}
-            firstItem="В начало"
-            lastItem="В конец"
-            totalPages={Math.floor(totalPages)}
-            prevItem="Предыдущая"
-            nextItem="Следующая"
-            onPageChange={onPageChange}
-        />
-    )
-
     return (
         <Table.Footer>
-            <Table.Row textAlign="center">
-                <Table.HeaderCell colSpan={spanCount ?? 1}>{renderPagination()}</Table.HeaderCell>
-            </Table.Row>
+            <Pagination
+                secondary
+                defaultActivePage={1}
+                firstItem="В начало"
+                lastItem="В конец"
+                totalPages={Math.floor(totalCount / pageSize)}
+                prevItem="Предыдущая"
+                nextItem="Следующая"
+                onPageChange={onPageChange}
+            />
+            {/* <Table.Row textAlign="center">
+                <Table.HeaderCell colSpan={spanCount ?? 1}></Table.HeaderCell>
+            </Table.Row> */}
         </Table.Footer>
     )
 }

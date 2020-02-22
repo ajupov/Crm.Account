@@ -1,52 +1,38 @@
 import { Button, Checkbox, Table } from 'semantic-ui-react'
 import React, { FC } from 'react'
 
-interface TableBodyProps {
-    editable?: boolean
-    deletable?: boolean
-    multiselectable?: boolean
-    rows: any[][]
+import { Link } from 'react-router-dom'
+
+export interface TableBodyProps {
+    rows: TableBodyRowProps[]
 }
 
-const TableBody: FC<TableBodyProps> = ({ editable, deletable, multiselectable, rows }) => {
-    const getMultiselectableCheckboxCell = (index: number): JSX.Element => (
-        <Table.Cell key={`MultiselectableCheckboxCell_${index}`}>
-            <Checkbox />
-        </Table.Cell>
-    )
+export interface TableBodyRowProps {
+    cells: any[]
+    onClickRow?: (event: Event) => void
+    onClickEditButton?: (event: Event) => void
+    onClickDeleteButton?: () => void
+}
 
-    const getActionsCell = (index: number): JSX.Element => (
-        <Table.Cell key={`ActionsHeaderCell_${index}`}>
-            <Button.Group basic size="small">
-                <Button icon="edit" />
-                <Button icon="remove" />
-            </Button.Group>
-        </Table.Cell>
-    )
+const TableBody: FC<TableBodyProps> = ({ rows }) => {
+    const renderCells = (row: TableBodyRowProps): JSX.Element[] =>
+        row.cells.map((cell, index) => <Table.Cell key={index}>{cell}</Table.Cell>)
 
-    const renderCell = (value: any, index: number): JSX.Element => <Table.Cell key={index}>{value}</Table.Cell>
-
-    const renderCells = (cells: any[], rowIndex: number): JSX.Element[] => {
-        let result = []
-
-        if (multiselectable) {
-            result.push(getMultiselectableCheckboxCell(rowIndex))
-        }
-
-        result = [...result, ...cells.map((cell, index) => renderCell(cell, index))]
-
-        if (editable || deletable) {
-            result.push(getActionsCell(rowIndex))
-        }
-
-        return result
-    }
-
-    const renderRow = (cells: any[], index: number): JSX.Element => (
-        <Table.Row key={index}>{renderCells(cells, index)}</Table.Row>
-    )
-
-    const renderRows = (): JSX.Element[] => rows.map((row, index) => renderRow(row, index))
+    const renderRows = (): JSX.Element[] =>
+        rows.map((row, index) => (
+            <Table.Row onClick={row.onClickRow} key={index}>
+                <Table.Cell textAlign="center" key={`MultiselectableCheckboxCell_${index}`}>
+                    <Checkbox />
+                </Table.Cell>
+                {renderCells(row)}
+                <Table.Cell textAlign="center" key={`ActionsHeaderCell_${index}`}>
+                    <Button.Group basic>
+                        <Button onClick={row.onClickEditButton} icon="edit" />
+                        <Button onClick={row.onClickDeleteButton} icon="remove" />
+                    </Button.Group>
+                </Table.Cell>
+            </Table.Row>
+        ))
 
     return <Table.Body>{renderRows()}</Table.Body>
 }

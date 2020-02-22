@@ -1,45 +1,33 @@
-import { Checkbox, Table } from 'semantic-ui-react'
+import { Checkbox, SemanticWIDTHS, Table } from 'semantic-ui-react'
 import React, { FC } from 'react'
 
-interface TableHeaderProps {
-    editable?: boolean
-    deletable?: boolean
-    multiselectable?: boolean
-    headers: any[]
+export interface TableHeaderProps {
+    headers: TableHeaderRowProps[]
 }
 
-const TableHeader: FC<TableHeaderProps> = ({ editable, deletable, multiselectable, headers }) => {
-    const getMultiselectableCheckboxHeaderCell = (): JSX.Element => (
-        <Table.HeaderCell key={'MultiselectableCheckboxHeaderCell'}>
-            <Checkbox />
-        </Table.HeaderCell>
-    )
+export interface TableHeaderRowProps {
+    value?: string
+    width?: SemanticWIDTHS
+    onClick?: () => void
+}
 
-    const getActionsHeaderCell = (): JSX.Element => <Table.HeaderCell key={'ActionsHeaderCell'} />
-
-    const renderCell = (name: string, index: number): JSX.Element => (
-        <Table.HeaderCell key={index}>{name}</Table.HeaderCell>
-    )
-
-    const renderCells = (): JSX.Element[] => {
-        let result = []
-
-        if (multiselectable) {
-            result.push(getMultiselectableCheckboxHeaderCell())
-        }
-
-        result = [...result, ...headers.map((name, index) => renderCell(name, index))]
-
-        if (editable || deletable) {
-            result.push(getActionsHeaderCell())
-        }
-
-        return result
-    }
+const TableHeader: FC<TableHeaderProps> = ({ headers }) => {
+    const renderCells = (): JSX.Element[] =>
+        headers.map((row, index) => (
+            <Table.HeaderCell textAlign="center" width={row.width} key={index}>
+                {row.value}
+            </Table.HeaderCell>
+        ))
 
     return (
         <Table.Header>
-            <Table.Row>{renderCells()}</Table.Row>
+            <Table.Row>
+                <Table.HeaderCell textAlign="center" width="1" key={'MultiselectableCheckboxHeaderCell'}>
+                    <Checkbox />
+                </Table.HeaderCell>
+                {renderCells()}
+                <Table.HeaderCell textAlign="center" width="2" key={'ActionsHeaderCell'} />
+            </Table.Row>
         </Table.Header>
     )
 }

@@ -1,35 +1,21 @@
 import React, { FC } from 'react'
+import TableBody, { TableBodyRowProps } from './TableBody'
+import TableFooter, { TableFooterProps } from './TableFooter'
+import TableHeader, { TableHeaderRowProps } from './TableHeader'
 
 import { Table as SemanticUiTable } from 'semantic-ui-react'
-import TableBody from './TableBody'
-import TableFooter from './TableFooter'
-import TableHeader from './TableHeader'
 
 interface TableProps {
-    editable?: boolean
-    deletable?: boolean
-    multiselectable?: boolean
-    totalCount: number
-    pageSize: number
-    onChangePage: (page: number) => void
-    headers: any[]
-    rows: any[][]
+    headers: TableHeaderRowProps[]
+    rows: TableBodyRowProps[]
+    footer: TableFooterProps
 }
 
-const Table: FC<TableProps> = ({
-    editable,
-    deletable,
-    multiselectable,
-    totalCount,
-    pageSize,
-    onChangePage,
-    headers,
-    rows
-}) => (
+const Table: FC<TableProps> = ({ headers, rows }) => (
     <SemanticUiTable compact sortable striped stackable padded selectable color="grey">
-        <TableHeader editable={editable} deletable={deletable} multiselectable={multiselectable} headers={headers} />
-        <TableBody editable={editable} deletable={deletable} multiselectable={multiselectable} rows={rows} />
-        <TableFooter spanCount={rows.length} totalPages={totalCount / pageSize} onChangePage={onChangePage} />
+        <TableHeader headers={headers} />
+        <TableBody rows={rows} />
+        {/* <TableFooter {...footer} /> */}
     </SemanticUiTable>
 )
 

@@ -16,9 +16,10 @@ export class HttpClient {
     }
 
     public async get<T>(uri: string, data?: object): Promise<T> {
-        const params = this.getParams('GET')
+        const fetchParams = this.getFetchParams('GET')
+        const queryParams = data ? '?' + stringify(data) : ''
 
-        const response = await fetch(this.getUrl(uri) + stringify(data || {}), params)
+        const response = await fetch(this.getUrl(uri) + queryParams, fetchParams)
 
         this.checkRedirect(response)
         this.checkError(response)
@@ -27,7 +28,7 @@ export class HttpClient {
     }
 
     public async post<T>(uri: string, body?: object): Promise<T> {
-        const params = this.getParams('POST', body)
+        const params = this.getFetchParams('POST', body)
         const response = await fetch(combineUrl(this._host, uri), params)
 
         this.checkRedirect(response)
@@ -40,7 +41,7 @@ export class HttpClient {
         return this._host ? combineUrl(this._host, uri) : uri
     }
 
-    private getParams(method: HttpMethod, body?: object): any {
+    private getFetchParams(method: HttpMethod, body?: object): any {
         return {
             method,
             mode: 'cors',
