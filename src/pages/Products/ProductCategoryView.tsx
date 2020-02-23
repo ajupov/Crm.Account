@@ -4,7 +4,7 @@ import React, { FC } from 'react'
 import { useParams } from 'react-router-dom'
 import useProductCategory from './hooks/useProductCategory'
 
-const ProductCategory: FC = () => {
+const ProductCategoryView: FC = () => {
     const { id } = useParams()
 
     const category = useProductCategory(id ?? '')
@@ -26,4 +26,4 @@ const ProductCategory: FC = () => {
     )
 }
 
-export default ProductCategory
+export default ProductCategoryView

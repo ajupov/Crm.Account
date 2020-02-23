@@ -10,8 +10,9 @@ import Layout from '../layout/Layout'
 import Leads from '../../pages/leads/Leads'
 import NotFound from '../../pages/notFound/NotFound'
 import ProductCategories from '../../pages/products/ProductCategories'
-import ProductCategory from '../../pages/products/ProductCategory'
+import ProductCategoryCreate from '../../pages/products/ProductCategoryCreate'
 import ProductCategoryEdit from '../../pages/products/ProductCategoryEdit'
+import ProductCategoryView from '../../pages/products/ProductCategoryView'
 import Products from '../../pages/products/Products'
 import Settings from '../../pages/settings/Settings'
 import UserInfoContext from '../../contexts/UserInfoContext'
@@ -31,10 +32,13 @@ const Application: FC = () => {
                         <Route path="/leads" component={Leads} />
                         <Route path="/deals" component={Deals} />
                         <Route path="/contacts" component={Contacts} />
+
                         <Route path="/products" exact component={Products} />
                         <Route path="/products/categories" exact component={ProductCategories} />
-                        <Route path="/products/categories/:id" exact component={ProductCategory} />
-                        <Route path="/products/categories/:id/edit" exact component={ProductCategoryEdit} />
+                        <Route path="/products/categories/view/:id" exact component={ProductCategoryView} />
+                        <Route path="/products/categories/create" exact component={ProductCategoryCreate} />
+                        <Route path="/products/categories/edit/:id" exact component={ProductCategoryEdit} />
+
                         <Route path="/settings" component={Settings} />
                         <Route component={NotFound} />
                     </Switch>

@@ -1,8 +1,9 @@
 import { Button, Input, SemanticWIDTHS, Table } from 'semantic-ui-react'
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 
 export interface TableHeaderProps {
     headers: TableHeaderRowProps[]
+    onClickCreate: (event: React.MouseEvent) => void
 }
 
 export type Sorting = '' | 'asc' | 'desc'
@@ -14,7 +15,15 @@ export interface TableHeaderRowProps {
     onClick?: () => void
 }
 
-const TableHeader: FC<TableHeaderProps> = ({ headers }) => {
+const TableHeader: FC<TableHeaderProps> = ({ headers, onClickCreate }) => {
+    const onCreateClick = useCallback(
+        (event: React.MouseEvent): void => {
+            onClickCreate(event)
+            event.stopPropagation()
+        },
+        [onClickCreate]
+    )
+
     const renderCells = (): JSX.Element[] =>
         headers.map((row, index) => (
             <Table.HeaderCell width={row.width} key={index}>
@@ -38,7 +47,7 @@ const TableHeader: FC<TableHeaderProps> = ({ headers }) => {
             <Table.Row>
                 {renderSearchCells()}
                 <Table.HeaderCell width="2" style={{ padding: '4px', background: 'white' }}>
-                    <Button basic compact fluid>
+                    <Button basic compact fluid onClick={onCreateClick}>
                         Создать
                     </Button>
                 </Table.HeaderCell>

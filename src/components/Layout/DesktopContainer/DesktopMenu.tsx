@@ -1,4 +1,4 @@
-import { Dropdown, Icon, Image, Menu } from 'semantic-ui-react'
+import { Dropdown, Icon, Menu } from 'semantic-ui-react'
 import React, { FC, useContext } from 'react'
 
 import Clock from 'react-live-clock'
