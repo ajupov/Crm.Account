@@ -5,10 +5,10 @@ export interface TableFooterProps {
     pageSize: number
     totalCount: number
     onChangePage: (page: number) => void
-    onClickDeleteButton?: () => void
+    columnsCount?: number
 }
 
-const TableFooter: FC<TableFooterProps> = ({ pageSize, totalCount, onChangePage }) => {
+const TableFooter: FC<TableFooterProps> = ({ pageSize, totalCount, onChangePage, columnsCount }) => {
     const onPageChange = useCallback(
         (_: React.MouseEvent, props: PaginationProps): void => {
             onChangePage(Number(props.activePage))
@@ -18,19 +18,20 @@ const TableFooter: FC<TableFooterProps> = ({ pageSize, totalCount, onChangePage 
 
     return (
         <Table.Footer>
-            <Pagination
-                secondary
-                defaultActivePage={1}
-                firstItem="В начало"
-                lastItem="В конец"
-                totalPages={Math.floor(totalCount / pageSize)}
-                prevItem="Предыдущая"
-                nextItem="Следующая"
-                onPageChange={onPageChange}
-            />
-            {/* <Table.Row textAlign="center">
-                <Table.HeaderCell colSpan={spanCount ?? 1}></Table.HeaderCell>
-            </Table.Row> */}
+            <Table.Row>
+                <Table.Cell colSpan={(columnsCount ?? 0) + 1} textAlign="center">
+                    <Pagination
+                        secondary
+                        defaultActivePage={1}
+                        firstItem="В начало"
+                        lastItem="В конец"
+                        totalPages={Math.ceil(totalCount / pageSize)}
+                        prevItem="Предыдущая"
+                        nextItem="Следующая"
+                        onPageChange={onPageChange}
+                    />
+                </Table.Cell>
+            </Table.Row>
         </Table.Footer>
     )
 }

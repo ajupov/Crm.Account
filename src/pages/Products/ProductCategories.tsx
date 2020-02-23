@@ -1,15 +1,16 @@
-import { Card, Header, Loader } from 'semantic-ui-react'
+import { Card, Header } from 'semantic-ui-react'
 import React, { FC, useEffect, useState } from 'react'
 
 import ProductsMenuLayout from './ProductsMenu/ProductsMenuLayout'
 import Table from '../../components/table/Table'
 import { getFullPageName } from '../../utils/page/pageUtils'
 import getLastChangeDateTimeText from '../../helpers/lastChangeTextHelper'
+import { toLocaleDateTime } from '../../utils/datetime/dateTimeUtils'
 import { useHistory } from 'react-router'
 import useProductCategoriesTableData from './hooks/useProductCategoriesTableData'
 
 const pageName = 'Категории'
-const pageSize = 5
+const pageSize = 10
 
 const ProductCategories: FC = () => {
     useEffect(() => {
@@ -21,51 +22,45 @@ const ProductCategories: FC = () => {
 
     const onChangePage = (page: number): void => setOffset((page - 1) * pageSize)
 
-    const { totalCount, lastModifyDateTime, rows } = useProductCategoriesTableData(offset, pageSize)
+    const { isLoading, totalCount, lastModifyDateTime, rows } = useProductCategoriesTableData(offset, pageSize)
 
     const getTable = (): JSX.Element => (
-        <>
-            <Card.Header>
-                <Header as="h2">{pageName}</Header>
-            </Card.Header>
-
-            <Card.Meta>{getLastChangeDateTimeText(lastModifyDateTime)}</Card.Meta>
-
-            <Card.Content>
-                <Table
-                    headers={[
-                        { value: 'Наименование', width: '8' },
-                        { value: 'Создан', width: '4' }
-                    ]}
-                    rows={rows.map(category => ({
-                        cells: [category.name, category.createDateTime],
-                        onClickRow: (event: Event) => {
-                            event.stopPropagation()
-
-                            history.push(`/products/categories/${category.id}`)
-                        },
-                        onClickEditButton: (event: Event) => {
-                            event.stopPropagation()
-
-                            history.push(`/products/categories/${category.id}/edit`)
-                        }
-                    }))}
-                    footer={{ pageSize, totalCount, onChangePage }}
-                />
-            </Card.Content>
-        </>
-    )
-
-    const getLoader = (): JSX.Element => (
-        <Loader active size="massive">
-            Загрузка
-        </Loader>
+        <Table
+            isLoading={isLoading}
+            headers={[
+                { value: 'Наименование', width: '8', sorting: '' },
+                { value: 'Создан', width: '3', sorting: '' }
+            ]}
+            rows={rows.map(category => ({
+                cells: [
+                    { value: category.name, textAlign: 'left' },
+                    { value: toLocaleDateTime(category.createDateTime), textAlign: 'center' }
+                ],
+                onClickRow: (event: Event) => {
+                    history.push(`/products/categories/${category.id}`)
+                    event.stopPropagation()
+                },
+                onClickEditButton: (event: React.MouseEvent) => {
+                    history.push(`/products/categories/${category.id}/edit`)
+                    event.stopPropagation()
+                },
+                onClickDeleteButton: (event: React.MouseEvent) => {
+                    history.push(`/products/categories/${category.id}/edit`)
+                    event.stopPropagation()
+                }
+            }))}
+            footer={{ pageSize, totalCount, onChangePage }}
+        />
     )
 
     return (
         <ProductsMenuLayout>
             <Card fluid>
-                <Card.Content>{rows && totalCount > 0 ? getTable() : getLoader()}</Card.Content>
+                <Card.Content>
+                    <Header as="h3">{pageName}</Header>
+                    <Card.Meta textAlign="right">{getLastChangeDateTimeText(lastModifyDateTime)}</Card.Meta>
+                    {getTable()}
+                </Card.Content>
             </Card>
         </ProductsMenuLayout>
     )

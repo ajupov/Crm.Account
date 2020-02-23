@@ -12,20 +12,23 @@ const useProductCategoriesTableData = (offset: number, limit: number): TableData
     const [totalCount, setTotalCount] = useState<number>(0)
     const [lastModifyDateTime, setLastModifyDateTime] = useState<string>('')
     const [rows, setRows] = useState<ProductCategory[]>([])
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const loadCategories = useCallback(async (): Promise<void> => {
+        setIsLoading(true)
         const response = await productCategoriesClient.GetPagedListAsync({ offset, limit, isDeleted: false })
 
         setTotalCount(response.totalCount)
         setLastModifyDateTime(response.lastModifyDateTime ?? '')
         setRows(response.categories ?? [])
+        setIsLoading(false)
     }, [limit, offset])
 
     useEffect(() => {
         loadCategories()
     }, [loadCategories])
 
-    return { totalCount, lastModifyDateTime, rows }
+    return { isLoading, totalCount, lastModifyDateTime, rows }
 }
 
 export default useProductCategoriesTableData

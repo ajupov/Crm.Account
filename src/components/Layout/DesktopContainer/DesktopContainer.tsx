@@ -11,7 +11,7 @@ const DesktopContainer: FC = ({ children }) => (
                 <DesktopMenu />
             </Menu>
         </Segment>
-        <Segment style={{ height: 'calc(100vh - 44px)', paddingBottom: 0, paddingTop: '10px' }} vertical>
+        <Segment style={{ paddingBottom: 0, paddingTop: '10px' }} vertical>
             <Sidebar.Pushable>
                 <Sidebar
                     as={Menu}
@@ -24,7 +24,9 @@ const DesktopContainer: FC = ({ children }) => (
                 >
                     <DesktopSidebarMenu />
                 </Sidebar>
-                <Sidebar.Pusher style={{ paddingTop: '10px', transform: 'translate3d(135px,0,0)' }}>
+                <Sidebar.Pusher
+                    style={{ paddingTop: '10px', transform: 'translate3d(135px,0,0)', minHeight: 'calc(100vh - 54px)' }}
+                >
                     {children}
                 </Sidebar.Pusher>
             </Sidebar.Pushable>
