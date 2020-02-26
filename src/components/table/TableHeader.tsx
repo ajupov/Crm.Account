@@ -7,10 +7,12 @@ export interface TableHeaderProps {
 }
 
 export type Sorting = '' | 'asc' | 'desc'
+export type Type = 'string' | 'datetime'
 
 export interface TableHeaderRowProps {
     value?: string
     width?: SemanticWIDTHS
+    type: Type
     sorting: Sorting
     onClick?: () => void
 }
@@ -31,10 +33,27 @@ const TableHeader: FC<TableHeaderProps> = ({ headers, onClickCreate }) => {
             </Table.HeaderCell>
         ))
 
+    const renderSearch = (type: Type): JSX.Element | null => {
+        switch (type) {
+            case 'string':
+                return <Input fluid placeholder="Введите для поиска" size="mini" />
+            case 'datetime':
+                return (
+                    <>
+                        <Input type="date" size="mini" style={{ width: '130px' }} />
+                        {' — '}
+                        <Input type="date" size="mini" style={{ width: '130px' }} />
+                    </>
+                )
+            default:
+                return null
+        }
+    }
+
     const renderSearchCells = (): JSX.Element[] =>
         headers.map((row, index) => (
             <Table.HeaderCell width={row.width} key={index} style={{ padding: '4px', background: 'white' }}>
-                <Input fluid icon="calendar" placeholder="Введите для поиска" size="small" />
+                {renderSearch(row.type)}
             </Table.HeaderCell>
         ))
 

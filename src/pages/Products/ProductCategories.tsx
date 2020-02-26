@@ -33,8 +33,8 @@ const ProductCategories: FC = () => {
             isLoading={isLoading}
             onClickCreate={onClickCreate}
             headers={[
-                { value: 'Наименование', width: '8', sorting: '' },
-                { value: 'Создан', width: '3', sorting: '' }
+                { value: 'Наименование', type: 'string', width: '8', sorting: '' },
+                { value: 'Создан', type: 'datetime', width: '1', sorting: '' }
             ]}
             rows={rows.map(category => ({
                 cells: [
