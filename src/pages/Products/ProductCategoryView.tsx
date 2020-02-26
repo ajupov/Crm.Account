@@ -1,28 +1,48 @@
-import { Card, Item } from 'semantic-ui-react'
+import { Button, Card, Checkbox, Dimmer, Header, Icon, Item, Loader } from 'semantic-ui-react'
+import { Link, useParams } from 'react-router-dom'
 import React, { FC } from 'react'
+import { getCreateDateTimeText, getLastChangeDateTimeText } from '../../helpers/changesTextHelper'
 
-import { useParams } from 'react-router-dom'
+import ProductsMenuLayout from './ProductsMenu/ProductsMenuLayout'
 import useProductCategory from './hooks/useProductCategory'
 
 const ProductCategoryView: FC = () => {
     const { id } = useParams()
 
-    const category = useProductCategory(id ?? '')
+    const entityData = useProductCategory(id)
 
     return (
-        <Card>
-            <Card.Content>
-                <Item.Group>
-                    <Item>
-                        <Item.Content>
-                            <Item.Header>{category?.name}</Item.Header>
-                            <Item.Description>{category?.createDateTime}</Item.Description>
-                            <Item.Extra>Additional Details</Item.Extra>
-                        </Item.Content>
-                    </Item>
-                </Item.Group>
-            </Card.Content>
-        </Card>
+        <ProductsMenuLayout>
+            <Card fluid>
+                <Card.Content>
+                    <Link to="/products/categories" style={{ color: 'grey' }}>
+                        <Icon name="arrow left" />
+                        Назад
+                    </Link>
+                    <Header as="h3">Просмотр категории</Header>
+                    <Card.Meta textAlign="right">{getCreateDateTimeText(entityData.entity?.createDateTime)}</Card.Meta>
+                    <Card.Meta textAlign="right">
+                        {getLastChangeDateTimeText(entityData.entity?.modifyDateTime)}
+                    </Card.Meta>
+                    <Dimmer active={entityData.isLoading} inverted>
+                        <Loader>Загрузка</Loader>
+                    </Dimmer>
+
+                    <p>Наименование:</p>
+                    <b>{entityData.entity?.name}</b>
+                    <br />
+                    <br />
+
+                    <p>Удален:</p>
+                    <b>{entityData.entity?.isDeleted ? 'Да' : 'Нет'}</b>
+
+                    <Button.Group floated="right">
+                        <Button>Редактировать</Button>
+                        <Button>Удалить</Button>
+                    </Button.Group>
+                </Card.Content>
+            </Card>
+        </ProductsMenuLayout>
     )
 }
 

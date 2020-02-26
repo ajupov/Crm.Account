@@ -10,6 +10,7 @@ export interface TableBodyRowProps {
     onClickRow: (event: Event) => void
     onClickEditButton: (event: React.MouseEvent) => void
     onClickDeleteButton: (event: React.MouseEvent) => void
+    onClickRestoreButton: (event: React.MouseEvent) => void
 }
 
 export type TableCellTextAlign = 'center' | 'left' | 'right'
@@ -34,7 +35,8 @@ const TableBody: FC<TableBodyProps> = ({ rows }) => {
                 <Table.Cell textAlign="center">
                     <Button.Group basic compact fluid size="mini">
                         <Button onClick={row.onClickEditButton} icon="edit" />
-                        <Button onClick={row.onClickDeleteButton} icon="remove" />
+                        {row.onClickDeleteButton && <Button onClick={row.onClickDeleteButton} icon="trash" />}
+                        {row.onClickRestoreButton && <Button onClick={row.onClickRestoreButton} icon="redo" />}
                     </Button.Group>
                 </Table.Cell>
             </Table.Row>

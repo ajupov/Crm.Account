@@ -1,4 +1,4 @@
-import { Button, Input, SemanticWIDTHS, Table } from 'semantic-ui-react'
+import { Button, Dropdown, Input, SemanticWIDTHS, Table } from 'semantic-ui-react'
 import React, { FC, useCallback } from 'react'
 
 export interface TableHeaderProps {
@@ -7,7 +7,7 @@ export interface TableHeaderProps {
 }
 
 export type Sorting = '' | 'asc' | 'desc'
-export type Type = 'string' | 'datetime'
+export type Type = 'string' | 'datetime' | 'boolean'
 
 export interface TableHeaderRowProps {
     value?: string
@@ -34,17 +34,41 @@ const TableHeader: FC<TableHeaderProps> = ({ headers, onClickCreate }) => {
         ))
 
     const renderSearch = (type: Type): JSX.Element | null => {
+        const options = [
+            { key: 1, text: 'Нет', value: false },
+            { key: 2, text: 'Да', value: true }
+        ]
+
         switch (type) {
             case 'string':
-                return <Input fluid placeholder="Введите для поиска" size="mini" />
+                return <Input size="mini" fluid placeholder="Введите для поиска" />
             case 'datetime':
                 return (
                     <>
-                        <Input type="date" size="mini" style={{ width: '130px' }} />
-                        {' — '}
-                        <Input type="date" size="mini" style={{ width: '130px' }} />
+                        <Input fluid size="mini" type="date" style={{ width: '150px' }} label="с" />
+                        <Input fluid size="mini" type="date" style={{ width: '150px' }} label="по" />
                     </>
                 )
+            case 'boolean':
+                return (
+                    <Dropdown
+                        style={{
+                            width: '70px',
+                            paddingTop: '4px',
+                            paddingBottom: '4px',
+                            minHeight: '30px',
+                            lineHeight: '20px',
+                            fontSize: '0.8em',
+                            fontWeight: 'normal'
+                        }}
+                        fluid
+                        options={options}
+                        selection
+                        basic
+                        compact
+                    />
+                )
+
             default:
                 return null
         }
@@ -63,6 +87,7 @@ const TableHeader: FC<TableHeaderProps> = ({ headers, onClickCreate }) => {
                 {renderCells()}
                 <Table.HeaderCell width="2">Действия</Table.HeaderCell>
             </Table.Row>
+
             <Table.Row>
                 {renderSearchCells()}
                 <Table.HeaderCell width="2" style={{ padding: '4px', background: 'white' }}>
