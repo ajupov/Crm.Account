@@ -1,16 +1,20 @@
 import React, { FC } from 'react'
 
 import { Grid } from 'semantic-ui-react'
-import RightBlock from './ProductsMenuBlock'
+import ProductsMenuBlock from './ProductsMenuBlock'
 
-const ProductsMenuLayout: FC = ({ children }) => (
-    <Grid columns={2}>
-        <Grid.Row>
-            <Grid.Column width={11}>{children}</Grid.Column>
-            <Grid.Column width={3}>
-                <RightBlock />
-            </Grid.Column>
-        </Grid.Row>
+interface ProductsMenuLayoutProps {
+    isShowFilters?: boolean
+    filters?: JSX.Element
+}
+
+const ProductsMenuLayout: FC<ProductsMenuLayoutProps> = ({ isShowFilters, filters, children }) => (
+    <Grid>
+        <Grid.Column width={11}>{children}</Grid.Column>
+        <Grid.Column width={3}>
+            <ProductsMenuBlock />
+            {isShowFilters && filters}
+        </Grid.Column>
     </Grid>
 )
 

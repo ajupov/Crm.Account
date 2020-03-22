@@ -88,14 +88,14 @@ const TableHeader: FC<TableHeaderProps> = ({ headers, onClickCreate }) => {
                 <Table.HeaderCell width="2">Действия</Table.HeaderCell>
             </Table.Row>
 
-            <Table.Row>
+            {/* <Table.Row>
                 {renderSearchCells()}
                 <Table.HeaderCell width="2" style={{ padding: '4px', background: 'white' }}>
                     <Button basic compact fluid onClick={onCreateClick}>
                         Создать
                     </Button>
                 </Table.HeaderCell>
-            </Table.Row>
+            </Table.Row> */}
         </Table.Header>
     )
 }

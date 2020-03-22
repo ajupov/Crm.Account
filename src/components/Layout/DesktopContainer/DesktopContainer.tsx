@@ -25,7 +25,7 @@ const DesktopContainer: FC = ({ children }) => (
                     <DesktopSidebarMenu />
                 </Sidebar>
                 <Sidebar.Pusher
-                    style={{ paddingTop: '10px', transform: 'translate3d(135px,0,0)', minHeight: 'calc(100vh - 54px)' }}
+                    style={{ paddingTop: '10px', transform: 'translate3d(140px,0,0)', minHeight: 'calc(100vh - 54px)' }}
                 >
                     {children}
                 </Sidebar.Pusher>

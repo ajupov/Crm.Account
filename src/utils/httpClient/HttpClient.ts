@@ -3,7 +3,7 @@ import 'isomorphic-fetch'
 import { combineUrl } from '../url/urlUtils'
 import { stringify } from 'query-string'
 
-type HttpMethod = 'GET' | 'POST'
+type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 
 const ApplicationJsonContentType = 'application/json'
 const NoCacheHeaderValue = 'no-cache'
@@ -28,8 +28,40 @@ export class HttpClient {
     }
 
     public async post<T>(uri: string, body?: object): Promise<T> {
-        const params = this.getFetchParams('POST', body)
-        const response = await fetch(combineUrl(this._host, uri), params)
+        const fetchParams = this.getFetchParams('POST', body)
+        const response = await fetch(combineUrl(this._host, uri), fetchParams)
+
+        this.checkRedirect(response)
+        this.checkError(response)
+
+        return this.convertToJson<T>(response)
+    }
+
+    public async put<T>(uri: string, body?: object): Promise<T> {
+        const fetchParams = this.getFetchParams('PUT', body)
+        const response = await fetch(combineUrl(this._host, uri), fetchParams)
+
+        this.checkRedirect(response)
+        this.checkError(response)
+
+        return this.convertToJson<T>(response)
+    }
+
+    public async patch<T>(uri: string, body?: object): Promise<T> {
+        const fetchParams = this.getFetchParams('PATCH', body)
+        const response = await fetch(combineUrl(this._host, uri), fetchParams)
+
+        this.checkRedirect(response)
+        this.checkError(response)
+
+        return this.convertToJson<T>(response)
+    }
+
+    public async delete<T>(uri: string, data?: object): Promise<T> {
+        const fetchParams = this.getFetchParams('DELETE')
+        const queryParams = data ? '?' + stringify(data) : ''
+
+        const response = await fetch(this.getUrl(uri) + queryParams, fetchParams)
 
         this.checkRedirect(response)
         this.checkError(response)
@@ -55,8 +87,12 @@ export class HttpClient {
             },
             redirect: 'manual',
             referrer: 'no-referrer',
-            body: method === 'POST' ? JSON.stringify(body) : null
+            body: this.isWithBody(method) ? JSON.stringify(body) : null
         }
+    }
+
+    private isWithBody(method: HttpMethod): boolean {
+        return method === 'POST' || method === 'PUT' || method === 'PATCH'
     }
 
     private checkError(response: Response): void {

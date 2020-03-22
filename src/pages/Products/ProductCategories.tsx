@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/indent */
 /* eslint-disable sonarjs/no-identical-functions */
 
-import { Card, Checkbox, Header } from 'semantic-ui-react'
+import { Accordion, Button, Card, Checkbox, Form, Grid, Header, Icon, Input, Menu } from 'semantic-ui-react'
 import React, { FC, useEffect, useState } from 'react'
 
 import ProductCategoryDelete from './ProductCategoryDelete'
@@ -48,14 +48,12 @@ const ProductCategories: FC = () => {
                 onClickCreate={onClickCreate}
                 headers={[
                     { value: 'Наименование', type: 'string', width: '8', sorting: '' },
-                    { value: 'Создан', type: 'datetime', width: '2', sorting: '' },
-                    { value: 'Удален', type: 'boolean', width: '1', sorting: '' }
+                    { value: 'Создан', type: 'datetime', width: '3', sorting: '' }
                 ]}
                 rows={rows.map(category => ({
                     cells: [
                         { value: category.name, textAlign: 'left' },
-                        { value: toLocaleDateTime(category.createDateTime), textAlign: 'center' },
-                        { value: category.isDeleted ? 'Да' : 'Нет', textAlign: 'center' }
+                        { value: toLocaleDateTime(category.createDateTime), textAlign: 'center' }
                     ],
                     onClickRow: (event: Event) => {
                         history.push(`/products/categories/view/${category.id}`)
@@ -81,12 +79,57 @@ const ProductCategories: FC = () => {
         </>
     )
 
+    const getFilters = (): JSX.Element => (
+        <Card fluid>
+            <Card.Content>
+                <Header as="h4">Фильтры</Header>
+                <Form>
+                    <Form.Field>
+                        <label>Наименование:</label>
+                        <Input size="mini" fluid placeholder="Наименование" />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Дата создания:</label>
+                        <Input size="mini" type="date" value="2020-03-01" min="2020-03-01" label="с" />
+                        <Input size="mini" type="date" value="2021-03-01" min="2020-03-01" label="по" />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Статус:</label>
+                        <Checkbox size="mini" radio label="Действующие" name="checkboxRadioGroup" checked />
+                        <Checkbox size="mini" radio label="Удаленные" name="checkboxRadioGroup" />
+                    </Form.Field>
+                    <Form.Field>
+                        <Button.Group size="mini" floated="right">
+                            <Button basic>Сброc</Button>
+                            <Button onClick={onDelete}>Применить</Button>
+                        </Button.Group>
+                    </Form.Field>
+                </Form>
+            </Card.Content>
+        </Card>
+    )
+
     return (
-        <ProductsMenuLayout>
+        <ProductsMenuLayout filters={getFilters()} isShowFilters>
             <Card fluid>
                 <Card.Content>
                     <Header as="h3">{pageName}</Header>
-                    <Card.Meta textAlign="right">{getLastChangeDateTimeText(lastModifyDateTime)}</Card.Meta>
+                    <Grid verticalAlign="middle">
+                        <Grid.Column width={11}>
+                            <Card.Meta floated="left">{getLastChangeDateTimeText(lastModifyDateTime)}</Card.Meta>
+                        </Grid.Column>
+                        <Grid.Column width={5}>
+                            <Button.Group basic size="mini" floated="right">
+                                <Button icon>
+                                    <Icon name="add" /> Создать
+                                </Button>
+                                <Button icon>
+                                    <Icon name="download" /> Выгрузить в CSV
+                                </Button>
+                            </Button.Group>
+                        </Grid.Column>
+                    </Grid>
+
                     {getTable()}
                 </Card.Content>
             </Card>

@@ -1,4 +1,4 @@
-import { Button, Card, Checkbox, Dimmer, Header, Icon, Item, Loader } from 'semantic-ui-react'
+import { Button, Card, Dimmer, Header, Icon, Loader } from 'semantic-ui-react'
 import { Link, useParams } from 'react-router-dom'
 import React, { FC } from 'react'
 import { getCreateDateTimeText, getLastChangeDateTimeText } from '../../helpers/changesTextHelper'
