@@ -36,9 +36,15 @@ const ProductCategories: FC = () => {
 
     const { isLoading, totalCount, lastModifyDateTime, rows } = useProductCategoriesTableData(offset, pageSize)
 
-    const onClickCreate = (): void => {
-        history.push('/products/categories/create')
-    }
+    const onClickCreate = (): void => history.push('/products/categories/create')
+
+    const onClickRow = (id: string) => (): void => history.push(`/products/categories/view/${id}`)
+
+    const onClickEditButton = (id: string) => (): void => history.push(`/products/categories/edit/${id}`)
+
+    const onClickDeleteButton = (id: string) => (): void => setDeleteIds([id])
+
+    const onClickRestoreButton = (id: string) => (): void => setDeleteIds([id])
 
     const getTable = (): JSX.Element => (
         <Table
@@ -53,24 +59,10 @@ const ProductCategories: FC = () => {
                     { value: toLocaleDateTime(category.createDateTime), textAlign: 'center' }
                 ],
                 isDeleted: category.isDeleted,
-                onClickRow: (event: Event) => {
-                    history.push(`/products/categories/view/${category.id}`)
-                    event.stopPropagation()
-                },
-                onClickEditButton: (event: React.MouseEvent) => {
-                    history.push(`/products/categories/edit/${category.id}`)
-                    event.stopPropagation()
-                },
-                onClickDeleteButton: (event: React.MouseEvent) => {
-                    setDeleteIds([category.id])
-                    setIsShowDeleteModal(true)
-                    event.stopPropagation()
-                },
-                onClickRestoreButton: (event: React.MouseEvent) => {
-                    setDeleteIds([category.id])
-                    setIsShowDeleteModal(true)
-                    event.stopPropagation()
-                }
+                onClickRow: onClickRow(category.id),
+                onClickEditButton: onClickEditButton(category.id),
+                onClickDeleteButton: onClickDeleteButton(category.id),
+                onClickRestoreButton: onClickRestoreButton(category.id)
             }))}
             footer={{ pageSize, totalCount, onChangePage }}
         />
@@ -107,20 +99,23 @@ const ProductCategories: FC = () => {
     )
 
     return (
-        <ProductsMenuLayout filters={getFilters()} isShowFilters>
-            <Card fluid>
-                <Card.Content>
-                    <ProductCategoryDelete isOpen={isShowDeleteModal} onClose={onClose} onDelete={onDelete} />
-                    <TableCardHeader
-                        title={pageName}
-                        lastModifyDateTime={lastModifyDateTime}
-                        onClickCreate={onClickCreate}
-                        onClickDownloadAsCsv={onClickCreate}
-                    />
-                    {getTable()}
-                </Card.Content>
-            </Card>
-        </ProductsMenuLayout>
+        <>
+            <ProductsMenuLayout filters={getFilters()} isShowFilters>
+                <Card fluid>
+                    <Card.Content>
+                        <TableCardHeader
+                            title={pageName}
+                            lastModifyDateTime={lastModifyDateTime}
+                            onClickCreate={onClickCreate}
+                            onClickDownloadAsCsv={onClickCreate}
+                        />
+                        {getTable()}
+                    </Card.Content>
+                </Card>
+            </ProductsMenuLayout>
+
+            <ProductCategoryDelete isOpen={deleteIds.length > 0} onClose={onClose} onDelete={onDelete} />
+        </>
     )
 }
 export default ProductCategories

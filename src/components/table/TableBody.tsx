@@ -18,6 +18,21 @@ export interface TableBodyRowProps {
 export type TableCellTextAlign = 'center' | 'left' | 'right'
 
 const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
+    const onClickEdit = (row: TableBodyRowProps) => (event: React.MouseEvent) => {
+        row.onClickEditButton(event)
+        event.stopPropagation()
+    }
+
+    const onClickDelete = (row: TableBodyRowProps) => (event: React.MouseEvent) => {
+        row.onClickDeleteButton(event)
+        event.stopPropagation()
+    }
+
+    const onClickRestore = (row: TableBodyRowProps) => (event: React.MouseEvent) => {
+        row.onClickRestoreButton(event)
+        event.stopPropagation()
+    }
+
     const renderCells = (row: TableBodyRowProps): JSX.Element[] =>
         row.cells.map((cell, index) => (
             <Table.Cell textAlign={cell.textAlign ?? 'left'} key={index}>
@@ -31,12 +46,12 @@ const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
                 {renderCells(row)}
                 <Table.Cell textAlign="center">
                     <Button.Group basic compact fluid size="mini">
-                        <Button onClick={row.onClickEditButton} icon="edit" />
+                        <Button onClick={onClickEdit(row)} icon="edit" />
                         {!row.isDeleted && row.onClickDeleteButton && (
-                            <Button onClick={row.onClickDeleteButton} icon="trash" />
+                            <Button onClick={onClickDelete(row)} icon="trash" />
                         )}
                         {row.isDeleted && row.onClickRestoreButton && (
-                            <Button onClick={row.onClickRestoreButton} icon="redo" />
+                            <Button onClick={onClickRestore(row)} icon="redo" />
                         )}
                     </Button.Group>
                 </Table.Cell>
