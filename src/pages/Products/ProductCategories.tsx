@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/indent */
 /* eslint-disable sonarjs/no-identical-functions */
 
-import { Accordion, Button, Card, Checkbox, Form, Grid, Header, Icon, Input, Menu } from 'semantic-ui-react'
+import { Button, Card, Checkbox, Form, Grid, Header, Icon, Input } from 'semantic-ui-react'
 import React, { FC, useEffect, useState } from 'react'
 
 import ProductCategoryDelete from './ProductCategoryDelete'
@@ -24,15 +24,15 @@ const ProductCategories: FC = () => {
     const history = useHistory()
     const [offset, setOffset] = useState<number>(0)
     const [deleteIds, setDeleteIds] = useState<string[]>([])
-    const [isShowDeleteModal, setShowDeleteModal] = useState<boolean>(false)
+    const [isShowDeleteModal, setIsShowDeleteModal] = useState<boolean>(false)
 
     const onChangePage = (page: number): void => setOffset((page - 1) * pageSize)
     const onDelete = (): void => {
         // eslint-disable-next-line no-alert
         alert(deleteIds)
-        setShowDeleteModal(false)
+        setIsShowDeleteModal(false)
     }
-    const onClose = (): void => setShowDeleteModal(false)
+    const onClose = (): void => setIsShowDeleteModal(false)
 
     const { isLoading, totalCount, lastModifyDateTime, rows } = useProductCategoriesTableData(offset, pageSize)
 
@@ -41,42 +41,39 @@ const ProductCategories: FC = () => {
     }
 
     const getTable = (): JSX.Element => (
-        <>
-            <ProductCategoryDelete isOpen={isShowDeleteModal} onClose={onClose} onDelete={onDelete} />
-            <Table
-                isLoading={isLoading}
-                onClickCreate={onClickCreate}
-                headers={[
-                    { value: 'Наименование', type: 'string', width: '8', sorting: '' },
-                    { value: 'Создан', type: 'datetime', width: '3', sorting: '' }
-                ]}
-                rows={rows.map(category => ({
-                    cells: [
-                        { value: category.name, textAlign: 'left' },
-                        { value: toLocaleDateTime(category.createDateTime), textAlign: 'center' }
-                    ],
-                    onClickRow: (event: Event) => {
-                        history.push(`/products/categories/view/${category.id}`)
-                        event.stopPropagation()
-                    },
-                    onClickEditButton: (event: React.MouseEvent) => {
-                        history.push(`/products/categories/edit/${category.id}`)
-                        event.stopPropagation()
-                    },
-                    onClickDeleteButton: (event: React.MouseEvent) => {
-                        setDeleteIds([category.id])
-                        setShowDeleteModal(true)
-                        event.stopPropagation()
-                    },
-                    onClickRestoreButton: (event: React.MouseEvent) => {
-                        setDeleteIds([category.id])
-                        setShowDeleteModal(true)
-                        event.stopPropagation()
-                    }
-                }))}
-                footer={{ pageSize, totalCount, onChangePage }}
-            />
-        </>
+        <Table
+            isLoading={isLoading}
+            headerCells={[
+                { value: 'Наименование', width: 8 },
+                { value: 'Создан', width: 3 }
+            ]}
+            rows={rows.map(category => ({
+                cells: [
+                    { value: category.name, textAlign: 'left' },
+                    { value: toLocaleDateTime(category.createDateTime), textAlign: 'center' }
+                ],
+                isDeleted: category.isDeleted,
+                onClickRow: (event: Event) => {
+                    history.push(`/products/categories/view/${category.id}`)
+                    event.stopPropagation()
+                },
+                onClickEditButton: (event: React.MouseEvent) => {
+                    history.push(`/products/categories/edit/${category.id}`)
+                    event.stopPropagation()
+                },
+                onClickDeleteButton: (event: React.MouseEvent) => {
+                    setDeleteIds([category.id])
+                    setIsShowDeleteModal(true)
+                    event.stopPropagation()
+                },
+                onClickRestoreButton: (event: React.MouseEvent) => {
+                    setDeleteIds([category.id])
+                    setIsShowDeleteModal(true)
+                    event.stopPropagation()
+                }
+            }))}
+            footer={{ pageSize, totalCount, onChangePage }}
+        />
     )
 
     const getFilters = (): JSX.Element => (
@@ -109,27 +106,32 @@ const ProductCategories: FC = () => {
         </Card>
     )
 
+    const getButtons = (): JSX.Element => (
+        <Grid verticalAlign="middle">
+            <Grid.Column width={11}>
+                <Card.Meta floated="left">{getLastChangeDateTimeText(lastModifyDateTime)}</Card.Meta>
+            </Grid.Column>
+            <Grid.Column width={5}>
+                <Button.Group basic size="mini" floated="right">
+                    <Button icon>
+                        <Icon name="add" /> Создать
+                    </Button>
+                    <Button icon>
+                        <Icon name="download" /> Выгрузить в CSV
+                    </Button>
+                </Button.Group>
+            </Grid.Column>
+        </Grid>
+    )
+
     return (
         <ProductsMenuLayout filters={getFilters()} isShowFilters>
             <Card fluid>
                 <Card.Content>
                     <Header as="h3">{pageName}</Header>
-                    <Grid verticalAlign="middle">
-                        <Grid.Column width={11}>
-                            <Card.Meta floated="left">{getLastChangeDateTimeText(lastModifyDateTime)}</Card.Meta>
-                        </Grid.Column>
-                        <Grid.Column width={5}>
-                            <Button.Group basic size="mini" floated="right">
-                                <Button icon>
-                                    <Icon name="add" /> Создать
-                                </Button>
-                                <Button icon>
-                                    <Icon name="download" /> Выгрузить в CSV
-                                </Button>
-                            </Button.Group>
-                        </Grid.Column>
-                    </Grid>
+                    <ProductCategoryDelete isOpen={isShowDeleteModal} onClose={onClose} onDelete={onDelete} />
 
+                    {getButtons()}
                     {getTable()}
                 </Card.Content>
             </Card>

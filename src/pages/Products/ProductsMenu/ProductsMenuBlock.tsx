@@ -10,10 +10,10 @@ const ProductsMenuBlock: FC = () => (
         <Menu.Item>
             <Header as="h4">Навигация</Header>
         </Menu.Item>
-        <ProductsMenuItem name="Продукты" path="/products" onClick={event => event.preventDefault()} />
-        <ProductsMenuItem name="Категории" path="/products/categories" onClick={event => event.preventDefault()} />
-        <ProductsMenuItem name="Атрибуты" path="/products/attributes" onClick={event => event.preventDefault()} />
-        <ProductsMenuItem name="Статусы" path="/products/statuses" onClick={event => event.preventDefault()} />
+        <ProductsMenuItem name="Продукты" path="/products" />
+        <ProductsMenuItem name="Категории" path="/products/categories" />
+        <ProductsMenuItem name="Атрибуты" path="/products/attributes" />
+        <ProductsMenuItem name="Статусы" path="/products/statuses" />
     </Menu>
 )
 

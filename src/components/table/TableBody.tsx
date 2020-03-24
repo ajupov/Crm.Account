@@ -1,12 +1,14 @@
 import { Button, Table } from 'semantic-ui-react'
 import React, { FC } from 'react'
 
-export interface TableBodyProps {
-    rows: TableBodyRowProps[]
+interface TableBodyCellProps {
+    value?: any
+    textAlign?: TableCellTextAlign
 }
 
 export interface TableBodyRowProps {
     cells: TableBodyCellProps[]
+    isDeleted: boolean
     onClickRow: (event: Event) => void
     onClickEditButton: (event: React.MouseEvent) => void
     onClickDeleteButton: (event: React.MouseEvent) => void
@@ -15,12 +17,7 @@ export interface TableBodyRowProps {
 
 export type TableCellTextAlign = 'center' | 'left' | 'right'
 
-export interface TableBodyCellProps {
-    value?: any
-    textAlign?: TableCellTextAlign
-}
-
-const TableBody: FC<TableBodyProps> = ({ rows }) => {
+const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
     const renderCells = (row: TableBodyRowProps): JSX.Element[] =>
         row.cells.map((cell, index) => (
             <Table.Cell textAlign={cell.textAlign ?? 'left'} key={index}>
@@ -35,8 +32,12 @@ const TableBody: FC<TableBodyProps> = ({ rows }) => {
                 <Table.Cell textAlign="center">
                     <Button.Group basic compact fluid size="mini">
                         <Button onClick={row.onClickEditButton} icon="edit" />
-                        {row.onClickDeleteButton && <Button onClick={row.onClickDeleteButton} icon="trash" />}
-                        {row.onClickRestoreButton && <Button onClick={row.onClickRestoreButton} icon="redo" />}
+                        {!row.isDeleted && row.onClickDeleteButton && (
+                            <Button onClick={row.onClickDeleteButton} icon="trash" />
+                        )}
+                        {row.isDeleted && row.onClickRestoreButton && (
+                            <Button onClick={row.onClickRestoreButton} icon="redo" />
+                        )}
                     </Button.Group>
                 </Table.Cell>
             </Table.Row>
