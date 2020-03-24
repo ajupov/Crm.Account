@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/indent */
 /* eslint-disable sonarjs/no-identical-functions */
 
-import { Button, Card, Checkbox, Form, Grid, Header, Icon, Input } from 'semantic-ui-react'
+import { Button, Card, Checkbox, Form, Header, Input } from 'semantic-ui-react'
 import React, { FC, useEffect, useState } from 'react'
 
 import ProductCategoryDelete from './ProductCategoryDelete'
 import ProductsMenuLayout from './ProductsMenu/ProductsMenuLayout'
 import Table from '../../components/table/Table'
+import TableCardHeader from './TableCardHeader'
 import { getFullPageName } from '../../utils/page/pageUtils'
-import { getLastChangeDateTimeText } from '../../helpers/changesTextHelper'
 import { toLocaleDateTime } from '../../utils/datetime/dateTimeUtils'
 import { useHistory } from 'react-router'
 import useProductCategoriesTableData from './hooks/useProductCategoriesTableData'
@@ -106,32 +106,17 @@ const ProductCategories: FC = () => {
         </Card>
     )
 
-    const getButtons = (): JSX.Element => (
-        <Grid verticalAlign="middle">
-            <Grid.Column width={11}>
-                <Card.Meta floated="left">{getLastChangeDateTimeText(lastModifyDateTime)}</Card.Meta>
-            </Grid.Column>
-            <Grid.Column width={5}>
-                <Button.Group basic size="mini" floated="right">
-                    <Button icon>
-                        <Icon name="add" /> Создать
-                    </Button>
-                    <Button icon>
-                        <Icon name="download" /> Выгрузить в CSV
-                    </Button>
-                </Button.Group>
-            </Grid.Column>
-        </Grid>
-    )
-
     return (
         <ProductsMenuLayout filters={getFilters()} isShowFilters>
             <Card fluid>
                 <Card.Content>
-                    <Header as="h3">{pageName}</Header>
                     <ProductCategoryDelete isOpen={isShowDeleteModal} onClose={onClose} onDelete={onDelete} />
-
-                    {getButtons()}
+                    <TableCardHeader
+                        title={pageName}
+                        lastModifyDateTime={lastModifyDateTime}
+                        onClickCreate={onClickCreate}
+                        onClickDownloadAsCsv={onClickCreate}
+                    />
                     {getTable()}
                 </Card.Content>
             </Card>
