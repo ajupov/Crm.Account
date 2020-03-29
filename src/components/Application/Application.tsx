@@ -11,13 +11,13 @@ import Leads from '../../pages/leads/Leads'
 import Loader from '../loader/Loader'
 import NotFound from '../../pages/notFound/NotFound'
 import ProductCategories from '../../pages/products/categories/ProductCategories'
-import ProductCategory from '../../pages/products/categories/ProductCategory'
 import ProductCategoryCreate from '../../pages/products/categories/ProductCategoryCreate'
 import ProductCategoryEdit from '../../pages/products/categories/ProductCategoryEdit'
+import ProductCategoryView from '../../pages/products/categories/ProductCategoryView'
 import Products from '../../pages/products/products/Products'
 import Settings from '../../pages/settings/Settings'
-import UserInfoContext from '../../contexts/UserInfoContext'
-import useUserInfo from '../../hooks/useUserInfo'
+import UserInfoContext from '../../contexts/userInfo/UserInfoContext'
+import useUserInfo from '../../contexts/userInfo/hooks/useUserInfo'
 
 const Application: FC = () => {
     const userInfo = useUserInfo()
@@ -36,7 +36,7 @@ const Application: FC = () => {
 
                         <Route path="/products" exact component={Products} />
                         <Route path="/products/categories" exact component={ProductCategories} />
-                        <Route path="/products/categories/:id" exact component={ProductCategory} />
+                        <Route path="/products/categories/view/:id" exact component={ProductCategoryView} />
                         <Route path="/products/categories/create" exact component={ProductCategoryCreate} />
                         <Route path="/products/categories/edit/:id" exact component={ProductCategoryEdit} />
 

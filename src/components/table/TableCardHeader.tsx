@@ -1,7 +1,7 @@
 import { Button, Card, Grid, Icon } from 'semantic-ui-react'
 import React, { FC } from 'react'
 
-import { getLastChangeDateTimeText } from '../../helpers/changesTextHelper'
+import { getLastChangeDateTimeText } from '../../helpers/textHelper'
 
 interface TableCardHeaderProps {
     lastModifyDateTime?: string

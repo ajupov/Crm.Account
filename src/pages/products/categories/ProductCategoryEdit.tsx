@@ -6,7 +6,7 @@ import Page from '../../../components/page/Page'
 import useEditActions from './hooks/actions/useEditActions'
 import { useParams } from 'react-router-dom'
 import useProductCategory from './hooks/useProductCategory'
-import useProductsMenu from '../../../hooks/useProductsMenu'
+import useProductsMenu from '../hooks/useProductsMenu'
 import useViewActions from './hooks/actions/useViewActions'
 
 const ProductCategoryEdit: FC = () => {

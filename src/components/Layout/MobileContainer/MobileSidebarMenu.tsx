@@ -4,7 +4,7 @@ import React, { FC, useContext } from 'react'
 import ActiveMenuItem from '../../activeMenuItem/ActiveMenuItem'
 import Configuration from '../../../configuration/Configuration'
 import { Link } from 'react-router-dom'
-import UserInfoContext from '../../../contexts/UserInfoContext'
+import UserInfoContext from '../../../contexts/userInfo/UserInfoContext'
 
 const MobileSidebarMenu: FC = () => {
     const configuration = new Configuration()

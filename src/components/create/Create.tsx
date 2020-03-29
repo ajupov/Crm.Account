@@ -1,23 +1,24 @@
-import { Button, Icon } from 'semantic-ui-react'
 import React, { FC } from 'react'
 
+import BackLink from '../backLink/BackLink'
+import { Button } from 'semantic-ui-react'
+
 export interface CreateProps {
-    onClickBack: (event: React.MouseEvent) => void
+    onClickBack: () => void
     onClickConfirm: () => void
-    onClickCancel: (event: React.MouseEvent) => void
+    onClickCancel: () => void
 }
 
 const Create: FC<CreateProps> = ({ children, onClickBack, onClickConfirm, onClickCancel }) => (
     <>
-        <a style={{ color: 'grey' }} onClick={onClickBack}>
-            <Icon name="arrow left" />
-            Назад
-        </a>
+        <BackLink onClick={onClickBack} />
 
         {children}
 
-        <Button.Group floated="right">
-            <Button onClick={onClickCancel}>Отмена</Button>
+        <Button.Group floated="right" style={{ marginTop: '30px' }}>
+            <Button basic onClick={onClickCancel}>
+                Отмена
+            </Button>
 
             <Button onClick={onClickConfirm}>Создать</Button>
         </Button.Group>

@@ -1,10 +1,8 @@
-import { Button, Card, Icon } from 'semantic-ui-react'
+import { Button, Card } from 'semantic-ui-react'
 import React, { FC } from 'react'
-import {
-    getCreateDateTimeText,
-    getLastChangeDateTimeText as getLastModifyDateTimeText
-} from '../../helpers/changesTextHelper'
+import { getCreateDateTimeText, getLastChangeDateTimeText as getLastModifyDateTimeText } from '../../helpers/textHelper'
 
+import BackLink from '../backLink/BackLink'
 import Loader from '../loader/Loader'
 
 export interface ViewDataProps {
@@ -18,7 +16,7 @@ export interface ViewProps {
     createDate: string
     lastModifyDateTime?: string
     data: ViewDataProps[]
-    onClickBack: (event: React.MouseEvent) => void
+    onClickBack: () => void
     onClickEdit: (event: React.MouseEvent) => void
     onClickDelete: (event: React.MouseEvent) => void
     onClickRestore: (event: React.MouseEvent) => void
@@ -37,22 +35,17 @@ const View: FC<ViewProps> = ({
 }) => {
     const renderData = (data: ViewDataProps[]): JSX.Element[] =>
         data.map(x => (
-            <>
+            <div key={x.label}>
                 {x.label && <p>{x.label}:</p>}
-                {x.value && <b>{x.value}:</b>}
-                <br />
-                <br />
-            </>
+                {x.value && <b>{x.value}</b>}
+            </div>
         ))
 
     return (
         <>
             <Loader isLoading={isLoading} />
 
-            <a style={{ color: 'grey' }} onClick={onClickBack}>
-                <Icon name="arrow left" />
-                Назад
-            </a>
+            <BackLink onClick={onClickBack} />
 
             <Card.Meta textAlign="right">{getCreateDateTimeText(createDate)}</Card.Meta>
 
@@ -61,14 +54,18 @@ const View: FC<ViewProps> = ({
             {renderData(data)}
 
             {!isDeleted && (
-                <Button.Group floated="right">
+                <Button.Group floated="right" style={{ marginTop: '30px' }}>
                     <Button onClick={onClickEdit}>Редактировать</Button>
 
                     <Button onClick={onClickDelete}>Удалить</Button>
                 </Button.Group>
             )}
 
-            {isDeleted && <Button onClick={onClickRestore}>Восстановить</Button>}
+            {isDeleted && (
+                <Button floated="right" style={{ marginTop: '30px' }} onClick={onClickRestore}>
+                    Восстановить
+                </Button>
+            )}
         </>
     )
 }

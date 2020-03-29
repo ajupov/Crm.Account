@@ -4,7 +4,7 @@ import React, { FC } from 'react'
 import Create from '../../../components/create/Create'
 import Page from '../../../components/page/Page'
 import useCreateActions from './hooks/actions/useCreateActions'
-import useProductsMenu from '../../../hooks/useProductsMenu'
+import useProductsMenu from '../hooks/useProductsMenu'
 import useViewActions from './hooks/actions/useViewActions'
 
 const ProductCategoryCreate: FC = () => {

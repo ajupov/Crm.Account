@@ -1,4 +1,4 @@
-import { MenuItemProps } from '../components/menu/Menu'
+import { MenuItemProps } from '../../../components/menu/Menu'
 
 const useProductsMenu = (): { menu: MenuItemProps[] } => ({
     menu: [

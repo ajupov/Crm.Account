@@ -5,7 +5,7 @@ import HttpClientFactoryInstance from '../../../../utils/httpClientFactory/HttpC
 import ProductCategoriesClient from '../../../../../api/products/clients/ProductCategoriesClient'
 import ProductCategory from '../../../../../api/products/models/ProductCategory'
 import ProductCategoryGetPagedListRequest from '../../../../../api/products/models/ProductCategoryGetPagedListRequest'
-import { calculateOffset } from '../../../../utils/pagination/paginationUtils'
+import { calculateOffset } from '../../../../helpers/paginationHelper'
 
 interface UseProductCategoriesReturn extends TableData {
     isLoading: boolean

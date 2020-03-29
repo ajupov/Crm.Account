@@ -12,19 +12,19 @@ const useDeleteActions = (): UseDeleteActionsReturn => {
     const [isDeleting, setIsDeleting] = useState<boolean>(false)
 
     const onClickDelete = useCallback(
-        (id: string) => (): void => {
+        (id: string) => () => {
             setIds([id])
             setIsDeleting(true)
         },
         []
     )
 
-    const onClickConfirm = useCallback((): void => {
+    const onClickConfirm = useCallback(() => {
         global.console.log(ids)
         setIsDeleting(false)
     }, [ids])
 
-    const onClickCancel = useCallback((): void => {
+    const onClickCancel = useCallback(() => {
         setIds([])
         setIsDeleting(false)
     }, [])

@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react'
 
 import Page from '../../../components/page/Page'
-import { setPageTitle } from '../../../utils/page/pageUtils'
-import useProductsMenu from '../../../hooks/useProductsMenu'
+import { setPageTitle } from '../../../helpers/pageHelper'
+import useProductsMenu from '../hooks/useProductsMenu'
 
 const Products: FC = () => {
     const title = 'Продукты'

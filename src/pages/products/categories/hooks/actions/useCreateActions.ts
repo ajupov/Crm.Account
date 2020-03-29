@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { useHistory } from 'react-router'
 
 interface UseCreateActionsReturn {
-    onClickCreate: () => () => void
+    onClickCreate: () => void
     onClickConfirm: () => void
     onClickCancel: () => void
 }
@@ -13,11 +13,11 @@ const useCreateActions = (): UseCreateActionsReturn => {
 
     const history = useHistory()
 
-    const onClickCreate = useCallback(() => () => history.push(`${path}${action}`), [history])
+    const onClickCreate = useCallback(() => history.push(`${path}${action}`), [history])
 
-    const onClickConfirm = useCallback((): void => global.console.log(), [])
+    const onClickConfirm = useCallback(() => global.console.log(), [])
 
-    const onClickCancel = useCallback((): void => history.push(path), [history])
+    const onClickCancel = useCallback(() => history.push(path), [history])
 
     return { onClickCreate, onClickConfirm, onClickCancel }
 }
