@@ -9,9 +9,9 @@ interface UseProductCategoryReturn {
     category?: ProductCategory
 }
 
-const useProductCategory = (id: string | undefined): UseProductCategoryReturn => {
-    const client = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
+const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
 
+const useProductCategory = (id: string | undefined): UseProductCategoryReturn => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [category, setCategory] = useState<ProductCategory | undefined>()
 
@@ -22,12 +22,12 @@ const useProductCategory = (id: string | undefined): UseProductCategoryReturn =>
 
         setIsLoading(true)
 
-        const response = await client.GetAsync(id)
+        const response = await productCategoriesClient.GetAsync(id)
 
         setCategory(response)
 
         setIsLoading(false)
-    }, [client, id])
+    }, [id])
 
     useEffect(() => {
         load()

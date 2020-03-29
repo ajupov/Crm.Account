@@ -12,9 +12,9 @@ interface UseProductCategoriesReturn extends TableData {
     categories?: ProductCategory[]
 }
 
-const useProductCategories = (request?: ProductCategoryGetPagedListRequest): UseProductCategoriesReturn => {
-    const client = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
+const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
 
+const useProductCategories = (request?: ProductCategoryGetPagedListRequest): UseProductCategoriesReturn => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [categories, setCategories] = useState<ProductCategory[] | undefined>([])
     const [limit] = useState<number>(DefaultLimit)
@@ -25,7 +25,7 @@ const useProductCategories = (request?: ProductCategoryGetPagedListRequest): Use
     const load = useCallback(async () => {
         setIsLoading(true)
 
-        const response = await client.GetPagedListAsync({
+        const response = await productCategoriesClient.GetPagedListAsync({
             name: request?.name,
             isDeleted: request?.isDeleted ?? false,
             minCreateDate: request?.minCreateDate,
@@ -43,7 +43,7 @@ const useProductCategories = (request?: ProductCategoryGetPagedListRequest): Use
         setLastModifyDateTime(response.lastModifyDateTime ?? '')
 
         setIsLoading(false)
-    }, [client, limit, offset, request])
+    }, [limit, offset, request])
 
     const onChangePage = useCallback((page: number): void => setOffset(calculateOffset(page, limit)), [limit])
 
