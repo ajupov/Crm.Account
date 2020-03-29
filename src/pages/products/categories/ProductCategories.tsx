@@ -22,11 +22,6 @@ import useViewActions from './hooks/actions/useViewActions'
 const ProductCategories: FC = () => {
     const title = 'Категории'
 
-    const headers: TableHeaderCellProps[] = [
-        { value: 'Наименование', width: 8 },
-        { value: 'Создан', width: 3 }
-    ]
-
     const { menu } = useProductsMenu()
     const { onClickView } = useViewActions()
     const { onClickCreate } = useCreateActions()
@@ -34,7 +29,47 @@ const ProductCategories: FC = () => {
     const { onClickDelete } = useDeleteActions()
     const { onClickRestore } = useRestoreActions()
     const { onClickDownloadAsCsv } = useDownloadActions()
-    const { isLoading, categories, limit, total, lastModifyDateTime, onChangePage } = useProductCategories()
+    const {
+        isLoading,
+        categories,
+        limit,
+        total,
+        lastModifyDateTime,
+        onChangePage,
+        sortBy,
+        setSortBy,
+        orderBy,
+        setOrderBy
+    } = useProductCategories()
+
+    const headers: TableHeaderCellProps[] = [
+        {
+            value: 'Наименование',
+            width: 8,
+            onClick: () => {
+                if (sortBy !== 'Name') {
+                    setSortBy('Name')
+                    setOrderBy('asc')
+                } else {
+                    setOrderBy(orderBy === 'asc' ? 'desc' : 'asc')
+                }
+            },
+            orderBy: sortBy === 'Name' ? orderBy : undefined // eslint-disable-line no-undefined
+        },
+        {
+            value: 'Создан',
+            width: 3,
+            onClick: () => {
+                if (sortBy !== 'CreateDateTime') {
+                    setSortBy('CreateDateTime')
+                    setOrderBy('asc')
+                } else {
+                    setOrderBy(orderBy === 'asc' ? 'desc' : 'asc')
+                }
+            },
+            orderBy: sortBy === 'CreateDateTime' ? orderBy : undefined // eslint-disable-line no-undefined
+        }
+    ]
 
     useEffect(() => setPageTitle(title), [])
 

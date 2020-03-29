@@ -1,4 +1,4 @@
-import TableData, { DefaultLimit } from '../../../../components/table/TableData'
+import TableData, { DefaultLimit, OrderBy } from '../../../../components/table/TableData'
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactoryInstance from '../../../../utils/httpClientFactory/HttpClientFactoryInstance'
@@ -22,6 +22,9 @@ const useProductCategories = (request?: ProductCategoryGetPagedListRequest): Use
     const [offset, setOffset] = useState<number>(0)
     const [lastModifyDateTime, setLastModifyDateTime] = useState<string>('')
 
+    const [sortBy, setSortBy] = useState<string | undefined>()
+    const [orderBy, setOrderBy] = useState<OrderBy>()
+
     const load = useCallback(async () => {
         setIsLoading(true)
 
@@ -34,8 +37,8 @@ const useProductCategories = (request?: ProductCategoryGetPagedListRequest): Use
             maxModifyDate: request?.maxModifyDate,
             offset,
             limit,
-            sortBy: request?.sortBy,
-            orderBy: request?.orderBy
+            sortBy,
+            orderBy
         })
 
         setCategories(response.categories)
@@ -43,7 +46,7 @@ const useProductCategories = (request?: ProductCategoryGetPagedListRequest): Use
         setLastModifyDateTime(response.lastModifyDateTime ?? '')
 
         setIsLoading(false)
-    }, [limit, offset, request])
+    }, [limit, offset, orderBy, request, sortBy])
 
     const onChangePage = useCallback((page: number): void => setOffset(calculateOffset(page, limit)), [limit])
 
@@ -51,7 +54,18 @@ const useProductCategories = (request?: ProductCategoryGetPagedListRequest): Use
         load()
     }, [load])
 
-    return { isLoading, categories, limit, total, lastModifyDateTime, onChangePage }
+    return {
+        isLoading,
+        categories,
+        limit,
+        total,
+        lastModifyDateTime,
+        onChangePage,
+        sortBy,
+        setSortBy,
+        orderBy,
+        setOrderBy
+    }
 }
 
 export default useProductCategories
