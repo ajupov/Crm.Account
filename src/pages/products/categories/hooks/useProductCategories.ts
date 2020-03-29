@@ -22,8 +22,8 @@ const useProductCategories = (request?: ProductCategoryGetPagedListRequest): Use
     const [offset, setOffset] = useState<number>(0)
     const [lastModifyDateTime, setLastModifyDateTime] = useState<string>('')
 
-    const [sortBy, setSortBy] = useState<string | undefined>()
-    const [orderBy, setOrderBy] = useState<OrderBy>()
+    const [sortBy, setSortBy] = useState<string | undefined>('CreateDateTime')
+    const [orderBy, setOrderBy] = useState<OrderBy>('desc')
 
     const load = useCallback(async () => {
         setIsLoading(true)
