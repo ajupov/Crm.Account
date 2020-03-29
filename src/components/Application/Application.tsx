@@ -8,6 +8,7 @@ import Dashboard from '../../pages/dashboard/Dashboard'
 import Deals from '../../pages/deals/Deals'
 import Layout from '../layout/Layout'
 import Leads from '../../pages/leads/Leads'
+import Loader from '../loader/Loader'
 import NotFound from '../../pages/notFound/NotFound'
 import ProductCategories from '../../pages/products/categories/ProductCategories'
 import ProductCategory from '../../pages/products/categories/ProductCategory'
@@ -21,7 +22,7 @@ import useUserInfo from '../../hooks/useUserInfo'
 const Application: FC = () => {
     const userInfo = useUserInfo()
 
-    return (
+    return userInfo.isAuthenticated ? (
         <UserInfoContext.Provider value={userInfo}>
             <BrowserRouter>
                 <Layout>
@@ -45,6 +46,8 @@ const Application: FC = () => {
                 </Layout>
             </BrowserRouter>
         </UserInfoContext.Provider>
+    ) : (
+        <Loader isLoading />
     )
 }
 

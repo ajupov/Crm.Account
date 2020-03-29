@@ -13,7 +13,7 @@ const useUserInfo = (): UserInfo => {
     const authClient = new AuthClient(httpClientFactory)
     const userInfoClient = new UserInfoClient(httpClientFactory)
 
-    const [userInfo, setUserInfo] = useState<UserInfo>({ name: '', roles: [] })
+    const [userInfo, setUserInfo] = useState<UserInfo>({ isAuthenticated: false, name: '', roles: [] })
 
     const loadUserInfo = useCallback(async () => {
         const isAuthenticated = await authClient.IsAuthenticatedAsync()
@@ -23,7 +23,7 @@ const useUserInfo = (): UserInfo => {
 
         const userInfo = await userInfoClient.GetAsync()
 
-        setUserInfo({ name: userInfo.name ?? '', roles: userInfo.roles ?? [] })
+        setUserInfo({ isAuthenticated: true, name: userInfo.name ?? '', roles: userInfo.roles ?? [] })
     }, [authClient, userInfoClient, configuration.LoginUrl])
 
     useEffect(() => {
