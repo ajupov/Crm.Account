@@ -1,4 +1,4 @@
-import { toLocaleDateTime } from '../utils/datetime/dateTimeUtils'
+import { toLocaleDateTime } from '../utils/dateTime/dateTimeUtils'
 
 export function getCreateDateTimeText(value?: string): string {
     if (!value) {

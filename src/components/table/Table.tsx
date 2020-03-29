@@ -1,24 +1,42 @@
-import { Dimmer, Loader, Table as SemanticUiTable } from 'semantic-ui-react'
 import React, { FC } from 'react'
 import TableBody, { TableBodyRowProps } from './TableBody'
 import TableFooter, { TableFooterProps } from './TableFooter'
 import TableHeader, { TableHeaderCellProps } from './TableHeader'
 
+import Loader from '../loader/Loader'
+import { Table as SemanticUiTable } from 'semantic-ui-react'
+import TableCardHeader from './TableCardHeader'
+
 interface TableProps {
     isLoading: boolean
-    headerCells: TableHeaderCellProps[]
+    headers: TableHeaderCellProps[]
     rows: TableBodyRowProps[]
     footer: TableFooterProps
+    lastModifyDateTime?: string
+    onClickCreate: () => void
+    onClickDownloadAsCsv: () => void
 }
 
-const Table: FC<TableProps> = ({ isLoading, headerCells: headers, rows, footer }) => (
+const Table: FC<TableProps> = ({
+    isLoading,
+    headers,
+    rows,
+    footer,
+    lastModifyDateTime,
+    onClickCreate,
+    onClickDownloadAsCsv
+}) => (
     <>
-        <Dimmer active={isLoading} inverted>
-            <Loader>Загрузка</Loader>
-        </Dimmer>
+        <Loader isLoading={isLoading} />
+
+        <TableCardHeader
+            lastModifyDateTime={lastModifyDateTime}
+            onClickCreate={onClickCreate}
+            onClickDownloadAsCsv={onClickDownloadAsCsv}
+        />
 
         <SemanticUiTable sortable compact celled striped selectable color="black">
-            <TableHeader headerCells={headers} />
+            <TableHeader headers={headers} />
             <TableBody rows={rows} />
             <TableFooter {...footer} columnsCount={headers.length} />
         </SemanticUiTable>

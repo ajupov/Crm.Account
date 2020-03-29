@@ -8,7 +8,7 @@ type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 const ApplicationJsonContentType = 'application/json'
 const NoCacheHeaderValue = 'no-cache'
 
-export class HttpClient {
+export default class HttpClient {
     private readonly _host: string | undefined
 
     constructor(host?: string) {

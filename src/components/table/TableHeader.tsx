@@ -6,9 +6,9 @@ export interface TableHeaderCellProps {
     width?: SemanticWIDTHS
 }
 
-const TableHeader: FC<{ headerCells: TableHeaderCellProps[] }> = ({ headerCells }) => {
+const TableHeader: FC<{ headers: TableHeaderCellProps[] }> = ({ headers }) => {
     const renderCells = (): JSX.Element[] =>
-        headerCells.map((cell, index) => (
+        headers.map((cell, index) => (
             <Table.HeaderCell width={cell.width} key={index}>
                 {cell.value}
             </Table.HeaderCell>
@@ -18,6 +18,7 @@ const TableHeader: FC<{ headerCells: TableHeaderCellProps[] }> = ({ headerCells 
         <Table.Header>
             <Table.Row textAlign="center">
                 {renderCells()}
+
                 <Table.HeaderCell width="1">Действия</Table.HeaderCell>
             </Table.Row>
         </Table.Header>

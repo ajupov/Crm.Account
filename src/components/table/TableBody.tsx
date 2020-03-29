@@ -1,5 +1,5 @@
 import { Button, Table } from 'semantic-ui-react'
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 
 interface TableBodyCellProps {
     value?: any
@@ -9,7 +9,7 @@ interface TableBodyCellProps {
 export interface TableBodyRowProps {
     cells: TableBodyCellProps[]
     isDeleted: boolean
-    onClickRow: (event: Event) => void
+    onClickRow: (event: React.MouseEvent) => void
     onClickEditButton: (event: React.MouseEvent) => void
     onClickDeleteButton: (event: React.MouseEvent) => void
     onClickRestoreButton: (event: React.MouseEvent) => void
@@ -18,20 +18,41 @@ export interface TableBodyRowProps {
 export type TableCellTextAlign = 'center' | 'left' | 'right'
 
 const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
-    const onClickEdit = (row: TableBodyRowProps) => (event: React.MouseEvent) => {
-        row.onClickEditButton(event)
-        event.stopPropagation()
-    }
+    const onClick = useCallback(
+        (row: TableBodyRowProps) => (event: React.MouseEvent) => {
+            row.onClickRow(event)
 
-    const onClickDelete = (row: TableBodyRowProps) => (event: React.MouseEvent) => {
-        row.onClickDeleteButton(event)
-        event.stopPropagation()
-    }
+            event.stopPropagation()
+        },
+        []
+    )
 
-    const onClickRestore = (row: TableBodyRowProps) => (event: React.MouseEvent) => {
-        row.onClickRestoreButton(event)
-        event.stopPropagation()
-    }
+    const onClickEdit = useCallback(
+        (row: TableBodyRowProps) => (event: React.MouseEvent) => {
+            row.onClickEditButton(event)
+
+            event.stopPropagation()
+        },
+        []
+    )
+
+    const onClickDelete = useCallback(
+        (row: TableBodyRowProps) => (event: React.MouseEvent) => {
+            row.onClickDeleteButton(event)
+
+            event.stopPropagation()
+        },
+        []
+    )
+
+    const onClickRestore = useCallback(
+        (row: TableBodyRowProps) => (event: React.MouseEvent) => {
+            row.onClickRestoreButton(event)
+
+            event.stopPropagation()
+        },
+        []
+    )
 
     const renderCells = (row: TableBodyRowProps): JSX.Element[] =>
         row.cells.map((cell, index) => (
@@ -42,14 +63,17 @@ const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
 
     const renderRows = (): JSX.Element | JSX.Element[] =>
         rows.map((row, index) => (
-            <Table.Row style={{ cursor: 'pointer' }} onClick={row.onClickRow} key={index}>
+            <Table.Row style={{ cursor: 'pointer' }} onClick={onClick(row)} key={index}>
                 {renderCells(row)}
+
                 <Table.Cell textAlign="center">
                     <Button.Group basic compact fluid size="mini">
                         <Button onClick={onClickEdit(row)} icon="edit" />
+
                         {!row.isDeleted && row.onClickDeleteButton && (
                             <Button onClick={onClickDelete(row)} icon="trash" />
                         )}
+
                         {row.isDeleted && row.onClickRestoreButton && (
                             <Button onClick={onClickRestore(row)} icon="redo" />
                         )}

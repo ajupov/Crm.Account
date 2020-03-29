@@ -1,7 +1,7 @@
 import Configuration from '../../configuration/Configuration'
 import HttpClientFactory from './HttpClientFactory'
 
-export class HttpClientFactoryBuilder {
+export default class HttpClientFactoryBuilder {
     private readonly configuration = new Configuration()
     private _host = ''
 

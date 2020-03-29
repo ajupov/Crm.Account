@@ -1,6 +1,6 @@
 import IHttpClientFactory, { IHttpClient } from '../../../api/IHttpClientFactory'
 
-import { HttpClient } from './HttpClient'
+import HttpClient from '../httpClient/HttpClient'
 
 export default class HttpClientFactory implements IHttpClientFactory {
     private readonly _host: string
