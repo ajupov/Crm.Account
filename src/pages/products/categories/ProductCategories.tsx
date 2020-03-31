@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from 'react'
 
+import { OrderBy } from '../../../components/table/TableData'
 import Page from '../../../components/page/Page'
 import ProductCategoriesFilter from './filters/ProductCategoriesFilter'
 import ProductCategory from '../../../../api/products/models/ProductCategory'
@@ -37,37 +38,25 @@ const ProductCategories: FC = () => {
         lastModifyDateTime,
         onChangePage,
         sortBy,
-        setSortBy,
         orderBy,
-        setOrderBy
+        onClickSort,
+        getOrderBy
     } = useProductCategories()
 
     const headers: TableHeaderCellProps[] = [
         {
-            value: 'Наименование',
+            key: 'Name',
+            label: 'Наименование',
             width: 8,
-            onClick: () => {
-                if (sortBy !== 'Name') {
-                    setSortBy('Name')
-                    setOrderBy('asc')
-                } else {
-                    setOrderBy(orderBy === 'asc' ? 'desc' : 'asc')
-                }
-            },
-            orderBy: sortBy === 'Name' ? orderBy : undefined // eslint-disable-line no-undefined
+            onClick: () => onClickSort('Name'),
+            orderBy: getOrderBy('Name')
         },
         {
-            value: 'Создан',
+            key: 'CreateDateTime',
+            label: 'Создан',
             width: 3,
-            onClick: () => {
-                if (sortBy !== 'CreateDateTime') {
-                    setSortBy('CreateDateTime')
-                    setOrderBy('asc')
-                } else {
-                    setOrderBy(orderBy === 'asc' ? 'desc' : 'asc')
-                }
-            },
-            orderBy: sortBy === 'CreateDateTime' ? orderBy : undefined // eslint-disable-line no-undefined
+            onClick: () => onClickSort('CreateDateTime'),
+            orderBy: sortBy === 'CreateDateTime' ? orderBy : void 0
         }
     ]
 

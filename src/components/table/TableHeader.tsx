@@ -4,7 +4,8 @@ import { SemanticWIDTHS, Table } from 'semantic-ui-react'
 import { OrderBy } from './TableData'
 
 export interface TableHeaderCellProps {
-    value: string
+    key: string
+    label: string
     width: SemanticWIDTHS
     onClick: () => void
     orderBy: OrderBy
@@ -20,14 +21,14 @@ const TableHeader: FC<{ headers: TableHeaderCellProps[] }> = ({ headers }) => {
             case 'desc':
                 return 'descending'
             default:
-                return undefined // eslint-disable-line no-undefined
+                return void 0
         }
     }
 
     const renderCells = (): JSX.Element[] =>
         headers.map((cell, index) => (
             <Table.HeaderCell width={cell.width} key={index} onClick={cell.onClick} sorted={getSorted(cell)}>
-                {cell.value}
+                {cell.label}
             </Table.HeaderCell>
         ))
 

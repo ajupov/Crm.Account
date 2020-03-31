@@ -15,7 +15,7 @@ const useProductCategory = (id: string | undefined): UseProductCategoryReturn =>
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [category, setCategory] = useState<ProductCategory | undefined>()
 
-    const load = useCallback(async (): Promise<void> => {
+    const load = useCallback(async () => {
         if (!id) {
             return
         }
