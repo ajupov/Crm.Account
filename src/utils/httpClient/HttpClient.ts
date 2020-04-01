@@ -1,6 +1,5 @@
 import 'isomorphic-fetch'
 
-import { combineUrl } from '../url/urlUtils'
 import { stringify } from 'query-string'
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
@@ -29,7 +28,7 @@ export default class HttpClient {
 
     public async post<T>(uri: string, body?: object): Promise<T> {
         const fetchParams = this.getFetchParams('POST', body)
-        const response = await fetch(combineUrl(this._host, uri), fetchParams)
+        const response = await fetch(this.combineUrl(this._host, uri), fetchParams)
 
         this.checkRedirect(response)
         this.checkError(response)
@@ -39,7 +38,7 @@ export default class HttpClient {
 
     public async put<T>(uri: string, body?: object): Promise<T> {
         const fetchParams = this.getFetchParams('PUT', body)
-        const response = await fetch(combineUrl(this._host, uri), fetchParams)
+        const response = await fetch(this.combineUrl(this._host, uri), fetchParams)
 
         this.checkRedirect(response)
         this.checkError(response)
@@ -49,7 +48,7 @@ export default class HttpClient {
 
     public async patch<T>(uri: string, body?: object): Promise<T> {
         const fetchParams = this.getFetchParams('PATCH', body)
-        const response = await fetch(combineUrl(this._host, uri), fetchParams)
+        const response = await fetch(this.combineUrl(this._host, uri), fetchParams)
 
         this.checkRedirect(response)
         this.checkError(response)
@@ -70,7 +69,7 @@ export default class HttpClient {
     }
 
     private getUrl(uri: string): string {
-        return this._host ? combineUrl(this._host, uri) : uri
+        return this._host ? this.combineUrl(this._host, uri) : uri
     }
 
     private getFetchParams(method: HttpMethod, body?: object): any {
@@ -112,5 +111,9 @@ export default class HttpClient {
         const result = await response.json()
 
         return (result as unknown) as T
+    }
+
+    private combineUrl(host?: string, path?: string): string {
+        return new URL(path || '', host).href.replace(/\/$/, '')
     }
 }

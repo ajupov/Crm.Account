@@ -3,11 +3,11 @@ import React, { FC } from 'react'
 
 import Edit from '../../../components/edit/Edit'
 import Page from '../../../components/page/Page'
-import useEditActions from './hooks/actions/useEditActions'
+import useEditActions from './hooks/useEditActions'
 import { useParams } from 'react-router-dom'
 import useProductCategory from './hooks/useProductCategory'
 import useProductsMenu from '../hooks/useProductsMenu'
-import useViewActions from './hooks/actions/useViewActions'
+import useViewActions from './hooks/useViewActions'
 
 const ProductCategoryEdit: FC = () => {
     const title = 'Изменение категории'

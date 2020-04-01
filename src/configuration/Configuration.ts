@@ -1,23 +1,29 @@
-import { combineUrl } from '../utils/url/urlUtils'
-
 export default class Configuration {
     get LoginUrl(): string {
         const authHost = process.env.AUTH_HOST
         const loginPath = process.env.LOGIN_PATH
 
-        return combineUrl(authHost, loginPath)
+        return this.combineUrl(authHost, loginPath)
     }
 
     get LogoutUrl(): string {
         const authHost = process.env.AUTH_HOST
         const logoutPath = process.env.LOGOUT_PATH
 
-        return combineUrl(authHost, logoutPath)
+        return this.combineUrl(authHost, logoutPath)
     }
 
     get ApiUrl(): string {
         const apiHost = process.env.API_HOST
 
-        return combineUrl(apiHost)
+        return this.combineUrl(apiHost)
+    }
+
+    private readonly combineUrl = (host?: string, path?: string): string => {
+        if (!host) {
+            throw new Error('Host is not defined')
+        }
+
+        return new URL(path || '', host).href.replace(/\/$/, '')
     }
 }

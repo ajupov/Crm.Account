@@ -4,7 +4,7 @@ import React, { FC, useContext } from 'react'
 import Clock from 'react-live-clock'
 import Configuration from '../../../configuration/Configuration'
 import { Link } from 'react-router-dom'
-import UserInfoContext from '../../../contexts/userInfo/UserInfoContext'
+import UserInfoContext from '../../UserInfo/contexts/UserInfoContext'
 
 const DesktopMenu: FC = () => {
     const configuration = new Configuration()

@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 import { Confirm } from 'semantic-ui-react'
-import useDeleteActions from '../hooks/actions/useDeleteActions'
+import useDeleteActions from '../hooks/useDeleteActions'
 
 const ProductCategoryDelete: FC = () => {
     const { isDeleting, onClickConfirm, onClickCancel } = useDeleteActions()

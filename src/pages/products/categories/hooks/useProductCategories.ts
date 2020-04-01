@@ -1,29 +1,19 @@
+import ProductCategories, { productCategoriesInitial } from '../contexts/ProductCategories'
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactoryInstance from '../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import ProductCategories from '../contexts/ProductCategories'
 import ProductCategoriesClient from '../../../../../api/products/clients/ProductCategoriesClient'
 import ProductCategory from '../../../../../api/products/models/ProductCategory'
 import ProductCategoryGetPagedListRequest from '../../../../../api/products/models/ProductCategoryGetPagedListRequest'
 
-const DefaultLimit = 10
-const DefaultSortBy = 'CreateDateTime'
-const DefaultOrderBy = 'desc'
-
 const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
 
 const useProductCategories = (): ProductCategories => {
-    const [request, setRequest] = useState<ProductCategoryGetPagedListRequest>({
-        isDeleted: false,
-        offset: 0,
-        limit: DefaultLimit,
-        sortBy: DefaultSortBy,
-        orderBy: DefaultOrderBy
-    })
-    const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [categories, setCategories] = useState<ProductCategory[]>([])
-    const [total, setTotal] = useState<number>(0)
-    const [lastModifyDateTime, setLastModifyDateTime] = useState<string | undefined>()
+    const [request, setRequest] = useState<ProductCategoryGetPagedListRequest>(productCategoriesInitial.request)
+    const [isLoading, setIsLoading] = useState<boolean>(productCategoriesInitial.isLoading)
+    const [categories, setCategories] = useState<ProductCategory[]>(productCategoriesInitial.categories)
+    const [total, setTotal] = useState<number>(productCategoriesInitial.total)
+    const [lastModifyDateTime, setLastModifyDateTime] = useState<string>(productCategoriesInitial.lastModifyDateTime)
 
     const load = useCallback(async () => {
         setIsLoading(true)
@@ -32,7 +22,7 @@ const useProductCategories = (): ProductCategories => {
 
         setCategories(response.categories ?? [])
         setTotal(response.totalCount)
-        setLastModifyDateTime(response.lastModifyDateTime)
+        setLastModifyDateTime(response.lastModifyDateTime ?? '')
 
         setIsLoading(false)
     }, [request, setLastModifyDateTime, setTotal])

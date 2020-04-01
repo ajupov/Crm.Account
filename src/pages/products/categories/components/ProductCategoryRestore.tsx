@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 import { Confirm } from 'semantic-ui-react'
-import useRestoreActions from '../hooks/actions/useRestoreActions'
+import useRestoreActions from '../hooks/useRestoreActions'
 
 const ProductCategoryRestore: FC = () => {
     const { isRestoring, onClickConfirm, onClickCancel } = useRestoreActions()

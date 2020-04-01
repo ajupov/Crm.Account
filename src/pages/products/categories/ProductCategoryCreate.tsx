@@ -3,9 +3,9 @@ import React, { FC } from 'react'
 
 import Create from '../../../components/create/Create'
 import Page from '../../../components/page/Page'
-import useCreateActions from './hooks/actions/useCreateActions'
+import useCreateActions from './hooks/useCreateActions'
 import useProductsMenu from '../hooks/useProductsMenu'
-import useViewActions from './hooks/actions/useViewActions'
+import useViewActions from './hooks/useViewActions'
 
 const ProductCategoryCreate: FC = () => {
     const title = 'Добавление категории'

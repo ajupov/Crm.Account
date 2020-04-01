@@ -2,10 +2,10 @@ import React, { FC, useEffect } from 'react'
 
 import Page from '../../../components/page/Page'
 import ProductCategoriesContext from './contexts/ProductCategoriesContext'
-import ProductCategoriesFilter from './filters/ProductCategoriesFilter'
-import ProductCategoriesTable from './ProductCategoriesTable'
-import ProductCategoryDelete from './modals/ProductCategoryDelete'
-import ProductCategoryRestore from './modals/ProductCategoryRestore'
+import ProductCategoriesFilter from './components/ProductCategoriesFilter'
+import ProductCategoriesTable from './components/ProductCategoriesTable'
+import ProductCategoryDelete from './components/ProductCategoryDelete'
+import ProductCategoryRestore from './components/ProductCategoryRestore'
 import { setPageTitle } from '../../../helpers/pageHelper'
 import useProductCategories from './hooks/useProductCategories'
 import useProductsMenu from '../hooks/useProductsMenu'
@@ -13,9 +13,8 @@ import useProductsMenu from '../hooks/useProductsMenu'
 const ProductCategories: FC = () => {
     const title = 'Категории'
 
-    const { menu } = useProductsMenu()
-
     const productCategories = useProductCategories()
+    const { menu } = useProductsMenu()
 
     useEffect(() => setPageTitle(title), [])
 

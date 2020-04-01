@@ -1,19 +1,19 @@
 import React, { FC, useContext } from 'react'
 
-import ProductCategoriesContext from './contexts/ProductCategoriesContext'
-import ProductCategory from '../../../../api/products/models/ProductCategory'
-import Table from '../../../components/table/Table'
-import { TableBodyRowProps } from '../../../components/table/TableBody'
-import { TableHeaderCellProps } from '../../../components/table/TableHeader'
-import { toLocaleDateTime } from '../../../utils/dateTime/dateTimeUtils'
-import useCreateActions from './hooks/actions/useCreateActions'
-import useDeleteActions from './hooks/actions/useDeleteActions'
-import useDownloadActions from './hooks/actions/useDownloadActions'
-import useEditActions from './hooks/actions/useEditActions'
-import useProductCategoriesPaging from './hooks/useProductCategoriesPaging'
-import useProductCategoriesSorting from './hooks/useProductCategoriesSorting'
-import useRestoreActions from './hooks/actions/useRestoreActions'
-import useViewActions from './hooks/actions/useViewActions'
+import ProductCategoriesContext from '../contexts/ProductCategoriesContext'
+import ProductCategory from '../../../../../api/products/models/ProductCategory'
+import Table from '../../../../components/table/Table'
+import { TableBodyRowProps } from '../../../../components/table/TableBody'
+import { TableHeaderCellProps } from '../../../../components/table/TableHeader'
+import { toLocaleDateTime } from '../../../../utils/dateTime/dateTimeUtils'
+import useCreateActions from '../hooks/useCreateActions'
+import useDeleteActions from '../hooks/useDeleteActions'
+import useDownloadActions from '../hooks/useDownloadActions'
+import useEditActions from '../hooks/useEditActions'
+import useProductCategoriesPaging from '../hooks/useProductCategoriesPaging'
+import useProductCategoriesSorting from '../hooks/useProductCategoriesSorting'
+import useRestoreActions from '../hooks/useRestoreActions'
+import useViewActions from '../hooks/useViewActions'
 
 const ProductCategoriesTable: FC = () => {
     const { isLoading, categories, total, lastModifyDateTime } = useContext(ProductCategoriesContext)
@@ -37,11 +37,7 @@ const ProductCategoriesTable: FC = () => {
         {
             label: 'Создан',
             width: 3,
-            onClick: () => {
-                // eslint-disable-next-line no-debugger
-                debugger
-                onClickSort('CreateDateTime')
-            },
+            onClick: () => onClickSort('CreateDateTime'),
             orderBy: getOrderBy('CreateDateTime')
         }
     ]
