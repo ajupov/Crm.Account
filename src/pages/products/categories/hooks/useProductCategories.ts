@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactoryInstance from '../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import ProductCategories from '../contexts/ProductCategories'
 import ProductCategoriesClient from '../../../../../api/products/clients/ProductCategoriesClient'
 import ProductCategory from '../../../../../api/products/models/ProductCategory'
 import ProductCategoryGetPagedListRequest from '../../../../../api/products/models/ProductCategoryGetPagedListRequest'
@@ -9,18 +10,9 @@ const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'
 const DefaultOrderBy = 'desc'
 
-interface UseProductCategoriesReturn {
-    request: ProductCategoryGetPagedListRequest
-    setRequest: (request: ProductCategoryGetPagedListRequest) => void
-    isLoading: boolean
-    categories: ProductCategory[]
-    total: number
-    lastModifyDateTime?: string
-}
-
 const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
 
-const useProductCategories = (): UseProductCategoriesReturn => {
+const useProductCategories = (): ProductCategories => {
     const [request, setRequest] = useState<ProductCategoryGetPagedListRequest>({
         isDeleted: false,
         offset: 0,

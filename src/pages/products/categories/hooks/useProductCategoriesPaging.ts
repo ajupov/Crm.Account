@@ -1,6 +1,7 @@
+import { useCallback, useContext } from 'react'
+
+import ProductCategoriesContext from '../contexts/ProductCategoriesContext'
 import { calculateOffset } from '../../../../helpers/paginationHelper'
-import { useCallback } from 'react'
-import useProductCategories from './useProductCategories'
 
 interface UseProductCategoriesPagingReturn {
     offset: number
@@ -9,7 +10,7 @@ interface UseProductCategoriesPagingReturn {
 }
 
 const useProductCategoriesPaging = (): UseProductCategoriesPagingReturn => {
-    const { request, setRequest } = useProductCategories()
+    const { request, setRequest } = useContext(ProductCategoriesContext)
 
     const onClickChangePage = useCallback(
         (page: number): void => setRequest({ ...request, offset: calculateOffset(page, request.limit) }),

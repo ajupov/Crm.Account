@@ -8,12 +8,12 @@ import UserInfoContext from '../../../contexts/userInfo/UserInfoContext'
 
 const MobileSidebarMenu: FC = () => {
     const configuration = new Configuration()
-    const userInfo = useContext(UserInfoContext)
+    const { name } = useContext(UserInfoContext)
 
     const AvatarAndUserElement = (
         <>
             <Image avatar src="/content/client-avatar-micro.jpg" style={{ marginRight: '1.4em' }} />
-            {userInfo.name}
+            {name}
         </>
     )
 

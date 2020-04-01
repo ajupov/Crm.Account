@@ -1,6 +1,6 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useContext, useState } from 'react'
 
-import useProductCategories from './useProductCategories'
+import ProductCategoriesContext from '../contexts/ProductCategoriesContext'
 
 interface UseProductCategoriesFiltersReturn {
     name?: string
@@ -20,7 +20,7 @@ interface UseProductCategoriesFiltersReturn {
 }
 
 const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
-    const { request, setRequest } = useProductCategories()
+    const { request, setRequest } = useContext(ProductCategoriesContext)
 
     const [name, setName] = useState<string | undefined>()
     const [isDeleted, setIsDeleted] = useState<boolean | undefined>(false)

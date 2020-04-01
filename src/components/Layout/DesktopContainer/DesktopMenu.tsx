@@ -8,7 +8,7 @@ import UserInfoContext from '../../../contexts/userInfo/UserInfoContext'
 
 const DesktopMenu: FC = () => {
     const configuration = new Configuration()
-    const userInfo = useContext(UserInfoContext)
+    const { name } = useContext(UserInfoContext)
 
     const getUserNameWithAvatar = (): JSX.Element => (
         <>
@@ -18,7 +18,7 @@ const DesktopMenu: FC = () => {
                 style={{ marginRight: '1em', height: '28px', lineHeight: '28px' }}
                 size="large"
             />
-            {userInfo.name}
+            {name}
         </>
     )
 

@@ -1,4 +1,5 @@
-import useProductCategories from './useProductCategories'
+import ProductCategoriesContext from '../contexts/ProductCategoriesContext'
+import { useContext } from 'react'
 
 interface UseProductCategoriesSortingReturn {
     sortBy?: string
@@ -8,7 +9,7 @@ interface UseProductCategoriesSortingReturn {
 }
 
 const useProductCategoriesSorting = (): UseProductCategoriesSortingReturn => {
-    const { request, setRequest } = useProductCategories()
+    const { request, setRequest } = useContext(ProductCategoriesContext)
 
     const onClickSort = (columnName: string): void => {
         if (request.sortBy !== columnName) {
