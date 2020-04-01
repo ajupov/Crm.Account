@@ -1,39 +1,37 @@
-import { useState } from 'react'
-
-export const DefaultSortBy = 'CreateDateTime'
-export const DefaultOrderBy = 'desc'
-export type OrderBy = 'asc' | 'desc' | undefined
-
-export interface SortingParams {
-    sortBy?: string
-    orderBy?: string
-}
+import useProductCategories from './useProductCategories'
 
 interface UseProductCategoriesSortingReturn {
     sortBy?: string
-    orderBy?: OrderBy
-    setSortBy: (value?: string) => void
-    setOrderBy: (value?: OrderBy) => void
-    onClickSort: (columnName: string) => void
-    getOrderBy: (columnName: string) => OrderBy
+    orderBy?: string
+    onClickSort: (key: string) => void
+    getOrderBy: (key: string) => string | undefined
 }
 
 const useProductCategoriesSorting = (): UseProductCategoriesSortingReturn => {
-    const [sortBy, setSortBy] = useState<string | undefined>(DefaultSortBy)
-    const [orderBy, setOrderBy] = useState<OrderBy>(DefaultOrderBy)
+    const { request, setRequest } = useProductCategories()
 
     const onClickSort = (columnName: string): void => {
-        if (sortBy !== columnName) {
-            setSortBy(columnName)
-            setOrderBy('asc')
+        if (request.sortBy !== columnName) {
+            setRequest({ ...request, sortBy: columnName, orderBy: 'asc' })
         } else {
-            setOrderBy(orderBy === 'asc' ? 'desc' : 'asc')
+            setRequest({ ...request, orderBy: request.orderBy === 'asc' ? 'desc' : 'asc' })
         }
     }
 
-    const getOrderBy = (columnName: string): OrderBy => (sortBy === columnName ? orderBy : void 0)
+    const getOrderBy = (columnName: string): string | undefined => {
+        if (request.sortBy === columnName) {
+            return request.orderBy
+        }
 
-    return { sortBy, orderBy, setSortBy, setOrderBy, onClickSort, getOrderBy }
+        return void 0
+    }
+
+    return {
+        sortBy: request.sortBy,
+        orderBy: request.orderBy,
+        onClickSort,
+        getOrderBy
+    }
 }
 
 export default useProductCategoriesSorting

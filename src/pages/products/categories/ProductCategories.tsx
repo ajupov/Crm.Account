@@ -1,6 +1,5 @@
 import React, { FC, useEffect } from 'react'
 
-import { OrderBy } from '../../../components/table/TableData'
 import Page from '../../../components/page/Page'
 import ProductCategoriesFilter from './filters/ProductCategoriesFilter'
 import ProductCategory from '../../../../api/products/models/ProductCategory'
@@ -16,6 +15,8 @@ import useDeleteActions from './hooks/actions/useDeleteActions'
 import useDownloadActions from './hooks/actions/useDownloadActions'
 import useEditActions from './hooks/actions/useEditActions'
 import useProductCategories from './hooks/useProductCategories'
+import useProductCategoriesPaging from './hooks/useProductCategoriesPaging'
+import useProductCategoriesSorting from './hooks/useProductCategoriesSorting'
 import useProductsMenu from '../hooks/useProductsMenu'
 import useRestoreActions from './hooks/actions/useRestoreActions'
 import useViewActions from './hooks/actions/useViewActions'
@@ -30,37 +31,26 @@ const ProductCategories: FC = () => {
     const { onClickDelete } = useDeleteActions()
     const { onClickRestore } = useRestoreActions()
     const { onClickDownloadAsCsv } = useDownloadActions()
-    const {
-        isLoading,
-        categories,
-        limit,
-        total,
-        lastModifyDateTime,
-        onChangePage,
-        sortBy,
-        orderBy,
-        onClickSort,
-        getOrderBy
-    } = useProductCategories()
+    const { onClickSort, getOrderBy } = useProductCategoriesSorting()
+    const { limit, onClickChangePage } = useProductCategoriesPaging()
+    const { isLoading, categories, total, lastModifyDateTime } = useProductCategories()
+
+    useEffect(() => setPageTitle(title), [])
 
     const headers: TableHeaderCellProps[] = [
         {
-            key: 'Name',
             label: 'Наименование',
             width: 8,
             onClick: () => onClickSort('Name'),
             orderBy: getOrderBy('Name')
         },
         {
-            key: 'CreateDateTime',
             label: 'Создан',
             width: 3,
             onClick: () => onClickSort('CreateDateTime'),
-            orderBy: sortBy === 'CreateDateTime' ? orderBy : void 0
+            orderBy: getOrderBy('CreateDateTime')
         }
     ]
-
-    useEffect(() => setPageTitle(title), [])
 
     const map = (categories: ProductCategory[]): TableBodyRowProps[] =>
         categories.map(category => ({
@@ -82,7 +72,7 @@ const ProductCategories: FC = () => {
                     isLoading={isLoading}
                     headers={headers}
                     rows={map(categories)}
-                    footer={{ limit, total, onChangePage }}
+                    footer={{ limit, total, onClickChangePage }}
                     lastModifyDateTime={lastModifyDateTime}
                     onClickCreate={onClickCreate}
                     onClickDownloadAsCsv={onClickDownloadAsCsv}

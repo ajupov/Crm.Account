@@ -4,23 +4,23 @@ import useProductCategories from './useProductCategories'
 
 interface UseProductCategoriesFiltersReturn {
     name?: string
-    isDeleted?: boolean
-    minCreateDate?: string
-    maxCreateDate?: string
-    minModifyDate?: string
-    maxModifyDate?: string
     setName: (value?: string) => void
+    isDeleted?: boolean
     setIsDeleted: (value?: boolean) => void
+    minCreateDate?: string
     setMinCreateDate: (value?: string) => void
+    maxCreateDate?: string
     setMaxCreateDate: (value?: string) => void
+    minModifyDate?: string
     setMinModifyDate: (value?: string) => void
     setMaxModifyDate: (value?: string) => void
+    maxModifyDate?: string
     onClickApply: () => void
     onClickClear: () => void
 }
 
 const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
-    const { offset, limit, sortBy, orderBy, setRequest } = useProductCategories()
+    const { request, setRequest } = useProductCategories()
 
     const [name, setName] = useState<string | undefined>()
     const [isDeleted, setIsDeleted] = useState<boolean | undefined>(false)
@@ -39,44 +39,21 @@ const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
     }, [])
 
     const onClickApply = useCallback(() => {
-        setRequest({
-            name,
-            isDeleted,
-            minCreateDate,
-            maxCreateDate,
-            minModifyDate,
-            maxModifyDate,
-            limit,
-            offset,
-            sortBy,
-            orderBy
-        })
-    }, [
-        isDeleted,
-        limit,
-        maxCreateDate,
-        maxModifyDate,
-        minCreateDate,
-        minModifyDate,
-        name,
-        offset,
-        orderBy,
-        setRequest,
-        sortBy
-    ])
+        setRequest({ ...request, name, isDeleted, minCreateDate, maxCreateDate, minModifyDate, maxModifyDate })
+    }, [isDeleted, maxCreateDate, maxModifyDate, minCreateDate, minModifyDate, name, request, setRequest])
 
     return {
         name,
-        isDeleted,
-        minCreateDate,
-        maxCreateDate,
-        minModifyDate,
-        maxModifyDate,
         setName,
+        isDeleted,
         setIsDeleted,
+        minCreateDate,
         setMinCreateDate,
+        maxCreateDate,
         setMaxCreateDate,
+        minModifyDate,
         setMinModifyDate,
+        maxModifyDate,
         setMaxModifyDate,
         onClickApply,
         onClickClear

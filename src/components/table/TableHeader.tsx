@@ -1,14 +1,11 @@
 import React, { FC } from 'react'
 import { SemanticWIDTHS, Table } from 'semantic-ui-react'
 
-import { OrderBy } from './TableData'
-
 export interface TableHeaderCellProps {
-    key: string
     label: string
     width: SemanticWIDTHS
     onClick: () => void
-    orderBy: OrderBy
+    orderBy?: string
 }
 
 type SemanticSortedType = 'ascending' | 'descending' | undefined
