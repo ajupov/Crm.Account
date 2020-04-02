@@ -39,7 +39,7 @@ const Edit: FC<EditProps> = ({
                 Отмена
             </Button>
 
-            <Button onClick={onClickConfirm}>Создать</Button>
+            <Button onClick={onClickConfirm}>Сохранить</Button>
         </Button.Group>
     </>
 )

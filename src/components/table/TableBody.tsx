@@ -7,12 +7,13 @@ interface TableBodyCellProps {
 }
 
 export interface TableBodyRowProps {
-    cells: TableBodyCellProps[]
+    id: string
     isDeleted: boolean
-    onClickRow: (event: React.MouseEvent) => void
-    onClickEditButton: (event: React.MouseEvent) => void
-    onClickDeleteButton: (event: React.MouseEvent) => void
-    onClickRestoreButton: (event: React.MouseEvent) => void
+    cells: TableBodyCellProps[]
+    onClickRow: (id: string) => void
+    onClickEditButton: (id: string) => void
+    onClickDeleteButton: (id: string) => void
+    onClickRestoreButton: (id: string) => void
 }
 
 export type TableCellTextAlign = 'center' | 'left' | 'right'
@@ -20,7 +21,7 @@ export type TableCellTextAlign = 'center' | 'left' | 'right'
 const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
     const onClick = useCallback(
         (row: TableBodyRowProps) => (event: React.MouseEvent) => {
-            row.onClickRow(event)
+            row.onClickRow(row.id)
 
             event.stopPropagation()
         },
@@ -29,7 +30,7 @@ const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
 
     const onClickEdit = useCallback(
         (row: TableBodyRowProps) => (event: React.MouseEvent) => {
-            row.onClickEditButton(event)
+            row.onClickEditButton(row.id)
 
             event.stopPropagation()
         },
@@ -38,7 +39,7 @@ const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
 
     const onClickDelete = useCallback(
         (row: TableBodyRowProps) => (event: React.MouseEvent) => {
-            row.onClickDeleteButton(event)
+            row.onClickDeleteButton(row.id)
 
             event.stopPropagation()
         },
@@ -47,7 +48,7 @@ const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
 
     const onClickRestore = useCallback(
         (row: TableBodyRowProps) => (event: React.MouseEvent) => {
-            row.onClickRestoreButton(event)
+            row.onClickRestoreButton(row.id)
 
             event.stopPropagation()
         },

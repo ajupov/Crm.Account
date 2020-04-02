@@ -7,6 +7,7 @@ import ProductCategory from '../../../../../api/products/models/ProductCategory'
 interface UseProductCategoryReturn {
     isLoading: boolean
     category?: ProductCategory
+    save: () => void
 }
 
 const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
@@ -29,11 +30,13 @@ const useProductCategory = (id: string | undefined): UseProductCategoryReturn =>
         setIsLoading(false)
     }, [id])
 
+    const save = useCallback(() => productCategoriesClient.UpdateAsync(category), [category])
+
     useEffect(() => {
         load()
     }, [load])
 
-    return { isLoading, category }
+    return { isLoading, category, save }
 }
 
 export default useProductCategory

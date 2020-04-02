@@ -6,21 +6,17 @@ import Table from '../../../../components/table/Table'
 import { TableBodyRowProps } from '../../../../components/table/TableBody'
 import { TableHeaderCellProps } from '../../../../components/table/TableHeader'
 import { toLocaleDateTime } from '../../../../utils/dateTime/dateTimeUtils'
-import useCreateActions from '../hooks/useCreateActions'
+import useActions from '../hooks/useActions'
 import useDeleteActions from '../hooks/useDeleteActions'
 import useDownloadActions from '../hooks/useDownloadActions'
-import useEditActions from '../hooks/useEditActions'
 import useProductCategoriesPaging from '../hooks/useProductCategoriesPaging'
 import useProductCategoriesSorting from '../hooks/useProductCategoriesSorting'
 import useRestoreActions from '../hooks/useRestoreActions'
-import useViewActions from '../hooks/useViewActions'
 
 const ProductCategoriesTable: FC = () => {
     const { isLoading, categories, total, lastModifyDateTime } = useContext(ProductCategoriesContext)
 
-    const { onClickView } = useViewActions()
-    const { onClickCreate } = useCreateActions()
-    const { onClickEdit } = useEditActions()
+    const { onClickCreate, onClickView, onClickEdit } = useActions()
     const { onClickDelete } = useDeleteActions()
     const { onClickRestore } = useRestoreActions()
     const { onClickDownloadAsCsv } = useDownloadActions()
@@ -44,15 +40,16 @@ const ProductCategoriesTable: FC = () => {
 
     const map = (categories: ProductCategory[]): TableBodyRowProps[] =>
         categories.map(category => ({
+            id: category.id,
             cells: [
                 { value: category.name, textAlign: 'left' },
                 { value: toLocaleDateTime(category.createDateTime), textAlign: 'center' }
             ],
             isDeleted: category.isDeleted,
-            onClickRow: onClickView(category.id),
-            onClickEditButton: onClickEdit(category.id),
-            onClickDeleteButton: onClickDelete(category.id),
-            onClickRestoreButton: onClickRestore(category.id)
+            onClickRow: onClickView,
+            onClickEditButton: onClickEdit,
+            onClickDeleteButton: onClickDelete,
+            onClickRestoreButton: onClickRestore
         }))
 
     return (

@@ -1,25 +1,39 @@
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
+
 import { useHistory } from 'react-router'
+import useProductCategory from './useProductCategory'
 
 interface UseEditActionsReturn {
-    onClickEdit: (id: string) => () => void
+    name: string | undefined
+    setName: (value: string) => void
+    isDeleted: boolean | undefined
+    setIsDeleted: (value: boolean) => void
     onClickConfirm: () => void
     onClickCancel: () => void
 }
 
-const useEditActions = (): UseEditActionsReturn => {
+const useEditActions = (id: string | undefined): UseEditActionsReturn => {
     const path = '/products/categories'
-    const action = '/edit'
+
+    const { save } = useProductCategory(id)
+
+    const [name, setName] = useState<string | undefined>()
+    const [isDeleted, setIsDeleted] = useState<boolean | undefined>(false)
 
     const history = useHistory()
 
-    const onClickEdit = useCallback((id: string) => () => history.push(`${path}${action}/${id}`), [history])
-
-    const onClickConfirm = useCallback((): void => global.console.log(), [])
+    const onClickConfirm = useCallback((): void => save(), [save])
 
     const onClickCancel = useCallback((): void => history.push(path), [history])
 
-    return { onClickEdit, onClickConfirm, onClickCancel }
+    return {
+        name,
+        setName,
+        isDeleted,
+        setIsDeleted,
+        onClickConfirm,
+        onClickCancel
+    }
 }
 
 export default useEditActions

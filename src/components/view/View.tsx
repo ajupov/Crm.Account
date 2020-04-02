@@ -1,5 +1,5 @@
 import { Button, Card } from 'semantic-ui-react'
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 import { getCreateDateTimeText, getLastChangeDateTimeText as getLastModifyDateTimeText } from '../../helpers/textHelper'
 
 import BackLink from '../backLink/BackLink'
@@ -11,27 +11,29 @@ export interface ViewDataProps {
 }
 
 export interface ViewProps {
+    id: string
     isLoading: boolean
     isDeleted: boolean
     createDate: string
     lastModifyDateTime?: string
     data: ViewDataProps[]
     onClickBack: () => void
-    onClickEdit: (event: React.MouseEvent) => void
-    onClickDelete: (event: React.MouseEvent) => void
-    onClickRestore: (event: React.MouseEvent) => void
+    onClickEditButton: (id: string) => void
+    onClickDeleteButton: (id: string) => void
+    onClickRestoreButton: (id: string) => void
 }
 
 const View: FC<ViewProps> = ({
+    id,
     isLoading,
     isDeleted,
     createDate,
     lastModifyDateTime,
     data,
     onClickBack,
-    onClickEdit,
-    onClickDelete,
-    onClickRestore
+    onClickEditButton,
+    onClickDeleteButton,
+    onClickRestoreButton
 }) => {
     const renderData = (data: ViewDataProps[]): JSX.Element[] =>
         data.map(x => (
@@ -40,6 +42,33 @@ const View: FC<ViewProps> = ({
                 {x.value && <b>{x.value}</b>}
             </div>
         ))
+
+    const onClickEdit = useCallback(
+        (event: React.MouseEvent) => {
+            onClickEditButton(id)
+
+            event.stopPropagation()
+        },
+        [id, onClickEditButton]
+    )
+
+    const onClickDelete = useCallback(
+        (event: React.MouseEvent) => {
+            onClickDeleteButton(id)
+
+            event.stopPropagation()
+        },
+        [id, onClickDeleteButton]
+    )
+
+    const onClickRestore = useCallback(
+        (event: React.MouseEvent) => {
+            onClickRestoreButton(id)
+
+            event.stopPropagation()
+        },
+        [id, onClickRestoreButton]
+    )
 
     return (
         <>

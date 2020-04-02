@@ -15,7 +15,7 @@ const ProductCategoryEdit: FC = () => {
     const { id } = useParams()
     const { menu } = useProductsMenu()
     const { onClickBack } = useViewActions()
-    const { onClickConfirm, onClickCancel } = useEditActions()
+    const { onClickConfirm, onClickCancel } = useEditActions(id)
     const { isLoading, category } = useProductCategory(id)
 
     return (
