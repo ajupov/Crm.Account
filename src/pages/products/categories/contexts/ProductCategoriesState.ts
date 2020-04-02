@@ -1,7 +1,7 @@
 import ProductCategory from '../../../../../api/products/models/ProductCategory'
 import ProductCategoryGetPagedListRequest from '../../../../../api/products/models/ProductCategoryGetPagedListRequest'
 
-export default interface ProductCategories {
+export default interface ProductCategoriesState {
     request: ProductCategoryGetPagedListRequest
     setRequest: (request: ProductCategoryGetPagedListRequest) => void
     isLoading: boolean

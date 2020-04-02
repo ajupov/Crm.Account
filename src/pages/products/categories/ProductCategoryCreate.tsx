@@ -3,15 +3,15 @@ import React, { FC } from 'react'
 
 import Create from '../../../components/create/Create'
 import Page from '../../../components/page/Page'
+import useActions from './hooks/useActions'
 import useCreateActions from './hooks/useCreateActions'
 import useProductsMenu from '../hooks/useProductsMenu'
-import useViewActions from './hooks/useViewActions'
 
 const ProductCategoryCreate: FC = () => {
     const title = 'Добавление категории'
 
     const { menu } = useProductsMenu()
-    const { onClickBack } = useViewActions()
+    const { onClickBack } = useActions()
     const { onClickConfirm, onClickCancel } = useCreateActions()
 
     return (

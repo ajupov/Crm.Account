@@ -5,6 +5,7 @@ interface UseActionsReturn {
     onClickCreate: () => void
     onClickView: (id: string) => void
     onClickEdit: (id: string) => void
+    onClickBack: () => void
 }
 
 const useActions = (): UseActionsReturn => {
@@ -16,7 +17,9 @@ const useActions = (): UseActionsReturn => {
 
     const onClickEdit = useCallback((id: string) => history.push(`/products/categories/edit/${id}`), [history])
 
-    return { onClickCreate, onClickView, onClickEdit }
+    const onClickBack = useCallback(() => history.push('/products/categories'), [history])
+
+    return { onClickCreate, onClickView, onClickEdit, onClickBack }
 }
 
 export default useActions

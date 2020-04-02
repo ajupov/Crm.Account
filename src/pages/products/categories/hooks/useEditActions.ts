@@ -1,7 +1,7 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useContext, useState } from 'react'
 
+import ProductCategoryContext from '../contexts/ProductCategoryContext'
 import { useHistory } from 'react-router'
-import useProductCategory from './useProductCategory'
 
 interface UseEditActionsReturn {
     name: string | undefined
@@ -12,22 +12,25 @@ interface UseEditActionsReturn {
     onClickCancel: () => void
 }
 
-const useEditActions = (id: string | undefined): UseEditActionsReturn => {
+const useEditActions = (): UseEditActionsReturn => {
     const path = '/products/categories'
 
-    const { save } = useProductCategory(id)
+    const state = useContext(ProductCategoryContext)
 
-    const [name, setName] = useState<string | undefined>()
     const [isDeleted, setIsDeleted] = useState<boolean | undefined>(false)
 
     const history = useHistory()
 
-    const onClickConfirm = useCallback((): void => save(), [save])
+    const onClickConfirm = useCallback((): void => state.save(), [state])
 
     const onClickCancel = useCallback((): void => history.push(path), [history])
 
+    const setName = (name: string): void => {
+        state.setCategory({ ...state.category, name })
+    }
+
     return {
-        name,
+        name: state.category.name,
         setName,
         isDeleted,
         setIsDeleted,

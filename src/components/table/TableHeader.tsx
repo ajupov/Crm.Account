@@ -2,10 +2,11 @@ import React, { FC } from 'react'
 import { SemanticWIDTHS, Table } from 'semantic-ui-react'
 
 export interface TableHeaderCellProps {
+    key: string
     label: string
     width: SemanticWIDTHS
-    onClick: () => void
     orderBy?: string
+    onClick: () => void
 }
 
 type SemanticSortedType = 'ascending' | 'descending' | undefined
@@ -23,8 +24,8 @@ const TableHeader: FC<{ headers: TableHeaderCellProps[] }> = ({ headers }) => {
     }
 
     const renderCells = (): JSX.Element[] =>
-        headers.map((cell, index) => (
-            <Table.HeaderCell width={cell.width} key={index} onClick={cell.onClick} sorted={getSorted(cell)}>
+        headers.map(cell => (
+            <Table.HeaderCell width={cell.width} key={cell.key} onClick={cell.onClick} sorted={getSorted(cell)}>
                 {cell.label}
             </Table.HeaderCell>
         ))

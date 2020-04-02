@@ -1,20 +1,15 @@
+import { ProductCategoryState, productCategoryInitial } from '../contexts/ProductCategoryState'
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactoryInstance from '../../../../utils/httpClientFactory/HttpClientFactoryInstance'
 import ProductCategoriesClient from '../../../../../api/products/clients/ProductCategoriesClient'
 import ProductCategory from '../../../../../api/products/models/ProductCategory'
 
-interface UseProductCategoryReturn {
-    isLoading: boolean
-    category?: ProductCategory
-    save: () => void
-}
-
 const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
 
-const useProductCategory = (id: string | undefined): UseProductCategoryReturn => {
+const useProductCategory = (id: string | undefined): ProductCategoryState => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [category, setCategory] = useState<ProductCategory | undefined>()
+    const [category, setCategory] = useState<ProductCategory>(productCategoryInitial.category)
 
     const load = useCallback(async () => {
         if (!id) {
@@ -36,7 +31,7 @@ const useProductCategory = (id: string | undefined): UseProductCategoryReturn =>
         load()
     }, [load])
 
-    return { isLoading, category, save }
+    return { isLoading, category, setCategory, save }
 }
 
 export default useProductCategory

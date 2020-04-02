@@ -1,4 +1,4 @@
-import ProductCategories, { productCategoriesInitial } from '../contexts/ProductCategories'
+import ProductCategoriesState, { productCategoriesInitial } from '../contexts/ProductCategoriesState'
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactoryInstance from '../../../../utils/httpClientFactory/HttpClientFactoryInstance'
@@ -8,7 +8,7 @@ import ProductCategoryGetPagedListRequest from '../../../../../api/products/mode
 
 const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
 
-const useProductCategories = (): ProductCategories => {
+const useProductCategories = (): ProductCategoriesState => {
     const [request, setRequest] = useState<ProductCategoryGetPagedListRequest>(productCategoriesInitial.request)
     const [isLoading, setIsLoading] = useState<boolean>(productCategoriesInitial.isLoading)
     const [categories, setCategories] = useState<ProductCategory[]>(productCategoriesInitial.categories)

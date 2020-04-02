@@ -1,7 +1,7 @@
-import ProductCategories, { productCategoriesInitial } from './ProductCategories'
+import ProductCategoriesState, { productCategoriesInitial } from './ProductCategoriesState'
 
 import { createContext } from 'react'
 
-const ProductCategoriesContext = createContext<ProductCategories>(productCategoriesInitial)
+const ProductCategoriesContext = createContext<ProductCategoriesState>(productCategoriesInitial)
 
 export default ProductCategoriesContext

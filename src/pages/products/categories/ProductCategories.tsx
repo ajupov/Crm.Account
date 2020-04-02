@@ -13,13 +13,13 @@ import useProductsMenu from '../hooks/useProductsMenu'
 const ProductCategories: FC = () => {
     const title = 'Категории'
 
-    const productCategories = useProductCategories()
+    const state = useProductCategories()
     const { menu } = useProductsMenu()
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <ProductCategoriesContext.Provider value={productCategories}>
+        <ProductCategoriesContext.Provider value={state}>
             <Page title={title} menu={menu} secondMenu={<ProductCategoriesFilter />}>
                 <ProductCategoriesTable />
             </Page>

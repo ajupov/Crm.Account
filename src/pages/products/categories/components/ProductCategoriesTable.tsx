@@ -2,9 +2,9 @@ import React, { FC, useContext } from 'react'
 
 import ProductCategoriesContext from '../contexts/ProductCategoriesContext'
 import ProductCategory from '../../../../../api/products/models/ProductCategory'
-import Table from '../../../../components/table/Table'
-import { TableBodyRowProps } from '../../../../components/table/TableBody'
-import { TableHeaderCellProps } from '../../../../components/table/TableHeader'
+import Table from '../../../../components/Table/Table'
+import { TableBodyRowProps } from '../../../../components/Table/TableBody'
+import { TableHeaderCellProps } from '../../../../components/Table/TableHeader'
 import { toLocaleDateTime } from '../../../../utils/dateTime/dateTimeUtils'
 import useActions from '../hooks/useActions'
 import useDeleteActions from '../hooks/useDeleteActions'
@@ -25,12 +25,14 @@ const ProductCategoriesTable: FC = () => {
 
     const headers: TableHeaderCellProps[] = [
         {
+            key: 'Name',
             label: 'Наименование',
             width: 8,
             onClick: () => onClickSort('Name'),
             orderBy: getOrderBy('Name')
         },
         {
+            key: 'CreateDateTime',
             label: 'Создан',
             width: 3,
             onClick: () => onClickSort('CreateDateTime'),

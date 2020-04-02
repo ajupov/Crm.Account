@@ -4,11 +4,11 @@ import React, { FC, useCallback } from 'react'
 export interface TableFooterProps {
     limit: number
     total: number
-    onClickChangePage: (page: number) => void
     columnsCount?: number
+    onClickChangePage: (page: number) => void
 }
 
-const TableFooter: FC<TableFooterProps> = ({ limit, total, onClickChangePage, columnsCount }) => {
+const TableFooter: FC<TableFooterProps> = ({ limit, total, columnsCount, onClickChangePage }) => {
     const onPageChange = useCallback(
         (_: React.MouseEvent, props: PaginationProps): void => {
             onClickChangePage(Number(props.activePage))
