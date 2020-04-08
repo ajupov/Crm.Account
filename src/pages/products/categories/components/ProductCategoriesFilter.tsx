@@ -1,6 +1,6 @@
 /* eslint-disable array-bracket-newline */
 
-import { Button, CheckboxProps, Form, Header, InputOnChangeData } from 'semantic-ui-react'
+import { Button, Checkbox, CheckboxProps, Form, Header, Input, InputOnChangeData } from 'semantic-ui-react'
 import React, { FC, useCallback, useContext, useState } from 'react'
 
 import ProductCategoriesContext from '../contexts/ProductCategoriesContext'
@@ -29,7 +29,13 @@ const ProductCategoriesFilter: FC = () => {
         setRequest({ ...request, name, isDeleted, minCreateDate, maxCreateDate, minModifyDate, maxModifyDate })
     }, [isDeleted, maxCreateDate, maxModifyDate, minCreateDate, minModifyDate, name, request, setRequest])
 
+    const onSubmit = useCallback(() => {
+        setRequest({ ...request, name, isDeleted, minCreateDate, maxCreateDate, minModifyDate, maxModifyDate })
+    }, [isDeleted, maxCreateDate, maxModifyDate, minCreateDate, minModifyDate, name, request, setRequest])
+
     const onClickClear = useCallback(() => {
+        debugger
+
         setName(void 0)
         setIsDeleted(false)
         setMinCreateDate(void 0)
@@ -69,10 +75,10 @@ const ProductCategoriesFilter: FC = () => {
         <>
             <Header as="h4">Фильтры</Header>
 
-            <Form onSubmit={onClickApply}>
+            <Form onSubmit={onSubmit}>
                 <Form.Field>
                     <label>Наименование:</label>
-                    <Form.Input
+                    <Input
                         name="name"
                         size="mini"
                         fluid
@@ -84,43 +90,19 @@ const ProductCategoriesFilter: FC = () => {
 
                 <Form.Field>
                     <label>Дата создания:</label>
-                    <Form.Input
-                        size="mini"
-                        type="date"
-                        value={minCreateDate}
-                        onChange={onChangeMinCreateDate}
-                        label="с"
-                    />
-                    <Form.Input
-                        size="mini"
-                        type="date"
-                        value={maxCreateDate}
-                        onChange={onChangeMaxCreateDate}
-                        label="по"
-                    />
+                    <Input size="mini" type="date" value={minCreateDate} onChange={onChangeMinCreateDate} label="с" />
+                    <Input size="mini" type="date" value={maxCreateDate} onChange={onChangeMaxCreateDate} label="по" />
                 </Form.Field>
 
                 <Form.Field>
                     <label>Дата изменения:</label>
-                    <Form.Input
-                        size="mini"
-                        type="date"
-                        value={minModifyDate}
-                        onChange={onChangeMinModifyDate}
-                        label="с"
-                    />
-                    <Form.Input
-                        size="mini"
-                        type="date"
-                        value={maxModifyDate}
-                        onChange={onChangeMaxModifyDate}
-                        label="по"
-                    />
+                    <Input size="mini" type="date" value={minModifyDate} onChange={onChangeMinModifyDate} label="с" />
+                    <Input size="mini" type="date" value={maxModifyDate} onChange={onChangeMaxModifyDate} label="по" />
                 </Form.Field>
 
                 <Form.Field>
                     <label>Статус:</label>
-                    <Form.Checkbox
+                    <Checkbox
                         size="mini"
                         radio
                         label="Действующие"
@@ -129,7 +111,7 @@ const ProductCategoriesFilter: FC = () => {
                         checked={isDeleted === false}
                         onChange={onChangeIsDeleted}
                     />
-                    <Form.Checkbox
+                    <Checkbox
                         size="mini"
                         radio
                         label="Удаленные"
@@ -139,14 +121,12 @@ const ProductCategoriesFilter: FC = () => {
                         onChange={onChangeIsDeleted}
                     />
                 </Form.Field>
-
                 <Form.Field>
                     <Button.Group size="mini" floated="right">
-                        <Form.Button basic onClick={onClickClear}>
+                        <Button type="reset" basic onClick={onClickClear}>
                             Сброc
-                        </Form.Button>
-
-                        <Form.Button type="submit">Применить</Form.Button>
+                        </Button>
+                        <Button type="submit">Применить</Button>
                     </Button.Group>
                 </Form.Field>
             </Form>
