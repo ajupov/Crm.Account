@@ -1,5 +1,6 @@
+import { useCallback, useContext } from 'react'
+
 import ProductCategoriesContext from '../contexts/ProductCategoriesContext'
-import { useContext } from 'react'
 
 interface UseProductCategoriesSortingReturn {
     sortBy?: string
@@ -11,21 +12,27 @@ interface UseProductCategoriesSortingReturn {
 const useProductCategoriesSorting = (): UseProductCategoriesSortingReturn => {
     const { request, setRequest } = useContext(ProductCategoriesContext)
 
-    const onClickSort = (columnName: string): void => {
-        if (request.sortBy !== columnName) {
-            setRequest({ ...request, sortBy: columnName, orderBy: 'asc' })
-        } else {
-            setRequest({ ...request, orderBy: request.orderBy === 'asc' ? 'desc' : 'asc' })
-        }
-    }
+    const onClickSort = useCallback(
+        (columnName: string): void => {
+            if (request.sortBy !== columnName) {
+                setRequest({ ...request, sortBy: columnName, orderBy: 'asc' })
+            } else {
+                setRequest({ ...request, orderBy: request.orderBy === 'asc' ? 'desc' : 'asc' })
+            }
+        },
+        [request, setRequest]
+    )
 
-    const getOrderBy = (columnName: string): string | undefined => {
-        if (request.sortBy === columnName) {
-            return request.orderBy
-        }
+    const getOrderBy = useCallback(
+        (columnName: string): string | undefined => {
+            if (request.sortBy === columnName) {
+                return request.orderBy
+            }
 
-        return void 0
-    }
+            return void 0
+        },
+        [request.orderBy, request.sortBy]
+    )
 
     return {
         sortBy: request.sortBy,

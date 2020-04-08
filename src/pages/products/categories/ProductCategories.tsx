@@ -22,11 +22,9 @@ const ProductCategories: FC = () => {
         <ProductCategoriesContext.Provider value={state}>
             <Page title={title} menu={menu} secondMenu={<ProductCategoriesFilter />}>
                 <ProductCategoriesTable />
+                <ProductCategoryDelete />
+                <ProductCategoryRestore />
             </Page>
-
-            <ProductCategoryDelete />
-
-            <ProductCategoryRestore />
         </ProductCategoriesContext.Provider>
     )
 }

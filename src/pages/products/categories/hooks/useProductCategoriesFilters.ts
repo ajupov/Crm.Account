@@ -1,6 +1,4 @@
-import { useCallback, useContext, useState } from 'react'
-
-import ProductCategoriesContext from '../contexts/ProductCategoriesContext'
+import { useState } from 'react'
 
 interface UseProductCategoriesFiltersReturn {
     name?: string
@@ -15,32 +13,15 @@ interface UseProductCategoriesFiltersReturn {
     setMinModifyDate: (value?: string) => void
     setMaxModifyDate: (value?: string) => void
     maxModifyDate?: string
-    onClickApply: () => void
-    onClickClear: () => void
 }
 
 const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
-    const { request, setRequest } = useContext(ProductCategoriesContext)
-
     const [name, setName] = useState<string | undefined>()
     const [isDeleted, setIsDeleted] = useState<boolean | undefined>(false)
     const [minCreateDate, setMinCreateDate] = useState<string | undefined>()
     const [maxCreateDate, setMaxCreateDate] = useState<string | undefined>()
     const [minModifyDate, setMinModifyDate] = useState<string | undefined>()
     const [maxModifyDate, setMaxModifyDate] = useState<string | undefined>()
-
-    const onClickClear = useCallback(() => {
-        setName(void 0)
-        setIsDeleted(false)
-        setMinCreateDate(void 0)
-        setMaxCreateDate(void 0)
-        setMinModifyDate(void 0)
-        setMaxModifyDate(void 0)
-    }, [])
-
-    const onClickApply = useCallback(() => {
-        setRequest({ ...request, name, isDeleted, minCreateDate, maxCreateDate, minModifyDate, maxModifyDate })
-    }, [isDeleted, maxCreateDate, maxModifyDate, minCreateDate, minModifyDate, name, request, setRequest])
 
     return {
         name,
@@ -54,9 +35,7 @@ const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
         minModifyDate,
         setMinModifyDate,
         maxModifyDate,
-        setMaxModifyDate,
-        onClickApply,
-        onClickClear
+        setMaxModifyDate
     }
 }
 
