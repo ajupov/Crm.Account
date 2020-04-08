@@ -6,6 +6,7 @@ COPY yarn.lock ./
 RUN yarn
 
 COPY public/ ./public
+COPY api/ ./api
 COPY src/ ./src
 COPY config/ ./config
 COPY tsconfig.json ./
