@@ -1,4 +1,4 @@
-import { ProductCategoryState, productCategoryInitial } from '../contexts/ProductCategoryState'
+import { ProductCategoryState, productCategoryInitialState } from '../states/ProductCategoryState'
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactoryInstance from '../../../../utils/httpClientFactory/HttpClientFactoryInstance'
@@ -7,9 +7,9 @@ import ProductCategory from '../../../../../api/products/models/ProductCategory'
 
 const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
 
-const useProductCategory = (id: string | undefined): ProductCategoryState => {
+const useProductCategory = (id?: string | undefined): ProductCategoryState => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [category, setCategory] = useState<ProductCategory>(productCategoryInitial.category)
+    const [category, setCategory] = useState<ProductCategory>(productCategoryInitialState.category)
 
     const load = useCallback(async () => {
         if (!id) {

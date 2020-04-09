@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 
-import Page from '../../../components/page/Page'
+import Page from '../../../components/Page/Page'
 import { setPageTitle } from '../../../helpers/pageHelper'
 import useProductsMenu from '../hooks/useProductsMenu'
 

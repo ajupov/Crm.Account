@@ -2,8 +2,8 @@ import { Button, Card } from 'semantic-ui-react'
 import React, { FC, useCallback } from 'react'
 import { getCreateDateTimeText, getLastChangeDateTimeText as getLastModifyDateTimeText } from '../../helpers/textHelper'
 
-import BackLink from '../backLink/BackLink'
-import Loader from '../loader/Loader'
+import BackLink from '../BackLink/BackLink'
+import Loader from '../Loader/Loader'
 
 export interface ViewDataProps {
     label: string

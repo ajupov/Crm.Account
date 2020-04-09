@@ -1,4 +1,4 @@
-import UserInfo, { userInfoInitial } from '../contexts/UserInfo'
+import UserInfoState, { userInfoInitialState } from '../states/UserInfoState'
 import { useCallback, useEffect, useState } from 'react'
 
 import AuthClient from '../../../../api/auth/clients/AuthClient'
@@ -10,8 +10,8 @@ const authClient = new AuthClient(HttpClientFactoryInstance.Api)
 const userInfoClient = new UserInfoClient(HttpClientFactoryInstance.Api)
 const configuration = new Configuration()
 
-const useUserInfo = (): UserInfo => {
-    const [userInfo, setUserInfo] = useState<UserInfo>(userInfoInitial)
+const useUserInfo = (): UserInfoState => {
+    const [userInfo, setUserInfo] = useState<UserInfoState>(userInfoInitialState)
 
     const load = useCallback(async () => {
         const isAuthenticated = await authClient.IsAuthenticatedAsync()

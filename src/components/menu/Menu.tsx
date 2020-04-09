@@ -1,7 +1,7 @@
 import { Header, Menu as SemanticMenu } from 'semantic-ui-react'
 import React, { FC } from 'react'
 
-import ActiveMenuItem from '../activeMenuItem/ActiveMenuItem'
+import ActiveMenuItem from '../ActiveMenuItem/ActiveMenuItem'
 
 export interface MenuItemProps {
     name: string

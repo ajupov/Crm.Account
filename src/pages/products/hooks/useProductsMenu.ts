@@ -1,12 +1,10 @@
-import { MenuItemProps } from '../../../components/menu/Menu'
+import { MenuItemProps } from '../../../components/Menu/Menu'
 
-const useProductsMenu = (): { menu: MenuItemProps[] } => ({
-    menu: [
-        { name: 'Продукты', path: '/products' },
-        { name: 'Категории', path: '/products/categories' },
-        { name: 'Атрибуты', path: '/products/attributes' },
-        { name: 'Статусы', path: '/products/statuses' }
-    ]
-})
+const useProductsMenu = (): MenuItemProps[] => [
+    { name: 'Продукты', path: '/products' },
+    { name: 'Категории', path: '/products/categories' },
+    { name: 'Атрибуты', path: '/products/attributes' },
+    { name: 'Статусы', path: '/products/statuses' }
+]
 
 export default useProductsMenu

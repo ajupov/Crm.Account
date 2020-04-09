@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import BackLink from '../backLink/BackLink'
+import BackLink from '../BackLink/BackLink'
 import { Button } from 'semantic-ui-react'
 
 export interface CreateProps {

@@ -2,8 +2,8 @@ import { Button, Card } from 'semantic-ui-react'
 import React, { FC } from 'react'
 import { getCreateDateTimeText, getLastChangeDateTimeText } from '../../helpers/textHelper'
 
-import BackLink from '../backLink/BackLink'
-import Loader from '../loader/Loader'
+import BackLink from '../BackLink/BackLink'
+import Loader from '../Loader/Loader'
 
 export interface EditProps {
     isLoading: boolean
@@ -33,14 +33,6 @@ const Edit: FC<EditProps> = ({
         <Card.Meta textAlign="right">{getLastChangeDateTimeText(lastModifyDateTime)}</Card.Meta>
 
         {children}
-
-        <Button.Group floated="right" style={{ marginTop: '30px' }}>
-            <Button basic onClick={onClickCancel}>
-                Отмена
-            </Button>
-
-            <Button onClick={onClickConfirm}>Сохранить</Button>
-        </Button.Group>
     </>
 )
 

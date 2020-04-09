@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import ActiveMenuItem from '../../activeMenuItem/ActiveMenuItem'
+import ActiveMenuItem from '../../ActiveMenuItem/ActiveMenuItem'
 import { Icon } from 'semantic-ui-react'
 
 const DesktopSidebarMenu: FC = () => (

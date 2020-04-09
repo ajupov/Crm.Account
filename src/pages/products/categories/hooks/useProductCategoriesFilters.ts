@@ -4,6 +4,7 @@ import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useState } from 'react'
 
 import ProductCategoriesContext from '../contexts/ProductCategoriesContext'
+import { toBoolean } from '../../../../helpers/booleanHelper'
 
 interface UseProductCategoriesFiltersReturn {
     name: string
@@ -34,7 +35,7 @@ const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
 
     const onChangeName = useCallback((_, { value }: InputOnChangeData) => setName(value), [setName])
 
-    const onChangeIsDeleted = useCallback((_, data: CheckboxProps) => setIsDeleted(data.value === 'true'), [
+    const onChangeIsDeleted = useCallback((_, data: CheckboxProps) => setIsDeleted(toBoolean(data.value)), [
         setIsDeleted
     ])
 

@@ -1,7 +1,7 @@
-import { ProductCategoryState, productCategoryInitial } from './ProductCategoryState'
+import { ProductCategoryState, productCategoryInitialState } from '../states/ProductCategoryState'
 
 import { createContext } from 'react'
 
-const ProductCategoryContext = createContext<ProductCategoryState>(productCategoryInitial)
+const ProductCategoryContext = createContext<ProductCategoryState>(productCategoryInitialState)
 
 export default ProductCategoryContext

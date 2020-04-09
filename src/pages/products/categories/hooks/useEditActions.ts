@@ -1,39 +1,45 @@
-import { useCallback, useContext, useState } from 'react'
+import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
+import { useCallback, useContext } from 'react'
 
 import ProductCategoryContext from '../contexts/ProductCategoryContext'
+import { toBoolean } from '../../../../helpers/booleanHelper'
 import { useHistory } from 'react-router'
 
 interface UseEditActionsReturn {
     name: string | undefined
-    setName: (value: string) => void
+    onChangeName: (_: any, data: InputOnChangeData) => void
     isDeleted: boolean | undefined
-    setIsDeleted: (value: boolean) => void
+    onChangeIsDeleted: (_: any, data: CheckboxProps) => void
     onClickConfirm: () => void
     onClickCancel: () => void
 }
 
 const useEditActions = (): UseEditActionsReturn => {
-    const path = '/products/categories'
-
-    const state = useContext(ProductCategoryContext)
-
-    const [isDeleted, setIsDeleted] = useState<boolean | undefined>(false)
-
     const history = useHistory()
+    const context = useContext(ProductCategoryContext)
 
-    const onClickConfirm = useCallback((): void => state.save(), [state])
+    const onChangeName = useCallback(
+        (_, data: InputOnChangeData) => context.setCategory({ ...context.category, name: data.value }),
+        [context]
+    )
 
-    const onClickCancel = useCallback((): void => history.push(path), [history])
+    const onChangeIsDeleted = useCallback(
+        (_, data: CheckboxProps) => context.setCategory({ ...context.category, isDeleted: toBoolean(data.value) }),
+        [context]
+    )
 
-    const setName = (name: string): void => {
-        state.setCategory({ ...state.category, name })
-    }
+    const onClickConfirm = useCallback((): void => {
+        context.save()
+        history.push('/products/categories')
+    }, [context, history])
+
+    const onClickCancel = useCallback((): void => history.push('/products/categories'), [history])
 
     return {
-        name: state.category.name,
-        setName,
-        isDeleted,
-        setIsDeleted,
+        name: context.category.name,
+        onChangeName,
+        isDeleted: context.category.isDeleted,
+        onChangeIsDeleted,
         onClickConfirm,
         onClickCancel
     }

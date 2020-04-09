@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 
 import { BrowserRouter } from 'react-router-dom'
-import Layout from '../layout/Layout'
-import Loader from '../loader/Loader'
+import Layout from '../Layout/Layout'
+import Loader from '../Loader/Loader'
 import Routes from '../Routes/Routes'
 import UserInfoContext from './contexts/UserInfoContext'
 import useUserInfo from './hooks/useUserInfo'

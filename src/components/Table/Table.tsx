@@ -3,7 +3,7 @@ import TableBody, { TableBodyRowProps } from './TableBody'
 import TableFooter, { TableFooterProps } from './TableFooter'
 import TableHeader, { TableHeaderCellProps } from './TableHeader'
 
-import Loader from '../loader/Loader'
+import Loader from '../Loader/Loader'
 import { Table as SemanticUiTable } from 'semantic-ui-react'
 import TableCardHeader from './TableCardHeader'
 

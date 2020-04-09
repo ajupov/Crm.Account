@@ -1,7 +1,7 @@
 import { Icon, Image, Menu } from 'semantic-ui-react'
 import React, { FC, useContext } from 'react'
 
-import ActiveMenuItem from '../../activeMenuItem/ActiveMenuItem'
+import ActiveMenuItem from '../../ActiveMenuItem/ActiveMenuItem'
 import Configuration from '../../../configuration/Configuration'
 import { Link } from 'react-router-dom'
 import UserInfoContext from '../../UserInfo/contexts/UserInfoContext'

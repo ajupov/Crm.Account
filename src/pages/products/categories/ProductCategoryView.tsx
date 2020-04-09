@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react'
-import View, { ViewDataProps } from '../../../components/view/View'
+import View, { ViewDataProps } from '../../../components/View/View'
 
-import Page from '../../../components/page/Page'
+import Page from '../../../components/Page/Page'
 import ProductCategory from '../../../../api/products/models/ProductCategory'
 import { setPageTitle } from '../../../helpers/pageHelper'
 import useActions from './hooks/useActions'
@@ -16,7 +16,7 @@ const ProductCategoryView: FC = () => {
     const title = 'Просмотр категории'
 
     const { id } = useParams()
-    const { menu } = useProductsMenu()
+    const menu = useProductsMenu()
     const { onClickBack } = useViewActions()
     const { onClickEdit } = useActions()
     const { onClickDelete } = useDeleteActions()

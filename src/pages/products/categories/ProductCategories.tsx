@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 
-import Page from '../../../components/page/Page'
+import Page from '../../../components/Page/Page'
 import ProductCategoriesContext from './contexts/ProductCategoriesContext'
 import ProductCategoriesFilter from './components/ProductCategoriesFilter'
 import ProductCategoriesTable from './components/ProductCategoriesTable'
@@ -13,13 +13,13 @@ import useProductsMenu from '../hooks/useProductsMenu'
 const ProductCategories: FC = () => {
     const title = 'Категории'
 
-    const state = useProductCategories()
-    const { menu } = useProductsMenu()
+    const context = useProductCategories()
+    const menu = useProductsMenu()
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <ProductCategoriesContext.Provider value={state}>
+        <ProductCategoriesContext.Provider value={context}>
             <Page title={title} menu={menu} secondMenu={<ProductCategoriesFilter />}>
                 <ProductCategoriesTable />
                 <ProductCategoryDelete />

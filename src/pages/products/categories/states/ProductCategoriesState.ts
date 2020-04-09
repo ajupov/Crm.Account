@@ -14,7 +14,7 @@ export const DefaultLimit = 10
 export const DefaultSortBy = 'CreateDateTime'
 export const DefaultOrderBy = 'desc'
 
-export const productCategoriesInitial = {
+export const productCategoriesInitialState = {
     request: {
         isDeleted: false,
         offset: 0,

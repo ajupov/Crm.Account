@@ -7,7 +7,7 @@ export interface ProductCategoryState {
     save: () => void
 }
 
-export const productCategoryInitial: ProductCategoryState = {
+export const productCategoryInitialState: ProductCategoryState = {
     isLoading: false,
     category: {
         id: '',

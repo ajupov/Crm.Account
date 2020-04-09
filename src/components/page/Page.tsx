@@ -1,5 +1,5 @@
 import { Card, Grid, Header } from 'semantic-ui-react'
-import Menu, { MenuItemProps } from '../menu/Menu'
+import Menu, { MenuItemProps } from '../Menu/Menu'
 import React, { FC } from 'react'
 
 interface PageProps {

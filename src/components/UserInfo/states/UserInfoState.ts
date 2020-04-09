@@ -1,10 +1,10 @@
-export default interface UserInfo {
+export default interface UserInfoState {
     isAuthenticated: boolean
     name: string
     roles: string[]
 }
 
-export const userInfoInitial: UserInfo = {
+export const userInfoInitialState: UserInfoState = {
     isAuthenticated: false,
     name: '',
     roles: []
