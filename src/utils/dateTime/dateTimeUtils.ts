@@ -1,4 +1,4 @@
-export function toLocaleDateTime(value: string): string {
+export function toLocaleDateTime(value: string | undefined): string {
     if (!value) {
         return ''
     }

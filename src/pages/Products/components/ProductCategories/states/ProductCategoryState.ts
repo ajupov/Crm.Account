@@ -18,11 +18,10 @@ export interface ProductCategoryState {
 export const productCategoryInitialState: ProductCategoryState = {
     isLoading: false,
     category: {
-        id: '',
-        accountId: '',
-        name: '',
+        id: void 0,
+        name: void 0,
         isDeleted: false,
-        createDateTime: '',
+        createDateTime: void 0,
         modifyDateTime: void 0
     },
     setCategory: (_: ProductCategory) => void 0,

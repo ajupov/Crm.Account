@@ -1,9 +1,7 @@
-/* eslint-disable */
 export default interface ProductCategory {
-    id: string
-    accountId: string
+    id?: string
     name?: string
     isDeleted: boolean
-    createDateTime: string
+    createDateTime?: string
     modifyDateTime?: string
 }

@@ -19,7 +19,12 @@ const ProductCategoryEditForm: FC = () => {
         >
             <Form.Field required>
                 <label>Наименование</label>
-                <Input type="text" placeholder="Наименование" value={state.category.name} onChange={onChangeName} />
+                <Input
+                    type="text"
+                    placeholder="Наименование"
+                    value={state.category.name ?? ''}
+                    onChange={onChangeName}
+                />
             </Form.Field>
             <Form.Field>
                 <Checkbox label="Удален" checked={state.category.isDeleted} onChange={onChangeIsDeleted} />

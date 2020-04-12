@@ -11,10 +11,10 @@ export interface ViewDataProps {
 }
 
 export interface ViewProps {
-    id: string
+    id?: string
     isLoading: boolean
     isDeleted: boolean
-    createDate: string
+    createDate?: string
     lastModifyDateTime?: string
     data: ViewDataProps[]
     onClickEdit: (id: string) => void
@@ -45,7 +45,9 @@ const View: FC<ViewProps> = ({
 
     const _onClickEdit = useCallback(
         (event: React.MouseEvent) => {
-            onClickEdit(id)
+            if (id) {
+                onClickEdit(id)
+            }
 
             event.stopPropagation()
         },
@@ -54,7 +56,9 @@ const View: FC<ViewProps> = ({
 
     const _onClickDelete = useCallback(
         (event: React.MouseEvent) => {
-            onClickDelete(id)
+            if (id) {
+                onClickDelete(id)
+            }
 
             event.stopPropagation()
         },
@@ -63,7 +67,9 @@ const View: FC<ViewProps> = ({
 
     const _onClickRestore = useCallback(
         (event: React.MouseEvent) => {
-            onClickRestore(id)
+            if (id) {
+                onClickRestore(id)
+            }
 
             event.stopPropagation()
         },

@@ -7,7 +7,7 @@ import Loader from '../Loader/Loader'
 
 export interface EditProps {
     isLoading: boolean
-    createDate: string
+    createDate?: string
     lastModifyDateTime?: string
     onClickConfirm: () => void
     onClickCancel: () => void

@@ -7,7 +7,7 @@ interface TableBodyCellProps {
 }
 
 export interface TableBodyRowProps {
-    id: string
+    id?: string
     isDeleted: boolean
     cells: TableBodyCellProps[]
     onClickRow: (id: string) => void
@@ -21,7 +21,9 @@ export type TableCellTextAlign = 'center' | 'left' | 'right'
 const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
     const onClick = useCallback(
         (row: TableBodyRowProps) => (event: React.MouseEvent) => {
-            row.onClickRow(row.id)
+            if (row.id) {
+                row.onClickRow(row.id)
+            }
 
             event.stopPropagation()
         },
@@ -30,7 +32,9 @@ const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
 
     const onClickEdit = useCallback(
         (row: TableBodyRowProps) => (event: React.MouseEvent) => {
-            row.onClickEditButton(row.id)
+            if (row.id) {
+                row.onClickEditButton(row.id)
+            }
 
             event.stopPropagation()
         },
@@ -39,8 +43,9 @@ const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
 
     const onClickDelete = useCallback(
         (row: TableBodyRowProps) => (event: React.MouseEvent) => {
-            row.onClickDeleteButton(row.id)
-
+            if (row.id) {
+                row.onClickDeleteButton(row.id)
+            }
             event.stopPropagation()
         },
         []
@@ -48,7 +53,9 @@ const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
 
     const onClickRestore = useCallback(
         (row: TableBodyRowProps) => (event: React.MouseEvent) => {
-            row.onClickRestoreButton(row.id)
+            if (row.id) {
+                row.onClickRestoreButton(row.id)
+            }
 
             event.stopPropagation()
         },

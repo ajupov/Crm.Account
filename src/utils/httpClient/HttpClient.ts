@@ -108,8 +108,13 @@ export default class HttpClient {
     }
 
     private async convertToJson<T>(response: Response): Promise<T> {
-        const result = await response.json()
+        const noContentStatusCode = 204
 
+        if (response.status === noContentStatusCode) {
+            return (void 0 as unknown) as T
+        }
+
+        const result = await response?.json()
         return (result as unknown) as T
     }
 

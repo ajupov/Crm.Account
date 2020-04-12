@@ -2,7 +2,6 @@ import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext } from 'react'
 
 import ProductCategoryContext from '../../../contexts/ProductCategoryContext/ProductCategoryContext'
-import { toBoolean } from '../../../../../../../utils/boolean/booleanUtils'
 import { useHistory } from 'react-router'
 
 interface UseProductCategoryEditReturn {
@@ -29,8 +28,8 @@ const useProductCategoryEdit = (): UseProductCategoryEditReturn => {
 
     const onClickEdit = useCallback((id: string) => history.push(`/products/categories/edit/${id}`), [history])
 
-    const onClickConfirm = useCallback((): void => {
-        state.create()
+    const onClickConfirm = useCallback(async (): Promise<void> => {
+        await state.update()
         history.push('/products/categories')
     }, [state, history])
 
