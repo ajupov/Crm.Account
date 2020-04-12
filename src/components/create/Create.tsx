@@ -1,27 +1,27 @@
+import { Button, Form } from 'semantic-ui-react'
 import React, { FC } from 'react'
 
 import BackLink from '../BackLink/BackLink'
-import { Button } from 'semantic-ui-react'
 
 export interface CreateProps {
-    onClickBack: () => void
     onClickConfirm: () => void
     onClickCancel: () => void
 }
 
-const Create: FC<CreateProps> = ({ children, onClickBack, onClickConfirm, onClickCancel }) => (
+const Create: FC<CreateProps> = ({ children, onClickConfirm, onClickCancel }) => (
     <>
-        <BackLink onClick={onClickBack} />
-
-        {children}
-
-        <Button.Group floated="right" style={{ marginTop: '30px' }}>
-            <Button basic onClick={onClickCancel}>
-                Отмена
-            </Button>
-
-            <Button onClick={onClickConfirm}>Создать</Button>
-        </Button.Group>
+        <BackLink onClick={onClickCancel} />
+        <Form onSubmit={onClickConfirm}>
+            {children}
+            <Form.Field>
+                <Button.Group floated="right">
+                    <Button type="reset" basic onClick={onClickCancel}>
+                        Отмена
+                    </Button>
+                    <Button type="submit">Создать</Button>
+                </Button.Group>
+            </Form.Field>
+        </Form>
     </>
 )
 

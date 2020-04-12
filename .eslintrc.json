@@ -171,7 +171,8 @@
                         "ignoreReadonlyClassProperties": true,
                         "ignore": [-1, 0, 1]
                     }
-                ]
+                ],
+                "array-bracket-newline": ["off"]
             }
         }
     ]

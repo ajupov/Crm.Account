@@ -6,22 +6,20 @@ import Table from '../../../../components/Table/Table'
 import { TableBodyRowProps } from '../../../../components/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../components/Table/TableHeader'
 import { toLocaleDateTime } from '../../../../utils/dateTime/dateTimeUtils'
-import useActions from '../hooks/useActions'
-import useDeleteActions from '../hooks/useDeleteActions'
-import useDownloadActions from '../hooks/useDownloadActions'
-import useProductCategoriesPaging from '../hooks/useProductCategoriesPaging'
-import useProductCategoriesSorting from '../hooks/useProductCategoriesSorting'
-import useRestoreActions from '../hooks/useRestoreActions'
+import useProductCategoriesTable from './hooks/useProductCategoriesTable'
+import useProductCategoryView from '../View/hooks/useProductCategoryView'
 
 const ProductCategoriesTable: FC = () => {
-    const { isLoading, categories, total, lastModifyDateTime } = useContext(ProductCategoriesContext)
-
-    const { onClickCreate, onClickView, onClickEdit } = useActions()
-    const { onClickDelete } = useDeleteActions()
-    const { onClickRestore } = useRestoreActions()
-    const { onClickDownloadAsCsv } = useDownloadActions()
-    const { onClickSort, getOrderBy } = useProductCategoriesSorting()
-    const { limit, onClickChangePage } = useProductCategoriesPaging()
+    const state = useContext(ProductCategoriesContext)
+    const {
+        onClickView,
+        onClickCreate,
+        onClickDownloadAsCsv,
+        onClickSort,
+        getOrderBy,
+        onClickChangePage
+    } = useProductCategoriesTable()
+    const { onClickEdit, onClickDelete, onClickRestore } = useProductCategoryView()
 
     const headers: TableHeaderCellProps[] = [
         {
@@ -56,11 +54,11 @@ const ProductCategoriesTable: FC = () => {
 
     return (
         <Table
-            isLoading={isLoading}
+            isLoading={state.isLoading}
             headers={headers}
-            rows={map(categories)}
-            footer={{ limit, total, onClickChangePage }}
-            lastModifyDateTime={lastModifyDateTime}
+            rows={map(state.categories)}
+            footer={{ limit: state.request.limit, total: state.total, onClickChangePage }}
+            lastModifyDateTime={state.lastModifyDateTime}
             onClickCreate={onClickCreate}
             onClickDownloadAsCsv={onClickDownloadAsCsv}
         />

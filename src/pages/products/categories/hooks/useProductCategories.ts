@@ -17,7 +17,7 @@ const useProductCategories = (): ProductCategoriesState => {
         productCategoriesInitialState.lastModifyDateTime
     )
 
-    const load = useCallback(async () => {
+    const getPagedList = useCallback(async () => {
         setIsLoading(true)
 
         const response = await productCategoriesClient.GetPagedListAsync(request)
@@ -30,8 +30,8 @@ const useProductCategories = (): ProductCategoriesState => {
     }, [request, setLastModifyDateTime, setTotal])
 
     useEffect(() => {
-        load()
-    }, [load])
+        getPagedList()
+    }, [getPagedList])
 
     return {
         request,

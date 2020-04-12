@@ -1,10 +1,8 @@
-/* eslint-disable array-bracket-newline */
-
 import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useState } from 'react'
 
-import ProductCategoriesContext from '../contexts/ProductCategoriesContext'
-import { toBoolean } from '../../../../helpers/booleanHelper'
+import ProductCategoriesContext from '../../contexts/ProductCategoriesContext'
+import { toBoolean } from '../../../../../utils/boolean/booleanUtils'
 
 interface UseProductCategoriesFiltersReturn {
     name: string
@@ -19,13 +17,12 @@ interface UseProductCategoriesFiltersReturn {
     onChangeMinModifyDate: (_: any, { value }: InputOnChangeData) => void
     maxModifyDate: string
     onChangeMaxModifyDate: (_: any, { value }: InputOnChangeData) => void
-    onSubmit: () => void
+    onApply: () => void
     onReset: () => void
 }
 
 const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
-    const { request, setRequest } = useContext(ProductCategoriesContext)
-
+    const state = useContext(ProductCategoriesContext)
     const [name, setName] = useState<string>('')
     const [isDeleted, setIsDeleted] = useState<boolean>(false)
     const [minCreateDate, setMinCreateDate] = useState<string>('')
@@ -55,9 +52,9 @@ const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
         setMaxModifyDate
     ])
 
-    const onSubmit = useCallback(() => {
-        setRequest({
-            ...request,
+    const onApply = useCallback(() => {
+        state.setRequest({
+            ...state.request,
             name,
             isDeleted,
             minCreateDate,
@@ -66,7 +63,7 @@ const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
             maxModifyDate,
             offset: 0
         })
-    }, [isDeleted, maxCreateDate, maxModifyDate, minCreateDate, minModifyDate, name, request, setRequest])
+    }, [isDeleted, maxCreateDate, maxModifyDate, minCreateDate, minModifyDate, name, state])
 
     const onReset = useCallback(() => {
         setName('')
@@ -76,8 +73,8 @@ const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
         setMinModifyDate('')
         setMaxModifyDate('')
 
-        setRequest({
-            ...request,
+        state.setRequest({
+            ...state.request,
             name: '',
             isDeleted: false,
             minCreateDate: '',
@@ -86,7 +83,7 @@ const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
             maxModifyDate: '',
             offset: 0
         })
-    }, [request, setRequest])
+    }, [state])
 
     return {
         name,
@@ -101,7 +98,7 @@ const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
         onChangeMinModifyDate,
         maxModifyDate,
         onChangeMaxModifyDate,
-        onSubmit,
+        onApply,
         onReset
     }
 }

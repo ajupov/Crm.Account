@@ -5,6 +5,8 @@ import Application from './components/Application/Application'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+declare let module: { hot: any }
+
 ReactDOM.render(<Application />, document.getElementById('root'))
 
 if (module.hot) {

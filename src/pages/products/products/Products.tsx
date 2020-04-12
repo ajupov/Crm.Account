@@ -7,7 +7,7 @@ import useProductsMenu from '../hooks/useProductsMenu'
 const Products: FC = () => {
     const title = 'Продукты'
 
-    const { menu } = useProductsMenu()
+    const menu = useProductsMenu()
 
     useEffect(() => setPageTitle(title), [])
 

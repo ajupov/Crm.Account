@@ -17,10 +17,10 @@ export interface ViewProps {
     createDate: string
     lastModifyDateTime?: string
     data: ViewDataProps[]
-    onClickBack: () => void
-    onClickEditButton: (id: string) => void
-    onClickDeleteButton: (id: string) => void
-    onClickRestoreButton: (id: string) => void
+    onClickEdit: (id: string) => void
+    onClickDelete: (id: string) => void
+    onClickRestore: (id: string) => void
+    onClickCancel: () => void
 }
 
 const View: FC<ViewProps> = ({
@@ -30,10 +30,10 @@ const View: FC<ViewProps> = ({
     createDate,
     lastModifyDateTime,
     data,
-    onClickBack,
-    onClickEditButton,
-    onClickDeleteButton,
-    onClickRestoreButton
+    onClickCancel,
+    onClickEdit,
+    onClickDelete,
+    onClickRestore
 }) => {
     const renderData = (data: ViewDataProps[]): JSX.Element[] =>
         data.map(x => (
@@ -43,55 +43,48 @@ const View: FC<ViewProps> = ({
             </div>
         ))
 
-    const onClickEdit = useCallback(
+    const _onClickEdit = useCallback(
         (event: React.MouseEvent) => {
-            onClickEditButton(id)
+            onClickEdit(id)
 
             event.stopPropagation()
         },
-        [id, onClickEditButton]
+        [id, onClickEdit]
     )
 
-    const onClickDelete = useCallback(
+    const _onClickDelete = useCallback(
         (event: React.MouseEvent) => {
-            onClickDeleteButton(id)
+            onClickDelete(id)
 
             event.stopPropagation()
         },
-        [id, onClickDeleteButton]
+        [id, onClickDelete]
     )
 
-    const onClickRestore = useCallback(
+    const _onClickRestore = useCallback(
         (event: React.MouseEvent) => {
-            onClickRestoreButton(id)
+            onClickRestore(id)
 
             event.stopPropagation()
         },
-        [id, onClickRestoreButton]
+        [id, onClickRestore]
     )
 
     return (
         <>
             <Loader isLoading={isLoading} />
-
-            <BackLink onClick={onClickBack} />
-
+            <BackLink onClick={onClickCancel} />
             <Card.Meta textAlign="right">{getCreateDateTimeText(createDate)}</Card.Meta>
-
             <Card.Meta textAlign="right">{getLastModifyDateTimeText(lastModifyDateTime)}</Card.Meta>
-
             {renderData(data)}
-
             {!isDeleted && (
                 <Button.Group floated="right" style={{ marginTop: '30px' }}>
-                    <Button onClick={onClickEdit}>Редактировать</Button>
-
-                    <Button onClick={onClickDelete}>Удалить</Button>
+                    <Button onClick={_onClickEdit}>Редактировать</Button>
+                    <Button onClick={_onClickDelete}>Удалить</Button>
                 </Button.Group>
             )}
-
             {isDeleted && (
-                <Button floated="right" style={{ marginTop: '30px' }} onClick={onClickRestore}>
+                <Button floated="right" style={{ marginTop: '30px' }} onClick={_onClickRestore}>
                     Восстановить
                 </Button>
             )}
