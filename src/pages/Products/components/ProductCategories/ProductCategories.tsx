@@ -4,6 +4,7 @@ import Page from '../../../../components/Page/Page'
 import ProductCategoriesContextProvider from './contexts/ProductCategoriesContext/ProductCategoriesContextProvider'
 import ProductCategoriesFilter from './components/ProductCategoriesFilter/ProductCategoriesFilter'
 import ProductCategoriesTable from './components/ProductCategoriesTable/ProductCategoriesTable'
+import ProductCategoryContextProvider from './contexts/ProductCategoryContext/ProductCategoryContextProvider'
 import ProductCategoryDelete from './components/ProductCategoryDelete/ProductCategoryDelete'
 import ProductCategoryRestore from './components/ProductCategoryRestore/ProductCategoryRestore'
 import ProductsMenu from '../ProductsMenu/ProductsMenu'
@@ -16,11 +17,13 @@ const ProductCategories: FC = () => {
 
     return (
         <ProductCategoriesContextProvider>
-            <Page title={title} firstSidebar={<ProductsMenu />} secondSidebar={<ProductCategoriesFilter />}>
-                <ProductCategoriesTable />
-            </Page>
-            <ProductCategoryDelete />
-            <ProductCategoryRestore />
+            <ProductCategoryContextProvider>
+                <Page title={title} firstSidebar={<ProductsMenu />} secondSidebar={<ProductCategoriesFilter />}>
+                    <ProductCategoriesTable />
+                    <ProductCategoryDelete />
+                    <ProductCategoryRestore />
+                </Page>
+            </ProductCategoryContextProvider>
         </ProductCategoriesContextProvider>
     )
 }

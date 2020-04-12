@@ -47,18 +47,20 @@ const useProductCategory = (): ProductCategoryState => {
     }, [category])
 
     const _delete = useCallback(async () => {
-        setIsDeleting(true)
+        setIsLoading(true)
 
         await productCategoriesClient.DeleteAsync(ids)
 
+        setIsLoading(false)
         setIsDeleting(false)
     }, [ids])
 
     const restore = useCallback(async () => {
-        setIsRestoring(true)
+        setIsLoading(true)
 
         await productCategoriesClient.RestoreAsync(ids)
 
+        setIsLoading(false)
         setIsRestoring(false)
     }, [ids])
 
