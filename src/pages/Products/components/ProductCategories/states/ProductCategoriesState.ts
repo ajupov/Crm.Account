@@ -8,11 +8,18 @@ export default interface ProductCategoriesState {
     categories: ProductCategory[]
     total: number
     lastModifyDateTime: string
+    setIds: (ids: string[]) => void
+    isDeleting: boolean
+    delete: () => Promise<void>
+    setIsDeleting: (state: boolean) => void
+    isRestoring: boolean
+    setIsRestoring: (state: boolean) => void
+    restore: () => Promise<void>
 }
 
-export const DefaultLimit = 10
-export const DefaultSortBy = 'CreateDateTime'
-export const DefaultOrderBy = 'desc'
+const DefaultLimit = 10
+const DefaultSortBy = 'CreateDateTime'
+const DefaultOrderBy = 'desc'
 
 export const productCategoriesInitialState = {
     request: {
@@ -26,5 +33,12 @@ export const productCategoriesInitialState = {
     isLoading: false,
     categories: [],
     total: 0,
-    lastModifyDateTime: ''
+    lastModifyDateTime: '',
+    setIds: (_: string[]) => void 0,
+    isDeleting: false,
+    setIsDeleting: (_: boolean) => void 0,
+    delete: () => Promise.resolve(void 0),
+    isRestoring: false,
+    setIsRestoring: (_: boolean) => void 0,
+    restore: () => Promise.resolve(void 0)
 }

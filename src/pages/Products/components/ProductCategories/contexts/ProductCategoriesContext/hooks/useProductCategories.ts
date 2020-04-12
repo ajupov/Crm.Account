@@ -16,6 +16,9 @@ const useProductCategories = (): ProductCategoriesState => {
     const [lastModifyDateTime, setLastModifyDateTime] = useState<string>(
         productCategoriesInitialState.lastModifyDateTime
     )
+    const [ids, setIds] = useState<string[]>([])
+    const [isDeleting, setIsDeleting] = useState<boolean>(false)
+    const [isRestoring, setIsRestoring] = useState<boolean>(false)
 
     const getPagedList = useCallback(async () => {
         setIsLoading(true)
@@ -29,6 +32,28 @@ const useProductCategories = (): ProductCategoriesState => {
         setIsLoading(false)
     }, [request, setLastModifyDateTime, setTotal])
 
+    const _delete = useCallback(async () => {
+        setIsLoading(true)
+
+        await productCategoriesClient.DeleteAsync(ids)
+
+        setIsLoading(false)
+        setIsDeleting(false)
+
+        getPagedList()
+    }, [getPagedList, ids])
+
+    const restore = useCallback(async () => {
+        setIsLoading(true)
+
+        await productCategoriesClient.RestoreAsync(ids)
+
+        setIsLoading(false)
+        setIsRestoring(false)
+
+        getPagedList()
+    }, [getPagedList, ids])
+
     useEffect(() => {
         getPagedList()
     }, [getPagedList])
@@ -39,7 +64,14 @@ const useProductCategories = (): ProductCategoriesState => {
         isLoading,
         categories,
         total,
-        lastModifyDateTime
+        lastModifyDateTime,
+        setIds,
+        isDeleting,
+        setIsDeleting,
+        delete: _delete,
+        isRestoring,
+        setIsRestoring,
+        restore
     }
 }
 

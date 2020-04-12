@@ -1,11 +1,11 @@
 import React, { FC, useContext } from 'react'
 
 import Delete from '../../../../../../components/Delete/Delete'
-import ProductCategoryContext from '../../contexts/ProductCategoryContext/ProductCategoryContext'
+import ProductCategoriesContext from '../../contexts/ProductCategoriesContext/ProductCategoriesContext'
 import useProductCategoryDelete from './hooks/useProductCategoryDelete'
 
 const ProductCategoryDelete: FC = () => {
-    const state = useContext(ProductCategoryContext)
+    const state = useContext(ProductCategoriesContext)
     const { onClickConfirm, onClickCancel } = useProductCategoryDelete()
 
     return (

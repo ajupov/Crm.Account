@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react'
 
-import ProductCategoryContext from '../../../contexts/ProductCategoryContext/ProductCategoryContext'
+import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext/ProductCategoriesContext'
 
 interface UseProductCategoryDelete {
     onClickConfirm: () => void
@@ -8,7 +8,7 @@ interface UseProductCategoryDelete {
 }
 
 const useProductCategoryDelete = (): UseProductCategoryDelete => {
-    const state = useContext(ProductCategoryContext)
+    const state = useContext(ProductCategoriesContext)
 
     const onClickConfirm = useCallback(() => {
         state.delete()

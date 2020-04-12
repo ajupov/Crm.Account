@@ -12,9 +12,6 @@ const useProductCategory = (): ProductCategoryState => {
     const { id } = useParams()
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [category, setCategory] = useState<ProductCategory>(productCategoryInitialState.category)
-    const [ids, setIds] = useState<string[]>([])
-    const [isDeleting, setIsDeleting] = useState<boolean>(false)
-    const [isRestoring, setIsRestoring] = useState<boolean>(false)
 
     const get = useCallback(async () => {
         if (!id) {
@@ -46,42 +43,11 @@ const useProductCategory = (): ProductCategoryState => {
         setIsLoading(false)
     }, [category])
 
-    const _delete = useCallback(async () => {
-        setIsLoading(true)
-
-        await productCategoriesClient.DeleteAsync(ids)
-
-        setIsLoading(false)
-        setIsDeleting(false)
-    }, [ids])
-
-    const restore = useCallback(async () => {
-        setIsLoading(true)
-
-        await productCategoriesClient.RestoreAsync(ids)
-
-        setIsLoading(false)
-        setIsRestoring(false)
-    }, [ids])
-
     useEffect(() => {
         get()
     }, [get])
 
-    return {
-        isLoading,
-        category,
-        setCategory,
-        setIds,
-        isDeleting,
-        setIsDeleting,
-        isRestoring,
-        setIsRestoring,
-        create,
-        update,
-        delete: _delete,
-        restore
-    }
+    return { isLoading, category, setCategory, create, update }
 }
 
 export default useProductCategory
