@@ -1,13 +1,13 @@
 import { Checkbox, Form, Input } from 'semantic-ui-react'
 import React, { FC, useContext, useEffect } from 'react'
 
-import Edit from '../../../../components/Edit/Edit'
-import Page from '../../../../components/Page/Page'
-import ProductCategoryContext from '../contexts/ProductCategoryContext'
-import { setPageTitle } from '../../../../helpers/pageHelper'
-import useProductCategory from '../hooks/useProductCategory'
+import Edit from '../../../../../components/Edit/Edit'
+import Page from '../../../../../components/Page/Page'
+import ProductCategoryContext from '../../contexts/ProductCategoryContext'
+import { setPageTitle } from '../../../../../helpers/pageHelper'
+import useProductCategory from '../../hooks/useProductCategory'
 import useProductCategoryEdit from './hooks/useProductCategoryEdit'
-import useProductsMenu from '../../hooks/useProductsMenu'
+import useProductsMenu from '../../../hooks/useProductsMenu'
 
 const ProductCategoryEdit: FC = () => {
     const title = 'Изменение категории'

@@ -1,11 +1,11 @@
 import React, { FC, useContext } from 'react'
 
-import ProductCategoriesContext from '../contexts/ProductCategoriesContext'
-import ProductCategory from '../../../../../api/products/models/ProductCategory'
-import Table from '../../../../components/Table/Table'
-import { TableBodyRowProps } from '../../../../components/Table/TableBody'
-import { TableHeaderCellProps } from '../../../../components/Table/TableHeader'
-import { toLocaleDateTime } from '../../../../utils/dateTime/dateTimeUtils'
+import ProductCategoriesContext from '../../contexts/ProductCategoriesContext'
+import ProductCategory from '../../../../../../api/products/models/ProductCategory'
+import Table from '../../../../../components/Table/Table'
+import { TableBodyRowProps } from '../../../../../components/Table/TableBody'
+import { TableHeaderCellProps } from '../../../../../components/Table/TableHeader'
+import { toLocaleDateTime } from '../../../../../utils/dateTime/dateTimeUtils'
 import useProductCategoriesTable from './hooks/useProductCategoriesTable'
 import useProductCategoryView from '../View/hooks/useProductCategoryView'
 

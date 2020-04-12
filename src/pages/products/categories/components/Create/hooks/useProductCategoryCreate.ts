@@ -1,11 +1,11 @@
 import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext } from 'react'
 
-import ProductCategoryContext from '../../contexts/ProductCategoryContext'
-import { toBoolean } from '../../../../../utils/boolean/booleanUtils'
+import ProductCategoryContext from '../../../contexts/ProductCategoryContext'
+import { toBoolean } from '../../../../../../utils/boolean/booleanUtils'
 import { useHistory } from 'react-router'
 
-interface UseProductCategoryEditReturn {
+interface UseProductCategoryCreateReturn {
     name: string | undefined
     onChangeName: (_: any, data: InputOnChangeData) => void
     isDeleted: boolean | undefined
@@ -14,7 +14,7 @@ interface UseProductCategoryEditReturn {
     onClickCancel: () => void
 }
 
-const useProductCategoryEdit = (): UseProductCategoryEditReturn => {
+const useProductCategoryCreate = (): UseProductCategoryCreateReturn => {
     const history = useHistory()
     const state = useContext(ProductCategoryContext)
 
@@ -28,8 +28,8 @@ const useProductCategoryEdit = (): UseProductCategoryEditReturn => {
         [state]
     )
 
-    const onClickConfirm = useCallback((): void => {
-        state.create()
+    const onClickConfirm = useCallback(async (): Promise<void> => {
+        await state.create()
         history.push('/products/categories')
     }, [state, history])
 
@@ -45,4 +45,4 @@ const useProductCategoryEdit = (): UseProductCategoryEditReturn => {
     }
 }
 
-export default useProductCategoryEdit
+export default useProductCategoryCreate

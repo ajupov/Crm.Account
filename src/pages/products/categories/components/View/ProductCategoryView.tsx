@@ -1,13 +1,13 @@
 import React, { FC, useEffect } from 'react'
-import View, { ViewDataProps } from '../../../../components/View/View'
+import View, { ViewDataProps } from '../../../../../components/View/View'
 
-import Page from '../../../../components/Page/Page'
-import ProductCategory from '../../../../../api/products/models/ProductCategory'
-import ProductCategoryContext from '../contexts/ProductCategoryContext'
-import { setPageTitle } from '../../../../helpers/pageHelper'
-import useProductCategory from '../hooks/useProductCategory'
+import Page from '../../../../../components/Page/Page'
+import ProductCategory from '../../../../../../api/products/models/ProductCategory'
+import ProductCategoryContext from '../../contexts/ProductCategoryContext'
+import { setPageTitle } from '../../../../../helpers/pageHelper'
+import useProductCategory from '../../hooks/useProductCategory'
 import useProductCategoryView from './hooks/useProductCategoryView'
-import useProductsMenu from '../../hooks/useProductsMenu'
+import useProductsMenu from '../../../hooks/useProductsMenu'
 
 const ProductCategoryView: FC = () => {
     const title = 'Просмотр категории'

@@ -1,14 +1,14 @@
 import React, { FC, useEffect } from 'react'
 
-import Page from '../../../components/Page/Page'
-import ProductCategoriesContext from './contexts/ProductCategoriesContext'
+import Page from '../../../../components/Page/Page'
+import ProductCategoriesContext from '../contexts/ProductCategoriesContext'
 import ProductCategoriesFilter from './Filter/ProductCategoriesFilter'
 import ProductCategoriesTable from './Table/ProductCategoriesTable'
 import ProductCategoryDelete from './Delete/ProductCategoryDelete'
 import ProductCategoryRestore from './Restore/ProductCategoryRestore'
-import { setPageTitle } from '../../../helpers/pageHelper'
-import useProductCategories from './hooks/useProductCategories'
-import useProductsMenu from '../hooks/useProductsMenu'
+import { setPageTitle } from '../../../../helpers/pageHelper'
+import useProductCategories from '../hooks/useProductCategories'
+import useProductsMenu from '../../hooks/useProductsMenu'
 
 const ProductCategories: FC = () => {
     const title = 'Категории'

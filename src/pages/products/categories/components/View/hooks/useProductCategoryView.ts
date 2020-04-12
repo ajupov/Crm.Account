@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react'
 
-import ProductCategoryContext from '../../contexts/ProductCategoryContext'
+import ProductCategoryContext from '../../../contexts/ProductCategoryContext'
 import { useHistory } from 'react-router'
 
 interface UseProductCategoryViewReturn {

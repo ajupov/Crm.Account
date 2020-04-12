@@ -1,7 +1,7 @@
 import { Checkbox, Form, Input } from 'semantic-ui-react'
 import React, { FC } from 'react'
 
-import Filter from '../../../../components/Filter/Filter'
+import Filter from '../../../../../components/Filter/Filter'
 import useProductCategoriesFilters from './hooks/useProductCategoriesFilters'
 
 const ProductCategoriesFilter: FC = () => {

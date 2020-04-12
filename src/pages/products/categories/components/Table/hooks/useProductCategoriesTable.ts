@@ -1,7 +1,7 @@
 import { useCallback, useContext } from 'react'
 
-import ProductCategoriesContext from '../../contexts/ProductCategoriesContext'
-import { calculateOffset } from '../../../../../helpers/paginationHelper'
+import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext'
+import { calculateOffset } from '../../../../../../helpers/paginationHelper'
 import { useHistory } from 'react-router'
 
 interface UseProductCategoriesTableReturn {

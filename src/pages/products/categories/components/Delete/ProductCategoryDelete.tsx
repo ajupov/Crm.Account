@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import Delete from '../../../../components/Delete/Delete'
+import Delete from '../../../../../components/Delete/Delete'
 import useProductCategoryDelete from './hooks/useProductCategoryDelete'
 
 const ProductCategoryDelete: FC = () => {

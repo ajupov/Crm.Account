@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import Restore from '../../../../components/Restore/Restore'
+import Restore from '../../../../../components/Restore/Restore'
 import useProductCategoryRestore from './hooks/useProductCategoryRestore'
 
 const ProductCategoryRestore: FC = () => {

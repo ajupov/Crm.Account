@@ -1,13 +1,13 @@
 import { Checkbox, Form, Input } from 'semantic-ui-react'
 import React, { FC, useEffect } from 'react'
 
-import Create from '../../../../components/Create/Create'
-import Page from '../../../../components/Page/Page'
-import ProductCategoryContext from '../contexts/ProductCategoryContext'
-import { setPageTitle } from '../../../../helpers/pageHelper'
-import useProductCategory from '../hooks/useProductCategory'
+import Create from '../../../../../components/Create/Create'
+import Page from '../../../../../components/Page/Page'
+import ProductCategoryContext from '../../contexts/ProductCategoryContext'
+import { setPageTitle } from '../../../../../helpers/pageHelper'
+import useProductCategory from '../../hooks/useProductCategory'
 import useProductCategoryCreate from './hooks/useProductCategoryCreate'
-import useProductsMenu from '../../hooks/useProductsMenu'
+import useProductsMenu from '../../../hooks/useProductsMenu'
 
 const ProductCategoryCreate: FC = () => {
     const title = 'Добавление категории'
