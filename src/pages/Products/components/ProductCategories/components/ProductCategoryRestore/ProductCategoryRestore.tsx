@@ -1,6 +1,6 @@
 import React, { FC, useContext } from 'react'
 
-import ProductCategoryContext from '../../contexts/ProductCategoryContext'
+import ProductCategoryContext from '../../contexts/ProductCategoryContext/ProductCategoryContext'
 import Restore from '../../../../../../components/Restore/Restore'
 import useProductCategoryRestore from './hooks/useProductCategoryRestore'
 

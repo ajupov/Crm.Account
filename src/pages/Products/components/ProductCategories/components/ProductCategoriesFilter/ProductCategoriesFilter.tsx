@@ -28,19 +28,16 @@ const ProductCategoriesFilter: FC = () => {
                 <label>Наименование:</label>
                 <Input type="text" size="mini" placeholder="Наименование" value={name} onChange={onChangeName} />
             </Form.Field>
-
             <Form.Field>
                 <label>Дата создания:</label>
                 <Input type="date" size="mini" label="с" value={minCreateDate} onChange={onChangeMinCreateDate} />
                 <Input type="date" size="mini" label="по" value={maxCreateDate} onChange={onChangeMaxCreateDate} />
             </Form.Field>
-
             <Form.Field>
                 <label>Дата изменения:</label>
                 <Input type="date" size="mini" label="с" value={minModifyDate} onChange={onChangeMinModifyDate} />
                 <Input type="date" size="mini" label="по" value={maxModifyDate} onChange={onChangeMaxModifyDate} />
             </Form.Field>
-
             <Form.Field>
                 <label>Статус:</label>
                 <Checkbox

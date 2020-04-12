@@ -1,7 +1,7 @@
 import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useState } from 'react'
 
-import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext'
+import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext/ProductCategoriesContext'
 import { toBoolean } from '../../../../../../../utils/boolean/booleanUtils'
 
 interface UseProductCategoriesFiltersReturn {

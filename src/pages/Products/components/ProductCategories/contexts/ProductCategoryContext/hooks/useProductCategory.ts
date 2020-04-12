@@ -1,9 +1,9 @@
-import { ProductCategoryState, productCategoryInitialState } from '../states/ProductCategoryState'
+import { ProductCategoryState, productCategoryInitialState } from '../../../states/ProductCategoryState'
 import { useCallback, useEffect, useState } from 'react'
 
-import HttpClientFactoryInstance from '../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import ProductCategoriesClient from '../../../../../../api/products/clients/ProductCategoriesClient'
-import ProductCategory from '../../../../../../api/products/models/ProductCategory'
+import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import ProductCategoriesClient from '../../../../../../../../api/products/clients/ProductCategoriesClient'
+import ProductCategory from '../../../../../../../../api/products/models/ProductCategory'
 import { useParams } from 'react-router'
 
 const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)

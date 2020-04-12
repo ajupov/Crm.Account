@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react'
 
-import ProductCategoryContext from '../../../contexts/ProductCategoryContext'
+import ProductCategoryContext from '../../../contexts/ProductCategoryContext/ProductCategoryContext'
 
 interface UseProductCategoryRestore {
     onClickConfirm: () => void

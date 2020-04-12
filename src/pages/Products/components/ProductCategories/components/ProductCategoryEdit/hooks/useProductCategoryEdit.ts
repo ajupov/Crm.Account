@@ -1,7 +1,7 @@
 import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext } from 'react'
 
-import ProductCategoryContext from '../../../contexts/ProductCategoryContext'
+import ProductCategoryContext from '../../../contexts/ProductCategoryContext/ProductCategoryContext'
 import { toBoolean } from '../../../../../../../utils/boolean/booleanUtils'
 import { useHistory } from 'react-router'
 
@@ -23,7 +23,7 @@ const useProductCategoryEdit = (): UseProductCategoryEditReturn => {
     )
 
     const onChangeIsDeleted = useCallback(
-        (_, data: CheckboxProps) => state.setCategory({ ...state.category, isDeleted: toBoolean(data.value) }),
+        (_, __: CheckboxProps) => state.setCategory({ ...state.category, isDeleted: !state.category.isDeleted }),
         [state]
     )
 

@@ -1,7 +1,7 @@
 import React, { FC, useContext } from 'react'
 
 import Delete from '../../../../../../components/Delete/Delete'
-import ProductCategoryContext from '../../contexts/ProductCategoryContext'
+import ProductCategoryContext from '../../contexts/ProductCategoryContext/ProductCategoryContext'
 import useProductCategoryDelete from './hooks/useProductCategoryDelete'
 
 const ProductCategoryDelete: FC = () => {

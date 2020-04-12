@@ -25,5 +25,5 @@ export function getLastChangeDateTimeText(value?: string): string {
         return ''
     }
 
-    return `Последнее изменение: ${lastModifyDateTime}`
+    return `Изменен: ${lastModifyDateTime}`
 }

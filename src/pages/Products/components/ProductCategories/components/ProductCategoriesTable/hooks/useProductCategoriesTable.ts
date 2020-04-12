@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react'
 
-import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext'
+import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext/ProductCategoriesContext'
 import { calculateOffset } from '../../../../../../../helpers/paginationHelper'
 import { useHistory } from 'react-router'
 

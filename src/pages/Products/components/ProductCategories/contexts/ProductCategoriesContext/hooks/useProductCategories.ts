@@ -1,10 +1,10 @@
-import ProductCategoriesState, { productCategoriesInitialState } from '../states/ProductCategoriesState'
+import ProductCategoriesState, { productCategoriesInitialState } from '../../../states/ProductCategoriesState'
 import { useCallback, useEffect, useState } from 'react'
 
-import HttpClientFactoryInstance from '../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import ProductCategoriesClient from '../../../../../../api/products/clients/ProductCategoriesClient'
-import ProductCategory from '../../../../../../api/products/models/ProductCategory'
-import ProductCategoryGetPagedListRequest from '../../../../../../api/products/models/ProductCategoryGetPagedListRequest'
+import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import ProductCategoriesClient from '../../../../../../../../api/products/clients/ProductCategoriesClient'
+import ProductCategory from '../../../../../../../../api/products/models/ProductCategory'
+import ProductCategoryGetPagedListRequest from '../../../../../../../../api/products/models/ProductCategoryGetPagedListRequest'
 
 const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
 

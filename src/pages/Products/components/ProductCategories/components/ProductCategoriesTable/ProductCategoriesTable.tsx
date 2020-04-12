@@ -1,6 +1,6 @@
 import React, { FC, useContext } from 'react'
 
-import ProductCategoriesContext from '../../contexts/ProductCategoriesContext'
+import ProductCategoriesContext from '../../contexts/ProductCategoriesContext/ProductCategoriesContext'
 import ProductCategory from '../../../../../../../api/products/models/ProductCategory'
 import Table from '../../../../../../components/Table/Table'
 import { TableBodyRowProps } from '../../../../../../components/Table/TableBody'

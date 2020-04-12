@@ -1,4 +1,4 @@
-import { ProductCategoryState, productCategoryInitialState } from '../states/ProductCategoryState'
+import { ProductCategoryState, productCategoryInitialState } from '../../states/ProductCategoryState'
 
 import { createContext } from 'react'
 
