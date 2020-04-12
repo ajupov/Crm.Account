@@ -1,7 +1,10 @@
 import React, { FC, useEffect } from 'react'
 
 import Page from '../../../../../../components/Page/Page'
+import ProductCategoriesContextProvider from '../../contexts/ProductCategoriesContext/ProductCategoriesContextProvider'
 import ProductCategoryContextProvider from '../../contexts/ProductCategoryContext/ProductCategoryContextProvider'
+import ProductCategoryDelete from '../ProductCategoryDelete/ProductCategoryDelete'
+import ProductCategoryRestore from '../ProductCategoryRestore/ProductCategoryRestore'
 import ProductCategoryViewForm from './ProductCategoryViewForm'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
 import { setPageTitle } from '../../../../../../helpers/pageHelper'
@@ -12,11 +15,15 @@ const ProductCategoryView: FC = () => {
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <ProductCategoryContextProvider>
-            <Page title={title} firstSidebar={<ProductsMenu />}>
-                <ProductCategoryViewForm />
-            </Page>
-        </ProductCategoryContextProvider>
+        <ProductCategoriesContextProvider>
+            <ProductCategoryContextProvider>
+                <Page title={title} firstSidebar={<ProductsMenu />}>
+                    <ProductCategoryViewForm />
+                    <ProductCategoryDelete />
+                    <ProductCategoryRestore />
+                </Page>
+            </ProductCategoryContextProvider>
+        </ProductCategoriesContextProvider>
     )
 }
 

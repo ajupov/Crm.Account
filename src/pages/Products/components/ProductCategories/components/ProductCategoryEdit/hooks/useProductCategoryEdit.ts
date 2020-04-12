@@ -30,6 +30,7 @@ const useProductCategoryEdit = (): UseProductCategoryEditReturn => {
 
     const onClickConfirm = useCallback(async (): Promise<void> => {
         await state.update()
+
         history.push('/products/categories')
     }, [state, history])
 

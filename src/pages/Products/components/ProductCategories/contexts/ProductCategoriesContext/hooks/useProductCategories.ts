@@ -38,7 +38,6 @@ const useProductCategories = (): ProductCategoriesState => {
         await productCategoriesClient.DeleteAsync(ids)
 
         setIsLoading(false)
-        setIsDeleting(false)
 
         getPagedList()
     }, [getPagedList, ids])
@@ -49,7 +48,6 @@ const useProductCategories = (): ProductCategoriesState => {
         await productCategoriesClient.RestoreAsync(ids)
 
         setIsLoading(false)
-        setIsRestoring(false)
 
         getPagedList()
     }, [getPagedList, ids])
