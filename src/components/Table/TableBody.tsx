@@ -66,15 +66,12 @@ const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
         rows.map((row, index) => (
             <Table.Row style={{ cursor: 'pointer' }} onClick={onClick(row)} key={index}>
                 {renderCells(row)}
-
                 <Table.Cell textAlign="center">
                     <Button.Group basic compact fluid size="mini">
                         <Button onClick={onClickEdit(row)} icon="edit" />
-
                         {!row.isDeleted && row.onClickDeleteButton && (
                             <Button onClick={onClickDelete(row)} icon="trash" />
                         )}
-
                         {row.isDeleted && row.onClickRestoreButton && (
                             <Button onClick={onClickRestore(row)} icon="redo" />
                         )}

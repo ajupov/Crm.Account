@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 
-import { Menu as SemanticMenu } from 'semantic-ui-react'
+import Menu from '../../../../components/Menu/Menu'
 
 const ProductsMenu: FC = () => (
-    <SemanticMenu
+    <Menu
         items={[
             { name: 'Продукты', path: '/products' },
             { name: 'Категории', path: '/products/categories' },

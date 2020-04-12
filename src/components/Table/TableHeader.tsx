@@ -34,8 +34,9 @@ const TableHeader: FC<{ headers: TableHeaderCellProps[] }> = ({ headers }) => {
         <Table.Header>
             <Table.Row textAlign="center">
                 {renderCells()}
-
-                <Table.HeaderCell width="1">Действия</Table.HeaderCell>
+                <Table.HeaderCell width="1" style={{ pointerEvents: 'none' }}>
+                    Действия
+                </Table.HeaderCell>
             </Table.Row>
         </Table.Header>
     )

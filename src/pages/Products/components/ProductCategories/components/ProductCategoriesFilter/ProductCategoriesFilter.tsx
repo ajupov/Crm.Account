@@ -51,6 +51,7 @@ const ProductCategoriesFilter: FC = () => {
                     checked={isDeleted === false}
                     onChange={onChangeIsDeleted}
                 />
+                <br />
                 <Checkbox
                     radio
                     size="mini"

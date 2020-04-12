@@ -10,7 +10,7 @@ export interface RestoreProps {
     onClickCancel: () => void
 }
 
-const Restore: FC<RestoreProps> = ({ title, content, isRestoring, onClickConfirm, onClickCancel }) => (
+const Restore: FC<RestoreProps> = ({ isRestoring, title, content, onClickConfirm, onClickCancel }) => (
     <Confirm
         open={isRestoring}
         size="mini"

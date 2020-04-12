@@ -28,13 +28,11 @@ const Table: FC<TableProps> = ({
 }) => (
     <>
         <Loader isLoading={isLoading} />
-
         <TableCardHeader
             lastModifyDateTime={lastModifyDateTime}
             onClickCreate={onClickCreate}
             onClickDownloadAsCsv={onClickDownloadAsCsv}
         />
-
         <SemanticUiTable sortable compact celled striped selectable color="black">
             <TableHeader headers={headers} />
             <TableBody rows={rows} />

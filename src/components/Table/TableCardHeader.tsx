@@ -14,13 +14,11 @@ const TableCardHeader: FC<TableCardHeaderProps> = ({ lastModifyDateTime, onClick
         <Grid.Column width={8}>
             <Card.Meta>{getLastChangeDateTimeText(lastModifyDateTime)}</Card.Meta>
         </Grid.Column>
-
         <Grid.Column width={8}>
             <Button.Group basic size="mini" floated="right">
                 <Button icon onClick={onClickCreate}>
                     <Icon name="add" /> Создать
                 </Button>
-
                 <Button icon onClick={onClickDownloadAsCsv}>
                     <Icon name="download" /> Выгрузить в CSV
                 </Button>

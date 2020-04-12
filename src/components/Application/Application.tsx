@@ -1,12 +1,15 @@
 import React, { FC, Suspense } from 'react'
 
+import ErrorBoundaryWithConsoleLogger from '../ErrorBoundary/ErrorBoundaryWithConsoleLogger'
 import Loader from '../Loader/Loader'
 import UserInfo from '../UserInfo/UserInfo'
 
 const Application: FC = () => (
-    <Suspense fallback={<Loader isLoading />}>
-        <UserInfo />
-    </Suspense>
+    <ErrorBoundaryWithConsoleLogger>
+        <Suspense fallback={<Loader isLoading />}>
+            <UserInfo />
+        </Suspense>
+    </ErrorBoundaryWithConsoleLogger>
 )
 
 export default Application

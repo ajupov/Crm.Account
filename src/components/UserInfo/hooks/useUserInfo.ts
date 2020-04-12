@@ -13,7 +13,7 @@ const configuration = new Configuration()
 const useUserInfo = (): UserInfoState => {
     const [userInfo, setUserInfo] = useState<UserInfoState>(userInfoInitialState)
 
-    const load = useCallback(async () => {
+    const get = useCallback(async () => {
         const isAuthenticated = await authClient.IsAuthenticatedAsync()
         if (!isAuthenticated) {
             window.location.href = configuration.LoginUrl
@@ -29,8 +29,8 @@ const useUserInfo = (): UserInfoState => {
     }, [])
 
     useEffect(() => {
-        load()
-    }, [load])
+        get()
+    }, [get])
 
     return userInfo
 }

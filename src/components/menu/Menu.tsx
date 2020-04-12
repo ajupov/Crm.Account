@@ -21,7 +21,6 @@ const Menu: FC<{
         <SemanticMenu vertical fluid>
             <SemanticMenu.Item>
                 <Header as="h4">Навигация</Header>
-
                 {items.map(x => renderMenuItem(x))}
             </SemanticMenu.Item>
         </SemanticMenu>

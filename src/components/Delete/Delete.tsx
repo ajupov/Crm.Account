@@ -10,7 +10,7 @@ export interface DeleteProps {
     onClickCancel: () => void
 }
 
-const Delete: FC<DeleteProps> = ({ title, content, isDeleting, onClickConfirm, onClickCancel }) => (
+const Delete: FC<DeleteProps> = ({ isDeleting, title, content, onClickConfirm, onClickCancel }) => (
     <Confirm
         open={isDeleting}
         size="mini"

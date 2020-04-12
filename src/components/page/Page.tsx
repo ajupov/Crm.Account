@@ -19,7 +19,6 @@ const Page: FC<PageProps> = ({ title, children, firstSidebar: menu, secondSideba
                 </Card>
             )}
         </Grid.Column>
-
         <Grid.Column width={3}>
             {menu}
             {secondMenu && (
