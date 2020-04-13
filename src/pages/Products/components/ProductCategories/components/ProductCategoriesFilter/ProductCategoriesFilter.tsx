@@ -1,7 +1,6 @@
-import { Checkbox, Form, Input } from 'semantic-ui-react'
+import Filter, { FilterFieldProps } from '../../../../../../components/Filter/Filter'
 import React, { FC } from 'react'
 
-import Filter from '../../../../../../components/Filter/Filter'
 import useProductCategoriesFilters from './hooks/useProductCategoriesFilters'
 
 const ProductCategoriesFilter: FC = () => {
@@ -22,44 +21,42 @@ const ProductCategoriesFilter: FC = () => {
         onReset
     } = useProductCategoriesFilters()
 
-    return (
-        <Filter onApply={onApply} onReset={onReset}>
-            <Form.Field>
-                <label>Наименование:</label>
-                <Input type="text" size="mini" placeholder="Наименование" value={name} onChange={onChangeName} />
-            </Form.Field>
-            <Form.Field>
-                <label>Дата создания:</label>
-                <Input type="date" size="mini" label="с" value={minCreateDate} onChange={onChangeMinCreateDate} />
-                <Input type="date" size="mini" label="по" value={maxCreateDate} onChange={onChangeMaxCreateDate} />
-            </Form.Field>
-            <Form.Field>
-                <label>Дата изменения:</label>
-                <Input type="date" size="mini" label="с" value={minModifyDate} onChange={onChangeMinModifyDate} />
-                <Input type="date" size="mini" label="по" value={maxModifyDate} onChange={onChangeMaxModifyDate} />
-            </Form.Field>
-            <Form.Field>
-                <label>Статус:</label>
-                <Checkbox
-                    radio
-                    size="mini"
-                    label="Действующие"
-                    value="false"
-                    checked={isDeleted === false}
-                    onChange={onChangeIsDeleted}
-                />
-                <br />
-                <Checkbox
-                    radio
-                    size="mini"
-                    label="Удаленные"
-                    value="true"
-                    checked={isDeleted}
-                    onChange={onChangeIsDeleted}
-                />
-            </Form.Field>
-        </Filter>
-    )
+    const fields: FilterFieldProps[] = [
+        {
+            type: 'text',
+            topLabel: 'Наименование',
+            value: name,
+            onChange: onChangeName
+        },
+        {
+            type: 'date',
+            topLabel: 'Дата создания',
+            value1: minCreateDate,
+            onChange1: onChangeMinCreateDate,
+            value2: maxCreateDate,
+            onChange2: onChangeMaxCreateDate
+        },
+        {
+            type: 'date',
+            topLabel: 'Дата изменения',
+            value1: minModifyDate,
+            onChange1: onChangeMinModifyDate,
+            value2: maxModifyDate,
+            onChange2: onChangeMaxModifyDate
+        },
+        {
+            type: 'checkbox',
+            topLabel: 'Статус',
+            label1: 'Действующие',
+            value1: 'true',
+            checked1: isDeleted === false,
+            label2: 'Удаленные',
+            value2: 'true',
+            checked2: isDeleted,
+            onChange: onChangeIsDeleted
+        }
+    ]
+    return <Filter onApply={onApply} onReset={onReset} fields={fields} />
 }
 
 export default ProductCategoriesFilter
