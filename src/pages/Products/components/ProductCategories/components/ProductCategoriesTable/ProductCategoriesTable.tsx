@@ -57,7 +57,12 @@ const ProductCategoriesTable: FC = () => {
             isLoading={state.isLoading}
             headers={headers}
             rows={map(state.categories)}
-            footer={{ limit: state.request.limit, total: state.total, onClickChangePage }}
+            footer={{
+                page: state.request.offset / state.request.limit + 1,
+                limit: state.request.limit,
+                total: state.total,
+                onClickChangePage
+            }}
             lastModifyDateTime={state.lastModifyDateTime}
             onClickCreate={onClickCreate}
             onClickDownloadAsCsv={onClickDownloadAsCsv}

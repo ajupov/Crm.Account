@@ -2,13 +2,14 @@ import { Pagination, PaginationProps, Table } from 'semantic-ui-react'
 import React, { FC, useCallback } from 'react'
 
 export interface TableFooterProps {
+    page: number
     limit: number
     total: number
     columnsCount?: number
     onClickChangePage: (page: number) => void
 }
 
-const TableFooter: FC<TableFooterProps> = ({ limit, total, columnsCount, onClickChangePage }) => {
+const TableFooter: FC<TableFooterProps> = ({ page, limit, total, columnsCount, onClickChangePage }) => {
     const onPageChange = useCallback(
         (_: React.MouseEvent, props: PaginationProps): void => {
             onClickChangePage(Number(props.activePage))
@@ -22,12 +23,12 @@ const TableFooter: FC<TableFooterProps> = ({ limit, total, columnsCount, onClick
                 <Table.Cell colSpan={(columnsCount ?? 0) + 1} textAlign="center">
                     <Pagination
                         secondary
-                        defaultActivePage={1}
                         firstItem="В начало"
                         lastItem="В конец"
-                        totalPages={Math.ceil(total / limit)}
                         prevItem="Предыдущая"
                         nextItem="Следующая"
+                        activePage={page}
+                        totalPages={Math.ceil(total / limit)}
                         onPageChange={onPageChange}
                     />
                 </Table.Cell>

@@ -47,7 +47,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
             switch (x.type) {
                 case 'text':
                     return (
-                        <Form.Field>
+                        <Form.Field key={x.topLabel}>
                             <label>{x.topLabel}:</label>
                             <Input
                                 type="text"
@@ -60,7 +60,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                     )
                 case 'date':
                     return (
-                        <Form.Field>
+                        <Form.Field key={x.topLabel}>
                             <label>{x.topLabel}:</label>
                             <Input
                                 type="date"
@@ -83,7 +83,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
 
                 case 'checkbox':
                     return (
-                        <Form.Field>
+                        <Form.Field key={x.topLabel}>
                             <label>{x.topLabel}</label>
                             <Checkbox
                                 radio
