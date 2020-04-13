@@ -17,7 +17,9 @@ const ProductCategoriesFilter: FC = () => {
         onChangeMinModifyDate,
         maxModifyDate,
         onChangeMaxModifyDate,
+        isApplyEnabled,
         onApply,
+        isResetEnabled,
         onReset
     } = useProductCategoriesFilters()
 
@@ -56,7 +58,15 @@ const ProductCategoriesFilter: FC = () => {
             onChange: onChangeIsDeleted
         }
     ]
-    return <Filter onApply={onApply} onReset={onReset} fields={fields} />
+    return (
+        <Filter
+            isApplyEnabled={isApplyEnabled}
+            onApply={onApply}
+            isResetEnabled={isResetEnabled}
+            onReset={onReset}
+            fields={fields}
+        />
+    )
 }
 
 export default ProductCategoriesFilter

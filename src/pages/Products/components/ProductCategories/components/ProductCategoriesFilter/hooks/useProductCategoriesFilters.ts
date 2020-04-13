@@ -17,7 +17,9 @@ interface UseProductCategoriesFiltersReturn {
     onChangeMinModifyDate: (_: any, { value }: InputOnChangeData) => void
     maxModifyDate: string
     onChangeMaxModifyDate: (_: any, { value }: InputOnChangeData) => void
+    isApplyEnabled: boolean
     onApply: () => void
+    isResetEnabled: boolean
     onReset: () => void
 }
 
@@ -30,27 +32,56 @@ const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
     const [minModifyDate, setMinModifyDate] = useState<string>('')
     const [maxModifyDate, setMaxModifyDate] = useState<string>('')
 
-    const onChangeName = useCallback((_, { value }: InputOnChangeData) => setName(value), [setName])
+    const [isApplyEnabled, setIsApplyEnabled] = useState<boolean>(false)
+    const [isResetEnabled, setIsResetEnabled] = useState<boolean>(false)
 
-    const onChangeIsDeleted = useCallback((_, data: CheckboxProps) => setIsDeleted(toBoolean(data.value)), [
-        setIsDeleted
-    ])
+    const onChangeName = useCallback(
+        (_, { value }: InputOnChangeData) => {
+            setName(value)
+            setIsApplyEnabled(true)
+        },
+        [setName]
+    )
 
-    const onChangeMinCreateDate = useCallback((_, data: InputOnChangeData) => setMinCreateDate(data.value), [
-        setMinCreateDate
-    ])
+    const onChangeIsDeleted = useCallback(
+        (_, data: CheckboxProps) => {
+            setIsDeleted(toBoolean(data.value))
+            setIsApplyEnabled(true)
+        },
+        [setIsDeleted]
+    )
 
-    const onChangeMaxCreateDate = useCallback((_, data: InputOnChangeData) => setMaxCreateDate(data.value), [
-        setMaxCreateDate
-    ])
+    const onChangeMinCreateDate = useCallback(
+        (_, data: InputOnChangeData) => {
+            setMinCreateDate(data.value)
+            setIsApplyEnabled(true)
+        },
+        [setMinCreateDate]
+    )
 
-    const onChangeMinModifyDate = useCallback((_, data: InputOnChangeData) => setMinModifyDate(data.value), [
-        setMinModifyDate
-    ])
+    const onChangeMaxCreateDate = useCallback(
+        (_, data: InputOnChangeData) => {
+            setMaxCreateDate(data.value)
+            setIsApplyEnabled(true)
+        },
+        [setMaxCreateDate]
+    )
 
-    const onChangeMaxModifyDate = useCallback((_, data: InputOnChangeData) => setMaxModifyDate(data.value), [
-        setMaxModifyDate
-    ])
+    const onChangeMinModifyDate = useCallback(
+        (_, data: InputOnChangeData) => {
+            setMinModifyDate(data.value)
+            setIsApplyEnabled(true)
+        },
+        [setMinModifyDate]
+    )
+
+    const onChangeMaxModifyDate = useCallback(
+        (_, data: InputOnChangeData) => {
+            setMaxModifyDate(data.value)
+            setIsApplyEnabled(true)
+        },
+        [setMaxModifyDate]
+    )
 
     const onApply = useCallback(() => {
         state.setRequest({
@@ -63,6 +94,9 @@ const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
             maxModifyDate,
             offset: 0
         })
+
+        setIsApplyEnabled(false)
+        setIsResetEnabled(true)
     }, [isDeleted, maxCreateDate, maxModifyDate, minCreateDate, minModifyDate, name, state])
 
     const onReset = useCallback(() => {
@@ -83,6 +117,8 @@ const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
             maxModifyDate: '',
             offset: 0
         })
+
+        setIsResetEnabled(false)
     }, [state])
 
     return {
@@ -98,7 +134,9 @@ const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
         onChangeMinModifyDate,
         maxModifyDate,
         onChangeMaxModifyDate,
+        isApplyEnabled,
         onApply,
+        isResetEnabled,
         onReset
     }
 }

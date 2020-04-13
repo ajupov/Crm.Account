@@ -35,11 +35,13 @@ export type FilterFieldProps = TextFilterFieldProps | DateFilterFieldProps | Che
 
 export interface FilterProps {
     fields: FilterFieldProps[]
+    isApplyEnabled: boolean
     onApply: () => void
+    isResetEnabled: boolean
     onReset: () => void
 }
 
-const Filter: FC<FilterProps> = ({ fields, onApply, onReset }) => {
+const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabled, onReset }) => {
     const renderFields = (): (JSX.Element | null)[] =>
         fields.map(x => {
             switch (x.type) {
@@ -116,10 +118,12 @@ const Filter: FC<FilterProps> = ({ fields, onApply, onReset }) => {
                 {renderFields()}
                 <Form.Field>
                     <Button.Group size="mini" floated="right">
-                        <Button type="reset" basic onClick={onReset}>
+                        <Button type="reset" basic disabled={!isResetEnabled} onClick={onReset}>
                             Сброс
                         </Button>
-                        <Button type="submit">Применить</Button>
+                        <Button type="submit" disabled={!isApplyEnabled}>
+                            Применить
+                        </Button>
                     </Button.Group>
                 </Form.Field>
             </Form>

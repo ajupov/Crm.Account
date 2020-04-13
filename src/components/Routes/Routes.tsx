@@ -12,7 +12,7 @@ import ProductCategories from '../../pages/Products/components/ProductCategories
 import ProductCategoryCreate from '../../pages/Products/components/ProductCategories/components/ProductCategoryCreate/ProductCategoryCreate'
 import ProductCategoryEdit from '../../pages/Products/components/ProductCategories/components/ProductCategoryEdit/ProductCategoryEdit'
 import ProductCategoryView from '../../pages/Products/components/ProductCategories/components/ProductCategoryView/ProductCategoryView'
-import Products from '../../pages/Products/components/Products/Products'
+import Products from '../../pages/Products/Products'
 import Settings from '../../pages/settings/Settings'
 
 const Routes: FC = () => (
