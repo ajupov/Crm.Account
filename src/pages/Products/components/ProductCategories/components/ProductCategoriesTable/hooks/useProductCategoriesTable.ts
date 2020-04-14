@@ -1,21 +1,29 @@
-import { useCallback, useContext } from 'react'
+import { calculateOffset, calculatePage } from '../../../../../../../helpers/paginationHelper'
+import { useCallback, useContext, useMemo } from 'react'
 
 import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext/ProductCategoriesContext'
-import { calculateOffset } from '../../../../../../../helpers/paginationHelper'
+import ProductCategory from '../../../../../../../../api/products/models/ProductCategory'
+import { TableBodyRowProps } from '../../../../../../../components/Table/TableBody'
+import { TableHeaderCellProps } from '../../../../../../../components/Table/TableHeader'
+import { toLocaleDateTime } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { useHistory } from 'react-router'
+import useProductCategoryView from '../../ProductCategoryView/hooks/useProductCategoryView'
 
 interface UseProductCategoriesTableReturn {
-    onClickView: (id: string) => void
+    page: number
+    limit: number
+    total: number
+    headers: TableHeaderCellProps[]
+    map: (categories: ProductCategory[]) => TableBodyRowProps[]
     onClickCreate: () => void
     onClickDownloadAsCsv: () => void
-    onClickSort: (key: string) => void
-    getOrderBy: (key: string) => string | undefined
     onClickChangePage: (page: number) => void
 }
 
 const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
     const history = useHistory()
     const state = useContext(ProductCategoriesContext)
+    const { onClickEdit, onClickDelete, onClickRestore } = useProductCategoryView()
 
     const onClickCreate = useCallback(() => history.push('/products/categories/create'), [history])
 
@@ -51,12 +59,56 @@ const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
         [state]
     )
 
+    const map = useCallback(
+        (categories: ProductCategory[]): TableBodyRowProps[] =>
+            categories.map(category => ({
+                id: category.id,
+                cells: [
+                    { value: category.name, textAlign: 'left' },
+                    { value: toLocaleDateTime(category.createDateTime), textAlign: 'center' }
+                ],
+                isDeleted: category.isDeleted,
+                onClickRow: onClickView,
+                onClickEditButton: onClickEdit,
+                onClickDeleteButton: onClickDelete,
+                onClickRestoreButton: onClickRestore
+            })),
+        [onClickDelete, onClickEdit, onClickRestore, onClickView]
+    )
+
+    const headers: TableHeaderCellProps[] = useMemo(
+        () => [
+            {
+                key: 'Name',
+                label: 'Наименование',
+                width: 8,
+                onClick: () => onClickSort('Name'),
+                orderBy: getOrderBy('Name')
+            },
+            {
+                key: 'CreateDateTime',
+                label: 'Создан',
+                width: 3,
+                onClick: () => onClickSort('CreateDateTime'),
+                orderBy: getOrderBy('CreateDateTime')
+            }
+        ],
+        [getOrderBy, onClickSort]
+    )
+
+    const page = useMemo(() => calculatePage(state.request.offset, state.request.limit), [
+        state.request.limit,
+        state.request.offset
+    ])
+
     return {
-        onClickView,
+        page,
+        limit: state.request.limit,
+        total: state.total,
+        headers,
+        map,
         onClickCreate,
         onClickDownloadAsCsv,
-        onClickSort,
-        getOrderBy,
         onClickChangePage
     }
 }

@@ -80,7 +80,6 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                             />
                         </Form.Field>
                     )
-
                 case 'checkbox':
                     return (
                         <Form.Field key={x.topLabel}>

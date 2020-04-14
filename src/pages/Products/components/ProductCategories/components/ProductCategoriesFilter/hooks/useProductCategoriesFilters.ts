@@ -1,22 +1,12 @@
 import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
-import { useCallback, useContext, useState } from 'react'
+import { useCallback, useContext, useMemo, useState } from 'react'
 
+import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'
 import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext/ProductCategoriesContext'
 import { toBoolean } from '../../../../../../../utils/boolean/booleanUtils'
 
 interface UseProductCategoriesFiltersReturn {
-    name: string
-    onChangeName: (_: any, { value }: InputOnChangeData) => void
-    isDeleted: boolean
-    onChangeIsDeleted: (_: any, { value }: CheckboxProps) => void
-    minCreateDate: string
-    onChangeMinCreateDate: (_: any, { value }: InputOnChangeData) => void
-    maxCreateDate: string
-    onChangeMaxCreateDate: (_: any, { value }: InputOnChangeData) => void
-    minModifyDate: string
-    onChangeMinModifyDate: (_: any, { value }: InputOnChangeData) => void
-    maxModifyDate: string
-    onChangeMaxModifyDate: (_: any, { value }: InputOnChangeData) => void
+    fields: FilterFieldProps[]
     isApplyEnabled: boolean
     onApply: () => void
     isResetEnabled: boolean
@@ -31,7 +21,6 @@ const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
     const [maxCreateDate, setMaxCreateDate] = useState<string>('')
     const [minModifyDate, setMinModifyDate] = useState<string>('')
     const [maxModifyDate, setMaxModifyDate] = useState<string>('')
-
     const [isApplyEnabled, setIsApplyEnabled] = useState<boolean>(false)
     const [isResetEnabled, setIsResetEnabled] = useState<boolean>(false)
 
@@ -121,24 +110,59 @@ const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
         setIsResetEnabled(false)
     }, [state])
 
-    return {
-        name,
-        onChangeName,
-        isDeleted,
-        onChangeIsDeleted,
-        minCreateDate,
-        onChangeMinCreateDate,
-        maxCreateDate,
-        onChangeMaxCreateDate,
-        minModifyDate,
-        onChangeMinModifyDate,
-        maxModifyDate,
-        onChangeMaxModifyDate,
-        isApplyEnabled,
-        onApply,
-        isResetEnabled,
-        onReset
-    }
+    const fields: FilterFieldProps[] = useMemo(
+        () => [
+            {
+                type: 'text',
+                topLabel: 'Наименование',
+                value: name,
+                onChange: onChangeName
+            },
+            {
+                type: 'date',
+                topLabel: 'Дата создания',
+                value1: minCreateDate,
+                onChange1: onChangeMinCreateDate,
+                value2: maxCreateDate,
+                onChange2: onChangeMaxCreateDate
+            },
+            {
+                type: 'date',
+                topLabel: 'Дата изменения',
+                value1: minModifyDate,
+                onChange1: onChangeMinModifyDate,
+                value2: maxModifyDate,
+                onChange2: onChangeMaxModifyDate
+            },
+            {
+                type: 'checkbox',
+                topLabel: 'Статус',
+                label1: 'Действующие',
+                value1: 'true',
+                checked1: isDeleted === false,
+                label2: 'Удаленные',
+                value2: 'true',
+                checked2: isDeleted,
+                onChange: onChangeIsDeleted
+            }
+        ],
+        [
+            isDeleted,
+            maxCreateDate,
+            maxModifyDate,
+            minCreateDate,
+            minModifyDate,
+            name,
+            onChangeIsDeleted,
+            onChangeMaxCreateDate,
+            onChangeMaxModifyDate,
+            onChangeMinCreateDate,
+            onChangeMinModifyDate,
+            onChangeName
+        ]
+    )
+
+    return { fields, isApplyEnabled, onApply, isResetEnabled, onReset }
 }
 
 export default useProductCategoriesFilters
