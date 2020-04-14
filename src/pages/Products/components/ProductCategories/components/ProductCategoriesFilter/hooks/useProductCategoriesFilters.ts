@@ -3,7 +3,7 @@ import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'
 import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext/ProductCategoriesContext'
-import { toBoolean } from '../../../../../../../utils/boolean/booleanUtils'
+import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
 
 interface UseProductCategoriesFiltersReturn {
     fields: FilterFieldProps[]
@@ -16,7 +16,7 @@ interface UseProductCategoriesFiltersReturn {
 const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
     const state = useContext(ProductCategoriesContext)
     const [name, setName] = useState<string>('')
-    const [isDeleted, setIsDeleted] = useState<boolean>(false)
+    const [isDeleted, setIsDeleted] = useState<boolean | undefined>(false)
     const [minCreateDate, setMinCreateDate] = useState<string>('')
     const [maxCreateDate, setMaxCreateDate] = useState<string>('')
     const [minModifyDate, setMinModifyDate] = useState<string>('')
@@ -34,7 +34,7 @@ const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
 
     const onChangeIsDeleted = useCallback(
         (_, data: CheckboxProps) => {
-            setIsDeleted(toBoolean(data.value))
+            setIsDeleted(toBooleanNullable(data.value))
             setIsApplyEnabled(true)
         },
         [setIsDeleted]
@@ -137,12 +137,15 @@ const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
             {
                 type: 'checkbox',
                 topLabel: 'Статус',
-                label1: 'Действующие',
-                value1: 'true',
-                checked1: isDeleted === false,
-                label2: 'Удаленные',
-                value2: 'true',
-                checked2: isDeleted,
+                label1: 'Все',
+                value1: void 0,
+                checked1: isDeleted === void 0,
+                label2: 'Действующие',
+                value2: 'false',
+                checked2: isDeleted === false,
+                label3: 'Удаленные',
+                value3: 'true',
+                checked3: isDeleted === true,
                 onChange: onChangeIsDeleted
             }
         ],

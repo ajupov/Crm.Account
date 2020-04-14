@@ -71,7 +71,7 @@ const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
 
     const renderRows = (): JSX.Element | JSX.Element[] =>
         rows.map((row, index) => (
-            <Table.Row style={{ cursor: 'pointer' }} onClick={onClick(row)} key={index}>
+            <Table.Row negative={row.isDeleted} style={{ cursor: 'pointer' }} onClick={onClick(row)} key={index}>
                 {renderCells(row)}
                 <Table.Cell textAlign="center">
                     <Button.Group basic compact fluid size="mini">

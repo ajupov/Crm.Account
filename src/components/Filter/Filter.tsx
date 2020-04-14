@@ -23,11 +23,14 @@ export interface CheckboxFilterFieldProps {
     type: 'checkbox'
     topLabel: string
     label1: string
-    value1: string
+    value1: string | undefined
     checked1: boolean
     label2: string
-    value2: string
+    value2: string | undefined
     checked2: boolean
+    label3: string
+    value3: string | undefined
+    checked3: boolean
     onChange: (_: any, { value }: CheckboxProps) => void
 }
 
@@ -101,6 +104,16 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                 placeholder={x.topLabel}
                                 value={x.value2}
                                 checked={x.checked2}
+                                onChange={x.onChange}
+                            />
+                            <br />
+                            <Checkbox
+                                radio
+                                size="mini"
+                                label={x.label3}
+                                placeholder={x.topLabel}
+                                value={x.value3}
+                                checked={x.checked3}
                                 onChange={x.onChange}
                             />
                         </Form.Field>
