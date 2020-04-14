@@ -1,13 +1,13 @@
 import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
-import { useCallback, useContext } from 'react'
+import { useCallback, useContext, useMemo, useState } from 'react'
 
+import { EditFieldProps } from '../../../../../../../components/Edit/Edit'
 import ProductCategoryContext from '../../../contexts/ProductCategoryContext/ProductCategoryContext'
 import { useHistory } from 'react-router'
 
 interface UseProductCategoryEditReturn {
-    onChangeName: (_: any, data: InputOnChangeData) => void
-    onChangeIsDeleted: (_: any, data: CheckboxProps) => void
-    onClickEdit: (id: string) => void
+    fields: EditFieldProps[]
+    isConfirmEnabled: boolean
     onClickConfirm: () => void
     onClickCancel: () => void
 }
@@ -15,34 +15,51 @@ interface UseProductCategoryEditReturn {
 const useProductCategoryEdit = (): UseProductCategoryEditReturn => {
     const history = useHistory()
     const state = useContext(ProductCategoryContext)
+    const [isConfirmEnabled, setIsConfirmEnabled] = useState<boolean>(false)
 
     const onChangeName = useCallback(
-        (_, data: InputOnChangeData) => state.setCategory({ ...state.category, name: data.value }),
+        (_, data: InputOnChangeData) => {
+            state.setCategory({ ...state.category, name: data.value })
+            setIsConfirmEnabled(true)
+        },
         [state]
     )
 
     const onChangeIsDeleted = useCallback(
-        (_, __: CheckboxProps) => state.setCategory({ ...state.category, isDeleted: !state.category.isDeleted }),
+        (_, __: CheckboxProps) => {
+            state.setCategory({ ...state.category, isDeleted: !state.category.isDeleted })
+            setIsConfirmEnabled(true)
+        },
         [state]
     )
 
-    const onClickEdit = useCallback((id: string) => history.push(`/products/categories/edit/${id}`), [history])
-
     const onClickConfirm = useCallback(async (): Promise<void> => {
         await state.update()
-
         history.push('/products/categories')
     }, [state, history])
 
     const onClickCancel = useCallback((): void => history.push('/products/categories'), [history])
 
-    return {
-        onChangeName,
-        onChangeIsDeleted,
-        onClickEdit,
-        onClickConfirm,
-        onClickCancel
-    }
+    const fields: EditFieldProps[] = useMemo(
+        () => [
+            {
+                type: 'text',
+                required: true,
+                topLabel: 'Наименование',
+                value: state.category.name,
+                onChange: onChangeName
+            },
+            {
+                type: 'checkbox',
+                label: 'Удален',
+                checked: state.category.isDeleted,
+                onChange: onChangeIsDeleted
+            }
+        ],
+        [onChangeIsDeleted, onChangeName, state.category.isDeleted, state.category.name]
+    )
+
+    return { fields, isConfirmEnabled, onClickConfirm, onClickCancel }
 }
 
 export default useProductCategoryEdit
