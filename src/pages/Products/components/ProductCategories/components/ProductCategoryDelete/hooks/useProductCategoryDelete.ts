@@ -14,15 +14,12 @@ const useProductCategoryDelete = (): UseProductCategoryDelete => {
 
     const onClickConfirm = useCallback(async () => {
         await state.delete()
-
         state.setIsDeleting(false)
-
         history.push('/products/categories')
     }, [history, state])
 
     const onClickCancel = useCallback(() => {
         state.setIds([])
-
         state.setIsDeleting(false)
     }, [state])
 

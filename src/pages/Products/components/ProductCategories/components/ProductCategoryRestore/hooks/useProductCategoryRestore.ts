@@ -14,15 +14,12 @@ const useProductCategoryRestore = (): UseProductCategoryRestore => {
 
     const onClickConfirm = useCallback(async () => {
         await state.restore()
-
         state.setIsRestoring(false)
-
         history.push('/products/categories')
     }, [history, state])
 
     const onClickCancel = useCallback(() => {
         state.setIds([])
-
         state.setIsRestoring(false)
     }, [state])
 

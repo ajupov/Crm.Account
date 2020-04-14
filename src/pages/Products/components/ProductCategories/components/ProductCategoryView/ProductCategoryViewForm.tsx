@@ -1,19 +1,13 @@
 import React, { FC, useContext } from 'react'
-import View, { ViewDataProps } from '../../../../../../components/View/View'
 
-import ProductCategory from '../../../../../../../api/products/models/ProductCategory'
 import ProductCategoryContext from '../../contexts/ProductCategoryContext/ProductCategoryContext'
+import View from '../../../../../../components/View/View'
 import useProductCategoryView from './hooks/useProductCategoryView'
 
 const ProductCategoryViewForm: FC = () => {
     const state = useContext(ProductCategoryContext)
 
-    const { onClickEdit, onClickDelete, onClickRestore, onClickCancel } = useProductCategoryView()
-
-    const map = (category: ProductCategory): ViewDataProps[] => [
-        { label: 'Наименование', value: category.name },
-        { label: 'Удален', value: category.isDeleted ? 'Да' : 'Нет' }
-    ]
+    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel } = useProductCategoryView()
 
     return (
         <View
