@@ -2,6 +2,7 @@ import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { CreateFieldProps } from '../../../../../../../components/Create/Create'
+import { ProductCategoriesRoutes } from '../../../routes/ProductCategoriesRoutes'
 import ProductCategoryContext from '../../../contexts/ProductCategoryContext/ProductCategoryContext'
 import { useHistory } from 'react-router'
 
@@ -35,10 +36,10 @@ const useProductCategoryCreate = (): UseProductCategoryCreateReturn => {
 
     const onClickConfirm = useCallback(async (): Promise<void> => {
         await state.create()
-        history.push('/products/categories')
+        history.push(ProductCategoriesRoutes.Index)
     }, [state, history])
 
-    const onClickCancel = useCallback((): void => history.push('/products/categories'), [history])
+    const onClickCancel = useCallback((): void => history.push(ProductCategoriesRoutes.Index), [history])
 
     const fields: CreateFieldProps[] = useMemo(
         () => [

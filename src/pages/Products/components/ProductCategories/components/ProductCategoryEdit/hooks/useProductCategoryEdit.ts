@@ -2,6 +2,7 @@ import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { EditFieldProps } from '../../../../../../../components/Edit/Edit'
+import { ProductCategoriesRoutes } from '../../../routes/ProductCategoriesRoutes'
 import ProductCategoryContext from '../../../contexts/ProductCategoryContext/ProductCategoryContext'
 import { useHistory } from 'react-router'
 
@@ -35,10 +36,10 @@ const useProductCategoryEdit = (): UseProductCategoryEditReturn => {
 
     const onClickConfirm = useCallback(async (): Promise<void> => {
         await state.update()
-        history.push('/products/categories')
+        history.push(ProductCategoriesRoutes.Index)
     }, [state, history])
 
-    const onClickCancel = useCallback((): void => history.push('/products/categories'), [history])
+    const onClickCancel = useCallback((): void => history.push(ProductCategoriesRoutes.Index), [history])
 
     const fields: EditFieldProps[] = useMemo(
         () => [

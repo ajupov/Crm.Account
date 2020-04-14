@@ -1,6 +1,7 @@
 import { useCallback, useContext } from 'react'
 
 import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext/ProductCategoriesContext'
+import { ProductCategoriesRoutes } from '../../../routes/ProductCategoriesRoutes'
 import { useHistory } from 'react-router'
 
 interface UseProductCategoryRestore {
@@ -15,7 +16,7 @@ const useProductCategoryRestore = (): UseProductCategoryRestore => {
     const onClickConfirm = useCallback(async () => {
         await state.restore()
         state.setIsRestoring(false)
-        history.push('/products/categories')
+        history.push(ProductCategoriesRoutes.Index)
     }, [history, state])
 
     const onClickCancel = useCallback(() => {

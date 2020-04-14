@@ -2,6 +2,7 @@ import { calculateOffset, calculatePage } from '../../../../../../../helpers/pag
 import { useCallback, useContext, useMemo } from 'react'
 
 import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext/ProductCategoriesContext'
+import { ProductCategoriesRoutes } from '../../../routes/ProductCategoriesRoutes'
 import ProductCategory from '../../../../../../../../api/products/models/ProductCategory'
 import { TableBodyRowProps } from '../../../../../../../components/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/Table/TableHeader'
@@ -25,9 +26,9 @@ const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
     const state = useContext(ProductCategoriesContext)
     const { onClickEdit, onClickDelete, onClickRestore } = useProductCategoryView()
 
-    const onClickCreate = useCallback(() => history.push('/products/categories/create'), [history])
+    const onClickCreate = useCallback(() => history.push(ProductCategoriesRoutes.Create), [history])
 
-    const onClickView = useCallback((id: string) => history.push(`/products/categories/view/${id}`), [history])
+    const onClickView = useCallback((id: string) => history.push(`${ProductCategoriesRoutes.View}/${id}`), [history])
 
     const onClickDownloadAsCsv = useCallback(() => global.console.log(), [])
 

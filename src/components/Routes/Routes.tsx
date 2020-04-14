@@ -9,6 +9,7 @@ import Deals from '../../pages/deals/Deals'
 import Leads from '../../pages/leads/Leads'
 import NotFound from '../../pages/notFound/NotFound'
 import ProductCategories from '../../pages/Products/components/ProductCategories/ProductCategories'
+import { ProductCategoriesRoutes } from '../../pages/Products/components/ProductCategories/routes/ProductCategoriesRoutes'
 import ProductCategoryCreate from '../../pages/Products/components/ProductCategories/components/ProductCategoryCreate/ProductCategoryCreate'
 import ProductCategoryEdit from '../../pages/Products/components/ProductCategories/components/ProductCategoryEdit/ProductCategoryEdit'
 import ProductCategoryView from '../../pages/Products/components/ProductCategories/components/ProductCategoryView/ProductCategoryView'
@@ -24,10 +25,10 @@ const Routes: FC = () => (
         <Route path="/deals" component={Deals} />
         <Route path="/contacts" component={Contacts} />
         <Route path="/products" exact component={Products} />
-        <Route path="/products/categories" exact component={ProductCategories} />
-        <Route path="/products/categories/view/:id" exact component={ProductCategoryView} />
-        <Route path="/products/categories/create" exact component={ProductCategoryCreate} />
-        <Route path="/products/categories/edit/:id" exact component={ProductCategoryEdit} />
+        <Route path={ProductCategoriesRoutes.Index} exact component={ProductCategories} />
+        <Route path={`${ProductCategoriesRoutes.View}/:id`} exact component={ProductCategoryView} />
+        <Route path={ProductCategoriesRoutes.Create} exact component={ProductCategoryCreate} />
+        <Route path={`${ProductCategoriesRoutes.Edit}/:id`} exact component={ProductCategoryEdit} />
         <Route path="/settings" component={Settings} />
         <Route component={NotFound} />
     </Switch>

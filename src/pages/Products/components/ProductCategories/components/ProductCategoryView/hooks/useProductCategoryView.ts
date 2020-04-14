@@ -1,6 +1,7 @@
 import { useCallback, useContext } from 'react'
 
 import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext/ProductCategoriesContext'
+import { ProductCategoriesRoutes } from '../../../routes/ProductCategoriesRoutes'
 import ProductCategory from '../../../../../../../../api/products/models/ProductCategory'
 import { ViewDataProps } from '../../../../../../../components/View/View'
 import { useHistory } from 'react-router'
@@ -17,7 +18,7 @@ const useProductCategoryView = (): UseProductCategoryViewReturn => {
     const history = useHistory()
     const state = useContext(ProductCategoriesContext)
 
-    const onClickEdit = useCallback((id: string) => history.push(`/products/categories/edit/${id}`), [history])
+    const onClickEdit = useCallback((id: string) => history.push(`${ProductCategoriesRoutes.Edit}/${id}`), [history])
 
     const onClickDelete = useCallback(
         (id: string) => {
@@ -35,7 +36,7 @@ const useProductCategoryView = (): UseProductCategoryViewReturn => {
         [state]
     )
 
-    const onClickCancel = useCallback((): void => history.push('/products/categories'), [history])
+    const onClickCancel = useCallback((): void => history.push(ProductCategoriesRoutes.Index), [history])
 
     const map = useCallback(
         (category: ProductCategory): ViewDataProps[] => [
