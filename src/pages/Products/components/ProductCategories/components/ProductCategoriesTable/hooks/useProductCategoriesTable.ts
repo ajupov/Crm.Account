@@ -1,4 +1,5 @@
 import { calculateOffset, calculatePage } from '../../../../../../../helpers/paginationHelper'
+import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
 import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext/ProductCategoriesContext'
@@ -30,7 +31,18 @@ const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
 
     const onClickView = useCallback((id: string) => history.push(`${ProductCategoriesRoutes.View}/${id}`), [history])
 
-    const onClickDownloadAsCsv = useCallback(() => global.console.log(), [])
+    const onClickDownloadAsCsv = useCallback(() => {
+        const data = [
+            {
+                id: 'asd',
+                name: 'asdasdasd',
+                cs: 3
+            }
+        ]
+
+        const csv = convertObjectToCSV(data)
+        downloadAsCsv('categories', csv)
+    }, [])
 
     const onClickSort = useCallback(
         (columnName: string) => {
