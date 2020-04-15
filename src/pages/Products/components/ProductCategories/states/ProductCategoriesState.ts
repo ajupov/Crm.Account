@@ -1,5 +1,6 @@
 import ProductCategory from '../../../../../../api/products/models/ProductCategory'
 import ProductCategoryGetPagedListRequest from '../../../../../../api/products/models/ProductCategoryGetPagedListRequest'
+import ProductCategoryGetPagedListResponse from '../../../../../../api/products/models/ProductCategoryGetPagedListResponse'
 
 export default interface ProductCategoriesState {
     request: ProductCategoryGetPagedListRequest
@@ -15,6 +16,7 @@ export default interface ProductCategoriesState {
     isRestoring: boolean
     setIsRestoring: (state: boolean) => void
     restore: () => Promise<void>
+    getAll: () => Promise<ProductCategoryGetPagedListResponse>
 }
 
 const DefaultLimit = 10
@@ -40,5 +42,9 @@ export const productCategoriesInitialState = {
     delete: () => Promise.resolve(void 0),
     isRestoring: false,
     setIsRestoring: (_: boolean) => void 0,
-    restore: () => Promise.resolve(void 0)
+    restore: () => Promise.resolve(void 0),
+    getAll: () =>
+        Promise.resolve({
+            totalCount: 0
+        })
 }

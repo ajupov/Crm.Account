@@ -9,6 +9,8 @@ import ProductCategoryGetPagedListRequest from '../../../../../../../../api/prod
 const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
 
 const useProductCategories = (): ProductCategoriesState => {
+    const MaxLimit = 1048576
+
     const [request, setRequest] = useState<ProductCategoryGetPagedListRequest>(productCategoriesInitialState.request)
     const [isLoading, setIsLoading] = useState<boolean>(productCategoriesInitialState.isLoading)
     const [categories, setCategories] = useState<ProductCategory[]>(productCategoriesInitialState.categories)
@@ -31,6 +33,16 @@ const useProductCategories = (): ProductCategoriesState => {
 
         setIsLoading(false)
     }, [request, setLastModifyDateTime, setTotal])
+
+    const getAll = useCallback(async () => {
+        setIsLoading(true)
+
+        const response = await productCategoriesClient.GetPagedListAsync({ ...request, offset: 0, limit: MaxLimit })
+
+        setIsLoading(false)
+
+        return response
+    }, [request])
 
     const _delete = useCallback(async () => {
         setIsLoading(true)
@@ -69,7 +81,8 @@ const useProductCategories = (): ProductCategoriesState => {
         delete: _delete,
         isRestoring,
         setIsRestoring,
-        restore
+        restore,
+        getAll
     }
 }
 

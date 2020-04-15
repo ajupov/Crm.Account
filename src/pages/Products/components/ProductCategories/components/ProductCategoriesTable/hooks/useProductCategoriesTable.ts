@@ -31,18 +31,18 @@ const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
 
     const onClickView = useCallback((id: string) => history.push(`${ProductCategoriesRoutes.View}/${id}`), [history])
 
-    const onClickDownloadAsCsv = useCallback(() => {
-        const data = [
-            {
-                id: 'asd',
-                name: 'asdasdasd',
-                cs: 3
-            }
-        ]
+    const onClickDownloadAsCsv = useCallback(async () => {
+        const categories = (await state.getAll())?.categories
+        if (!categories) {
+            return
+        }
 
-        const csv = convertObjectToCSV(data)
-        downloadAsCsv('categories', csv)
-    }, [])
+        const fileName = 'Категории'
+        const headers = ['Идентификатор', 'Наименование', 'Удален', 'Дата создания', 'Дата изменения']
+        const csv = convertObjectToCSV([headers, ...categories])
+
+        downloadAsCsv(fileName, csv)
+    }, [state])
 
     const onClickSort = useCallback(
         (columnName: string) => {

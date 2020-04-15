@@ -9,7 +9,7 @@ export function convertObjectToCSV(objectArray: object[]): string {
                 row += ','
             }
 
-            row += property[1]
+            row += property[1] ?? ''
         }
 
         table += row + '\r\n'
