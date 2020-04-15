@@ -23,7 +23,7 @@ const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'
 const DefaultOrderBy = 'desc'
 
-export const productCategoriesInitialState = {
+export const productCategoriesInitialState: ProductCategoriesState = {
     request: {
         isDeleted: false,
         offset: 0,
@@ -43,8 +43,5 @@ export const productCategoriesInitialState = {
     isRestoring: false,
     setIsRestoring: (_: boolean) => void 0,
     restore: () => Promise.resolve(void 0),
-    getAll: () =>
-        Promise.resolve({
-            totalCount: 0
-        })
+    getAll: () => Promise.resolve({ totalCount: 0 })
 }

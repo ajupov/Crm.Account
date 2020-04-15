@@ -13,7 +13,7 @@ interface TableProps {
     rows: TableBodyRowProps[]
     footer: TableFooterProps
     lastModifyDateTime?: string
-    onClickCreate: () => void
+    onClickCreate?: () => void
     onClickDownloadAsCsv: () => void
 }
 

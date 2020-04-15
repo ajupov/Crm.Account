@@ -8,12 +8,12 @@ interface TableBodyCellProps {
 
 export interface TableBodyRowProps {
     id?: string
-    isDeleted: boolean
+    isDeleted?: boolean
     cells: TableBodyCellProps[]
     onClickRow: (id: string) => void
-    onClickEditButton: (id: string) => void
-    onClickDeleteButton: (id: string) => void
-    onClickRestoreButton: (id: string) => void
+    onClickEditButton?: (id: string) => void
+    onClickDeleteButton?: (id: string) => void
+    onClickRestoreButton?: (id: string) => void
 }
 
 export type TableCellTextAlign = 'center' | 'left' | 'right'
@@ -32,7 +32,7 @@ const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
 
     const onClickEdit = useCallback(
         (row: TableBodyRowProps) => (event: React.MouseEvent) => {
-            if (row.id) {
+            if (row.id && row.onClickEditButton) {
                 row.onClickEditButton(row.id)
             }
 
@@ -43,7 +43,7 @@ const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
 
     const onClickDelete = useCallback(
         (row: TableBodyRowProps) => (event: React.MouseEvent) => {
-            if (row.id) {
+            if (row.id && row.onClickDeleteButton) {
                 row.onClickDeleteButton(row.id)
             }
             event.stopPropagation()
@@ -53,7 +53,7 @@ const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
 
     const onClickRestore = useCallback(
         (row: TableBodyRowProps) => (event: React.MouseEvent) => {
-            if (row.id) {
+            if (row.id && row.onClickRestoreButton) {
                 row.onClickRestoreButton(row.id)
             }
 
@@ -75,7 +75,7 @@ const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
                 {renderCells(row)}
                 <Table.Cell textAlign="center">
                     <Button.Group basic compact fluid size="mini">
-                        <Button onClick={onClickEdit(row)} icon="edit" />
+                        {row.onClickEditButton && <Button onClick={onClickEdit(row)} icon="edit" />}
                         {!row.isDeleted && row.onClickDeleteButton && (
                             <Button onClick={onClickDelete(row)} icon="trash" />
                         )}

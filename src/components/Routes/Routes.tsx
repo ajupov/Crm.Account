@@ -10,6 +10,7 @@ import Leads from '../../pages/leads/Leads'
 import NotFound from '../../pages/notFound/NotFound'
 import ProductCategories from '../../pages/Products/components/ProductCategories/ProductCategories'
 import { ProductCategoriesRoutes } from '../../pages/Products/components/ProductCategories/routes/ProductCategoriesRoutes'
+import ProductCategoryChanges from '../../pages/Products/components/ProductCategories/components/ProductCategoryChanges/ProductCategoryChanges'
 import ProductCategoryCreate from '../../pages/Products/components/ProductCategories/components/ProductCategoryCreate/ProductCategoryCreate'
 import ProductCategoryEdit from '../../pages/Products/components/ProductCategories/components/ProductCategoryEdit/ProductCategoryEdit'
 import ProductCategoryView from '../../pages/Products/components/ProductCategories/components/ProductCategoryView/ProductCategoryView'
@@ -29,6 +30,7 @@ const Routes: FC = () => (
         <Route path={`${ProductCategoriesRoutes.View}/:id`} exact component={ProductCategoryView} />
         <Route path={ProductCategoriesRoutes.Create} exact component={ProductCategoryCreate} />
         <Route path={`${ProductCategoriesRoutes.Edit}/:id`} exact component={ProductCategoryEdit} />
+        <Route path={`${ProductCategoriesRoutes.Changes}/:id`} exact component={ProductCategoryChanges} />
         <Route path="/settings" component={Settings} />
         <Route component={NotFound} />
     </Switch>

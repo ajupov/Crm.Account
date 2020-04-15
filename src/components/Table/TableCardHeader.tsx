@@ -5,7 +5,7 @@ import { getLastChangeDateTimeText } from '../../helpers/textHelper'
 
 interface TableCardHeaderProps {
     lastModifyDateTime?: string
-    onClickCreate: () => void
+    onClickCreate?: () => void
     onClickDownloadAsCsv: () => void
 }
 
@@ -16,9 +16,11 @@ const TableCardHeader: FC<TableCardHeaderProps> = ({ lastModifyDateTime, onClick
         </Grid.Column>
         <Grid.Column width={8}>
             <Button.Group basic size="mini" floated="right">
-                <Button icon onClick={onClickCreate}>
-                    <Icon name="add" /> Создать
-                </Button>
+                {onClickCreate && (
+                    <Button icon onClick={onClickCreate}>
+                        <Icon name="add" /> Создать
+                    </Button>
+                )}
                 <Button icon onClick={onClickDownloadAsCsv}>
                     <Icon name="download" /> Выгрузить в CSV
                 </Button>
