@@ -12,6 +12,7 @@ export const productCategoryInitialState: ProductCategoryState = {
     isLoading: false,
     category: {
         id: void 0,
+        accountId: void 0,
         name: void 0,
         isDeleted: false,
         createDateTime: void 0,
