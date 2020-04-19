@@ -20,7 +20,11 @@ const TableFooter: FC<TableFooterProps> = ({ page, limit, total, columnsCount, o
     return (
         <Table.Footer>
             <Table.Row>
-                <Table.Cell colSpan={(columnsCount ?? 0) + 1} textAlign="center">
+                <Table.Cell
+                    colSpan={(columnsCount ?? 0) + 1}
+                    textAlign="center"
+                    style={{ borderTop: '1px solid rgba(34,36,38,.1)' }}
+                >
                     <Pagination
                         secondary
                         firstItem="В начало"
@@ -30,6 +34,7 @@ const TableFooter: FC<TableFooterProps> = ({ page, limit, total, columnsCount, o
                         activePage={page}
                         totalPages={Math.ceil(total / limit)}
                         onPageChange={onPageChange}
+                        pageItem={{ style: { display: 'block' } }}
                     />
                 </Table.Cell>
             </Table.Row>

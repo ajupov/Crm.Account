@@ -8,7 +8,7 @@ export default interface ProductCategoryChangesState {
     isLoading: boolean
     changes: ProductCategoryChange[]
     total: number
-    getAll: () => Promise<ProductCategoryChangeGetPagedListResponse>
+    getAll: () => Promise<ProductCategoryChangeGetPagedListResponse | undefined>
 }
 
 const DefaultLimit = 10

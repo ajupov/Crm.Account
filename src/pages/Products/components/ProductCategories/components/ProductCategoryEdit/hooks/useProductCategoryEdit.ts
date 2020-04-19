@@ -9,6 +9,7 @@ import { useHistory } from 'react-router'
 interface UseProductCategoryEditReturn {
     fields: EditFieldProps[]
     isConfirmEnabled: boolean
+    onClickHistory: (id: string) => void
     onClickConfirm: () => void
     onClickCancel: () => void
 }
@@ -41,6 +42,10 @@ const useProductCategoryEdit = (): UseProductCategoryEditReturn => {
 
     const onClickCancel = useCallback((): void => history.push(ProductCategoriesRoutes.Index), [history])
 
+    const onClickHistory = useCallback((id: string): void => history.push(`${ProductCategoriesRoutes.Changes}/${id}`), [
+        history
+    ])
+
     const fields: EditFieldProps[] = useMemo(
         () => [
             {
@@ -60,7 +65,7 @@ const useProductCategoryEdit = (): UseProductCategoryEditReturn => {
         [onChangeIsDeleted, onChangeName, state.category.isDeleted, state.category.name]
     )
 
-    return { fields, isConfirmEnabled, onClickConfirm, onClickCancel }
+    return { fields, isConfirmEnabled, onClickHistory, onClickConfirm, onClickCancel }
 }
 
 export default useProductCategoryEdit

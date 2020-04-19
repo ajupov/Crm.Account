@@ -20,6 +20,7 @@ const ProductCategoriesTable: FC = () => {
     return (
         <Table
             isLoading={state.isLoading}
+            hasActions
             headers={headers}
             rows={map(state.categories)}
             footer={{ page, limit, total, onClickChangePage }}

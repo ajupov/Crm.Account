@@ -6,12 +6,17 @@ export interface TableHeaderCellProps {
     label: string
     width: SemanticWIDTHS
     orderBy?: string
-    onClick: () => void
+    onClick?: () => void
+}
+
+export interface TableHeaderProps {
+    headers: TableHeaderCellProps[]
+    hasActions?: boolean
 }
 
 type SemanticSortedType = 'ascending' | 'descending' | undefined
 
-const TableHeader: FC<{ headers: TableHeaderCellProps[] }> = ({ headers }) => {
+const TableHeader: FC<TableHeaderProps> = ({ headers, hasActions }) => {
     const getSorted = (cell: TableHeaderCellProps): SemanticSortedType => {
         switch (cell.orderBy) {
             case 'asc':
@@ -34,9 +39,11 @@ const TableHeader: FC<{ headers: TableHeaderCellProps[] }> = ({ headers }) => {
         <Table.Header>
             <Table.Row textAlign="center">
                 {renderCells()}
-                <Table.HeaderCell width="1" style={{ pointerEvents: 'none' }}>
-                    Действия
-                </Table.HeaderCell>
+                {hasActions && (
+                    <Table.HeaderCell width="1" style={{ pointerEvents: 'none' }}>
+                        Действия
+                    </Table.HeaderCell>
+                )}
             </Table.Row>
         </Table.Header>
     )

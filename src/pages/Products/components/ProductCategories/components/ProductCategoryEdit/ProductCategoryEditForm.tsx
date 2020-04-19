@@ -6,19 +6,21 @@ import useProductCategoryEdit from './hooks/useProductCategoryEdit'
 
 const ProductCategoryEditForm: FC = () => {
     const state = useContext(ProductCategoryContext)
-    const { fields, isConfirmEnabled, onClickCancel, onClickConfirm } = useProductCategoryEdit()
+    const { fields, isConfirmEnabled, onClickHistory, onClickCancel, onClickConfirm } = useProductCategoryEdit()
 
-    return (
+    return state.category.id ? (
         <Edit
+            id={state.category.id}
             fields={fields}
             isLoading={state.isLoading}
             isConfirmEnabled={isConfirmEnabled}
             createDate={state.category.createDateTime}
             lastModifyDateTime={state.category.modifyDateTime}
+            onClickHistory={onClickHistory}
             onClickConfirm={onClickConfirm}
             onClickCancel={onClickCancel}
         />
-    )
+    ) : null
 }
 
 export default ProductCategoryEditForm

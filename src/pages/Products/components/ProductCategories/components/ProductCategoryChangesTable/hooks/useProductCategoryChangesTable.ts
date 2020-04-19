@@ -2,13 +2,12 @@ import { calculateOffset, calculatePage } from '../../../../../../../helpers/pag
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import { ProductCategoriesRoutes } from '../../../routes/ProductCategoriesRoutes'
+import ProductCategory from '../../../../../../../../api/products/models/ProductCategory'
 import ProductCategoryChange from '../../../../../../../../api/products/models/ProductCategoryChange'
 import ProductCategoryChangesContext from '../../../contexts/ProductCategoryChangesContext/ProductCategoryChangesContext'
 import { TableBodyRowProps } from '../../../../../../../components/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/Table/TableHeader'
 import { toLocaleDateTime } from '../../../../../../../utils/dateTime/dateTimeUtils'
-import { useHistory } from 'react-router'
 
 interface UseProductCategoryChangesTableReturn {
     page: number
@@ -21,10 +20,7 @@ interface UseProductCategoryChangesTableReturn {
 }
 
 const useProductCategoryChangesTable = (): UseProductCategoryChangesTableReturn => {
-    const history = useHistory()
     const state = useContext(ProductCategoryChangesContext)
-
-    const onClickView = useCallback((id: string) => history.push(`${ProductCategoriesRoutes.View}/${id}`), [history])
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const changes = (await state.getAll())?.changes
@@ -33,40 +29,11 @@ const useProductCategoryChangesTable = (): UseProductCategoryChangesTableReturn 
         }
 
         const fileName = 'История'
-        const headers = [
-            'Идентификатор',
-            'Идентификатор пользователя',
-            'Идентификатор категории',
-            'Дата создания',
-            'Старое значение',
-            'Новое значение'
-        ]
+        const headers = ['Идентификатор', 'Дата и время', 'Старое значение', 'Новое значение']
         const csv = convertObjectToCSV([headers, ...changes])
 
         downloadAsCsv(fileName, csv)
     }, [state])
-
-    const onClickSort = useCallback(
-        (columnName: string) => {
-            if (state.request.sortBy !== columnName) {
-                state.setRequest({ ...state.request, sortBy: columnName, orderBy: 'asc' })
-            } else {
-                state.setRequest({ ...state.request, orderBy: state.request.orderBy === 'asc' ? 'desc' : 'asc' })
-            }
-        },
-        [state]
-    )
-
-    const getOrderBy = useCallback(
-        (columnName: string) => {
-            if (state.request.sortBy === columnName) {
-                return state.request.orderBy
-            }
-
-            return void 0
-        },
-        [state.request.orderBy, state.request.sortBy]
-    )
 
     const onClickChangePage = useCallback(
         (page: number): void =>
@@ -74,45 +41,82 @@ const useProductCategoryChangesTable = (): UseProductCategoryChangesTableReturn 
         [state]
     )
 
+    const getChangeName = useCallback((change: ProductCategoryChange) => {
+        if (!change.oldValueJson && change.newValueJson) {
+            return 'Создан'
+        }
+
+        if (change.oldValueJson && change.newValueJson) {
+            return 'Изменен'
+        }
+
+        if (change.oldValueJson && !change.newValueJson) {
+            return 'Удален'
+        }
+
+        return ''
+    }, [])
+
+    const getValueOrEmpty = useCallback((value?: string | boolean) => {
+        if (typeof value === 'boolean') {
+            if (value) {
+                return 'Да'
+            }
+
+            return 'Нет'
+        }
+
+        return value ?? '...'
+    }, [])
+
+    const getChangeValue = useCallback(
+        (change: ProductCategoryChange) => {
+            const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as ProductCategory) : void 0
+            const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as ProductCategory) : void 0
+
+            return [
+                `Наименование: \t ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
+                `Удален: ${getValueOrEmpty(oldValue?.isDeleted)} → ${getValueOrEmpty(newValue?.isDeleted)}`
+            ]
+        },
+        [getValueOrEmpty]
+    )
+
     const map = useCallback(
-        (changes: ProductCategoryChange[]): TableBodyRowProps[] =>
-            changes.map(change => ({
-                id: change.id,
-                cells: [
-                    { value: change.oldValueJson, textAlign: 'left' },
-                    { value: change.newValueJson, textAlign: 'left' },
-                    { value: toLocaleDateTime(change.createDateTime), textAlign: 'center' }
-                ],
-                onClickRow: onClickView
-            })),
-        [onClickView]
+        (changes: ProductCategoryChange[]) =>
+            changes.map(
+                change =>
+                    ({
+                        id: change.id,
+                        cells: [
+                            { value: getChangeName(change), textAlign: 'center' },
+                            { value: getChangeValue(change), textAlign: 'left' },
+                            { value: toLocaleDateTime(change.createDateTime), textAlign: 'center' }
+                        ]
+                    } as TableBodyRowProps)
+            ),
+        [getChangeName, getChangeValue]
     )
 
     const headers: TableHeaderCellProps[] = useMemo(
         () => [
             {
-                key: 'OldValueJson',
-                label: 'Старое значение',
-                width: 8,
-                onClick: () => onClickSort('OldValueJson'),
-                orderBy: getOrderBy('OldValueJson')
+                key: 'Action',
+                label: 'Действие',
+                width: 3
             },
             {
-                key: 'NewValueJson',
-                label: 'Новое значение',
-                width: 8,
-                onClick: () => onClickSort('NewValueJson'),
-                orderBy: getOrderBy('NewValueJson')
+                key: 'Changes',
+                label: 'Изменения',
+                width: 5
             },
             {
                 key: 'CreateDateTime',
-                label: 'Создан',
-                width: 3,
-                onClick: () => onClickSort('CreateDateTime'),
-                orderBy: getOrderBy('CreateDateTime')
+                label: 'Дата и время',
+                width: 3
             }
         ],
-        [getOrderBy, onClickSort]
+        []
     )
 
     const page = useMemo(() => calculatePage(state.request.offset, state.request.limit), [

@@ -1,8 +1,8 @@
-import { Button, Table } from 'semantic-ui-react'
+import { Button, List, Table } from 'semantic-ui-react'
 import React, { FC, useCallback } from 'react'
 
 interface TableBodyCellProps {
-    value?: any
+    value?: string | string[]
     textAlign?: TableCellTextAlign
 }
 
@@ -10,18 +10,23 @@ export interface TableBodyRowProps {
     id?: string
     isDeleted?: boolean
     cells: TableBodyCellProps[]
-    onClickRow: (id: string) => void
+    onClickRow?: (id: string) => void
     onClickEditButton?: (id: string) => void
     onClickDeleteButton?: (id: string) => void
     onClickRestoreButton?: (id: string) => void
 }
 
+export interface TableBodyProps {
+    rows: TableBodyRowProps[]
+    hasActions?: boolean
+}
+
 export type TableCellTextAlign = 'center' | 'left' | 'right'
 
-const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
+const TableBody: FC<TableBodyProps> = ({ rows, hasActions }) => {
     const onClick = useCallback(
         (row: TableBodyRowProps) => (event: React.MouseEvent) => {
-            if (row.id) {
+            if (row.id && row.onClickRow) {
                 row.onClickRow(row.id)
             }
 
@@ -62,28 +67,38 @@ const TableBody: FC<{ rows: TableBodyRowProps[] }> = ({ rows }) => {
         []
     )
 
+    const renderCellArrayValue = (values: string[]): JSX.Element[] =>
+        values.map((value, index) => <List.Item key={index}>{value}</List.Item>)
+
     const renderCells = (row: TableBodyRowProps): JSX.Element[] =>
         row.cells.map((cell, index) => (
             <Table.Cell textAlign={cell.textAlign ?? 'left'} key={index}>
-                {cell.value}
+                {cell.value instanceof Array ? <List>{renderCellArrayValue(cell.value)}</List> : cell.value}
             </Table.Cell>
         ))
 
     const renderRows = (): JSX.Element | JSX.Element[] =>
-        rows.map((row, index) => (
-            <Table.Row negative={row.isDeleted} style={{ cursor: 'pointer' }} onClick={onClick(row)} key={index}>
+        rows.map(row => (
+            <Table.Row
+                negative={row.isDeleted}
+                style={{ cursor: row.onClickRow ? 'pointer' : 'default' }}
+                onClick={onClick(row)}
+                key={row.id}
+            >
                 {renderCells(row)}
-                <Table.Cell textAlign="center">
-                    <Button.Group basic compact fluid size="mini">
-                        {row.onClickEditButton && <Button onClick={onClickEdit(row)} icon="edit" />}
-                        {!row.isDeleted && row.onClickDeleteButton && (
-                            <Button onClick={onClickDelete(row)} icon="trash" />
-                        )}
-                        {row.isDeleted && row.onClickRestoreButton && (
-                            <Button onClick={onClickRestore(row)} icon="redo" />
-                        )}
-                    </Button.Group>
-                </Table.Cell>
+                {hasActions && (
+                    <Table.Cell textAlign="center" width={2}>
+                        <Button.Group basic compact fluid size="mini">
+                            {row.onClickEditButton && <Button onClick={onClickEdit(row)} icon="edit" />}
+                            {!row.isDeleted && row.onClickDeleteButton && (
+                                <Button onClick={onClickDelete(row)} icon="trash" />
+                            )}
+                            {row.isDeleted && row.onClickRestoreButton && (
+                                <Button onClick={onClickRestore(row)} icon="redo" />
+                            )}
+                        </Button.Group>
+                    </Table.Cell>
+                )}
             </Table.Row>
         ))
 

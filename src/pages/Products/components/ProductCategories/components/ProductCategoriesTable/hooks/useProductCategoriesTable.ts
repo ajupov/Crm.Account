@@ -38,7 +38,7 @@ const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
         }
 
         const fileName = 'Категории'
-        const headers = ['Идентификатор', 'Наименование', 'Удален', 'Дата создания', 'Дата изменения']
+        const headers = ['Идентификатор', 'Наименование', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...categories])
 
         downloadAsCsv(fileName, csv)
@@ -73,19 +73,22 @@ const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
     )
 
     const map = useCallback(
-        (categories: ProductCategory[]): TableBodyRowProps[] =>
-            categories.map(category => ({
-                id: category.id,
-                cells: [
-                    { value: category.name, textAlign: 'left' },
-                    { value: toLocaleDateTime(category.createDateTime), textAlign: 'center' }
-                ],
-                isDeleted: category.isDeleted,
-                onClickRow: onClickView,
-                onClickEditButton: onClickEdit,
-                onClickDeleteButton: onClickDelete,
-                onClickRestoreButton: onClickRestore
-            })),
+        (categories: ProductCategory[]) =>
+            categories.map(
+                category =>
+                    ({
+                        id: category.id,
+                        cells: [
+                            { value: category.name, textAlign: 'left' },
+                            { value: toLocaleDateTime(category.createDateTime), textAlign: 'center' }
+                        ],
+                        isDeleted: category.isDeleted,
+                        onClickRow: onClickView,
+                        onClickEditButton: onClickEdit,
+                        onClickDeleteButton: onClickDelete,
+                        onClickRestoreButton: onClickRestore
+                    } as TableBodyRowProps)
+            ),
         [onClickDelete, onClickEdit, onClickRestore, onClickView]
     )
 
@@ -94,7 +97,7 @@ const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
             {
                 key: 'Name',
                 label: 'Наименование',
-                width: 8,
+                width: 11,
                 onClick: () => onClickSort('Name'),
                 orderBy: getOrderBy('Name')
             },

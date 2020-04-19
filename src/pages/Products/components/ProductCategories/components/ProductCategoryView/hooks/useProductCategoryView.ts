@@ -11,6 +11,7 @@ interface UseProductCategoryViewReturn {
     onClickEdit: (id: string) => void
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
+    onClickHistory: (id: string) => void
     onClickCancel: () => void
 }
 
@@ -36,6 +37,10 @@ const useProductCategoryView = (): UseProductCategoryViewReturn => {
         [state]
     )
 
+    const onClickHistory = useCallback((id: string): void => history.push(`${ProductCategoriesRoutes.Changes}/${id}`), [
+        history
+    ])
+
     const onClickCancel = useCallback((): void => history.push(ProductCategoriesRoutes.Index), [history])
 
     const map = useCallback(
@@ -46,7 +51,7 @@ const useProductCategoryView = (): UseProductCategoryViewReturn => {
         []
     )
 
-    return { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel }
+    return { map, onClickEdit, onClickDelete, onClickRestore, onClickHistory, onClickCancel }
 }
 
 export default useProductCategoryView

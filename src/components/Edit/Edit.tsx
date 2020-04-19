@@ -1,8 +1,9 @@
-import { Button, Card, Checkbox, CheckboxProps, Form, Input, InputOnChangeData } from 'semantic-ui-react'
-import React, { FC } from 'react'
+import { Button, Card, Checkbox, CheckboxProps, Form, Icon, Input, InputOnChangeData } from 'semantic-ui-react'
+import React, { FC, useCallback } from 'react'
 import { getCreateDateTimeText, getLastChangeDateTimeText } from '../../helpers/textHelper'
 
 import BackLink from '../BackLink/BackLink'
+import HistoryLink from '../HistoryLink/HistoryLink'
 import Loader from '../Loader/Loader'
 
 export type FilterFieldType = 'text' | 'date' | 'checkbox'
@@ -33,24 +34,39 @@ export interface CheckboxEditFieldProps {
 export type EditFieldProps = TextEditFieldProps | DateEditFieldProps | CheckboxEditFieldProps
 
 export interface EditProps {
+    id: string
     fields: EditFieldProps[]
     isLoading: boolean
     isConfirmEnabled: boolean
     createDate?: string
     lastModifyDateTime?: string
+    onClickHistory: (id: string) => void
     onClickConfirm: () => void
     onClickCancel: () => void
 }
 
 const Edit: FC<EditProps> = ({
+    id,
     fields,
     isLoading,
     isConfirmEnabled,
     createDate,
     lastModifyDateTime,
+    onClickHistory,
     onClickConfirm,
     onClickCancel
 }) => {
+    const _onClickHistory = useCallback(
+        (event: React.MouseEvent) => {
+            if (id) {
+                onClickHistory(id)
+            }
+
+            event.stopPropagation()
+        },
+        [id, onClickHistory]
+    )
+
     const renderFields = (): (JSX.Element | null)[] =>
         fields.map(x => {
             switch (x.type) {
@@ -83,17 +99,18 @@ const Edit: FC<EditProps> = ({
         <>
             <Loader isLoading={isLoading} />
             <BackLink onClick={onClickCancel} />
+            <HistoryLink onClick={_onClickHistory} />
             <Card.Meta textAlign="right">{getCreateDateTimeText(createDate)}</Card.Meta>
             <Card.Meta textAlign="right">{getLastChangeDateTimeText(lastModifyDateTime)}</Card.Meta>
             <Form onSubmit={onClickConfirm}>
                 {renderFields()}
                 <Form.Field>
-                    <Button.Group floated="right">
-                        <Button type="reset" basic onClick={onClickCancel}>
-                            Отмена
+                    <Button.Group basic floated="right">
+                        <Button type="reset" onClick={onClickCancel}>
+                            <Icon name="cancel" /> Отмена
                         </Button>
                         <Button type="submit" disabled={!isConfirmEnabled}>
-                            Сохранить
+                            <Icon name="save" /> Сохранить
                         </Button>
                     </Button.Group>
                 </Form.Field>

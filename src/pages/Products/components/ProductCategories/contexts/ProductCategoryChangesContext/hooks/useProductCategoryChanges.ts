@@ -38,18 +38,30 @@ const useProductCategoryChanges = (): ProductCategoryChangesState => {
     }, [id, request])
 
     const getAll = useCallback(async () => {
+        if (!id) {
+            return
+        }
+
         setIsLoading(true)
 
         const response = await productCategoryChangesClient.GetPagedListAsync({
             ...request,
+            categoryId: id,
             offset: 0,
             limit: MaxLimit
         })
 
+        if (response.changes) {
+            response.changes.forEach(v => {
+                delete v.categoryId
+                delete v.changerUserId
+            })
+        }
+
         setIsLoading(false)
 
         return response
-    }, [request])
+    }, [id, request])
 
     useEffect(() => {
         getPagedList()

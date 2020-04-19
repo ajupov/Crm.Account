@@ -1,4 +1,4 @@
-import { Button, Checkbox, CheckboxProps, Form, Input, InputOnChangeData } from 'semantic-ui-react'
+import { Button, Checkbox, CheckboxProps, Form, Icon, Input, InputOnChangeData } from 'semantic-ui-react'
 import React, { FC } from 'react'
 
 import BackLink from '../BackLink/BackLink'
@@ -72,12 +72,12 @@ const Create: FC<CreateProps> = ({ fields, isConfirmEnabled, onClickConfirm, onC
             <Form onSubmit={onClickConfirm}>
                 {renderFields()}
                 <Form.Field>
-                    <Button.Group floated="right">
-                        <Button type="reset" basic onClick={onClickCancel}>
-                            Отмена
+                    <Button.Group basic floated="right">
+                        <Button type="reset" onClick={onClickCancel}>
+                            <Icon name="cancel" /> Отмена
                         </Button>
                         <Button type="submit" disabled={!isConfirmEnabled}>
-                            Создать
+                            <Icon name="save" /> Создать
                         </Button>
                     </Button.Group>
                 </Form.Field>

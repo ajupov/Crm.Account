@@ -7,8 +7,9 @@ import Loader from '../Loader/Loader'
 import { Table as SemanticUiTable } from 'semantic-ui-react'
 import TableCardHeader from './TableCardHeader'
 
-interface TableProps {
+export interface TableProps {
     isLoading: boolean
+    hasActions?: boolean
     headers: TableHeaderCellProps[]
     rows: TableBodyRowProps[]
     footer: TableFooterProps
@@ -22,6 +23,7 @@ const Table: FC<TableProps> = ({
     headers,
     rows,
     footer,
+    hasActions,
     lastModifyDateTime,
     onClickCreate,
     onClickDownloadAsCsv
@@ -33,9 +35,9 @@ const Table: FC<TableProps> = ({
             onClickCreate={onClickCreate}
             onClickDownloadAsCsv={onClickDownloadAsCsv}
         />
-        <SemanticUiTable sortable compact celled striped selectable color="black">
-            <TableHeader headers={headers} />
-            <TableBody rows={rows} />
+        <SemanticUiTable sortable={hasActions} compact celled striped selectable={hasActions} color="black">
+            <TableHeader headers={headers} hasActions={hasActions} />
+            <TableBody rows={rows} hasActions={hasActions} />
             <TableFooter {...footer} columnsCount={headers.length} />
         </SemanticUiTable>
     </>
