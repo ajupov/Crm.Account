@@ -108,7 +108,7 @@ const useProductCategoryChangesTable = (): UseProductCategoryChangesTableReturn 
             {
                 key: 'Changes',
                 label: 'Изменения',
-                width: 5
+                width: 10
             },
             {
                 key: 'CreateDateTime',
