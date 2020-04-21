@@ -21,7 +21,7 @@ export default class Configuration {
 
     private readonly combineUrl = (host?: string, path?: string): string => {
         if (!host) {
-            throw new Error('Host is not defined')
+            throw new Error('host is not defined')
         }
 
         return new URL(path || '', host).href.replace(/\/$/, '')

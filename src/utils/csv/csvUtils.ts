@@ -20,7 +20,6 @@ export function convertObjectToCSV(objectArray: object[]): string {
 
 export function downloadAsCsv(filename: string, data: string): void {
     const mimeType = 'text/csv;charset=utf-8;'
-
     const blob = new Blob([data], { type: mimeType })
     const url = URL.createObjectURL(blob)
     const link = document.createElement('a')
@@ -29,6 +28,8 @@ export function downloadAsCsv(filename: string, data: string): void {
     link.setAttribute('visibility', 'hidden')
 
     document.body.appendChild(link)
+
     link.click()
+
     document.body.removeChild(link)
 }
