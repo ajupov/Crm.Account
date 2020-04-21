@@ -8,8 +8,7 @@ interface HistoryLinkProps {
 
 const HistoryLink: FC<HistoryLinkProps> = ({ onClick }) => (
     <a style={{ color: 'grey', paddingLeft: '30px' }} onClick={onClick}>
-        <Icon name="history" />
-        История изменений
+        <Icon name="history" /> История изменений
     </a>
 )
 

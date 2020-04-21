@@ -1,5 +1,5 @@
 import { Header, Menu as SemanticMenu } from 'semantic-ui-react'
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 
 import ActiveMenuItem from '../ActiveMenuItem/ActiveMenuItem'
 
@@ -11,10 +11,13 @@ export interface MenuItemProps {
 const Menu: FC<{
     items: MenuItemProps[]
 }> = ({ items }) => {
-    const renderMenuItem = (x: MenuItemProps): JSX.Element => (
-        <SemanticMenu.Item key={x.path} as={ActiveMenuItem} path={x.path}>
-            {x.name}
-        </SemanticMenu.Item>
+    const renderMenuItem = useCallback(
+        (x: MenuItemProps) => (
+            <SemanticMenu.Item key={x.path} as={ActiveMenuItem} path={x.path}>
+                {x.name}
+            </SemanticMenu.Item>
+        ),
+        []
     )
 
     return (

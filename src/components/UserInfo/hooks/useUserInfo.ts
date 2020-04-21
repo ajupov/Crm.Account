@@ -11,7 +11,7 @@ const userInfoClient = new UserInfoClient(HttpClientFactoryInstance.Api)
 const configuration = new Configuration()
 
 const useUserInfo = (): UserInfoState => {
-    const [userInfo, setUserInfo] = useState<UserInfoState>(userInfoInitialState)
+    const [userInfo, setUserInfo] = useState(userInfoInitialState)
 
     const get = useCallback(async () => {
         const isAuthenticated = await authClient.IsAuthenticatedAsync()

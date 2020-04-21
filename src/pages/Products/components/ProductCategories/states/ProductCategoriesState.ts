@@ -2,6 +2,10 @@ import ProductCategory from '../../../../../../api/products/models/ProductCatego
 import ProductCategoryGetPagedListRequest from '../../../../../../api/products/models/ProductCategoryGetPagedListRequest'
 import ProductCategoryGetPagedListResponse from '../../../../../../api/products/models/ProductCategoryGetPagedListResponse'
 
+const DefaultLimit = 10
+const DefaultSortBy = 'CreateDateTime'
+const DefaultOrderBy = 'desc'
+
 export default interface ProductCategoriesState {
     request: ProductCategoryGetPagedListRequest
     setRequest: (request: ProductCategoryGetPagedListRequest) => void
@@ -11,10 +15,6 @@ export default interface ProductCategoriesState {
     lastModifyDateTime: string
     getAll: () => Promise<ProductCategoryGetPagedListResponse>
 }
-
-const DefaultLimit = 10
-const DefaultSortBy = 'CreateDateTime'
-const DefaultOrderBy = 'desc'
 
 export const productCategoriesInitialState: ProductCategoriesState = {
     request: {

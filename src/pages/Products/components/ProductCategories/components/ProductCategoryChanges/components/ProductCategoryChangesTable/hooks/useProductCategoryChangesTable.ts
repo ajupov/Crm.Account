@@ -7,12 +7,11 @@ import ProductCategoryChange from '../../../../../../../../../../api/products/mo
 import ProductCategoryChangesContext from '../../../../../contexts/ProductCategoryChangesContext/ProductCategoryChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../../components/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../../components/Table/TableHeader'
+import { getValueOrEmpty } from '../../../../../../../../../helpers/valueHelper'
 import { toLocaleDateTime } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 
 interface UseProductCategoryChangesTableReturn {
     page: number
-    limit: number
-    total: number
     headers: TableHeaderCellProps[]
     map: (categories: ProductCategoryChange[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
@@ -57,30 +56,15 @@ const useProductCategoryChangesTable = (): UseProductCategoryChangesTableReturn 
         return ''
     }, [])
 
-    const getValueOrEmpty = useCallback((value?: string | boolean) => {
-        if (typeof value === 'boolean') {
-            if (value) {
-                return 'Да'
-            }
+    const getChangeValue = useCallback((change: ProductCategoryChange) => {
+        const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as ProductCategory) : void 0
+        const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as ProductCategory) : void 0
 
-            return 'Нет'
-        }
-
-        return value ?? '...'
+        return [
+            `Наименование: \t ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
+            `Удален: ${getValueOrEmpty(oldValue?.isDeleted)} → ${getValueOrEmpty(newValue?.isDeleted)}`
+        ]
     }, [])
-
-    const getChangeValue = useCallback(
-        (change: ProductCategoryChange) => {
-            const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as ProductCategory) : void 0
-            const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as ProductCategory) : void 0
-
-            return [
-                `Наименование: \t ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
-                `Удален: ${getValueOrEmpty(oldValue?.isDeleted)} → ${getValueOrEmpty(newValue?.isDeleted)}`
-            ]
-        },
-        [getValueOrEmpty]
-    )
 
     const map = useCallback(
         (changes: ProductCategoryChange[]) =>
@@ -124,15 +108,7 @@ const useProductCategoryChangesTable = (): UseProductCategoryChangesTableReturn 
         state.request.offset
     ])
 
-    return {
-        page,
-        limit: state.request.limit,
-        total: state.total,
-        headers,
-        map,
-        onClickDownloadAsCsv,
-        onClickChangePage
-    }
+    return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
 export default useProductCategoryChangesTable

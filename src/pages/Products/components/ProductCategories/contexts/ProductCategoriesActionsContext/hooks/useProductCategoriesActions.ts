@@ -9,7 +9,7 @@ import ProductCategoriesClient from '../../../../../../../../api/products/client
 const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
 
 const useProductCategoriesActions = (): ProductCategoriesActionsState => {
-    const [ids, setIds] = useState<string[]>([])
+    const [ids, setIds] = useState(productCategoriesActionsInitialState.ids)
     const [isLoading, setIsLoading] = useState(productCategoriesActionsInitialState.isLoading)
     const [isDeleting, setIsDeleting] = useState(productCategoriesActionsInitialState.isDeleting)
     const [isRestoring, setIsRestoring] = useState(productCategoriesActionsInitialState.isRestoring)
@@ -32,7 +32,7 @@ const useProductCategoriesActions = (): ProductCategoriesActionsState => {
         setIsLoading(false)
     }, [ids])
 
-    return { isLoading, setIds, isDeleting, setIsDeleting, delete: _delete, isRestoring, setIsRestoring, restore }
+    return { isLoading, ids, setIds, isDeleting, setIsDeleting, delete: _delete, isRestoring, setIsRestoring, restore }
 }
 
 export default useProductCategoriesActions

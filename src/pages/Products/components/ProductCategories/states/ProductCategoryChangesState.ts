@@ -2,6 +2,10 @@ import ProductCategoryChange from '../../../../../../api/products/models/Product
 import ProductCategoryChangeGetPagedListRequest from '../../../../../../api/products/models/ProductCategoryChangeGetPagedListRequest'
 import ProductCategoryChangeGetPagedListResponse from '../../../../../../api/products/models/ProductCategoryChangeGetPagedListResponse'
 
+const DefaultLimit = 10
+const DefaultSortBy = 'CreateDateTime'
+const DefaultOrderBy = 'desc'
+
 export default interface ProductCategoryChangesState {
     request: ProductCategoryChangeGetPagedListRequest
     setRequest: (request: ProductCategoryChangeGetPagedListRequest) => void
@@ -10,10 +14,6 @@ export default interface ProductCategoryChangesState {
     total: number
     getAll: () => Promise<ProductCategoryChangeGetPagedListResponse | undefined>
 }
-
-const DefaultLimit = 10
-const DefaultSortBy = 'CreateDateTime'
-const DefaultOrderBy = 'desc'
 
 export const productCategoryChangesInitialState: ProductCategoryChangesState = {
     request: {

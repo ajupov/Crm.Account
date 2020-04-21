@@ -1,12 +1,12 @@
 import { Button, Card, Checkbox, CheckboxProps, Form, Icon, Input, InputOnChangeData } from 'semantic-ui-react'
-import React, { FC, useCallback } from 'react'
+import React, { FC, useCallback, useMemo } from 'react'
 import { getCreateDateTimeText, getLastChangeDateTimeText } from '../../helpers/textHelper'
 
 import BackLink from '../BackLink/BackLink'
 import HistoryLink from '../HistoryLink/HistoryLink'
 import Loader from '../Loader/Loader'
 
-export type FilterFieldType = 'text' | 'date' | 'checkbox'
+export type EditFieldProps = TextEditFieldProps | DateEditFieldProps | CheckboxEditFieldProps
 
 export interface TextEditFieldProps {
     required: boolean
@@ -30,8 +30,6 @@ export interface CheckboxEditFieldProps {
     checked: boolean
     onChange: (_: any, { value }: CheckboxProps) => void
 }
-
-export type EditFieldProps = TextEditFieldProps | DateEditFieldProps | CheckboxEditFieldProps
 
 export interface EditProps {
     id: string
@@ -67,33 +65,46 @@ const Edit: FC<EditProps> = ({
         [id, onClickHistory]
     )
 
-    const renderFields = (): (JSX.Element | null)[] =>
-        fields.map(x => {
-            switch (x.type) {
-                case 'text':
-                    return (
-                        <Form.Field required={x.required} key={x.topLabel}>
-                            <label>{x.topLabel}:</label>
-                            <Input type="text" placeholder={x.topLabel} value={x.value ?? ''} onChange={x.onChange} />
-                        </Form.Field>
-                    )
-                case 'date':
-                    return (
-                        <Form.Field required={x.required} key={x.topLabel}>
-                            <label>{x.topLabel}:</label>
-                            <Input type="date" placeholder={x.topLabel} value={x.value ?? ''} onChange={x.onChange} />
-                        </Form.Field>
-                    )
-                case 'checkbox':
-                    return (
-                        <Form.Field key={x.label}>
-                            <Checkbox label={x.label} checked={x.checked} onChange={x.onChange} />
-                        </Form.Field>
-                    )
-                default:
-                    return null
-            }
-        })
+    const fieldComponents = useMemo(
+        () =>
+            fields.map(x => {
+                switch (x.type) {
+                    case 'text':
+                        return (
+                            <Form.Field required={x.required} key={x.topLabel}>
+                                <label>{x.topLabel}:</label>
+                                <Input
+                                    type="text"
+                                    placeholder={x.topLabel}
+                                    value={x.value ?? ''}
+                                    onChange={x.onChange}
+                                />
+                            </Form.Field>
+                        )
+                    case 'date':
+                        return (
+                            <Form.Field required={x.required} key={x.topLabel}>
+                                <label>{x.topLabel}:</label>
+                                <Input
+                                    type="date"
+                                    placeholder={x.topLabel}
+                                    value={x.value ?? ''}
+                                    onChange={x.onChange}
+                                />
+                            </Form.Field>
+                        )
+                    case 'checkbox':
+                        return (
+                            <Form.Field key={x.label}>
+                                <Checkbox label={x.label} checked={x.checked} onChange={x.onChange} />
+                            </Form.Field>
+                        )
+                    default:
+                        return null
+                }
+            }),
+        [fields]
+    )
 
     return (
         <>
@@ -103,7 +114,7 @@ const Edit: FC<EditProps> = ({
             <Card.Meta textAlign="right">{getCreateDateTimeText(createDate)}</Card.Meta>
             <Card.Meta textAlign="right">{getLastChangeDateTimeText(lastModifyDateTime)}</Card.Meta>
             <Form onSubmit={onClickConfirm}>
-                {renderFields()}
+                {fieldComponents}
                 <Form.Field>
                     <Button.Group basic floated="right">
                         <Button type="reset" onClick={onClickCancel}>

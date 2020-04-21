@@ -6,22 +6,14 @@ import useProductCategoryChangesTable from './hooks/useProductCategoryChangesTab
 
 const ProductCategoryChangesTable: FC = () => {
     const state = useContext(ProductCategoryChangesContext)
-    const {
-        page,
-        limit,
-        total,
-        headers,
-        map,
-        onClickDownloadAsCsv,
-        onClickChangePage
-    } = useProductCategoryChangesTable()
+    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useProductCategoryChangesTable()
 
     return (
         <Table
             isLoading={state.isLoading}
             headers={headers}
             rows={map(state.changes)}
-            footer={{ page, limit, total, onClickChangePage }}
+            footer={{ page, limit: state.request.limit, total: state.total, onClickChangePage }}
             onClickDownloadAsCsv={onClickDownloadAsCsv}
         />
     )

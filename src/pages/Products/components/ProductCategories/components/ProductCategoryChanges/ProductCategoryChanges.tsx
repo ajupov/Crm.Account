@@ -18,10 +18,10 @@ const ProductCategoryChanges: FC = () => {
     return (
         <ProductCategoryChangesContextProvider>
             <Page
-                onClickCancel={onClickCancel}
                 title={title}
                 firstSidebar={<ProductsMenu />}
                 secondSidebar={<ProductCategoryChangesFilter />}
+                onClickCancel={onClickCancel}
             >
                 <ProductCategoryChangesTable />
             </Page>

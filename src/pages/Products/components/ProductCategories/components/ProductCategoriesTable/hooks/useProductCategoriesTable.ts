@@ -13,8 +13,6 @@ import useProductCategoryView from '../../ProductCategoryView/hooks/useProductCa
 
 interface UseProductCategoriesTableReturn {
     page: number
-    limit: number
-    total: number
     headers: TableHeaderCellProps[]
     map: (categories: ProductCategory[]) => TableBodyRowProps[]
     onClickCreate: () => void
@@ -117,16 +115,7 @@ const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
         state.request.offset
     ])
 
-    return {
-        page,
-        limit: state.request.limit,
-        total: state.total,
-        headers,
-        map,
-        onClickCreate,
-        onClickDownloadAsCsv,
-        onClickChangePage
-    }
+    return { page, headers, map, onClickCreate, onClickDownloadAsCsv, onClickChangePage }
 }
 
 export default useProductCategoriesTable

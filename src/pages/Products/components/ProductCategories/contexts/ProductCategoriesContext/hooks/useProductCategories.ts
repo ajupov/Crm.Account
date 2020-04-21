@@ -3,21 +3,17 @@ import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
 import ProductCategoriesClient from '../../../../../../../../api/products/clients/ProductCategoriesClient'
-import ProductCategory from '../../../../../../../../api/products/models/ProductCategory'
-import ProductCategoryGetPagedListRequest from '../../../../../../../../api/products/models/ProductCategoryGetPagedListRequest'
 
 const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
 
 const useProductCategories = (): ProductCategoriesState => {
     const MaxLimit = 1048576
 
-    const [request, setRequest] = useState<ProductCategoryGetPagedListRequest>(productCategoriesInitialState.request)
-    const [isLoading, setIsLoading] = useState<boolean>(productCategoriesInitialState.isLoading)
-    const [categories, setCategories] = useState<ProductCategory[]>(productCategoriesInitialState.categories)
-    const [total, setTotal] = useState<number>(productCategoriesInitialState.total)
-    const [lastModifyDateTime, setLastModifyDateTime] = useState<string>(
-        productCategoriesInitialState.lastModifyDateTime
-    )
+    const [request, setRequest] = useState(productCategoriesInitialState.request)
+    const [isLoading, setIsLoading] = useState(productCategoriesInitialState.isLoading)
+    const [categories, setCategories] = useState(productCategoriesInitialState.categories)
+    const [total, setTotal] = useState(productCategoriesInitialState.total)
+    const [lastModifyDateTime, setLastModifyDateTime] = useState(productCategoriesInitialState.lastModifyDateTime)
 
     const getPagedList = useCallback(async () => {
         setIsLoading(true)

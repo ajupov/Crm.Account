@@ -1,5 +1,5 @@
 import { Dropdown, Icon, Menu } from 'semantic-ui-react'
-import React, { FC, useContext } from 'react'
+import React, { FC, useCallback, useContext } from 'react'
 
 import Clock from 'react-live-clock'
 import Configuration from '../../../configuration/Configuration'
@@ -10,16 +10,19 @@ const DesktopMenu: FC = () => {
     const configuration = new Configuration()
     const { name } = useContext(UserInfoContext)
 
-    const getUserNameWithAvatar = (): JSX.Element => (
-        <>
-            <Icon
-                circular
-                name="user"
-                style={{ marginRight: '1em', height: '28px', lineHeight: '28px' }}
-                size="large"
-            />
-            {name}
-        </>
+    const getUserNameWithAvatar = useCallback(
+        () => (
+            <>
+                <Icon
+                    circular
+                    name="user"
+                    style={{ marginRight: '1em', height: '28px', lineHeight: '28px' }}
+                    size="large"
+                />
+                {name}
+            </>
+        ),
+        [name]
     )
 
     return (

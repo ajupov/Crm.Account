@@ -1,5 +1,5 @@
 import { Button, List, Table } from 'semantic-ui-react'
-import React, { FC, useCallback } from 'react'
+import React, { FC, useCallback, useMemo } from 'react'
 
 interface TableBodyCellProps {
     value?: string | string[]
@@ -51,6 +51,7 @@ const TableBody: FC<TableBodyProps> = ({ rows, hasActions }) => {
             if (row.id && row.onClickDeleteButton) {
                 row.onClickDeleteButton(row.id)
             }
+
             event.stopPropagation()
         },
         []
@@ -67,42 +68,50 @@ const TableBody: FC<TableBodyProps> = ({ rows, hasActions }) => {
         []
     )
 
-    const renderCellArrayValue = (values: string[]): JSX.Element[] =>
-        values.map((value, index) => <List.Item key={index}>{value}</List.Item>)
+    const renderCellArrayValue = useCallback(
+        (values: string[]) => values.map((value, index) => <List.Item key={index}>{value}</List.Item>),
+        []
+    )
 
-    const renderCells = (row: TableBodyRowProps): JSX.Element[] =>
-        row.cells.map((cell, index) => (
-            <Table.Cell textAlign={cell.textAlign ?? 'left'} key={index}>
-                {cell.value instanceof Array ? <List>{renderCellArrayValue(cell.value)}</List> : cell.value}
-            </Table.Cell>
-        ))
+    const renderCells = useCallback(
+        (row: TableBodyRowProps) =>
+            row.cells.map((cell, index) => (
+                <Table.Cell textAlign={cell.textAlign ?? 'left'} key={index}>
+                    {cell.value instanceof Array ? <List>{renderCellArrayValue(cell.value)}</List> : cell.value}
+                </Table.Cell>
+            )),
+        [renderCellArrayValue]
+    )
 
-    const renderRows = (): JSX.Element | JSX.Element[] =>
-        rows.map(row => (
-            <Table.Row
-                negative={row.isDeleted}
-                style={{ cursor: row.onClickRow ? 'pointer' : 'default' }}
-                onClick={onClick(row)}
-                key={row.id}
-            >
-                {renderCells(row)}
-                {hasActions && (
-                    <Table.Cell textAlign="center" width={2}>
-                        <Button.Group basic compact fluid size="mini">
-                            {row.onClickEditButton && <Button onClick={onClickEdit(row)} icon="edit" />}
-                            {!row.isDeleted && row.onClickDeleteButton && (
-                                <Button onClick={onClickDelete(row)} icon="trash" />
-                            )}
-                            {row.isDeleted && row.onClickRestoreButton && (
-                                <Button onClick={onClickRestore(row)} icon="redo" />
-                            )}
-                        </Button.Group>
-                    </Table.Cell>
-                )}
-            </Table.Row>
-        ))
+    const rowComponents = useMemo(
+        () =>
+            rows.map(row => (
+                <Table.Row
+                    negative={row.isDeleted}
+                    style={{ cursor: row.onClickRow ? 'pointer' : 'default' }}
+                    onClick={onClick(row)}
+                    key={row.id}
+                >
+                    {renderCells(row)}
+                    {hasActions && (
+                        <Table.Cell textAlign="center" width={2}>
+                            <Button.Group basic compact fluid size="mini">
+                                {row.onClickEditButton && <Button onClick={onClickEdit(row)} icon="edit" />}
+                                {!row.isDeleted && row.onClickDeleteButton && (
+                                    <Button onClick={onClickDelete(row)} icon="trash" />
+                                )}
+                                {row.isDeleted && row.onClickRestoreButton && (
+                                    <Button onClick={onClickRestore(row)} icon="redo" />
+                                )}
+                            </Button.Group>
+                        </Table.Cell>
+                    )}
+                </Table.Row>
+            )),
+        [hasActions, onClick, onClickDelete, onClickEdit, onClickRestore, renderCells, rows]
+    )
 
-    return <Table.Body>{renderRows()}</Table.Body>
+    return <Table.Body>{rowComponents}</Table.Body>
 }
 
 export default TableBody

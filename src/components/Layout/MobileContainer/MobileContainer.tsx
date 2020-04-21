@@ -1,5 +1,5 @@
 import { Menu, Responsive, Segment, Sidebar } from 'semantic-ui-react'
-import React, { FC, useState } from 'react'
+import React, { FC, useCallback, useState } from 'react'
 
 import MobileMenu from './MobileMenu'
 import MobileSidebarMenu from './MobileSidebarMenu'
@@ -7,13 +7,9 @@ import MobileSidebarMenu from './MobileSidebarMenu'
 const MobileContainer: FC = ({ children }) => {
     const [isSidebarMenuVisible, setSidebarMenuVisible] = useState(false)
 
-    const showMenu = (): void => {
-        setSidebarMenuVisible(true)
-    }
+    const showMenu = useCallback((): void => setSidebarMenuVisible(true), [])
 
-    const hideMenu = (): void => {
-        setSidebarMenuVisible(false)
-    }
+    const hideMenu = useCallback((): void => setSidebarMenuVisible(false), [])
 
     return (
         <Responsive as={Sidebar.Pushable} maxWidth={Responsive.onlyMobile.maxWidth}>

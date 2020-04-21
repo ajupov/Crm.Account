@@ -21,8 +21,8 @@ const ProductCategoryViewForm: FC = () => {
             onClickEdit={onClickEdit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
-            onClickCancel={onClickCancel}
             onClickHistory={onClickHistory}
+            onClickCancel={onClickCancel}
         />
     )
 }

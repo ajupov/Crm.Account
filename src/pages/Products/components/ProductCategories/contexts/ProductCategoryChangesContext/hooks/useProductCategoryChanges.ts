@@ -4,8 +4,6 @@ import ProductCategoryChangesState, {
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import ProductCategoryChange from '../../../../../../../../api/products/models/ProductCategoryChange'
-import ProductCategoryChangeGetPagedListRequest from '../../../../../../../../api/products/models/ProductCategoryChangeGetPagedListRequest'
 import ProductCategoryChangesClient from '../../../../../../../../api/products/clients/ProductCategoryChangesClient'
 import { useParams } from 'react-router'
 
@@ -15,12 +13,10 @@ const useProductCategoryChanges = (): ProductCategoryChangesState => {
     const MaxLimit = 1048576
 
     const { id } = useParams()
-    const [request, setRequest] = useState<ProductCategoryChangeGetPagedListRequest>(
-        productCategoryChangesInitialState.request
-    )
-    const [isLoading, setIsLoading] = useState<boolean>(productCategoryChangesInitialState.isLoading)
-    const [changes, setChanges] = useState<ProductCategoryChange[]>(productCategoryChangesInitialState.changes)
-    const [total, setTotal] = useState<number>(productCategoryChangesInitialState.total)
+    const [request, setRequest] = useState(productCategoryChangesInitialState.request)
+    const [isLoading, setIsLoading] = useState(productCategoryChangesInitialState.isLoading)
+    const [changes, setChanges] = useState(productCategoryChangesInitialState.changes)
+    const [total, setTotal] = useState(productCategoryChangesInitialState.total)
 
     const getPagedList = useCallback(async () => {
         if (!id) {

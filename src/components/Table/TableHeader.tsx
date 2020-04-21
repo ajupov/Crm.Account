@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 import { SemanticWIDTHS, Table } from 'semantic-ui-react'
 
 export interface TableHeaderCellProps {
@@ -17,7 +17,7 @@ export interface TableHeaderProps {
 type SemanticSortedType = 'ascending' | 'descending' | undefined
 
 const TableHeader: FC<TableHeaderProps> = ({ headers, hasActions }) => {
-    const getSorted = (cell: TableHeaderCellProps): SemanticSortedType => {
+    const getSorted = useCallback((cell: TableHeaderCellProps) => {
         switch (cell.orderBy) {
             case 'asc':
                 return 'ascending'
@@ -26,14 +26,17 @@ const TableHeader: FC<TableHeaderProps> = ({ headers, hasActions }) => {
             default:
                 return void 0
         }
-    }
+    }, [])
 
-    const renderCells = (): JSX.Element[] =>
-        headers.map(cell => (
-            <Table.HeaderCell width={cell.width} key={cell.key} onClick={cell.onClick} sorted={getSorted(cell)}>
-                {cell.label}
-            </Table.HeaderCell>
-        ))
+    const renderCells = useCallback(
+        () =>
+            headers.map(cell => (
+                <Table.HeaderCell width={cell.width} key={cell.key} onClick={cell.onClick} sorted={getSorted(cell)}>
+                    {cell.label}
+                </Table.HeaderCell>
+            )),
+        [getSorted, headers]
+    )
 
     return (
         <Table.Header>

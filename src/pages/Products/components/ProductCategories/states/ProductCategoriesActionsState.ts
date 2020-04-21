@@ -1,5 +1,6 @@
 export default interface ProductCategoriesActionsState {
     isLoading: boolean
+    ids: string[]
     setIds: (ids: string[]) => void
     isDeleting: boolean
     delete: () => Promise<void>
@@ -11,6 +12,7 @@ export default interface ProductCategoriesActionsState {
 
 export const productCategoriesActionsInitialState: ProductCategoriesActionsState = {
     isLoading: false,
+    ids: [],
     setIds: (_: string[]) => void 0,
     isDeleting: false,
     setIsDeleting: (_: boolean) => void 0,

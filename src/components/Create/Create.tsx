@@ -1,9 +1,9 @@
 import { Button, Checkbox, CheckboxProps, Form, Icon, Input, InputOnChangeData } from 'semantic-ui-react'
-import React, { FC } from 'react'
+import React, { FC, useMemo } from 'react'
 
 import BackLink from '../BackLink/BackLink'
 
-export type FilterFieldType = 'text' | 'date' | 'checkbox'
+export type CreateFieldProps = TextCreateFieldProps | DateCreateFieldProps | CheckboxCreateFieldProps
 
 export interface TextCreateFieldProps {
     required: boolean
@@ -28,8 +28,6 @@ export interface CheckboxCreateFieldProps {
     onChange: (_: any, { value }: CheckboxProps) => void
 }
 
-export type CreateFieldProps = TextCreateFieldProps | DateCreateFieldProps | CheckboxCreateFieldProps
-
 export interface CreateProps {
     fields: CreateFieldProps[]
     isConfirmEnabled: boolean
@@ -38,39 +36,52 @@ export interface CreateProps {
 }
 
 const Create: FC<CreateProps> = ({ fields, isConfirmEnabled, onClickConfirm, onClickCancel }) => {
-    const renderFields = (): (JSX.Element | null)[] =>
-        fields.map(x => {
-            switch (x.type) {
-                case 'text':
-                    return (
-                        <Form.Field required={x.required} key={x.topLabel}>
-                            <label>{x.topLabel}:</label>
-                            <Input type="text" placeholder={x.topLabel} value={x.value ?? ''} onChange={x.onChange} />
-                        </Form.Field>
-                    )
-                case 'date':
-                    return (
-                        <Form.Field required={x.required} key={x.topLabel}>
-                            <label>{x.topLabel}:</label>
-                            <Input type="date" placeholder={x.topLabel} value={x.value ?? ''} onChange={x.onChange} />
-                        </Form.Field>
-                    )
-                case 'checkbox':
-                    return (
-                        <Form.Field key={x.label}>
-                            <Checkbox label={x.label} checked={x.checked} onChange={x.onChange} />
-                        </Form.Field>
-                    )
-                default:
-                    return null
-            }
-        })
+    const fieldComponents = useMemo(
+        () =>
+            fields.map(x => {
+                switch (x.type) {
+                    case 'text':
+                        return (
+                            <Form.Field required={x.required} key={x.topLabel}>
+                                <label>{x.topLabel}:</label>
+                                <Input
+                                    type="text"
+                                    placeholder={x.topLabel}
+                                    value={x.value ?? ''}
+                                    onChange={x.onChange}
+                                />
+                            </Form.Field>
+                        )
+                    case 'date':
+                        return (
+                            <Form.Field required={x.required} key={x.topLabel}>
+                                <label>{x.topLabel}:</label>
+                                <Input
+                                    type="date"
+                                    placeholder={x.topLabel}
+                                    value={x.value ?? ''}
+                                    onChange={x.onChange}
+                                />
+                            </Form.Field>
+                        )
+                    case 'checkbox':
+                        return (
+                            <Form.Field key={x.label}>
+                                <Checkbox label={x.label} checked={x.checked} onChange={x.onChange} />
+                            </Form.Field>
+                        )
+                    default:
+                        return null
+                }
+            }),
+        [fields]
+    )
 
     return (
         <>
             <BackLink onClick={onClickCancel} />
             <Form onSubmit={onClickConfirm}>
-                {renderFields()}
+                {fieldComponents}
                 <Form.Field>
                     <Button.Group basic floated="right">
                         <Button type="reset" onClick={onClickCancel}>

@@ -1,5 +1,5 @@
 import { Button, Card, Icon } from 'semantic-ui-react'
-import React, { FC, useCallback } from 'react'
+import React, { FC, useCallback, useMemo } from 'react'
 import { getCreateDateTimeText, getLastChangeDateTimeText as getLastModifyDateTimeText } from '../../helpers/textHelper'
 
 import BackLink from '../BackLink/BackLink'
@@ -38,13 +38,15 @@ const View: FC<ViewProps> = ({
     onClickDelete,
     onClickRestore
 }) => {
-    const renderData = (data: ViewDataProps[]): JSX.Element[] =>
+    const renderData = useMemo(
         data.map(x => (
             <div key={x.label} style={{ marginBottom: '20px' }}>
                 {x.label && <p>{x.label}:</p>}
                 {x.value && <b>{x.value}</b>}
             </div>
-        ))
+        )),
+        []
+    )
 
     const _onClickEdit = useCallback(
         (event: React.MouseEvent) => {
