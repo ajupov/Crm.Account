@@ -6,15 +6,23 @@ import ProductCategoryChangesFilter from './components/ProductCategoryChangesFil
 import ProductCategoryChangesTable from './components/ProductCategoryChangesTable/ProductCategoryChangesTable'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
 import { setPageTitle } from '../../../../../../helpers/pageHelper'
+import useProductCategoryChangesView from './hooks/useProductCategoryChangesView'
 
 const ProductCategoryChanges: FC = () => {
     const title = 'История изменений'
+
+    const { onClickCancel } = useProductCategoryChangesView()
 
     useEffect(() => setPageTitle(title), [])
 
     return (
         <ProductCategoryChangesContextProvider>
-            <Page title={title} firstSidebar={<ProductsMenu />} secondSidebar={<ProductCategoryChangesFilter />}>
+            <Page
+                onClickCancel={onClickCancel}
+                title={title}
+                firstSidebar={<ProductsMenu />}
+                secondSidebar={<ProductCategoryChangesFilter />}
+            >
                 <ProductCategoryChangesTable />
             </Page>
         </ProductCategoryChangesContextProvider>
