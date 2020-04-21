@@ -1,11 +1,11 @@
 import React, { FC, useContext } from 'react'
 
-import ProductCategoriesContext from '../../contexts/ProductCategoriesContext/ProductCategoriesContext'
+import ProductCategoriesActionsContext from '../../contexts/ProductCategoriesActionsContext/ProductCategoriesActionsContext'
 import Restore from '../../../../../../components/Restore/Restore'
 import useProductCategoryRestore from './hooks/useProductCategoryRestore'
 
 const ProductCategoryRestore: FC = () => {
-    const state = useContext(ProductCategoriesContext)
+    const state = useContext(ProductCategoriesActionsContext)
     const { onClickConfirm, onClickCancel } = useProductCategoryRestore()
 
     return (

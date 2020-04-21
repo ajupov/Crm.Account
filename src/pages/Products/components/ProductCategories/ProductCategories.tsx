@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react'
 
 import Page from '../../../../components/Page/Page'
+import ProductCategoriesActionsContextProvider from './contexts/ProductCategoriesActionsContext/ProductCategoriesActionsContextProvider'
 import ProductCategoriesContextProvider from './contexts/ProductCategoriesContext/ProductCategoriesContextProvider'
 import ProductCategoriesFilter from './components/ProductCategoriesFilter/ProductCategoriesFilter'
 import ProductCategoriesTable from './components/ProductCategoriesTable/ProductCategoriesTable'
@@ -16,15 +17,17 @@ const ProductCategories: FC = () => {
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <ProductCategoriesContextProvider>
-            <ProductCategoryContextProvider>
-                <Page title={title} firstSidebar={<ProductsMenu />} secondSidebar={<ProductCategoriesFilter />}>
-                    <ProductCategoriesTable />
-                    <ProductCategoryDelete />
-                    <ProductCategoryRestore />
-                </Page>
-            </ProductCategoryContextProvider>
-        </ProductCategoriesContextProvider>
+        <ProductCategoriesActionsContextProvider>
+            <ProductCategoriesContextProvider>
+                <ProductCategoryContextProvider>
+                    <Page title={title} firstSidebar={<ProductsMenu />} secondSidebar={<ProductCategoriesFilter />}>
+                        <ProductCategoriesTable />
+                        <ProductCategoryDelete />
+                        <ProductCategoryRestore />
+                    </Page>
+                </ProductCategoryContextProvider>
+            </ProductCategoriesContextProvider>
+        </ProductCategoriesActionsContextProvider>
     )
 }
 

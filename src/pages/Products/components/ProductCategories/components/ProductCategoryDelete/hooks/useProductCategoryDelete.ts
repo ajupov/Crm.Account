@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react'
 
-import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext/ProductCategoriesContext'
+import ProductCategoriesActionsContext from '../../../contexts/ProductCategoriesActionsContext/ProductCategoriesActionsContext'
 import { ProductCategoriesRoutes } from '../../../routes/ProductCategoriesRoutes'
 import { useHistory } from 'react-router'
 
@@ -11,7 +11,7 @@ interface UseProductCategoryDelete {
 
 const useProductCategoryDelete = (): UseProductCategoryDelete => {
     const history = useHistory()
-    const state = useContext(ProductCategoriesContext)
+    const state = useContext(ProductCategoriesActionsContext)
 
     const onClickConfirm = useCallback(async () => {
         await state.delete()

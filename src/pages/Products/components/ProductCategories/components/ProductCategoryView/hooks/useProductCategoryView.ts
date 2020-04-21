@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react'
 
-import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext/ProductCategoriesContext'
+import ProductCategoriesActionsContext from '../../../contexts/ProductCategoriesActionsContext/ProductCategoriesActionsContext'
 import { ProductCategoriesRoutes } from '../../../routes/ProductCategoriesRoutes'
 import ProductCategory from '../../../../../../../../api/products/models/ProductCategory'
 import { ViewDataProps } from '../../../../../../../components/View/View'
@@ -17,7 +17,7 @@ interface UseProductCategoryViewReturn {
 
 const useProductCategoryView = (): UseProductCategoryViewReturn => {
     const history = useHistory()
-    const state = useContext(ProductCategoriesContext)
+    const state = useContext(ProductCategoriesActionsContext)
 
     const onClickEdit = useCallback((id: string) => history.push(`${ProductCategoriesRoutes.Edit}/${id}`), [history])
 

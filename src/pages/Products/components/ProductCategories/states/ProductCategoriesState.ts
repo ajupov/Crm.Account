@@ -9,13 +9,6 @@ export default interface ProductCategoriesState {
     categories: ProductCategory[]
     total: number
     lastModifyDateTime: string
-    setIds: (ids: string[]) => void
-    isDeleting: boolean
-    delete: () => Promise<void>
-    setIsDeleting: (state: boolean) => void
-    isRestoring: boolean
-    setIsRestoring: (state: boolean) => void
-    restore: () => Promise<void>
     getAll: () => Promise<ProductCategoryGetPagedListResponse>
 }
 
@@ -36,12 +29,5 @@ export const productCategoriesInitialState: ProductCategoriesState = {
     categories: [],
     total: 0,
     lastModifyDateTime: '',
-    setIds: (_: string[]) => void 0,
-    isDeleting: false,
-    setIsDeleting: (_: boolean) => void 0,
-    delete: () => Promise.resolve(void 0),
-    isRestoring: false,
-    setIsRestoring: (_: boolean) => void 0,
-    restore: () => Promise.resolve(void 0),
     getAll: () => Promise.resolve({ totalCount: 0 })
 }
