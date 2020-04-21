@@ -18,7 +18,7 @@ const Restore: FC<RestoreProps> = ({ isRestoring, title, content, onClickConfirm
                 <Button type="reset" basic onClick={onClickCancel}>
                     Нет
                 </Button>
-                <Button type="submit" disabled={!onClickConfirm}>
+                <Button type="submit" onClick={onClickConfirm}>
                     Да
                 </Button>
             </Button.Group>
