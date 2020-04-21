@@ -1,8 +1,8 @@
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'
+import { FilterFieldProps } from '../../../../../../../../../components/Filter/Filter'
 import { InputOnChangeData } from 'semantic-ui-react'
-import ProductCategoryChangesContext from '../../../contexts/ProductCategoryChangesContext/ProductCategoryChangesContext'
+import ProductCategoryChangesContext from '../../../../../contexts/ProductCategoryChangesContext/ProductCategoryChangesContext'
 
 interface UseProductCategoriesFiltersReturn {
     fields: FilterFieldProps[]

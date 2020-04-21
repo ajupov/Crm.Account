@@ -2,8 +2,8 @@ import React, { FC, useEffect } from 'react'
 
 import Page from '../../../../../../components/Page/Page'
 import ProductCategoryChangesContextProvider from '../../contexts/ProductCategoryChangesContext/ProductCategoryChangesContextProvider'
-import ProductCategoryChangesFilter from '../ProductCategoryChangesFilter/ProductCategoryChangesFilter'
-import ProductCategoryChangesTable from '../ProductCategoryChangesTable/ProductCategoryChangesTable'
+import ProductCategoryChangesFilter from './components/ProductCategoryChangesFilter/ProductCategoryChangesFilter'
+import ProductCategoryChangesTable from './components/ProductCategoryChangesTable/ProductCategoryChangesTable'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
 import { setPageTitle } from '../../../../../../helpers/pageHelper'
 

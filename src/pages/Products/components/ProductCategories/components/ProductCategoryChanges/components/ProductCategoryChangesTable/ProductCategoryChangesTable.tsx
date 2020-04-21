@@ -1,7 +1,7 @@
 import React, { FC, useContext } from 'react'
 
-import ProductCategoryChangesContext from '../../contexts/ProductCategoryChangesContext/ProductCategoryChangesContext'
-import Table from '../../../../../../components/Table/Table'
+import ProductCategoryChangesContext from '../../../../contexts/ProductCategoryChangesContext/ProductCategoryChangesContext'
+import Table from '../../../../../../../../components/Table/Table'
 import useProductCategoryChangesTable from './hooks/useProductCategoryChangesTable'
 
 const ProductCategoryChangesTable: FC = () => {

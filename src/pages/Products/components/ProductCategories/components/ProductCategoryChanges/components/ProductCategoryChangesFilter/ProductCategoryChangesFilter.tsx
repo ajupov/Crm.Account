@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import Filter from '../../../../../../components/Filter/Filter'
+import Filter from '../../../../../../../../components/Filter/Filter'
 import useProductCategoryChangesFilters from './hooks/useProductCategoryChangesFilters'
 
 const ProductCategoryChangesFilter: FC = () => {
