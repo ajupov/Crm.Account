@@ -41,7 +41,7 @@ const useProductCategoryView = (): UseProductCategoryViewReturn => {
         history
     ])
 
-    const onClickCancel = useCallback((): void => history.push(ProductCategoriesRoutes.Index), [history])
+    const onClickCancel = useCallback((): void => history.goBack(), [history])
 
     const map = useCallback(
         (category: ProductCategory): ViewDataProps[] => [

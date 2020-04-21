@@ -39,7 +39,7 @@ const useProductCategoryCreate = (): UseProductCategoryCreateReturn => {
         history.push(ProductCategoriesRoutes.Index)
     }, [state, history])
 
-    const onClickCancel = useCallback((): void => history.push(ProductCategoriesRoutes.Index), [history])
+    const onClickCancel = useCallback((): void => history.goBack(), [history])
 
     const fields: CreateFieldProps[] = useMemo(
         () => [

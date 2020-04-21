@@ -40,7 +40,7 @@ const useProductCategoryEdit = (): UseProductCategoryEditReturn => {
         history.push(ProductCategoriesRoutes.Index)
     }, [state, history])
 
-    const onClickCancel = useCallback((): void => history.push(ProductCategoriesRoutes.Index), [history])
+    const onClickCancel = useCallback((): void => history.goBack(), [history])
 
     const onClickHistory = useCallback((id: string): void => history.push(`${ProductCategoriesRoutes.Changes}/${id}`), [
         history
