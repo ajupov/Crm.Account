@@ -15,7 +15,7 @@ const DesktopContainer: FC = ({ children }) => (
             <Sidebar.Pushable>
                 <Sidebar
                     as={Menu}
-                    style={{ backgroundColor: '#37474F', width: '115px' }}
+                    style={{ backgroundColor: '#37474F', width: '130px' }}
                     inverted
                     vertical
                     visible

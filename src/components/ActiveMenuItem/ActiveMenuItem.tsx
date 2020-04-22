@@ -9,7 +9,7 @@ interface ActiveMenuItemProps {
 }
 
 const ActiveMenuItem: FC<ActiveMenuItemProps> = ({ path, onClick, children }) => (
-    <Menu.Item as={Link} to={path} onClick={onClick}>
+    <Menu.Item as={Link} to={path} active={window.location.pathname === path} onClick={onClick}>
         {children}
     </Menu.Item>
 )

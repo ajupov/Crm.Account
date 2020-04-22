@@ -1,4 +1,4 @@
-import { Dropdown, Icon, Menu } from 'semantic-ui-react'
+import { Dropdown, Icon, Image, Menu } from 'semantic-ui-react'
 import React, { FC, useCallback, useContext } from 'react'
 
 import Clock from 'react-live-clock'
@@ -27,8 +27,8 @@ const DesktopMenu: FC = () => {
 
     return (
         <>
-            <Menu.Item as={Link} to="/" style={{ width: '115px' }}>
-                Главная
+            <Menu.Item as={Link} to="/" style={{ width: '130px' }}>
+                <Image avatar src="/content/logo.png" style={{ marginRight: '10px' }} /> Lite CRM
             </Menu.Item>
             <Menu.Item position="right" header>
                 <Clock format="HH:mm" ticking={true} timezone="Europe/Moscow" />

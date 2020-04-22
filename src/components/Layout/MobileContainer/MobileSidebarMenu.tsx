@@ -24,16 +24,19 @@ const MobileSidebarMenu: FC<MobileSidebarMenuProps> = ({ onClickItem }) => {
         [name]
     )
 
-    const renderItem = (title: string, path: string, icon: SemanticICONS): JSX.Element => (
-        <ActiveMenuItem path={path} onClick={onClickItem}>
-            <Icon name={icon} style={{ float: 'left', marginRight: '12px' }} />
-            {title}
-        </ActiveMenuItem>
+    const renderItem = useCallback(
+        (title: string, path: string, icon: SemanticICONS) => (
+            <Menu.Item as={Link} to={path} onClick={onClickItem}>
+                <Icon name={icon} style={{ float: 'left', marginRight: '12px' }} />
+                {title}
+            </Menu.Item>
+        ),
+        [onClickItem]
     )
 
     return (
         <>
-            <Menu.Item as={Link} to="settings" style={{ height: '68px', lineHeight: '48px' }}>
+            <Menu.Item as={Link} to="settings" onClick={onClickItem} style={{ height: '68px', lineHeight: '48px' }}>
                 {AvatarAndUserElement}
             </Menu.Item>
             {renderItem('Дашбоард', '', 'dashboard')}

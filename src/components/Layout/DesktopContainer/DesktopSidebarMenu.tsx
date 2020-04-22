@@ -1,15 +1,15 @@
-import { Icon, SemanticICONS } from 'semantic-ui-react'
+import { Icon, Menu, SemanticICONS } from 'semantic-ui-react'
 import React, { FC, useCallback } from 'react'
 
-import ActiveMenuItem from '../../ActiveMenuItem/ActiveMenuItem'
+import { Link } from 'react-router-dom'
 
 const DesktopSidebarMenu: FC = () => {
     const renderItem = useCallback(
         (title: string, path: string, icon: SemanticICONS): JSX.Element => (
-            <ActiveMenuItem path={path}>
+            <Menu.Item as={Link} to={path}>
                 <Icon name={icon} />
                 {title}
-            </ActiveMenuItem>
+            </Menu.Item>
         ),
         []
     )
@@ -17,7 +17,7 @@ const DesktopSidebarMenu: FC = () => {
     return (
         <>
             {renderItem('Дашбоард', '/', 'dashboard')}
-            {/* {renderItem('Календарь', '/calendar', 'calendar')} */}
+            {renderItem('Календарь', '/calendar', 'calendar')}
             {renderItem('Задачи', '/activities', 'tasks')}
             {renderItem('Сделки', '/deals', 'handshake')}
             {renderItem('Лиды', '/leads', 'filter')}

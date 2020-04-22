@@ -1,7 +1,7 @@
 export function setPageTitle(title: string): void {
-    document.title = 'LiteCRM' + (title ? ` - ${title}` : '')
+    document.title = 'Lite CRM' + (title ? ` - ${title}` : '')
 }
 
 export function getPageTitle(): string {
-    return document.title.replace('LiteCRM - ', '')
+    return document.title.replace('Lite CRM - ', '')
 }

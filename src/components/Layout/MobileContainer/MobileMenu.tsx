@@ -1,4 +1,4 @@
-import { Icon, Menu } from 'semantic-ui-react'
+import { Icon, Image, Menu } from 'semantic-ui-react'
 import React, { FC } from 'react'
 
 import Clock from 'react-live-clock'
@@ -14,9 +14,11 @@ const MobileMenu: FC<MobileMenuProps> = ({ onClickShow }) => (
             <Icon name="sidebar" />
         </Menu.Item>
         <Menu.Item position="right">
+            <Image avatar src="/content/logo.png" style={{ marginRight: '10px' }} /> Lite CRM
+        </Menu.Item>
+        <Menu.Item position="right">
             <Clock format="HH:mm" ticking={true} timezone="Europe/Moscow" />
         </Menu.Item>
-        <Menu.Item position="right">{getPageTitle()}</Menu.Item>
     </>
 )
 
