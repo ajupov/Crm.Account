@@ -1,7 +1,6 @@
 import { Icon, Menu, SemanticICONS } from 'semantic-ui-react'
 import React, { FC, useCallback, useContext, useMemo } from 'react'
 
-import ActiveMenuItem from '../../ActiveMenuItem/ActiveMenuItem'
 import Configuration from '../../../configuration/Configuration'
 import { Link } from 'react-router-dom'
 import UserInfoContext from '../../UserInfo/contexts/UserInfoContext'
@@ -11,8 +10,8 @@ interface MobileSidebarMenuProps {
 }
 
 const MobileSidebarMenu: FC<MobileSidebarMenuProps> = ({ onClickItem }) => {
-    const configuration = new Configuration()
     const { name } = useContext(UserInfoContext)
+    const configuration = new Configuration()
 
     const AvatarAndUserElement = useMemo(
         () => (

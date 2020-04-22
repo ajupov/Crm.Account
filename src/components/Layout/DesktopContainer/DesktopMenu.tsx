@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom'
 import UserInfoContext from '../../UserInfo/contexts/UserInfoContext'
 
 const DesktopMenu: FC = () => {
-    const configuration = new Configuration()
     const { name } = useContext(UserInfoContext)
+    const configuration = new Configuration()
 
     const getUserNameWithAvatar = useCallback(
         () => (
@@ -33,14 +33,8 @@ const DesktopMenu: FC = () => {
             <Menu.Item position="right" header>
                 <Clock format="HH:mm" ticking={true} timezone="Europe/Moscow" />
             </Menu.Item>
-            <Menu.Item
-                as={Dropdown}
-                position="right"
-                simple
-                trigger={getUserNameWithAvatar()}
-                style={{ padding: '6px 33px' }}
-            >
-                <Dropdown.Menu>
+            <Menu.Item as={Dropdown} position="right" trigger={getUserNameWithAvatar()} style={{ padding: '6px 33px' }}>
+                <Dropdown.Menu direction="left">
                     <Dropdown.Item as={Link} to="/settings">
                         <Icon name="user circle" />
                         Настройки аккаунта
