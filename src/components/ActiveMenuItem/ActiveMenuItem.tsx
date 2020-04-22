@@ -5,10 +5,11 @@ import { Menu } from 'semantic-ui-react'
 
 interface ActiveMenuItemProps {
     path: string
+    onClick?: () => void
 }
 
-const ActiveMenuItem: FC<ActiveMenuItemProps> = ({ path, children }) => (
-    <Menu.Item as={Link} to={path} active={window.location.pathname === path}>
+const ActiveMenuItem: FC<ActiveMenuItemProps> = ({ path, onClick, children }) => (
+    <Menu.Item as={Link} to={path} onClick={onClick}>
         {children}
     </Menu.Item>
 )

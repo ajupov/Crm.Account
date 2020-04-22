@@ -7,7 +7,7 @@ import DesktopSidebarMenu from './DesktopSidebarMenu'
 const DesktopContainer: FC = ({ children }) => (
     <Responsive minWidth={Responsive.onlyTablet.minWidth}>
         <Segment>
-            <Menu fixed="top" inverted style={{ backgroundColor: '#263238' }} borderless={true}>
+            <Menu fixed="top" inverted style={{ backgroundColor: '#263238' }} borderless>
                 <DesktopMenu />
             </Menu>
         </Segment>
@@ -19,7 +19,6 @@ const DesktopContainer: FC = ({ children }) => (
                     inverted
                     vertical
                     visible
-                    width="thin"
                     icon="labeled"
                 >
                     <DesktopSidebarMenu />

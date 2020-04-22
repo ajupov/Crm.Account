@@ -1,39 +1,30 @@
-import React, { FC } from 'react'
+import { Icon, SemanticICONS } from 'semantic-ui-react'
+import React, { FC, useCallback } from 'react'
 
 import ActiveMenuItem from '../../ActiveMenuItem/ActiveMenuItem'
-import { Icon } from 'semantic-ui-react'
 
-const DesktopSidebarMenu: FC = () => (
-    <>
-        <ActiveMenuItem path="/">
-            <Icon name="dashboard" />
-            Дашбоард
-        </ActiveMenuItem>
-        <ActiveMenuItem path="/calendar">
-            <Icon name="calendar" />
-            Календарь
-        </ActiveMenuItem>
-        <ActiveMenuItem path="/activities">
-            <Icon name="tasks" />
-            Задачи
-        </ActiveMenuItem>
-        <ActiveMenuItem path="/deals">
-            <Icon name="handshake" />
-            Сделки
-        </ActiveMenuItem>
-        <ActiveMenuItem path="/leads">
-            <Icon name="filter" />
-            Лиды
-        </ActiveMenuItem>
-        <ActiveMenuItem path="/contacts">
-            <Icon name="address book" />
-            Контакты
-        </ActiveMenuItem>
-        <ActiveMenuItem path="/products">
-            <Icon name="list ol" />
-            Продукты
-        </ActiveMenuItem>
-    </>
-)
+const DesktopSidebarMenu: FC = () => {
+    const renderItem = useCallback(
+        (title: string, path: string, icon: SemanticICONS): JSX.Element => (
+            <ActiveMenuItem path={path}>
+                <Icon name={icon} />
+                {title}
+            </ActiveMenuItem>
+        ),
+        []
+    )
+
+    return (
+        <>
+            {renderItem('Дашбоард', '/', 'dashboard')}
+            {/* {renderItem('Календарь', '/calendar', 'calendar')} */}
+            {renderItem('Задачи', '/activities', 'tasks')}
+            {renderItem('Сделки', '/deals', 'handshake')}
+            {renderItem('Лиды', '/leads', 'filter')}
+            {renderItem('Контакты', '/contacts', 'address book')}
+            {renderItem('Продукты', '/products', 'list ol')}
+        </>
+    )
+}
 
 export default DesktopSidebarMenu

@@ -22,7 +22,7 @@ const MobileContainer: FC = ({ children }) => {
                 onHide={hideMenu}
                 style={{ backgroundColor: '#37474F' }}
             >
-                <MobileSidebarMenu />
+                <MobileSidebarMenu onClickItem={hideMenu} />
             </Sidebar>
             <Sidebar.Pusher dimmed={isSidebarMenuVisible} style={{ height: '100vh', paddingBottom: 0 }}>
                 <Segment inverted vertical style={{ backgroundColor: '#263238' }}>

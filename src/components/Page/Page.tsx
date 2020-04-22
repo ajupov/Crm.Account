@@ -11,7 +11,7 @@ interface PageProps {
 }
 
 const Page: FC<PageProps> = ({ onClickCancel, title, children, firstSidebar: menu, secondSidebar: secondMenu }) => (
-    <Grid>
+    <Grid style={{ margin: 0 }}>
         <Grid.Column width={11}>
             {children && (
                 <Card fluid>
