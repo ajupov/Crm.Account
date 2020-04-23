@@ -2,7 +2,6 @@ import { Icon, Image, Menu } from 'semantic-ui-react'
 import React, { FC } from 'react'
 
 import Clock from 'react-live-clock'
-import { getPageTitle } from '../../../helpers/pageHelper'
 
 interface MobileMenuProps {
     onClickShow: () => void

@@ -1,4 +1,4 @@
-import { Header, Menu as SemanticMenu } from 'semantic-ui-react'
+import { Header, Responsive, Menu as SemanticMenu } from 'semantic-ui-react'
 import React, { FC, useCallback } from 'react'
 
 import ActiveMenuItem from '../ActiveMenuItem/ActiveMenuItem'
@@ -21,12 +21,21 @@ const Menu: FC<{
     )
 
     return (
-        <SemanticMenu vertical fluid>
-            <SemanticMenu.Item>
-                <Header as="h4">Навигация</Header>
-                {items.map(x => renderMenuItem(x))}
-            </SemanticMenu.Item>
-        </SemanticMenu>
+        <>
+            <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
+                <SemanticMenu fluid tabular size="mini">
+                    {items.map(x => renderMenuItem(x))}
+                </SemanticMenu>
+            </Responsive>
+            <Responsive minWidth={Responsive.onlyMobile.maxWidth}>
+                <SemanticMenu fluid vertical borderless>
+                    <SemanticMenu.Item>
+                        <Header as="h4">Навигация</Header>
+                    </SemanticMenu.Item>
+                    {items.map(x => renderMenuItem(x))}
+                </SemanticMenu>
+            </Responsive>
+        </>
     )
 }
 

@@ -14,8 +14,6 @@ export interface TableHeaderProps {
     hasActions?: boolean
 }
 
-type SemanticSortedType = 'ascending' | 'descending' | undefined
-
 const TableHeader: FC<TableHeaderProps> = ({ headers, hasActions }) => {
     const getSorted = useCallback((cell: TableHeaderCellProps) => {
         switch (cell.orderBy) {
