@@ -95,14 +95,14 @@ const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
             {
                 key: 'Name',
                 label: 'Наименование',
-                width: 11,
+                width: 10,
                 onClick: () => onClickSort('Name'),
                 orderBy: getOrderBy('Name')
             },
             {
                 key: 'CreateDateTime',
                 label: 'Создан',
-                width: 3,
+                width: 4,
                 onClick: () => onClickSort('CreateDateTime'),
                 orderBy: getOrderBy('CreateDateTime')
             }

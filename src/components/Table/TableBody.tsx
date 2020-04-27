@@ -94,7 +94,7 @@ const TableBody: FC<TableBodyProps> = ({ rows, hasActions }) => {
                 >
                     {renderCells(row)}
                     {hasActions && (
-                        <Table.Cell textAlign="center" width={2}>
+                        <Table.Cell textAlign="center">
                             <Button.Group basic compact fluid size="mini">
                                 {row.onClickEditButton && <Button onClick={onClickEdit(row)} icon="edit" />}
                                 {!row.isDeleted && row.onClickDeleteButton && (

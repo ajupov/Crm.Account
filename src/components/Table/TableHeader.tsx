@@ -40,11 +40,7 @@ const TableHeader: FC<TableHeaderProps> = ({ headers, hasActions }) => {
         <Table.Header>
             <Table.Row textAlign="center">
                 {renderCells()}
-                {hasActions && (
-                    <Table.HeaderCell width="1" style={{ pointerEvents: 'none' }}>
-                        Действия
-                    </Table.HeaderCell>
-                )}
+                {hasActions && <Table.HeaderCell width={2} style={{ pointerEvents: 'none' }}></Table.HeaderCell>}
             </Table.Row>
         </Table.Header>
     )

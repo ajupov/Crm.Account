@@ -27,10 +27,10 @@ const TableFooter: FC<TableFooterProps> = ({ page, limit, total, columnsCount, o
                 >
                     <Pagination
                         secondary
-                        firstItem="В начало"
-                        lastItem="В конец"
-                        prevItem="Предыдущая"
-                        nextItem="Следующая"
+                        firstItem={null}
+                        lastItem={null}
+                        prevItem={null}
+                        nextItem={null}
                         activePage={page}
                         totalPages={Math.ceil(total / limit)}
                         onPageChange={onPageChange}

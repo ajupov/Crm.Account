@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useMemo } from 'react'
+import React, { FC, useCallback } from 'react'
 import { Responsive, Table as SemanticUiTable } from 'semantic-ui-react'
 import TableBody, { TableBodyRowProps } from './TableBody'
 import TableFooter, { TableFooterProps } from './TableFooter'
@@ -55,8 +55,12 @@ const Table: FC<TableProps> = ({
                 onClickCreate={onClickCreate}
                 onClickDownloadAsCsv={onClickDownloadAsCsv}
             />
-            <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>{getTable('block')}</Responsive>
-            <Responsive minWidth={Responsive.onlyMobile.maxWidth}>{getTable('table')}</Responsive>
+            <Responsive style={{ overflow: 'auto' }} maxWidth={Responsive.onlyMobile.maxWidth}>
+                {getTable('block')}
+            </Responsive>
+            <Responsive style={{ overflow: 'auto' }} minWidth={Responsive.onlyMobile.maxWidth}>
+                {getTable('table')}
+            </Responsive>
         </>
     )
 }
