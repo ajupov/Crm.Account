@@ -34,7 +34,7 @@ const TableFooter: FC<TableFooterProps> = ({ page, limit, total, columnsCount, o
                         activePage={page}
                         totalPages={Math.ceil(total / limit)}
                         onPageChange={onPageChange}
-                        pageItem={{ style: { display: 'block' } }}
+                        pageItem={{ style: { display: 'block', minWidth: 0, padding: '10px' } }}
                     />
                 </Table.Cell>
             </Table.Row>

@@ -15,12 +15,12 @@ interface UseProductCategoriesFiltersReturn {
 
 const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
     const state = useContext(ProductCategoriesContext)
-    const [name, setName] = useState<string>('')
-    const [isDeleted, setIsDeleted] = useState<boolean | undefined>(false)
-    const [minCreateDate, setMinCreateDate] = useState<string>('')
-    const [maxCreateDate, setMaxCreateDate] = useState<string>('')
-    const [minModifyDate, setMinModifyDate] = useState<string>('')
-    const [maxModifyDate, setMaxModifyDate] = useState<string>('')
+    const [name, setName] = useState<string>(state.request.name ?? '')
+    const [isDeleted, setIsDeleted] = useState<boolean | undefined>(state.request.isDeleted)
+    const [minCreateDate, setMinCreateDate] = useState<string>(state.request.minCreateDate ?? '')
+    const [maxCreateDate, setMaxCreateDate] = useState<string>(state.request.maxCreateDate ?? '')
+    const [minModifyDate, setMinModifyDate] = useState<string>(state.request.minModifyDate ?? '')
+    const [maxModifyDate, setMaxModifyDate] = useState<string>(state.request.maxModifyDate ?? '')
     const [isApplyEnabled, setIsApplyEnabled] = useState<boolean>(false)
     const [isResetEnabled, setIsResetEnabled] = useState<boolean>(false)
 
