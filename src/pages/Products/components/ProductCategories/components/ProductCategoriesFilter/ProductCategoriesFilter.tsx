@@ -1,18 +1,18 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 
 import Filter from '../../../../../../components/Filter/Filter'
-import useProductCategoriesFilters from './hooks/useProductCategoriesFilters'
+import ProductCategoriesFiltersContext from '../../contexts/ProductCategoriesFiltersContext/ProductCategoriesFiltersContext'
 
 const ProductCategoriesFilter: FC = () => {
-    const { fields, isApplyEnabled, onApply, isResetEnabled, onReset } = useProductCategoriesFilters()
+    const state = useContext(ProductCategoriesFiltersContext)
 
     return (
         <Filter
-            fields={fields}
-            isApplyEnabled={isApplyEnabled}
-            onApply={onApply}
-            isResetEnabled={isResetEnabled}
-            onReset={onReset}
+            fields={state.fields}
+            isApplyEnabled={state.isApplyEnabled}
+            onApply={state.onApply}
+            isResetEnabled={state.isResetEnabled}
+            onReset={state.onReset}
         />
     )
 }

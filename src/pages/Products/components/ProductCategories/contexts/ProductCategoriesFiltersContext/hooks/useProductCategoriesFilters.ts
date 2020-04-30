@@ -2,18 +2,11 @@ import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'
-import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext/ProductCategoriesContext'
+import ProductCategoriesContext from '../../ProductCategoriesContext/ProductCategoriesContext'
+import ProductCategoriesFiltersState from '../../../states/ProductCategoriesFiltersState'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
 
-interface UseProductCategoriesFiltersReturn {
-    fields: FilterFieldProps[]
-    isApplyEnabled: boolean
-    onApply: () => void
-    isResetEnabled: boolean
-    onReset: () => void
-}
-
-const useProductCategoriesFilters = (): UseProductCategoriesFiltersReturn => {
+const useProductCategoriesFilters = (): ProductCategoriesFiltersState => {
     const state = useContext(ProductCategoriesContext)
     const [name, setName] = useState<string>(state.request.name ?? '')
     const [isDeleted, setIsDeleted] = useState<boolean | undefined>(state.request.isDeleted)

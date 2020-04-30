@@ -4,6 +4,7 @@ import Page from '../../../../components/Page/Page'
 import ProductCategoriesActionsContextProvider from './contexts/ProductCategoriesActionsContext/ProductCategoriesActionsContextProvider'
 import ProductCategoriesContextProvider from './contexts/ProductCategoriesContext/ProductCategoriesContextProvider'
 import ProductCategoriesFilter from './components/ProductCategoriesFilter/ProductCategoriesFilter'
+import ProductCategoriesFiltersContextProvider from './contexts/ProductCategoriesFiltersContext/ProductCategoriesFiltersContextProvider'
 import ProductCategoriesTable from './components/ProductCategoriesTable/ProductCategoriesTable'
 import ProductCategoryContextProvider from './contexts/ProductCategoryContext/ProductCategoryContextProvider'
 import ProductCategoryDelete from './components/ProductCategoryDelete/ProductCategoryDelete'
@@ -17,17 +18,19 @@ const ProductCategories: FC = () => {
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <ProductCategoriesActionsContextProvider>
-            <ProductCategoriesContextProvider>
-                <ProductCategoryContextProvider>
-                    <Page title={title} firstSidebar={<ProductsMenu />} secondSidebar={<ProductCategoriesFilter />}>
-                        <ProductCategoriesTable />
-                        <ProductCategoryDelete />
-                        <ProductCategoryRestore />
-                    </Page>
-                </ProductCategoryContextProvider>
-            </ProductCategoriesContextProvider>
-        </ProductCategoriesActionsContextProvider>
+        <ProductCategoriesContextProvider>
+            <ProductCategoriesActionsContextProvider>
+                <ProductCategoriesFiltersContextProvider>
+                    <ProductCategoryContextProvider>
+                        <Page title={title} firstSidebar={<ProductsMenu />} secondSidebar={<ProductCategoriesFilter />}>
+                            <ProductCategoriesTable />
+                            <ProductCategoryDelete />
+                            <ProductCategoryRestore />
+                        </Page>
+                    </ProductCategoryContextProvider>
+                </ProductCategoriesFiltersContextProvider>
+            </ProductCategoriesActionsContextProvider>
+        </ProductCategoriesContextProvider>
     )
 }
 

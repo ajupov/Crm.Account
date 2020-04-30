@@ -7,9 +7,9 @@ import Routes from '../Routes/Routes'
 import UserInfoContext from './contexts/UserInfoContext'
 
 const UserInfoPart: FC = () => {
-    const { isAuthenticated } = useContext(UserInfoContext)
+    const state = useContext(UserInfoContext)
 
-    return isAuthenticated ? (
+    return state.isAuthenticated ? (
         <BrowserRouter>
             <Layout>
                 <Routes />

@@ -10,17 +10,17 @@ interface MobileSidebarMenuProps {
 }
 
 const MobileSidebarMenu: FC<MobileSidebarMenuProps> = ({ onClickItem }) => {
-    const { name } = useContext(UserInfoContext)
+    const state = useContext(UserInfoContext)
     const configuration = new Configuration()
 
     const AvatarAndUserElement = useMemo(
         () => (
             <>
                 <Icon circular name="user" style={{ marginRight: '1em', float: 'left' }} size="large" />
-                {name}
+                {state.name}
             </>
         ),
-        [name]
+        [state.name]
     )
 
     const renderItem = useCallback(

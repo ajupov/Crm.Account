@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import UserInfoContext from '../../UserInfo/contexts/UserInfoContext'
 
 const DesktopMenu: FC = () => {
-    const { name } = useContext(UserInfoContext)
+    const state = useContext(UserInfoContext)
     const configuration = new Configuration()
 
     const getUserNameWithAvatar = useCallback(
@@ -19,10 +19,10 @@ const DesktopMenu: FC = () => {
                     style={{ marginRight: '1em', height: '28px', lineHeight: '28px' }}
                     size="large"
                 />
-                {name}
+                {state.name}
             </>
         ),
-        [name]
+        [state.name]
     )
 
     return (
