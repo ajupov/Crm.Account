@@ -17,7 +17,7 @@ interface UseProductCategoryEditReturn {
 const useProductCategoryEdit = (): UseProductCategoryEditReturn => {
     const history = useHistory()
     const state = useContext(ProductCategoryContext)
-    const [isConfirmEnabled, setIsConfirmEnabled] = useState<boolean>(false)
+    const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeName = useCallback(
         (_, data: InputOnChangeData) => {

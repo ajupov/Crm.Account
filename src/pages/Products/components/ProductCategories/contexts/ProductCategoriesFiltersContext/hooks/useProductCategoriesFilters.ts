@@ -1,21 +1,24 @@
 import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
+import ProductCategoriesFiltersState, {
+    productCategoriesFiltersInitialState
+} from '../../../states/ProductCategoriesFiltersState'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'
 import ProductCategoriesContext from '../../ProductCategoriesContext/ProductCategoriesContext'
-import ProductCategoriesFiltersState from '../../../states/ProductCategoriesFiltersState'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
 
 const useProductCategoriesFilters = (): ProductCategoriesFiltersState => {
     const state = useContext(ProductCategoriesContext)
-    const [name, setName] = useState<string>(state.request.name ?? '')
-    const [isDeleted, setIsDeleted] = useState<boolean | undefined>(state.request.isDeleted)
-    const [minCreateDate, setMinCreateDate] = useState<string>(state.request.minCreateDate ?? '')
-    const [maxCreateDate, setMaxCreateDate] = useState<string>(state.request.maxCreateDate ?? '')
-    const [minModifyDate, setMinModifyDate] = useState<string>(state.request.minModifyDate ?? '')
-    const [maxModifyDate, setMaxModifyDate] = useState<string>(state.request.maxModifyDate ?? '')
-    const [isApplyEnabled, setIsApplyEnabled] = useState<boolean>(false)
-    const [isResetEnabled, setIsResetEnabled] = useState<boolean>(false)
+    const [name, setName] = useState(state.request.name ?? '')
+    const [isDeleted, setIsDeleted] = useState(state.request.isDeleted)
+    const [minCreateDate, setMinCreateDate] = useState(state.request.minCreateDate ?? '')
+    const [maxCreateDate, setMaxCreateDate] = useState(state.request.maxCreateDate ?? '')
+    const [minModifyDate, setMinModifyDate] = useState(state.request.minModifyDate ?? '')
+    const [maxModifyDate, setMaxModifyDate] = useState(state.request.maxModifyDate ?? '')
+    const [isApplyEnabled, setIsApplyEnabled] = useState(productCategoriesFiltersInitialState.isApplyEnabled)
+    const [isResetEnabled, setIsResetEnabled] = useState(productCategoriesFiltersInitialState.isResetEnabled)
+    const [isShowMobile, setIsShowMobile] = useState(productCategoriesFiltersInitialState.isShowMobile)
 
     const onChangeName = useCallback(
         (_, { value }: InputOnChangeData) => {
@@ -77,6 +80,7 @@ const useProductCategoriesFilters = (): ProductCategoriesFiltersState => {
             offset: 0
         })
 
+        setIsShowMobile(false)
         setIsApplyEnabled(false)
         setIsResetEnabled(true)
     }, [isDeleted, maxCreateDate, maxModifyDate, minCreateDate, minModifyDate, name, state])
@@ -100,8 +104,13 @@ const useProductCategoriesFilters = (): ProductCategoriesFiltersState => {
             offset: 0
         })
 
+        setIsShowMobile(false)
         setIsResetEnabled(false)
     }, [state])
+
+    const onShowMobile = useCallback(() => setIsShowMobile(true), [setIsShowMobile])
+
+    const onHideMobile = useCallback(() => setIsShowMobile(false), [setIsShowMobile])
 
     const fields: FilterFieldProps[] = useMemo(
         () => [
@@ -158,7 +167,7 @@ const useProductCategoriesFilters = (): ProductCategoriesFiltersState => {
         ]
     )
 
-    return { fields, isApplyEnabled, onApply, isResetEnabled, onReset }
+    return { fields, isApplyEnabled, onApply, isResetEnabled, onReset, isShowMobile, onShowMobile, onHideMobile }
 }
 
 export default useProductCategoriesFilters

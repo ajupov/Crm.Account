@@ -9,6 +9,7 @@ import ProductCategoriesTable from './components/ProductCategoriesTable/ProductC
 import ProductCategoryContextProvider from './contexts/ProductCategoryContext/ProductCategoryContextProvider'
 import ProductCategoryDelete from './components/ProductCategoryDelete/ProductCategoryDelete'
 import ProductCategoryRestore from './components/ProductCategoryRestore/ProductCategoryRestore'
+import ProductsCategoriesFilterMobile from './components/ProductsCategoriesFilterMobile/ProductsCategoriesFilterMobile'
 import ProductsMenu from '../ProductsMenu/ProductsMenu'
 import { setPageTitle } from '../../../../helpers/pageHelper'
 
@@ -22,7 +23,12 @@ const ProductCategories: FC = () => {
             <ProductCategoriesActionsContextProvider>
                 <ProductCategoriesFiltersContextProvider>
                     <ProductCategoryContextProvider>
-                        <Page title={title} firstSidebar={<ProductsMenu />} secondSidebar={<ProductCategoriesFilter />}>
+                        <Page
+                            title={title}
+                            firstSidebar={<ProductsMenu />}
+                            secondSidebar={<ProductCategoriesFilter />}
+                            secondSidebarMobile={<ProductsCategoriesFilterMobile />}
+                        >
                             <ProductCategoriesTable />
                             <ProductCategoryDelete />
                             <ProductCategoryRestore />

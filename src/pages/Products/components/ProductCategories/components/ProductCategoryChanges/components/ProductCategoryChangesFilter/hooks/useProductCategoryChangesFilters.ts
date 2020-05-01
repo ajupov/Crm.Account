@@ -14,10 +14,10 @@ interface UseProductCategoriesFiltersReturn {
 
 const useProductCategoryChangesFilters = (): UseProductCategoriesFiltersReturn => {
     const state = useContext(ProductCategoryChangesContext)
-    const [minCreateDate, setMinCreateDate] = useState<string>('')
-    const [maxCreateDate, setMaxCreateDate] = useState<string>('')
-    const [isApplyEnabled, setIsApplyEnabled] = useState<boolean>(false)
-    const [isResetEnabled, setIsResetEnabled] = useState<boolean>(false)
+    const [minCreateDate, setMinCreateDate] = useState('')
+    const [maxCreateDate, setMaxCreateDate] = useState('')
+    const [isApplyEnabled, setIsApplyEnabled] = useState(false)
+    const [isResetEnabled, setIsResetEnabled] = useState(false)
 
     const onChangeMinCreateDate = useCallback(
         (_, data: InputOnChangeData) => {

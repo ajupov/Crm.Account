@@ -6,6 +6,9 @@ export default interface ProductCategoriesFiltersState {
     onApply: () => void
     isResetEnabled: boolean
     onReset: () => void
+    isShowMobile: boolean
+    onShowMobile: () => void
+    onHideMobile: () => void
 }
 
 export const productCategoriesFiltersInitialState: ProductCategoriesFiltersState = {
@@ -13,5 +16,8 @@ export const productCategoriesFiltersInitialState: ProductCategoriesFiltersState
     isApplyEnabled: false,
     onApply: () => void 0,
     isResetEnabled: false,
-    onReset: () => void 0
+    onReset: () => void 0,
+    isShowMobile: false,
+    onShowMobile: () => void 0,
+    onHideMobile: () => void 0
 }
