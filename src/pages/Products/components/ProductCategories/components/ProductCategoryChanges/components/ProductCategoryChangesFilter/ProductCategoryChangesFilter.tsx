@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 import Filter from '../../../../../../../../components/Filter/Filter'
-import useProductCategoryChangesFilters from './hooks/useProductCategoryChangesFilters'
+import useProductCategoryChangesFilters from '../../../../contexts/ProductCategoryChangesFiltersContext/hooks/useProductCategoryChangesFilters'
 
 const ProductCategoryChangesFilter: FC = () => {
     const { fields, isApplyEnabled, onApply, isResetEnabled, onReset } = useProductCategoryChangesFilters()

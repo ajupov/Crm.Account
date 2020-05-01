@@ -1,23 +1,19 @@
+import ProductCategoryChangesFiltersState, {
+    productCategoryChangesFiltersInitialState
+} from '../../../states/ProductCategoryChangesFiltersState'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { FilterFieldProps } from '../../../../../../../../../components/Filter/Filter'
+import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'
 import { InputOnChangeData } from 'semantic-ui-react'
-import ProductCategoryChangesContext from '../../../../../contexts/ProductCategoryChangesContext/ProductCategoryChangesContext'
+import ProductCategoryChangesContext from '../../ProductCategoryChangesContext/ProductCategoryChangesContext'
 
-interface UseProductCategoriesFiltersReturn {
-    fields: FilterFieldProps[]
-    isApplyEnabled: boolean
-    onApply: () => void
-    isResetEnabled: boolean
-    onReset: () => void
-}
-
-const useProductCategoryChangesFilters = (): UseProductCategoriesFiltersReturn => {
+const useProductCategoryChangesFilters = (): ProductCategoryChangesFiltersState => {
     const state = useContext(ProductCategoryChangesContext)
     const [minCreateDate, setMinCreateDate] = useState('')
     const [maxCreateDate, setMaxCreateDate] = useState('')
     const [isApplyEnabled, setIsApplyEnabled] = useState(false)
     const [isResetEnabled, setIsResetEnabled] = useState(false)
+    const [isShowMobile, setIsShowMobile] = useState(productCategoryChangesFiltersInitialState.isShowMobile)
 
     const onChangeMinCreateDate = useCallback(
         (_, data: InputOnChangeData) => {
@@ -43,6 +39,7 @@ const useProductCategoryChangesFilters = (): UseProductCategoriesFiltersReturn =
             offset: 0
         })
 
+        setIsShowMobile(false)
         setIsApplyEnabled(false)
         setIsResetEnabled(true)
     }, [maxCreateDate, minCreateDate, state])
@@ -58,8 +55,13 @@ const useProductCategoryChangesFilters = (): UseProductCategoriesFiltersReturn =
             offset: 0
         })
 
+        setIsShowMobile(false)
         setIsResetEnabled(false)
     }, [state])
+
+    const onShowMobile = useCallback(() => setIsShowMobile(true), [setIsShowMobile])
+
+    const onHideMobile = useCallback(() => setIsShowMobile(false), [setIsShowMobile])
 
     const fields: FilterFieldProps[] = useMemo(
         () => [
@@ -75,7 +77,7 @@ const useProductCategoryChangesFilters = (): UseProductCategoriesFiltersReturn =
         [maxCreateDate, minCreateDate, onChangeMaxCreateDate, onChangeMinCreateDate]
     )
 
-    return { fields, isApplyEnabled, onApply, isResetEnabled, onReset }
+    return { fields, isApplyEnabled, onApply, isResetEnabled, onReset, isShowMobile, onShowMobile, onHideMobile }
 }
 
 export default useProductCategoryChangesFilters
