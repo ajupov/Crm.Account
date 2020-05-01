@@ -27,7 +27,7 @@ const useProductCategoryChangesTable = (): UseProductCategoryChangesTableReturn 
             return
         }
 
-        const fileName = 'История'
+        const fileName = 'История изменений'
         const headers = ['Идентификатор', 'Дата и время', 'Старое значение', 'Новое значение']
         const csv = convertObjectToCSV([headers, ...changes])
 

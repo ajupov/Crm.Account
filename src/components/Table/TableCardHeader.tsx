@@ -10,11 +10,11 @@ interface TableCardHeaderProps {
 }
 
 const TableCardHeader: FC<TableCardHeaderProps> = ({ lastModifyDateTime, onClickCreate, onClickDownloadAsCsv }) => (
-    <Grid verticalAlign="bottom" columns="equal" stackable style={{ paddingBottom: '10px' }}>
-        <Grid.Column mobile={16} tablet={16} computer={9} widescreen={13}>
+    <Grid verticalAlign="bottom" columns="equal" stackable style={{ paddingBottom: '10px', margin: 0 }}>
+        <Grid.Column mobile={16} tablet={16} computer={9} widescreen={13} style={{ padding: 0 }}>
             <Card.Meta>{getLastChangeDateTimeText(lastModifyDateTime)}</Card.Meta>
         </Grid.Column>
-        <Grid.Column mobile={16} tablet={16} computer={7} widescreen={3}>
+        <Grid.Column mobile={16} tablet={16} computer={7} widescreen={3} style={{ padding: 0 }}>
             <Button.Group basic widths="2" fluid floated="right" size="mini">
                 {onClickCreate && (
                     <Button icon onClick={onClickCreate}>

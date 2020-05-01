@@ -14,20 +14,22 @@ interface PageProps {
 const Page: FC<PageProps> = ({ onClickCancel, title, children, firstSidebar, secondSidebar, secondSidebarMobile }) => (
     <Grid style={{ margin: 0 }} columns="equal" stackable reversed="mobile">
         <Grid.Column>
-            {children && (
-                <Card fluid>
-                    <Card.Content>
-                        <Grid columns="equal" verticalAlign="middle">
-                            <Grid.Column>
-                                <Header as="h3">{title}</Header>
-                            </Grid.Column>
-                            <Grid.Column only="mobile">{secondSidebarMobile}</Grid.Column>
-                        </Grid>
-                        {onClickCancel && <BackLink onClick={onClickCancel} />}
-                        {children}
-                    </Card.Content>
-                </Card>
-            )}
+            <Card fluid>
+                <Card.Content>
+                    <Grid columns="equal" verticalAlign="middle">
+                        <Grid.Column>
+                            <Header as="h3" style={{ marginBottom: '10px' }}>
+                                {title}
+                            </Header>
+                        </Grid.Column>
+                        <Grid.Column only="mobile" width={6}>
+                            {secondSidebarMobile}
+                        </Grid.Column>
+                    </Grid>
+                    {onClickCancel && <BackLink onClick={onClickCancel} />}
+                    {children}
+                </Card.Content>
+            </Card>
         </Grid.Column>
         <Grid.Column tablet={5} computer={4} widescreen={2} style={{ paddingLeft: 0 }}>
             <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>{firstSidebar}</Responsive>
