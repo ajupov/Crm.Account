@@ -16,11 +16,9 @@ const Page: FC<PageProps> = ({ onClickCancel, title, children, firstSidebar, sec
         <Grid.Column>
             <Card fluid>
                 <Card.Content>
-                    <Grid columns="equal" verticalAlign="middle">
-                        <Grid.Column>
-                            <Header as="h3" style={{ marginBottom: '10px' }}>
-                                {title}
-                            </Header>
+                    <Grid style={{ margin: 0 }} columns="equal" verticalAlign="middle">
+                        <Grid.Column style={{ padding: '0', paddingBottom: '10px' }}>
+                            <Header as="h3">{title}</Header>
                         </Grid.Column>
                         <Grid.Column only="mobile" width={6}>
                             {secondSidebarMobile}
