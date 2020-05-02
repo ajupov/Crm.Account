@@ -1,7 +1,7 @@
 import { Dropdown, Icon, Image, Menu } from 'semantic-ui-react'
 import React, { FC, useCallback, useContext } from 'react'
 
-import Clock from 'react-live-clock'
+import Clock from '../../Clock/Clock'
 import Configuration from '../../../configuration/Configuration'
 import { Link } from 'react-router-dom'
 import UserInfoContext from '../../UserInfo/contexts/UserInfoContext/UserInfoContext'
@@ -31,7 +31,7 @@ const DesktopMenu: FC = () => {
                 <Image avatar src="/content/logo.png" style={{ marginRight: '10px' }} /> Lite CRM
             </Menu.Item>
             <Menu.Item position="right" header>
-                {/* <Clock format="HH:mm" ticking={true} timezone="Europe/Moscow" /> */}
+                <Clock />
             </Menu.Item>
             <Menu.Item as={Dropdown} position="right" trigger={getUserNameWithAvatar()} style={{ padding: '6px 33px' }}>
                 <Dropdown.Menu direction="left">
