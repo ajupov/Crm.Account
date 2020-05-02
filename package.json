@@ -67,6 +67,7 @@
         "query-string": "^6.10.1",
         "react": "^16.12.0",
         "react-big-calendar": "^0.24.0",
+        "react-detect-offline": "^2.4.0",
         "react-dom": "^16.12.0",
         "react-live-clock": "^4.0.3",
         "react-router": "^5.1.2",
