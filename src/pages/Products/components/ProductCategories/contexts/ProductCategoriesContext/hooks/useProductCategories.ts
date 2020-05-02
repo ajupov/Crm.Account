@@ -44,7 +44,7 @@ const useProductCategories = (): ProductCategoriesState => {
         getPagedList()
     }, [getPagedList])
 
-    return { request, setRequest, isLoading, categories, total, lastModifyDateTime, getAll }
+    return { request, setRequest, isLoading, categories, total, lastModifyDateTime, getPagedList, getAll }
 }
 
 export default useProductCategories

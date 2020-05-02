@@ -13,6 +13,7 @@ export default interface ProductCategoriesState {
     categories: ProductCategory[]
     total: number
     lastModifyDateTime: string
+    getPagedList: () => Promise<void>
     getAll: () => Promise<ProductCategoryGetPagedListResponse>
 }
 
@@ -29,5 +30,6 @@ export const productCategoriesInitialState: ProductCategoriesState = {
     categories: [],
     total: 0,
     lastModifyDateTime: '',
+    getPagedList: () => Promise.resolve(void 0),
     getAll: () => Promise.resolve({ totalCount: 0 })
 }

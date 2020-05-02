@@ -1,6 +1,7 @@
 import { useCallback, useContext } from 'react'
 
 import ProductStatusesActionsContext from '../../../contexts/ProductStatusesActionsContext/ProductStatusesActionsContext'
+import ProductStatusesContext from '../../../contexts/ProductStatusesContext/ProductStatusesContext'
 import { ProductStatusesRoutes } from '../../../routes/ProductStatusesRoutes'
 import { useHistory } from 'react-router'
 
@@ -11,18 +12,20 @@ interface UseProductStatusDelete {
 
 const useProductStatusDelete = (): UseProductStatusDelete => {
     const history = useHistory()
-    const state = useContext(ProductStatusesActionsContext)
+    const actionsState = useContext(ProductStatusesActionsContext)
+    const statusesState = useContext(ProductStatusesContext)
 
     const onClickConfirm = useCallback(async () => {
-        await state.delete()
-        state.setIsDeleting(false)
+        await actionsState.delete()
+        actionsState.setIsDeleting(false)
         history.push(ProductStatusesRoutes.Index)
-    }, [history, state])
+        await statusesState.getPagedList()
+    }, [actionsState, history, statusesState])
 
     const onClickCancel = useCallback(() => {
-        state.setIds([])
-        state.setIsDeleting(false)
-    }, [state])
+        actionsState.setIds([])
+        actionsState.setIsDeleting(false)
+    }, [actionsState])
 
     return { onClickConfirm, onClickCancel }
 }

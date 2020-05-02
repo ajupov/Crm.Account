@@ -44,7 +44,7 @@ const useProductStatuses = (): ProductStatusesState => {
         getPagedList()
     }, [getPagedList])
 
-    return { request, setRequest, isLoading, statuses, total, lastModifyDateTime, getAll }
+    return { request, setRequest, isLoading, statuses, total, lastModifyDateTime, getPagedList, getAll }
 }
 
 export default useProductStatuses

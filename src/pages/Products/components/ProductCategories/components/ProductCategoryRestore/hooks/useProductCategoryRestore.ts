@@ -1,6 +1,7 @@
 import { useCallback, useContext } from 'react'
 
 import ProductCategoriesActionsContext from '../../../contexts/ProductCategoriesActionsContext/ProductCategoriesActionsContext'
+import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext/ProductCategoriesContext'
 import { ProductCategoriesRoutes } from '../../../routes/ProductCategoriesRoutes'
 import { useHistory } from 'react-router'
 
@@ -11,18 +12,20 @@ interface UseProductCategoryRestore {
 
 const useProductCategoryRestore = (): UseProductCategoryRestore => {
     const history = useHistory()
-    const state = useContext(ProductCategoriesActionsContext)
+    const actionsState = useContext(ProductCategoriesActionsContext)
+    const categoriesState = useContext(ProductCategoriesContext)
 
     const onClickConfirm = useCallback(async () => {
-        await state.restore()
-        state.setIsRestoring(false)
+        await actionsState.restore()
+        actionsState.setIsRestoring(false)
         history.push(ProductCategoriesRoutes.Index)
-    }, [history, state])
+        await categoriesState.getPagedList()
+    }, [actionsState, history, categoriesState])
 
     const onClickCancel = useCallback(() => {
-        state.setIds([])
-        state.setIsRestoring(false)
-    }, [state])
+        actionsState.setIds([])
+        actionsState.setIsRestoring(false)
+    }, [actionsState])
 
     return { onClickConfirm, onClickCancel }
 }
