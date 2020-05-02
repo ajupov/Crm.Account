@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface ProductCategoryChange {
     id?: string
     changerUserId?: string

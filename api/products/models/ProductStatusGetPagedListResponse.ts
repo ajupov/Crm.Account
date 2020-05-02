@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import ProductStatus from '../models/ProductStatus'
 
 export default interface ProductStatusGetPagedListResponse {

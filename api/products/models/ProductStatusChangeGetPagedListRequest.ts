@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface ProductStatusChangeGetPagedListRequest {
     statusId: string
     minCreateDate?: string

@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface ProductStatusGetPagedListRequest {
     name?: string
     isDeleted?: boolean

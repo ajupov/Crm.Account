@@ -14,6 +14,12 @@ import ProductCategoryChanges from '../../pages/Products/components/ProductCateg
 import ProductCategoryCreate from '../../pages/Products/components/ProductCategories/components/ProductCategoryCreate/ProductCategoryCreate'
 import ProductCategoryEdit from '../../pages/Products/components/ProductCategories/components/ProductCategoryEdit/ProductCategoryEdit'
 import ProductCategoryView from '../../pages/Products/components/ProductCategories/components/ProductCategoryView/ProductCategoryView'
+import ProductStatusChanges from '../../pages/Products/components/ProductStatuses/components/ProductStatusChanges/ProductStatusChanges'
+import ProductStatusCreate from '../../pages/Products/components/ProductStatuses/components/ProductStatusCreate/ProductStatusCreate'
+import ProductStatusEdit from '../../pages/Products/components/ProductStatuses/components/ProductStatusEdit/ProductStatusEdit'
+import ProductStatusView from '../../pages/Products/components/ProductStatuses/components/ProductStatusView/ProductStatusView'
+import ProductStatuses from '../../pages/Products/components/ProductStatuses/ProductStatuses'
+import { ProductStatusesRoutes } from '../../pages/Products/components/ProductStatuses/routes/ProductStatusesRoutes'
 import Products from '../../pages/Products/Products'
 import Settings from '../../pages/Settings/Settings'
 
@@ -32,6 +38,12 @@ const Routes: FC = () => (
         <Route path={`${ProductCategoriesRoutes.View}/:id`} exact component={ProductCategoryView} />
         <Route path={`${ProductCategoriesRoutes.Edit}/:id`} exact component={ProductCategoryEdit} />
         <Route path={`${ProductCategoriesRoutes.Changes}/:id`} exact component={ProductCategoryChanges} />
+
+        <Route path={ProductStatusesRoutes.Index} exact component={ProductStatuses} />
+        <Route path={ProductStatusesRoutes.Create} exact component={ProductStatusCreate} />
+        <Route path={`${ProductStatusesRoutes.View}/:id`} exact component={ProductStatusView} />
+        <Route path={`${ProductStatusesRoutes.Edit}/:id`} exact component={ProductStatusEdit} />
+        <Route path={`${ProductStatusesRoutes.Changes}/:id`} exact component={ProductStatusChanges} />
 
         <Route path="/settings" component={Settings} />
         <Route component={NotFound} />
