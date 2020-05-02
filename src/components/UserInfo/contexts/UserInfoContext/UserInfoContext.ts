@@ -1,4 +1,4 @@
-import UserInfoState, { userInfoInitialState } from '../states/UserInfoState'
+import UserInfoState, { userInfoInitialState } from '../../states/UserInfoState'
 
 import { createContext } from 'react'
 

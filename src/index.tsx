@@ -1,5 +1,6 @@
 import 'semantic-ui-css/semantic.min.css'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
+import './index.css'
 
 import Application from './components/Application/Application'
 import React from 'react'

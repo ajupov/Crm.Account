@@ -76,7 +76,7 @@ const TableBody: FC<TableBodyProps> = ({ rows, hasActions }) => {
     const renderCells = useCallback(
         (row: TableBodyRowProps) =>
             row.cells.map((cell, index) => (
-                <Table.Cell textAlign={cell.textAlign ?? 'left'} key={index}>
+                <Table.Cell key={index} textAlign={cell.textAlign ?? 'left'}>
                     {cell.value instanceof Array ? <List>{renderCellArrayValue(cell.value)}</List> : cell.value}
                 </Table.Cell>
             )),
@@ -87,10 +87,10 @@ const TableBody: FC<TableBodyProps> = ({ rows, hasActions }) => {
         () =>
             rows.map(row => (
                 <Table.Row
+                    key={row.id}
                     negative={row.isDeleted}
                     style={{ cursor: row.onClickRow ? 'pointer' : 'default' }}
                     onClick={onClick(row)}
-                    key={row.id}
                 >
                     {renderCells(row)}
                     {hasActions && (

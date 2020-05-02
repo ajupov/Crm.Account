@@ -3,7 +3,7 @@ import React, { FC, useCallback, useContext, useMemo } from 'react'
 
 import Configuration from '../../../configuration/Configuration'
 import { Link } from 'react-router-dom'
-import UserInfoContext from '../../UserInfo/contexts/UserInfoContext'
+import UserInfoContext from '../../UserInfo/contexts/UserInfoContext/UserInfoContext'
 
 interface MobileSidebarMenuProps {
     onClickItem: () => void

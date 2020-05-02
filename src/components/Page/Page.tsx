@@ -12,11 +12,11 @@ interface PageProps {
 }
 
 const Page: FC<PageProps> = ({ onClickCancel, title, children, firstSidebar, secondSidebar, secondSidebarMobile }) => (
-    <Grid style={{ margin: 0 }} columns="equal" stackable reversed="mobile">
+    <Grid columns="equal" stackable reversed="mobile" style={{ margin: 0 }}>
         <Grid.Column>
             <Card fluid>
                 <Card.Content>
-                    <Grid style={{ margin: 0 }} columns="equal" verticalAlign="middle">
+                    <Grid columns="equal" verticalAlign="middle" style={{ margin: 0 }}>
                         <Grid.Column style={{ padding: '0', paddingBottom: '10px' }}>
                             <Header as="h3">{title}</Header>
                         </Grid.Column>

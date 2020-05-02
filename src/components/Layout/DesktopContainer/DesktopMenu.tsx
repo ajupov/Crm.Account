@@ -4,7 +4,7 @@ import React, { FC, useCallback, useContext } from 'react'
 import Clock from 'react-live-clock'
 import Configuration from '../../../configuration/Configuration'
 import { Link } from 'react-router-dom'
-import UserInfoContext from '../../UserInfo/contexts/UserInfoContext'
+import UserInfoContext from '../../UserInfo/contexts/UserInfoContext/UserInfoContext'
 
 const DesktopMenu: FC = () => {
     const state = useContext(UserInfoContext)

@@ -29,7 +29,7 @@ const TableHeader: FC<TableHeaderProps> = ({ headers, hasActions }) => {
     const renderCells = useCallback(
         () =>
             headers.map(cell => (
-                <Table.HeaderCell width={cell.width} key={cell.key} onClick={cell.onClick} sorted={getSorted(cell)}>
+                <Table.HeaderCell key={cell.key} width={cell.width} onClick={cell.onClick} sorted={getSorted(cell)}>
                     {cell.label}
                 </Table.HeaderCell>
             )),

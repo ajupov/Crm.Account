@@ -1,12 +1,12 @@
 import React, { FC, useContext } from 'react'
 
 import { BrowserRouter } from 'react-router-dom'
-import Layout from '../Layout/Layout'
-import Loader from '../Loader/Loader'
-import Routes from '../Routes/Routes'
-import UserInfoContext from './contexts/UserInfoContext'
+import Layout from '../../../Layout/Layout'
+import Loader from '../../../Loader/Loader'
+import Routes from '../../../Routes/Routes'
+import UserInfoContext from '../../contexts/UserInfoContext/UserInfoContext'
 
-const UserInfoPart: FC = () => {
+const UserInfoLayout: FC = () => {
     const state = useContext(UserInfoContext)
 
     return state.isAuthenticated ? (
@@ -20,4 +20,4 @@ const UserInfoPart: FC = () => {
     )
 }
 
-export default UserInfoPart
+export default UserInfoLayout

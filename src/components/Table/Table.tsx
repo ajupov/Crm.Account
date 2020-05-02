@@ -55,10 +55,10 @@ const Table: FC<TableProps> = ({
                 onClickCreate={onClickCreate}
                 onClickDownloadAsCsv={onClickDownloadAsCsv}
             />
-            <Responsive style={{ overflow: 'auto' }} maxWidth={Responsive.onlyMobile.maxWidth}>
+            <Responsive maxWidth={Responsive.onlyMobile.maxWidth} style={{ overflow: 'auto' }}>
                 {getTable('block')}
             </Responsive>
-            <Responsive style={{ overflow: 'auto' }} minWidth={Responsive.onlyMobile.maxWidth}>
+            <Responsive minWidth={Responsive.onlyMobile.maxWidth} style={{ overflow: 'auto' }}>
                 {getTable('table')}
             </Responsive>
         </>
