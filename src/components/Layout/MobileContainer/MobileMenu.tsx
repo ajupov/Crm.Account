@@ -15,9 +15,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ onClickShow }) => (
         <Menu.Item position="right">
             <Image avatar src="/content/logo.png" style={{ marginRight: '10px' }} /> Lite CRM
         </Menu.Item>
-        <Menu.Item position="right">
-            <Clock format="HH:mm" ticking={true} timezone="Europe/Moscow" />
-        </Menu.Item>
+        <Menu.Item position="right">{/* <Clock format="HH:mm" ticking={true} timezone="Europe/Moscow" /> */}</Menu.Item>
     </>
 )
 

@@ -31,7 +31,7 @@ const DesktopMenu: FC = () => {
                 <Image avatar src="/content/logo.png" style={{ marginRight: '10px' }} /> Lite CRM
             </Menu.Item>
             <Menu.Item position="right" header>
-                <Clock format="HH:mm" ticking={true} timezone="Europe/Moscow" />
+                {/* <Clock format="HH:mm" ticking={true} timezone="Europe/Moscow" /> */}
             </Menu.Item>
             <Menu.Item as={Dropdown} position="right" trigger={getUserNameWithAvatar()} style={{ padding: '6px 33px' }}>
                 <Dropdown.Menu direction="left">
