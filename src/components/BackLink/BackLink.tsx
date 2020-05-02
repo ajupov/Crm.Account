@@ -7,7 +7,7 @@ interface BackLinkProps {
 }
 
 const BackLink: FC<BackLinkProps> = ({ onClick }) => (
-    <a style={{ color: 'grey' }} onClick={onClick}>
+    <a style={{ color: 'grey', lineHeight: '3rem' }} onClick={onClick}>
         <Icon name="arrow left" /> Назад
     </a>
 )

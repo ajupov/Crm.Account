@@ -1,6 +1,9 @@
 import { Button, Card, Icon } from 'semantic-ui-react'
 import React, { FC, useCallback } from 'react'
-import { getCreateDateTimeText, getLastChangeDateTimeText as getLastModifyDateTimeText } from '../../helpers/textHelper'
+import {
+    getCreateDateTimeText,
+    getLastChangeDateTimeText as getLastModifyDateTimeText
+} from '../../helpers/dateTimeTextHelper'
 
 import BackLink from '../BackLink/BackLink'
 import HistoryLink from '../HistoryLink/HistoryLink'

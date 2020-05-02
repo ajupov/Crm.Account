@@ -1,6 +1,6 @@
 import { Button, Card, Checkbox, CheckboxProps, Form, Icon, Input, InputOnChangeData } from 'semantic-ui-react'
 import React, { FC, useCallback, useMemo } from 'react'
-import { getCreateDateTimeText, getLastChangeDateTimeText } from '../../helpers/textHelper'
+import { getCreateDateTimeText, getLastChangeDateTimeText } from '../../helpers/dateTimeTextHelper'
 
 import BackLink from '../BackLink/BackLink'
 import HistoryLink from '../HistoryLink/HistoryLink'
