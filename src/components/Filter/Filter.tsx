@@ -1,7 +1,23 @@
-import { Button, Checkbox, CheckboxProps, Form, Header, Input, InputOnChangeData } from 'semantic-ui-react'
+import {
+    Button,
+    Checkbox,
+    CheckboxProps,
+    Dropdown,
+    DropdownProps,
+    Form,
+    Header,
+    Input,
+    InputOnChangeData
+} from 'semantic-ui-react'
 import React, { FC, useMemo } from 'react'
 
-export type FilterFieldProps = TextFilterFieldProps | DateFilterFieldProps | CheckboxFilterFieldProps
+import { SelectOptionCreateFieldProps } from '../Create/Create'
+
+export type FilterFieldProps =
+    | TextFilterFieldProps
+    | DateFilterFieldProps
+    | CheckboxFilterFieldProps
+    | SelectFilterFieldProps
 
 export interface TextFilterFieldProps {
     type: 'text'
@@ -34,6 +50,14 @@ export interface CheckboxFilterFieldProps {
     onChange: (_: any, { value }: CheckboxProps) => void
 }
 
+export interface SelectFilterFieldProps {
+    type: 'select'
+    label: string
+    values: number[]
+    options: SelectOptionCreateFieldProps[]
+    onChange: (_: any, { value }: DropdownProps) => void
+}
+
 export interface FilterProps {
     fields: FilterFieldProps[]
     isApplyEnabled: boolean
@@ -53,7 +77,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                 <label>{x.topLabel}:</label>
                                 <Input
                                     type="text"
-                                    size="mini"
+                                    // size="mini"
                                     placeholder={x.topLabel}
                                     value={x.value}
                                     onChange={x.onChange}
@@ -66,7 +90,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                 <label>{x.topLabel}:</label>
                                 <Input
                                     type="date"
-                                    size="mini"
+                                    // size="mini"
                                     label="с"
                                     placeholder={x.topLabel}
                                     value={x.value1}
@@ -74,7 +98,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                 />
                                 <Input
                                     type="date"
-                                    size="mini"
+                                    // size="mini"
                                     label="по"
                                     placeholder={x.topLabel}
                                     value={x.value2}
@@ -88,7 +112,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                 <label>{x.topLabel}</label>
                                 <Checkbox
                                     radio
-                                    size="mini"
+                                    // size="mini"
                                     label={x.label1}
                                     placeholder={x.topLabel}
                                     value={x.value1}
@@ -98,7 +122,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                 <br />
                                 <Checkbox
                                     radio
-                                    size="mini"
+                                    // size="mini"
                                     label={x.label2}
                                     placeholder={x.topLabel}
                                     value={x.value2}
@@ -108,12 +132,31 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                 <br />
                                 <Checkbox
                                     radio
-                                    size="mini"
+                                    // size="mini"
                                     label={x.label3}
                                     placeholder={x.topLabel}
                                     value={x.value3}
                                     checked={x.checked3}
                                     onChange={x.onChange}
+                                />
+                            </Form.Field>
+                        )
+                    case 'select':
+                        return (
+                            <Form.Field key={x.label}>
+                                <label>{x.label}:</label>
+                                <Dropdown
+                                    placeholder={x.label}
+                                    value={x.values}
+                                    // text={x.text}
+                                    multiple
+                                    selection
+                                    onChange={x.onChange}
+                                    options={x.options.map(x => ({
+                                        key: x.value,
+                                        value: x.value,
+                                        text: x.text
+                                    }))}
                                 />
                             </Form.Field>
                         )

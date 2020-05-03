@@ -1,4 +1,4 @@
-import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
+import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import ProductAttributesFiltersState, {
     productAttributesFiltersInitialState
 } from '../../../states/ProductAttributesFiltersState'
@@ -6,6 +6,7 @@ import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'
 import ProductAttributesContext from '../../ProductAttributesContext/ProductAttributesContext'
+import { getAttributesAsSelectOptions } from '../../../../../../../helpers/attributeTypeHelper'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
 
 const useProductAttributesFilters = (): ProductAttributesFiltersState => {
@@ -21,10 +22,10 @@ const useProductAttributesFilters = (): ProductAttributesFiltersState => {
     const [isResetEnabled, setIsResetEnabled] = useState(productAttributesFiltersInitialState.isResetEnabled)
     const [isShowMobile, setIsShowMobile] = useState(productAttributesFiltersInitialState.isShowMobile)
 
-    // const onChangeTypes = useCallback((_, values: number[]) => {
-    //     setTypes(values)
-    //     setIsApplyEnabled(true)
-    // }, [])
+    const onChangeTypes = useCallback((_: any, { value }: DropdownProps) => {
+        setTypes(value as [])
+        setIsApplyEnabled(true)
+    }, [])
 
     const onChangeKey = useCallback(
         (_, { value }: InputOnChangeData) => {
@@ -124,6 +125,13 @@ const useProductAttributesFilters = (): ProductAttributesFiltersState => {
     const fields: FilterFieldProps[] = useMemo(
         () => [
             {
+                type: 'select',
+                label: 'Тип',
+                values: types.map(x => x as number),
+                options: getAttributesAsSelectOptions(),
+                onChange: onChangeTypes
+            },
+            {
                 type: 'text',
                 topLabel: 'Наименование',
                 value: key,
@@ -161,18 +169,20 @@ const useProductAttributesFilters = (): ProductAttributesFiltersState => {
             }
         ],
         [
-            isDeleted,
-            maxCreateDate,
-            maxModifyDate,
-            minCreateDate,
-            minModifyDate,
+            types,
+            onChangeTypes,
             key,
-            onChangeIsDeleted,
-            onChangeMaxCreateDate,
-            onChangeMaxModifyDate,
+            onChangeKey,
+            minCreateDate,
             onChangeMinCreateDate,
+            maxCreateDate,
+            onChangeMaxCreateDate,
+            minModifyDate,
             onChangeMinModifyDate,
-            onChangeKey
+            maxModifyDate,
+            onChangeMaxModifyDate,
+            isDeleted,
+            onChangeIsDeleted
         ]
     )
 
