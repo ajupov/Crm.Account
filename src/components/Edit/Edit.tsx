@@ -1,4 +1,15 @@
-import { Button, Card, Checkbox, CheckboxProps, Form, Icon, Input, InputOnChangeData } from 'semantic-ui-react'
+import {
+    Button,
+    Card,
+    Checkbox,
+    CheckboxProps,
+    DropdownProps,
+    Form,
+    Icon,
+    Input,
+    InputOnChangeData,
+    Select
+} from 'semantic-ui-react'
 import React, { FC, useCallback, useMemo } from 'react'
 import { getCreateDateTimeText, getLastChangeDateTimeText } from '../../helpers/dateTimeTextHelper'
 
@@ -6,7 +17,7 @@ import BackLink from '../BackLink/BackLink'
 import HistoryLink from '../HistoryLink/HistoryLink'
 import Loader from '../Loader/Loader'
 
-export type EditFieldProps = TextEditFieldProps | DateEditFieldProps | CheckboxEditFieldProps
+export type EditFieldProps = TextEditFieldProps | DateEditFieldProps | CheckboxEditFieldProps | SelectEditFieldProps
 
 export interface TextEditFieldProps {
     required: boolean
@@ -29,6 +40,21 @@ export interface CheckboxEditFieldProps {
     label: string
     checked: boolean
     onChange: (_: any, { value }: CheckboxProps) => void
+}
+
+export interface SelectOptionEditFieldProps {
+    value: number | string
+    text: string
+}
+
+export interface SelectEditFieldProps {
+    required: boolean
+    type: 'select'
+    label: string
+    value: number
+    text: string
+    options: SelectOptionEditFieldProps[]
+    onChange: (_: any, { value }: DropdownProps) => void
 }
 
 export interface EditProps {
@@ -78,6 +104,7 @@ const Edit: FC<EditProps> = ({
                                     placeholder={x.topLabel}
                                     value={x.value ?? ''}
                                     onChange={x.onChange}
+                                    required={x.required}
                                 />
                             </Form.Field>
                         )
@@ -90,6 +117,7 @@ const Edit: FC<EditProps> = ({
                                     placeholder={x.topLabel}
                                     value={x.value ?? ''}
                                     onChange={x.onChange}
+                                    required={x.required}
                                 />
                             </Form.Field>
                         )
@@ -97,6 +125,24 @@ const Edit: FC<EditProps> = ({
                         return (
                             <Form.Field key={x.label}>
                                 <Checkbox label={x.label} checked={x.checked} onChange={x.onChange} />
+                            </Form.Field>
+                        )
+                    case 'select':
+                        return (
+                            <Form.Field required={x.required} key={x.label}>
+                                <label>{x.label}:</label>
+                                <Select
+                                    placeholder={x.label}
+                                    value={x.value}
+                                    text={x.text}
+                                    onChange={x.onChange}
+                                    required={x.required}
+                                    options={x.options.map(x => ({
+                                        key: x.value,
+                                        value: x.value,
+                                        text: x.text
+                                    }))}
+                                />
                             </Form.Field>
                         )
                     default:

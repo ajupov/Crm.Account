@@ -1,9 +1,23 @@
-import { Button, Checkbox, CheckboxProps, Form, Icon, Input, InputOnChangeData } from 'semantic-ui-react'
+import {
+    Button,
+    Checkbox,
+    CheckboxProps,
+    DropdownProps,
+    Form,
+    Icon,
+    Input,
+    InputOnChangeData,
+    Select
+} from 'semantic-ui-react'
 import React, { FC, useMemo } from 'react'
 
 import BackLink from '../BackLink/BackLink'
 
-export type CreateFieldProps = TextCreateFieldProps | DateCreateFieldProps | CheckboxCreateFieldProps
+export type CreateFieldProps =
+    | TextCreateFieldProps
+    | DateCreateFieldProps
+    | CheckboxCreateFieldProps
+    | SelectCreateFieldProps
 
 export interface TextCreateFieldProps {
     required: boolean
@@ -28,6 +42,21 @@ export interface CheckboxCreateFieldProps {
     onChange: (_: any, { value }: CheckboxProps) => void
 }
 
+export interface SelectOptionCreateFieldProps {
+    value: number | string
+    text: string
+}
+
+export interface SelectCreateFieldProps {
+    required: boolean
+    type: 'select'
+    label: string
+    value: number
+    text: string
+    options: SelectOptionCreateFieldProps[]
+    onChange: (_: any, { value }: DropdownProps) => void
+}
+
 export interface CreateProps {
     fields: CreateFieldProps[]
     isConfirmEnabled: boolean
@@ -49,6 +78,7 @@ const Create: FC<CreateProps> = ({ fields, isConfirmEnabled, onClickConfirm, onC
                                     placeholder={x.topLabel}
                                     value={x.value ?? ''}
                                     onChange={x.onChange}
+                                    required={x.required}
                                 />
                             </Form.Field>
                         )
@@ -61,6 +91,7 @@ const Create: FC<CreateProps> = ({ fields, isConfirmEnabled, onClickConfirm, onC
                                     placeholder={x.topLabel}
                                     value={x.value ?? ''}
                                     onChange={x.onChange}
+                                    required={x.required}
                                 />
                             </Form.Field>
                         )
@@ -68,6 +99,24 @@ const Create: FC<CreateProps> = ({ fields, isConfirmEnabled, onClickConfirm, onC
                         return (
                             <Form.Field key={x.label}>
                                 <Checkbox label={x.label} checked={x.checked} onChange={x.onChange} />
+                            </Form.Field>
+                        )
+                    case 'select':
+                        return (
+                            <Form.Field required={x.required} key={x.label}>
+                                <label>{x.label}:</label>
+                                <Select
+                                    placeholder={x.label}
+                                    value={x.value}
+                                    text={x.text}
+                                    onChange={x.onChange}
+                                    required={x.required}
+                                    options={x.options.map(x => ({
+                                        key: x.value,
+                                        value: x.value,
+                                        text: x.text
+                                    }))}
+                                />
                             </Form.Field>
                         )
                     default:

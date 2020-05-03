@@ -8,6 +8,12 @@ import Dashboard from '../../pages/Dashboard/Dashboard'
 import Deals from '../../pages/Deals/Deals'
 import Leads from '../../pages/Leads/Leads'
 import NotFound from '../../pages/NotFound/NotFound'
+import ProductAttributeChanges from '../../pages/Products/components/ProductAttributes/components/ProductAttributeChanges/ProductAttributeChanges'
+import ProductAttributeCreate from '../../pages/Products/components/ProductAttributes/components/ProductAttributeCreate/ProductAttributeCreate'
+import ProductAttributeEdit from '../../pages/Products/components/ProductAttributes/components/ProductAttributeEdit/ProductAttributeEdit'
+import ProductAttributeView from '../../pages/Products/components/ProductAttributes/components/ProductAttributeView/ProductAttributeView'
+import ProductAttributes from '../../pages/Products/components/ProductAttributes/ProductAttributes'
+import { ProductAttributesRoutes } from '../../pages/Products/components/ProductAttributes/routes/ProductAttributesRoutes'
 import ProductCategories from '../../pages/Products/components/ProductCategories/ProductCategories'
 import { ProductCategoriesRoutes } from '../../pages/Products/components/ProductCategories/routes/ProductCategoriesRoutes'
 import ProductCategoryChanges from '../../pages/Products/components/ProductCategories/components/ProductCategoryChanges/ProductCategoryChanges'
@@ -38,6 +44,12 @@ const Routes: FC = () => (
         <Route path={`${ProductCategoriesRoutes.View}/:id`} exact component={ProductCategoryView} />
         <Route path={`${ProductCategoriesRoutes.Edit}/:id`} exact component={ProductCategoryEdit} />
         <Route path={`${ProductCategoriesRoutes.Changes}/:id`} exact component={ProductCategoryChanges} />
+
+        <Route path={ProductAttributesRoutes.Index} exact component={ProductAttributes} />
+        <Route path={ProductAttributesRoutes.Create} exact component={ProductAttributeCreate} />
+        <Route path={`${ProductAttributesRoutes.View}/:id`} exact component={ProductAttributeView} />
+        <Route path={`${ProductAttributesRoutes.Edit}/:id`} exact component={ProductAttributeEdit} />
+        <Route path={`${ProductAttributesRoutes.Changes}/:id`} exact component={ProductAttributeChanges} />
 
         <Route path={ProductStatusesRoutes.Index} exact component={ProductStatuses} />
         <Route path={ProductStatusesRoutes.Create} exact component={ProductStatusCreate} />

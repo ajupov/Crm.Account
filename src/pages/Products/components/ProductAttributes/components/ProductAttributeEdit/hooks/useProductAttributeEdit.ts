@@ -1,10 +1,11 @@
-import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
+import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
+import { getAttributeTypeName, getAttributesAsSelectOptions } from '../../../../../../../helpers/attributeTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
+import AttributeType from '../../../../../../../../api/products/models/AttributeType'
 import { EditFieldProps } from '../../../../../../../components/Edit/Edit'
 import ProductAttributeContext from '../../../contexts/ProductAttributeContext/ProductAttributeContext'
 import { ProductAttributesRoutes } from '../../../routes/ProductAttributesRoutes'
-import { getAttributeTypeName } from '../../../../../../../helpers/attributeTypeHelper'
 import { useHistory } from 'react-router'
 
 interface UseProductAttributeEditReturn {
@@ -19,6 +20,14 @@ const useProductAttributeEdit = (): UseProductAttributeEditReturn => {
     const history = useHistory()
     const state = useContext(ProductAttributeContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
+
+    const onChangeType = useCallback(
+        (_, data: DropdownProps) => {
+            state.setAttribute({ ...state.attribute, type: data.value as AttributeType })
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
 
     const onChangeName = useCallback(
         (_, data: InputOnChangeData) => {
@@ -50,11 +59,13 @@ const useProductAttributeEdit = (): UseProductAttributeEditReturn => {
     const fields: EditFieldProps[] = useMemo(
         () => [
             {
-                type: 'text',
+                type: 'select',
                 required: true,
-                topLabel: 'Тип',
-                value: getAttributeTypeName(state.attribute.type),
-                onChange: onChangeName
+                label: 'Тип',
+                value: state.attribute.type,
+                text: getAttributeTypeName(state.attribute.type),
+                options: getAttributesAsSelectOptions(),
+                onChange: onChangeType
             },
             {
                 type: 'text',
@@ -70,7 +81,14 @@ const useProductAttributeEdit = (): UseProductAttributeEditReturn => {
                 onChange: onChangeIsDeleted
             }
         ],
-        [onChangeIsDeleted, onChangeName, state.attribute.isDeleted, state.attribute.key, state.attribute.type]
+        [
+            onChangeIsDeleted,
+            onChangeName,
+            onChangeType,
+            state.attribute.isDeleted,
+            state.attribute.key,
+            state.attribute.type
+        ]
     )
 
     return { fields, isConfirmEnabled, onClickHistory, onClickConfirm, onClickCancel }

@@ -1,10 +1,11 @@
-import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
+import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
+import { getAttributeTypeName, getAttributesAsSelectOptions } from '../../../../../../../helpers/attributeTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
+import AttributeType from '../../../../../../../../api/products/models/AttributeType'
 import { CreateFieldProps } from '../../../../../../../components/Create/Create'
 import ProductAttributeContext from '../../../contexts/ProductAttributeContext/ProductAttributeContext'
 import { ProductAttributesRoutes } from '../../../routes/ProductAttributesRoutes'
-import { getAttributeTypeName } from '../../../../../../../helpers/attributeTypeHelper'
 import { useHistory } from 'react-router'
 
 interface UseProductAttributeCreateReturn {
@@ -19,7 +20,15 @@ const useProductAttributeCreate = (): UseProductAttributeCreateReturn => {
     const state = useContext(ProductAttributeContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
-    const onChangeName = useCallback(
+    const onChangeType = useCallback(
+        (_, data: DropdownProps) => {
+            state.setAttribute({ ...state.attribute, type: data.value as AttributeType })
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
+    const onChangeKey = useCallback(
         (_, data: InputOnChangeData) => {
             state.setAttribute({ ...state.attribute, key: data.value })
             setIsConfirmEnabled(true)
@@ -45,18 +54,20 @@ const useProductAttributeCreate = (): UseProductAttributeCreateReturn => {
     const fields: CreateFieldProps[] = useMemo(
         () => [
             {
-                type: 'text',
+                type: 'select',
                 required: true,
-                topLabel: 'Тип',
-                value: getAttributeTypeName(state.attribute.type),
-                onChange: onChangeName
+                label: 'Тип',
+                value: state.attribute.type,
+                text: getAttributeTypeName(state.attribute.type),
+                options: getAttributesAsSelectOptions(),
+                onChange: onChangeType
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Наименование',
                 value: state.attribute.key,
-                onChange: onChangeName
+                onChange: onChangeKey
             },
             {
                 type: 'checkbox',
@@ -65,7 +76,14 @@ const useProductAttributeCreate = (): UseProductAttributeCreateReturn => {
                 onChange: onChangeIsDeleted
             }
         ],
-        [onChangeIsDeleted, onChangeName, state.attribute.isDeleted, state.attribute.key, state.attribute.type]
+        [
+            onChangeType,
+            onChangeKey,
+            onChangeIsDeleted,
+            state.attribute.type,
+            state.attribute.key,
+            state.attribute.isDeleted
+        ]
     )
 
     return { fields, isConfirmEnabled, onClickConfirm, onClickCancel }

@@ -7,6 +7,7 @@ import ProductAttributesContext from '../../../contexts/ProductAttributesContext
 import { ProductAttributesRoutes } from '../../../routes/ProductAttributesRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/Table/TableHeader'
+import { getAttributeTypeName } from '../../../../../../../helpers/attributeTypeHelper'
 import { toLocaleDateTime } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { useHistory } from 'react-router'
 import useProductAttributeView from '../../ProductAttributeView/hooks/useProductAttributeView'
@@ -35,8 +36,8 @@ const useProductAttributesTable = (): UseProductAttributesTableReturn => {
             return
         }
 
-        const fileName = 'Статусы'
-        const headers = ['Идентификатор', 'Наименование', 'Удален', 'Создан', 'Изменен']
+        const fileName = 'Атрибуты'
+        const headers = ['Идентификатор', 'Тип', 'Наименование', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...attributes])
 
         downloadAsCsv(fileName, csv)
@@ -77,7 +78,7 @@ const useProductAttributesTable = (): UseProductAttributesTableReturn => {
                     ({
                         id: attribute.id,
                         cells: [
-                            { value: attribute.type, textAlign: 'left' },
+                            { value: getAttributeTypeName(attribute.type), textAlign: 'left' },
                             { value: attribute.key, textAlign: 'left' },
                             { value: toLocaleDateTime(attribute.createDateTime), textAlign: 'center' }
                         ],
@@ -94,11 +95,18 @@ const useProductAttributesTable = (): UseProductAttributesTableReturn => {
     const headers: TableHeaderCellProps[] = useMemo(
         () => [
             {
-                key: 'Name',
+                key: 'Type',
+                label: 'Тип',
+                width: 4,
+                onClick: () => onClickSort('Type'),
+                orderBy: getOrderBy('Type')
+            },
+            {
+                key: 'Key',
                 label: 'Наименование',
-                width: 10,
-                onClick: () => onClickSort('Name'),
-                orderBy: getOrderBy('Name')
+                width: 6,
+                onClick: () => onClickSort('Key'),
+                orderBy: getOrderBy('Key')
             },
             {
                 key: 'CreateDateTime',

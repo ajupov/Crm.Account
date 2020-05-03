@@ -4,6 +4,7 @@ import ProductAttribute from '../../../../../../../../api/products/models/Produc
 import ProductAttributesActionsContext from '../../../contexts/ProductAttributesActionsContext/ProductAttributesActionsContext'
 import { ProductAttributesRoutes } from '../../../routes/ProductAttributesRoutes'
 import { ViewDataProps } from '../../../../../../../components/View/View'
+import { getAttributeTypeName } from '../../../../../../../helpers/attributeTypeHelper'
 import { useHistory } from 'react-router'
 
 interface UseProductAttributeViewReturn {
@@ -45,7 +46,7 @@ const useProductAttributeView = (): UseProductAttributeViewReturn => {
 
     const map = useCallback(
         (attribute: ProductAttribute): ViewDataProps[] => [
-            { label: 'Тип', value: attribute.type.toString() },
+            { label: 'Тип', value: getAttributeTypeName(attribute.type) },
             { label: 'Наименование', value: attribute.key },
             { label: 'Удален', value: attribute.isDeleted ? 'Да' : 'Нет' }
         ],

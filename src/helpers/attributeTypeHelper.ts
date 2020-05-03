@@ -1,10 +1,11 @@
 import AttributeType from '../../api/products/models/AttributeType'
+import { SelectOptionCreateFieldProps } from '../components/Create/Create'
 
 interface Dictionary {
     [key: number]: string
 }
 
-const TypeWithNames: Dictionary = {
+const AttributeTypeWithNames: Dictionary = {
     1: 'Тег',
     2: 'Флаг',
     3: 'Целое число от 0 до 255',
@@ -34,9 +35,17 @@ const TypeWithNames: Dictionary = {
     60: 'JSON данные',
     61: 'XML данные',
     63: 'HTML данные',
-    64: 'Тескстовые данные'
+    64: 'Текстовые данные'
+}
+
+export const DefaultAttributeType = AttributeType.Text
+
+export function getAttributesAsSelectOptions(): SelectOptionCreateFieldProps[] {
+    return Object.entries(AttributeTypeWithNames).map(
+        x => ({ value: x[0], text: x[1] } as SelectOptionCreateFieldProps)
+    )
 }
 
 export function getAttributeTypeName(type?: AttributeType): string {
-    return type ? TypeWithNames[type] : ''
+    return type ? AttributeTypeWithNames[type] : ''
 }
