@@ -1,4 +1,3 @@
-/* eslint-disable */
 enum AttributeType {
     Tag = 1,
     Bool = 2,

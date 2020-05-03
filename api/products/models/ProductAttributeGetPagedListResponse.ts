@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import ProductAttribute from '../models/ProductAttribute'
 
 export default interface ProductAttributeGetPagedListResponse {

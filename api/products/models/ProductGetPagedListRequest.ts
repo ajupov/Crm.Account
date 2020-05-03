@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import ProductType from '../models/ProductType'
 
 export default interface ProductGetPagedListRequest {

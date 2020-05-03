@@ -1,6 +1,5 @@
-/* eslint-disable */
 export default interface ProductCategoryLink {
-    id: string
-    productId: string
-    productCategoryId: string
+    id?: string
+    productId?: string
+    productCategoryId?: string
 }
