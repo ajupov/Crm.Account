@@ -40,7 +40,7 @@ const AttributeTypeWithNames: Dictionary = {
 
 export const DefaultAttributeType = AttributeType.Text
 
-export function getAttributesAsSelectOptions(): SelectOptionCreateFieldProps[] {
+export function getAttributeTypesAsSelectOptions(): SelectOptionCreateFieldProps[] {
     return Object.entries(AttributeTypeWithNames).map(
         x => ({ value: x[0], text: x[1] } as SelectOptionCreateFieldProps)
     )

@@ -20,13 +20,18 @@ import ProductCategoryChanges from '../../pages/Products/components/ProductCateg
 import ProductCategoryCreate from '../../pages/Products/components/ProductCategories/components/ProductCategoryCreate/ProductCategoryCreate'
 import ProductCategoryEdit from '../../pages/Products/components/ProductCategories/components/ProductCategoryEdit/ProductCategoryEdit'
 import ProductCategoryView from '../../pages/Products/components/ProductCategories/components/ProductCategoryView/ProductCategoryView'
+import ProductChanges from '../../pages/Products/components/Products/components/ProductChanges/ProductChanges'
+import ProductCreate from '../../pages/Products/components/Products/components/ProductCreate/ProductCreate'
+import ProductEdit from '../../pages/Products/components/Products/components/ProductEdit/ProductEdit'
 import ProductStatusChanges from '../../pages/Products/components/ProductStatuses/components/ProductStatusChanges/ProductStatusChanges'
 import ProductStatusCreate from '../../pages/Products/components/ProductStatuses/components/ProductStatusCreate/ProductStatusCreate'
 import ProductStatusEdit from '../../pages/Products/components/ProductStatuses/components/ProductStatusEdit/ProductStatusEdit'
 import ProductStatusView from '../../pages/Products/components/ProductStatuses/components/ProductStatusView/ProductStatusView'
 import ProductStatuses from '../../pages/Products/components/ProductStatuses/ProductStatuses'
 import { ProductStatusesRoutes } from '../../pages/Products/components/ProductStatuses/routes/ProductStatusesRoutes'
-import Products from '../../pages/Products/Products'
+import ProductView from '../../pages/Products/components/Products/components/ProductView/ProductView'
+import Products from '../../pages/Products/components/Products/Products'
+import { ProductsRoutes } from '../../pages/Products/components/Products/routes/ProductsRoutes'
 import Settings from '../../pages/Settings/Settings'
 
 const Routes: FC = () => (
@@ -37,7 +42,12 @@ const Routes: FC = () => (
         <Route path="/leads" component={Leads} />
         <Route path="/deals" component={Deals} />
         <Route path="/contacts" component={Contacts} />
-        <Route path="/products" exact component={Products} />
+
+        <Route path={ProductsRoutes.Index} exact component={Products} />
+        <Route path={ProductsRoutes.Create} exact component={ProductCreate} />
+        <Route path={`${ProductsRoutes.View}/:id`} exact component={ProductView} />
+        <Route path={`${ProductsRoutes.Edit}/:id`} exact component={ProductEdit} />
+        <Route path={`${ProductsRoutes.Changes}/:id`} exact component={ProductChanges} />
 
         <Route path={ProductCategoriesRoutes.Index} exact component={ProductCategories} />
         <Route path={ProductCategoriesRoutes.Create} exact component={ProductCategoryCreate} />

@@ -17,7 +17,7 @@ export default interface Product {
     isDeleted: boolean
     createDateTime?: string
     modifyDateTime?: string
-    status: ProductStatus
+    status?: ProductStatus
     attributeLinks?: ProductAttributeLink[]
     categoryLinks?: ProductCategoryLink[]
 }

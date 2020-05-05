@@ -1,14 +1,14 @@
 import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
-import { getAttributeTypeName, getAttributeTypesAsSelectOptions } from '../../../../../../../helpers/attributeTypeHelper'
+import { getAttributeTypeName, getProductTypesAsSelectOptions } from '../../../../../../../helpers/productTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import AttributeType from '../../../../../../../../api/products/models/AttributeType'
 import { EditFieldProps } from '../../../../../../../components/Edit/Edit'
-import ProductAttributeContext from '../../../contexts/ProductAttributeContext/ProductAttributeContext'
-import { ProductAttributesRoutes } from '../../../routes/ProductAttributesRoutes'
+import ProductContext from '../../../contexts/ProductContext/ProductContext'
+import ProductType from '../../../../../../../../api/products/models/ProductType'
+import { ProductsRoutes } from '../../../routes/ProductsRoutes'
 import { useHistory } from 'react-router'
 
-interface UseProductAttributeEditReturn {
+interface UseProductEditReturn {
     fields: EditFieldProps[]
     isConfirmEnabled: boolean
     onClickHistory: (id: string) => void
@@ -16,14 +16,14 @@ interface UseProductAttributeEditReturn {
     onClickCancel: () => void
 }
 
-const useProductAttributeEdit = (): UseProductAttributeEditReturn => {
+const useProductEdit = (): UseProductEditReturn => {
     const history = useHistory()
-    const state = useContext(ProductAttributeContext)
+    const state = useContext(ProductContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeType = useCallback(
         (_, data: DropdownProps) => {
-            state.setAttribute({ ...state.attribute, type: data.value as AttributeType })
+            state.setProduct({ ...state.product, type: data.value as ProductType })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -31,7 +31,7 @@ const useProductAttributeEdit = (): UseProductAttributeEditReturn => {
 
     const onChangeName = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setAttribute({ ...state.attribute, key: data.value })
+            state.setProduct({ ...state.product, name: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -39,7 +39,7 @@ const useProductAttributeEdit = (): UseProductAttributeEditReturn => {
 
     const onChangeIsDeleted = useCallback(
         (_, __: CheckboxProps) => {
-            state.setAttribute({ ...state.attribute, isDeleted: !state.attribute.isDeleted })
+            state.setProduct({ ...state.product, isDeleted: !state.product.isDeleted })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -47,12 +47,12 @@ const useProductAttributeEdit = (): UseProductAttributeEditReturn => {
 
     const onClickConfirm = useCallback(async (): Promise<void> => {
         await state.update()
-        history.push(ProductAttributesRoutes.Index)
+        history.push(ProductsRoutes.Index)
     }, [state, history])
 
     const onClickCancel = useCallback((): void => history.goBack(), [history])
 
-    const onClickHistory = useCallback((id: string): void => history.push(`${ProductAttributesRoutes.Changes}/${id}`), [
+    const onClickHistory = useCallback((id: string): void => history.push(`${ProductsRoutes.Changes}/${id}`), [
         history
     ])
 
@@ -62,22 +62,22 @@ const useProductAttributeEdit = (): UseProductAttributeEditReturn => {
                 type: 'select',
                 required: true,
                 label: 'Тип',
-                value: state.attribute.type,
-                text: getAttributeTypeName(state.attribute.type),
-                options: getAttributeTypesAsSelectOptions(),
+                value: state.product.type,
+                text: getAttributeTypeName(state.product.type),
+                options: getProductTypesAsSelectOptions(),
                 onChange: onChangeType
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Наименование',
-                value: state.attribute.key,
+                value: state.product.name,
                 onChange: onChangeName
             },
             {
                 type: 'checkbox',
                 label: 'Удален',
-                checked: state.attribute.isDeleted,
+                checked: state.product.isDeleted,
                 onChange: onChangeIsDeleted
             }
         ],
@@ -85,13 +85,13 @@ const useProductAttributeEdit = (): UseProductAttributeEditReturn => {
             onChangeIsDeleted,
             onChangeName,
             onChangeType,
-            state.attribute.isDeleted,
-            state.attribute.key,
-            state.attribute.type
+            state.product.isDeleted,
+            state.product.name,
+            state.product.type
         ]
     )
 
     return { fields, isConfirmEnabled, onClickHistory, onClickConfirm, onClickCancel }
 }
 
-export default useProductAttributeEdit
+export default useProductEdit

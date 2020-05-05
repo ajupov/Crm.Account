@@ -1,26 +1,26 @@
 import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
-import ProductAttributesFiltersState, {
-    productAttributesFiltersInitialState
-} from '../../../states/ProductAttributesFiltersState'
+import ProductsFiltersState, {
+    productsFiltersInitialState
+} from '../../../states/ProductsFiltersState'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'
-import ProductAttributesContext from '../../ProductAttributesContext/ProductAttributesContext'
-import { getAttributeTypesAsSelectOptions } from '../../../../../../../helpers/attributeTypeHelper'
+import ProductsContext from '../../ProductsContext/ProductsContext'
+import { getProductTypesAsSelectOptions } from '../../../../../../../helpers/productTypeHelper'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
 
-const useProductAttributesFilters = (): ProductAttributesFiltersState => {
-    const state = useContext(ProductAttributesContext)
+const useProductsFilters = (): ProductsFiltersState => {
+    const state = useContext(ProductsContext)
     const [types, setTypes] = useState(state.request.types ?? [])
-    const [key, setKey] = useState(state.request.key ?? '')
+    const [name, setName] = useState(state.request.name ?? '')
     const [isDeleted, setIsDeleted] = useState(state.request.isDeleted)
     const [minCreateDate, setMinCreateDate] = useState(state.request.minCreateDate ?? '')
     const [maxCreateDate, setMaxCreateDate] = useState(state.request.maxCreateDate ?? '')
     const [minModifyDate, setMinModifyDate] = useState(state.request.minModifyDate ?? '')
     const [maxModifyDate, setMaxModifyDate] = useState(state.request.maxModifyDate ?? '')
-    const [isApplyEnabled, setIsApplyEnabled] = useState(productAttributesFiltersInitialState.isApplyEnabled)
-    const [isResetEnabled, setIsResetEnabled] = useState(productAttributesFiltersInitialState.isResetEnabled)
-    const [isShowMobile, setIsShowMobile] = useState(productAttributesFiltersInitialState.isShowMobile)
+    const [isApplyEnabled, setIsApplyEnabled] = useState(productsFiltersInitialState.isApplyEnabled)
+    const [isResetEnabled, setIsResetEnabled] = useState(productsFiltersInitialState.isResetEnabled)
+    const [isShowMobile, setIsShowMobile] = useState(productsFiltersInitialState.isShowMobile)
 
     const onChangeTypes = useCallback((_: any, { value }: DropdownProps) => {
         setTypes(value as [])
@@ -29,10 +29,10 @@ const useProductAttributesFilters = (): ProductAttributesFiltersState => {
 
     const onChangeKey = useCallback(
         (_, { value }: InputOnChangeData) => {
-            setKey(value)
+            setName(value)
             setIsApplyEnabled(true)
         },
-        [setKey]
+        [setName]
     )
 
     const onChangeIsDeleted = useCallback(
@@ -79,7 +79,7 @@ const useProductAttributesFilters = (): ProductAttributesFiltersState => {
         state.setRequest({
             ...state.request,
             types,
-            key,
+            name,
             isDeleted,
             minCreateDate,
             maxCreateDate,
@@ -91,10 +91,10 @@ const useProductAttributesFilters = (): ProductAttributesFiltersState => {
         setIsShowMobile(false)
         setIsApplyEnabled(false)
         setIsResetEnabled(true)
-    }, [state, types, key, isDeleted, minCreateDate, maxCreateDate, minModifyDate, maxModifyDate])
+    }, [state, types, name, isDeleted, minCreateDate, maxCreateDate, minModifyDate, maxModifyDate])
 
     const onReset = useCallback(() => {
-        setKey('')
+        setName('')
         setTypes([])
         setIsDeleted(false)
         setMinCreateDate('')
@@ -104,13 +104,23 @@ const useProductAttributesFilters = (): ProductAttributesFiltersState => {
 
         state.setRequest({
             ...state.request,
-            key: '',
+            parentProductId: void 0,
             types: [],
+            statusIds: [],
+            name: '',
+            vendorCode: '',
+            minPrice: void 0,
+            maxPrice: void 0,
+            isHidden: false,
             isDeleted: false,
             minCreateDate: '',
             maxCreateDate: '',
             minModifyDate: '',
             maxModifyDate: '',
+            allAttributes: false,
+            attributes: [],
+            allCategoryIds: false,
+            categoryIds: [],
             offset: 0
         })
 
@@ -128,13 +138,13 @@ const useProductAttributesFilters = (): ProductAttributesFiltersState => {
                 type: 'select',
                 label: 'Тип',
                 values: types.map(x => x as number),
-                options: getAttributeTypesAsSelectOptions(),
+                options: getProductTypesAsSelectOptions(),
                 onChange: onChangeTypes
             },
             {
                 type: 'text',
                 topLabel: 'Наименование',
-                value: key,
+                value: name,
                 onChange: onChangeKey
             },
             {
@@ -171,7 +181,7 @@ const useProductAttributesFilters = (): ProductAttributesFiltersState => {
         [
             types,
             onChangeTypes,
-            key,
+            name,
             onChangeKey,
             minCreateDate,
             onChangeMinCreateDate,
@@ -189,4 +199,4 @@ const useProductAttributesFilters = (): ProductAttributesFiltersState => {
     return { fields, isApplyEnabled, onApply, isResetEnabled, onReset, isShowMobile, onShowMobile, onHideMobile }
 }
 
-export default useProductAttributesFilters
+export default useProductsFilters

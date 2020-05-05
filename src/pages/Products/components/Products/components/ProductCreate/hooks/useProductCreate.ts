@@ -1,28 +1,28 @@
 import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
-import { getAttributeTypeName, getAttributeTypesAsSelectOptions } from '../../../../../../../helpers/attributeTypeHelper'
+import { getAttributeTypeName, getProductTypesAsSelectOptions } from '../../../../../../../helpers/productTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import AttributeType from '../../../../../../../../api/products/models/AttributeType'
 import { CreateFieldProps } from '../../../../../../../components/Create/Create'
-import ProductAttributeContext from '../../../contexts/ProductAttributeContext/ProductAttributeContext'
-import { ProductAttributesRoutes } from '../../../routes/ProductAttributesRoutes'
+import ProductContext from '../../../contexts/ProductContext/ProductContext'
+import ProductType from '../../../../../../../../api/products/models/ProductType'
+import { ProductsRoutes } from '../../../routes/ProductsRoutes'
 import { useHistory } from 'react-router'
 
-interface UseProductAttributeCreateReturn {
+interface UseProductCreateReturn {
     fields: CreateFieldProps[]
     isConfirmEnabled: boolean
     onClickConfirm: () => void
     onClickCancel: () => void
 }
 
-const useProductAttributeCreate = (): UseProductAttributeCreateReturn => {
+const useProductCreate = (): UseProductCreateReturn => {
     const history = useHistory()
-    const state = useContext(ProductAttributeContext)
+    const state = useContext(ProductContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeType = useCallback(
         (_, data: DropdownProps) => {
-            state.setAttribute({ ...state.attribute, type: data.value as AttributeType })
+            state.setProduct({ ...state.product, type: data.value as ProductType })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -30,7 +30,7 @@ const useProductAttributeCreate = (): UseProductAttributeCreateReturn => {
 
     const onChangeKey = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setAttribute({ ...state.attribute, key: data.value })
+            state.setProduct({ ...state.product, name: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -38,7 +38,7 @@ const useProductAttributeCreate = (): UseProductAttributeCreateReturn => {
 
     const onChangeIsDeleted = useCallback(
         (_, __: CheckboxProps) => {
-            state.setAttribute({ ...state.attribute, isDeleted: !state.attribute.isDeleted })
+            state.setProduct({ ...state.product, isDeleted: !state.product.isDeleted })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -46,7 +46,7 @@ const useProductAttributeCreate = (): UseProductAttributeCreateReturn => {
 
     const onClickConfirm = useCallback(async (): Promise<void> => {
         await state.create()
-        history.push(ProductAttributesRoutes.Index)
+        history.push(ProductsRoutes.Index)
     }, [state, history])
 
     const onClickCancel = useCallback((): void => history.goBack(), [history])
@@ -57,22 +57,22 @@ const useProductAttributeCreate = (): UseProductAttributeCreateReturn => {
                 type: 'select',
                 required: true,
                 label: 'Тип',
-                value: state.attribute.type,
-                text: getAttributeTypeName(state.attribute.type),
-                options: getAttributeTypesAsSelectOptions(),
+                value: state.product.type,
+                text: getAttributeTypeName(state.product.type),
+                options: getProductTypesAsSelectOptions(),
                 onChange: onChangeType
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Наименование',
-                value: state.attribute.key,
+                value: state.product.name,
                 onChange: onChangeKey
             },
             {
                 type: 'checkbox',
                 label: 'Удален',
-                checked: state.attribute.isDeleted,
+                checked: state.product.isDeleted,
                 onChange: onChangeIsDeleted
             }
         ],
@@ -80,13 +80,13 @@ const useProductAttributeCreate = (): UseProductAttributeCreateReturn => {
             onChangeType,
             onChangeKey,
             onChangeIsDeleted,
-            state.attribute.type,
-            state.attribute.key,
-            state.attribute.isDeleted
+            state.product.type,
+            state.product.name,
+            state.product.isDeleted
         ]
     )
 
     return { fields, isConfirmEnabled, onClickConfirm, onClickCancel }
 }
 
-export default useProductAttributeCreate
+export default useProductCreate
