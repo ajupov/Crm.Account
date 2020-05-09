@@ -15,6 +15,7 @@ import { SelectOptionCreateFieldProps } from '../Create/Create'
 
 export type FilterFieldProps =
     | TextFilterFieldProps
+    | NumberFilterFieldProps
     | DateFilterFieldProps
     | RadioFilterFieldProps
     | SelectFilterFieldProps
@@ -24,6 +25,17 @@ export interface TextFilterFieldProps {
     topLabel: string
     value: string
     onChange: (_: any, { value }: InputOnChangeData) => void
+}
+
+export interface NumberFilterFieldProps {
+    type: 'number'
+    topLabel: string
+    label1?: string
+    value1?: number
+    onChange1: (_: any, { value }: InputOnChangeData) => void
+    label2?: string
+    value2?: number
+    onChange2: (_: any, { value }: InputOnChangeData) => void
 }
 
 export interface DateFilterFieldProps {
@@ -94,8 +106,31 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                     type="date"
                                     label="по"
                                     placeholder={x.topLabel}
-                                    value={x.value2}
+                                    value={x.value2 ?? 0}
                                     onChange={x.onChange2}
+                                />
+                            </Form.Field>
+                        )
+
+                    case 'number':
+                        return (
+                            <Form.Field key={x.topLabel}>
+                                <label>{x.topLabel}:</label>
+                                <Input
+                                    type="number"
+                                    label="от"
+                                    placeholder={x.label1}
+                                    value={x.value1 ?? 0}
+                                    onChange={x.onChange1}
+                                    min={0}
+                                />
+                                <Input
+                                    type="number"
+                                    label="до"
+                                    placeholder={x.label2}
+                                    value={x.value2 ?? 0}
+                                    onChange={x.onChange2}
+                                    min={0}
                                 />
                             </Form.Field>
                         )
@@ -103,7 +138,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                         return (
                             <Form.Field key={x.topLabel ?? x.label1} inline={x.isHorizontal}>
                                 <>
-                                    {x.topLabel && <label>{x.topLabel}</label>}
+                                    {x.topLabel && <label>{x.topLabel}:</label>}
                                     <Checkbox
                                         radio
                                         label={x.label1}
@@ -111,6 +146,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                         value={x.value1}
                                         checked={x.checked1}
                                         onChange={x.onChange}
+                                        style={{ marginRight: '20px' }}
                                     />
                                     {x.isHorizontal || <br />}
                                     <Checkbox

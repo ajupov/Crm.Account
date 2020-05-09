@@ -16,6 +16,8 @@ const useProductsFilters = (): ProductsFiltersState => {
     const [vendorCode, setVendorCode] = useState(state.request.vendorCode ?? '')
     const [isHidden, setIsHidden] = useState(state.request.isHidden)
     const [isDeleted, setIsDeleted] = useState(state.request.isDeleted)
+    const [minPrice, setMinPrice] = useState(state.request.minPrice)
+    const [maxPrice, setMaxPrice] = useState(state.request.maxPrice)
     const [minCreateDate, setMinCreateDate] = useState(state.request.minCreateDate ?? '')
     const [maxCreateDate, setMaxCreateDate] = useState(state.request.maxCreateDate ?? '')
     const [minModifyDate, setMinModifyDate] = useState(state.request.minModifyDate ?? '')
@@ -34,7 +36,7 @@ const useProductsFilters = (): ProductsFiltersState => {
             setName(value)
             setIsApplyEnabled(true)
         },
-        [setName]
+        []
     )
 
     const onChangeVendorCode = useCallback(
@@ -42,7 +44,7 @@ const useProductsFilters = (): ProductsFiltersState => {
             setVendorCode(value)
             setIsApplyEnabled(true)
         },
-        [setVendorCode]
+        []
     )
 
     const onChangeIsHidden = useCallback(
@@ -50,7 +52,7 @@ const useProductsFilters = (): ProductsFiltersState => {
             setIsHidden(toBooleanNullable(data.value))
             setIsApplyEnabled(true)
         },
-        [setIsHidden]
+        []
     )
 
     const onChangeIsDeleted = useCallback(
@@ -58,7 +60,23 @@ const useProductsFilters = (): ProductsFiltersState => {
             setIsDeleted(toBooleanNullable(data.value))
             setIsApplyEnabled(true)
         },
-        [setIsDeleted]
+        []
+    )
+
+    const onChangeMinPrice = useCallback(
+        (_, data: InputOnChangeData) => {
+            setMinPrice(parseInt(data.value, 10))
+            setIsApplyEnabled(true)
+        },
+        []
+    )
+
+    const onChangeMaxPrice = useCallback(
+        (_, data: InputOnChangeData) => {
+            setMaxPrice(parseInt(data.value, 10))
+            setIsApplyEnabled(true)
+        },
+        []
     )
 
     const onChangeMinCreateDate = useCallback(
@@ -66,7 +84,7 @@ const useProductsFilters = (): ProductsFiltersState => {
             setMinCreateDate(data.value)
             setIsApplyEnabled(true)
         },
-        [setMinCreateDate]
+        []
     )
 
     const onChangeMaxCreateDate = useCallback(
@@ -74,7 +92,7 @@ const useProductsFilters = (): ProductsFiltersState => {
             setMaxCreateDate(data.value)
             setIsApplyEnabled(true)
         },
-        [setMaxCreateDate]
+        []
     )
 
     const onChangeMinModifyDate = useCallback(
@@ -82,7 +100,7 @@ const useProductsFilters = (): ProductsFiltersState => {
             setMinModifyDate(data.value)
             setIsApplyEnabled(true)
         },
-        [setMinModifyDate]
+        []
     )
 
     const onChangeMaxModifyDate = useCallback(
@@ -90,31 +108,39 @@ const useProductsFilters = (): ProductsFiltersState => {
             setMaxModifyDate(data.value)
             setIsApplyEnabled(true)
         },
-        [setMaxModifyDate]
+        []
     )
 
-    const onApply = useCallback(() => {
+    const newFunction = useCallback((productType?: ProductType): void => {
         state.setRequest({
             ...state.request,
-            types: [type],
+            types: [productType ?? type],
             name,
             isDeleted,
+            minPrice,
+            maxPrice,
             minCreateDate,
             maxCreateDate,
             minModifyDate,
             maxModifyDate,
             offset: 0
         })
+    }, [isDeleted, maxCreateDate, maxModifyDate, maxPrice, minCreateDate, minModifyDate, minPrice, name, state, type])
+
+    const onApply = useCallback(() => {
+        newFunction()
 
         setIsShowMobile(false)
         setIsApplyEnabled(false)
         setIsResetEnabled(true)
-    }, [state, type, name, isDeleted, minCreateDate, maxCreateDate, minModifyDate, maxModifyDate])
+    }, [newFunction])
 
     const onReset = useCallback(() => {
         setName('')
         setType(ProductType.Material)
         setIsDeleted(false)
+        setMinPrice(void 0)
+        setMaxPrice(void 0)
         setMinCreateDate('')
         setMaxCreateDate('')
         setMinModifyDate('')
@@ -162,7 +188,10 @@ const useProductsFilters = (): ProductsFiltersState => {
                 label2: 'Услуги',
                 value2: ProductType.NonMaterial,
                 checked2: type === ProductType.NonMaterial,
-                onChange: onChangeType
+                onChange: (_, props) => {
+                    onChangeType(_, props)
+                    newFunction(props.value as ProductType)
+                }
             },
             {
                 type: 'text',
@@ -175,6 +204,14 @@ const useProductsFilters = (): ProductsFiltersState => {
                 topLabel: 'Артикул',
                 value: vendorCode,
                 onChange: onChangeVendorCode
+            },
+            {
+                type: 'number',
+                topLabel: 'Цена',
+                value1: minPrice,
+                onChange1: onChangeMinPrice,
+                value2: maxPrice,
+                onChange2: onChangeMaxPrice
             },
             {
                 type: 'date',
@@ -218,7 +255,7 @@ const useProductsFilters = (): ProductsFiltersState => {
                 onChange: onChangeIsDeleted
             }
         ],
-        [type, onChangeType, name, onChangeName, vendorCode, onChangeVendorCode, minCreateDate, onChangeMinCreateDate, maxCreateDate, onChangeMaxCreateDate, minModifyDate, onChangeMinModifyDate, maxModifyDate, onChangeMaxModifyDate, isHidden, onChangeIsHidden, isDeleted, onChangeIsDeleted]
+        [type, name, onChangeName, vendorCode, onChangeVendorCode, minPrice, onChangeMinPrice, maxPrice, onChangeMaxPrice, minCreateDate, onChangeMinCreateDate, maxCreateDate, onChangeMaxCreateDate, minModifyDate, onChangeMinModifyDate, maxModifyDate, onChangeMaxModifyDate, isHidden, onChangeIsHidden, isDeleted, onChangeIsDeleted, onChangeType, newFunction]
     )
 
     return { fields, isApplyEnabled, onApply, isResetEnabled, onReset, isShowMobile, onShowMobile, onHideMobile }
