@@ -66,7 +66,7 @@ export interface RadioFilterFieldProps {
 export interface SelectFilterFieldProps {
     type: 'select'
     label: string
-    values: number[]
+    values: (number | string)[]
     options: SelectOptionCreateFieldProps[]
     onChange: (_: any, { value }: DropdownProps) => void
 }
@@ -120,7 +120,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                     type="number"
                                     label="от"
                                     placeholder={x.label1}
-                                    value={x.value1 ?? 0}
+                                    value={x.value1 ?? ''}
                                     onChange={x.onChange1}
                                     min={0}
                                 />
@@ -128,7 +128,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                     type="number"
                                     label="до"
                                     placeholder={x.label2}
-                                    value={x.value2 ?? 0}
+                                    value={x.value2 ?? ''}
                                     onChange={x.onChange2}
                                     min={0}
                                 />
