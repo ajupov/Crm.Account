@@ -16,7 +16,7 @@ import { SelectOptionCreateFieldProps } from '../Create/Create'
 export type FilterFieldProps =
     | TextFilterFieldProps
     | DateFilterFieldProps
-    | CheckboxFilterFieldProps
+    | RadioFilterFieldProps
     | SelectFilterFieldProps
 
 export interface TextFilterFieldProps {
@@ -35,18 +35,19 @@ export interface DateFilterFieldProps {
     onChange2: (_: any, { value }: InputOnChangeData) => void
 }
 
-export interface CheckboxFilterFieldProps {
-    type: 'checkbox'
-    topLabel: string
+export interface RadioFilterFieldProps {
+    type: 'radio'
+    isHorizontal?: boolean
+    topLabel?: string
     label1: string
-    value1: string | undefined
+    value1: string | number | undefined
     checked1: boolean
     label2: string
-    value2: string | undefined
+    value2: string | number | undefined
     checked2: boolean
-    label3: string
-    value3: string | undefined
-    checked3: boolean
+    label3?: string
+    value3?: string | number | undefined
+    checked3?: boolean
     onChange: (_: any, { value }: CheckboxProps) => void
 }
 
@@ -75,13 +76,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                         return (
                             <Form.Field key={x.topLabel}>
                                 <label>{x.topLabel}:</label>
-                                <Input
-                                    type="text"
-                                    // size="mini"
-                                    placeholder={x.topLabel}
-                                    value={x.value}
-                                    onChange={x.onChange}
-                                />
+                                <Input type="text" placeholder={x.topLabel} value={x.value} onChange={x.onChange} />
                             </Form.Field>
                         )
                     case 'date':
@@ -90,7 +85,6 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                 <label>{x.topLabel}:</label>
                                 <Input
                                     type="date"
-                                    // size="mini"
                                     label="с"
                                     placeholder={x.topLabel}
                                     value={x.value1}
@@ -98,7 +92,6 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                 />
                                 <Input
                                     type="date"
-                                    // size="mini"
                                     label="по"
                                     placeholder={x.topLabel}
                                     value={x.value2}
@@ -106,39 +99,42 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                 />
                             </Form.Field>
                         )
-                    case 'checkbox':
+                    case 'radio':
                         return (
-                            <Form.Field key={x.topLabel}>
-                                <label>{x.topLabel}</label>
-                                <Checkbox
-                                    radio
-                                    // size="mini"
-                                    label={x.label1}
-                                    placeholder={x.topLabel}
-                                    value={x.value1}
-                                    checked={x.checked1}
-                                    onChange={x.onChange}
-                                />
-                                <br />
-                                <Checkbox
-                                    radio
-                                    // size="mini"
-                                    label={x.label2}
-                                    placeholder={x.topLabel}
-                                    value={x.value2}
-                                    checked={x.checked2}
-                                    onChange={x.onChange}
-                                />
-                                <br />
-                                <Checkbox
-                                    radio
-                                    // size="mini"
-                                    label={x.label3}
-                                    placeholder={x.topLabel}
-                                    value={x.value3}
-                                    checked={x.checked3}
-                                    onChange={x.onChange}
-                                />
+                            <Form.Field key={x.topLabel ?? x.label1} inline={x.isHorizontal}>
+                                <>
+                                    {x.topLabel && <label>{x.topLabel}</label>}
+                                    <Checkbox
+                                        radio
+                                        label={x.label1}
+                                        placeholder={x.topLabel}
+                                        value={x.value1}
+                                        checked={x.checked1}
+                                        onChange={x.onChange}
+                                    />
+                                    {x.isHorizontal || <br />}
+                                    <Checkbox
+                                        radio
+                                        label={x.label2}
+                                        placeholder={x.topLabel}
+                                        value={x.value2}
+                                        checked={x.checked2}
+                                        onChange={x.onChange}
+                                    />
+                                    {x.value3 && (
+                                        <>
+                                            {x.isHorizontal || <br />}
+                                            <Checkbox
+                                                radio
+                                                label={x.label3}
+                                                placeholder={x.topLabel}
+                                                value={x.value3}
+                                                checked={x.checked3}
+                                                onChange={x.onChange}
+                                            />
+                                        </>
+                                    )}
+                                </>
                             </Form.Field>
                         )
                     case 'select':
@@ -148,7 +144,6 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                 <Dropdown
                                     placeholder={x.label}
                                     value={x.values}
-                                    // text={x.text}
                                     multiple
                                     selection
                                     onChange={x.onChange}

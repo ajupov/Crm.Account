@@ -1,18 +1,20 @@
-import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
+import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
 import ProductsFiltersState, {
     productsFiltersInitialState
 } from '../../../states/ProductsFiltersState'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'
+import ProductType from '../../../../../../../../api/products/models/ProductType'
 import ProductsContext from '../../ProductsContext/ProductsContext'
-import { getProductTypesAsSelectOptions } from '../../../../../../../helpers/productTypeHelper'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
 
 const useProductsFilters = (): ProductsFiltersState => {
     const state = useContext(ProductsContext)
-    const [types, setTypes] = useState(state.request.types ?? [])
+    const [type, setType] = useState(state.request.types?.[0] ?? ProductType.Material)
     const [name, setName] = useState(state.request.name ?? '')
+    const [vendorCode, setVendorCode] = useState(state.request.vendorCode ?? '')
+    const [isHidden, setIsHidden] = useState(state.request.isHidden)
     const [isDeleted, setIsDeleted] = useState(state.request.isDeleted)
     const [minCreateDate, setMinCreateDate] = useState(state.request.minCreateDate ?? '')
     const [maxCreateDate, setMaxCreateDate] = useState(state.request.maxCreateDate ?? '')
@@ -22,17 +24,33 @@ const useProductsFilters = (): ProductsFiltersState => {
     const [isResetEnabled, setIsResetEnabled] = useState(productsFiltersInitialState.isResetEnabled)
     const [isShowMobile, setIsShowMobile] = useState(productsFiltersInitialState.isShowMobile)
 
-    const onChangeTypes = useCallback((_: any, { value }: DropdownProps) => {
-        setTypes(value as [])
+    const onChangeType = useCallback((_: any, { value }: CheckboxProps) => {
+        setType(value as ProductType)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeKey = useCallback(
+    const onChangeName = useCallback(
         (_, { value }: InputOnChangeData) => {
             setName(value)
             setIsApplyEnabled(true)
         },
         [setName]
+    )
+
+    const onChangeVendorCode = useCallback(
+        (_, { value }: InputOnChangeData) => {
+            setVendorCode(value)
+            setIsApplyEnabled(true)
+        },
+        [setVendorCode]
+    )
+
+    const onChangeIsHidden = useCallback(
+        (_, data: CheckboxProps) => {
+            setIsHidden(toBooleanNullable(data.value))
+            setIsApplyEnabled(true)
+        },
+        [setIsHidden]
     )
 
     const onChangeIsDeleted = useCallback(
@@ -78,7 +96,7 @@ const useProductsFilters = (): ProductsFiltersState => {
     const onApply = useCallback(() => {
         state.setRequest({
             ...state.request,
-            types,
+            types: [type],
             name,
             isDeleted,
             minCreateDate,
@@ -91,11 +109,11 @@ const useProductsFilters = (): ProductsFiltersState => {
         setIsShowMobile(false)
         setIsApplyEnabled(false)
         setIsResetEnabled(true)
-    }, [state, types, name, isDeleted, minCreateDate, maxCreateDate, minModifyDate, maxModifyDate])
+    }, [state, type, name, isDeleted, minCreateDate, maxCreateDate, minModifyDate, maxModifyDate])
 
     const onReset = useCallback(() => {
         setName('')
-        setTypes([])
+        setType(ProductType.Material)
         setIsDeleted(false)
         setMinCreateDate('')
         setMaxCreateDate('')
@@ -135,17 +153,28 @@ const useProductsFilters = (): ProductsFiltersState => {
     const fields: FilterFieldProps[] = useMemo(
         () => [
             {
-                type: 'select',
-                label: 'Тип',
-                values: types.map(x => x as number),
-                options: getProductTypesAsSelectOptions(),
-                onChange: onChangeTypes
+                type: 'radio',
+                isHorizontal: true,
+                topLabel: 'Тип',
+                label1: 'Товары',
+                value1: ProductType.Material,
+                checked1: type === ProductType.Material,
+                label2: 'Услуги',
+                value2: ProductType.NonMaterial,
+                checked2: type === ProductType.NonMaterial,
+                onChange: onChangeType
             },
             {
                 type: 'text',
                 topLabel: 'Наименование',
                 value: name,
-                onChange: onChangeKey
+                onChange: onChangeName
+            },
+            {
+                type: 'text',
+                topLabel: 'Артикул',
+                value: vendorCode,
+                onChange: onChangeVendorCode
             },
             {
                 type: 'date',
@@ -164,7 +193,18 @@ const useProductsFilters = (): ProductsFiltersState => {
                 onChange2: onChangeMaxModifyDate
             },
             {
-                type: 'checkbox',
+                type: 'radio',
+                isHorizontal: true,
+                label1: 'Активные',
+                value1: 'false',
+                checked1: isHidden === false,
+                label2: 'Черновики',
+                value2: 'true',
+                checked2: isHidden === true,
+                onChange: onChangeIsHidden
+            },
+            {
+                type: 'radio',
                 topLabel: 'Статус',
                 label1: 'Все',
                 value1: void 0,
@@ -178,22 +218,7 @@ const useProductsFilters = (): ProductsFiltersState => {
                 onChange: onChangeIsDeleted
             }
         ],
-        [
-            types,
-            onChangeTypes,
-            name,
-            onChangeKey,
-            minCreateDate,
-            onChangeMinCreateDate,
-            maxCreateDate,
-            onChangeMaxCreateDate,
-            minModifyDate,
-            onChangeMinModifyDate,
-            maxModifyDate,
-            onChangeMaxModifyDate,
-            isDeleted,
-            onChangeIsDeleted
-        ]
+        [type, onChangeType, name, onChangeName, vendorCode, onChangeVendorCode, minCreateDate, onChangeMinCreateDate, maxCreateDate, onChangeMaxCreateDate, minModifyDate, onChangeMinModifyDate, maxModifyDate, onChangeMaxModifyDate, isHidden, onChangeIsHidden, isDeleted, onChangeIsDeleted]
     )
 
     return { fields, isApplyEnabled, onApply, isResetEnabled, onReset, isShowMobile, onShowMobile, onHideMobile }

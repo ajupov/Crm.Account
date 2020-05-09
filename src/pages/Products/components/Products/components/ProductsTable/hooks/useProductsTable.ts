@@ -7,7 +7,7 @@ import ProductsContext from '../../../contexts/ProductsContext/ProductsContext'
 import { ProductsRoutes } from '../../../routes/ProductsRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/Table/TableHeader'
-import { getAttributeTypeName } from '../../../../../../../helpers/productTypeHelper'
+import { getWithCurrency } from '../../../../../../../helpers/currencyHelper'
 import { toLocaleDateTime } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { useHistory } from 'react-router'
 import useProductView from '../../ProductView/hooks/useProductView'
@@ -79,9 +79,9 @@ const useProductsTable = (): UseProductsTableReturn => {
                         id: product.id,
                         cells: [
                             { value: product.name, textAlign: 'left' },
-                            { value: getAttributeTypeName(product.type), textAlign: 'left' },
                             { value: product.vendorCode, textAlign: 'left' },
-                            { value: product.price.toFixed(2) + ' ₽', textAlign: 'right' },
+                            { value: product.status?.name, textAlign: 'left' },
+                            { value: getWithCurrency(product.price), textAlign: 'right' },
                             { value: toLocaleDateTime(product.createDateTime), textAlign: 'center' }
                         ],
                         isDeleted: product.isDeleted,
@@ -99,16 +99,9 @@ const useProductsTable = (): UseProductsTableReturn => {
             {
                 key: 'Key',
                 label: 'Наименование',
-                width: 6,
+                width: 4,
                 onClick: () => onClickSort('Key'),
                 orderBy: getOrderBy('Key')
-            },
-            {
-                key: 'Type',
-                label: 'Тип',
-                width: 2,
-                onClick: () => onClickSort('Type'),
-                orderBy: getOrderBy('Type')
             },
             {
                 key: 'VendorCode',
@@ -116,7 +109,15 @@ const useProductsTable = (): UseProductsTableReturn => {
                 width: 1,
                 onClick: () => onClickSort('VendorCode'),
                 orderBy: getOrderBy('VendorCode')
-            }, {
+            },
+            {
+                key: 'Status',
+                label: 'Статус',
+                width: 2,
+                onClick: () => onClickSort('StatusId'),
+                orderBy: getOrderBy('StatusId')
+            },
+            {
                 key: 'price',
                 label: 'Цена',
                 width: 2,

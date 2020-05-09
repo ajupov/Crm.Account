@@ -154,7 +154,7 @@ const useProductAttributesFilters = (): ProductAttributesFiltersState => {
                 onChange2: onChangeMaxModifyDate
             },
             {
-                type: 'checkbox',
+                type: 'radio',
                 topLabel: 'Статус',
                 label1: 'Все',
                 value1: void 0,

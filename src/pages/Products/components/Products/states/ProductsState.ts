@@ -1,6 +1,7 @@
 import Product from '../../../../../../api/products/models/Product'
 import ProductGetPagedListRequest from '../../../../../../api/products/models/ProductGetPagedListRequest'
 import ProductGetPagedListResponse from '../../../../../../api/products/models/ProductGetPagedListResponse'
+import ProductType from '../../../../../../api/products/models/ProductType'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'
@@ -19,6 +20,8 @@ export default interface ProductsState {
 
 export const productsInitialState: ProductsState = {
     request: {
+        types: [ProductType.Material],
+        isHidden: false,
         isDeleted: false,
         offset: 0,
         limit: DefaultLimit,
