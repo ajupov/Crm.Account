@@ -2,10 +2,12 @@ import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-rea
 import ProductsFiltersState, {
     productsFiltersInitialState
 } from '../../../states/ProductsFiltersState'
+import { arrayToDictionary, dictionaryToArray } from '../../../../../../../helpers/dictionaryHelper'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 
 import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'
 import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import ProductAttributesClient from '../../../../../../../../api/products/clients/ProductAttributesClient'
 import ProductCategoriesClient from '../../../../../../../../api/products/clients/ProductCategoriesClient'
 import ProductStatusesClient from '../../../../../../../../api/products/clients/ProductStatusesClient'
 import ProductType from '../../../../../../../../api/products/models/ProductType'
@@ -15,6 +17,7 @@ import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUti
 
 const productStatusesClient = new ProductStatusesClient(HttpClientFactoryInstance.Api)
 const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
+const productAttributesClient = new ProductAttributesClient(HttpClientFactoryInstance.Api)
 
 const useProductsFilters = (): ProductsFiltersState => {
     const MaxLimit = 1000
@@ -23,6 +26,7 @@ const useProductsFilters = (): ProductsFiltersState => {
     const [type, setType] = useState(state.request.types?.[0] ?? ProductType.Material)
     const [statusIds, setStatusIds] = useState(state.request.statusIds ?? [])
     const [categoryIds, setCategoryIds] = useState(state.request.categoryIds ?? [])
+    const [attributeIds, setAttributeIds] = useState(state.request.attributes ?? {})
     const [name, setName] = useState(state.request.name ?? '')
     const [vendorCode, setVendorCode] = useState(state.request.vendorCode ?? '')
     const [isHidden, setIsHidden] = useState(state.request.isHidden)
@@ -38,12 +42,15 @@ const useProductsFilters = (): ProductsFiltersState => {
     const [isShowMobile, setIsShowMobile] = useState(productsFiltersInitialState.isShowMobile)
     const [statuses, setStatuses] = useState<SelectOptionCreateFieldProps[]>([])
     const [categories, setCategories] = useState<SelectOptionCreateFieldProps[]>([])
+    const [attributes, setAttributes] = useState<SelectOptionCreateFieldProps[]>([])
 
     const onChangeType = useCallback((_: any, { value }: CheckboxProps) => setType(value as ProductType), [])
 
     const onChangeStatusIds = useCallback((_: any, { value }: DropdownProps) => setStatusIds(value as string[]), [])
 
     const onChangeCategoryIds = useCallback((_: any, { value }: DropdownProps) => setCategoryIds(value as string[]), [])
+
+    const onChangeAttributeIds = useCallback((_: any, { value }: DropdownProps) => setAttributeIds(arrayToDictionary((value as string[]))), [])
 
     const getStatuses = useCallback(async () => {
         const statuses = await productStatusesClient.GetPagedListAsync({
@@ -58,7 +65,6 @@ const useProductsFilters = (): ProductsFiltersState => {
             value: x.id,
             text: x.name
         } as SelectOptionCreateFieldProps)) ?? [])
-
     }, [])
 
     const getCategories = useCallback(async () => {
@@ -75,13 +81,28 @@ const useProductsFilters = (): ProductsFiltersState => {
             value: x.id,
             text: x.name
         } as SelectOptionCreateFieldProps)) ?? [])
+    }, [])
 
+    const getAttributes = useCallback(async () => {
+        const statuses = await productAttributesClient.GetPagedListAsync({
+            isDeleted: false,
+            sortBy: 'Key',
+            orderBy: 'asc',
+            offset: 0,
+            limit: MaxLimit
+        })
+
+        setAttributes(statuses.attributes?.map(x => ({
+            value: x.id,
+            text: x.key
+        } as SelectOptionCreateFieldProps)) ?? [])
     }, [])
 
     useEffect(() => {
         getStatuses()
         getCategories()
-    }, [getCategories, getStatuses])
+        getAttributes()
+    }, [getAttributes, getCategories, getStatuses])
 
     const onChangeName = useCallback(
         (_, { value }: InputOnChangeData) => {
@@ -320,6 +341,19 @@ const useProductsFilters = (): ProductsFiltersState => {
                 onChange: onChangeIsHidden
             },
             {
+                type: 'select',
+                label: 'Атрибуты',
+                values: dictionaryToArray(attributeIds),
+                options: attributes,
+                onChange: (_, props) => {
+                    onChangeAttributeIds(_, props)
+                    state.setRequest({
+                        ...state.request,
+                        attributes: arrayToDictionary((props.value as string[])),
+                    })
+                }
+            },
+            {
                 type: 'radio',
                 topLabel: 'Статус',
                 label1: 'Все',
@@ -334,7 +368,7 @@ const useProductsFilters = (): ProductsFiltersState => {
                 onChange: onChangeIsDeleted
             }
         ],
-        [type, statusIds, statuses, categoryIds, categories, name, onChangeName, vendorCode, onChangeVendorCode, minPrice, onChangeMinPrice, maxPrice, onChangeMaxPrice, minCreateDate, onChangeMinCreateDate, maxCreateDate, onChangeMaxCreateDate, minModifyDate, onChangeMinModifyDate, maxModifyDate, onChangeMaxModifyDate, isHidden, onChangeIsHidden, isDeleted, onChangeIsDeleted, onChangeType, state, onChangeStatusIds, onChangeCategoryIds]
+        [type, statusIds, statuses, categoryIds, categories, name, onChangeName, vendorCode, onChangeVendorCode, minPrice, onChangeMinPrice, maxPrice, onChangeMaxPrice, minCreateDate, onChangeMinCreateDate, maxCreateDate, onChangeMaxCreateDate, minModifyDate, onChangeMinModifyDate, maxModifyDate, onChangeMaxModifyDate, isHidden, onChangeIsHidden, attributeIds, attributes, isDeleted, onChangeIsDeleted, onChangeType, state, onChangeStatusIds, onChangeCategoryIds, onChangeAttributeIds]
     )
 
     return { fields, isApplyEnabled, onApply, isResetEnabled, onReset, isShowMobile, onShowMobile, onHideMobile }
