@@ -1,9 +1,11 @@
 import Product from '../../../../../../api/products/models/Product'
+import ProductCategory from '../../../../../../api/products/models/ProductCategory'
 import ProductType from '../../../../../../api/products/models/ProductType'
 
 export interface ProductState {
     isLoading: boolean
     product: Product
+    categories: ProductCategory[]
     setProduct: (product: Product) => void
     create: () => Promise<void>
     update: () => Promise<void>
@@ -36,6 +38,7 @@ export const productInitialState: ProductState = {
         attributeLinks: [],
         categoryLinks: []
     },
+    categories: [],
     setProduct: (_: Product) => void 0,
     create: () => Promise.resolve(void 0),
     update: () => Promise.resolve(void 0)

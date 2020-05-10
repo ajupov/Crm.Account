@@ -1,10 +1,12 @@
 import { useCallback, useContext } from 'react'
 
 import Product from '../../../../../../../../api/products/models/Product'
+import ProductContext from '../../../contexts/ProductContext/ProductContext'
 import ProductsActionsContext from '../../../contexts/ProductsActionsContext/ProductsActionsContext'
 import { ProductsRoutes } from '../../../routes/ProductsRoutes'
 import { ViewDataProps } from '../../../../../../../components/View/View'
 import { getAttributeTypeName } from '../../../../../../../helpers/productTypeHelper'
+import { getWithCurrency } from '../../../../../../../helpers/currencyHelper'
 import { useHistory } from 'react-router'
 
 interface UseProductViewReturn {
@@ -18,39 +20,48 @@ interface UseProductViewReturn {
 
 const useProductView = (): UseProductViewReturn => {
     const history = useHistory()
-    const state = useContext(ProductsActionsContext)
+    const productState = useContext(ProductContext)
+    const actionsState = useContext(ProductsActionsContext)
 
     const onClickEdit = useCallback((id: string) => history.push(`${ProductsRoutes.Edit}/${id}`), [history])
 
     const onClickDelete = useCallback(
         (id: string) => {
-            state.setIds([id])
-            state.setIsDeleting(true)
+            actionsState.setIds([id])
+            actionsState.setIsDeleting(true)
         },
-        [state]
+        [actionsState]
     )
 
     const onClickRestore = useCallback(
         (id: string) => {
-            state.setIds([id])
-            state.setIsRestoring(true)
+            actionsState.setIds([id])
+            actionsState.setIsRestoring(true)
         },
-        [state]
+        [actionsState]
     )
 
-    const onClickHistory = useCallback((id: string): void => history.push(`${ProductsRoutes.Changes}/${id}`), [
-        history
-    ])
+    const onClickHistory = useCallback((id: string): void => history.push(`${ProductsRoutes.Changes}/${id}`), [history])
 
     const onClickCancel = useCallback((): void => history.goBack(), [history])
+
+    const mapCategories = useCallback(() => productState.categories.map(x => x.name).join(', '), [
+        productState.categories
+    ])
 
     const map = useCallback(
         (product: Product): ViewDataProps[] => [
             { label: 'Тип', value: getAttributeTypeName(product.type) },
+            { label: 'Статус', value: product.status?.name },
+            { label: 'Категории', value: mapCategories() },
             { label: 'Наименование', value: product.name },
+            { label: 'Артикул', value: product.vendorCode },
+            { label: 'Цена', value: getWithCurrency(product.price) },
+            { label: 'Атрибуты', value: JSON.stringify(product.attributeLinks ?? []) },
+            { label: 'Видимость', value: product.isHidden ? 'Черновик' : 'Активный' },
             { label: 'Удален', value: product.isDeleted ? 'Да' : 'Нет' }
         ],
-        []
+        [mapCategories]
     )
 
     return { map, onClickEdit, onClickDelete, onClickRestore, onClickHistory, onClickCancel }

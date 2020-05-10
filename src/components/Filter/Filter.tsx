@@ -178,6 +178,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                             <Form.Field key={x.label}>
                                 <label>{x.label}:</label>
                                 <Dropdown
+                                    search={x.options.length > 0}
                                     placeholder={x.label}
                                     value={x.values}
                                     multiple
