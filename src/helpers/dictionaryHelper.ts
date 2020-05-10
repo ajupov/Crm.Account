@@ -7,5 +7,5 @@ export function arrayToDictionary<T>(values: (string | number)[]): Dictionary<T>
 }
 
 export function dictionaryToArray<T>(values: Dictionary<T>): (string | number)[] {
-    return Object.values(values).map((x: any) => x[0])
+    return Object.entries(values).map((x: any) => x[0])
 }
