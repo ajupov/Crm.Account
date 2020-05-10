@@ -212,7 +212,7 @@ const useProductsFilters = (): ProductsFiltersState => {
             minModifyDate: '',
             maxModifyDate: '',
             allAttributes: false,
-            attributes: [],
+            attributes: void 0,
             allCategoryIds: false,
             categoryIds: [],
             offset: 0

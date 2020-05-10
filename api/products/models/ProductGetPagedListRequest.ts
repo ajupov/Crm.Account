@@ -15,7 +15,7 @@ export default interface ProductGetPagedListRequest {
     minModifyDate?: string
     maxModifyDate?: string
     allAttributes?: boolean
-    attributes?: string[]
+    attributes?: Dictionary<string>
     allCategoryIds?: boolean
     categoryIds?: string[]
     offset: number
