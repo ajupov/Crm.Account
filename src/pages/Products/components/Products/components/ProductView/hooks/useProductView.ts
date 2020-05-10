@@ -49,6 +49,18 @@ const useProductView = (): UseProductViewReturn => {
         productState.categories
     ])
 
+    const mapAttributes = useCallback(
+        () =>
+            productState.attributes
+                .map(x => {
+                    const value = productState.product.attributeLinks?.find(l => l.productAttributeId === x.id)?.value
+
+                    return x.key + (value ? ': ' + value : '')
+                })
+                .join(', '),
+        [productState.attributes, productState.product.attributeLinks]
+    )
+
     const map = useCallback(
         (product: Product): ViewDataProps[] => [
             { label: 'Тип', value: getAttributeTypeName(product.type) },
@@ -57,11 +69,11 @@ const useProductView = (): UseProductViewReturn => {
             { label: 'Наименование', value: product.name },
             { label: 'Артикул', value: product.vendorCode },
             { label: 'Цена', value: getWithCurrency(product.price) },
-            { label: 'Атрибуты', value: JSON.stringify(product.attributeLinks ?? []) },
+            { label: 'Атрибуты', value: mapAttributes() },
             { label: 'Видимость', value: product.isHidden ? 'Черновик' : 'Активный' },
             { label: 'Удален', value: product.isDeleted ? 'Да' : 'Нет' }
         ],
-        [mapCategories]
+        [mapAttributes, mapCategories]
     )
 
     return { map, onClickEdit, onClickDelete, onClickRestore, onClickHistory, onClickCancel }
