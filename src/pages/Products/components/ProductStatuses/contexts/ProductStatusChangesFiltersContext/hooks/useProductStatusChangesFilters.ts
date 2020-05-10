@@ -15,21 +15,15 @@ const useProductStatusChangesFilters = (): ProductStatusChangesFiltersState => {
     const [isResetEnabled, setIsResetEnabled] = useState(false)
     const [isShowMobile, setIsShowMobile] = useState(productStatusChangesFiltersInitialState.isShowMobile)
 
-    const onChangeMinCreateDate = useCallback(
-        (_, data: InputOnChangeData) => {
-            setMinCreateDate(data.value)
-            setIsApplyEnabled(true)
-        },
-        [setMinCreateDate]
-    )
+    const onChangeMinCreateDate = useCallback((_, data: InputOnChangeData) => {
+        setMinCreateDate(data.value)
+        setIsApplyEnabled(true)
+    }, [])
 
-    const onChangeMaxCreateDate = useCallback(
-        (_, data: InputOnChangeData) => {
-            setMaxCreateDate(data.value)
-            setIsApplyEnabled(true)
-        },
-        [setMaxCreateDate]
-    )
+    const onChangeMaxCreateDate = useCallback((_, data: InputOnChangeData) => {
+        setMaxCreateDate(data.value)
+        setIsApplyEnabled(true)
+    }, [])
 
     const onApply = useCallback(() => {
         state.setRequest({

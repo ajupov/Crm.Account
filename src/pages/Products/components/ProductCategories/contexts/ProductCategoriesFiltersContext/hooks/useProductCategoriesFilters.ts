@@ -11,72 +11,54 @@ import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUti
 const useProductCategoriesFilters = (): ProductCategoriesFiltersState => {
     const state = useContext(ProductCategoriesContext)
     const [name, setName] = useState(state.request.name ?? '')
-    const [isDeleted, setIsDeleted] = useState(state.request.isDeleted)
     const [minCreateDate, setMinCreateDate] = useState(state.request.minCreateDate ?? '')
     const [maxCreateDate, setMaxCreateDate] = useState(state.request.maxCreateDate ?? '')
     const [minModifyDate, setMinModifyDate] = useState(state.request.minModifyDate ?? '')
     const [maxModifyDate, setMaxModifyDate] = useState(state.request.maxModifyDate ?? '')
+    const [isDeleted, setIsDeleted] = useState(state.request.isDeleted)
     const [isApplyEnabled, setIsApplyEnabled] = useState(productCategoriesFiltersInitialState.isApplyEnabled)
     const [isResetEnabled, setIsResetEnabled] = useState(productCategoriesFiltersInitialState.isResetEnabled)
     const [isShowMobile, setIsShowMobile] = useState(productCategoriesFiltersInitialState.isShowMobile)
 
-    const onChangeName = useCallback(
-        (_, { value }: InputOnChangeData) => {
-            setName(value)
-            setIsApplyEnabled(true)
-        },
-        [setName]
-    )
+    const onChangeName = useCallback((_, { value }: InputOnChangeData) => {
+        setName(value)
+        setIsApplyEnabled(true)
+    }, [])
 
-    const onChangeIsDeleted = useCallback(
-        (_, data: CheckboxProps) => {
-            setIsDeleted(toBooleanNullable(data.value))
-            setIsApplyEnabled(true)
-        },
-        [setIsDeleted]
-    )
+    const onChangeMinCreateDate = useCallback((_, data: InputOnChangeData) => {
+        setMinCreateDate(data.value)
+        setIsApplyEnabled(true)
+    }, [])
 
-    const onChangeMinCreateDate = useCallback(
-        (_, data: InputOnChangeData) => {
-            setMinCreateDate(data.value)
-            setIsApplyEnabled(true)
-        },
-        [setMinCreateDate]
-    )
+    const onChangeMaxCreateDate = useCallback((_, data: InputOnChangeData) => {
+        setMaxCreateDate(data.value)
+        setIsApplyEnabled(true)
+    }, [])
 
-    const onChangeMaxCreateDate = useCallback(
-        (_, data: InputOnChangeData) => {
-            setMaxCreateDate(data.value)
-            setIsApplyEnabled(true)
-        },
-        [setMaxCreateDate]
-    )
+    const onChangeMinModifyDate = useCallback((_, data: InputOnChangeData) => {
+        setMinModifyDate(data.value)
+        setIsApplyEnabled(true)
+    }, [])
 
-    const onChangeMinModifyDate = useCallback(
-        (_, data: InputOnChangeData) => {
-            setMinModifyDate(data.value)
-            setIsApplyEnabled(true)
-        },
-        [setMinModifyDate]
-    )
+    const onChangeMaxModifyDate = useCallback((_, data: InputOnChangeData) => {
+        setMaxModifyDate(data.value)
+        setIsApplyEnabled(true)
+    }, [])
 
-    const onChangeMaxModifyDate = useCallback(
-        (_, data: InputOnChangeData) => {
-            setMaxModifyDate(data.value)
-            setIsApplyEnabled(true)
-        },
-        [setMaxModifyDate]
-    )
+    const onChangeIsDeleted = useCallback((_, data: CheckboxProps) => {
+        setIsDeleted(toBooleanNullable(data.value))
+        setIsApplyEnabled(true)
+    }, [])
 
     const onApply = useCallback(() => {
         state.setRequest({
             ...state.request,
             name,
-            isDeleted,
             minCreateDate,
             maxCreateDate,
             minModifyDate,
             maxModifyDate,
+            isDeleted,
             offset: 0
         })
 
@@ -87,20 +69,20 @@ const useProductCategoriesFilters = (): ProductCategoriesFiltersState => {
 
     const onReset = useCallback(() => {
         setName('')
-        setIsDeleted(false)
         setMinCreateDate('')
         setMaxCreateDate('')
         setMinModifyDate('')
         setMaxModifyDate('')
+        setIsDeleted(false)
 
         state.setRequest({
             ...state.request,
             name: '',
-            isDeleted: false,
             minCreateDate: '',
             maxCreateDate: '',
             minModifyDate: '',
             maxModifyDate: '',
+            isDeleted: false,
             offset: 0
         })
 
@@ -138,11 +120,11 @@ const useProductCategoriesFilters = (): ProductCategoriesFiltersState => {
             },
             {
                 type: 'radio',
-                topLabel: 'Статус',
+                topLabel: 'Удаленность',
                 label1: 'Все',
                 value1: void 0,
                 checked1: isDeleted === void 0,
-                label2: 'Действующие',
+                label2: 'Не удаленные',
                 value2: 'false',
                 checked2: isDeleted === false,
                 label3: 'Удаленные',
