@@ -1,241 +1,181 @@
 import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
-import ProductsFiltersState, {
-    productsFiltersInitialState
-} from '../../../states/ProductsFiltersState'
+import ProductsFiltersState, { productsFiltersInitialState } from '../../../states/ProductsFiltersState'
 import { arrayToDictionary, dictionaryToArray } from '../../../../../../../helpers/dictionaryHelper'
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import ProductAttributesClient from '../../../../../../../../api/products/clients/ProductAttributesClient'
-import ProductCategoriesClient from '../../../../../../../../api/products/clients/ProductCategoriesClient'
-import ProductStatusesClient from '../../../../../../../../api/products/clients/ProductStatusesClient'
 import ProductType from '../../../../../../../../api/products/models/ProductType'
 import ProductsContext from '../../ProductsContext/ProductsContext'
-import { SelectOptionCreateFieldProps } from '../../../../../../../components/Create/Create'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
-
-const productStatusesClient = new ProductStatusesClient(HttpClientFactoryInstance.Api)
-const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
-const productAttributesClient = new ProductAttributesClient(HttpClientFactoryInstance.Api)
+import useProductsSelectOptions from '../../../hooks/useProductsSelectOptions'
 
 const useProductsFilters = (): ProductsFiltersState => {
-    const MaxLimit = 1000
-
     const state = useContext(ProductsContext)
+    const { statuses, categories, attributes } = useProductsSelectOptions()
     const [type, setType] = useState(state.request.types?.[0] ?? ProductType.Material)
     const [statusIds, setStatusIds] = useState(state.request.statusIds ?? [])
     const [categoryIds, setCategoryIds] = useState(state.request.categoryIds ?? [])
-    const [attributeIds, setAttributeIds] = useState(state.request.attributes ?? {})
     const [name, setName] = useState(state.request.name ?? '')
     const [vendorCode, setVendorCode] = useState(state.request.vendorCode ?? '')
-    const [isHidden, setIsHidden] = useState(state.request.isHidden)
-    const [isDeleted, setIsDeleted] = useState(state.request.isDeleted)
     const [minPrice, setMinPrice] = useState(state.request.minPrice)
     const [maxPrice, setMaxPrice] = useState(state.request.maxPrice)
+    const [attributeIds, setAttributeIds] = useState(state.request.attributes ?? {})
+    const [isHidden, setIsHidden] = useState(state.request.isHidden)
     const [minCreateDate, setMinCreateDate] = useState(state.request.minCreateDate ?? '')
     const [maxCreateDate, setMaxCreateDate] = useState(state.request.maxCreateDate ?? '')
     const [minModifyDate, setMinModifyDate] = useState(state.request.minModifyDate ?? '')
     const [maxModifyDate, setMaxModifyDate] = useState(state.request.maxModifyDate ?? '')
+    const [isDeleted, setIsDeleted] = useState(state.request.isDeleted)
     const [isApplyEnabled, setIsApplyEnabled] = useState(productsFiltersInitialState.isApplyEnabled)
     const [isResetEnabled, setIsResetEnabled] = useState(productsFiltersInitialState.isResetEnabled)
     const [isShowMobile, setIsShowMobile] = useState(productsFiltersInitialState.isShowMobile)
-    const [statuses, setStatuses] = useState<SelectOptionCreateFieldProps[]>([])
-    const [categories, setCategories] = useState<SelectOptionCreateFieldProps[]>([])
-    const [attributes, setAttributes] = useState<SelectOptionCreateFieldProps[]>([])
 
-    const onChangeType = useCallback((_: any, { value }: CheckboxProps) => setType(value as ProductType), [])
-
-    const onChangeStatusIds = useCallback((_: any, { value }: DropdownProps) => setStatusIds(value as string[]), [])
-
-    const onChangeCategoryIds = useCallback((_: any, { value }: DropdownProps) => setCategoryIds(value as string[]), [])
-
-    const onChangeAttributeIds = useCallback((_: any, { value }: DropdownProps) => setAttributeIds(arrayToDictionary((value as string[]))), [])
-
-    const getStatuses = useCallback(async () => {
-        const statuses = await productStatusesClient.GetPagedListAsync({
-            isDeleted: false,
-            sortBy: 'Name',
-            orderBy: 'asc',
-            offset: 0,
-            limit: MaxLimit
-        })
-
-        setStatuses(statuses.statuses?.map(x => ({
-            value: x.id,
-            text: x.name
-        } as SelectOptionCreateFieldProps)) ?? [])
+    const onChangeType = useCallback((_: any, { value }: CheckboxProps) => {
+        setType(value as ProductType)
     }, [])
 
-    const getCategories = useCallback(async () => {
-        const statuses = await productCategoriesClient.GetPagedListAsync({
-            isDeleted: false,
-            sortBy: 'Name',
-            orderBy: 'asc',
-            offset: 0,
-            limit: MaxLimit
-        })
-
-        // eslint-disable-next-line sonarjs/no-identical-functions
-        setCategories(statuses.categories?.map(x => ({
-            value: x.id,
-            text: x.name
-        } as SelectOptionCreateFieldProps)) ?? [])
+    const onChangeStatusIds = useCallback((_: any, { value }: DropdownProps) => {
+        setStatusIds(value as string[])
+        setIsApplyEnabled(true)
     }, [])
 
-    const getAttributes = useCallback(async () => {
-        const statuses = await productAttributesClient.GetPagedListAsync({
-            isDeleted: false,
-            sortBy: 'Key',
-            orderBy: 'asc',
-            offset: 0,
-            limit: MaxLimit
-        })
-
-        setAttributes(statuses.attributes?.map(x => ({
-            value: x.id,
-            text: x.key
-        } as SelectOptionCreateFieldProps)) ?? [])
+    const onChangeCategoryIds = useCallback((_: any, { value }: DropdownProps) => {
+        setCategoryIds(value as string[])
+        setIsApplyEnabled(true)
     }, [])
 
-    useEffect(() => {
-        getStatuses()
-        getCategories()
-        getAttributes()
-    }, [getAttributes, getCategories, getStatuses])
+    const onChangeName = useCallback((_, { value }: InputOnChangeData) => {
+        setName(value)
+        setIsApplyEnabled(true)
+    }, [])
 
-    const onChangeName = useCallback(
-        (_, { value }: InputOnChangeData) => {
-            setName(value)
-            setIsApplyEnabled(true)
-        },
-        []
-    )
+    const onChangeVendorCode = useCallback((_, { value }: InputOnChangeData) => {
+        setVendorCode(value)
+        setIsApplyEnabled(true)
+    }, [])
 
-    const onChangeVendorCode = useCallback(
-        (_, { value }: InputOnChangeData) => {
-            setVendorCode(value)
-            setIsApplyEnabled(true)
-        },
-        []
-    )
+    const onChangeMinPrice = useCallback((_, data: InputOnChangeData) => {
+        setMinPrice(parseInt(data.value, 10))
+        setIsApplyEnabled(true)
+    }, [])
 
-    const onChangeIsHidden = useCallback(
-        (_, data: CheckboxProps) => {
-            setIsHidden(toBooleanNullable(data.value))
-            setIsApplyEnabled(true)
-        },
-        []
-    )
+    const onChangeMaxPrice = useCallback((_, data: InputOnChangeData) => {
+        setMaxPrice(parseInt(data.value, 10))
+        setIsApplyEnabled(true)
+    }, [])
 
-    const onChangeIsDeleted = useCallback(
-        (_, data: CheckboxProps) => {
-            setIsDeleted(toBooleanNullable(data.value))
-            setIsApplyEnabled(true)
-        },
-        []
-    )
+    const onChangeAttributeIds = useCallback((_: any, { value }: DropdownProps) => {
+        setAttributeIds(arrayToDictionary(value as string[]))
+        setIsApplyEnabled(true)
+    }, [])
 
-    const onChangeMinPrice = useCallback(
-        (_, data: InputOnChangeData) => {
-            setMinPrice(parseInt(data.value, 10))
-            setIsApplyEnabled(true)
-        },
-        []
-    )
+    const onChangeIsHidden = useCallback((_, data: CheckboxProps) => {
+        setIsHidden(toBooleanNullable(data.value))
+        setIsApplyEnabled(true)
+    }, [])
 
-    const onChangeMaxPrice = useCallback(
-        (_, data: InputOnChangeData) => {
-            setMaxPrice(parseInt(data.value, 10))
-            setIsApplyEnabled(true)
-        },
-        []
-    )
+    const onChangeMinCreateDate = useCallback((_, data: InputOnChangeData) => {
+        setMinCreateDate(data.value)
+        setIsApplyEnabled(true)
+    }, [])
 
-    const onChangeMinCreateDate = useCallback(
-        (_, data: InputOnChangeData) => {
-            setMinCreateDate(data.value)
-            setIsApplyEnabled(true)
-        },
-        []
-    )
+    const onChangeMaxCreateDate = useCallback((_, data: InputOnChangeData) => {
+        setMaxCreateDate(data.value)
+        setIsApplyEnabled(true)
+    }, [])
 
-    const onChangeMaxCreateDate = useCallback(
-        (_, data: InputOnChangeData) => {
-            setMaxCreateDate(data.value)
-            setIsApplyEnabled(true)
-        },
-        []
-    )
+    const onChangeMinModifyDate = useCallback((_, data: InputOnChangeData) => {
+        setMinModifyDate(data.value)
+        setIsApplyEnabled(true)
+    }, [])
 
-    const onChangeMinModifyDate = useCallback(
-        (_, data: InputOnChangeData) => {
-            setMinModifyDate(data.value)
-            setIsApplyEnabled(true)
-        },
-        []
-    )
+    const onChangeMaxModifyDate = useCallback((_, data: InputOnChangeData) => {
+        setMaxModifyDate(data.value)
+        setIsApplyEnabled(true)
+    }, [])
 
-    const onChangeMaxModifyDate = useCallback(
-        (_, data: InputOnChangeData) => {
-            setMaxModifyDate(data.value)
-            setIsApplyEnabled(true)
-        },
-        []
-    )
+    const onChangeIsDeleted = useCallback((_, data: CheckboxProps) => {
+        setIsDeleted(toBooleanNullable(data.value))
+        setIsApplyEnabled(true)
+    }, [])
 
     const onApply = useCallback(() => {
         state.setRequest({
             ...state.request,
             types: [type],
             statusIds,
+            allCategoryIds: false,
+            categoryIds,
             name,
-            isDeleted,
+            vendorCode,
             minPrice,
             maxPrice,
+            allAttributes: true,
+            attributes: attributeIds,
+            isHidden,
             minCreateDate,
             maxCreateDate,
             minModifyDate,
             maxModifyDate,
-            categoryIds,
+            isDeleted,
             offset: 0
         })
 
         setIsShowMobile(false)
         setIsApplyEnabled(false)
         setIsResetEnabled(true)
-    }, [categoryIds, isDeleted, maxCreateDate, maxModifyDate, maxPrice, minCreateDate, minModifyDate, minPrice, name, state, statusIds, type])
+    }, [
+        attributeIds,
+        categoryIds,
+        isDeleted,
+        isHidden,
+        maxCreateDate,
+        maxModifyDate,
+        maxPrice,
+        minCreateDate,
+        minModifyDate,
+        minPrice,
+        name,
+        state,
+        statusIds,
+        type,
+        vendorCode
+    ])
 
     const onReset = useCallback(() => {
-        setName('')
         setType(ProductType.Material)
-        setIsDeleted(false)
+        setStatusIds([])
+        setCategoryIds([])
+        setName('')
+        setVendorCode('')
         setMinPrice(void 0)
         setMaxPrice(void 0)
+        setAttributeIds({})
+        setIsHidden(false)
         setMinCreateDate('')
         setMaxCreateDate('')
         setMinModifyDate('')
         setMaxModifyDate('')
+        setIsDeleted(false)
 
         state.setRequest({
             ...state.request,
-            parentProductId: void 0,
             types: [],
             statusIds: [],
+            allCategoryIds: false,
+            categoryIds: [],
             name: '',
             vendorCode: '',
             minPrice: void 0,
             maxPrice: void 0,
+            allAttributes: true,
+            attributes: void 0,
             isHidden: false,
-            isDeleted: false,
             minCreateDate: '',
             maxCreateDate: '',
             minModifyDate: '',
             maxModifyDate: '',
-            allAttributes: false,
-            attributes: void 0,
-            allCategoryIds: false,
-            categoryIds: [],
+            isDeleted: false,
             offset: 0
         })
 
@@ -252,7 +192,6 @@ const useProductsFilters = (): ProductsFiltersState => {
             {
                 type: 'radio',
                 isHorizontal: true,
-                topLabel: 'Тип',
                 label1: 'Товары',
                 value1: ProductType.Material,
                 checked1: type === ProductType.Material,
@@ -263,35 +202,23 @@ const useProductsFilters = (): ProductsFiltersState => {
                     onChangeType(_, props)
                     state.setRequest({
                         ...state.request,
-                        types: [props.value as ProductType],
+                        types: [props.value as ProductType]
                     })
                 }
             },
             {
                 type: 'select',
-                label: 'Статус продукта',
+                label: 'Статус',
                 values: statusIds,
                 options: statuses,
-                onChange: (_, props) => {
-                    onChangeStatusIds(_, props)
-                    state.setRequest({
-                        ...state.request,
-                        statusIds: props.value as string[],
-                    })
-                }
+                onChange: onChangeStatusIds
             },
             {
                 type: 'select',
                 label: 'Категория',
                 values: categoryIds,
                 options: categories,
-                onChange: (_, props) => {
-                    onChangeCategoryIds(_, props)
-                    state.setRequest({
-                        ...state.request,
-                        categoryIds: props.value as string[],
-                    })
-                }
+                onChange: onChangeCategoryIds
             },
             {
                 type: 'text',
@@ -314,6 +241,24 @@ const useProductsFilters = (): ProductsFiltersState => {
                 onChange2: onChangeMaxPrice
             },
             {
+                type: 'select',
+                label: 'Атрибуты',
+                values: dictionaryToArray(attributeIds),
+                options: attributes,
+                onChange: onChangeAttributeIds
+            },
+            {
+                type: 'radio',
+                topLabel: 'Видимость',
+                label1: 'Активные',
+                value1: 'false',
+                checked1: isHidden === false,
+                label2: 'Черновики',
+                value2: 'true',
+                checked2: isHidden === true,
+                onChange: onChangeIsHidden
+            },
+            {
                 type: 'date',
                 topLabel: 'Дата создания',
                 value1: minCreateDate,
@@ -331,35 +276,11 @@ const useProductsFilters = (): ProductsFiltersState => {
             },
             {
                 type: 'radio',
-                isHorizontal: true,
-                label1: 'Активные',
-                value1: 'false',
-                checked1: isHidden === false,
-                label2: 'Черновики',
-                value2: 'true',
-                checked2: isHidden === true,
-                onChange: onChangeIsHidden
-            },
-            {
-                type: 'select',
-                label: 'Атрибуты',
-                values: dictionaryToArray(attributeIds),
-                options: attributes,
-                onChange: (_, props) => {
-                    onChangeAttributeIds(_, props)
-                    state.setRequest({
-                        ...state.request,
-                        attributes: arrayToDictionary((props.value as string[])),
-                    })
-                }
-            },
-            {
-                type: 'radio',
-                topLabel: 'Статус',
+                topLabel: 'Удаленность',
                 label1: 'Все',
                 value1: void 0,
                 checked1: isDeleted === void 0,
-                label2: 'Действующие',
+                label2: 'Не удаленные',
                 value2: 'false',
                 checked2: isDeleted === false,
                 label3: 'Удаленные',
@@ -368,11 +289,43 @@ const useProductsFilters = (): ProductsFiltersState => {
                 onChange: onChangeIsDeleted
             }
         ],
-        [type, statusIds, statuses, categoryIds, categories, name, onChangeName, vendorCode, onChangeVendorCode, minPrice, onChangeMinPrice, maxPrice, onChangeMaxPrice, minCreateDate, onChangeMinCreateDate, maxCreateDate, onChangeMaxCreateDate, minModifyDate, onChangeMinModifyDate, maxModifyDate, onChangeMaxModifyDate, isHidden, onChangeIsHidden, attributeIds, attributes, isDeleted, onChangeIsDeleted, onChangeType, state, onChangeStatusIds, onChangeCategoryIds, onChangeAttributeIds]
+        [
+            attributeIds,
+            attributes,
+            categories,
+            categoryIds,
+            isDeleted,
+            isHidden,
+            maxCreateDate,
+            maxModifyDate,
+            maxPrice,
+            minCreateDate,
+            minModifyDate,
+            minPrice,
+            name,
+            onChangeAttributeIds,
+            onChangeCategoryIds,
+            onChangeIsDeleted,
+            onChangeIsHidden,
+            onChangeMaxCreateDate,
+            onChangeMaxModifyDate,
+            onChangeMaxPrice,
+            onChangeMinCreateDate,
+            onChangeMinModifyDate,
+            onChangeMinPrice,
+            onChangeName,
+            onChangeStatusIds,
+            onChangeType,
+            onChangeVendorCode,
+            state,
+            statusIds,
+            statuses,
+            type,
+            vendorCode
+        ]
     )
 
     return { fields, isApplyEnabled, onApply, isResetEnabled, onReset, isShowMobile, onShowMobile, onHideMobile }
 }
-
 
 export default useProductsFilters
