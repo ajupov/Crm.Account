@@ -6,6 +6,7 @@ import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 
 import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'
 import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import ProductCategoriesClient from '../../../../../../../../api/products/clients/ProductCategoriesClient'
 import ProductStatusesClient from '../../../../../../../../api/products/clients/ProductStatusesClient'
 import ProductType from '../../../../../../../../api/products/models/ProductType'
 import ProductsContext from '../../ProductsContext/ProductsContext'
@@ -13,6 +14,7 @@ import { SelectOptionCreateFieldProps } from '../../../../../../../components/Cr
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
 
 const productStatusesClient = new ProductStatusesClient(HttpClientFactoryInstance.Api)
+const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
 
 const useProductsFilters = (): ProductsFiltersState => {
     const MaxLimit = 1000
@@ -20,6 +22,7 @@ const useProductsFilters = (): ProductsFiltersState => {
     const state = useContext(ProductsContext)
     const [type, setType] = useState(state.request.types?.[0] ?? ProductType.Material)
     const [statusIds, setStatusIds] = useState(state.request.statusIds ?? [])
+    const [categoryIds, setCategoryIds] = useState(state.request.categoryIds ?? [])
     const [name, setName] = useState(state.request.name ?? '')
     const [vendorCode, setVendorCode] = useState(state.request.vendorCode ?? '')
     const [isHidden, setIsHidden] = useState(state.request.isHidden)
@@ -34,10 +37,13 @@ const useProductsFilters = (): ProductsFiltersState => {
     const [isResetEnabled, setIsResetEnabled] = useState(productsFiltersInitialState.isResetEnabled)
     const [isShowMobile, setIsShowMobile] = useState(productsFiltersInitialState.isShowMobile)
     const [statuses, setStatuses] = useState<SelectOptionCreateFieldProps[]>([])
+    const [categories, setCategories] = useState<SelectOptionCreateFieldProps[]>([])
 
     const onChangeType = useCallback((_: any, { value }: CheckboxProps) => setType(value as ProductType), [])
 
     const onChangeStatusIds = useCallback((_: any, { value }: DropdownProps) => setStatusIds(value as string[]), [])
+
+    const onChangeCategoryIds = useCallback((_: any, { value }: DropdownProps) => setCategoryIds(value as string[]), [])
 
     const getStatuses = useCallback(async () => {
         const statuses = await productStatusesClient.GetPagedListAsync({
@@ -55,9 +61,27 @@ const useProductsFilters = (): ProductsFiltersState => {
 
     }, [])
 
+    const getCategories = useCallback(async () => {
+        const statuses = await productCategoriesClient.GetPagedListAsync({
+            isDeleted: false,
+            sortBy: 'Name',
+            orderBy: 'asc',
+            offset: 0,
+            limit: MaxLimit
+        })
+
+        // eslint-disable-next-line sonarjs/no-identical-functions
+        setCategories(statuses.categories?.map(x => ({
+            value: x.id,
+            text: x.name
+        } as SelectOptionCreateFieldProps)) ?? [])
+
+    }, [])
+
     useEffect(() => {
         getStatuses()
-    }, [getStatuses])
+        getCategories()
+    }, [getCategories, getStatuses])
 
     const onChangeName = useCallback(
         (_, { value }: InputOnChangeData) => {
@@ -139,30 +163,27 @@ const useProductsFilters = (): ProductsFiltersState => {
         []
     )
 
-    const setRequest = useCallback(
-        (nowType?: ProductType, nowStatusIds?: string[]) => {
-            state.setRequest({
-                ...state.request,
-                types: [nowType ?? type],
-                statusIds: nowStatusIds ?? statusIds,
-                name,
-                isDeleted,
-                minPrice,
-                maxPrice,
-                minCreateDate,
-                maxCreateDate,
-                minModifyDate,
-                maxModifyDate,
-                offset: 0
-            })
-        }, [isDeleted, maxCreateDate, maxModifyDate, maxPrice, minCreateDate, minModifyDate, minPrice, name, state, statusIds, type])
-
     const onApply = useCallback(() => {
-        setRequest()
+        state.setRequest({
+            ...state.request,
+            types: [type],
+            statusIds,
+            name,
+            isDeleted,
+            minPrice,
+            maxPrice,
+            minCreateDate,
+            maxCreateDate,
+            minModifyDate,
+            maxModifyDate,
+            categoryIds,
+            offset: 0
+        })
+
         setIsShowMobile(false)
         setIsApplyEnabled(false)
         setIsResetEnabled(true)
-    }, [setRequest])
+    }, [categoryIds, isDeleted, maxCreateDate, maxModifyDate, maxPrice, minCreateDate, minModifyDate, minPrice, name, state, statusIds, type])
 
     const onReset = useCallback(() => {
         setName('')
@@ -219,7 +240,10 @@ const useProductsFilters = (): ProductsFiltersState => {
                 checked2: type === ProductType.NonMaterial,
                 onChange: (_, props) => {
                     onChangeType(_, props)
-                    setRequest(props.value as ProductType, statusIds)
+                    state.setRequest({
+                        ...state.request,
+                        types: [props.value as ProductType],
+                    })
                 }
             },
             {
@@ -229,7 +253,23 @@ const useProductsFilters = (): ProductsFiltersState => {
                 options: statuses,
                 onChange: (_, props) => {
                     onChangeStatusIds(_, props)
-                    setRequest(type, props.value as string[])
+                    state.setRequest({
+                        ...state.request,
+                        statusIds: props.value as string[],
+                    })
+                }
+            },
+            {
+                type: 'select',
+                label: 'Категория',
+                values: categoryIds,
+                options: categories,
+                onChange: (_, props) => {
+                    onChangeCategoryIds(_, props)
+                    state.setRequest({
+                        ...state.request,
+                        categoryIds: props.value as string[],
+                    })
                 }
             },
             {
@@ -294,7 +334,7 @@ const useProductsFilters = (): ProductsFiltersState => {
                 onChange: onChangeIsDeleted
             }
         ],
-        [type, statuses, name, onChangeName, vendorCode, onChangeVendorCode, minPrice, onChangeMinPrice, maxPrice, onChangeMaxPrice, minCreateDate, onChangeMinCreateDate, maxCreateDate, onChangeMaxCreateDate, minModifyDate, onChangeMinModifyDate, maxModifyDate, onChangeMaxModifyDate, isHidden, onChangeIsHidden, isDeleted, onChangeIsDeleted, onChangeType, setRequest, statusIds, onChangeStatusIds]
+        [type, statusIds, statuses, categoryIds, categories, name, onChangeName, vendorCode, onChangeVendorCode, minPrice, onChangeMinPrice, maxPrice, onChangeMaxPrice, minCreateDate, onChangeMinCreateDate, maxCreateDate, onChangeMaxCreateDate, minModifyDate, onChangeMinModifyDate, maxModifyDate, onChangeMaxModifyDate, isHidden, onChangeIsHidden, isDeleted, onChangeIsDeleted, onChangeType, state, onChangeStatusIds, onChangeCategoryIds]
     )
 
     return { fields, isApplyEnabled, onApply, isResetEnabled, onReset, isShowMobile, onShowMobile, onHideMobile }
