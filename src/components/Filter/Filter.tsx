@@ -91,27 +91,6 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                 <Input type="text" placeholder={x.topLabel} value={x.value} onChange={x.onChange} />
                             </Form.Field>
                         )
-                    case 'date':
-                        return (
-                            <Form.Field key={x.topLabel}>
-                                <label>{x.topLabel}:</label>
-                                <Input
-                                    type="date"
-                                    label="с"
-                                    placeholder={x.topLabel}
-                                    value={x.value1}
-                                    onChange={x.onChange1}
-                                />
-                                <Input
-                                    type="date"
-                                    label="по"
-                                    placeholder={x.topLabel}
-                                    value={x.value2 ?? 0}
-                                    onChange={x.onChange2}
-                                />
-                            </Form.Field>
-                        )
-
                     case 'number':
                         return (
                             <Form.Field key={x.topLabel}>
@@ -131,6 +110,26 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                     value={x.value2 ?? ''}
                                     onChange={x.onChange2}
                                     min={0}
+                                />
+                            </Form.Field>
+                        )
+                    case 'date':
+                        return (
+                            <Form.Field key={x.topLabel}>
+                                <label>{x.topLabel}:</label>
+                                <Input
+                                    type="date"
+                                    label="с"
+                                    placeholder={x.topLabel}
+                                    value={x.value1}
+                                    onChange={x.onChange1}
+                                />
+                                <Input
+                                    type="date"
+                                    label="по"
+                                    placeholder={x.topLabel}
+                                    value={x.value2 ?? 0}
+                                    onChange={x.onChange2}
                                 />
                             </Form.Field>
                         )
@@ -178,11 +177,11 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                             <Form.Field key={x.label}>
                                 <label>{x.label}:</label>
                                 <Dropdown
-                                    search={x.options.length > 0}
-                                    placeholder={x.label}
-                                    value={x.values}
                                     multiple
                                     selection
+                                    placeholder={x.label}
+                                    value={x.values}
+                                    search={x.options.length > 5}
                                     onChange={x.onChange}
                                     options={x.options.map(x => ({
                                         key: x.value,

@@ -17,18 +17,31 @@ import BackLink from '../BackLink/BackLink'
 import HistoryLink from '../HistoryLink/HistoryLink'
 import Loader from '../Loader/Loader'
 
-export type EditFieldProps = TextEditFieldProps | DateEditFieldProps | CheckboxEditFieldProps | SelectEditFieldProps
+export type EditFieldProps =
+    | TextEditFieldProps
+    | NumberFilterFieldProps
+    | DateEditFieldProps
+    | CheckboxEditFieldProps
+    | SelectEditFieldProps
 
 export interface TextEditFieldProps {
-    required: boolean
+    required?: boolean
     type: 'text'
     topLabel: string
     value?: string
     onChange: (_: any, { value }: InputOnChangeData) => void
 }
 
+export interface NumberFilterFieldProps {
+    required?: boolean
+    type: 'number'
+    topLabel: string
+    value?: number
+    onChange: (_: any, { value }: InputOnChangeData) => void
+}
+
 export interface DateEditFieldProps {
-    required: boolean
+    required?: boolean
     type: 'date'
     topLabel: string
     value?: string
@@ -48,8 +61,9 @@ export interface SelectOptionEditFieldProps {
 }
 
 export interface SelectEditFieldProps {
-    required: boolean
+    required?: boolean
     type: 'select'
+    isMultiple?: boolean
     label: string
     value?: number | string | (number | string)[]
     text?: string
@@ -108,6 +122,21 @@ const Edit: FC<EditProps> = ({
                                 />
                             </Form.Field>
                         )
+                    case 'number':
+                        return (
+                            <Form.Field required={x.required} key={x.topLabel}>
+                                <label>{x.topLabel}:</label>
+                                <Input
+                                    type="number"
+                                    min={0}
+                                    precession={2}
+                                    placeholder={x.topLabel}
+                                    value={x.value ?? 0}
+                                    onChange={x.onChange}
+                                    required={x.required}
+                                />
+                            </Form.Field>
+                        )
                     case 'date':
                         return (
                             <Form.Field required={x.required} key={x.topLabel}>
@@ -132,6 +161,7 @@ const Edit: FC<EditProps> = ({
                             <Form.Field required={x.required} key={x.label}>
                                 <label>{x.label}:</label>
                                 <Select
+                                    multiple={x.isMultiple}
                                     placeholder={x.label}
                                     value={x.value}
                                     text={x.text}
