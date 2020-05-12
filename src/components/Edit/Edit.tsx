@@ -51,8 +51,8 @@ export interface SelectEditFieldProps {
     required: boolean
     type: 'select'
     label: string
-    value: number
-    text: string
+    value?: number | string | (number | string)[]
+    text?: string
     options: SelectOptionEditFieldProps[]
     onChange: (_: any, { value }: DropdownProps) => void
 }

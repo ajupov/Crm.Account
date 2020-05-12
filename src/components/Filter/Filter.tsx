@@ -66,7 +66,7 @@ export interface RadioFilterFieldProps {
 export interface SelectFilterFieldProps {
     type: 'select'
     label: string
-    values: (number | string)[]
+    values?: (number | string)[]
     options: SelectOptionCreateFieldProps[]
     onChange: (_: any, { value }: DropdownProps) => void
 }

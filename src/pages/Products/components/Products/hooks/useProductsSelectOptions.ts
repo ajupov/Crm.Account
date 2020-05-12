@@ -14,17 +14,20 @@ const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryIns
 const productAttributesClient = new ProductAttributesClient(HttpClientFactoryInstance.Api)
 
 interface UseProductsSelectOptionsReturn {
-    statuses: SelectOptionCreateFieldProps[]
-    categories: SelectOptionCreateFieldProps[]
-    attributes: SelectOptionCreateFieldProps[]
+    getActualStatuses: () => SelectOptionCreateFieldProps[]
+    getAllStatuses: () => SelectOptionCreateFieldProps[]
+    getActualCategories: () => SelectOptionCreateFieldProps[]
+    getAllCategories: () => SelectOptionCreateFieldProps[]
+    getActualAttributes: () => SelectOptionCreateFieldProps[]
+    getAllAttributes: () => SelectOptionCreateFieldProps[]
 }
 
 const useProductsSelectOptions = (): UseProductsSelectOptionsReturn => {
-    const MaxLimit = 100
+    const MaxLimit = 1000
 
-    const [statuses, setStatuses] = useState<SelectOptionCreateFieldProps[]>([])
-    const [categories, setCategories] = useState<SelectOptionCreateFieldProps[]>([])
-    const [attributes, setAttributes] = useState<SelectOptionCreateFieldProps[]>([])
+    const [statuses, setStatuses] = useState<ProductStatus[]>([])
+    const [categories, setCategories] = useState<ProductCategory[]>([])
+    const [attributes, setAttributes] = useState<ProductAttribute[]>([])
 
     const mapProductStatus = useCallback((x: ProductStatus) => ({ value: x.id ?? '', text: x.name ?? '' }), [])
 
@@ -33,19 +36,18 @@ const useProductsSelectOptions = (): UseProductsSelectOptionsReturn => {
     const mapProductAttribute = useCallback((x: ProductAttribute) => ({ value: x.id ?? '', text: x.key ?? '' }), [])
 
     const getStatuses = useCallback(async () => {
-        const statuses = await productStatusesClient.GetPagedListAsync({
-            isDeleted: false,
+        const response = await productStatusesClient.GetPagedListAsync({
             sortBy: 'Name',
             orderBy: 'asc',
             offset: 0,
             limit: MaxLimit
         })
 
-        setStatuses(statuses.statuses?.map(mapProductStatus) ?? [])
-    }, [mapProductStatus])
+        setStatuses(response.statuses ?? [])
+    }, [])
 
     const getCategories = useCallback(async () => {
-        const statuses = await productCategoriesClient.GetPagedListAsync({
+        const response = await productCategoriesClient.GetPagedListAsync({
             isDeleted: false,
             sortBy: 'Name',
             orderBy: 'asc',
@@ -53,11 +55,11 @@ const useProductsSelectOptions = (): UseProductsSelectOptionsReturn => {
             limit: MaxLimit
         })
 
-        setCategories(statuses.categories?.map(mapProductCategory) ?? [])
-    }, [mapProductCategory])
+        setCategories(response.categories ?? [])
+    }, [])
 
     const getAttributes = useCallback(async () => {
-        const statuses = await productAttributesClient.GetPagedListAsync({
+        const response = await productAttributesClient.GetPagedListAsync({
             isDeleted: false,
             sortBy: 'Key',
             orderBy: 'asc',
@@ -65,8 +67,29 @@ const useProductsSelectOptions = (): UseProductsSelectOptionsReturn => {
             limit: MaxLimit
         })
 
-        setAttributes(statuses.attributes?.map(mapProductAttribute) ?? [])
-    }, [mapProductAttribute])
+        setAttributes(response.attributes ?? [])
+    }, [])
+
+    const getActualStatuses = useCallback(() => statuses.filter(x => !x.isDeleted).map(mapProductStatus), [
+        mapProductStatus,
+        statuses
+    ])
+
+    const getAllStatuses = useCallback(() => statuses.map(mapProductStatus), [mapProductStatus, statuses])
+
+    const getActualCategories = useCallback(() => categories.filter(x => !x.isDeleted).map(mapProductCategory), [
+        categories,
+        mapProductCategory
+    ])
+
+    const getAllCategories = useCallback(() => categories.map(mapProductCategory), [categories, mapProductCategory])
+
+    const getActualAttributes = useCallback(() => attributes.filter(x => !x.isDeleted).map(mapProductAttribute), [
+        attributes,
+        mapProductAttribute
+    ])
+
+    const getAllAttributes = useCallback(() => attributes.map(mapProductAttribute), [attributes, mapProductAttribute])
 
     useEffect(() => {
         getStatuses()
@@ -74,7 +97,14 @@ const useProductsSelectOptions = (): UseProductsSelectOptionsReturn => {
         getAttributes()
     }, [getAttributes, getCategories, getStatuses])
 
-    return { statuses, categories, attributes }
+    return {
+        getActualStatuses,
+        getAllStatuses,
+        getActualCategories,
+        getAllCategories,
+        getActualAttributes,
+        getAllAttributes
+    }
 }
 
 export default useProductsSelectOptions

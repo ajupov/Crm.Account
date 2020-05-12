@@ -43,12 +43,15 @@ const View: FC<ViewProps> = ({
 }) => {
     const renderData = useCallback(
         (data: ViewDataProps[]) =>
-            data.map(x => (
-                <div key={x.label} style={{ marginBottom: '20px' }}>
-                    {x.label && <p>{x.label}:</p>}
-                    {x.value && <b>{x.value}</b>}
-                </div>
-            )),
+            data.map(
+                x =>
+                    x.value && (
+                        <div key={x.label} style={{ marginBottom: '20px' }}>
+                            {x.label && <p>{x.label}:</p>}
+                            {x.value && <b>{x.value}</b>}
+                        </div>
+                    )
+            ),
         []
     )
 

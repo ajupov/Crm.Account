@@ -11,7 +11,7 @@ import useProductsSelectOptions from '../../../hooks/useProductsSelectOptions'
 
 const useProductsFilters = (): ProductsFiltersState => {
     const state = useContext(ProductsContext)
-    const { statuses, categories, attributes } = useProductsSelectOptions()
+    const { getActualStatuses, getActualCategories, getActualAttributes } = useProductsSelectOptions()
     const [type, setType] = useState(state.request.types?.[0] ?? ProductType.Material)
     const [statusIds, setStatusIds] = useState(state.request.statusIds ?? [])
     const [categoryIds, setCategoryIds] = useState(state.request.categoryIds ?? [])
@@ -210,14 +210,14 @@ const useProductsFilters = (): ProductsFiltersState => {
                 type: 'select',
                 label: 'Статус',
                 values: statusIds,
-                options: statuses,
+                options: getActualStatuses(),
                 onChange: onChangeStatusIds
             },
             {
                 type: 'select',
                 label: 'Категория',
                 values: categoryIds,
-                options: categories,
+                options: getActualCategories(),
                 onChange: onChangeCategoryIds
             },
             {
@@ -244,7 +244,7 @@ const useProductsFilters = (): ProductsFiltersState => {
                 type: 'select',
                 label: 'Атрибуты',
                 values: dictionaryToArray(attributeIds),
-                options: attributes,
+                options: getActualAttributes(),
                 onChange: onChangeAttributeIds
             },
             {
@@ -291,9 +291,10 @@ const useProductsFilters = (): ProductsFiltersState => {
         ],
         [
             attributeIds,
-            attributes,
-            categories,
             categoryIds,
+            getActualAttributes,
+            getActualCategories,
+            getActualStatuses,
             isDeleted,
             isHidden,
             maxCreateDate,
@@ -319,7 +320,6 @@ const useProductsFilters = (): ProductsFiltersState => {
             onChangeVendorCode,
             state,
             statusIds,
-            statuses,
             type,
             vendorCode
         ]

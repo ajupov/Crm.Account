@@ -7,6 +7,7 @@ import ProductContext from '../../../contexts/ProductContext/ProductContext'
 import ProductType from '../../../../../../../../api/products/models/ProductType'
 import { ProductsRoutes } from '../../../routes/ProductsRoutes'
 import { useHistory } from 'react-router'
+import useProductsSelectOptions from '../../../hooks/useProductsSelectOptions'
 
 interface UseProductEditReturn {
     fields: EditFieldProps[]
@@ -18,12 +19,21 @@ interface UseProductEditReturn {
 
 const useProductEdit = (): UseProductEditReturn => {
     const history = useHistory()
+    const { getActualStatuses, getAllStatuses } = useProductsSelectOptions()
     const state = useContext(ProductContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeType = useCallback(
         (_, data: DropdownProps) => {
             state.setProduct({ ...state.product, type: data.value as ProductType })
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
+    const onChangeStatus = useCallback(
+        (_, data: DropdownProps) => {
+            state.setProduct({ ...state.product, statusId: data.value as string })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -52,9 +62,7 @@ const useProductEdit = (): UseProductEditReturn => {
 
     const onClickCancel = useCallback((): void => history.goBack(), [history])
 
-    const onClickHistory = useCallback((id: string): void => history.push(`${ProductsRoutes.Changes}/${id}`), [
-        history
-    ])
+    const onClickHistory = useCallback((id: string): void => history.push(`${ProductsRoutes.Changes}/${id}`), [history])
 
     const fields: EditFieldProps[] = useMemo(
         () => [
@@ -66,6 +74,15 @@ const useProductEdit = (): UseProductEditReturn => {
                 text: getAttributeTypeName(state.product.type),
                 options: getProductTypesAsSelectOptions(),
                 onChange: onChangeType
+            },
+            {
+                type: 'select',
+                required: true,
+                label: 'Статус',
+                text: getAllStatuses().find(x => x.value === state.product.statusId)?.text,
+                value: state.product.statusId,
+                options: getActualStatuses(),
+                onChange: onChangeStatus
             },
             {
                 type: 'text',
@@ -82,11 +99,15 @@ const useProductEdit = (): UseProductEditReturn => {
             }
         ],
         [
+            getActualStatuses,
+            getAllStatuses,
             onChangeIsDeleted,
             onChangeName,
+            onChangeStatus,
             onChangeType,
             state.product.isDeleted,
             state.product.name,
+            state.product.statusId,
             state.product.type
         ]
     )
