@@ -1,19 +1,24 @@
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactoryInstance from '../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import Product from '../../../../../../api/products/models/Product'
 import ProductAttribute from '../../../../../../api/products/models/ProductAttribute'
 import ProductAttributesClient from '../../../../../../api/products/clients/ProductAttributesClient'
 import ProductCategoriesClient from '../../../../../../api/products/clients/ProductCategoriesClient'
 import ProductCategory from '../../../../../../api/products/models/ProductCategory'
 import ProductStatus from '../../../../../../api/products/models/ProductStatus'
 import ProductStatusesClient from '../../../../../../api/products/clients/ProductStatusesClient'
+import ProductsClient from '../../../../../../api/products/clients/ProductsClient'
 import { SelectOptionCreateFieldProps } from '../../../../../components/Create/Create'
 
+const productClient = new ProductsClient(HttpClientFactoryInstance.Api)
 const productStatusesClient = new ProductStatusesClient(HttpClientFactoryInstance.Api)
 const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
 const productAttributesClient = new ProductAttributesClient(HttpClientFactoryInstance.Api)
 
 interface UseProductsSelectOptionsReturn {
+    getActualProducts: () => SelectOptionCreateFieldProps[]
+    getAllProducts: () => SelectOptionCreateFieldProps[]
     getActualStatuses: () => SelectOptionCreateFieldProps[]
     getAllStatuses: () => SelectOptionCreateFieldProps[]
     getActualCategories: () => SelectOptionCreateFieldProps[]
@@ -25,15 +30,29 @@ interface UseProductsSelectOptionsReturn {
 const useProductsSelectOptions = (): UseProductsSelectOptionsReturn => {
     const MaxLimit = 1000
 
+    const [products, setProducts] = useState<Product[]>([])
     const [statuses, setStatuses] = useState<ProductStatus[]>([])
     const [categories, setCategories] = useState<ProductCategory[]>([])
     const [attributes, setAttributes] = useState<ProductAttribute[]>([])
+
+    const mapProduct = useCallback((x: Product) => ({ value: x.id ?? '', text: x.name ?? '' }), [])
 
     const mapProductStatus = useCallback((x: ProductStatus) => ({ value: x.id ?? '', text: x.name ?? '' }), [])
 
     const mapProductCategory = useCallback((x: ProductCategory) => ({ value: x.id ?? '', text: x.name ?? '' }), [])
 
     const mapProductAttribute = useCallback((x: ProductAttribute) => ({ value: x.id ?? '', text: x.key ?? '' }), [])
+
+    const getProducts = useCallback(async () => {
+        const response = await productClient.GetPagedListAsync({
+            sortBy: 'Name',
+            orderBy: 'asc',
+            offset: 0,
+            limit: MaxLimit
+        })
+
+        setProducts(response.products ?? [])
+    }, [])
 
     const getStatuses = useCallback(async () => {
         const response = await productStatusesClient.GetPagedListAsync({
@@ -70,6 +89,13 @@ const useProductsSelectOptions = (): UseProductsSelectOptionsReturn => {
         setAttributes(response.attributes ?? [])
     }, [])
 
+    const getActualProducts = useCallback(() => products.filter(x => !x.isDeleted).map(mapProduct), [
+        mapProduct,
+        products
+    ])
+
+    const getAllProducts = useCallback(() => products.map(mapProduct), [mapProduct, products])
+
     const getActualStatuses = useCallback(() => statuses.filter(x => !x.isDeleted).map(mapProductStatus), [
         mapProductStatus,
         statuses
@@ -92,12 +118,15 @@ const useProductsSelectOptions = (): UseProductsSelectOptionsReturn => {
     const getAllAttributes = useCallback(() => attributes.map(mapProductAttribute), [attributes, mapProductAttribute])
 
     useEffect(() => {
+        getProducts()
         getStatuses()
         getCategories()
         getAttributes()
-    }, [getAttributes, getCategories, getStatuses])
+    }, [getAttributes, getCategories, getProducts, getStatuses])
 
     return {
+        getActualProducts,
+        getAllProducts,
         getActualStatuses,
         getAllStatuses,
         getActualCategories,

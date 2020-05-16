@@ -80,6 +80,8 @@ export interface FilterProps {
 }
 
 const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabled, onReset }) => {
+    const MaxDropdownOptionsCountWithoutSearch = 5
+
     const fieldComponents = useMemo(
         (): (JSX.Element | null)[] =>
             fields.map(x => {
@@ -181,7 +183,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                     selection
                                     placeholder={x.label}
                                     value={x.values}
-                                    search={x.options.length > 5}
+                                    search={x.options.length > MaxDropdownOptionsCountWithoutSearch}
                                     onChange={x.onChange}
                                     options={x.options.map(x => ({
                                         key: x.value,

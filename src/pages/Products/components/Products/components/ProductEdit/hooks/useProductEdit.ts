@@ -19,9 +19,23 @@ interface UseProductEditReturn {
 
 const useProductEdit = (): UseProductEditReturn => {
     const history = useHistory()
-    const { getActualStatuses, getAllStatuses, getActualCategories } = useProductsSelectOptions()
+    const {
+        getActualProducts,
+        getAllProducts,
+        getActualStatuses,
+        getAllStatuses,
+        getActualCategories
+    } = useProductsSelectOptions()
     const state = useContext(ProductContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
+
+    const onChangeParentProductId = useCallback(
+        (_, data: DropdownProps) => {
+            state.setProduct({ ...state.product, parentProductId: data.value as string })
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
 
     const onChangeType = useCallback(
         (_, data: DropdownProps) => {
@@ -108,6 +122,15 @@ const useProductEdit = (): UseProductEditReturn => {
             {
                 type: 'select',
                 required: true,
+                label: 'Родительский продукт',
+                text: getAllProducts().find(x => x.value === state.product.parentProductId)?.text,
+                value: state.product.parentProductId,
+                options: getActualProducts(),
+                onChange: onChangeParentProductId
+            },
+            {
+                type: 'select',
+                required: true,
                 label: 'Тип',
                 value: state.product.type,
                 text: getAttributeTypeName(state.product.type),
@@ -175,12 +198,15 @@ const useProductEdit = (): UseProductEditReturn => {
         ],
         [
             getActualCategories,
+            getActualProducts,
             getActualStatuses,
+            getAllProducts,
             getAllStatuses,
             onChangeCategoryIds,
             onChangeIsDeleted,
             onChangeIsHidden,
             onChangeName,
+            onChangeParentProductId,
             onChangePrice,
             onChangeStatusId,
             onChangeType,
@@ -189,6 +215,7 @@ const useProductEdit = (): UseProductEditReturn => {
             state.product.isDeleted,
             state.product.isHidden,
             state.product.name,
+            state.product.parentProductId,
             state.product.price,
             state.product.statusId,
             state.product.type,
