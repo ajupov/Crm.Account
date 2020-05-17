@@ -10,12 +10,17 @@ interface ActiveMenuItemProps {
 
 const ActiveMenuItem: FC<ActiveMenuItemProps> = ({ path, onClick, children }) => {
     const isActive = useMemo(() => {
-        const urlMinPartCount = 2
+        if (window.location.pathname === path) {
+            return true
+        }
 
-        return (
-            window.location.pathname === path ||
-            (path.split('/').length > urlMinPartCount && window.location.pathname.includes(path))
-        )
+        const subPaths = ['/create', '/view', '/edit', '/changes']
+        const pathWithoutRoot = window.location.pathname.replace(path, '')
+        if (subPaths.some(x => pathWithoutRoot.startsWith(x))) {
+            return true
+        }
+
+        return false
     }, [path])
 
     return (
