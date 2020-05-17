@@ -90,7 +90,13 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                         return (
                             <Form.Field key={x.topLabel}>
                                 <label>{x.topLabel}:</label>
-                                <Input type="text" placeholder={x.topLabel} value={x.value} onChange={x.onChange} />
+                                <Input
+                                    fluid
+                                    type="text"
+                                    placeholder={x.topLabel}
+                                    value={x.value}
+                                    onChange={x.onChange}
+                                />
                             </Form.Field>
                         )
                     case 'number':
@@ -98,6 +104,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                             <Form.Field key={x.topLabel}>
                                 <label>{x.topLabel}:</label>
                                 <Input
+                                    fluid
                                     type="number"
                                     label="от"
                                     placeholder={x.label1}
@@ -106,6 +113,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                     min={0}
                                 />
                                 <Input
+                                    fluid
                                     type="number"
                                     label="до"
                                     placeholder={x.label2}
@@ -120,6 +128,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                             <Form.Field key={x.topLabel}>
                                 <label>{x.topLabel}:</label>
                                 <Input
+                                    fluid
                                     type="date"
                                     label="с"
                                     placeholder={x.topLabel}
@@ -127,6 +136,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                     onChange={x.onChange1}
                                 />
                                 <Input
+                                    fluid
                                     type="date"
                                     label="по"
                                     placeholder={x.topLabel}
@@ -179,6 +189,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                             <Form.Field key={x.label}>
                                 <label>{x.label}:</label>
                                 <Dropdown
+                                    fluid
                                     multiple
                                     selection
                                     placeholder={x.label}

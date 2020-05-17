@@ -200,6 +200,7 @@ const useProductsFilters = (): ProductsFiltersState => {
                 checked2: type === ProductType.NonMaterial,
                 onChange: (_, props) => {
                     onChangeType(_, props)
+                    setIsShowMobile(false)
                     state.setRequest({
                         ...state.request,
                         types: [props.value as ProductType]
