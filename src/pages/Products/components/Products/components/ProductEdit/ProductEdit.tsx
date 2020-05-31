@@ -7,7 +7,7 @@ import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
 import { setPageTitle } from '../../../../../../helpers/pageHelper'
 
 const ProductEdit: FC = () => {
-    const title = 'Изменение атрибута'
+    const title = 'Изменение продукта'
 
     useEffect(() => setPageTitle(title), [])
 

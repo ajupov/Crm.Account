@@ -24,7 +24,9 @@ const useProductEdit = (): UseProductEditReturn => {
         getAllProducts,
         getActualStatuses,
         getAllStatuses,
-        getActualCategories
+        getActualCategories,
+        getActualAttributes
+        // getAllAttributes
     } = useProductsSelectOptions()
     const state = useContext(ProductContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
@@ -91,6 +93,43 @@ const useProductEdit = (): UseProductEditReturn => {
         },
         [state]
     )
+
+    const onChangeAttributeKey = useCallback(
+        (_, { value }: DropdownProps) => {
+            global.console.log(value)
+
+            state.setProduct({
+                ...state.product
+            })
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
+    const onChangeAttributeValue = useCallback(
+        (_, _data: InputOnChangeData) => {
+            state.setProduct({
+                ...state.product
+            })
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
+    const onDeleteAttribute = useCallback(
+        (index: number) => {
+            state.setProduct({ ...state.product, attributeLinks: state.product.attributeLinks?.splice(index, 1) })
+
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
+    const onClickAddAttributeItem = useCallback(() => {
+        state.setProduct({ ...state.product, attributeLinks: [...(state.product.attributeLinks ?? []), {}] })
+
+        setIsConfirmEnabled(true)
+    }, [state])
 
     const onChangeIsHidden = useCallback(
         (_, __: CheckboxProps) => {
@@ -176,19 +215,24 @@ const useProductEdit = (): UseProductEditReturn => {
                 onChange: onChangePrice
             },
             {
+                type: 'attributes',
+                label: 'Атрибуты',
+                options: getActualAttributes(),
+                items: state.product.attributeLinks?.map((x, i) => ({
+                    index: i,
+                    onChangeKey: onChangeAttributeKey,
+                    value: x.productAttributeId,
+                    onChangeValue: onChangeAttributeValue,
+                    onClickDelete: onDeleteAttribute
+                })),
+                onClickAddItem: onClickAddAttributeItem
+            },
+            {
                 type: 'checkbox',
                 label: 'Видимость',
                 checked: state.product.isHidden,
                 onChange: onChangeIsHidden
             },
-            // {
-            //     type: 'select',
-            //     isMultiple: true,
-            //     label: 'Атрибуты',
-            //     value: state.product.categoryLinks?.map(x => x.productCategoryId ?? ''),
-            //     options: getActualCategories(),
-            //     onChange: onChangeCategoryIds
-            // },
             {
                 type: 'checkbox',
                 label: 'Удален',
@@ -197,11 +241,14 @@ const useProductEdit = (): UseProductEditReturn => {
             }
         ],
         [
+            getActualAttributes,
             getActualCategories,
             getActualProducts,
             getActualStatuses,
             getAllProducts,
             getAllStatuses,
+            onChangeAttributeKey,
+            onChangeAttributeValue,
             onChangeCategoryIds,
             onChangeIsDeleted,
             onChangeIsHidden,
@@ -211,6 +258,9 @@ const useProductEdit = (): UseProductEditReturn => {
             onChangeStatusId,
             onChangeType,
             onChangeVendorCode,
+            onClickAddAttributeItem,
+            onDeleteAttribute,
+            state.product.attributeLinks,
             state.product.categoryLinks,
             state.product.isDeleted,
             state.product.isHidden,

@@ -1,3 +1,4 @@
+import AttributeLinks, { AttributeLinksItemProps } from '../AttributeLinks/AttributeLinks'
 import {
     Button,
     Card,
@@ -16,6 +17,7 @@ import { getCreateDateTimeText, getLastChangeDateTimeText } from '../../helpers/
 import BackLink from '../BackLink/BackLink'
 import HistoryLink from '../HistoryLink/HistoryLink'
 import Loader from '../Loader/Loader'
+import { SelectOptionCreateFieldProps } from '../Create/Create'
 
 export type EditFieldProps =
     | TextEditFieldProps
@@ -23,6 +25,7 @@ export type EditFieldProps =
     | DateEditFieldProps
     | CheckboxEditFieldProps
     | SelectEditFieldProps
+    | AttributeLinksFieldProps
 
 export interface TextEditFieldProps {
     required?: boolean
@@ -69,6 +72,15 @@ export interface SelectEditFieldProps {
     text?: string
     options: SelectOptionEditFieldProps[]
     onChange: (_: any, { value }: DropdownProps) => void
+}
+
+export interface AttributeLinksFieldProps {
+    required?: boolean
+    type: 'attributes'
+    label: string
+    options: SelectOptionCreateFieldProps[]
+    items?: AttributeLinksItemProps[]
+    onClickAddItem: () => void
 }
 
 export interface EditProps {
@@ -173,6 +185,13 @@ const Edit: FC<EditProps> = ({
                                         text: x.text
                                     }))}
                                 />
+                            </Form.Field>
+                        )
+                    case 'attributes':
+                        return (
+                            <Form.Field required={x.required} key={x.label}>
+                                <label>{x.label}:</label>
+                                <AttributeLinks items={x.items} options={x.options} onClickAddItem={x.onClickAddItem} />
                             </Form.Field>
                         )
                     default:
