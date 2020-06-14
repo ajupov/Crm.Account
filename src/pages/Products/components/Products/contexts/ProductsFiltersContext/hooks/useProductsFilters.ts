@@ -250,13 +250,13 @@ const useProductsFilters = (): ProductsFiltersState => {
             },
             {
                 type: 'radio',
-                topLabel: 'Видимость',
-                label1: 'Активные',
-                value1: 'false',
-                checked1: isHidden === false,
-                label2: 'Черновики',
-                value2: 'true',
-                checked2: isHidden === true,
+                topLabel: 'Черновик',
+                label1: 'Да',
+                value1: 'true',
+                checked1: isHidden === true,
+                label2: 'Нет',
+                value2: 'false',
+                checked2: isHidden === false,
                 onChange: onChangeIsHidden
             },
             {

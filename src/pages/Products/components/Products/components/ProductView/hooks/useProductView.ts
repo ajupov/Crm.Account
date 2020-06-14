@@ -70,7 +70,7 @@ const useProductView = (): UseProductViewReturn => {
             { label: 'Артикул', value: product.vendorCode },
             { label: 'Цена', value: getWithCurrency(product.price) },
             { label: 'Атрибуты', value: mapAttributes() },
-            { label: 'Видимость', value: product.isHidden ? 'Черновик' : 'Активный' },
+            { label: 'Черновик', value: product.isHidden ? 'Да' : 'Нет' },
             { label: 'Удален', value: product.isDeleted ? 'Да' : 'Нет' }
         ],
         [mapAttributes, mapCategories]

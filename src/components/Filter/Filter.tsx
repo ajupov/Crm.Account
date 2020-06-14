@@ -201,6 +201,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                         value: x.value,
                                         text: x.text
                                     }))}
+                                    noResultsMessage="Не найдено"
                                 />
                             </Form.Field>
                         )

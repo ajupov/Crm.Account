@@ -89,10 +89,10 @@ const useProductsSelectOptions = (): UseProductsSelectOptionsReturn => {
         setAttributes(response.attributes ?? [])
     }, [])
 
-    const getActualProducts = useCallback(() => products.filter(x => !x.isDeleted).map(mapProduct), [
-        mapProduct,
-        products
-    ])
+    const getActualProducts = useCallback(
+        () => [{ value: '', text: 'Не выбрано' }, ...products.filter(x => !x.isDeleted).map(mapProduct)],
+        [mapProduct, products]
+    )
 
     const getAllProducts = useCallback(() => products.map(mapProduct), [mapProduct, products])
 

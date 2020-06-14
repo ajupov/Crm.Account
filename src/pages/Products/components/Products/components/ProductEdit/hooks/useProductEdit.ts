@@ -25,8 +25,8 @@ const useProductEdit = (): UseProductEditReturn => {
         getActualStatuses,
         getAllStatuses,
         getActualCategories,
-        getActualAttributes
-        // getAllAttributes
+        getActualAttributes,
+        getAllAttributes
     } = useProductsSelectOptions()
     const state = useContext(ProductContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
@@ -95,22 +95,37 @@ const useProductEdit = (): UseProductEditReturn => {
     )
 
     const onChangeAttributeKey = useCallback(
-        (_, { value }: DropdownProps) => {
-            global.console.log(value)
+        (index: number, value: string) => {
+            if (!state.product.attributeLinks) {
+                return
+            }
+
+            state.product.attributeLinks[index].productAttributeId = value
 
             state.setProduct({
                 ...state.product
             })
+
             setIsConfirmEnabled(true)
         },
         [state]
     )
 
     const onChangeAttributeValue = useCallback(
-        (_, _data: InputOnChangeData) => {
+        (index: number, value: string) => {
+            if (!state.product.attributeLinks) {
+                return
+            }
+
+            const neww = [...state.product.attributeLinks]
+
+            neww[index].value = value
+
             state.setProduct({
-                ...state.product
+                ...state.product,
+                attributeLinks: neww
             })
+
             setIsConfirmEnabled(true)
         },
         [state]
@@ -118,7 +133,10 @@ const useProductEdit = (): UseProductEditReturn => {
 
     const onDeleteAttribute = useCallback(
         (index: number) => {
-            state.setProduct({ ...state.product, attributeLinks: state.product.attributeLinks?.splice(index, 1) })
+            state.setProduct({
+                ...state.product,
+                attributeLinks: state.product.attributeLinks?.filter((_, i) => i !== index)
+            })
 
             setIsConfirmEnabled(true)
         },
@@ -220,8 +238,10 @@ const useProductEdit = (): UseProductEditReturn => {
                 options: getActualAttributes(),
                 items: state.product.attributeLinks?.map((x, i) => ({
                     index: i,
+                    key: x.productAttributeId ?? '',
                     onChangeKey: onChangeAttributeKey,
-                    value: x.productAttributeId,
+                    value: x.value ?? '',
+                    text: getAllAttributes().find(a => a.value === x.productAttributeId)?.text,
                     onChangeValue: onChangeAttributeValue,
                     onClickDelete: onDeleteAttribute
                 })),
@@ -229,7 +249,7 @@ const useProductEdit = (): UseProductEditReturn => {
             },
             {
                 type: 'checkbox',
-                label: 'Видимость',
+                label: 'Черновик',
                 checked: state.product.isHidden,
                 onChange: onChangeIsHidden
             },
@@ -245,6 +265,7 @@ const useProductEdit = (): UseProductEditReturn => {
             getActualCategories,
             getActualProducts,
             getActualStatuses,
+            getAllAttributes,
             getAllProducts,
             getAllStatuses,
             onChangeAttributeKey,

@@ -1,6 +1,7 @@
 import { Button, Dropdown, DropdownProps, Grid, Icon, Input, InputOnChangeData } from 'semantic-ui-react'
-import React, { FC, Fragment, useCallback } from 'react'
+import React, { FC, useCallback } from 'react'
 
+import IconLink from '../IconLink/IconLink'
 import { SelectOptionCreateFieldProps } from '../Create/Create'
 
 export interface AttributeLinksProps {
@@ -14,6 +15,7 @@ export interface AttributeLinksItemProps {
     key: string
     onChangeKey: (index: number, value: string) => void
     value?: string
+    text?: string
     onChangeValue: (index: number, value: string) => void
     onClickDelete: (index: number) => void
 }
@@ -29,8 +31,10 @@ const AttributeLinks: FC<AttributeLinksProps> = ({ options, items, onClickAddIte
     )
 
     const _onChangeKey = useCallback(
-        (item: AttributeLinksItemProps) => (_: any, { value }: DropdownProps) => {
+        (item: AttributeLinksItemProps) => (event: React.SyntheticEvent, { value }: DropdownProps) => {
             item.onChangeKey(item.index, value as string)
+
+            event.preventDefault()
         },
         []
     )
@@ -55,14 +59,27 @@ const AttributeLinks: FC<AttributeLinksProps> = ({ options, items, onClickAddIte
 
     return (
         <>
-            <Grid columns="3" style={{ margin: 0 }}>
+            <Grid centered columns="4" style={{ margin: 0 }}>
                 {items?.map(x => (
-                    <Fragment key={x.key}>
-                        <Grid.Column width="8" style={{ padding: '0', margin: '4px 0' }}>
+                    <Grid.Row key={x.index} style={{ padding: 0 }}>
+                        <Grid.Column
+                            width="1"
+                            style={{ padding: 0, margin: '4px 0', lineHeight: '36px', textAlign: 'center' }}
+                        >
+                            <IconLink name="remove" onClick={_onClickDelete(x)} />
+                        </Grid.Column>
+                        <Grid.Column
+                            width="5"
+                            computer="5"
+                            tablet="5"
+                            mobile="15"
+                            style={{ padding: 0, margin: '4px 0' }}
+                        >
                             <Dropdown
                                 fluid
                                 selection
-                                value={x.value}
+                                value={x.key}
+                                text={x.text}
                                 search={options.length > MaxDropdownOptionsCountWithoutSearch}
                                 onChange={_onChangeKey(x)}
                                 options={options.map(x => ({
@@ -70,15 +87,21 @@ const AttributeLinks: FC<AttributeLinksProps> = ({ options, items, onClickAddIte
                                     value: x.value,
                                     text: x.text
                                 }))}
+                                noResultsMessage="Не найдено"
                             />
                         </Grid.Column>
-                        <Grid.Column width="7" style={{ padding: '0', margin: '4px 0' }}>
+                        <Grid.Column only="mobile" width="1" style={{ padding: '0', margin: '4px 0' }}></Grid.Column>
+                        {/* <Grid.Column width="1" style={{ padding: '0', margin: '4px 0' }}></Grid.Column> */}
+                        <Grid.Column
+                            width="10"
+                            computer="10"
+                            tablet="10"
+                            mobile="15"
+                            style={{ padding: '0', margin: '4px 0' }}
+                        >
                             <Input fluid type="text" value={x.value} onChange={_onChangeValue(x)} />
                         </Grid.Column>
-                        <Grid.Column width="1" stretched style={{ padding: '0', margin: '4px 0' }}>
-                            <Button basic onClick={_onClickDelete(x)} icon="remove" />
-                        </Grid.Column>
-                    </Fragment>
+                    </Grid.Row>
                 ))}
             </Grid>
             <Button basic compact size="mini" onClick={_onClickAddItem}>
