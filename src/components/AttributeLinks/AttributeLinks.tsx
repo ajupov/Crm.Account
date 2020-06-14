@@ -88,10 +88,10 @@ const AttributeLinks: FC<AttributeLinksProps> = ({ options, items, onClickAddIte
                                     text: x.text
                                 }))}
                                 noResultsMessage="Не найдено"
+                                style={{ whiteSpace: 'nowrap' }}
                             />
                         </Grid.Column>
                         <Grid.Column only="mobile" width="1" style={{ padding: '0', margin: '4px 0' }}></Grid.Column>
-                        {/* <Grid.Column width="1" style={{ padding: '0', margin: '4px 0' }}></Grid.Column> */}
                         <Grid.Column
                             width="10"
                             computer="10"

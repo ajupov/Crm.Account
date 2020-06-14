@@ -184,6 +184,7 @@ const Edit: FC<EditProps> = ({
                                         value: x.value,
                                         text: x.text
                                     }))}
+                                    style={{ whiteSpace: 'nowrap' }}
                                 />
                             </Form.Field>
                         )

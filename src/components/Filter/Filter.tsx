@@ -202,6 +202,7 @@ const Filter: FC<FilterProps> = ({ fields, isApplyEnabled, onApply, isResetEnabl
                                         text: x.text
                                     }))}
                                     noResultsMessage="Не найдено"
+                                    style={{ whiteSpace: 'nowrap' }}
                                 />
                             </Form.Field>
                         )
