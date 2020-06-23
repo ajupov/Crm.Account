@@ -36,7 +36,7 @@ const useProductStatusCreate = (): UseProductStatusCreateReturn => {
 
     const onClickConfirm = useCallback(async (): Promise<void> => {
         await state.create()
-        history.push(ProductStatusesRoutes.Index)
+        history.goBack()
     }, [state, history])
 
     const onClickCancel = useCallback((): void => history.goBack(), [history])

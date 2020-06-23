@@ -62,7 +62,7 @@ const useProductAttributeChangesTable = (): UseProductAttributeChangesTableRetur
         const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as ProductAttribute) : void 0
 
         return [
-            `Наименование: \t ${getValueOrEmpty(getAttributeTypeName(oldValue?.type))} → ${getValueOrEmpty(
+            `Тип: \t ${getValueOrEmpty(getAttributeTypeName(oldValue?.type))} → ${getValueOrEmpty(
                 getAttributeTypeName(newValue?.type)
             )}`,
             `Наименование: \t ${getValueOrEmpty(oldValue?.key)} → ${getValueOrEmpty(newValue?.key)}`,

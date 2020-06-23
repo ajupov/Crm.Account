@@ -46,7 +46,7 @@ const useProductCreate = (): UseProductCreateReturn => {
 
     const onClickConfirm = useCallback(async (): Promise<void> => {
         await state.create()
-        history.push(ProductsRoutes.Index)
+        history.goBack()
     }, [state, history])
 
     const onClickCancel = useCallback((): void => history.goBack(), [history])
@@ -76,14 +76,7 @@ const useProductCreate = (): UseProductCreateReturn => {
                 onChange: onChangeIsDeleted
             }
         ],
-        [
-            onChangeType,
-            onChangeKey,
-            onChangeIsDeleted,
-            state.product.type,
-            state.product.name,
-            state.product.isDeleted
-        ]
+        [onChangeType, onChangeKey, onChangeIsDeleted, state.product.type, state.product.name, state.product.isDeleted]
     )
 
     return { fields, isConfirmEnabled, onClickConfirm, onClickCancel }

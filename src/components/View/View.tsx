@@ -47,8 +47,8 @@ const View: FC<ViewProps> = ({
                 x =>
                     x.value && (
                         <div key={x.label} style={{ marginBottom: '20px' }}>
-                            {x.label && <p>{x.label}:</p>}
-                            {x.value && <b>{x.value}</b>}
+                            {x.label && <b style={{ display: 'inline-block', minWidth: '180px' }}>{x.label}: </b>}
+                            {x.value && <span style={{ display: 'inline-block' }}> {x.value}</span>}
                         </div>
                     )
             ),

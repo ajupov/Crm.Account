@@ -37,7 +37,7 @@ const useProductStatusEdit = (): UseProductStatusEditReturn => {
 
     const onClickConfirm = useCallback(async (): Promise<void> => {
         await state.update()
-        history.push(ProductStatusesRoutes.Index)
+        history.goBack()
     }, [state, history])
 
     const onClickCancel = useCallback((): void => history.goBack(), [history])

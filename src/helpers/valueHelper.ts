@@ -1,4 +1,4 @@
-export function getValueOrEmpty(value?: string | boolean): string {
+export function getValueOrEmpty(value?: boolean | string): string {
     if (typeof value === 'boolean') {
         if (value) {
             return 'Да'
@@ -7,5 +7,5 @@ export function getValueOrEmpty(value?: string | boolean): string {
         return 'Нет'
     }
 
-    return value ?? '...'
+    return value === void 0 || value === null || value === '' ? '...' : value
 }

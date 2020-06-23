@@ -36,7 +36,7 @@ const useProductCategoryCreate = (): UseProductCategoryCreateReturn => {
 
     const onClickConfirm = useCallback(async (): Promise<void> => {
         await state.create()
-        history.push(ProductCategoriesRoutes.Index)
+        history.goBack()
     }, [state, history])
 
     const onClickCancel = useCallback((): void => history.goBack(), [history])

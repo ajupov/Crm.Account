@@ -7,7 +7,9 @@ import { ProductsRoutes } from '../../../routes/ProductsRoutes'
 import { ViewDataProps } from '../../../../../../../components/View/View'
 import { getAttributeTypeName } from '../../../../../../../helpers/productTypeHelper'
 import { getWithCurrency } from '../../../../../../../helpers/currencyHelper'
+import { joinCategoryNames } from '../../../mappers/productCategoriesMapper'
 import { useHistory } from 'react-router'
+import useProductsSelectOptions from '../../../hooks/useProductsSelectOptions'
 
 interface UseProductViewReturn {
     map: (product: Product) => ViewDataProps[]
@@ -20,6 +22,7 @@ interface UseProductViewReturn {
 
 const useProductView = (): UseProductViewReturn => {
     const history = useHistory()
+    const { getAllProducts } = useProductsSelectOptions()
     const productState = useContext(ProductContext)
     const actionsState = useContext(ProductsActionsContext)
 
@@ -45,9 +48,7 @@ const useProductView = (): UseProductViewReturn => {
 
     const onClickCancel = useCallback((): void => history.goBack(), [history])
 
-    const mapCategories = useCallback(() => productState.categories.map(x => x.name).join(', '), [
-        productState.categories
-    ])
+    const mapCategories = useCallback(() => joinCategoryNames(productState.categories), [productState.categories])
 
     const mapAttributes = useCallback(
         () =>
@@ -63,6 +64,10 @@ const useProductView = (): UseProductViewReturn => {
 
     const map = useCallback(
         (product: Product): ViewDataProps[] => [
+            {
+                label: 'Родительский продукт',
+                value: getAllProducts().find(x => x.value === product.parentProductId)?.text
+            },
             { label: 'Тип', value: getAttributeTypeName(product.type) },
             { label: 'Статус', value: product.status?.name },
             { label: 'Категории', value: mapCategories() },
@@ -73,7 +78,7 @@ const useProductView = (): UseProductViewReturn => {
             { label: 'Черновик', value: product.isHidden ? 'Да' : 'Нет' },
             { label: 'Удален', value: product.isDeleted ? 'Да' : 'Нет' }
         ],
-        [mapAttributes, mapCategories]
+        [getAllProducts, mapAttributes, mapCategories]
     )
 
     return { map, onClickEdit, onClickDelete, onClickRestore, onClickHistory, onClickCancel }

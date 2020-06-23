@@ -1,5 +1,8 @@
 import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
-import { getAttributeTypeName, getAttributeTypesAsSelectOptions } from '../../../../../../../helpers/attributeTypeHelper'
+import {
+    getAttributeTypeName,
+    getAttributeTypesAsSelectOptions
+} from '../../../../../../../helpers/attributeTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import AttributeType from '../../../../../../../../api/products/models/AttributeType'
@@ -46,7 +49,7 @@ const useProductAttributeCreate = (): UseProductAttributeCreateReturn => {
 
     const onClickConfirm = useCallback(async (): Promise<void> => {
         await state.create()
-        history.push(ProductAttributesRoutes.Index)
+        history.goBack()
     }, [state, history])
 
     const onClickCancel = useCallback((): void => history.goBack(), [history])

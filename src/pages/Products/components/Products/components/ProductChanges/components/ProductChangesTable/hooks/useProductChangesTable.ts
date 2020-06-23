@@ -3,12 +3,15 @@ import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../../ut
 import { useCallback, useContext, useMemo } from 'react'
 
 import Product from '../../../../../../../../../../api/products/models/Product'
+import ProductCategoryLink from '../../../../../../../../../../api/products/models/ProductCategoryLink'
 import ProductChange from '../../../../../../../../../../api/products/models/ProductChange'
 import ProductChangesContext from '../../../../../contexts/ProductChangesContext/ProductChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../../components/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../../components/Table/TableHeader'
 import { getAttributeTypeName } from '../../../../../../../../../helpers/productTypeHelper'
 import { getValueOrEmpty } from '../../../../../../../../../helpers/valueHelper'
+import { getWithCurrency } from '../../../../../../../../../helpers/currencyHelper'
+import { joinCategoryIds } from '../../../../../mappers/productCategoriesMapper'
 import { toLocaleDateTime } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 
 interface UseProductChangesTableReturn {
@@ -57,15 +60,30 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
         return ''
     }, [])
 
+    const mapCategories = useCallback((categoryLinks?: ProductCategoryLink[]) => joinCategoryIds(categoryLinks), [])
+
     const getChangeValue = useCallback((change: ProductChange) => {
         const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as Product) : void 0
         const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as Product) : void 0
 
         return [
-            `Наименование: \t ${getValueOrEmpty(getAttributeTypeName(oldValue?.type))} → ${getValueOrEmpty(
+            `ID Родительского продукта: ${getValueOrEmpty(oldValue?.parentProductId)} → ${getValueOrEmpty(
+                newValue?.parentProductId
+            )}`,
+            `Тип: \t ${getValueOrEmpty(getAttributeTypeName(oldValue?.type))} → ${getValueOrEmpty(
                 getAttributeTypeName(newValue?.type)
             )}`,
+            `ID статуса: \t ${getValueOrEmpty(oldValue?.statusId)} → ${getValueOrEmpty(newValue?.statusId)}`,
+            `ID категорий: \t ${getValueOrEmpty(mapCategories(oldValue?.categoryLinks))} → ${getValueOrEmpty(
+                mapCategories(newValue?.categoryLinks)
+            )}`,
             `Наименование: \t ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
+            `Артикул: \t ${getValueOrEmpty(oldValue?.vendorCode)} → ${getValueOrEmpty(newValue?.vendorCode)}`,
+
+            `Цена: \t ${getValueOrEmpty(getWithCurrency(oldValue?.price))} → ${getValueOrEmpty(
+                getWithCurrency(newValue?.price)
+            )}`,
+
             `Удален: ${getValueOrEmpty(oldValue?.isDeleted)} → ${getValueOrEmpty(newValue?.isDeleted)}`
         ]
     }, [])
