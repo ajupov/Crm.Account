@@ -61,7 +61,7 @@ const useProductStatusChangesTable = (): UseProductStatusChangesTableReturn => {
         const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as ProductStatus) : void 0
 
         return [
-            `Наименование: \t ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
+            `Наименование: ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
             `Удален: ${getValueOrEmpty(oldValue?.isDeleted)} → ${getValueOrEmpty(newValue?.isDeleted)}`
         ]
     }, [])

@@ -2,7 +2,6 @@ import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { CreateFieldProps } from '../../../../../../../components/Create/Create'
-import { ProductCategoriesRoutes } from '../../../routes/ProductCategoriesRoutes'
 import ProductCategoryContext from '../../../contexts/ProductCategoryContext/ProductCategoryContext'
 import { useHistory } from 'react-router'
 

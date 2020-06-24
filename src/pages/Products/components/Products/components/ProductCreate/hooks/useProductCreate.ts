@@ -5,7 +5,6 @@ import { useCallback, useContext, useMemo, useState } from 'react'
 import { CreateFieldProps } from '../../../../../../../components/Create/Create'
 import ProductContext from '../../../contexts/ProductContext/ProductContext'
 import ProductType from '../../../../../../../../api/products/models/ProductType'
-import { ProductsRoutes } from '../../../routes/ProductsRoutes'
 import { useHistory } from 'react-router'
 
 interface UseProductCreateReturn {

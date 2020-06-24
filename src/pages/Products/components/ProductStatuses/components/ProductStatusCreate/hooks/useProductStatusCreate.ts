@@ -3,7 +3,6 @@ import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { CreateFieldProps } from '../../../../../../../components/Create/Create'
 import ProductStatusContext from '../../../contexts/ProductStatusContext/ProductStatusContext'
-import { ProductStatusesRoutes } from '../../../routes/ProductStatusesRoutes'
 import { useHistory } from 'react-router'
 
 interface UseProductStatusCreateReturn {

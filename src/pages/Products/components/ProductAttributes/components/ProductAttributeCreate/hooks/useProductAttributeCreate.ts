@@ -8,7 +8,6 @@ import { useCallback, useContext, useMemo, useState } from 'react'
 import AttributeType from '../../../../../../../../api/products/models/AttributeType'
 import { CreateFieldProps } from '../../../../../../../components/Create/Create'
 import ProductAttributeContext from '../../../contexts/ProductAttributeContext/ProductAttributeContext'
-import { ProductAttributesRoutes } from '../../../routes/ProductAttributesRoutes'
 import { useHistory } from 'react-router'
 
 interface UseProductAttributeCreateReturn {

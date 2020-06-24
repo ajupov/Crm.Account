@@ -3,6 +3,7 @@ import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../../ut
 import { useCallback, useContext, useMemo } from 'react'
 
 import Product from '../../../../../../../../../../api/products/models/Product'
+import ProductAttributeLink from '../../../../../../../../../../api/products/models/ProductAttributeLink'
 import ProductCategoryLink from '../../../../../../../../../../api/products/models/ProductCategoryLink'
 import ProductChange from '../../../../../../../../../../api/products/models/ProductChange'
 import ProductChangesContext from '../../../../../contexts/ProductChangesContext/ProductChangesContext'
@@ -11,6 +12,7 @@ import { TableHeaderCellProps } from '../../../../../../../../../components/Tabl
 import { getAttributeTypeName } from '../../../../../../../../../helpers/productTypeHelper'
 import { getValueOrEmpty } from '../../../../../../../../../helpers/valueHelper'
 import { getWithCurrency } from '../../../../../../../../../helpers/currencyHelper'
+import { joinAttributes } from '../../../../../mappers/productAttributesMapper'
 import { joinCategoryIds } from '../../../../../mappers/productCategoriesMapper'
 import { toLocaleDateTime } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 
@@ -60,33 +62,40 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
         return ''
     }, [])
 
-    const mapCategories = useCallback((categoryLinks?: ProductCategoryLink[]) => joinCategoryIds(categoryLinks), [])
+    const mapCategories = useCallback((links?: ProductCategoryLink[]) => joinCategoryIds(links), [])
 
-    const getChangeValue = useCallback((change: ProductChange) => {
-        const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as Product) : void 0
-        const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as Product) : void 0
+    const mapAttributes = useCallback((links?: ProductAttributeLink[]) => joinAttributes(links), [])
 
-        return [
-            `ID Родительского продукта: ${getValueOrEmpty(oldValue?.parentProductId)} → ${getValueOrEmpty(
-                newValue?.parentProductId
-            )}`,
-            `Тип: \t ${getValueOrEmpty(getAttributeTypeName(oldValue?.type))} → ${getValueOrEmpty(
-                getAttributeTypeName(newValue?.type)
-            )}`,
-            `ID статуса: \t ${getValueOrEmpty(oldValue?.statusId)} → ${getValueOrEmpty(newValue?.statusId)}`,
-            `ID категорий: \t ${getValueOrEmpty(mapCategories(oldValue?.categoryLinks))} → ${getValueOrEmpty(
-                mapCategories(newValue?.categoryLinks)
-            )}`,
-            `Наименование: \t ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
-            `Артикул: \t ${getValueOrEmpty(oldValue?.vendorCode)} → ${getValueOrEmpty(newValue?.vendorCode)}`,
+    const getChangeValue = useCallback(
+        (change: ProductChange) => {
+            const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as Product) : void 0
+            const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as Product) : void 0
 
-            `Цена: \t ${getValueOrEmpty(getWithCurrency(oldValue?.price))} → ${getValueOrEmpty(
-                getWithCurrency(newValue?.price)
-            )}`,
-
-            `Удален: ${getValueOrEmpty(oldValue?.isDeleted)} → ${getValueOrEmpty(newValue?.isDeleted)}`
-        ]
-    }, [])
+            return [
+                `ID Родительского продукта: ${getValueOrEmpty(oldValue?.parentProductId)} → ${getValueOrEmpty(
+                    newValue?.parentProductId
+                )}`,
+                `Тип: ${getValueOrEmpty(getAttributeTypeName(oldValue?.type))} → ${getValueOrEmpty(
+                    getAttributeTypeName(newValue?.type)
+                )}`,
+                `ID статуса: ${getValueOrEmpty(oldValue?.statusId)} → ${getValueOrEmpty(newValue?.statusId)}`,
+                `ID категорий: ${getValueOrEmpty(mapCategories(oldValue?.categoryLinks))} → ${getValueOrEmpty(
+                    mapCategories(newValue?.categoryLinks)
+                )}`,
+                `Наименование: ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
+                `Артикул: ${getValueOrEmpty(oldValue?.vendorCode)} → ${getValueOrEmpty(newValue?.vendorCode)}`,
+                `Цена: ${getValueOrEmpty(getWithCurrency(oldValue?.price))} → ${getValueOrEmpty(
+                    getWithCurrency(newValue?.price)
+                )}`,
+                `Черновик: ${getValueOrEmpty(oldValue?.isHidden)} → ${getValueOrEmpty(newValue?.isHidden)}`,
+                `Удален: ${getValueOrEmpty(oldValue?.isDeleted)} → ${getValueOrEmpty(newValue?.isDeleted)}`,
+                `Атрибуты: ${getValueOrEmpty(mapAttributes(oldValue?.attributeLinks))} → ${getValueOrEmpty(
+                    mapAttributes(newValue?.attributeLinks)
+                )}`
+            ]
+        },
+        [mapAttributes, mapCategories]
+    )
 
     const map = useCallback(
         (changes: ProductChange[]) =>
