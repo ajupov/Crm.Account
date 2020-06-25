@@ -21,11 +21,11 @@ import { SelectOptionCreateFieldProps } from '../Create/Create'
 
 export type EditFieldProps =
     | TextEditFieldProps
-    | NumberFilterFieldProps
+    | NumberEditFieldProps
     | DateEditFieldProps
     | CheckboxEditFieldProps
     | SelectEditFieldProps
-    | AttributeLinksFieldProps
+    | AttributesEditLinksFieldProps
 
 export interface TextEditFieldProps {
     required?: boolean
@@ -35,7 +35,7 @@ export interface TextEditFieldProps {
     onChange: (_: any, { value }: InputOnChangeData) => void
 }
 
-export interface NumberFilterFieldProps {
+export interface NumberEditFieldProps {
     required?: boolean
     type: 'number'
     topLabel: string
@@ -74,7 +74,7 @@ export interface SelectEditFieldProps {
     onChange: (_: any, { value }: DropdownProps) => void
 }
 
-export interface AttributeLinksFieldProps {
+export interface AttributesEditLinksFieldProps {
     required?: boolean
     type: 'attributes'
     label: string
