@@ -1,4 +1,4 @@
-import { calculateOffset, calculatePage } from '../../../../../../../helpers/paginationHelper'
+import { calculateOffset, calculatePage } from '../../../../../../../utils/pagination/paginationUtils'
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 

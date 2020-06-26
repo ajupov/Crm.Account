@@ -4,7 +4,7 @@ import Page from '../../../../../../components/Page/Page'
 import ProductAttributeContextProvider from '../../contexts/ProductAttributeContext/ProductAttributeContextProvider'
 import ProductAttributeEditForm from './ProductAttributeEditForm'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
-import { setPageTitle } from '../../../../../../helpers/pageHelper'
+import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
 const ProductAttributeEdit: FC = () => {
     const title = 'Изменение атрибута'

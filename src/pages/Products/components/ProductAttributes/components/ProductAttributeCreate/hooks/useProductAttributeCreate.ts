@@ -2,7 +2,7 @@ import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-rea
 import {
     getAttributeTypeName,
     getAttributeTypesAsSelectOptions
-} from '../../../../../../../helpers/attributeTypeHelper'
+} from '../../../../../../../helpers/entityAttributeTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import AttributeType from '../../../../../../../../api/products/models/AttributeType'

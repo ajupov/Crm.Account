@@ -7,7 +7,7 @@ import ProductAttributeChangesFiltersContextProvider from '../../contexts/Produc
 import ProductAttributeChangesTable from './components/ProductAttributeChangesTable/ProductAttributeChangesTable'
 import ProductsAttributeChangesFilterMobile from './components/ProductsAttributeChangesFilterMobile/ProductsAttributeChangesFilterMobile'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
-import { setPageTitle } from '../../../../../../helpers/pageHelper'
+import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 import useProductAttributeChangesView from './hooks/useProductAttributeChangesView'
 
 const ProductAttributeChanges: FC = () => {

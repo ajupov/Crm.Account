@@ -11,7 +11,7 @@ import ProductStatusesFiltersContextProvider from './contexts/ProductStatusesFil
 import ProductStatusesTable from './components/ProductStatusesTable/ProductStatusesTable'
 import ProductsMenu from '../ProductsMenu/ProductsMenu'
 import ProductsStatusesFilterMobile from './components/ProductsStatusesFilterMobile/ProductsStatusesFilterMobile'
-import { setPageTitle } from '../../../../helpers/pageHelper'
+import { setPageTitle } from '../../../../helpers/productNameHelper'
 
 const ProductStatuses: FC = () => {
     const title = 'Статусы'

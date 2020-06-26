@@ -1,3 +1,7 @@
+export type Dictionary<T> = {
+    [key in string | number]: T
+}
+
 export function arrayToDictionary<T>(values: (string | number)[]): Dictionary<T> {
     return values.reduce((map: any, obj) => {
         map[obj] = ''

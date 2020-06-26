@@ -11,7 +11,7 @@ import ProductCategoryDelete from './components/ProductCategoryDelete/ProductCat
 import ProductCategoryRestore from './components/ProductCategoryRestore/ProductCategoryRestore'
 import ProductsCategoriesFilterMobile from './components/ProductsCategoriesFilterMobile/ProductsCategoriesFilterMobile'
 import ProductsMenu from '../ProductsMenu/ProductsMenu'
-import { setPageTitle } from '../../../../helpers/pageHelper'
+import { setPageTitle } from '../../../../helpers/productNameHelper'
 
 const ProductCategories: FC = () => {
     const title = 'Категории'

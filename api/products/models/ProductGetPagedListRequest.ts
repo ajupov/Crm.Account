@@ -1,3 +1,4 @@
+import { Dictionary } from '../../../src/utils/dictionary/dictionaryUtils'
 import ProductType from '../models/ProductType'
 
 export default interface ProductGetPagedListRequest {

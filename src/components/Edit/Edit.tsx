@@ -12,7 +12,7 @@ import {
     Select
 } from 'semantic-ui-react'
 import React, { FC, useCallback, useMemo } from 'react'
-import { getCreateDateTimeText, getLastChangeDateTimeText } from '../../helpers/dateTimeTextHelper'
+import { getCreateDateTimeText, getLastChangeDateTimeText } from '../../helpers/entityDateTimeHelper'
 
 import BackLink from '../BackLink/BackLink'
 import HistoryLink from '../HistoryLink/HistoryLink'

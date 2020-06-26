@@ -7,7 +7,7 @@ import ProductStatusRestore from '../ProductStatusRestore/ProductStatusRestore'
 import ProductStatusViewForm from './ProductStatusViewForm'
 import ProductStatusesActionsContextProvider from '../../contexts/ProductStatusesActionsContext/ProductStatusesActionsContextProvider'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
-import { setPageTitle } from '../../../../../../helpers/pageHelper'
+import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
 const ProductStatusView: FC = () => {
     const title = 'Просмотр категории'

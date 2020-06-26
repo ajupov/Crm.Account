@@ -1,7 +1,7 @@
-export function toBoolean(value: string | number | undefined): boolean {
+export function toBoolean(value: any): boolean {
     return value === 'true'
 }
 
-export function toBooleanNullable(value: string | number | undefined): boolean | undefined {
+export function toBooleanNullable(value: any): boolean | undefined {
     return value === void 0 ? void 0 : toBoolean(value)
 }

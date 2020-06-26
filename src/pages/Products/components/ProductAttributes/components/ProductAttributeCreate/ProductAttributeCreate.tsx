@@ -4,7 +4,7 @@ import Page from '../../../../../../components/Page/Page'
 import ProductAttributeContextProvider from '../../contexts/ProductAttributeContext/ProductAttributeContextProvider'
 import ProductAttributeCreateForm from './ProductAttributeCreateForm'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
-import { setPageTitle } from '../../../../../../helpers/pageHelper'
+import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
 const ProductAttributeCreate: FC = () => {
     const title = 'Добавление атрибута'

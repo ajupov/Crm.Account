@@ -6,7 +6,7 @@ import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'
 import ProductAttributesContext from '../../ProductAttributesContext/ProductAttributesContext'
-import { getAttributeTypesAsSelectOptions } from '../../../../../../../helpers/attributeTypeHelper'
+import { getAttributeTypesAsSelectOptions } from '../../../../../../../helpers/entityAttributeTypeHelper'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
 
 const useProductAttributesFilters = (): ProductAttributesFiltersState => {

@@ -7,7 +7,7 @@ import ProductStatusChangesFiltersContextProvider from '../../contexts/ProductSt
 import ProductStatusChangesTable from './components/ProductStatusChangesTable/ProductStatusChangesTable'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
 import ProductsStatusChangesFilterMobile from './components/ProductsStatusChangesFilterMobile/ProductsStatusChangesFilterMobile'
-import { setPageTitle } from '../../../../../../helpers/pageHelper'
+import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 import useProductStatusChangesView from './hooks/useProductStatusChangesView'
 
 const ProductStatusChanges: FC = () => {

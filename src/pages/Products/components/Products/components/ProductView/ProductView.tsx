@@ -7,7 +7,7 @@ import ProductRestore from '../ProductRestore/ProductRestore'
 import ProductViewForm from './ProductViewForm'
 import ProductsActionsContextProvider from '../../contexts/ProductsActionsContext/ProductsActionsContextProvider'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
-import { setPageTitle } from '../../../../../../helpers/pageHelper'
+import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
 const ProductView: FC = () => {
     const title = 'Просмотр продукта'

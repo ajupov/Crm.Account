@@ -1,5 +1,5 @@
 import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
-import { getAttributeTypeName, getProductTypesAsSelectOptions } from '../../../../../../../helpers/productTypeHelper'
+import { getProductTypeName, getProductTypesAsSelectOptions } from '../../../helpers/productTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { EditFieldProps } from '../../../../../../../components/Edit/Edit'
@@ -190,7 +190,7 @@ const useProductEdit = (): UseProductEditReturn => {
                 required: true,
                 label: 'Тип',
                 value: state.product.type,
-                text: getAttributeTypeName(state.product.type),
+                text: getProductTypeName(state.product.type),
                 options: getProductTypesAsSelectOptions(),
                 onChange: onChangeType
             },

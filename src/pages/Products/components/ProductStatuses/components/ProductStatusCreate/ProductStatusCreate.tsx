@@ -4,7 +4,7 @@ import Page from '../../../../../../components/Page/Page'
 import ProductStatusContextProvider from '../../contexts/ProductStatusContext/ProductStatusContextProvider'
 import ProductStatusCreateForm from './ProductStatusCreateForm'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
-import { setPageTitle } from '../../../../../../helpers/pageHelper'
+import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
 const ProductStatusCreate: FC = () => {
     const title = 'Добавление статуса'

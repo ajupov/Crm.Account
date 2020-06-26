@@ -1,4 +1,4 @@
-import { calculateOffset, calculatePage } from '../../../../../../../../../helpers/paginationHelper'
+import { calculateOffset, calculatePage } from '../../../../../../../../../utils/pagination/paginationUtils'
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
@@ -7,7 +7,7 @@ import ProductCategoryChange from '../../../../../../../../../../api/products/mo
 import ProductCategoryChangesContext from '../../../../../contexts/ProductCategoryChangesContext/ProductCategoryChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../../components/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../../components/Table/TableHeader'
-import { getValueOrEmpty } from '../../../../../../../../../helpers/valueHelper'
+import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
 import { toLocaleDateTime } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 
 interface UseProductCategoryChangesTableReturn {

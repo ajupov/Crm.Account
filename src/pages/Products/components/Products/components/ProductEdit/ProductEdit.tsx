@@ -4,7 +4,7 @@ import Page from '../../../../../../components/Page/Page'
 import ProductContextProvider from '../../contexts/ProductContext/ProductContextProvider'
 import ProductEditForm from './ProductEditForm'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
-import { setPageTitle } from '../../../../../../helpers/pageHelper'
+import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
 const ProductEdit: FC = () => {
     const title = 'Изменение продукта'

@@ -11,7 +11,7 @@ import ProductsFilterMobile from './components/ProductsFilterMobile/ProductsFilt
 import ProductsFiltersContextProvider from './contexts/ProductsFiltersContext/ProductsFiltersContextProvider'
 import ProductsMenu from '../ProductsMenu/ProductsMenu'
 import ProductsTable from './components/ProductsTable/ProductsTable'
-import { setPageTitle } from '../../../../helpers/pageHelper'
+import { setPageTitle } from '../../../../helpers/productNameHelper'
 
 const Products: FC = () => {
     const title = 'Продукты'

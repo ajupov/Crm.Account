@@ -11,7 +11,7 @@ import ProductAttributesFiltersContextProvider from './contexts/ProductAttribute
 import ProductAttributesTable from './components/ProductAttributesTable/ProductAttributesTable'
 import ProductsAttributesFilterMobile from './components/ProductsAttributesFilterMobile/ProductsAttributesFilterMobile'
 import ProductsMenu from '../ProductsMenu/ProductsMenu'
-import { setPageTitle } from '../../../../helpers/pageHelper'
+import { setPageTitle } from '../../../../helpers/productNameHelper'
 
 const ProductAttributes: FC = () => {
     const title = 'Аттрибуты'

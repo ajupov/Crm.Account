@@ -4,7 +4,7 @@ import Page from '../../../../../../components/Page/Page'
 import ProductContextProvider from '../../contexts/ProductContext/ProductContextProvider'
 import ProductCreateForm from './ProductCreateForm'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
-import { setPageTitle } from '../../../../../../helpers/pageHelper'
+import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
 const ProductCreate: FC = () => {
     const title = 'Добавление продукта'

@@ -1,6 +1,8 @@
 import AttributeType from '../../api/products/models/AttributeType'
+import { Dictionary } from '../utils/dictionary/dictionaryUtils'
 import { SelectOptionCreateFieldProps } from '../components/Create/Create'
 
+// TODO: Move to l10n
 const AttributeTypeWithNames: Dictionary<string> = {
     1: 'Тег',
     2: 'Флаг',

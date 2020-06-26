@@ -1,4 +1,4 @@
-import { calculateOffset, calculatePage } from '../../../../../../../helpers/paginationHelper'
+import { calculateOffset, calculatePage } from '../../../../../../../utils/pagination/paginationUtils'
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
@@ -7,7 +7,7 @@ import ProductsContext from '../../../contexts/ProductsContext/ProductsContext'
 import { ProductsRoutes } from '../../../routes/ProductsRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/Table/TableHeader'
-import { getWithCurrency } from '../../../../../../../helpers/currencyHelper'
+import { toCurrency } from '../../../../../../../utils/currency/currencyUtils'
 import { toLocaleDateTime } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { useHistory } from 'react-router'
 import useProductView from '../../ProductView/hooks/useProductView'
@@ -81,7 +81,7 @@ const useProductsTable = (): UseProductsTableReturn => {
                             { value: product.name, textAlign: 'left' },
                             { value: product.vendorCode, textAlign: 'left' },
                             { value: product.status?.name, textAlign: 'left' },
-                            { value: getWithCurrency(product.price), textAlign: 'right' },
+                            { value: toCurrency(product.price), textAlign: 'right' },
                             { value: toLocaleDateTime(product.createDateTime), textAlign: 'center' }
                         ],
                         isDeleted: product.isDeleted,

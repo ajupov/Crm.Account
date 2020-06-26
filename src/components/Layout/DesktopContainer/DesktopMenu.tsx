@@ -4,6 +4,7 @@ import React, { FC, useCallback, useContext } from 'react'
 import Clock from '../../Clock/Clock'
 import Configuration from '../../../configuration/Configuration'
 import { Link } from 'react-router-dom'
+import { ProductName } from '../../../helpers/productNameHelper'
 import UserInfoContext from '../../UserInfo/contexts/UserInfoContext/UserInfoContext'
 
 const DesktopMenu: FC = () => {
@@ -28,7 +29,7 @@ const DesktopMenu: FC = () => {
     return (
         <>
             <Menu.Item as={Link} to="/" style={{ width: '130px' }}>
-                <Image avatar src="/content/logo.png" style={{ marginRight: '10px' }} /> Lite CRM
+                <Image avatar src="/content/logo.png" style={{ marginRight: '10px' }} /> {ProductName}
             </Menu.Item>
             <Menu.Item position="right" header>
                 <Clock />

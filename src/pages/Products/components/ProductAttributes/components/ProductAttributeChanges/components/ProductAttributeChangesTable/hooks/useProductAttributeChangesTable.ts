@@ -1,4 +1,4 @@
-import { calculateOffset, calculatePage } from '../../../../../../../../../helpers/paginationHelper'
+import { calculateOffset, calculatePage } from '../../../../../../../../../utils/pagination/paginationUtils'
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
@@ -7,8 +7,8 @@ import ProductAttributeChange from '../../../../../../../../../../api/products/m
 import ProductAttributeChangesContext from '../../../../../contexts/ProductAttributeChangesContext/ProductAttributeChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../../components/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../../components/Table/TableHeader'
-import { getAttributeTypeName } from '../../../../../../../../../helpers/attributeTypeHelper'
-import { getValueOrEmpty } from '../../../../../../../../../helpers/valueHelper'
+import { getAttributeTypeName } from '../../../../../../../../../helpers/entityAttributeTypeHelper'
+import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
 import { toLocaleDateTime } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 
 interface UseProductAttributeChangesTableReturn {

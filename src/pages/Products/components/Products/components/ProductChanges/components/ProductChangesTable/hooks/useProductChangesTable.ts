@@ -1,4 +1,4 @@
-import { calculateOffset, calculatePage } from '../../../../../../../../../helpers/paginationHelper'
+import { calculateOffset, calculatePage } from '../../../../../../../../../utils/pagination/paginationUtils'
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
@@ -9,11 +9,11 @@ import ProductChange from '../../../../../../../../../../api/products/models/Pro
 import ProductChangesContext from '../../../../../contexts/ProductChangesContext/ProductChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../../components/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../../components/Table/TableHeader'
-import { getAttributeTypeName } from '../../../../../../../../../helpers/productTypeHelper'
-import { getValueOrEmpty } from '../../../../../../../../../helpers/valueHelper'
-import { getWithCurrency } from '../../../../../../../../../helpers/currencyHelper'
+import { getProductTypeName } from '../../../../../helpers/productTypeHelper'
+import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
 import { joinAttributes } from '../../../../../mappers/productAttributesMapper'
 import { joinCategoryIds } from '../../../../../mappers/productCategoriesMapper'
+import { toCurrency } from '../../../../../../../../../utils/currency/currencyUtils'
 import { toLocaleDateTime } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 
 interface UseProductChangesTableReturn {
@@ -75,8 +75,8 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
                 `ID Родительского продукта: ${getValueOrEmpty(oldValue?.parentProductId)} → ${getValueOrEmpty(
                     newValue?.parentProductId
                 )}`,
-                `Тип: ${getValueOrEmpty(getAttributeTypeName(oldValue?.type))} → ${getValueOrEmpty(
-                    getAttributeTypeName(newValue?.type)
+                `Тип: ${getValueOrEmpty(getProductTypeName(oldValue?.type))} → ${getValueOrEmpty(
+                    getProductTypeName(newValue?.type)
                 )}`,
                 `ID статуса: ${getValueOrEmpty(oldValue?.statusId)} → ${getValueOrEmpty(newValue?.statusId)}`,
                 `ID категорий: ${getValueOrEmpty(mapCategories(oldValue?.categoryLinks))} → ${getValueOrEmpty(
@@ -84,8 +84,8 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
                 )}`,
                 `Наименование: ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
                 `Артикул: ${getValueOrEmpty(oldValue?.vendorCode)} → ${getValueOrEmpty(newValue?.vendorCode)}`,
-                `Цена: ${getValueOrEmpty(getWithCurrency(oldValue?.price))} → ${getValueOrEmpty(
-                    getWithCurrency(newValue?.price)
+                `Цена: ${getValueOrEmpty(toCurrency(oldValue?.price))} → ${getValueOrEmpty(
+                    toCurrency(newValue?.price)
                 )}`,
                 `Черновик: ${getValueOrEmpty(oldValue?.isHidden)} → ${getValueOrEmpty(newValue?.isHidden)}`,
                 `Удален: ${getValueOrEmpty(oldValue?.isDeleted)} → ${getValueOrEmpty(newValue?.isDeleted)}`,

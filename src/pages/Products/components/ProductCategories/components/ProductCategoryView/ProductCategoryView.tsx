@@ -7,7 +7,7 @@ import ProductCategoryDelete from '../ProductCategoryDelete/ProductCategoryDelet
 import ProductCategoryRestore from '../ProductCategoryRestore/ProductCategoryRestore'
 import ProductCategoryViewForm from './ProductCategoryViewForm'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
-import { setPageTitle } from '../../../../../../helpers/pageHelper'
+import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
 const ProductCategoryView: FC = () => {
     const title = 'Просмотр категории'

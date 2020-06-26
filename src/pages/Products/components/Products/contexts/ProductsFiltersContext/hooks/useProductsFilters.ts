@@ -1,6 +1,6 @@
 import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import ProductsFiltersState, { productsFiltersInitialState } from '../../../states/ProductsFiltersState'
-import { arrayToDictionary, dictionaryToArray } from '../../../../../../../helpers/dictionaryHelper'
+import { arrayToDictionary, dictionaryToArray } from '../../../../../../../utils/dictionary/dictionaryUtils'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'

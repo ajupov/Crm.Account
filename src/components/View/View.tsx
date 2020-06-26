@@ -3,7 +3,7 @@ import React, { FC, useCallback } from 'react'
 import {
     getCreateDateTimeText,
     getLastChangeDateTimeText as getLastModifyDateTimeText
-} from '../../helpers/dateTimeTextHelper'
+} from '../../helpers/entityDateTimeHelper'
 
 import BackLink from '../BackLink/BackLink'
 import HistoryLink from '../HistoryLink/HistoryLink'

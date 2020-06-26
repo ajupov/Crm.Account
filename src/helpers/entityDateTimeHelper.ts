@@ -11,6 +11,7 @@ export function getCreateDateTimeText(value?: string): string {
         return ''
     }
 
+    // TODO: Move to l10n
     return `Создан: ${lastModifyDateTime}`
 }
 
@@ -25,5 +26,6 @@ export function getLastChangeDateTimeText(value?: string): string {
         return ''
     }
 
+    // TODO: Move to l10n
     return `Изменен: ${lastModifyDateTime}`
 }

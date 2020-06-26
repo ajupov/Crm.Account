@@ -7,7 +7,7 @@ import ProductAttributeRestore from '../ProductAttributeRestore/ProductAttribute
 import ProductAttributeViewForm from './ProductAttributeViewForm'
 import ProductAttributesActionsContextProvider from '../../contexts/ProductAttributesActionsContext/ProductAttributesActionsContextProvider'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
-import { setPageTitle } from '../../../../../../helpers/pageHelper'
+import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
 const ProductAttributeView: FC = () => {
     const title = 'Просмотр атрибута'

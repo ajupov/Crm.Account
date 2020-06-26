@@ -4,7 +4,7 @@ import ProductAttribute from '../../../../../../../../api/products/models/Produc
 import ProductAttributesActionsContext from '../../../contexts/ProductAttributesActionsContext/ProductAttributesActionsContext'
 import { ProductAttributesRoutes } from '../../../routes/ProductAttributesRoutes'
 import { ViewDataProps } from '../../../../../../../components/View/View'
-import { getAttributeTypeName } from '../../../../../../../helpers/attributeTypeHelper'
+import { getAttributeTypeName } from '../../../../../../../helpers/entityAttributeTypeHelper'
 import { useHistory } from 'react-router'
 
 interface UseProductAttributeViewReturn {
