@@ -2,10 +2,10 @@ import React, { FC, useEffect } from 'react'
 
 const Dashboard: FC = () => {
     useEffect(() => {
-        document.title = 'Дашбоард'
+        document.title = 'Инфопанель'
     })
 
-    return <h1>Дашбоард</h1>
+    return <h1>Инфопанель</h1>
 }
 
 export default Dashboard

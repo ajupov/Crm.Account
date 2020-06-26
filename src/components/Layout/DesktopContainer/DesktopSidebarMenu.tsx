@@ -16,11 +16,10 @@ const DesktopSidebarMenu: FC = () => {
 
     return (
         <>
-            {renderItem('Дашбоард', '/', 'dashboard')}
+            {renderItem('Инфопанель', '/', 'dashboard')}
             {renderItem('Календарь', '/calendar', 'calendar')}
             {renderItem('Задачи', '/activities', 'tasks')}
             {renderItem('Сделки', '/deals', 'handshake')}
-            {renderItem('Лиды', '/leads', 'filter')}
             {renderItem('Клиенты', '/cients', 'address book')}
             {renderItem('Продукты', '/products', 'list ol')}
         </>

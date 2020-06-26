@@ -38,11 +38,10 @@ const MobileSidebarMenu: FC<MobileSidebarMenuProps> = ({ onClickItem }) => {
             <Menu.Item as={Link} to="settings" onClick={onClickItem} style={{ height: '68px', lineHeight: '48px' }}>
                 {AvatarAndUserElement}
             </Menu.Item>
-            {renderItem('Дашбоард', '', 'dashboard')}
+            {renderItem('Инфопанель', '', 'dashboard')}
             {renderItem('Календарь', '/calendar', 'calendar')}
             {renderItem('Задачи', '/activities', 'tasks')}
             {renderItem('Сделки', '/deals', 'handshake')}
-            {renderItem('Лиды', '/leads', 'filter')}
             {renderItem('Клиенты', '/clients', 'address book')}
             {renderItem('Продукты', '/products', 'list ol')}
             {renderItem('Настройки аккаунта', '/settings', 'user circle')}

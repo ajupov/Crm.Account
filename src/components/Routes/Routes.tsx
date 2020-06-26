@@ -2,11 +2,10 @@ import React, { FC } from 'react'
 import { Route, Switch } from 'react-router'
 
 import Activities from '../../pages/Activities/Activities'
-import { Calendar } from 'react-big-calendar'
+import Calendar from '../../pages/Calendar/Calendar'
 import Clients from '../../pages/Clients/Clients'
 import Dashboard from '../../pages/Dashboard/Dashboard'
 import Deals from '../../pages/Deals/Deals'
-import Leads from '../../pages/Leads/Leads'
 import NotFound from '../../pages/NotFound/NotFound'
 import ProductAttributeChanges from '../../pages/Products/components/ProductAttributes/components/ProductAttributeChanges/ProductAttributeChanges'
 import ProductAttributeCreate from '../../pages/Products/components/ProductAttributes/components/ProductAttributeCreate/ProductAttributeCreate'
@@ -39,7 +38,6 @@ const Routes: FC = () => (
         <Route path="/" exact component={Dashboard} />
         <Route path="/calendar" component={Calendar} />
         <Route path="/activities" component={Activities} />
-        <Route path="/leads" component={Leads} />
         <Route path="/deals" component={Deals} />
         <Route path="/clients" component={Clients} />
 
