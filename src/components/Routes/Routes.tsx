@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router'
 
 import Activities from '../../pages/Activities/Activities'
 import { Calendar } from 'react-big-calendar'
-import Contacts from '../../pages/Contacts/Contacts'
+import Clients from '../../pages/Clients/Clients'
 import Dashboard from '../../pages/Dashboard/Dashboard'
 import Deals from '../../pages/Deals/Deals'
 import Leads from '../../pages/Leads/Leads'
@@ -41,7 +41,7 @@ const Routes: FC = () => (
         <Route path="/activities" component={Activities} />
         <Route path="/leads" component={Leads} />
         <Route path="/deals" component={Deals} />
-        <Route path="/contacts" component={Contacts} />
+        <Route path="/clients" component={Clients} />
 
         <Route path={ProductsRoutes.Index} exact component={Products} />
         <Route path={ProductsRoutes.Create} exact component={ProductCreate} />
