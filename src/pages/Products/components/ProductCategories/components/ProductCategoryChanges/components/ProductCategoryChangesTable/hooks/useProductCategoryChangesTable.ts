@@ -5,8 +5,8 @@ import { useCallback, useContext, useMemo } from 'react'
 import ProductCategory from '../../../../../../../../../../api/products/models/ProductCategory'
 import ProductCategoryChange from '../../../../../../../../../../api/products/models/ProductCategoryChange'
 import ProductCategoryChangesContext from '../../../../../contexts/ProductCategoryChangesContext/ProductCategoryChangesContext'
-import { TableBodyRowProps } from '../../../../../../../../../components/Table/TableBody'
-import { TableHeaderCellProps } from '../../../../../../../../../components/Table/TableHeader'
+import { TableBodyRowProps } from '../../../../../../../../../components/common/collections/Table/TableBody'
+import { TableHeaderCellProps } from '../../../../../../../../../components/common/collections/Table/TableHeader'
 import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
 import { toLocaleDateTime } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 
@@ -35,8 +35,7 @@ const useProductCategoryChangesTable = (): UseProductCategoryChangesTableReturn 
     }, [state])
 
     const onClickChangePage = useCallback(
-        (page: number): void =>
-            state.setRequest({ ...state.request, offset: calculateOffset(page, state.request.limit) }),
+        (page: number) => state.setRequest({ ...state.request, offset: calculateOffset(page, state.request.limit) }),
         [state]
     )
 

@@ -3,7 +3,7 @@ import ProductsFiltersState, { productsFiltersInitialState } from '../../../stat
 import { arrayToDictionary, dictionaryToArray } from '../../../../../../../utils/dictionary/dictionaryUtils'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'
+import { FilterFormFieldProps } from '../../../../../../../components/common/forms/FilterForm/FilterForm'
 import ProductType from '../../../../../../../../api/products/models/ProductType'
 import ProductsContext from '../../ProductsContext/ProductsContext'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
@@ -187,7 +187,7 @@ const useProductsFilters = (): ProductsFiltersState => {
 
     const onHideMobile = useCallback(() => setIsShowMobile(false), [setIsShowMobile])
 
-    const fields: FilterFieldProps[] = useMemo(
+    const fields: FilterFormFieldProps[] = useMemo(
         () => [
             {
                 type: 'radio',
@@ -208,16 +208,18 @@ const useProductsFilters = (): ProductsFiltersState => {
                 }
             },
             {
-                type: 'select',
+                type: 'dropdown',
+                multiple: true,
                 label: 'Статус',
-                values: statusIds,
+                value: statusIds,
                 options: getActualStatuses(),
                 onChange: onChangeStatusIds
             },
             {
-                type: 'select',
+                type: 'dropdown',
                 label: 'Категория',
-                values: categoryIds,
+                multiple: true,
+                value: categoryIds,
                 options: getActualCategories(),
                 onChange: onChangeCategoryIds
             },
@@ -242,9 +244,10 @@ const useProductsFilters = (): ProductsFiltersState => {
                 onChange2: onChangeMaxPrice
             },
             {
-                type: 'select',
+                type: 'dropdown',
+                multiple: true,
                 label: 'Атрибуты',
-                values: dictionaryToArray(attributeIds),
+                value: dictionaryToArray(attributeIds),
                 options: getActualAttributes(),
                 onChange: onChangeAttributeIds
             },

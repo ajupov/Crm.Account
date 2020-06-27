@@ -1,13 +1,13 @@
 import React, { FC, useContext } from 'react'
 
-import Filter from '../../../../../../components/Filter/Filter'
+import FilterForm from '../../../../../../components/common/forms/FilterForm/FilterForm'
 import ProductsFiltersContext from '../../contexts/ProductsFiltersContext/ProductsFiltersContext'
 
 const ProductsFilter: FC = () => {
     const state = useContext(ProductsFiltersContext)
 
     return (
-        <Filter
+        <FilterForm
             fields={state.fields}
             isApplyEnabled={state.isApplyEnabled}
             onApply={state.onApply}

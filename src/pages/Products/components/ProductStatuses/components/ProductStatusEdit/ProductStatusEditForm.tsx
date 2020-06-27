@@ -1,6 +1,6 @@
 import React, { FC, useContext } from 'react'
 
-import Edit from '../../../../../../components/Edit/Edit'
+import EditForm from '../../../../../../components/common/forms/EditForm/EditForm'
 import ProductStatusContext from '../../contexts/ProductStatusContext/ProductStatusContext'
 import useProductStatusEdit from './hooks/useProductStatusEdit'
 import useProductStatusesActions from '../../contexts/ProductStatusesActionsContext/hooks/useProductStatusesActions'
@@ -11,7 +11,7 @@ const ProductStatusEditForm: FC = () => {
     const { fields, isConfirmEnabled, onClickHistory, onClickCancel, onClickConfirm } = useProductStatusEdit()
 
     return state.status.id ? (
-        <Edit
+        <EditForm
             id={state.status.id}
             fields={fields}
             isLoading={state.isLoading || isLoading}

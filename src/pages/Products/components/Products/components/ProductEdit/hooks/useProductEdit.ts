@@ -2,7 +2,7 @@ import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-rea
 import { getProductTypeName, getProductTypesAsSelectOptions } from '../../../helpers/productTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { EditFieldProps } from '../../../../../../../components/Edit/Edit'
+import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
 import ProductContext from '../../../contexts/ProductContext/ProductContext'
 import ProductType from '../../../../../../../../api/products/models/ProductType'
 import { ProductsRoutes } from '../../../routes/ProductsRoutes'
@@ -10,7 +10,7 @@ import { useHistory } from 'react-router'
 import useProductsSelectOptions from '../../../hooks/useProductsSelectOptions'
 
 interface UseProductEditReturn {
-    fields: EditFieldProps[]
+    fields: EditFormFieldProps[]
     isConfirmEnabled: boolean
     onClickHistory: (id: string) => void
     onClickConfirm: () => void
@@ -165,19 +165,19 @@ const useProductEdit = (): UseProductEditReturn => {
         [state]
     )
 
-    const onClickConfirm = useCallback(async (): Promise<void> => {
+    const onClickConfirm = useCallback(async () => {
         await state.update()
         history.goBack()
     }, [state, history])
 
-    const onClickCancel = useCallback((): void => history.goBack(), [history])
+    const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const onClickHistory = useCallback((id: string): void => history.push(`${ProductsRoutes.Changes}/${id}`), [history])
+    const onClickHistory = useCallback((id: string) => history.push(`${ProductsRoutes.Changes}/${id}`), [history])
 
-    const fields: EditFieldProps[] = useMemo(
+    const fields: EditFormFieldProps[] = useMemo(
         () => [
             {
-                type: 'select',
+                type: 'dropdown',
                 required: true,
                 label: 'Родительский продукт',
                 text: getAllProducts().find(x => x.value === state.product.parentProductId)?.text,
@@ -186,7 +186,7 @@ const useProductEdit = (): UseProductEditReturn => {
                 onChange: onChangeParentProductId
             },
             {
-                type: 'select',
+                type: 'dropdown',
                 required: true,
                 label: 'Тип',
                 value: state.product.type,
@@ -195,7 +195,7 @@ const useProductEdit = (): UseProductEditReturn => {
                 onChange: onChangeType
             },
             {
-                type: 'select',
+                type: 'dropdown',
                 required: true,
                 label: 'Статус',
                 text: getAllStatuses().find(x => x.value === state.product.statusId)?.text,
@@ -204,10 +204,10 @@ const useProductEdit = (): UseProductEditReturn => {
                 onChange: onChangeStatusId
             },
             {
-                type: 'select',
-                isMultiple: true,
+                type: 'dropdown',
+                multiple: true,
                 required: true,
-                label: 'Категория',
+                label: 'Категории',
                 value: state.product.categoryLinks?.map(x => x.productCategoryId ?? ''),
                 options: getActualCategories(),
                 onChange: onChangeCategoryIds

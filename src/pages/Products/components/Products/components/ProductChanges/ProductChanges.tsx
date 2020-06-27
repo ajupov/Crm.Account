@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 
-import Page from '../../../../../../components/Page/Page'
+import Page from '../../../../../../components/common/grids/Page/Page'
 import ProductChangesContextProvider from '../../contexts/ProductChangesContext/ProductChangesContextProvider'
 import ProductChangesFilter from './components/ProductChangesFilter/ProductChangesFilter'
 import ProductChangesFilterMobile from './components/ProductChangesFilterMobile/ProductChangesFilterMobile'

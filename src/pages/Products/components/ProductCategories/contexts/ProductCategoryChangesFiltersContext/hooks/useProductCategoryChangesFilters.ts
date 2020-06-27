@@ -3,7 +3,7 @@ import ProductCategoryChangesFiltersState, {
 } from '../../../states/ProductCategoryChangesFiltersState'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'
+import { FilterFormFieldProps } from '../../../../../../../components/common/forms/FilterForm/FilterForm'
 import { InputOnChangeData } from 'semantic-ui-react'
 import ProductCategoryChangesContext from '../../ProductCategoryChangesContext/ProductCategoryChangesContext'
 
@@ -57,7 +57,7 @@ const useProductCategoryChangesFilters = (): ProductCategoryChangesFiltersState 
 
     const onHideMobile = useCallback(() => setIsShowMobile(false), [setIsShowMobile])
 
-    const fields: FilterFieldProps[] = useMemo(
+    const fields: FilterFormFieldProps[] = useMemo(
         () => [
             {
                 type: 'date',

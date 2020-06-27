@@ -6,13 +6,13 @@ import {
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import AttributeType from '../../../../../../../../api/products/models/AttributeType'
-import { EditFieldProps } from '../../../../../../../components/Edit/Edit'
+import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
 import ProductAttributeContext from '../../../contexts/ProductAttributeContext/ProductAttributeContext'
 import { ProductAttributesRoutes } from '../../../routes/ProductAttributesRoutes'
 import { useHistory } from 'react-router'
 
 interface UseProductAttributeEditReturn {
-    fields: EditFieldProps[]
+    fields: EditFormFieldProps[]
     isConfirmEnabled: boolean
     onClickHistory: (id: string) => void
     onClickConfirm: () => void
@@ -48,21 +48,21 @@ const useProductAttributeEdit = (): UseProductAttributeEditReturn => {
         [state]
     )
 
-    const onClickConfirm = useCallback(async (): Promise<void> => {
+    const onClickConfirm = useCallback(async () => {
         await state.update()
         history.goBack()
     }, [state, history])
 
-    const onClickCancel = useCallback((): void => history.goBack(), [history])
+    const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const onClickHistory = useCallback((id: string): void => history.push(`${ProductAttributesRoutes.Changes}/${id}`), [
+    const onClickHistory = useCallback((id: string) => history.push(`${ProductAttributesRoutes.Changes}/${id}`), [
         history
     ])
 
-    const fields: EditFieldProps[] = useMemo(
+    const fields: EditFormFieldProps[] = useMemo(
         () => [
             {
-                type: 'select',
+                type: 'dropdown',
                 required: true,
                 label: 'Тип',
                 value: state.attribute.type,

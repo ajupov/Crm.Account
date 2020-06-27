@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 
-import Page from '../../../../components/Page/Page'
+import Page from '../../../../components/common/grids/Page/Page'
 import ProductStatusContextProvider from './contexts/ProductStatusContext/ProductStatusContextProvider'
 import ProductStatusDelete from './components/ProductStatusDelete/ProductStatusDelete'
 import ProductStatusRestore from './components/ProductStatusRestore/ProductStatusRestore'

@@ -2,14 +2,14 @@ import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-rea
 import { getProductTypeName, getProductTypesAsSelectOptions } from '../../../helpers/productTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { CreateFieldProps } from '../../../../../../../components/Create/Create'
+import { CreateFormFieldProps } from '../../../../../../../components/common/forms/CreateForm/CreateForm'
 import ProductContext from '../../../contexts/ProductContext/ProductContext'
 import ProductType from '../../../../../../../../api/products/models/ProductType'
 import { useHistory } from 'react-router'
 import useProductsSelectOptions from '../../../hooks/useProductsSelectOptions'
 
 interface UseProductCreateReturn {
-    fields: CreateFieldProps[]
+    fields: CreateFormFieldProps[]
     isConfirmEnabled: boolean
     onClickConfirm: () => void
     onClickCancel: () => void
@@ -163,17 +163,17 @@ const useProductCreate = (): UseProductCreateReturn => {
         [state]
     )
 
-    const onClickConfirm = useCallback(async (): Promise<void> => {
+    const onClickConfirm = useCallback(async () => {
         await state.create()
         history.goBack()
     }, [state, history])
 
-    const onClickCancel = useCallback((): void => history.goBack(), [history])
+    const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const fields: CreateFieldProps[] = useMemo(
+    const fields: CreateFormFieldProps[] = useMemo(
         () => [
             {
-                type: 'select',
+                type: 'dropdown',
                 required: true,
                 label: 'Родительский продукт',
                 text: getAllProducts().find(x => x.value === state.product.parentProductId)?.text,
@@ -182,7 +182,7 @@ const useProductCreate = (): UseProductCreateReturn => {
                 onChange: onChangeParentProductId
             },
             {
-                type: 'select',
+                type: 'dropdown',
                 required: true,
                 label: 'Тип',
                 value: state.product.type,
@@ -191,7 +191,7 @@ const useProductCreate = (): UseProductCreateReturn => {
                 onChange: onChangeType
             },
             {
-                type: 'select',
+                type: 'dropdown',
                 required: true,
                 label: 'Статус',
                 text: getAllStatuses().find(x => x.value === state.product.statusId)?.text,
@@ -200,10 +200,10 @@ const useProductCreate = (): UseProductCreateReturn => {
                 onChange: onChangeStatusId
             },
             {
-                type: 'select',
-                isMultiple: true,
+                type: 'dropdown',
+                multiple: true,
                 required: true,
-                label: 'Категория',
+                label: 'Категории',
                 value: state.product.categoryLinks?.map(x => x.productCategoryId ?? ''),
                 options: getActualCategories(),
                 onChange: onChangeCategoryIds

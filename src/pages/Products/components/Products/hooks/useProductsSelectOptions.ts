@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 
+import { DropdownItemProps } from '../../../../../components/common/fields/Dropdown/Dropdown'
 import HttpClientFactoryInstance from '../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
 import Product from '../../../../../../api/products/models/Product'
 import ProductAttribute from '../../../../../../api/products/models/ProductAttribute'
@@ -9,7 +10,6 @@ import ProductCategory from '../../../../../../api/products/models/ProductCatego
 import ProductStatus from '../../../../../../api/products/models/ProductStatus'
 import ProductStatusesClient from '../../../../../../api/products/clients/ProductStatusesClient'
 import ProductsClient from '../../../../../../api/products/clients/ProductsClient'
-import { SelectOptionCreateFieldProps } from '../../../../../components/Create/Create'
 
 const productClient = new ProductsClient(HttpClientFactoryInstance.Api)
 const productStatusesClient = new ProductStatusesClient(HttpClientFactoryInstance.Api)
@@ -17,14 +17,14 @@ const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryIns
 const productAttributesClient = new ProductAttributesClient(HttpClientFactoryInstance.Api)
 
 interface UseProductsSelectOptionsReturn {
-    getActualProducts: () => SelectOptionCreateFieldProps[]
-    getAllProducts: () => SelectOptionCreateFieldProps[]
-    getActualStatuses: () => SelectOptionCreateFieldProps[]
-    getAllStatuses: () => SelectOptionCreateFieldProps[]
-    getActualCategories: () => SelectOptionCreateFieldProps[]
-    getAllCategories: () => SelectOptionCreateFieldProps[]
-    getActualAttributes: () => SelectOptionCreateFieldProps[]
-    getAllAttributes: () => SelectOptionCreateFieldProps[]
+    getActualProducts: () => DropdownItemProps[]
+    getAllProducts: () => DropdownItemProps[]
+    getActualStatuses: () => DropdownItemProps[]
+    getAllStatuses: () => DropdownItemProps[]
+    getActualCategories: () => DropdownItemProps[]
+    getAllCategories: () => DropdownItemProps[]
+    getActualAttributes: () => DropdownItemProps[]
+    getAllAttributes: () => DropdownItemProps[]
 }
 
 const useProductsSelectOptions = (): UseProductsSelectOptionsReturn => {

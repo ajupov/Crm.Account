@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 
-import Page from '../../../../components/Page/Page'
+import Page from '../../../../components/common/grids/Page/Page'
 import ProductContextProvider from './contexts/ProductContext/ProductContextProvider'
 import ProductDelete from './components/ProductDelete/ProductDelete'
 import ProductRestore from './components/ProductRestore/ProductRestore'

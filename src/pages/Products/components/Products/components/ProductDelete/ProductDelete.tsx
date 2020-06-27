@@ -1,6 +1,6 @@
 import React, { FC, useContext } from 'react'
 
-import Delete from '../../../../../../components/Delete/Delete'
+import DeleteModal from '../../../../../../components/common/modals/DeleteModal/DeleteModal'
 import ProductsActionsContext from '../../contexts/ProductsActionsContext/ProductsActionsContext'
 import useProductDelete from './hooks/useProductDelete'
 
@@ -9,7 +9,7 @@ const ProductDelete: FC = () => {
     const { onClickConfirm, onClickCancel } = useProductDelete()
 
     return (
-        <Delete
+        <DeleteModal
             isDeleting={state.isDeleting}
             title="Удаление атрибута"
             content="Вы уверены, что хотите удалить атрибут?"

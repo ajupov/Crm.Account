@@ -1,6 +1,6 @@
 import React, { FC, useContext } from 'react'
 
-import Delete from '../../../../../../components/Delete/Delete'
+import DeleteModal from '../../../../../../components/common/modals/DeleteModal/DeleteModal'
 import ProductCategoriesActionsContext from '../../contexts/ProductCategoriesActionsContext/ProductCategoriesActionsContext'
 import useProductCategoryDelete from './hooks/useProductCategoryDelete'
 
@@ -9,7 +9,7 @@ const ProductCategoryDelete: FC = () => {
     const { onClickConfirm, onClickCancel } = useProductCategoryDelete()
 
     return (
-        <Delete
+        <DeleteModal
             isDeleting={state.isDeleting}
             title="Удаление категории"
             content="Вы уверены, что хотите удалить категорию?"

@@ -3,7 +3,7 @@ import { useCallback, useContext } from 'react'
 import ProductAttribute from '../../../../../../../../api/products/models/ProductAttribute'
 import ProductAttributesActionsContext from '../../../contexts/ProductAttributesActionsContext/ProductAttributesActionsContext'
 import { ProductAttributesRoutes } from '../../../routes/ProductAttributesRoutes'
-import { ViewDataProps } from '../../../../../../../components/View/View'
+import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { getAttributeTypeName } from '../../../../../../../helpers/entityAttributeTypeHelper'
 import { useHistory } from 'react-router'
 
@@ -38,11 +38,11 @@ const useProductAttributeView = (): UseProductAttributeViewReturn => {
         [state]
     )
 
-    const onClickHistory = useCallback((id: string): void => history.push(`${ProductAttributesRoutes.Changes}/${id}`), [
+    const onClickHistory = useCallback((id: string) => history.push(`${ProductAttributesRoutes.Changes}/${id}`), [
         history
     ])
 
-    const onClickCancel = useCallback((): void => history.goBack(), [history])
+    const onClickCancel = useCallback(() => history.goBack(), [history])
 
     const map = useCallback(
         (attribute: ProductAttribute): ViewDataProps[] => [

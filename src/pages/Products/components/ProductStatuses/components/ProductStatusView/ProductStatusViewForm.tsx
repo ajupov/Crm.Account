@@ -1,7 +1,7 @@
 import React, { FC, useContext } from 'react'
 
 import ProductStatusContext from '../../contexts/ProductStatusContext/ProductStatusContext'
-import View from '../../../../../../components/View/View'
+import View from '../../../../../../components/common/grids/View/View'
 import useProductStatusView from './hooks/useProductStatusView'
 import useProductStatusesActions from '../../contexts/ProductStatusesActionsContext/hooks/useProductStatusesActions'
 

@@ -4,7 +4,7 @@ import ProductCategoriesFiltersState, {
 } from '../../../states/ProductCategoriesFiltersState'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'
+import { FilterFormFieldProps } from '../../../../../../../components/common/forms/FilterForm/FilterForm'
 import ProductCategoriesContext from '../../ProductCategoriesContext/ProductCategoriesContext'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
 
@@ -94,7 +94,7 @@ const useProductCategoriesFilters = (): ProductCategoriesFiltersState => {
 
     const onHideMobile = useCallback(() => setIsShowMobile(false), [setIsShowMobile])
 
-    const fields: FilterFieldProps[] = useMemo(
+    const fields: FilterFormFieldProps[] = useMemo(
         () => [
             {
                 type: 'text',

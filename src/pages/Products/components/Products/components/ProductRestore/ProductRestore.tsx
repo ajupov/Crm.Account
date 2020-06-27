@@ -1,7 +1,7 @@
 import React, { FC, useContext } from 'react'
 
 import ProductsActionsContext from '../../contexts/ProductsActionsContext/ProductsActionsContext'
-import Restore from '../../../../../../components/Restore/Restore'
+import RestoreModal from '../../../../../../components/common/modals/RestoreModal/RestoreModal'
 import useProductRestore from './hooks/useProductRestore'
 
 const ProductRestore: FC = () => {
@@ -9,7 +9,7 @@ const ProductRestore: FC = () => {
     const { onClickConfirm, onClickCancel } = useProductRestore()
 
     return (
-        <Restore
+        <RestoreModal
             isRestoring={state.isRestoring}
             title="Восстановление атрибута"
             content="Вы уверены, что хотите восстановить атрибут?"

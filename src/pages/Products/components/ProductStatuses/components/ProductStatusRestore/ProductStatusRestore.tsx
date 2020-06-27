@@ -1,7 +1,7 @@
 import React, { FC, useContext } from 'react'
 
 import ProductStatusesActionsContext from '../../contexts/ProductStatusesActionsContext/ProductStatusesActionsContext'
-import Restore from '../../../../../../components/Restore/Restore'
+import RestoreModal from '../../../../../../components/common/modals/RestoreModal/RestoreModal'
 import useProductStatusRestore from './hooks/useProductStatusRestore'
 
 const ProductStatusRestore: FC = () => {
@@ -9,7 +9,7 @@ const ProductStatusRestore: FC = () => {
     const { onClickConfirm, onClickCancel } = useProductStatusRestore()
 
     return (
-        <Restore
+        <RestoreModal
             isRestoring={state.isRestoring}
             title="Восстановление статуса"
             content="Вы уверены, что хотите восстановить статус?"

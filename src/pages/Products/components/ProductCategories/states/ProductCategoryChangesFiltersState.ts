@@ -1,7 +1,7 @@
-import { FilterFieldProps } from '../../../../../components/Filter/Filter'
+import { FilterFormFieldProps } from '../../../../../components/common/forms/FilterForm/FilterForm'
 
 export default interface ProductCategoryChangesFiltersState {
-    fields: FilterFieldProps[]
+    fields: FilterFormFieldProps[]
     isApplyEnabled: boolean
     onApply: () => void
     isResetEnabled: boolean

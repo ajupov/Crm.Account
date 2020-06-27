@@ -1,7 +1,7 @@
 import React, { FC, useContext } from 'react'
 
 import ProductContext from '../../contexts/ProductContext/ProductContext'
-import View from '../../../../../../components/View/View'
+import View from '../../../../../../components/common/grids/View/View'
 import useProductView from './hooks/useProductView'
 import useProductsActions from '../../contexts/ProductsActionsContext/hooks/useProductsActions'
 

@@ -4,7 +4,7 @@ import Product from '../../../../../../../../api/products/models/Product'
 import ProductContext from '../../../contexts/ProductContext/ProductContext'
 import ProductsActionsContext from '../../../contexts/ProductsActionsContext/ProductsActionsContext'
 import { ProductsRoutes } from '../../../routes/ProductsRoutes'
-import { ViewDataProps } from '../../../../../../../components/View/View'
+import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { getProductTypeName } from '../../../helpers/productTypeHelper'
 import { joinCategoryNames } from '../../../mappers/productCategoriesMapper'
 import { toCurrency } from '../../../../../../../utils/currency/currencyUtils'
@@ -44,9 +44,9 @@ const useProductView = (): UseProductViewReturn => {
         [actionsState]
     )
 
-    const onClickHistory = useCallback((id: string): void => history.push(`${ProductsRoutes.Changes}/${id}`), [history])
+    const onClickHistory = useCallback((id: string) => history.push(`${ProductsRoutes.Changes}/${id}`), [history])
 
-    const onClickCancel = useCallback((): void => history.goBack(), [history])
+    const onClickCancel = useCallback(() => history.goBack(), [history])
 
     const mapCategories = useCallback(() => joinCategoryNames(productState.categories), [productState.categories])
 

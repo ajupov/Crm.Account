@@ -4,7 +4,7 @@ import ProductAttributesFiltersState, {
 } from '../../../states/ProductAttributesFiltersState'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'
+import { FilterFormFieldProps } from '../../../../../../../components/common/forms/FilterForm/FilterForm'
 import ProductAttributesContext from '../../ProductAttributesContext/ProductAttributesContext'
 import { getAttributeTypesAsSelectOptions } from '../../../../../../../helpers/entityAttributeTypeHelper'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
@@ -104,12 +104,13 @@ const useProductAttributesFilters = (): ProductAttributesFiltersState => {
 
     const onHideMobile = useCallback(() => setIsShowMobile(false), [])
 
-    const fields: FilterFieldProps[] = useMemo(
+    const fields: FilterFormFieldProps[] = useMemo(
         () => [
             {
-                type: 'select',
+                type: 'dropdown',
+                multiple: true,
                 label: 'Тип',
-                values: types.map(x => x as number),
+                value: types.map(x => x as number),
                 options: getAttributeTypesAsSelectOptions(),
                 onChange: onChangeTypes
             },

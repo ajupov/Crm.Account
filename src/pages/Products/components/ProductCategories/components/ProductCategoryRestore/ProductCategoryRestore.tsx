@@ -1,7 +1,7 @@
 import React, { FC, useContext } from 'react'
 
 import ProductCategoriesActionsContext from '../../contexts/ProductCategoriesActionsContext/ProductCategoriesActionsContext'
-import Restore from '../../../../../../components/Restore/Restore'
+import RestoreModal from '../../../../../../components/common/modals/RestoreModal/RestoreModal'
 import useProductCategoryRestore from './hooks/useProductCategoryRestore'
 
 const ProductCategoryRestore: FC = () => {
@@ -9,7 +9,7 @@ const ProductCategoryRestore: FC = () => {
     const { onClickConfirm, onClickCancel } = useProductCategoryRestore()
 
     return (
-        <Restore
+        <RestoreModal
             isRestoring={state.isRestoring}
             title="Восстановление категории"
             content="Вы уверены, что хотите восстановить категорию?"

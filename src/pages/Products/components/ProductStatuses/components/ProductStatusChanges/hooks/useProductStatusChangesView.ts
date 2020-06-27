@@ -8,7 +8,7 @@ interface UseProductStatusViewReturn {
 const useProductStatusChangesView = (): UseProductStatusViewReturn => {
     const history = useHistory()
 
-    const onClickCancel = useCallback((): void => history.goBack(), [history])
+    const onClickCancel = useCallback(() => history.goBack(), [history])
 
     return { onClickCancel }
 }

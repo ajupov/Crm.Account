@@ -3,7 +3,7 @@ import { useCallback, useContext } from 'react'
 import ProductStatus from '../../../../../../../../api/products/models/ProductStatus'
 import ProductStatusesActionsContext from '../../../contexts/ProductStatusesActionsContext/ProductStatusesActionsContext'
 import { ProductStatusesRoutes } from '../../../routes/ProductStatusesRoutes'
-import { ViewDataProps } from '../../../../../../../components/View/View'
+import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { useHistory } from 'react-router'
 
 interface UseProductStatusViewReturn {
@@ -37,11 +37,11 @@ const useProductStatusView = (): UseProductStatusViewReturn => {
         [state]
     )
 
-    const onClickHistory = useCallback((id: string): void => history.push(`${ProductStatusesRoutes.Changes}/${id}`), [
+    const onClickHistory = useCallback((id: string) => history.push(`${ProductStatusesRoutes.Changes}/${id}`), [
         history
     ])
 
-    const onClickCancel = useCallback((): void => history.goBack(), [history])
+    const onClickCancel = useCallback(() => history.goBack(), [history])
 
     const map = useCallback(
         (status: ProductStatus): ViewDataProps[] => [

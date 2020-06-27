@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import Menu from '../../../../components/Menu/Menu'
+import Menu from '../../../../components/common/collections/Menu/Menu'
 import { ProductCategoriesRoutes } from '../ProductCategories/routes/ProductCategoriesRoutes'
 
 const ProductsMenu: FC = () => (

@@ -6,12 +6,12 @@ import {
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import AttributeType from '../../../../../../../../api/products/models/AttributeType'
-import { CreateFieldProps } from '../../../../../../../components/Create/Create'
+import { CreateFormFieldProps } from '../../../../../../../components/common/forms/CreateForm/CreateForm'
 import ProductAttributeContext from '../../../contexts/ProductAttributeContext/ProductAttributeContext'
 import { useHistory } from 'react-router'
 
 interface UseProductAttributeCreateReturn {
-    fields: CreateFieldProps[]
+    fields: CreateFormFieldProps[]
     isConfirmEnabled: boolean
     onClickConfirm: () => void
     onClickCancel: () => void
@@ -46,17 +46,17 @@ const useProductAttributeCreate = (): UseProductAttributeCreateReturn => {
         [state]
     )
 
-    const onClickConfirm = useCallback(async (): Promise<void> => {
+    const onClickConfirm = useCallback(async () => {
         await state.create()
         history.goBack()
     }, [state, history])
 
-    const onClickCancel = useCallback((): void => history.goBack(), [history])
+    const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const fields: CreateFieldProps[] = useMemo(
+    const fields: CreateFormFieldProps[] = useMemo(
         () => [
             {
-                type: 'select',
+                type: 'dropdown',
                 required: true,
                 label: 'Тип',
                 value: state.attribute.type,

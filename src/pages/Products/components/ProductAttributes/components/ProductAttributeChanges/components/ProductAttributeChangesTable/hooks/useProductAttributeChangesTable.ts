@@ -5,8 +5,8 @@ import { useCallback, useContext, useMemo } from 'react'
 import ProductAttribute from '../../../../../../../../../../api/products/models/ProductAttribute'
 import ProductAttributeChange from '../../../../../../../../../../api/products/models/ProductAttributeChange'
 import ProductAttributeChangesContext from '../../../../../contexts/ProductAttributeChangesContext/ProductAttributeChangesContext'
-import { TableBodyRowProps } from '../../../../../../../../../components/Table/TableBody'
-import { TableHeaderCellProps } from '../../../../../../../../../components/Table/TableHeader'
+import { TableBodyRowProps } from '../../../../../../../../../components/common/collections/Table/TableBody'
+import { TableHeaderCellProps } from '../../../../../../../../../components/common/collections/Table/TableHeader'
 import { getAttributeTypeName } from '../../../../../../../../../helpers/entityAttributeTypeHelper'
 import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
 import { toLocaleDateTime } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
@@ -36,8 +36,7 @@ const useProductAttributeChangesTable = (): UseProductAttributeChangesTableRetur
     }, [state])
 
     const onClickChangePage = useCallback(
-        (page: number): void =>
-            state.setRequest({ ...state.request, offset: calculateOffset(page, state.request.limit) }),
+        (page: number) => state.setRequest({ ...state.request, offset: calculateOffset(page, state.request.limit) }),
         [state]
     )
 

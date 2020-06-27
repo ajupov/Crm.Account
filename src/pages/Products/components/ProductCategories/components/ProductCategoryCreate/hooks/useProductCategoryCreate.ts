@@ -1,12 +1,12 @@
 import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { CreateFieldProps } from '../../../../../../../components/Create/Create'
+import { CreateFormFieldProps } from '../../../../../../../components/common/forms/CreateForm/CreateForm'
 import ProductCategoryContext from '../../../contexts/ProductCategoryContext/ProductCategoryContext'
 import { useHistory } from 'react-router'
 
 interface UseProductCategoryCreateReturn {
-    fields: CreateFieldProps[]
+    fields: CreateFormFieldProps[]
     isConfirmEnabled: boolean
     onClickConfirm: () => void
     onClickCancel: () => void
@@ -33,14 +33,14 @@ const useProductCategoryCreate = (): UseProductCategoryCreateReturn => {
         [state]
     )
 
-    const onClickConfirm = useCallback(async (): Promise<void> => {
+    const onClickConfirm = useCallback(async () => {
         await state.create()
         history.goBack()
     }, [state, history])
 
-    const onClickCancel = useCallback((): void => history.goBack(), [history])
+    const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const fields: CreateFieldProps[] = useMemo(
+    const fields: CreateFormFieldProps[] = useMemo(
         () => [
             {
                 type: 'text',

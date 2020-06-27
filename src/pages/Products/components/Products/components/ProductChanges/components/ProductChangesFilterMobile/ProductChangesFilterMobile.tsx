@@ -1,13 +1,13 @@
 import React, { FC, useContext } from 'react'
 
-import FilterMobile from '../../../../../../../../components/Filter/FilterMobile'
+import FilterMobileModal from '../../../../../../../../components/common/modals/FilterMobileModal/FilterMobileModal'
 import ProductChangesFiltersContext from '../../../../contexts/ProductChangesFiltersContext/ProductChangesFiltersContext'
 
 const ProductChangesFilterMobile: FC = () => {
     const state = useContext(ProductChangesFiltersContext)
 
     return (
-        <FilterMobile
+        <FilterMobileModal
             isShow={state.isShowMobile}
             onShow={state.onShowMobile}
             onHide={state.onHideMobile}

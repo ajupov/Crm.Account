@@ -1,6 +1,6 @@
 import AttributeType from '../../api/products/models/AttributeType'
 import { Dictionary } from '../utils/dictionary/dictionaryUtils'
-import { SelectOptionCreateFieldProps } from '../components/Create/Create'
+import { DropdownItemProps } from '../components/common/fields/Dropdown/Dropdown'
 
 // TODO: Move to l10n
 const AttributeTypeWithNames: Dictionary<string> = {
@@ -36,10 +36,8 @@ const AttributeTypeWithNames: Dictionary<string> = {
     64: 'Текстовые данные'
 }
 
-export function getAttributeTypesAsSelectOptions(): SelectOptionCreateFieldProps[] {
-    return Object.entries(AttributeTypeWithNames).map(
-        x => ({ value: x[0], text: x[1] } as SelectOptionCreateFieldProps)
-    )
+export function getAttributeTypesAsSelectOptions(): DropdownItemProps[] {
+    return Object.entries(AttributeTypeWithNames).map(x => ({ value: x[0], text: x[1] } as DropdownItemProps))
 }
 
 export function getAttributeTypeName(type?: AttributeType): string {

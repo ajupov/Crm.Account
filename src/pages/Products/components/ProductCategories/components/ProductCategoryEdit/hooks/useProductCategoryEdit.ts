@@ -1,13 +1,13 @@
 import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { EditFieldProps } from '../../../../../../../components/Edit/Edit'
+import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
 import { ProductCategoriesRoutes } from '../../../routes/ProductCategoriesRoutes'
 import ProductCategoryContext from '../../../contexts/ProductCategoryContext/ProductCategoryContext'
 import { useHistory } from 'react-router'
 
 interface UseProductCategoryEditReturn {
-    fields: EditFieldProps[]
+    fields: EditFormFieldProps[]
     isConfirmEnabled: boolean
     onClickHistory: (id: string) => void
     onClickConfirm: () => void
@@ -35,18 +35,18 @@ const useProductCategoryEdit = (): UseProductCategoryEditReturn => {
         [state]
     )
 
-    const onClickConfirm = useCallback(async (): Promise<void> => {
+    const onClickConfirm = useCallback(async () => {
         await state.update()
         history.goBack()
     }, [state, history])
 
-    const onClickCancel = useCallback((): void => history.goBack(), [history])
+    const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const onClickHistory = useCallback((id: string): void => history.push(`${ProductCategoriesRoutes.Changes}/${id}`), [
+    const onClickHistory = useCallback((id: string) => history.push(`${ProductCategoriesRoutes.Changes}/${id}`), [
         history
     ])
 
-    const fields: EditFieldProps[] = useMemo(
+    const fields: EditFormFieldProps[] = useMemo(
         () => [
             {
                 type: 'text',

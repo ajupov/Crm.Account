@@ -5,8 +5,8 @@ import { useCallback, useContext, useMemo } from 'react'
 import ProductAttribute from '../../../../../../../../api/products/models/ProductAttribute'
 import ProductAttributesContext from '../../../contexts/ProductAttributesContext/ProductAttributesContext'
 import { ProductAttributesRoutes } from '../../../routes/ProductAttributesRoutes'
-import { TableBodyRowProps } from '../../../../../../../components/Table/TableBody'
-import { TableHeaderCellProps } from '../../../../../../../components/Table/TableHeader'
+import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
+import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
 import { getAttributeTypeName } from '../../../../../../../helpers/entityAttributeTypeHelper'
 import { toLocaleDateTime } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { useHistory } from 'react-router'
@@ -66,8 +66,7 @@ const useProductAttributesTable = (): UseProductAttributesTableReturn => {
     )
 
     const onClickChangePage = useCallback(
-        (page: number): void =>
-            state.setRequest({ ...state.request, offset: calculateOffset(page, state.request.limit) }),
+        (page: number) => state.setRequest({ ...state.request, offset: calculateOffset(page, state.request.limit) }),
         [state]
     )
 

@@ -1,13 +1,13 @@
 import React, { FC } from 'react'
 
-import Create from '../../../../../../components/Create/Create'
+import CreateForm from '../../../../../../components/common/forms/CreateForm/CreateForm'
 import useProductAttributeCreate from './hooks/useProductAttributeCreate'
 
 const ProductAttributeCreateForm: FC = () => {
     const { isConfirmEnabled, fields, onClickConfirm, onClickCancel } = useProductAttributeCreate()
 
     return (
-        <Create
+        <CreateForm
             fields={fields}
             isConfirmEnabled={isConfirmEnabled}
             onClickConfirm={onClickConfirm}

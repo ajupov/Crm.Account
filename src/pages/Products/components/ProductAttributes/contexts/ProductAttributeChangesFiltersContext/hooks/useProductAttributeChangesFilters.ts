@@ -3,7 +3,7 @@ import ProductAttributeChangesFiltersState, {
 } from '../../../states/ProductAttributeChangesFiltersState'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { FilterFieldProps } from '../../../../../../../components/Filter/Filter'
+import { FilterFormFieldProps } from '../../../../../../../components/common/forms/FilterForm/FilterForm'
 import { InputOnChangeData } from 'semantic-ui-react'
 import ProductAttributeChangesContext from '../../ProductAttributeChangesContext/ProductAttributeChangesContext'
 
@@ -57,7 +57,7 @@ const useProductAttributeChangesFilters = (): ProductAttributeChangesFiltersStat
 
     const onHideMobile = useCallback(() => setIsShowMobile(false), [setIsShowMobile])
 
-    const fields: FilterFieldProps[] = useMemo(
+    const fields: FilterFormFieldProps[] = useMemo(
         () => [
             {
                 type: 'date',

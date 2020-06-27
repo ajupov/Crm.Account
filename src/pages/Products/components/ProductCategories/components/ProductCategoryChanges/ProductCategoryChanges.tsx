@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 
-import Page from '../../../../../../components/Page/Page'
+import Page from '../../../../../../components/common/grids/Page/Page'
 import ProductCategoryChangesContextProvider from '../../contexts/ProductCategoryChangesContext/ProductCategoryChangesContextProvider'
 import ProductCategoryChangesFilter from './components/ProductCategoryChangesFilter/ProductCategoryChangesFilter'
 import ProductCategoryChangesFiltersContextProvider from '../../contexts/ProductCategoryChangesFiltersContext/ProductCategoryChangesFiltersContextProvider'

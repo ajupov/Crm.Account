@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 
-import Page from '../../../../../../components/Page/Page'
+import Page from '../../../../../../components/common/grids/Page/Page'
 import ProductCategoryContextProvider from '../../contexts/ProductCategoryContext/ProductCategoryContextProvider'
 import ProductCategoryEditForm from './ProductCategoryEditForm'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
