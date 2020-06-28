@@ -43,6 +43,7 @@ const MobileSidebarMenu: FC<MobileSidebarMenuProps> = ({ onClickItem }) => {
             {renderItem('Календарь', '/calendar', 'calendar')}
             {renderItem('Задачи', '/activities', 'tasks')}
             {renderItem('Сделки', '/deals', 'handshake')}
+            {renderItem('Лиды', '/leads', 'filter')}
             {renderItem('Клиенты', '/clients', 'address book')}
             {renderItem('Продукты', '/products', 'list ol')}
             {renderItem('Настройки аккаунта', '/settings', 'user circle')}
