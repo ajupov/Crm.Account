@@ -1,4 +1,3 @@
-import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
 import ProductStatusesFiltersState, {
     productStatusesFiltersInitialState
 } from '../../../states/ProductStatusesFiltersState'
@@ -8,6 +7,7 @@ import { FilterFormFieldProps } from '../../../../../../../components/common/for
 import ProductStatusesContext from '../../ProductStatusesContext/ProductStatusesContext'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
 
+// TODO: Move to l10n
 const useProductStatusesFilters = (): ProductStatusesFiltersState => {
     const state = useContext(ProductStatusesContext)
     const [name, setName] = useState(state.request.name ?? '')
@@ -20,32 +20,32 @@ const useProductStatusesFilters = (): ProductStatusesFiltersState => {
     const [isResetEnabled, setIsResetEnabled] = useState(productStatusesFiltersInitialState.isResetEnabled)
     const [isShowMobile, setIsShowMobile] = useState(productStatusesFiltersInitialState.isShowMobile)
 
-    const onChangeName = useCallback((_, { value }: InputOnChangeData) => {
+    const onChangeName = useCallback((_, { value }) => {
         setName(value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMinCreateDate = useCallback((_, data: InputOnChangeData) => {
+    const onChangeMinCreateDate = useCallback((_, data) => {
         setMinCreateDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMaxCreateDate = useCallback((_, data: InputOnChangeData) => {
+    const onChangeMaxCreateDate = useCallback((_, data) => {
         setMaxCreateDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMinModifyDate = useCallback((_, data: InputOnChangeData) => {
+    const onChangeMinModifyDate = useCallback((_, data) => {
         setMinModifyDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMaxModifyDate = useCallback((_, data: InputOnChangeData) => {
+    const onChangeMaxModifyDate = useCallback((_, data) => {
         setMaxModifyDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeIsDeleted = useCallback((_, data: CheckboxProps) => {
+    const onChangeIsDeleted = useCallback((_, data) => {
         setIsDeleted(toBooleanNullable(data.value))
         setIsApplyEnabled(true)
     }, [])

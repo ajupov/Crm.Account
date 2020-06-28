@@ -15,6 +15,7 @@ interface UseProductStatusViewReturn {
     onClickCancel: () => void
 }
 
+// TODO: Move to l10n
 const useProductStatusView = (): UseProductStatusViewReturn => {
     const history = useHistory()
     const state = useContext(ProductStatusesActionsContext)

@@ -4,6 +4,7 @@ import ProductStatusesActionsContext from '../../contexts/ProductStatusesActions
 import RestoreModal from '../../../../../../components/common/modals/RestoreModal/RestoreModal'
 import useProductStatusRestore from './hooks/useProductStatusRestore'
 
+// TODO: Move to l10n
 const ProductStatusRestore: FC = () => {
     const state = useContext(ProductStatusesActionsContext)
     const { onClickConfirm, onClickCancel } = useProductStatusRestore()

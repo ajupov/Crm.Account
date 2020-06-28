@@ -8,7 +8,7 @@ import { useParams } from 'react-router'
 const productStatusesClient = new ProductStatusesClient(HttpClientFactoryInstance.Api)
 
 const useProductStatus = (): ProductStatusState => {
-    const { id } = useParams()
+    const { id }: { id: string } = useParams()
     const [isLoading, setIsLoading] = useState(productStatusInitialState.isLoading)
     const [status, setStatus] = useState(productStatusInitialState.status)
 

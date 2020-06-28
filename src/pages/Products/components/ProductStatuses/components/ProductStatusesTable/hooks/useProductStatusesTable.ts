@@ -7,6 +7,7 @@ import ProductStatusesContext from '../../../contexts/ProductStatusesContext/Pro
 import { ProductStatusesRoutes } from '../../../routes/ProductStatusesRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
+import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
 import { toLocaleDateTime } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { useHistory } from 'react-router'
 import useProductStatusView from '../../ProductStatusView/hooks/useProductStatusView'
@@ -20,6 +21,7 @@ interface UseProductStatusesTableReturn {
     onClickChangePage: (page: number) => void
 }
 
+// TODO: Move to l10n
 const useProductStatusesTable = (): UseProductStatusesTableReturn => {
     const history = useHistory()
     const state = useContext(ProductStatusesContext)
@@ -35,7 +37,7 @@ const useProductStatusesTable = (): UseProductStatusesTableReturn => {
             return
         }
 
-        const fileName = 'Статусы'
+        const fileName = getFileNameWithDateTime('Статусы')
         const headers = ['Идентификатор', 'Наименование', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...statuses])
 

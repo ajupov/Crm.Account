@@ -1,4 +1,3 @@
-import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { CreateFormFieldProps } from '../../../../../../../components/common/forms/CreateForm/CreateForm'
@@ -12,13 +11,14 @@ interface UseProductStatusCreateReturn {
     onClickCancel: () => void
 }
 
+// TODO: Move to l10n
 const useProductStatusCreate = (): UseProductStatusCreateReturn => {
     const history = useHistory()
     const state = useContext(ProductStatusContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeName = useCallback(
-        (_, data: InputOnChangeData) => {
+        (_, data) => {
             state.setStatus({ ...state.status, name: data.value })
             setIsConfirmEnabled(true)
         },
@@ -26,7 +26,7 @@ const useProductStatusCreate = (): UseProductStatusCreateReturn => {
     )
 
     const onChangeIsDeleted = useCallback(
-        (_, __: CheckboxProps) => {
+        (_, __) => {
             state.setStatus({ ...state.status, isDeleted: !state.status.isDeleted })
             setIsConfirmEnabled(true)
         },

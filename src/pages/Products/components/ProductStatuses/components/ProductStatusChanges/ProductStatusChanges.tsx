@@ -10,6 +10,7 @@ import ProductsStatusChangesFilterMobile from './components/ProductsStatusChange
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 import useProductStatusChangesView from './hooks/useProductStatusChangesView'
 
+// TODO: Move to l10n
 const ProductStatusChanges: FC = () => {
     const title = 'История изменений'
 
