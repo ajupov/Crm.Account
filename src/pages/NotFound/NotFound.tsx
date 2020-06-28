@@ -1,13 +1,14 @@
 import React, { FC, useEffect } from 'react'
 
-import NotFoundSegment from './NotFoundSegment'
+import NotFoundPage from '../../components/common/grids/NotFoundPage/NotFoundPage'
+import { setPageTitle } from '../../helpers/productNameHelper'
 
 const NotFound: FC = () => {
-    useEffect(() => {
-        document.title = '404'
-    })
+    const title = '404'
 
-    return <NotFoundSegment />
+    useEffect(() => setPageTitle(title), [])
+
+    return <NotFoundPage text="Такой страницы нет" />
 }
 
 export default NotFound
