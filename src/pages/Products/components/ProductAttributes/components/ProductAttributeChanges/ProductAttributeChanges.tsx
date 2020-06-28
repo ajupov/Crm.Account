@@ -10,6 +10,7 @@ import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 import useProductAttributeChangesView from './hooks/useProductAttributeChangesView'
 
+// TODO: Move to l10n
 const ProductAttributeChanges: FC = () => {
     const title = 'История изменений'
 

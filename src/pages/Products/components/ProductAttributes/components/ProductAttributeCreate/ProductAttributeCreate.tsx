@@ -6,6 +6,7 @@ import ProductAttributeCreateForm from './ProductAttributeCreateForm'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
+// TODO: Move to l10n
 const ProductAttributeCreate: FC = () => {
     const title = 'Добавление атрибута'
 

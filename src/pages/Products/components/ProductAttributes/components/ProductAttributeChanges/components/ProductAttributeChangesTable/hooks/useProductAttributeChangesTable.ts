@@ -8,6 +8,7 @@ import ProductAttributeChangesContext from '../../../../../contexts/ProductAttri
 import { TableBodyRowProps } from '../../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../../components/common/collections/Table/TableHeader'
 import { getAttributeTypeName } from '../../../../../../../../../helpers/entityAttributeTypeHelper'
+import { getFileNameWithDateTime } from '../../../../../../../../../helpers/fileNameHelper'
 import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
 import { toLocaleDateTime } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 
@@ -19,6 +20,7 @@ interface UseProductAttributeChangesTableReturn {
     onClickChangePage: (page: number) => void
 }
 
+// TODO: Move to l10n
 const useProductAttributeChangesTable = (): UseProductAttributeChangesTableReturn => {
     const state = useContext(ProductAttributeChangesContext)
 
@@ -28,7 +30,7 @@ const useProductAttributeChangesTable = (): UseProductAttributeChangesTableRetur
             return
         }
 
-        const fileName = 'История изменений'
+        const fileName = getFileNameWithDateTime('История изменений')
         const headers = ['Идентификатор', 'Дата и время', 'Старое значение', 'Новое значение']
         const csv = convertObjectToCSV([headers, ...changes])
 

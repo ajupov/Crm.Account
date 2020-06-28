@@ -13,6 +13,7 @@ import ProductsAttributesFilterMobile from './components/ProductsAttributesFilte
 import ProductsMenu from '../ProductsMenu/ProductsMenu'
 import { setPageTitle } from '../../../../helpers/productNameHelper'
 
+// TODO: Move to l10n
 const ProductAttributes: FC = () => {
     const title = 'Аттрибуты'
 

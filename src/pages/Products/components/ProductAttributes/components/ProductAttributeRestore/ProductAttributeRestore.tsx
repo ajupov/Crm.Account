@@ -4,6 +4,7 @@ import ProductAttributesActionsContext from '../../contexts/ProductAttributesAct
 import RestoreModal from '../../../../../../components/common/modals/RestoreModal/RestoreModal'
 import useProductAttributeRestore from './hooks/useProductAttributeRestore'
 
+// TODO: Move to l10n
 const ProductAttributeRestore: FC = () => {
     const state = useContext(ProductAttributesActionsContext)
     const { onClickConfirm, onClickCancel } = useProductAttributeRestore()

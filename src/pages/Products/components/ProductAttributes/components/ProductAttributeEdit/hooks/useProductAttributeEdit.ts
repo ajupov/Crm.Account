@@ -1,4 +1,3 @@
-import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import {
     getAttributeTypeName,
     getAttributeTypesAsSelectOptions
@@ -19,13 +18,14 @@ interface UseProductAttributeEditReturn {
     onClickCancel: () => void
 }
 
+// TODO: Move to l10n
 const useProductAttributeEdit = (): UseProductAttributeEditReturn => {
     const history = useHistory()
     const state = useContext(ProductAttributeContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeType = useCallback(
-        (_, data: DropdownProps) => {
+        (_, data) => {
             state.setAttribute({ ...state.attribute, type: data.value as AttributeType })
             setIsConfirmEnabled(true)
         },
@@ -33,7 +33,7 @@ const useProductAttributeEdit = (): UseProductAttributeEditReturn => {
     )
 
     const onChangeName = useCallback(
-        (_, data: InputOnChangeData) => {
+        (_, data) => {
             state.setAttribute({ ...state.attribute, key: data.value })
             setIsConfirmEnabled(true)
         },
@@ -41,7 +41,7 @@ const useProductAttributeEdit = (): UseProductAttributeEditReturn => {
     )
 
     const onChangeIsDeleted = useCallback(
-        (_, __: CheckboxProps) => {
+        (_, __) => {
             state.setAttribute({ ...state.attribute, isDeleted: !state.attribute.isDeleted })
             setIsConfirmEnabled(true)
         },

@@ -4,6 +4,7 @@ import DeleteModal from '../../../../../../components/common/modals/DeleteModal/
 import ProductAttributesActionsContext from '../../contexts/ProductAttributesActionsContext/ProductAttributesActionsContext'
 import useProductAttributeDelete from './hooks/useProductAttributeDelete'
 
+// TODO: Move to l10n
 const ProductAttributeDelete: FC = () => {
     const state = useContext(ProductAttributesActionsContext)
     const { onClickConfirm, onClickCancel } = useProductAttributeDelete()

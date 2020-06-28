@@ -8,6 +8,7 @@ import { ProductAttributesRoutes } from '../../../routes/ProductAttributesRoutes
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
 import { getAttributeTypeName } from '../../../../../../../helpers/entityAttributeTypeHelper'
+import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
 import { toLocaleDateTime } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { useHistory } from 'react-router'
 import useProductAttributeView from '../../ProductAttributeView/hooks/useProductAttributeView'
@@ -21,6 +22,7 @@ interface UseProductAttributesTableReturn {
     onClickChangePage: (page: number) => void
 }
 
+// TODO: Move to l10n
 const useProductAttributesTable = (): UseProductAttributesTableReturn => {
     const history = useHistory()
     const state = useContext(ProductAttributesContext)
@@ -36,7 +38,7 @@ const useProductAttributesTable = (): UseProductAttributesTableReturn => {
             return
         }
 
-        const fileName = 'Атрибуты'
+        const fileName = getFileNameWithDateTime('Атрибуты продуктов')
         const headers = ['Идентификатор', 'Тип', 'Наименование', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...attributes])
 

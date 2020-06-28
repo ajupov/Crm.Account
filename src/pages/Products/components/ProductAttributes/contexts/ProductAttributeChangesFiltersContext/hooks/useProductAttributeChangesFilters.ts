@@ -7,6 +7,7 @@ import { FilterFormFieldProps } from '../../../../../../../components/common/for
 import { InputOnChangeData } from 'semantic-ui-react'
 import ProductAttributeChangesContext from '../../ProductAttributeChangesContext/ProductAttributeChangesContext'
 
+// TODO: Move to l10n
 const useProductAttributeChangesFilters = (): ProductAttributeChangesFiltersState => {
     const state = useContext(ProductAttributeChangesContext)
     const [minCreateDate, setMinCreateDate] = useState('')

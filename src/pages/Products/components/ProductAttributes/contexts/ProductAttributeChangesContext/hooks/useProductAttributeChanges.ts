@@ -1,4 +1,6 @@
-import ProductAttributeChangesState, { productAttributeChangesInitialState } from '../../../states/ProductAttributeChangesState'
+import ProductAttributeChangesState, {
+    productAttributeChangesInitialState
+} from '../../../states/ProductAttributeChangesState'
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
@@ -10,7 +12,7 @@ const productAttributeChangesClient = new ProductAttributeChangesClient(HttpClie
 const useProductAttributeChanges = (): ProductAttributeChangesState => {
     const MaxLimit = 1048576
 
-    const { id } = useParams()
+    const { id }: { id: string } = useParams()
     const [request, setRequest] = useState(productAttributeChangesInitialState.request)
     const [isLoading, setIsLoading] = useState(productAttributeChangesInitialState.isLoading)
     const [changes, setChanges] = useState(productAttributeChangesInitialState.changes)
