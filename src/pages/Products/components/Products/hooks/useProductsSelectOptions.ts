@@ -27,6 +27,7 @@ interface UseProductsSelectOptionsReturn {
     getAllAttributes: () => DropdownItemProps[]
 }
 
+// TODO: Move to l10n
 const useProductsSelectOptions = (): UseProductsSelectOptionsReturn => {
     const MaxLimit = 1000
 

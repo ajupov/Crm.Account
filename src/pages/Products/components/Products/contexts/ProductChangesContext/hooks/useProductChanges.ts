@@ -10,7 +10,7 @@ const productChangesClient = new ProductChangesClient(HttpClientFactoryInstance.
 const useProductChanges = (): ProductChangesState => {
     const MaxLimit = 1048576
 
-    const { id } = useParams()
+    const { id }: { id: string } = useParams()
     const [request, setRequest] = useState(productChangesInitialState.request)
     const [isLoading, setIsLoading] = useState(productChangesInitialState.isLoading)
     const [changes, setChanges] = useState(productChangesInitialState.changes)

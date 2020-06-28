@@ -7,6 +7,7 @@ import ProductsContext from '../../../contexts/ProductsContext/ProductsContext'
 import { ProductsRoutes } from '../../../routes/ProductsRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
+import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
 import { toCurrency } from '../../../../../../../utils/currency/currencyUtils'
 import { toLocaleDateTime } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { useHistory } from 'react-router'
@@ -21,6 +22,7 @@ interface UseProductsTableReturn {
     onClickChangePage: (page: number) => void
 }
 
+// TODO: Move to l10n
 const useProductsTable = (): UseProductsTableReturn => {
     const history = useHistory()
     const state = useContext(ProductsContext)
@@ -36,7 +38,7 @@ const useProductsTable = (): UseProductsTableReturn => {
             return
         }
 
-        const fileName = 'Атрибуты'
+        const fileName = getFileNameWithDateTime('Атрибуты продукта')
         const headers = ['Идентификатор', 'Тип', 'Наименование', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...products])
 

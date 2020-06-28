@@ -1,4 +1,3 @@
-import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import { getProductTypeName, getProductTypesAsSelectOptions } from '../../../helpers/productTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
@@ -15,6 +14,7 @@ interface UseProductCreateReturn {
     onClickCancel: () => void
 }
 
+// TODO: Move to l10n
 const useProductCreate = (): UseProductCreateReturn => {
     const history = useHistory()
     const {
@@ -30,7 +30,7 @@ const useProductCreate = (): UseProductCreateReturn => {
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeParentProductId = useCallback(
-        (_, data: DropdownProps) => {
+        (_, data) => {
             state.setProduct({ ...state.product, parentProductId: data.value as string })
             setIsConfirmEnabled(true)
         },
@@ -38,7 +38,7 @@ const useProductCreate = (): UseProductCreateReturn => {
     )
 
     const onChangeType = useCallback(
-        (_, data: DropdownProps) => {
+        (_, data) => {
             state.setProduct({ ...state.product, type: data.value as ProductType })
             setIsConfirmEnabled(true)
         },
@@ -46,7 +46,7 @@ const useProductCreate = (): UseProductCreateReturn => {
     )
 
     const onChangeStatusId = useCallback(
-        (_, data: DropdownProps) => {
+        (_, data) => {
             state.setProduct({ ...state.product, statusId: data.value as string })
             setIsConfirmEnabled(true)
         },
@@ -54,7 +54,7 @@ const useProductCreate = (): UseProductCreateReturn => {
     )
 
     const onChangeCategoryIds = useCallback(
-        (_, { value }: DropdownProps) => {
+        (_, { value }) => {
             state.setProduct({
                 ...state.product,
                 categoryLinks: (value as string[]).map(x => ({
@@ -69,7 +69,7 @@ const useProductCreate = (): UseProductCreateReturn => {
     )
 
     const onChangeName = useCallback(
-        (_, data: InputOnChangeData) => {
+        (_, data) => {
             state.setProduct({ ...state.product, name: data.value })
             setIsConfirmEnabled(true)
         },
@@ -77,7 +77,7 @@ const useProductCreate = (): UseProductCreateReturn => {
     )
 
     const onChangeVendorCode = useCallback(
-        (_, data: InputOnChangeData) => {
+        (_, data) => {
             state.setProduct({ ...state.product, vendorCode: data.value })
             setIsConfirmEnabled(true)
         },
@@ -85,7 +85,7 @@ const useProductCreate = (): UseProductCreateReturn => {
     )
 
     const onChangePrice = useCallback(
-        (_, data: InputOnChangeData) => {
+        (_, data) => {
             state.setProduct({ ...state.product, price: (data.value as unknown) as number })
             setIsConfirmEnabled(true)
         },
@@ -148,7 +148,7 @@ const useProductCreate = (): UseProductCreateReturn => {
     }, [state])
 
     const onChangeIsHidden = useCallback(
-        (_, __: CheckboxProps) => {
+        (_, __) => {
             state.setProduct({ ...state.product, isHidden: !state.product.isHidden })
             setIsConfirmEnabled(true)
         },
@@ -156,7 +156,7 @@ const useProductCreate = (): UseProductCreateReturn => {
     )
 
     const onChangeIsDeleted = useCallback(
-        (_, __: CheckboxProps) => {
+        (_, __) => {
             state.setProduct({ ...state.product, isDeleted: !state.product.isDeleted })
             setIsConfirmEnabled(true)
         },

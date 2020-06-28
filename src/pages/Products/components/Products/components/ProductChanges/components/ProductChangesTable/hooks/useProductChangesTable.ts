@@ -9,6 +9,7 @@ import ProductChange from '../../../../../../../../../../api/products/models/Pro
 import ProductChangesContext from '../../../../../contexts/ProductChangesContext/ProductChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../../components/common/collections/Table/TableHeader'
+import { getFileNameWithDateTime } from '../../../../../../../../../helpers/fileNameHelper'
 import { getProductTypeName } from '../../../../../helpers/productTypeHelper'
 import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
 import { joinAttributes } from '../../../../../mappers/productAttributesMapper'
@@ -24,6 +25,7 @@ interface UseProductChangesTableReturn {
     onClickChangePage: (page: number) => void
 }
 
+// TODO: Move to l10n
 const useProductChangesTable = (): UseProductChangesTableReturn => {
     const state = useContext(ProductChangesContext)
 
@@ -33,7 +35,7 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
             return
         }
 
-        const fileName = 'История изменений'
+        const fileName = getFileNameWithDateTime('История изменений продукта')
         const headers = ['Идентификатор', 'Дата и время', 'Старое значение', 'Новое значение']
         const csv = convertObjectToCSV([headers, ...changes])
 

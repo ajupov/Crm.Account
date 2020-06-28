@@ -14,7 +14,7 @@ const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryIns
 const productAttributesClient = new ProductAttributesClient(HttpClientFactoryInstance.Api)
 
 const useProduct = (): ProductState => {
-    const { id } = useParams()
+    const { id }: { id: string } = useParams()
     const [isLoading, setIsLoading] = useState(productInitialState.isLoading)
     const [product, setProduct] = useState(productInitialState.product)
     const [categories, setCategories] = useState(productCategoriesInitialState.categories)

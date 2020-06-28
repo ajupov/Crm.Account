@@ -13,6 +13,7 @@ import ProductsMenu from '../ProductsMenu/ProductsMenu'
 import ProductsTable from './components/ProductsTable/ProductsTable'
 import { setPageTitle } from '../../../../helpers/productNameHelper'
 
+// TODO: Move to l10n
 const Products: FC = () => {
     const title = 'Продукты'
 

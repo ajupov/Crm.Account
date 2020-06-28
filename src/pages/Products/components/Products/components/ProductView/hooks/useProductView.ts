@@ -20,6 +20,7 @@ interface UseProductViewReturn {
     onClickCancel: () => void
 }
 
+// TODO: Move to l10n
 const useProductView = (): UseProductViewReturn => {
     const history = useHistory()
     const { getAllProducts } = useProductsSelectOptions()

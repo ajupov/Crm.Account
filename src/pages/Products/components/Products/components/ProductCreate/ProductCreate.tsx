@@ -6,6 +6,7 @@ import ProductCreateForm from './ProductCreateForm'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
+// TODO: Move to l10n
 const ProductCreate: FC = () => {
     const title = 'Добавление продукта'
 

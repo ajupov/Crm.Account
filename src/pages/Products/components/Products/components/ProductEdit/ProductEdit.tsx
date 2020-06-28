@@ -6,6 +6,7 @@ import ProductEditForm from './ProductEditForm'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
+// TODO: Move to l10n
 const ProductEdit: FC = () => {
     const title = 'Изменение продукта'
 

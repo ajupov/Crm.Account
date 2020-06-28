@@ -2,6 +2,7 @@ import { Dictionary } from '../../../../../utils/dictionary/dictionaryUtils'
 import { DropdownItemProps } from '../../../../../components/common/fields/Dropdown/Dropdown'
 import ProductType from '../../../../../../api/products/models/ProductType'
 
+// TODO: Move to l10n
 const ProductTypeWithNames: Dictionary<string> = {
     1: 'Товары',
     2: 'Услуги'

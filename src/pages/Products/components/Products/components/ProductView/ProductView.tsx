@@ -9,6 +9,7 @@ import ProductsActionsContextProvider from '../../contexts/ProductsActionsContex
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
+// TODO: Move to l10n
 const ProductView: FC = () => {
     const title = 'Просмотр продукта'
 
