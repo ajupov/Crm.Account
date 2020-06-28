@@ -6,6 +6,7 @@ import ProductCategoryCreateForm from './ProductCategoryCreateForm'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
+// TODO: Move to l10n
 const ProductCategoryCreate: FC = () => {
     const title = 'Добавление категории'
 

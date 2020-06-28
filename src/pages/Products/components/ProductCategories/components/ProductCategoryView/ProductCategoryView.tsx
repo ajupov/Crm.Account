@@ -9,6 +9,7 @@ import ProductCategoryViewForm from './ProductCategoryViewForm'
 import ProductsMenu from '../../../ProductsMenu/ProductsMenu'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
+// TODO: Move to l10n
 const ProductCategoryView: FC = () => {
     const title = 'Просмотр категории'
 

@@ -1,4 +1,3 @@
-import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
@@ -14,13 +13,14 @@ interface UseProductCategoryEditReturn {
     onClickCancel: () => void
 }
 
+// TODO: Move to l10n
 const useProductCategoryEdit = (): UseProductCategoryEditReturn => {
     const history = useHistory()
     const state = useContext(ProductCategoryContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeName = useCallback(
-        (_, data: InputOnChangeData) => {
+        (_, data) => {
             state.setCategory({ ...state.category, name: data.value })
             setIsConfirmEnabled(true)
         },
@@ -28,7 +28,7 @@ const useProductCategoryEdit = (): UseProductCategoryEditReturn => {
     )
 
     const onChangeIsDeleted = useCallback(
-        (_, __: CheckboxProps) => {
+        (_, __) => {
             state.setCategory({ ...state.category, isDeleted: !state.category.isDeleted })
             setIsConfirmEnabled(true)
         },

@@ -12,7 +12,7 @@ const productCategoryChangesClient = new ProductCategoryChangesClient(HttpClient
 const useProductCategoryChanges = (): ProductCategoryChangesState => {
     const MaxLimit = 1048576
 
-    const { id } = useParams()
+    const { id }: { id: string } = useParams()
     const [request, setRequest] = useState(productCategoryChangesInitialState.request)
     const [isLoading, setIsLoading] = useState(productCategoryChangesInitialState.isLoading)
     const [changes, setChanges] = useState(productCategoryChangesInitialState.changes)

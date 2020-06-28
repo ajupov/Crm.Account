@@ -7,6 +7,7 @@ import { ProductCategoriesRoutes } from '../../../routes/ProductCategoriesRoutes
 import ProductCategory from '../../../../../../../../api/products/models/ProductCategory'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
+import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
 import { toLocaleDateTime } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { useHistory } from 'react-router'
 import useProductCategoryView from '../../ProductCategoryView/hooks/useProductCategoryView'
@@ -20,6 +21,7 @@ interface UseProductCategoriesTableReturn {
     onClickChangePage: (page: number) => void
 }
 
+// TODO: Move to l10n
 const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
     const history = useHistory()
     const state = useContext(ProductCategoriesContext)
@@ -35,7 +37,7 @@ const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
             return
         }
 
-        const fileName = 'Категории'
+        const fileName = getFileNameWithDateTime('Категории продукта')
         const headers = ['Идентификатор', 'Наименование', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...categories])
 

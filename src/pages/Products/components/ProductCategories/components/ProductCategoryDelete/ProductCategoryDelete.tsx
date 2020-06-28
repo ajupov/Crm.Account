@@ -4,6 +4,7 @@ import DeleteModal from '../../../../../../components/common/modals/DeleteModal/
 import ProductCategoriesActionsContext from '../../contexts/ProductCategoriesActionsContext/ProductCategoriesActionsContext'
 import useProductCategoryDelete from './hooks/useProductCategoryDelete'
 
+// TODO: Move to l10n
 const ProductCategoryDelete: FC = () => {
     const state = useContext(ProductCategoriesActionsContext)
     const { onClickConfirm, onClickCancel } = useProductCategoryDelete()
