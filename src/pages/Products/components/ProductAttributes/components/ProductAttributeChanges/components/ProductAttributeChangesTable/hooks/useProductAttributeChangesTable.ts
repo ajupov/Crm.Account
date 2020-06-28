@@ -30,7 +30,7 @@ const useProductAttributeChangesTable = (): UseProductAttributeChangesTableRetur
             return
         }
 
-        const fileName = getFileNameWithDateTime('История изменений')
+        const fileName = getFileNameWithDateTime('История изменений атрибутов продукта')
         const headers = ['Идентификатор', 'Дата и время', 'Старое значение', 'Новое значение']
         const csv = convertObjectToCSV([headers, ...changes])
 

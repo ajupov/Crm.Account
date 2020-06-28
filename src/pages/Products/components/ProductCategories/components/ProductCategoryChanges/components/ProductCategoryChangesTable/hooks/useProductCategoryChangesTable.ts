@@ -29,7 +29,7 @@ const useProductCategoryChangesTable = (): UseProductCategoryChangesTableReturn 
             return
         }
 
-        const fileName = getFileNameWithDateTime('История изменений категории продукта')
+        const fileName = getFileNameWithDateTime('История изменений категорий продукта')
         const headers = ['Идентификатор', 'Дата и время', 'Старое значение', 'Новое значение']
         const csv = convertObjectToCSV([headers, ...changes])
 

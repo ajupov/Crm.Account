@@ -29,7 +29,7 @@ const useProductStatusChangesTable = (): UseProductStatusChangesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('История изменений')
+        const fileName = getFileNameWithDateTime('История изменений статусов продукта')
         const headers = ['Идентификатор', 'Дата и время', 'Старое значение', 'Новое значение']
         const csv = convertObjectToCSV([headers, ...changes])
 
