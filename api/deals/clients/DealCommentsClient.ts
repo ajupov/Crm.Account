@@ -1,8 +1,7 @@
-/* eslint-disable */
-import IHttpClientFactory from '../../IHttpClientFactory'
+import DealComment from '../models/DealComment'
 import DealCommentGetPagedListRequest from '../models/DealCommentGetPagedListRequest'
 import DealCommentGetPagedListResponse from '../models/DealCommentGetPagedListResponse'
-import DealComment from '../models/DealComment'
+import IHttpClientFactory from '../../IHttpClientFactory'
 
 export default class DealCommentsClient {
     private readonly httpClientFactory: IHttpClientFactory

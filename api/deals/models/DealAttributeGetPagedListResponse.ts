@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import DealAttribute from '../models/DealAttribute'
 
 export default interface DealAttributeGetPagedListResponse {

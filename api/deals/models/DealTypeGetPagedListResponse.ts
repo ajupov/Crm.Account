@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import DealType from '../models/DealType'
 
 export default interface DealTypeGetPagedListResponse {

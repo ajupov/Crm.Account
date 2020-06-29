@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface DealGetPagedListRequest {
     name?: string
     minStartDateTime?: string

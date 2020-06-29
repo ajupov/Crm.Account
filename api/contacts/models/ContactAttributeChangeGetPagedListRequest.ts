@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface ContactAttributeChangeGetPagedListRequest {
     attributeId: string
     minCreateDate?: string

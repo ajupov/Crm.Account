@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface ActivityTypeGetPagedListRequestParameter {
     accountId?: string
     name?: string

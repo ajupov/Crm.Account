@@ -1,7 +1,7 @@
-import AttributeType from '../models/AttributeType'
+import ProductAttributeType from './ProductAttributeType'
 
 export default interface ProductAttributeGetPagedListRequest {
-    types?: AttributeType[]
+    types?: ProductAttributeType[]
     key?: string
     isDeleted?: boolean
     minCreateDate?: string

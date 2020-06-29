@@ -1,9 +1,8 @@
-/* eslint-disable */
 export default interface LeadSourceChange {
-    id: string
-    changerUserId: string
-    sourceId: string
-    createDateTime: string
+    id?: string
+    changerUserId?: string
+    sourceId?: string
+    createDateTime?: string
     oldValueJson?: string
     newValueJson?: string
 }

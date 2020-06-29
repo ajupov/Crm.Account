@@ -1,4 +1,3 @@
-/* eslint-disable */
 enum CompanyType {
     SelfEmployed = 1,
     Commercial = 2,

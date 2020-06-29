@@ -1,7 +1,5 @@
-/* eslint-disable */
-
-import CompanyType from '../models/CompanyType'
 import CompanyIndustryType from '../models/CompanyIndustryType'
+import CompanyType from '../models/CompanyType'
 
 export default interface CompanyGetPagedListRequest {
     leadId?: string

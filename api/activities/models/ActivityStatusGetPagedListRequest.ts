@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface ActivityStatusGetPagedListRequest {
     name?: string
     isFinish?: boolean

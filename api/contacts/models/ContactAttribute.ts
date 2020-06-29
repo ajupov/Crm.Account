@@ -1,13 +1,11 @@
-/* eslint-disable */
-
-import AttributeType from '../models/AttributeType'
+import ContactAttributeType from '../models/ContactAttributeType'
 
 export default interface ContactAttribute {
-    id: string
-    accountId: string
-    type: AttributeType
+    id?: string
+    accountId?: string
+    type: ContactAttributeType
     key?: string
     isDeleted: boolean
-    createDateTime: string
+    createDateTime?: string
     modifyDateTime?: string
 }

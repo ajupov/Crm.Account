@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import ActivityType from '../models/ActivityType'
 
 export default interface ActivityTypeGetPagedListResponse {

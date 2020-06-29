@@ -1,4 +1,3 @@
-/* eslint-disable */
 enum ActivityPriority {
     Low = 1,
     Medium = 2,

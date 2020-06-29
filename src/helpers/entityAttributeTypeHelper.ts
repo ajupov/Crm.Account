@@ -1,6 +1,6 @@
-import AttributeType from '../../api/products/models/AttributeType'
 import { Dictionary } from '../utils/dictionary/dictionaryUtils'
 import { DropdownItemProps } from '../components/common/fields/Dropdown/Dropdown'
+import ProductAttributeType from '../../api/products/models/ProductAttributeType'
 
 // TODO: Move to l10n
 const AttributeTypeWithNames: Dictionary<string> = {
@@ -40,6 +40,6 @@ export function getAttributeTypesAsSelectOptions(): DropdownItemProps[] {
     return Object.entries(AttributeTypeWithNames).map(x => ({ value: x[0], text: x[1] } as DropdownItemProps))
 }
 
-export function getAttributeTypeName(type?: AttributeType): string {
+export function getAttributeTypeName(type?: ProductAttributeType): string {
     return type ? AttributeTypeWithNames[type] : ''
 }

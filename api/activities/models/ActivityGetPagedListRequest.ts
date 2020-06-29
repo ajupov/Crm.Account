@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import ActivityPriority from '../models/ActivityPriority'
 
 export default interface ActivityGetPagedListRequest {

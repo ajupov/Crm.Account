@@ -1,8 +1,7 @@
-/* eslint-disable */
-import IHttpClientFactory from '../../IHttpClientFactory'
 import Contact from '../models/Contact'
 import ContactGetPagedListRequest from '../models/ContactGetPagedListRequest'
 import ContactGetPagedListResponse from '../models/ContactGetPagedListResponse'
+import IHttpClientFactory from '../../IHttpClientFactory'
 
 export default class ContactsClient {
     private readonly httpClientFactory: IHttpClientFactory

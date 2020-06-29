@@ -1,7 +1,6 @@
-/* eslint-disable */
 export default interface CompanyBankAccount {
-    id: string
-    companyId: string
+    id?: string
+    companyId?: string
     number?: string
     bankNumber?: string
     bankCorrespondentNumber?: string

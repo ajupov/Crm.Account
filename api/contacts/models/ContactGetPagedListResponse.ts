@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import Contact from '../models/Contact'
 
 export default interface ContactGetPagedListResponse {

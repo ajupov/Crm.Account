@@ -1,13 +1,11 @@
-/* eslint-disable */
-
-import AttributeType from '../models/AttributeType'
+import DealAttributeType from './DealAttributeType'
 
 export default interface DealAttribute {
-    id: string
-    accountId: string
-    type: AttributeType
+    id?: string
+    accountId?: string
+    type: DealAttributeType
     key?: string
     isDeleted: boolean
-    createDateTime: string
+    createDateTime?: string
     modifyDateTime?: string
 }

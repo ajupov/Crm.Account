@@ -1,13 +1,11 @@
-/* eslint-disable */
-
-import AttributeType from '../models/AttributeType'
+import ActivityAttributeType from './ActivityAttributeType'
 
 export default interface ActivityAttribute {
-    id: string
-    accountId: string
-    type: AttributeType
+    id?: string
+    accountId?: string
+    type: ActivityAttributeType
     key?: string
     isDeleted: boolean
-    createDateTime: string
+    createDateTime?: string
     modifyDateTime?: string
 }

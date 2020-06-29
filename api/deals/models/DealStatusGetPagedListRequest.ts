@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface DealStatusGetPagedListRequest {
     name?: string
     isFinish?: boolean

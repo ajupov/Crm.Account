@@ -1,8 +1,7 @@
-/* eslint-disable */
-import IHttpClientFactory from '../../IHttpClientFactory'
 import Company from '../models/Company'
 import CompanyGetPagedListRequest from '../models/CompanyGetPagedListRequest'
 import CompanyGetPagedListResponse from '../models/CompanyGetPagedListResponse'
+import IHttpClientFactory from '../../IHttpClientFactory'
 
 export default class CompaniesClient {
     private readonly httpClientFactory: IHttpClientFactory

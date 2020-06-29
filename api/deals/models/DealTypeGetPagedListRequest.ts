@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface DealTypeGetPagedListRequest {
     name?: string
     isDeleted?: boolean

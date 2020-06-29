@@ -1,7 +1,6 @@
-/* eslint-disable */
 export default interface LeadAttributeLink {
-    id: string
-    leadId: string
-    leadAttributeId: string
+    id?: string
+    leadId?: string
+    leadAttributeId?: string
     value?: string
 }

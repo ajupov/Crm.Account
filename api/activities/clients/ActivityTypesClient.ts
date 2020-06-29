@@ -1,8 +1,7 @@
-/* eslint-disable */
-import IHttpClientFactory from '../../IHttpClientFactory'
 import ActivityType from '../models/ActivityType'
 import ActivityTypeGetPagedListRequest from '../models/ActivityTypeGetPagedListRequest'
 import ActivityTypeGetPagedListResponse from '../models/ActivityTypeGetPagedListResponse'
+import IHttpClientFactory from '../../IHttpClientFactory'
 
 export default class ActivityTypesClient {
     private readonly httpClientFactory: IHttpClientFactory

@@ -1,13 +1,11 @@
-/* eslint-disable */
-
-import AttributeType from '../models/AttributeType'
+import CompanyAttributeType from '../models/CompanyAttributeType'
 
 export default interface CompanyAttribute {
-    id: string
-    accountId: string
-    type: AttributeType
+    id?: string
+    accountId?: string
+    type: CompanyAttributeType
     key?: string
     isDeleted: boolean
-    createDateTime: string
+    createDateTime?: string
     modifyDateTime?: string
 }

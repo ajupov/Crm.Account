@@ -1,7 +1,6 @@
-/* eslint-disable */
 export default interface CompanyAttributeLink {
-    id: string
-    companyId: string
-    companyAttributeId: string
+    id?: string
+    companyId?: string
+    companyAttributeId?: string
     value?: string
 }

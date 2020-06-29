@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import ActivityStatus from '../models/ActivityStatus'
 
 export default interface ActivityStatusGetPagedListResponse {

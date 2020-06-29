@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import Company from '../models/Company'
 
 export default interface CompanyGetPagedListResponse {

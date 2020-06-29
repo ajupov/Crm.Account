@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface ActivityTypeGetPagedListRequest {
     name?: string
     isDeleted?: boolean

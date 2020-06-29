@@ -1,9 +1,7 @@
-/* eslint-disable */
-
-import AttributeType from '../models/AttributeType'
+import CompanyAttributeType from '../models/CompanyAttributeType'
 
 export default interface CompanyAttributeGetPagedListRequest {
-    types?: AttributeType[]
+    types?: CompanyAttributeType[]
     key?: string
     isDeleted?: boolean
     minCreateDate?: string

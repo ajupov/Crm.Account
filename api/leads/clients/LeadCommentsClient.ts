@@ -1,8 +1,7 @@
-/* eslint-disable */
 import IHttpClientFactory from '../../IHttpClientFactory'
+import LeadComment from '../models/LeadComment'
 import LeadCommentGetPagedListRequest from '../models/LeadCommentGetPagedListRequest'
 import LeadCommentGetPagedListResponse from '../models/LeadCommentGetPagedListResponse'
-import LeadComment from '../models/LeadComment'
 
 export default class LeadCommentsClient {
     private readonly httpClientFactory: IHttpClientFactory

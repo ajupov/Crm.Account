@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface ContactGetPagedListRequest {
     surname?: string
     name?: string

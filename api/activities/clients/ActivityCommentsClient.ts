@@ -1,8 +1,7 @@
-/* eslint-disable */
-import IHttpClientFactory from '../../IHttpClientFactory'
+import ActivityComment from '../models/ActivityComment'
 import ActivityCommentGetPagedListRequest from '../models/ActivityCommentGetPagedListRequest'
 import ActivityCommentGetPagedListResponse from '../models/ActivityCommentGetPagedListResponse'
-import ActivityComment from '../models/ActivityComment'
+import IHttpClientFactory from '../../IHttpClientFactory'
 
 export default class ActivityCommentsClient {
     private readonly httpClientFactory: IHttpClientFactory

@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface ActivityChangeGetPagedListRequest {
     activityId: string
     minCreateDate?: string

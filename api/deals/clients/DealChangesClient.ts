@@ -1,7 +1,6 @@
-/* eslint-disable */
-import IHttpClientFactory from '../../IHttpClientFactory'
 import DealChangeGetPagedListRequest from '../models/DealChangeGetPagedListRequest'
 import DealChangeGetPagedListResponse from '../models/DealChangeGetPagedListResponse'
+import IHttpClientFactory from '../../IHttpClientFactory'
 
 export default class DealChangesClient {
     private readonly httpClientFactory: IHttpClientFactory

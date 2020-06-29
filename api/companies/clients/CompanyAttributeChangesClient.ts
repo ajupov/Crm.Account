@@ -1,7 +1,6 @@
-/* eslint-disable */
-import IHttpClientFactory from '../../IHttpClientFactory'
 import CompanyAttributeChangeGetPagedListRequest from '../models/CompanyAttributeChangeGetPagedListRequest'
 import CompanyAttributeChangeGetPagedListResponse from '../models/CompanyAttributeChangeGetPagedListResponse'
+import IHttpClientFactory from '../../IHttpClientFactory'
 
 export default class CompanyAttributeChangesClient {
     private readonly httpClientFactory: IHttpClientFactory

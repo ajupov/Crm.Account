@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import LeadAttributeChange from '../models/LeadAttributeChange'
 
 export default interface LeadAttributeChangeGetPagedListResponse {

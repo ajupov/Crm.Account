@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface LeadChangeGetPagedListRequest {
     leadId: string
     minCreateDate?: string

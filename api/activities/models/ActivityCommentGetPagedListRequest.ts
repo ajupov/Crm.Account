@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface ActivityCommentGetPagedListRequest {
     activityId: string
     value?: string

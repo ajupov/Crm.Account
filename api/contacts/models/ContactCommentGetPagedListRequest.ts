@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface ContactCommentGetPagedListRequest {
     contactId: string
     value?: string

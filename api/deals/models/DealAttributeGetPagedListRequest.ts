@@ -1,9 +1,7 @@
-/* eslint-disable */
-
-import AttributeType from '../models/AttributeType'
+import DealAttributeType from './DealAttributeType'
 
 export default interface DealAttributeGetPagedListRequest {
-    types?: AttributeType[]
+    types?: DealAttributeType[]
     key?: string
     isDeleted?: boolean
     minCreateDate?: string

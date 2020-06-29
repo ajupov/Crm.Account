@@ -1,4 +1,3 @@
-/* eslint-disable */
 import IHttpClientFactory from '../../IHttpClientFactory'
 
 export default class AuthClient {

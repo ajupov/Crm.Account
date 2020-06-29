@@ -1,4 +1,3 @@
-/* eslint-disable */
 import IHttpClientFactory from '../../IHttpClientFactory'
 import ProductCategory from '../models/ProductCategory'
 import ProductCategoryGetPagedListRequest from '../models/ProductCategoryGetPagedListRequest'

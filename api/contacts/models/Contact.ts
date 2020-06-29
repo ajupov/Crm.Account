@@ -1,12 +1,10 @@
-/* eslint-disable */
-
-import ContactBankAccount from '../models/ContactBankAccount'
 import ContactAttributeLink from '../models/ContactAttributeLink'
+import ContactBankAccount from '../models/ContactBankAccount'
 
 export default interface Contact {
-    id: string
-    accountId: string
-    leadId: string
+    id?: string
+    accountId?: string
+    leadId?: string
     companyId?: string
     createUserId: string
     responsibleUserId?: string
@@ -28,7 +26,7 @@ export default interface Contact {
     birthDate?: string
     photo?: string
     isDeleted: boolean
-    createDateTime: string
+    createDateTime?: string
     modifyDateTime?: string
     bankAccounts?: ContactBankAccount[]
     attributeLinks?: ContactAttributeLink[]

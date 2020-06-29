@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface DealCommentGetPagedListRequest {
     dealId: string
     value?: string

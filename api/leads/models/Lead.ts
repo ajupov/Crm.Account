@@ -1,13 +1,11 @@
-/* eslint-disable */
-
-import LeadSource from '../models/LeadSource'
 import LeadAttributeLink from '../models/LeadAttributeLink'
+import LeadSource from '../models/LeadSource'
 
 export default interface Lead {
-    id: string
-    accountId: string
-    sourceId: string
-    createUserId: string
+    id?: string
+    accountId?: string
+    sourceId?: string
+    createUserId?: string
     responsibleUserId?: string
     surname?: string
     name?: string
@@ -26,8 +24,8 @@ export default interface Lead {
     apartment?: string
     opportunitySum: number
     isDeleted: boolean
-    createDateTime: string
+    createDateTime?: string
     modifyDateTime?: string
-    source: LeadSource
+    source?: LeadSource
     attributeLinks?: LeadAttributeLink[]
 }

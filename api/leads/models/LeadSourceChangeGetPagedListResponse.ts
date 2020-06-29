@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import LeadSourceChange from '../models/LeadSourceChange'
 
 export default interface LeadSourceChangeGetPagedListResponse {

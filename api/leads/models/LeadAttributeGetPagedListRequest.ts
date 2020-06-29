@@ -1,9 +1,7 @@
-/* eslint-disable */
-
-import AttributeType from '../models/AttributeType'
+import LeadAttributeType from '../models/LeadAttributeType'
 
 export default interface LeadAttributeGetPagedListRequest {
-    types?: AttributeType[]
+    types?: LeadAttributeType[]
     key?: string
     isDeleted?: boolean
     minCreateDate?: string

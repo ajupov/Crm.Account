@@ -1,10 +1,9 @@
-/* eslint-disable */
 export default interface ActivityStatus {
-    id: string
-    accountId: string
+    id?: string
+    accountId?: string
     name?: string
     isFinish: boolean
     isDeleted: boolean
-    createDateTime: string
+    createDateTime?: string
     modifyDateTime?: string
 }

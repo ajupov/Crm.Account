@@ -1,9 +1,7 @@
-/* eslint-disable */
-
-import AttributeType from '../models/AttributeType'
+import ActivityAttributeType from './ActivityAttributeType'
 
 export default interface ActivityAttributeGetPagedListRequest {
-    types?: AttributeType[]
+    types?: ActivityAttributeType[]
     key?: string
     isDeleted?: boolean
     minCreateDate?: string

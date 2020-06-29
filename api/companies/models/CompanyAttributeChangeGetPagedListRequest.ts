@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface CompanyAttributeChangeGetPagedListRequest {
     attributeId: string
     minCreateDate?: string

@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface LeadSourceGetPagedListRequest {
     name?: string
     isDeleted?: boolean

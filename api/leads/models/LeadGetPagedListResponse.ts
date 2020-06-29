@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import Lead from '../models/Lead'
 
 export default interface LeadGetPagedListResponse {

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import IHttpClientFactory from '../../IHttpClientFactory'
 import Lead from '../models/Lead'
 import LeadGetPagedListRequest from '../models/LeadGetPagedListRequest'

@@ -1,4 +1,3 @@
-/* eslint-disable */
 enum CompanyIndustryType {
     Transport = 1,
     Computer = 2,

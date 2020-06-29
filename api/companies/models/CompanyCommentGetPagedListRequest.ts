@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface CompanyCommentGetPagedListRequest {
     companyId: string
     value?: string

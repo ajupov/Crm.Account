@@ -1,15 +1,13 @@
-/* eslint-disable */
-
-import CompanyType from '../models/CompanyType'
-import CompanyIndustryType from '../models/CompanyIndustryType'
-import CompanyBankAccount from '../models/CompanyBankAccount'
 import CompanyAttributeLink from '../models/CompanyAttributeLink'
+import CompanyBankAccount from '../models/CompanyBankAccount'
+import CompanyIndustryType from '../models/CompanyIndustryType'
+import CompanyType from '../models/CompanyType'
 
 export default interface Company {
-    id: string
-    accountId: string
-    leadId: string
-    createUserId: string
+    id?: string
+    accountId?: string
+    leadId?: string
+    createUserId?: string
     responsibleUserId?: string
     type: CompanyType
     industryType: CompanyIndustryType
@@ -39,7 +37,7 @@ export default interface Company {
     legalHouse?: string
     legalApartment?: string
     isDeleted: boolean
-    createDateTime: string
+    createDateTime?: string
     modifyDateTime?: string
     bankAccounts?: CompanyBankAccount[]
     attributeLinks?: CompanyAttributeLink[]

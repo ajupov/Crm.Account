@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface DealAttributeChangeGetPagedListRequest {
     attributeId: string
     minCreateDate?: string

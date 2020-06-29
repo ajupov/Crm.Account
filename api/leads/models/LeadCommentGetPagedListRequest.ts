@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface LeadCommentGetPagedListRequest {
     leadId: string
     value?: string

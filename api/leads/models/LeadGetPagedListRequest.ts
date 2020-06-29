@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default interface LeadGetPagedListRequest {
     surname?: string
     name?: string

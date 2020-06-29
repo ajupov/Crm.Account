@@ -1,13 +1,11 @@
-/* eslint-disable */
-
-import AttributeType from '../models/AttributeType'
+import LeadAttributeType from '../models/LeadAttributeType'
 
 export default interface LeadAttribute {
-    id: string
-    accountId: string
-    type: AttributeType
+    id?: string
+    accountId?: string
+    type: LeadAttributeType
     key?: string
     isDeleted: boolean
-    createDateTime: string
+    createDateTime?: string
     modifyDateTime?: string
 }

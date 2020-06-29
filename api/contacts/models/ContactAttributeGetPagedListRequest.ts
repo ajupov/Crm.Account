@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import AttributeType from '../models/AttributeType'
 
 export default interface ContactAttributeGetPagedListRequest {
