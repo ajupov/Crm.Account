@@ -4,7 +4,7 @@ import ProductAttributeType from '../../../../../../api/products/models/ProductA
 export interface ProductAttributeState {
     isLoading: boolean
     attribute: ProductAttribute
-    setAttribute: (Attribute: ProductAttribute) => void
+    setAttribute: (attribute: ProductAttribute) => void
     create: () => Promise<void>
     update: () => Promise<void>
 }
