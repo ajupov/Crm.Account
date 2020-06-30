@@ -22,7 +22,7 @@ export default interface ContactGetPagedListRequest {
     minModifyDate?: string
     maxModifyDate?: string
     allAttributes?: boolean
-    attributes?: string[]
+    attributes?: { [key: string]: string }
     bankAccountNumber?: string
     bankAccountBankNumber?: string
     bankAccountBankCorrespondentNumber?: string

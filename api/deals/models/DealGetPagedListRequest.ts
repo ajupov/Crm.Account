@@ -22,7 +22,7 @@ export default interface DealGetPagedListRequest {
     createUserIds?: string[]
     responsibleUserIds?: string[]
     allAttributes?: boolean
-    attributes?: string[]
+    attributes?: { [key: string]: string }
     positionsProductIds?: string[]
     offset: number
     limit: number

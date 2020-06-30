@@ -12,8 +12,8 @@ const ProductDelete: FC = () => {
     return (
         <DeleteModal
             isDeleting={state.isDeleting}
-            title="Удаление атрибута"
-            content="Вы уверены, что хотите удалить атрибут?"
+            title="Удаление продукта"
+            content="Вы уверены, что хотите удалить продукт?"
             onClickConfirm={onClickConfirm}
             onClickCancel={onClickCancel}
         />

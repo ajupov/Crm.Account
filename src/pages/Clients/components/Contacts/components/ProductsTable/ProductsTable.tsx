@@ -1,12 +1,12 @@
 import React, { FC, useContext } from 'react'
 
-import ProductsContext from '../../contexts/ProductsContext/ProductsContext'
+import ContactsContext from '../../contexts/ContactsContext/ContactsContext'
 import Table from '../../../../../../components/common/collections/Table/Table'
-import useProductsTable from './hooks/useProductsTable'
+import useContactsTable from './hooks/useContactsTable'
 
 const ProductsTable: FC = () => {
-    const state = useContext(ProductsContext)
-    const { page, headers, map, onClickCreate, onClickDownloadAsCsv, onClickChangePage } = useProductsTable()
+    const state = useContext(ContactsContext)
+    const { page, headers, map, onClickCreate, onClickDownloadAsCsv, onClickChangePage } = useContactsTable()
 
     return (
         <Table

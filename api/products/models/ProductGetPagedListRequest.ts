@@ -1,4 +1,3 @@
-import { Dictionary } from '../../../src/utils/dictionary/dictionaryUtils'
 import ProductType from '../models/ProductType'
 
 export default interface ProductGetPagedListRequest {
@@ -16,7 +15,7 @@ export default interface ProductGetPagedListRequest {
     minModifyDate?: string
     maxModifyDate?: string
     allAttributes?: boolean
-    attributes?: Dictionary<string>
+    attributes?: { [key: string]: string }
     allCategoryIds?: boolean
     categoryIds?: string[]
     offset: number

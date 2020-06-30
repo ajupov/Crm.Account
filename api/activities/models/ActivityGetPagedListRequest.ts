@@ -25,7 +25,7 @@ export default interface ActivityGetPagedListRequest {
     responsibleUserIds?: string[]
     priorities?: ActivityPriority[]
     allAttributes?: boolean
-    attributes?: string[]
+    attributes?: Dictionary<string>
     offset: number
     limit: number
     sortBy?: string

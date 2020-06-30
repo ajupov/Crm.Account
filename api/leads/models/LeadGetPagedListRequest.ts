@@ -22,7 +22,7 @@ export default interface LeadGetPagedListRequest {
     minModifyDate?: string
     maxModifyDate?: string
     allAttributes?: boolean
-    attributes?: string[]
+    attributes?: { [key: string]: string }
     sourceIds?: string[]
     createUserIds?: string[]
     responsibleUserIds?: string[]

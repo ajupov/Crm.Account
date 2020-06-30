@@ -1,15 +1,15 @@
 import { useCallback, useContext } from 'react'
 
+import ContactContext from '../../../contexts/ContactContext/ContactContext'
+import ContactsActionsContext from '../../../contexts/ContactsActionsContext/ContactsActionsContext'
 import { ContactsRoutes } from '../../../routes/ContactsRoutes'
 import Product from '../../../../../../../../api/products/models/Product'
-import ProductContext from '../../../contexts/ProductContext/ProductContext'
-import ProductsActionsContext from '../../../contexts/ProductsActionsContext/ProductsActionsContext'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { getProductTypeName } from '../../../helpers/productTypeHelper'
-import { joinCategoryNames } from '../../../mappers/productCategoriesMapper'
+import { joinCategoryNames } from '../../../mappers/contactCategoriesMapper'
 import { toCurrency } from '../../../../../../../utils/currency/currencyUtils'
+import useContactsSelectOptions from '../../../hooks/useContactsSelectOptions'
 import { useHistory } from 'react-router'
-import useProductsSelectOptions from '../../../hooks/useProductsSelectOptions'
 
 interface UseProductViewReturn {
     map: (product: Product) => ViewDataProps[]
@@ -23,9 +23,9 @@ interface UseProductViewReturn {
 // TODO: Move to l10n
 const useProductView = (): UseProductViewReturn => {
     const history = useHistory()
-    const { getAllProducts } = useProductsSelectOptions()
-    const productState = useContext(ProductContext)
-    const actionsState = useContext(ProductsActionsContext)
+    const { getAllProducts } = useContactsSelectOptions()
+    const productState = useContext(ContactContext)
+    const actionsState = useContext(ContactsActionsContext)
 
     const onClickEdit = useCallback((id: string) => history.push(`${ContactsRoutes.Edit}/${id}`), [history])
 

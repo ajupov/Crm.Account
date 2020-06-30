@@ -1,13 +1,13 @@
 import React, { FC, useContext } from 'react'
 
-import ProductContext from '../../contexts/ProductContext/ProductContext'
+import ContactContext from '../../contexts/ContactContext/ContactContext'
 import View from '../../../../../../components/common/grids/View/View'
+import useContactsActions from '../../contexts/ContactsActionsContext/hooks/useContactsActions'
 import useProductView from './hooks/useProductView'
-import useProductsActions from '../../contexts/ProductsActionsContext/hooks/useProductsActions'
 
 const ProductViewForm: FC = () => {
-    const state = useContext(ProductContext)
-    const { isLoading } = useProductsActions()
+    const state = useContext(ContactContext)
+    const { isLoading } = useContactsActions()
     const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel, onClickHistory } = useProductView()
 
     return (

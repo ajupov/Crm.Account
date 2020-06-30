@@ -1,12 +1,12 @@
 import React, { FC, useEffect } from 'react'
 
+import ContactContextProvider from '../../contexts/ContactContext/ContactContextProvider'
+import ContactDelete from '../ContactDelete/ContactDelete'
+import ContactRestore from '../ContactRestore/ContactRestore'
+import ContactsActionsContextProvider from '../../contexts/ContactsActionsContext/ContactsActionsContextProvider'
 import ContactsMenu from '../../../ContactsMenu/ContactsMenu'
 import Page from '../../../../../../components/common/grids/Page/Page'
-import ProductContextProvider from '../../contexts/ProductContext/ProductContextProvider'
-import ProductDelete from '../ProductDelete/ProductDelete'
-import ProductRestore from '../ProductRestore/ProductRestore'
 import ProductViewForm from './ProductViewForm'
-import ProductsActionsContextProvider from '../../contexts/ProductsActionsContext/ProductsActionsContextProvider'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
@@ -16,15 +16,15 @@ const ProductView: FC = () => {
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <ProductsActionsContextProvider>
-            <ProductContextProvider>
+        <ContactsActionsContextProvider>
+            <ContactContextProvider>
                 <Page title={title} firstSidebar={<ContactsMenu />}>
                     <ProductViewForm />
-                    <ProductDelete />
-                    <ProductRestore />
+                    <ContactDelete />
+                    <ContactRestore />
                 </Page>
-            </ProductContextProvider>
-        </ProductsActionsContextProvider>
+            </ContactContextProvider>
+        </ContactsActionsContextProvider>
     )
 }
 

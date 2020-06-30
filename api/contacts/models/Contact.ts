@@ -6,7 +6,7 @@ export default interface Contact {
     accountId?: string
     leadId?: string
     companyId?: string
-    createUserId: string
+    createUserId?: string
     responsibleUserId?: string
     surname?: string
     name?: string

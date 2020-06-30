@@ -1,15 +1,15 @@
 import React, { FC, useEffect } from 'react'
 
+import ContactContextProvider from './contexts/ContactContext/ContactContextProvider'
+import ContactDelete from './components/ContactDelete/ContactDelete'
+import ContactRestore from './components/ContactRestore/ContactRestore'
+import ContactsActionsContextProvider from './contexts/ContactsActionsContext/ContactsActionsContextProvider'
+import ContactsContextProvider from './contexts/ContactsContext/ContactsContextProvider'
+import ContactsFilter from './components/ContactsFilter/ContactsFilter'
+import ContactsFilterMobile from './components/ContactsFilterMobile/ContactsFilterMobile'
+import ContactsFiltersContextProvider from './contexts/ContactsFiltersContext/ContactsFiltersContextProvider'
 import ContactsMenu from '../ContactsMenu/ContactsMenu'
 import Page from '../../../../components/common/grids/Page/Page'
-import ProductContextProvider from './contexts/ProductContext/ProductContextProvider'
-import ProductDelete from './components/ProductDelete/ProductDelete'
-import ProductRestore from './components/ProductRestore/ProductRestore'
-import ProductsActionsContextProvider from './contexts/ProductsActionsContext/ProductsActionsContextProvider'
-import ProductsContextProvider from './contexts/ProductsContext/ProductsContextProvider'
-import ProductsFilter from './components/ProductsFilter/ProductsFilter'
-import ProductsFilterMobile from './components/ProductsFilterMobile/ProductsFilterMobile'
-import ProductsFiltersContextProvider from './contexts/ProductsFiltersContext/ProductsFiltersContextProvider'
 import ProductsTable from './components/ProductsTable/ProductsTable'
 import { setPageTitle } from '../../../../helpers/productNameHelper'
 
@@ -20,24 +20,24 @@ const Contacts: FC = () => {
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <ProductsContextProvider>
-            <ProductsActionsContextProvider>
-                <ProductsFiltersContextProvider>
-                    <ProductContextProvider>
+        <ContactsContextProvider>
+            <ContactsActionsContextProvider>
+                <ContactsFiltersContextProvider>
+                    <ContactContextProvider>
                         <Page
                             title={title}
                             firstSidebar={<ContactsMenu />}
-                            secondSidebar={<ProductsFilter />}
-                            secondSidebarMobile={<ProductsFilterMobile />}
+                            secondSidebar={<ContactsFilter />}
+                            secondSidebarMobile={<ContactsFilterMobile />}
                         >
                             <ProductsTable />
-                            <ProductDelete />
-                            <ProductRestore />
+                            <ContactDelete />
+                            <ContactRestore />
                         </Page>
-                    </ProductContextProvider>
-                </ProductsFiltersContextProvider>
-            </ProductsActionsContextProvider>
-        </ProductsContextProvider>
+                    </ContactContextProvider>
+                </ContactsFiltersContextProvider>
+            </ContactsActionsContextProvider>
+        </ContactsContextProvider>
     )
 }
 

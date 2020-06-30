@@ -39,7 +39,7 @@ export default interface CompanyGetPagedListRequest {
     types?: CompanyType[]
     industryTypes?: CompanyIndustryType[]
     allAttributes?: boolean
-    attributes?: string[]
+    attributes?: { [key: string]: string }
     bankAccountNumber?: string
     bankAccountBankNumber?: string
     bankAccountBankCorrespondentNumber?: string

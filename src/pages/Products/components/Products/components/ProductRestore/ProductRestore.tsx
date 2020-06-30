@@ -12,8 +12,8 @@ const ProductRestore: FC = () => {
     return (
         <RestoreModal
             isRestoring={state.isRestoring}
-            title="Восстановление атрибута"
-            content="Вы уверены, что хотите восстановить атрибут?"
+            title="Восстановление продукта"
+            content="Вы уверены, что хотите восстановить продукт?"
             onClickCancel={onClickCancel}
             onClickConfirm={onClickConfirm}
         />
