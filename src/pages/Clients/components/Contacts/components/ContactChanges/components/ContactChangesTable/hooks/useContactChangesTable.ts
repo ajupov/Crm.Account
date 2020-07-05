@@ -13,7 +13,6 @@ import { getFileNameWithDateTime } from '../../../../../../../../../helpers/file
 import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
 import { joinAttributes } from '../../../../../mappers/contactAttributesMapper'
 import { joinBankAccounts } from '../../../../../mappers/contactBankAccountsMapper'
-import { toCurrency } from '../../../../../../../../../utils/currency/currencyUtils'
 import { toLocaleDateTime } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 
 interface UseContactChangesTableReturn {
@@ -35,7 +34,7 @@ const useContactChangesTable = (): UseContactChangesTableReturn => {
         }
 
         const fileName = getFileNameWithDateTime('История изменений контакта')
-        const headers = ['Идентификатор', 'Дата и время', 'Старое значение', 'Новое значение']
+        const headers = ['Идентификатор', 'Идентификатор контакта', 'Дата и время', 'Старое значение', 'Новое значение']
         const csv = convertObjectToCSV([headers, ...changes])
 
         downloadAsCsv(fileName, csv)

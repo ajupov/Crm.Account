@@ -47,7 +47,6 @@ const useProductStatusChanges = (): ProductStatusChangesState => {
 
         if (response.changes) {
             response.changes.forEach(v => {
-                delete v.statusId
                 delete v.changerUserId
             })
         }

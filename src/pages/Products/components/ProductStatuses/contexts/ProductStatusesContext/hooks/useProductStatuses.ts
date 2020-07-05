@@ -32,7 +32,9 @@ const useProductStatuses = (): ProductStatusesState => {
 
         const response = await productStatusesClient.GetPagedListAsync({ ...request, offset: 0, limit: MaxLimit })
         if (response.statuses) {
-            response.statuses.forEach(v => delete v.accountId)
+            response.statuses.forEach(v => {
+                delete v.accountId
+            })
         }
 
         setIsLoading(false)

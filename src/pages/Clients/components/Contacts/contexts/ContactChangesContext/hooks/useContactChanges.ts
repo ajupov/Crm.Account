@@ -47,7 +47,6 @@ const useContactChanges = (): ContactChangesState => {
 
         if (response.changes) {
             response.changes.forEach(v => {
-                delete v.contactId
                 delete v.changerUserId
             })
         }

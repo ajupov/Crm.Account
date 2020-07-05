@@ -6,6 +6,7 @@ import ProductsActionsContext from '../../../contexts/ProductsActionsContext/Pro
 import { ProductsRoutes } from '../../../routes/ProductsRoutes'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { getProductTypeName } from '../../../helpers/productTypeHelper'
+import { joinAttributes } from '../../../mappers/productAttributesMapper'
 import { joinCategoryNames } from '../../../mappers/productCategoriesMapper'
 import { toCurrency } from '../../../../../../../utils/currency/currencyUtils'
 import { useHistory } from 'react-router'
@@ -51,17 +52,9 @@ const useProductView = (): UseProductViewReturn => {
 
     const mapCategories = useCallback(() => joinCategoryNames(productState.categories), [productState.categories])
 
-    const mapAttributes = useCallback(
-        () =>
-            productState.attributes
-                .map(x => {
-                    const value = productState.product.attributeLinks?.find(l => l.productAttributeId === x.id)?.value
-
-                    return x.key + (value ? ': ' + value : '')
-                })
-                .join(', '),
-        [productState.attributes, productState.product.attributeLinks]
-    )
+    const mapAttributes = useCallback(() => joinAttributes(productState.product.attributeLinks), [
+        productState.product.attributeLinks
+    ])
 
     const map = useCallback(
         (product: Product): ViewDataProps[] => [

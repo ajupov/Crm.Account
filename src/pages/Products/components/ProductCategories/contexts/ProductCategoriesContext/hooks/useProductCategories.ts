@@ -32,7 +32,9 @@ const useProductCategories = (): ProductCategoriesState => {
 
         const response = await productCategoriesClient.GetPagedListAsync({ ...request, offset: 0, limit: MaxLimit })
         if (response.categories) {
-            response.categories.forEach(v => delete v.accountId)
+            response.categories.forEach(v => {
+                delete v.accountId
+            })
         }
 
         setIsLoading(false)

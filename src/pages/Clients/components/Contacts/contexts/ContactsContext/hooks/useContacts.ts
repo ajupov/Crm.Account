@@ -34,10 +34,9 @@ const useContacts = (): ContactsState => {
         if (response.contacts) {
             response.contacts.forEach(v => {
                 delete v.accountId
-                delete v.leadId
-                delete v.companyId
                 delete v.createUserId
                 delete v.responsibleUserId
+                delete v.photo
                 delete v.bankAccounts
                 delete v.attributeLinks
             })

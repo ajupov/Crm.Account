@@ -98,11 +98,11 @@ const useProductsTable = (): UseProductsTableReturn => {
     const headers: TableHeaderCellProps[] = useMemo(
         () => [
             {
-                key: 'Key',
+                key: 'Name',
                 label: 'Наименование',
                 width: 4,
-                onClick: () => onClickSort('Key'),
-                orderBy: getOrderBy('Key')
+                onClick: () => onClickSort('Name'),
+                orderBy: getOrderBy('Name')
             },
             {
                 key: 'VendorCode',

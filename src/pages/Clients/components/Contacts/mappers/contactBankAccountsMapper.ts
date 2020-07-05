@@ -1,7 +1,7 @@
 import ContactBankAccount from '../../../../../../api/contacts/models/ContactBankAccount'
 
-const joinBankAccounts = (categories?: ContactBankAccount[]): string =>
-    categories
+const joinBankAccounts = (accounts?: ContactBankAccount[]): string =>
+    accounts
         ?.map(
             x =>
                 `Номер счета: ${x.number}, БИК банка: ${x.bankNumber}, Корреспондентский счет банка: ${x.bankCorrespondentNumber}, Название банка: ${x.bankName}`

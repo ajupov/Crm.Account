@@ -32,7 +32,9 @@ const useProductAttributes = (): ProductAttributesState => {
 
         const response = await productAttributesClient.GetPagedListAsync({ ...request, offset: 0, limit: MaxLimit })
         if (response.attributes) {
-            response.attributes.forEach(v => delete v.accountId)
+            response.attributes.forEach(v => {
+                delete v.accountId
+            })
         }
 
         setIsLoading(false)

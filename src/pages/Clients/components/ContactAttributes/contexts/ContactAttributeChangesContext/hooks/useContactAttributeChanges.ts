@@ -49,7 +49,6 @@ const useContactAttributeChanges = (): ContactAttributeChangesState => {
 
         if (response.changes) {
             response.changes.forEach(v => {
-                delete v.attributeId
                 delete v.changerUserId
             })
         }

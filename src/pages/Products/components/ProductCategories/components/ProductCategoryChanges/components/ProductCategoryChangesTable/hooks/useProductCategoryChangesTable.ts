@@ -30,7 +30,13 @@ const useProductCategoryChangesTable = (): UseProductCategoryChangesTableReturn 
         }
 
         const fileName = getFileNameWithDateTime('История изменений категорий продукта')
-        const headers = ['Идентификатор', 'Дата и время', 'Старое значение', 'Новое значение']
+        const headers = [
+            'Идентификатор',
+            'Идентификатор категории',
+            'Дата и время',
+            'Старое значение',
+            'Новое значение'
+        ]
         const csv = convertObjectToCSV([headers, ...changes])
 
         downloadAsCsv(fileName, csv)

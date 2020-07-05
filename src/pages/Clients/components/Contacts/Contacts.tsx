@@ -9,8 +9,8 @@ import ContactsFilter from './components/ContactsFilter/ContactsFilter'
 import ContactsFilterMobile from './components/ContactsFilterMobile/ContactsFilterMobile'
 import ContactsFiltersContextProvider from './contexts/ContactsFiltersContext/ContactsFiltersContextProvider'
 import ContactsMenu from '../ContactsMenu/ContactsMenu'
+import ContactsTable from './components/ContactsTable/ContactsTable'
 import Page from '../../../../components/common/grids/Page/Page'
-import ProductsTable from './components/ProductsTable/ProductsTable'
 import { setPageTitle } from '../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
@@ -30,7 +30,7 @@ const Contacts: FC = () => {
                             secondSidebar={<ContactsFilter />}
                             secondSidebarMobile={<ContactsFilterMobile />}
                         >
-                            <ProductsTable />
+                            <ContactsTable />
                             <ContactDelete />
                             <ContactRestore />
                         </Page>

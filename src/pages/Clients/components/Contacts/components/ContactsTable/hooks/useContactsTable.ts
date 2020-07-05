@@ -8,7 +8,6 @@ import { ContactsRoutes } from '../../../routes/ContactsRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
-import { toCurrency } from '../../../../../../../utils/currency/currencyUtils'
 import { toLocaleDateTime } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import useContactView from '../../ContactView/hooks/useContactView'
 import { useHistory } from 'react-router'
@@ -39,7 +38,30 @@ const useContactsTable = (): UseContactsTableReturn => {
         }
 
         const fileName = getFileNameWithDateTime('Контакты')
-        const headers = ['Идентификатор', 'Фамилия', 'Имя', 'Отчество', 'Удален', 'Создан', 'Изменен']
+        const headers = [
+            'Идентификатор',
+            'Идентификатор лида',
+            'Идентификатор компании',
+            'Фамилия',
+            'Имя',
+            'Отчество',
+            'Телефон',
+            'Email',
+            'ИНН',
+            'Должность',
+            'Почтовый индекс',
+            'Страна',
+            'Регион',
+            'Район/провинция',
+            'Город/населенный пункт',
+            'Улица',
+            'Дом/строение',
+            'Квартира',
+            'Дата рождения',
+            'Удален',
+            'Создан',
+            'Изменен'
+        ]
         const csv = convertObjectToCSV([headers, ...contacts])
 
         downloadAsCsv(fileName, csv)
@@ -79,10 +101,11 @@ const useContactsTable = (): UseContactsTableReturn => {
                     ({
                         id: contact.id,
                         cells: [
+                            { value: contact.surname, textAlign: 'left' },
                             { value: contact.name, textAlign: 'left' },
-                            { value: contact.vendorCode, textAlign: 'left' },
-                            { value: contact.status?.name, textAlign: 'left' },
-                            { value: toCurrency(contact.price), textAlign: 'right' },
+                            { value: contact.patronymic, textAlign: 'left' },
+                            { value: contact.phone, textAlign: 'left' },
+                            { value: contact.email, textAlign: 'left' },
                             { value: toLocaleDateTime(contact.createDateTime), textAlign: 'center' }
                         ],
                         isDeleted: contact.isDeleted,
@@ -98,32 +121,39 @@ const useContactsTable = (): UseContactsTableReturn => {
     const headers: TableHeaderCellProps[] = useMemo(
         () => [
             {
-                key: 'Key',
-                label: 'Наименование',
-                width: 4,
-                onClick: () => onClickSort('Key'),
-                orderBy: getOrderBy('Key')
+                key: 'Surname',
+                label: 'Фамилия',
+                width: 3,
+                onClick: () => onClickSort('Surname'),
+                orderBy: getOrderBy('Surname')
             },
             {
-                key: 'VendorCode',
-                label: 'Артикул',
-                width: 1,
-                onClick: () => onClickSort('VendorCode'),
-                orderBy: getOrderBy('VendorCode')
+                key: 'Name',
+                label: 'Имя',
+                width: 3,
+                onClick: () => onClickSort('Name'),
+                orderBy: getOrderBy('Name')
             },
             {
-                key: 'Status',
-                label: 'Статус',
+                key: 'Patronymic',
+                label: 'Отчетство',
+                width: 3,
+                onClick: () => onClickSort('Patronymic'),
+                orderBy: getOrderBy('Patronymic')
+            },
+            {
+                key: 'Phone',
+                label: 'Телефон',
                 width: 2,
-                onClick: () => onClickSort('StatusId'),
-                orderBy: getOrderBy('StatusId')
+                onClick: () => onClickSort('Phone'),
+                orderBy: getOrderBy('Phone')
             },
             {
-                key: 'price',
-                label: 'Цена',
+                key: 'Email',
+                label: 'Email',
                 width: 2,
-                onClick: () => onClickSort('Price'),
-                orderBy: getOrderBy('Price')
+                onClick: () => onClickSort('Email'),
+                orderBy: getOrderBy('Email')
             },
             {
                 key: 'CreateDateTime',

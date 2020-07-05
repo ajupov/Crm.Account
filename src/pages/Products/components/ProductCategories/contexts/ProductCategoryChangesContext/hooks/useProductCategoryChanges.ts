@@ -49,7 +49,6 @@ const useProductCategoryChanges = (): ProductCategoryChangesState => {
 
         if (response.changes) {
             response.changes.forEach(v => {
-                delete v.categoryId
                 delete v.changerUserId
             })
         }

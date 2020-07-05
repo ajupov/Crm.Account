@@ -1,7 +1,7 @@
-import AttributeType from '../models/AttributeType'
+import ContactAttributeType from '../models/ContactAttributeType'
 
 export default interface ContactAttributeGetPagedListRequest {
-    types?: AttributeType[]
+    types?: ContactAttributeType[]
     key?: string
     isDeleted?: boolean
     minCreateDate?: string
