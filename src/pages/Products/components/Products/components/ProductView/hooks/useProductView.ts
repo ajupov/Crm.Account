@@ -10,7 +10,7 @@ import { joinAttributes } from '../../../mappers/productAttributesMapper'
 import { joinCategoryNames } from '../../../mappers/productCategoriesMapper'
 import { toCurrency } from '../../../../../../../utils/currency/currencyUtils'
 import { useHistory } from 'react-router'
-import useProductsSelectOptions from '../../../hooks/useProductsSelectOptions'
+import useProductName from '../../../hooks/useProductName'
 
 interface UseProductViewReturn {
     map: (product: Product) => ViewDataProps[]
@@ -24,9 +24,9 @@ interface UseProductViewReturn {
 // TODO: Move to l10n
 const useProductView = (): UseProductViewReturn => {
     const history = useHistory()
-    const { getAllProducts } = useProductsSelectOptions()
     const productState = useContext(ProductContext)
     const actionsState = useContext(ProductsActionsContext)
+    const { getProductName } = useProductName(productState.product.parentProductId)
 
     const onClickEdit = useCallback((id: string) => history.push(`${ProductsRoutes.Edit}/${id}`), [history])
 
@@ -60,7 +60,7 @@ const useProductView = (): UseProductViewReturn => {
         (product: Product): ViewDataProps[] => [
             {
                 label: 'Родительский продукт',
-                value: getAllProducts().find(x => x.value === product.parentProductId)?.text
+                value: getProductName()
             },
             { label: 'Тип', value: getProductTypeName(product.type) },
             { label: 'Статус', value: product.status?.name },
@@ -72,7 +72,7 @@ const useProductView = (): UseProductViewReturn => {
             { label: 'Черновик', value: product.isHidden ? 'Да' : 'Нет' },
             { label: 'Удален', value: product.isDeleted ? 'Да' : 'Нет' }
         ],
-        [getAllProducts, mapAttributes, mapCategories]
+        [getProductName, mapAttributes, mapCategories]
     )
 
     return { map, onClickEdit, onClickDelete, onClickRestore, onClickHistory, onClickCancel }

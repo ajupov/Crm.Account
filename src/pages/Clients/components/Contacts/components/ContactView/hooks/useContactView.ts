@@ -7,8 +7,9 @@ import ContactsRoutes from '../../../routes/ContactsRoutes'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { joinAttributes } from '../../../mappers/contactAttributesMapper'
 import { joinBankAccounts } from '../../../mappers/contactBankAccountsMapper'
-import useContactsSelectOptions from '../../../hooks/useContactsSelectOptions'
+import useCompanyName from '../../../hooks/useCompanyName'
 import { useHistory } from 'react-router'
+import useLeadName from '../../../hooks/useLeadName'
 
 interface UseContactViewReturn {
     map: (contact: Contact) => ViewDataProps[]
@@ -22,9 +23,10 @@ interface UseContactViewReturn {
 // TODO: Move to l10n
 const useContactView = (): UseContactViewReturn => {
     const history = useHistory()
-    const { getAllLeads, getAllCompanies } = useContactsSelectOptions()
     const contactState = useContext(ContactContext)
     const actionsState = useContext(ContactsActionsContext)
+    const { getCompanyName } = useCompanyName(contactState.contact.companyId)
+    const { getLeadName } = useLeadName(contactState.contact.leadId)
 
     const onClickEdit = useCallback((id: string) => history.push(`${ContactsRoutes.Edit}/${id}`), [history])
 
@@ -60,11 +62,11 @@ const useContactView = (): UseContactViewReturn => {
         (contact: Contact): ViewDataProps[] => [
             {
                 label: 'Лид',
-                value: getAllLeads().find(x => x.value === contact.leadId)?.text
+                value: getLeadName()
             },
             {
                 label: 'Компания',
-                value: getAllCompanies().find(x => x.value === contact.companyId)?.text
+                value: getCompanyName()
             },
             { label: 'Фамилия', value: contact.surname },
             { label: 'Имя', value: contact.name },
@@ -86,7 +88,7 @@ const useContactView = (): UseContactViewReturn => {
             { label: 'Атрибуты', value: mapAttributes() },
             { label: 'Удален', value: contact.isDeleted ? 'Да' : 'Нет' }
         ],
-        [getAllCompanies, getAllLeads, mapAttributes, mapBankAccounts]
+        [getCompanyName, getLeadName, mapAttributes, mapBankAccounts]
     )
 
     return { map, onClickEdit, onClickDelete, onClickRestore, onClickHistory, onClickCancel }
