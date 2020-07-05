@@ -2,7 +2,7 @@ import { useCallback, useContext } from 'react'
 
 import ProductStatus from '../../../../../../../../api/products/models/ProductStatus'
 import ProductStatusesActionsContext from '../../../contexts/ProductStatusesActionsContext/ProductStatusesActionsContext'
-import { ProductStatusesRoutes } from '../../../routes/ProductStatusesRoutes'
+import ProductStatusesRoutes from '../../../routes/ProductStatusesRoutes'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { useHistory } from 'react-router'
 

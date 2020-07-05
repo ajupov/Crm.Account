@@ -4,7 +4,7 @@ import { useCallback, useContext, useMemo } from 'react'
 
 import ProductAttribute from '../../../../../../../../api/products/models/ProductAttribute'
 import ProductAttributesContext from '../../../contexts/ProductAttributesContext/ProductAttributesContext'
-import { ProductAttributesRoutes } from '../../../routes/ProductAttributesRoutes'
+import ProductAttributesRoutes from '../../../routes/ProductAttributesRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
 import { getAttributeTypeName } from '../../../../../../../helpers/entityAttributeTypeHelper'

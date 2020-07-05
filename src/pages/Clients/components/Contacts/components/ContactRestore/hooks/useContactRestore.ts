@@ -2,7 +2,7 @@ import { useCallback, useContext } from 'react'
 
 import ContactsActionsContext from '../../../contexts/ContactsActionsContext/ContactsActionsContext'
 import ContactsContext from '../../../contexts/ContactsContext/ContactsContext'
-import { ContactsRoutes } from '../../../routes/ContactsRoutes'
+import ContactsRoutes from '../../../routes/ContactsRoutes'
 import { useHistory } from 'react-router'
 
 interface UseContactRestore {

@@ -4,7 +4,7 @@ import { useCallback, useContext, useMemo } from 'react'
 
 import Contact from '../../../../../../../../api/contacts/models/Contact'
 import ContactsContext from '../../../contexts/ContactsContext/ContactsContext'
-import { ContactsRoutes } from '../../../routes/ContactsRoutes'
+import ContactsRoutes from '../../../routes/ContactsRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'

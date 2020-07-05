@@ -2,7 +2,7 @@ import { useCallback, useContext } from 'react'
 
 import ProductAttribute from '../../../../../../../../api/products/models/ProductAttribute'
 import ProductAttributesActionsContext from '../../../contexts/ProductAttributesActionsContext/ProductAttributesActionsContext'
-import { ProductAttributesRoutes } from '../../../routes/ProductAttributesRoutes'
+import ProductAttributesRoutes from '../../../routes/ProductAttributesRoutes'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { getAttributeTypeName } from '../../../../../../../helpers/entityAttributeTypeHelper'
 import { useHistory } from 'react-router'

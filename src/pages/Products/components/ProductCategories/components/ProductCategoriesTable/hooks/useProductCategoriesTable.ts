@@ -3,7 +3,7 @@ import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../utils/cs
 import { useCallback, useContext, useMemo } from 'react'
 
 import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext/ProductCategoriesContext'
-import { ProductCategoriesRoutes } from '../../../routes/ProductCategoriesRoutes'
+import ProductCategoriesRoutes from '../../../routes/ProductCategoriesRoutes'
 import ProductCategory from '../../../../../../../../api/products/models/ProductCategory'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'

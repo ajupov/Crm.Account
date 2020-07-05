@@ -2,7 +2,7 @@ import { useCallback, useContext } from 'react'
 
 import ProductStatusesActionsContext from '../../../contexts/ProductStatusesActionsContext/ProductStatusesActionsContext'
 import ProductStatusesContext from '../../../contexts/ProductStatusesContext/ProductStatusesContext'
-import { ProductStatusesRoutes } from '../../../routes/ProductStatusesRoutes'
+import ProductStatusesRoutes from '../../../routes/ProductStatusesRoutes'
 import { useHistory } from 'react-router'
 
 interface UseProductStatusRestore {

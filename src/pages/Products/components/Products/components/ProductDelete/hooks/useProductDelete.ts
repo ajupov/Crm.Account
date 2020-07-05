@@ -2,7 +2,7 @@ import { useCallback, useContext } from 'react'
 
 import ProductsActionsContext from '../../../contexts/ProductsActionsContext/ProductsActionsContext'
 import ProductsContext from '../../../contexts/ProductsContext/ProductsContext'
-import { ProductsRoutes } from '../../../routes/ProductsRoutes'
+import ProductsRoutes from '../../../routes/ProductsRoutes'
 import { useHistory } from 'react-router'
 
 interface UseProductDelete {

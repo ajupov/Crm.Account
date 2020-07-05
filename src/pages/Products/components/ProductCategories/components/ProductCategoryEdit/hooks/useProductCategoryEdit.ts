@@ -1,7 +1,7 @@
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
-import { ProductCategoriesRoutes } from '../../../routes/ProductCategoriesRoutes'
+import ProductCategoriesRoutes from '../../../routes/ProductCategoriesRoutes'
 import ProductCategoryContext from '../../../contexts/ProductCategoryContext/ProductCategoryContext'
 import { useHistory } from 'react-router'
 

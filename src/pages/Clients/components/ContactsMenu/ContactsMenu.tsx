@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
-import { ContactAttributesRoutes } from '../ContactAttributes/routes/ContactAttributesRoutes'
-import { ContactsRoutes } from '../Contacts/routes/ContactsRoutes'
+import ContactAttributesRoutes from '../ContactAttributes/routes/ContactAttributesRoutes'
+import ContactsRoutes from '../Contacts/routes/ContactsRoutes'
 import Menu from '../../../../components/common/collections/Menu/Menu'
 
 const ContactsMenu: FC = () => (

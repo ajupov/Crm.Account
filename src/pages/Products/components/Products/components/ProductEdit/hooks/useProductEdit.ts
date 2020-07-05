@@ -4,7 +4,7 @@ import { useCallback, useContext, useMemo, useState } from 'react'
 import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
 import ProductContext from '../../../contexts/ProductContext/ProductContext'
 import ProductType from '../../../../../../../../api/products/models/ProductType'
-import { ProductsRoutes } from '../../../routes/ProductsRoutes'
+import ProductsRoutes from '../../../routes/ProductsRoutes'
 import { useHistory } from 'react-router'
 import useProductsSelectOptions from '../../../hooks/useProductsSelectOptions'
 

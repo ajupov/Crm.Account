@@ -1,7 +1,7 @@
 import { useCallback, useContext } from 'react'
 
 import ProductCategoriesActionsContext from '../../../contexts/ProductCategoriesActionsContext/ProductCategoriesActionsContext'
-import { ProductCategoriesRoutes } from '../../../routes/ProductCategoriesRoutes'
+import ProductCategoriesRoutes from '../../../routes/ProductCategoriesRoutes'
 import ProductCategory from '../../../../../../../../api/products/models/ProductCategory'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { useHistory } from 'react-router'

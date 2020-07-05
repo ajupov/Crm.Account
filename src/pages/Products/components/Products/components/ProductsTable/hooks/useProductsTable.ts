@@ -4,7 +4,7 @@ import { useCallback, useContext, useMemo } from 'react'
 
 import Product from '../../../../../../../../api/products/models/Product'
 import ProductsContext from '../../../contexts/ProductsContext/ProductsContext'
-import { ProductsRoutes } from '../../../routes/ProductsRoutes'
+import ProductsRoutes from '../../../routes/ProductsRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'

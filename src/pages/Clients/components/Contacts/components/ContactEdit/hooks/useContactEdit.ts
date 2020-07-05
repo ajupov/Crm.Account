@@ -1,7 +1,7 @@
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import ContactContext from '../../../contexts/ContactContext/ContactContext'
-import { ContactsRoutes } from '../../../routes/ContactsRoutes'
+import ContactsRoutes from '../../../routes/ContactsRoutes'
 import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
 import useContactsSelectOptions from '../../../hooks/useContactsSelectOptions'
 import { useHistory } from 'react-router'

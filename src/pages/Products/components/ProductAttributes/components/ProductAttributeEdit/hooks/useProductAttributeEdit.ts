@@ -7,7 +7,7 @@ import { useCallback, useContext, useMemo, useState } from 'react'
 import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
 import ProductAttributeContext from '../../../contexts/ProductAttributeContext/ProductAttributeContext'
 import ProductAttributeType from '../../../../../../../../api/products/models/ProductAttributeType'
-import { ProductAttributesRoutes } from '../../../routes/ProductAttributesRoutes'
+import ProductAttributesRoutes from '../../../routes/ProductAttributesRoutes'
 import { useHistory } from 'react-router'
 
 interface UseProductAttributeEditReturn {

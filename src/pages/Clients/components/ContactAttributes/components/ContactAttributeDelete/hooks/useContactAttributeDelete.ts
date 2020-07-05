@@ -2,7 +2,7 @@ import { useCallback, useContext } from 'react'
 
 import ContactAttributesActionsContext from '../../../contexts/ContactAttributesActionsContext/ContactAttributesActionsContext'
 import ContactAttributesContext from '../../../contexts/ContactAttributesContext/ContactAttributesContext'
-import { ContactAttributesRoutes } from '../../../routes/ContactAttributesRoutes'
+import ContactAttributesRoutes from '../../../routes/ContactAttributesRoutes'
 import { useHistory } from 'react-router'
 
 interface UseContactAttributeDelete {

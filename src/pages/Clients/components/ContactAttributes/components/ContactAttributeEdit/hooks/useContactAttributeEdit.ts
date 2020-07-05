@@ -6,7 +6,7 @@ import { useCallback, useContext, useMemo, useState } from 'react'
 
 import ContactAttributeContext from '../../../contexts/ContactAttributeContext/ContactAttributeContext'
 import ContactAttributeType from '../../../../../../../../api/contacts/models/ContactAttributeType'
-import { ContactAttributesRoutes } from '../../../routes/ContactAttributesRoutes'
+import ContactAttributesRoutes from '../../../routes/ContactAttributesRoutes'
 import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
 import { useHistory } from 'react-router'
 

@@ -2,7 +2,7 @@ import { useCallback, useContext } from 'react'
 
 import ProductCategoriesActionsContext from '../../../contexts/ProductCategoriesActionsContext/ProductCategoriesActionsContext'
 import ProductCategoriesContext from '../../../contexts/ProductCategoriesContext/ProductCategoriesContext'
-import { ProductCategoriesRoutes } from '../../../routes/ProductCategoriesRoutes'
+import ProductCategoriesRoutes from '../../../routes/ProductCategoriesRoutes'
 import { useHistory } from 'react-router'
 
 interface UseProductCategoryRestore {

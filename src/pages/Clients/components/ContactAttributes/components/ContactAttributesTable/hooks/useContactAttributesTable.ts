@@ -4,7 +4,7 @@ import { useCallback, useContext, useMemo } from 'react'
 
 import ContactAttribute from '../../../../../../../../api/contacts/models/ContactAttribute'
 import ContactAttributesContext from '../../../contexts/ContactAttributesContext/ContactAttributesContext'
-import { ContactAttributesRoutes } from '../../../routes/ContactAttributesRoutes'
+import ContactAttributesRoutes from '../../../routes/ContactAttributesRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
 import { getAttributeTypeName } from '../../../../../../../helpers/entityAttributeTypeHelper'
