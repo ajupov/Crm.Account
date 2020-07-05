@@ -1,9 +1,9 @@
 const ContactsRoutes = {
-    Index: '/contacts',
-    View: '/contacts/view',
-    Create: '/contacts/create',
-    Edit: '/contacts/edit',
-    Changes: '/contacts/changes'
+    Index: '/clients/contacts',
+    View: '/clients/contacts/view',
+    Create: '/clients/contacts/create',
+    Edit: '/clients/contacts/edit',
+    Changes: '/clients/contacts/changes'
 }
 
 export default ContactsRoutes

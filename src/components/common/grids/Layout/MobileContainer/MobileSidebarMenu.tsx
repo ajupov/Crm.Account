@@ -2,7 +2,9 @@ import { Icon, Menu, SemanticICONS } from 'semantic-ui-react'
 import React, { FC, useCallback, useContext, useMemo } from 'react'
 
 import Configuration from '../../../../../configuration/Configuration'
+import ContactsRoutes from '../../../../../pages/Clients/components/Contacts/routes/ContactsRoutes'
 import { Link } from 'react-router-dom'
+import ProductsRoutes from '../../../../../pages/Products/components/Products/routes/ProductsRoutes'
 import UserInfoContext from '../../../../system/UserInfo/contexts/UserInfoContext/UserInfoContext'
 
 export interface MobileSidebarMenuProps {
@@ -44,8 +46,8 @@ const MobileSidebarMenu: FC<MobileSidebarMenuProps> = ({ onClickItem }) => {
             {renderItem('Задачи', '/activities', 'tasks')}
             {renderItem('Сделки', '/deals', 'handshake')}
             {renderItem('Лиды', '/leads', 'filter')}
-            {renderItem('Клиенты', '/clients', 'address book')}
-            {renderItem('Продукты', '/products', 'list ol')}
+            {renderItem('Клиенты', ContactsRoutes.Index, 'address book')}
+            {renderItem('Продукты', ProductsRoutes.Index, 'list ol')}
             {renderItem('Настройки аккаунта', '/settings', 'user circle')}
             <Menu.Item as="a" href={configuration.LogoutUrl}>
                 <Icon name="log out" style={{ float: 'left', marginRight: '12px' }} />

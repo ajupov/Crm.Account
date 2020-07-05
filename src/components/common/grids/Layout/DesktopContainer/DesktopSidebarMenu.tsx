@@ -1,7 +1,9 @@
 import { Icon, Menu, SemanticICONS } from 'semantic-ui-react'
 import React, { FC, useCallback } from 'react'
 
+import ContactsRoutes from '../../../../../pages/Clients/components/Contacts/routes/ContactsRoutes'
 import { Link } from 'react-router-dom'
+import ProductsRoutes from '../../../../../pages/Products/components/Products/routes/ProductsRoutes'
 
 // TODO: Move to l10n
 const DesktopSidebarMenu: FC = () => {
@@ -22,8 +24,8 @@ const DesktopSidebarMenu: FC = () => {
             {renderItem('Задачи', '/activities', 'tasks')}
             {renderItem('Сделки', '/deals', 'handshake')}
             {renderItem('Лиды', '/leads', 'filter')}
-            {renderItem('Клиенты', '/clients', 'address book')}
-            {renderItem('Продукты', '/products', 'list ol')}
+            {renderItem('Клиенты', ContactsRoutes.Index, 'address book')}
+            {renderItem('Продукты', ProductsRoutes.Index, 'list ol')}
         </>
     )
 }
