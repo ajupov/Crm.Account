@@ -41,23 +41,33 @@ const useCompaniesTable = (): UseCompaniesTableReturn => {
         const headers = [
             'Идентификатор',
             'Идентификатор лида',
-            'Идентификатор компании',
-            'Фамилия',
-            'Имя',
-            'Отчество',
+            'Тип',
+            'Род деятельности',
+            'Полное название',
+            'Краткое название',
             'Телефон',
             'Email',
             'ИНН',
-            'Должность',
-            'Почтовый индекс',
-            'Страна',
-            'Регион',
-            'Район/провинция',
-            'Город/населенный пункт',
-            'Улица',
-            'Дом/строение',
-            'Квартира',
-            'Дата рождения',
+            'ОРГН',
+            'Дата регистрации',
+            'Количество сотрудников',
+            'Годовой оборот',
+            'Почтовый индекс (юридический адрес)',
+            'Страна (юридический адрес)',
+            'Регион (юридический адрес)',
+            'Район/провинция (юридический адрес)',
+            'Город/населенный пункт (юридический адрес)',
+            'Улица (юридический адрес)',
+            'Дом/строение (юридический адрес)',
+            'Квартира (юридический адрес)',
+            'Почтовый индекс (фактический адрес)',
+            'Страна (фактический адрес)',
+            'Регион (фактический адрес)',
+            'Район/провинция (фактический адрес)',
+            'Город/населенный пункт (фактический адрес)',
+            'Улица (фактический адрес)',
+            'Дом/строение (фактический адрес)',
+            'Квартира (фактический адрес)',
             'Удален',
             'Создан',
             'Изменен'
@@ -101,11 +111,11 @@ const useCompaniesTable = (): UseCompaniesTableReturn => {
                     ({
                         id: company.id,
                         cells: [
-                            { value: company.surname, textAlign: 'left' },
-                            { value: company.name, textAlign: 'left' },
-                            { value: company.patronymic, textAlign: 'left' },
-                            { value: company.phone, textAlign: 'left' },
-                            { value: company.email, textAlign: 'left' },
+                            { value: company.shortName, textAlign: 'left' },
+                            { value: company.taxNumber, textAlign: 'left' },
+                            { value: company.juridicalRegion, textAlign: 'left' },
+                            { value: company.juridicalProvince, textAlign: 'left' },
+                            { value: company.juridicalCity, textAlign: 'left' },
                             { value: toLocaleDateTime(company.createDateTime), textAlign: 'center' }
                         ],
                         isDeleted: company.isDeleted,
@@ -121,39 +131,39 @@ const useCompaniesTable = (): UseCompaniesTableReturn => {
     const headers: TableHeaderCellProps[] = useMemo(
         () => [
             {
-                key: 'Surname',
-                label: 'Фамилия',
+                key: 'ShortName',
+                label: 'Название',
                 width: 3,
-                onClick: () => onClickSort('Surname'),
-                orderBy: getOrderBy('Surname')
+                onClick: () => onClickSort('ShortName'),
+                orderBy: getOrderBy('ShortName')
             },
             {
-                key: 'Name',
-                label: 'Имя',
-                width: 3,
-                onClick: () => onClickSort('Name'),
-                orderBy: getOrderBy('Name')
-            },
-            {
-                key: 'Patronymic',
-                label: 'Отчетство',
-                width: 3,
-                onClick: () => onClickSort('Patronymic'),
-                orderBy: getOrderBy('Patronymic')
-            },
-            {
-                key: 'Phone',
-                label: 'Телефон',
+                key: 'TaxNumber',
+                label: 'ИНН',
                 width: 2,
-                onClick: () => onClickSort('Phone'),
-                orderBy: getOrderBy('Phone')
+                onClick: () => onClickSort('TaxNumber'),
+                orderBy: getOrderBy('TaxNumber')
             },
             {
-                key: 'Email',
-                label: 'Email',
-                width: 2,
-                onClick: () => onClickSort('Email'),
-                orderBy: getOrderBy('Email')
+                key: 'Region',
+                label: 'Регион',
+                width: 3,
+                onClick: () => onClickSort('Region'),
+                orderBy: getOrderBy('Region')
+            },
+            {
+                key: 'Province',
+                label: 'Район/провинция',
+                width: 3,
+                onClick: () => onClickSort('Province'),
+                orderBy: getOrderBy('Province')
+            },
+            {
+                key: 'City',
+                label: 'Город/населенный пункт',
+                width: 3,
+                onClick: () => onClickSort('City'),
+                orderBy: getOrderBy('City')
             },
             {
                 key: 'CreateDateTime',

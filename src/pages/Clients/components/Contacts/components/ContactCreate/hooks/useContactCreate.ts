@@ -254,7 +254,7 @@ const useContactCreate = (): UseContactCreateReturn => {
             {
                 type: 'dropdown',
                 required: true,
-                label: 'Лид',
+                label: 'Компания',
                 text: getAllCompanies().find(x => x.value === state.contact.companyId)?.text,
                 value: state.contact.companyId,
                 options: getActualCompanies(),

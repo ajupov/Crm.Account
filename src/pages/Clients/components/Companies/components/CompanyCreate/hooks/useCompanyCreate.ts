@@ -252,15 +252,6 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
                 onChange: onChangeLeadId
             },
             {
-                type: 'dropdown',
-                required: true,
-                label: 'Лид',
-                text: getAllCompanies().find(x => x.value === state.company.companyId)?.text,
-                value: state.company.companyId,
-                options: getActualCompanies(),
-                onChange: onChangeCompanyId
-            },
-            {
                 type: 'text',
                 required: true,
                 topLabel: 'Фамилия',

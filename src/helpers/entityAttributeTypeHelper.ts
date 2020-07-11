@@ -1,3 +1,4 @@
+import CompanyAttributeType from '../../api/companies/models/CompanyAttributeType'
 import ContactAttributeType from '../../api/contacts/models/ContactAttributeType'
 import { Dictionary } from '../utils/dictionary/dictionaryUtils'
 import { DropdownItemProps } from '../components/common/fields/Dropdown/Dropdown'
@@ -41,6 +42,8 @@ export function getAttributeTypesAsSelectOptions(): DropdownItemProps[] {
     return Object.entries(AttributeTypeWithNames).map(x => ({ value: x[0], text: x[1] } as DropdownItemProps))
 }
 
-export function getAttributeTypeName(type?: ProductAttributeType | ContactAttributeType): string {
+export function getAttributeTypeName(
+    type?: ProductAttributeType | ContactAttributeType | CompanyAttributeType
+): string {
     return type ? AttributeTypeWithNames[type] : ''
 }
