@@ -1,4 +1,5 @@
 enum CompanyIndustryType {
+    Other = 0,
     Transport = 1,
     Computer = 2,
     Telecommunication = 3,

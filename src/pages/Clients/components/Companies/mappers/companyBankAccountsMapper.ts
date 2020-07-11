@@ -1,6 +1,6 @@
-import ContactBankAccount from '../../../../../../api/contacts/models/ContactBankAccount'
+import CompanyBankAccount from '../../../../../../api/companies/models/CompanyBankAccount'
 
-const joinBankAccounts = (accounts?: ContactBankAccount[]): string =>
+const joinBankAccounts = (accounts?: CompanyBankAccount[]): string =>
     accounts
         ?.map(
             x =>

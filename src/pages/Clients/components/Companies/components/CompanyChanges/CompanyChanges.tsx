@@ -1,38 +1,38 @@
 import React, { FC, useEffect } from 'react'
 
-import ContactChangesContextProvider from '../../contexts/ContactChangesContext/ContactChangesContextProvider'
-import ContactChangesFilter from './components/ContactChangesFilter/ContactChangesFilter'
-import ContactChangesFilterMobile from './components/ContactChangesFilterMobile/ContactChangesFilterMobile'
-import ContactChangesFiltersContextProvider from '../../contexts/ContactChangesFiltersContext/ContactChangesFiltersContextProvider'
-import ContactChangesTable from './components/ContactChangesTable/ContactChangesTable'
-import ContactsMenu from '../../../ContactsMenu/ContactsMenu'
+import ClientsMenu from '../../../ClientsMenu/ClientsMenu'
+import CompanyChangesContextProvider from '../../contexts/CompanyChangesContext/CompanyChangesContextProvider'
+import CompanyChangesFilter from './components/CompanyChangesFilter/CompanyChangesFilter'
+import CompanyChangesFilterMobile from './components/CompanyChangesFilterMobile/CompanyChangesFilterMobile'
+import CompanyChangesFiltersContextProvider from '../../contexts/CompanyChangesFiltersContext/CompanyChangesFiltersContextProvider'
+import CompanyChangesTable from './components/CompanyChangesTable/CompanyChangesTable'
 import Page from '../../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
-import useContactChangesView from './hooks/useContactChangesView'
+import useCompanyChangesView from './hooks/useCompanyChangesView'
 
 // TODO: Move to l10n
-const ContactChanges: FC = () => {
+const CompanyChanges: FC = () => {
     const title = 'История изменений'
 
-    const { onClickCancel } = useContactChangesView()
+    const { onClickCancel } = useCompanyChangesView()
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <ContactChangesContextProvider>
-            <ContactChangesFiltersContextProvider>
+        <CompanyChangesContextProvider>
+            <CompanyChangesFiltersContextProvider>
                 <Page
                     title={title}
-                    firstSidebar={<ContactsMenu />}
-                    secondSidebar={<ContactChangesFilter />}
-                    secondSidebarMobile={<ContactChangesFilterMobile />}
+                    firstSidebar={<ClientsMenu />}
+                    secondSidebar={<CompanyChangesFilter />}
+                    secondSidebarMobile={<CompanyChangesFilterMobile />}
                     onClickCancel={onClickCancel}
                 >
-                    <ContactChangesTable />
+                    <CompanyChangesTable />
                 </Page>
-            </ContactChangesFiltersContextProvider>
-        </ContactChangesContextProvider>
+            </CompanyChangesFiltersContextProvider>
+        </CompanyChangesContextProvider>
     )
 }
 
-export default ContactChanges
+export default CompanyChanges

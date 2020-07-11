@@ -1,24 +1,24 @@
 import React, { FC, useEffect } from 'react'
 
-import ContactContextProvider from '../../contexts/ContactContext/ContactContextProvider'
-import ContactEditForm from './ContactEditForm'
-import ContactsMenu from '../../../ContactsMenu/ContactsMenu'
+import ClientsMenu from '../../../ClientsMenu/ClientsMenu'
+import CompanyContextProvider from '../../contexts/CompanyContext/CompanyContextProvider'
+import CompanyEditForm from './CompanyEditForm'
 import Page from '../../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
-const ContactEdit: FC = () => {
+const CompanyEdit: FC = () => {
     const title = 'Изменение контакта'
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <ContactContextProvider>
-            <Page title={title} firstSidebar={<ContactsMenu />}>
-                <ContactEditForm />
+        <CompanyContextProvider>
+            <Page title={title} firstSidebar={<ClientsMenu />}>
+                <CompanyEditForm />
             </Page>
-        </ContactContextProvider>
+        </CompanyContextProvider>
     )
 }
 
-export default ContactEdit
+export default CompanyEdit

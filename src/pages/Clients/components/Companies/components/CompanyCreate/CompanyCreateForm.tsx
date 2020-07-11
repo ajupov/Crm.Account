@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 
 import CreateForm from '../../../../../../components/common/forms/CreateForm/CreateForm'
-import useContactCreate from './hooks/useContactCreate'
+import useCompanyCreate from './hooks/useCompanyCreate'
 
-const ContactCreateForm: FC = () => {
-    const { isConfirmEnabled, fields, onClickConfirm, onClickCancel } = useContactCreate()
+const CompanyCreateForm: FC = () => {
+    const { isConfirmEnabled, fields, onClickConfirm, onClickCancel } = useCompanyCreate()
 
     return (
         <CreateForm
@@ -16,4 +16,4 @@ const ContactCreateForm: FC = () => {
     )
 }
 
-export default ContactCreateForm
+export default CompanyCreateForm

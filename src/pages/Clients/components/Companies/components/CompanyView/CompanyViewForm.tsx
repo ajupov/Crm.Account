@@ -1,23 +1,23 @@
 import React, { FC, useContext } from 'react'
 
-import ContactContext from '../../contexts/ContactContext/ContactContext'
+import CompanyContext from '../../contexts/CompanyContext/CompanyContext'
 import View from '../../../../../../components/common/grids/View/View'
-import useContactView from './hooks/useContactView'
-import useContactsActions from '../../contexts/ContactsActionsContext/hooks/useContactsActions'
+import useCompaniesActions from '../../contexts/CompaniesActionsContext/hooks/useCompaniesActions'
+import useCompanyView from './hooks/useCompanyView'
 
-const ContactViewForm: FC = () => {
-    const state = useContext(ContactContext)
-    const { isLoading } = useContactsActions()
-    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel, onClickHistory } = useContactView()
+const CompanyViewForm: FC = () => {
+    const state = useContext(CompanyContext)
+    const { isLoading } = useCompaniesActions()
+    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel, onClickHistory } = useCompanyView()
 
     return (
         <View
-            id={state.contact.id}
+            id={state.company.id}
             isLoading={state.isLoading || isLoading}
-            isDeleted={state.contact.isDeleted}
-            createDate={state.contact.createDateTime}
-            lastModifyDateTime={state.contact.modifyDateTime}
-            data={map(state.contact)}
+            isDeleted={state.company.isDeleted}
+            createDate={state.company.createDateTime}
+            lastModifyDateTime={state.company.modifyDateTime}
+            data={map(state.company)}
             onClickEdit={onClickEdit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
@@ -27,4 +27,4 @@ const ContactViewForm: FC = () => {
     )
 }
 
-export default ContactViewForm
+export default CompanyViewForm

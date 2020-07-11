@@ -1,19 +1,19 @@
 import React, { FC, useContext } from 'react'
 
-import ContactsContext from '../../contexts/ContactsContext/ContactsContext'
+import CompaniesContext from '../../contexts/CompaniesContext/CompaniesContext'
 import Table from '../../../../../../components/common/collections/Table/Table'
-import useContactsTable from './hooks/useContactsTable'
+import useCompaniesTable from './hooks/useCompaniesTable'
 
-const ContactsTable: FC = () => {
-    const state = useContext(ContactsContext)
-    const { page, headers, map, onClickCreate, onClickDownloadAsCsv, onClickChangePage } = useContactsTable()
+const CompaniesTable: FC = () => {
+    const state = useContext(CompaniesContext)
+    const { page, headers, map, onClickCreate, onClickDownloadAsCsv, onClickChangePage } = useCompaniesTable()
 
     return (
         <Table
             isLoading={state.isLoading}
             hasActions
             headers={headers}
-            rows={map(state.contacts)}
+            rows={map(state.companies)}
             footer={{ page, limit: state.request.limit, total: state.total, onClickChangePage }}
             lastModifyDateTime={state.lastModifyDateTime}
             onClickCreate={onClickCreate}
@@ -22,4 +22,4 @@ const ContactsTable: FC = () => {
     )
 }
 
-export default ContactsTable
+export default CompaniesTable

@@ -1,11 +1,11 @@
 import React, { FC, useEffect } from 'react'
 
+import ClientsMenu from '../../../ClientsMenu/ClientsMenu'
 import ContactContextProvider from '../../contexts/ContactContext/ContactContextProvider'
 import ContactDelete from '../ContactDelete/ContactDelete'
 import ContactRestore from '../ContactRestore/ContactRestore'
 import ContactViewForm from './ContactViewForm'
 import ContactsActionsContextProvider from '../../contexts/ContactsActionsContext/ContactsActionsContextProvider'
-import ContactsMenu from '../../../ContactsMenu/ContactsMenu'
 import Page from '../../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
@@ -18,7 +18,7 @@ const ContactView: FC = () => {
     return (
         <ContactsActionsContextProvider>
             <ContactContextProvider>
-                <Page title={title} firstSidebar={<ContactsMenu />}>
+                <Page title={title} firstSidebar={<ClientsMenu />}>
                     <ContactViewForm />
                     <ContactDelete />
                     <ContactRestore />

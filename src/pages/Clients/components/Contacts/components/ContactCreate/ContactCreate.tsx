@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react'
 
+import ClientsMenu from '../../../ClientsMenu/ClientsMenu'
 import ContactContextProvider from '../../contexts/ContactContext/ContactContextProvider'
 import ContactCreateForm from './ContactCreateForm'
-import ContactsMenu from '../../../ContactsMenu/ContactsMenu'
 import Page from '../../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
@@ -14,7 +14,7 @@ const ContactCreate: FC = () => {
 
     return (
         <ContactContextProvider>
-            <Page title={title} firstSidebar={<ContactsMenu />}>
+            <Page title={title} firstSidebar={<ClientsMenu />}>
                 <ContactCreateForm />
             </Page>
         </ContactContextProvider>

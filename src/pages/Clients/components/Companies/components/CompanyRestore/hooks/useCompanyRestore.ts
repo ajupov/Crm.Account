@@ -1,26 +1,26 @@
 import { useCallback, useContext } from 'react'
 
-import ContactsActionsContext from '../../../contexts/ContactsActionsContext/ContactsActionsContext'
-import ContactsContext from '../../../contexts/ContactsContext/ContactsContext'
-import ContactsRoutes from '../../../routes/ContactsRoutes'
+import CompaniesActionsContext from '../../../contexts/CompaniesActionsContext/CompaniesActionsContext'
+import CompaniesContext from '../../../contexts/CompaniesContext/CompaniesContext'
+import CompaniesRoutes from '../../../routes/CompaniesRoutes'
 import { useHistory } from 'react-router'
 
-interface UseContactRestore {
+interface UseCompanyRestore {
     onClickConfirm: () => void
     onClickCancel: () => void
 }
 
-const useContactRestore = (): UseContactRestore => {
+const useCompanyRestore = (): UseCompanyRestore => {
     const history = useHistory()
-    const actionsState = useContext(ContactsActionsContext)
-    const contactsState = useContext(ContactsContext)
+    const actionsState = useContext(CompaniesActionsContext)
+    const companiesState = useContext(CompaniesContext)
 
     const onClickConfirm = useCallback(async () => {
         await actionsState.restore()
         actionsState.setIsRestoring(false)
-        history.push(ContactsRoutes.Index)
-        await contactsState.getPagedList()
-    }, [actionsState, history, contactsState])
+        history.push(CompaniesRoutes.Index)
+        await companiesState.getPagedList()
+    }, [actionsState, history, companiesState])
 
     const onClickCancel = useCallback(() => {
         actionsState.setIds([])
@@ -30,4 +30,4 @@ const useContactRestore = (): UseContactRestore => {
     return { onClickConfirm, onClickCancel }
 }
 
-export default useContactRestore
+export default useCompanyRestore

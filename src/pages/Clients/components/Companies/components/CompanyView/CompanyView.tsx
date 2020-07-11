@@ -1,31 +1,31 @@
 import React, { FC, useEffect } from 'react'
 
-import ContactContextProvider from '../../contexts/ContactContext/ContactContextProvider'
-import ContactDelete from '../ContactDelete/ContactDelete'
-import ContactRestore from '../ContactRestore/ContactRestore'
-import ContactViewForm from './ContactViewForm'
-import ContactsActionsContextProvider from '../../contexts/ContactsActionsContext/ContactsActionsContextProvider'
-import ContactsMenu from '../../../ContactsMenu/ContactsMenu'
+import ClientsMenu from '../../../ClientsMenu/ClientsMenu'
+import CompaniesActionsContextProvider from '../../contexts/CompaniesActionsContext/CompaniesActionsContextProvider'
+import CompanyContextProvider from '../../contexts/CompanyContext/CompanyContextProvider'
+import CompanyDelete from '../CompanyDelete/CompanyDelete'
+import CompanyRestore from '../CompanyRestore/CompanyRestore'
+import CompanyViewForm from './CompanyViewForm'
 import Page from '../../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
-const ContactView: FC = () => {
+const CompanyView: FC = () => {
     const title = 'Просмотр контакта'
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <ContactsActionsContextProvider>
-            <ContactContextProvider>
-                <Page title={title} firstSidebar={<ContactsMenu />}>
-                    <ContactViewForm />
-                    <ContactDelete />
-                    <ContactRestore />
+        <CompaniesActionsContextProvider>
+            <CompanyContextProvider>
+                <Page title={title} firstSidebar={<ClientsMenu />}>
+                    <CompanyViewForm />
+                    <CompanyDelete />
+                    <CompanyRestore />
                 </Page>
-            </ContactContextProvider>
-        </ContactsActionsContextProvider>
+            </CompanyContextProvider>
+        </CompaniesActionsContextProvider>
     )
 }
 
-export default ContactView
+export default CompanyView

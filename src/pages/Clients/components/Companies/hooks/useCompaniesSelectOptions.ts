@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from 'react'
 
 import CompaniesClient from '../../../../../../api/companies/clients/CompaniesClient'
 import Company from '../../../../../../api/companies/models/Company'
-import ContactAttribute from '../../../../../../api/contacts/models/ContactAttribute'
-import ContactAttributesClient from '../../../../../../api/contacts/clients/ContactAttributesClient'
+import CompanyAttribute from '../../../../../../api/companies/models/CompanyAttribute'
+import CompanyAttributesClient from '../../../../../../api/companies/clients/CompanyAttributesClient'
 import { DropdownItemProps } from '../../../../../components/common/fields/Dropdown/Dropdown'
 import HttpClientFactoryInstance from '../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
 import Lead from '../../../../../../api/leads/models/Lead'
@@ -11,9 +11,9 @@ import LeadsClient from '../../../../../../api/leads/clients/LeadsClient'
 
 const leadsClient = new LeadsClient(HttpClientFactoryInstance.Api)
 const companiesClient = new CompaniesClient(HttpClientFactoryInstance.Api)
-const contactAttributesClient = new ContactAttributesClient(HttpClientFactoryInstance.Api)
+const companyAttributesClient = new CompanyAttributesClient(HttpClientFactoryInstance.Api)
 
-interface UseContactsSelectOptionsReturn {
+interface UseCompaniesSelectOptionsReturn {
     getActualLeads: () => DropdownItemProps[]
     getAllLeads: () => DropdownItemProps[]
     getActualCompanies: () => DropdownItemProps[]
@@ -23,18 +23,18 @@ interface UseContactsSelectOptionsReturn {
 }
 
 // TODO: Move to l10n
-const useContactsSelectOptions = (): UseContactsSelectOptionsReturn => {
+const useCompaniesSelectOptions = (): UseCompaniesSelectOptionsReturn => {
     const MaxLimit = 1000
 
     const [leads, setLeads] = useState<Lead[]>([])
     const [companies, setCompanies] = useState<Company[]>([])
-    const [attributes, setAttributes] = useState<ContactAttribute[]>([])
+    const [attributes, setAttributes] = useState<CompanyAttribute[]>([])
 
     const mapLead = useCallback((x: Lead) => ({ value: x.id ?? '', text: x.name ?? '' }), [])
 
     const mapCompany = useCallback((x: Company) => ({ value: x.id ?? '', text: x.shortName ?? '' }), [])
 
-    const mapContactAttribute = useCallback((x: ContactAttribute) => ({ value: x.id ?? '', text: x.key ?? '' }), [])
+    const mapCompanyAttribute = useCallback((x: CompanyAttribute) => ({ value: x.id ?? '', text: x.key ?? '' }), [])
 
     const getLeads = useCallback(async () => {
         const response = await leadsClient.GetPagedListAsync({
@@ -59,7 +59,7 @@ const useContactsSelectOptions = (): UseContactsSelectOptionsReturn => {
     }, [])
 
     const getAttributes = useCallback(async () => {
-        const response = await contactAttributesClient.GetPagedListAsync({
+        const response = await companyAttributesClient.GetPagedListAsync({
             isDeleted: false,
             sortBy: 'Key',
             orderBy: 'asc',
@@ -84,12 +84,12 @@ const useContactsSelectOptions = (): UseContactsSelectOptionsReturn => {
 
     const getAllCompanies = useCallback(() => companies.map(mapCompany), [companies, mapCompany])
 
-    const getActualAttributes = useCallback(() => attributes.filter(x => !x.isDeleted).map(mapContactAttribute), [
+    const getActualAttributes = useCallback(() => attributes.filter(x => !x.isDeleted).map(mapCompanyAttribute), [
         attributes,
-        mapContactAttribute
+        mapCompanyAttribute
     ])
 
-    const getAllAttributes = useCallback(() => attributes.map(mapContactAttribute), [attributes, mapContactAttribute])
+    const getAllAttributes = useCallback(() => attributes.map(mapCompanyAttribute), [attributes, mapCompanyAttribute])
 
     useEffect(() => {
         getLeads()
@@ -107,4 +107,4 @@ const useContactsSelectOptions = (): UseContactsSelectOptionsReturn => {
     }
 }
 
-export default useContactsSelectOptions
+export default useCompaniesSelectOptions

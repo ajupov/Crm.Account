@@ -1,19 +1,19 @@
-import ContactChangesFiltersState, {
-    contactChangesFiltersInitialState
-} from '../../../states/ContactChangesFiltersState'
+import CompanyChangesFiltersState, {
+    companyChangesFiltersInitialState
+} from '../../../states/CompanyChangesFiltersState'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import ContactChangesContext from '../../ContactChangesContext/ContactChangesContext'
+import CompanyChangesContext from '../../CompanyChangesContext/CompanyChangesContext'
 import { FilterFormFieldProps } from '../../../../../../../components/common/forms/FilterForm/FilterForm'
 
 // TODO: Move to l10n
-const useContactChangesFilters = (): ContactChangesFiltersState => {
-    const state = useContext(ContactChangesContext)
+const useCompanyChangesFilters = (): CompanyChangesFiltersState => {
+    const state = useContext(CompanyChangesContext)
     const [minCreateDate, setMinCreateDate] = useState('')
     const [maxCreateDate, setMaxCreateDate] = useState('')
     const [isApplyEnabled, setIsApplyEnabled] = useState(false)
     const [isResetEnabled, setIsResetEnabled] = useState(false)
-    const [isShowMobile, setIsShowMobile] = useState(contactChangesFiltersInitialState.isShowMobile)
+    const [isShowMobile, setIsShowMobile] = useState(companyChangesFiltersInitialState.isShowMobile)
 
     const onChangeMinCreateDate = useCallback((_, data) => {
         setMinCreateDate(data.value)
@@ -74,4 +74,4 @@ const useContactChangesFilters = (): ContactChangesFiltersState => {
     return { fields, isApplyEnabled, onApply, isResetEnabled, onReset, isShowMobile, onShowMobile, onHideMobile }
 }
 
-export default useContactChangesFilters
+export default useCompanyChangesFilters

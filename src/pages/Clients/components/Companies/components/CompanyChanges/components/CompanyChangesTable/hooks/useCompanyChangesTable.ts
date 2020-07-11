@@ -2,30 +2,30 @@ import { calculateOffset, calculatePage } from '../../../../../../../../../utils
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import Contact from '../../../../../../../../../../api/contacts/models/Contact'
-import ContactAttributeLink from '../../../../../../../../../../api/contacts/models/ContactAttributeLink'
-import ContactBankAccount from '../../../../../../../../../../api/contacts/models/ContactBankAccount'
-import ContactChange from '../../../../../../../../../../api/contacts/models/ContactChange'
-import ContactChangesContext from '../../../../../contexts/ContactChangesContext/ContactChangesContext'
+import Company from '../../../../../../../../../../api/companies/models/Company'
+import CompanyAttributeLink from '../../../../../../../../../../api/companies/models/CompanyAttributeLink'
+import CompanyBankAccount from '../../../../../../../../../../api/companies/models/CompanyBankAccount'
+import CompanyChange from '../../../../../../../../../../api/companies/models/CompanyChange'
+import CompanyChangesContext from '../../../../../contexts/CompanyChangesContext/CompanyChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../../components/common/collections/Table/TableHeader'
 import { getFileNameWithDateTime } from '../../../../../../../../../helpers/fileNameHelper'
 import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
-import { joinAttributes } from '../../../../../mappers/contactAttributesMapper'
-import { joinBankAccounts } from '../../../../../mappers/contactBankAccountsMapper'
+import { joinAttributes } from '../../../../../mappers/companyAttributesMapper'
+import { joinBankAccounts } from '../../../../../mappers/companyBankAccountsMapper'
 import { toLocaleDateTime } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 
-interface UseContactChangesTableReturn {
+interface UseCompanyChangesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (contacts: ContactChange[]) => TableBodyRowProps[]
+    map: (companies: CompanyChange[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
 
 // TODO: Move to l10n
-const useContactChangesTable = (): UseContactChangesTableReturn => {
-    const state = useContext(ContactChangesContext)
+const useCompanyChangesTable = (): UseCompanyChangesTableReturn => {
+    const state = useContext(CompanyChangesContext)
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const changes = (await state.getAll())?.changes
@@ -46,7 +46,7 @@ const useContactChangesTable = (): UseContactChangesTableReturn => {
         [state]
     )
 
-    const getChangeName = useCallback((change: ContactChange) => {
+    const getChangeName = useCallback((change: CompanyChange) => {
         if (!change.oldValueJson && change.newValueJson) {
             return 'Создан'
         }
@@ -62,14 +62,14 @@ const useContactChangesTable = (): UseContactChangesTableReturn => {
         return ''
     }, [])
 
-    const mapAttributes = useCallback((links?: ContactAttributeLink[]) => joinAttributes(links), [])
+    const mapAttributes = useCallback((links?: CompanyAttributeLink[]) => joinAttributes(links), [])
 
-    const mapBankAccounts = useCallback((accounts?: ContactBankAccount[]) => joinBankAccounts(accounts), [])
+    const mapBankAccounts = useCallback((accounts?: CompanyBankAccount[]) => joinBankAccounts(accounts), [])
 
     const getChangeValue = useCallback(
-        (change: ContactChange) => {
-            const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as Contact) : void 0
-            const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as Contact) : void 0
+        (change: CompanyChange) => {
+            const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as Company) : void 0
+            const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as Company) : void 0
 
             return [
                 `ID Лида: ${getValueOrEmpty(oldValue?.leadId)} → ${getValueOrEmpty(newValue?.leadId)}`,
@@ -103,7 +103,7 @@ const useContactChangesTable = (): UseContactChangesTableReturn => {
     )
 
     const map = useCallback(
-        (changes: ContactChange[]) =>
+        (changes: CompanyChange[]) =>
             changes.map(
                 change =>
                     ({
@@ -147,4 +147,4 @@ const useContactChangesTable = (): UseContactChangesTableReturn => {
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
-export default useContactChangesTable
+export default useCompanyChangesTable

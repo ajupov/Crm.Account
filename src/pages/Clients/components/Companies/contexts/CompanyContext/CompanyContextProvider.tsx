@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 
-import ContactContext from './ContactContext'
-import useContact from './hooks/useContact'
+import CompanyContext from './CompanyContext'
+import useCompany from './hooks/useCompany'
 
-const ContactContextProvider: FC = ({ children }) => {
-    const state = useContact()
+const CompanyContextProvider: FC = ({ children }) => {
+    const state = useCompany()
 
-    return <ContactContext.Provider value={state}>{children}</ContactContext.Provider>
+    return <CompanyContext.Provider value={state}>{children}</CompanyContext.Provider>
 }
 
-export default ContactContextProvider
+export default CompanyContextProvider

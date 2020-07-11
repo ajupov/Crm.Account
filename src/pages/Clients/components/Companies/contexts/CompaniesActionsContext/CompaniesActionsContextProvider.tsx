@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 
-import ContactsActionsContext from './ContactsActionsContext'
-import useContactsActions from './hooks/useContactsActions'
+import CompaniesActionsContext from './CompaniesActionsContext'
+import useCompaniesActions from './hooks/useCompaniesActions'
 
-const ContactsActionsContextProvider: FC = ({ children }) => {
-    const state = useContactsActions()
+const CompaniesActionsContextProvider: FC = ({ children }) => {
+    const state = useCompaniesActions()
 
-    return <ContactsActionsContext.Provider value={state}>{children}</ContactsActionsContext.Provider>
+    return <CompaniesActionsContext.Provider value={state}>{children}</CompaniesActionsContext.Provider>
 }
 
-export default ContactsActionsContextProvider
+export default CompaniesActionsContextProvider

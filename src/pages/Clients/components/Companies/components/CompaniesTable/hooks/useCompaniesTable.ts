@@ -2,38 +2,38 @@ import { calculateOffset, calculatePage } from '../../../../../../../utils/pagin
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import Contact from '../../../../../../../../api/contacts/models/Contact'
-import ContactsContext from '../../../contexts/ContactsContext/ContactsContext'
-import ContactsRoutes from '../../../routes/ContactsRoutes'
+import CompaniesContext from '../../../contexts/CompaniesContext/CompaniesContext'
+import CompaniesRoutes from '../../../routes/CompaniesRoutes'
+import Company from '../../../../../../../../api/companies/models/Company'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
 import { toLocaleDateTime } from '../../../../../../../utils/dateTime/dateTimeUtils'
-import useContactView from '../../ContactView/hooks/useContactView'
+import useCompanyView from '../../CompanyView/hooks/useCompanyView'
 import { useHistory } from 'react-router'
 
-interface UseContactsTableReturn {
+interface UseCompaniesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (contacts: Contact[]) => TableBodyRowProps[]
+    map: (companies: Company[]) => TableBodyRowProps[]
     onClickCreate: () => void
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
 
 // TODO: Move to l10n
-const useContactsTable = (): UseContactsTableReturn => {
+const useCompaniesTable = (): UseCompaniesTableReturn => {
     const history = useHistory()
-    const state = useContext(ContactsContext)
-    const { onClickEdit, onClickDelete, onClickRestore } = useContactView()
+    const state = useContext(CompaniesContext)
+    const { onClickEdit, onClickDelete, onClickRestore } = useCompanyView()
 
-    const onClickCreate = useCallback(() => history.push(ContactsRoutes.Create), [history])
+    const onClickCreate = useCallback(() => history.push(CompaniesRoutes.Create), [history])
 
-    const onClickView = useCallback((id: string) => history.push(`${ContactsRoutes.View}/${id}`), [history])
+    const onClickView = useCallback((id: string) => history.push(`${CompaniesRoutes.View}/${id}`), [history])
 
     const onClickDownloadAsCsv = useCallback(async () => {
-        const contacts = (await state.getAll())?.contacts
-        if (!contacts) {
+        const companies = (await state.getAll())?.companies
+        if (!companies) {
             return
         }
 
@@ -62,7 +62,7 @@ const useContactsTable = (): UseContactsTableReturn => {
             'Создан',
             'Изменен'
         ]
-        const csv = convertObjectToCSV([headers, ...contacts])
+        const csv = convertObjectToCSV([headers, ...companies])
 
         downloadAsCsv(fileName, csv)
     }, [state])
@@ -95,20 +95,20 @@ const useContactsTable = (): UseContactsTableReturn => {
     )
 
     const map = useCallback(
-        (contacts: Contact[]) =>
-            contacts.map(
-                contact =>
+        (companies: Company[]) =>
+            companies.map(
+                company =>
                     ({
-                        id: contact.id,
+                        id: company.id,
                         cells: [
-                            { value: contact.surname, textAlign: 'left' },
-                            { value: contact.name, textAlign: 'left' },
-                            { value: contact.patronymic, textAlign: 'left' },
-                            { value: contact.phone, textAlign: 'left' },
-                            { value: contact.email, textAlign: 'left' },
-                            { value: toLocaleDateTime(contact.createDateTime), textAlign: 'center' }
+                            { value: company.surname, textAlign: 'left' },
+                            { value: company.name, textAlign: 'left' },
+                            { value: company.patronymic, textAlign: 'left' },
+                            { value: company.phone, textAlign: 'left' },
+                            { value: company.email, textAlign: 'left' },
+                            { value: toLocaleDateTime(company.createDateTime), textAlign: 'center' }
                         ],
-                        isDeleted: contact.isDeleted,
+                        isDeleted: company.isDeleted,
                         onClickRow: onClickView,
                         onClickEditButton: onClickEdit,
                         onClickDeleteButton: onClickDelete,
@@ -174,4 +174,4 @@ const useContactsTable = (): UseContactsTableReturn => {
     return { page, headers, map, onClickCreate, onClickDownloadAsCsv, onClickChangePage }
 }
 
-export default useContactsTable
+export default useCompaniesTable

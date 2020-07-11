@@ -1,21 +1,21 @@
-import ContactsActionsState, { contactsActionsInitialState } from '../../../states/ContactsActionsState'
+import CompaniesActionsState, { companiesActionsInitialState } from '../../../states/CompaniesActionsState'
 import { useCallback, useState } from 'react'
 
-import ContactsClient from '../../../../../../../../api/contacts/clients/ContactsClient'
+import CompaniesClient from '../../../../../../../../api/companies/clients/CompaniesClient'
 import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
 
-const contactsClient = new ContactsClient(HttpClientFactoryInstance.Api)
+const companiesClient = new CompaniesClient(HttpClientFactoryInstance.Api)
 
-const useContactsActions = (): ContactsActionsState => {
-    const [ids, setIds] = useState(contactsActionsInitialState.ids)
-    const [isLoading, setIsLoading] = useState(contactsActionsInitialState.isLoading)
-    const [isDeleting, setIsDeleting] = useState(contactsActionsInitialState.isDeleting)
-    const [isRestoring, setIsRestoring] = useState(contactsActionsInitialState.isRestoring)
+const useCompaniesActions = (): CompaniesActionsState => {
+    const [ids, setIds] = useState(companiesActionsInitialState.ids)
+    const [isLoading, setIsLoading] = useState(companiesActionsInitialState.isLoading)
+    const [isDeleting, setIsDeleting] = useState(companiesActionsInitialState.isDeleting)
+    const [isRestoring, setIsRestoring] = useState(companiesActionsInitialState.isRestoring)
 
     const _delete = useCallback(async () => {
         setIsLoading(true)
 
-        await contactsClient.DeleteAsync(ids)
+        await companiesClient.DeleteAsync(ids)
 
         setIsDeleting(false)
         setIsLoading(false)
@@ -24,7 +24,7 @@ const useContactsActions = (): ContactsActionsState => {
     const restore = useCallback(async () => {
         setIsLoading(true)
 
-        await contactsClient.RestoreAsync(ids)
+        await companiesClient.RestoreAsync(ids)
 
         setIsRestoring(false)
         setIsLoading(false)
@@ -33,4 +33,4 @@ const useContactsActions = (): ContactsActionsState => {
     return { isLoading, ids, setIds, isDeleting, setIsDeleting, delete: _delete, isRestoring, setIsRestoring, restore }
 }
 
-export default useContactsActions
+export default useCompaniesActions

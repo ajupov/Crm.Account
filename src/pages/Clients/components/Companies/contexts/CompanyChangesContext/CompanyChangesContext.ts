@@ -1,7 +1,7 @@
-import ContactChangesState, { contactChangesInitialState } from '../../states/ContactChangesState'
+import CompanyChangesState, { companyChangesInitialState } from '../../states/CompanyChangesState'
 
 import { createContext } from 'react'
 
-const ContactChangesContext = createContext<ContactChangesState>(contactChangesInitialState)
+const CompanyChangesContext = createContext<CompanyChangesState>(companyChangesInitialState)
 
-export default ContactChangesContext
+export default CompanyChangesContext

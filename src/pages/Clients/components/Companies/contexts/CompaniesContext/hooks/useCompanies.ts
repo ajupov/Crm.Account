@@ -1,26 +1,26 @@
-import ContactsState, { conactsInitialState } from '../../../states/ContactsState'
+import CompaniesState, { conactsInitialState } from '../../../states/CompaniesState'
 import { useCallback, useEffect, useState } from 'react'
 
-import ContactsClient from '../../../../../../../../api/contacts/clients/ContactsClient'
+import CompaniesClient from '../../../../../../../../api/companies/clients/CompaniesClient'
 import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
 
-const contactsClient = new ContactsClient(HttpClientFactoryInstance.Api)
+const companiesClient = new CompaniesClient(HttpClientFactoryInstance.Api)
 
-const useContacts = (): ContactsState => {
+const useCompanies = (): CompaniesState => {
     const MaxLimit = 1048576
 
     const [request, setRequest] = useState(conactsInitialState.request)
     const [isLoading, setIsLoading] = useState(conactsInitialState.isLoading)
-    const [contacts, setAttributes] = useState(conactsInitialState.contacts)
+    const [companies, setAttributes] = useState(conactsInitialState.companies)
     const [total, setTotal] = useState(conactsInitialState.total)
     const [lastModifyDateTime, setLastModifyDateTime] = useState(conactsInitialState.lastModifyDateTime)
 
     const getPagedList = useCallback(async () => {
         setIsLoading(true)
 
-        const response = await contactsClient.GetPagedListAsync(request)
+        const response = await companiesClient.GetPagedListAsync(request)
 
-        setAttributes(response.contacts ?? [])
+        setAttributes(response.companies ?? [])
         setTotal(response.totalCount)
         setLastModifyDateTime(response.lastModifyDateTime ?? '')
 
@@ -30,9 +30,9 @@ const useContacts = (): ContactsState => {
     const getAll = useCallback(async () => {
         setIsLoading(true)
 
-        const response = await contactsClient.GetPagedListAsync({ ...request, offset: 0, limit: MaxLimit })
-        if (response.contacts) {
-            response.contacts.forEach(v => {
+        const response = await companiesClient.GetPagedListAsync({ ...request, offset: 0, limit: MaxLimit })
+        if (response.companies) {
+            response.companies.forEach(v => {
                 delete v.accountId
                 delete v.createUserId
                 delete v.responsibleUserId
@@ -51,7 +51,7 @@ const useContacts = (): ContactsState => {
         getPagedList()
     }, [getPagedList])
 
-    return { request, setRequest, isLoading, contacts, total, lastModifyDateTime, getPagedList, getAll }
+    return { request, setRequest, isLoading, companies, total, lastModifyDateTime, getPagedList, getAll }
 }
 
-export default useContacts
+export default useCompanies

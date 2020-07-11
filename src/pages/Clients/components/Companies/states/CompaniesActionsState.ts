@@ -1,4 +1,4 @@
-export default interface ContactsActionsState {
+export default interface CompaniesActionsState {
     isLoading: boolean
     ids: string[]
     setIds: (ids: string[]) => void
@@ -10,7 +10,7 @@ export default interface ContactsActionsState {
     restore: () => Promise<void>
 }
 
-export const contactsActionsInitialState: ContactsActionsState = {
+export const companiesActionsInitialState: CompaniesActionsState = {
     isLoading: false,
     ids: [],
     setIds: (_: string[]) => void 0,

@@ -1,16 +1,16 @@
-import ContactsFiltersState, { contactsFiltersInitialState } from '../../../states/ContactsFiltersState'
+import CompaniesFiltersState, { companiesFiltersInitialState } from '../../../states/CompaniesFiltersState'
 import { arrayToDictionary, dictionaryToArray } from '../../../../../../../utils/dictionary/dictionaryUtils'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import ContactsContext from '../../ContactsContext/ContactsContext'
+import CompaniesContext from '../../CompaniesContext/CompaniesContext'
 import { FilterFormFieldProps } from '../../../../../../../components/common/forms/FilterForm/FilterForm'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
-import useContactsSelectOptions from '../../../hooks/useContactsSelectOptions'
+import useCompaniesSelectOptions from '../../../hooks/useCompaniesSelectOptions'
 
 // TODO: Move to l10n
-const useContactsFilters = (): ContactsFiltersState => {
-    const state = useContext(ContactsContext)
-    const { getActualAttributes } = useContactsSelectOptions()
+const useCompaniesFilters = (): CompaniesFiltersState => {
+    const state = useContext(CompaniesContext)
+    const { getActualAttributes } = useCompaniesSelectOptions()
 
     const [surname, setSurname] = useState(state.request.surname ?? '')
     const [name, setName] = useState(state.request.name ?? '')
@@ -37,9 +37,9 @@ const useContactsFilters = (): ContactsFiltersState => {
     const [minModifyDate, setMinModifyDate] = useState(state.request.minModifyDate ?? '')
     const [maxModifyDate, setMaxModifyDate] = useState(state.request.maxModifyDate ?? '')
     const [isDeleted, setIsDeleted] = useState(state.request.isDeleted)
-    const [isApplyEnabled, setIsApplyEnabled] = useState(contactsFiltersInitialState.isApplyEnabled)
-    const [isResetEnabled, setIsResetEnabled] = useState(contactsFiltersInitialState.isResetEnabled)
-    const [isShowMobile, setIsShowMobile] = useState(contactsFiltersInitialState.isShowMobile)
+    const [isApplyEnabled, setIsApplyEnabled] = useState(companiesFiltersInitialState.isApplyEnabled)
+    const [isResetEnabled, setIsResetEnabled] = useState(companiesFiltersInitialState.isResetEnabled)
+    const [isShowMobile, setIsShowMobile] = useState(companiesFiltersInitialState.isShowMobile)
 
     const onChangeName = useCallback((_, { value }) => {
         setName(value)
@@ -504,4 +504,4 @@ const useContactsFilters = (): ContactsFiltersState => {
     return { fields, isApplyEnabled, onApply, isResetEnabled, onReset, isShowMobile, onShowMobile, onHideMobile }
 }
 
-export default useContactsFilters
+export default useCompaniesFilters

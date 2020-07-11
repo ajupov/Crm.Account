@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react'
 
+import ClientsMenu from '../../../ClientsMenu/ClientsMenu'
 import ContactAttributeContextProvider from '../../contexts/ContactAttributeContext/ContactAttributeContextProvider'
 import ContactAttributeCreateForm from './ContactAttributeCreateForm'
-import ContactsMenu from '../../../ContactsMenu/ContactsMenu'
 import Page from '../../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
@@ -14,7 +14,7 @@ const ContactAttributeCreate: FC = () => {
 
     return (
         <ContactAttributeContextProvider>
-            <Page title={title} firstSidebar={<ContactsMenu />}>
+            <Page title={title} firstSidebar={<ClientsMenu />}>
                 <ContactAttributeCreateForm />
             </Page>
         </ContactAttributeContextProvider>

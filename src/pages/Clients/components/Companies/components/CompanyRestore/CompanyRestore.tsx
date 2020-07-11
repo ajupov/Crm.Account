@@ -1,13 +1,13 @@
 import React, { FC, useContext } from 'react'
 
-import ContactsActionsContext from '../../contexts/ContactsActionsContext/ContactsActionsContext'
+import CompaniesActionsContext from '../../contexts/CompaniesActionsContext/CompaniesActionsContext'
 import RestoreModal from '../../../../../../components/common/modals/RestoreModal/RestoreModal'
-import useContactRestore from './hooks/useContactRestore'
+import useCompanyRestore from './hooks/useCompanyRestore'
 
 // TODO: Move to l10n
-const ContactRestore: FC = () => {
-    const state = useContext(ContactsActionsContext)
-    const { onClickConfirm, onClickCancel } = useContactRestore()
+const CompanyRestore: FC = () => {
+    const state = useContext(CompaniesActionsContext)
+    const { onClickConfirm, onClickCancel } = useCompanyRestore()
 
     return (
         <RestoreModal
@@ -20,4 +20,4 @@ const ContactRestore: FC = () => {
     )
 }
 
-export default ContactRestore
+export default CompanyRestore

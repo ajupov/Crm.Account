@@ -1,6 +1,6 @@
-import ContactAttributeLink from '../../../../../../api/contacts/models/ContactAttributeLink'
+import CompanyAttributeLink from '../../../../../../api/companies/models/CompanyAttributeLink'
 
-const joinAttributes = (categories?: ContactAttributeLink[]): string =>
-    categories?.map(x => x.contactAttributeId + (x.value ? ': ' + x.value : '')).join(', ') ?? ''
+const joinAttributes = (categories?: CompanyAttributeLink[]): string =>
+    categories?.map(x => x.companyAttributeId + (x.value ? ': ' + x.value : '')).join(', ') ?? ''
 
 export { joinAttributes }

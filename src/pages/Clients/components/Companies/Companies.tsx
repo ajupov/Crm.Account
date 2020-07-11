@@ -1,44 +1,44 @@
 import React, { FC, useEffect } from 'react'
 
-import ContactContextProvider from './contexts/ContactContext/ContactContextProvider'
-import ContactDelete from './components/ContactDelete/ContactDelete'
-import ContactRestore from './components/ContactRestore/ContactRestore'
-import ContactsActionsContextProvider from './contexts/ContactsActionsContext/ContactsActionsContextProvider'
-import ContactsContextProvider from './contexts/ContactsContext/ContactsContextProvider'
-import ContactsFilter from './components/ContactsFilter/ContactsFilter'
-import ContactsFilterMobile from './components/ContactsFilterMobile/ContactsFilterMobile'
-import ContactsFiltersContextProvider from './contexts/ContactsFiltersContext/ContactsFiltersContextProvider'
-import ContactsMenu from '../ContactsMenu/ContactsMenu'
-import ContactsTable from './components/ContactsTable/ContactsTable'
+import ClientsMenu from '../ClientsMenu/ClientsMenu'
+import CompaniesActionsContextProvider from './contexts/CompaniesActionsContext/CompaniesActionsContextProvider'
+import CompaniesContextProvider from './contexts/CompaniesContext/CompaniesContextProvider'
+import CompaniesFilter from './components/CompaniesFilter/CompaniesFilter'
+import CompaniesFilterMobile from './components/CompaniesFilterMobile/CompaniesFilterMobile'
+import CompaniesFiltersContextProvider from './contexts/CompaniesFiltersContext/CompaniesFiltersContextProvider'
+import CompaniesTable from './components/CompaniesTable/CompaniesTable'
+import CompanyContextProvider from './contexts/CompanyContext/CompanyContextProvider'
+import CompanyDelete from './components/CompanyDelete/CompanyDelete'
+import CompanyRestore from './components/CompanyRestore/CompanyRestore'
 import Page from '../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
-const Contacts: FC = () => {
+const Companies: FC = () => {
     const title = 'Контакты'
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <ContactsContextProvider>
-            <ContactsActionsContextProvider>
-                <ContactsFiltersContextProvider>
-                    <ContactContextProvider>
+        <CompaniesContextProvider>
+            <CompaniesActionsContextProvider>
+                <CompaniesFiltersContextProvider>
+                    <CompanyContextProvider>
                         <Page
                             title={title}
-                            firstSidebar={<ContactsMenu />}
-                            secondSidebar={<ContactsFilter />}
-                            secondSidebarMobile={<ContactsFilterMobile />}
+                            firstSidebar={<ClientsMenu />}
+                            secondSidebar={<CompaniesFilter />}
+                            secondSidebarMobile={<CompaniesFilterMobile />}
                         >
-                            <ContactsTable />
-                            <ContactDelete />
-                            <ContactRestore />
+                            <CompaniesTable />
+                            <CompanyDelete />
+                            <CompanyRestore />
                         </Page>
-                    </ContactContextProvider>
-                </ContactsFiltersContextProvider>
-            </ContactsActionsContextProvider>
-        </ContactsContextProvider>
+                    </CompanyContextProvider>
+                </CompaniesFiltersContextProvider>
+            </CompaniesActionsContextProvider>
+        </CompaniesContextProvider>
     )
 }
 
-export default Contacts
+export default Companies

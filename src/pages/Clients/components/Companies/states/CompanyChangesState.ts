@@ -1,23 +1,23 @@
-import ContactChange from '../../../../../../api/contacts/models/ContactChange'
-import ContactChangeGetPagedListRequest from '../../../../../../api/contacts/models/ContactChangeGetPagedListRequest'
-import ContactChangeGetPagedListResponse from '../../../../../../api/contacts/models/ContactChangeGetPagedListResponse'
+import CompanyChange from '../../../../../../api/companies/models/CompanyChange'
+import CompanyChangeGetPagedListRequest from '../../../../../../api/companies/models/CompanyChangeGetPagedListRequest'
+import CompanyChangeGetPagedListResponse from '../../../../../../api/companies/models/CompanyChangeGetPagedListResponse'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'
 const DefaultOrderBy = 'desc'
 
-export default interface ContactChangesState {
-    request: ContactChangeGetPagedListRequest
-    setRequest: (request: ContactChangeGetPagedListRequest) => void
+export default interface CompanyChangesState {
+    request: CompanyChangeGetPagedListRequest
+    setRequest: (request: CompanyChangeGetPagedListRequest) => void
     isLoading: boolean
-    changes: ContactChange[]
+    changes: CompanyChange[]
     total: number
-    getAll: () => Promise<ContactChangeGetPagedListResponse | undefined>
+    getAll: () => Promise<CompanyChangeGetPagedListResponse | undefined>
 }
 
-export const contactChangesInitialState: ContactChangesState = {
+export const companyChangesInitialState: CompanyChangesState = {
     request: {
-        contactId: '',
+        companyId: '',
         minCreateDate: void 0,
         maxCreateDate: void 0,
         offset: 0,
@@ -25,7 +25,7 @@ export const contactChangesInitialState: ContactChangesState = {
         sortBy: DefaultSortBy,
         orderBy: DefaultOrderBy
     },
-    setRequest: (_: ContactChangeGetPagedListRequest) => void 0,
+    setRequest: (_: CompanyChangeGetPagedListRequest) => void 0,
     isLoading: false,
     changes: [],
     total: 0,

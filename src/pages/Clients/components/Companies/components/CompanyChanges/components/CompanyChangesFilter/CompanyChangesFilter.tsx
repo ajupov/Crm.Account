@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 
 import FilterForm from '../../../../../../../../components/common/forms/FilterForm/FilterForm'
-import useContactChangesFilters from '../../../../contexts/ContactChangesFiltersContext/hooks/useContactChangesFilters'
+import useCompanyChangesFilters from '../../../../contexts/CompanyChangesFiltersContext/hooks/useCompanyChangesFilters'
 
-const ContactChangesFilter: FC = () => {
-    const { fields, isApplyEnabled, onApply, isResetEnabled, onReset } = useContactChangesFilters()
+const CompanyChangesFilter: FC = () => {
+    const { fields, isApplyEnabled, onApply, isResetEnabled, onReset } = useCompanyChangesFilters()
 
     return (
         <FilterForm
@@ -17,4 +17,4 @@ const ContactChangesFilter: FC = () => {
     )
 }
 
-export default ContactChangesFilter
+export default CompanyChangesFilter

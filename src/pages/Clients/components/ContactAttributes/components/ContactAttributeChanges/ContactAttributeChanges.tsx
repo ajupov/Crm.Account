@@ -1,11 +1,11 @@
 import React, { FC, useEffect } from 'react'
 
+import ClientsMenu from '../../../ClientsMenu/ClientsMenu'
 import ContactAttributeChangesContextProvider from '../../contexts/ContactAttributeChangesContext/ContactAttributeChangesContextProvider'
 import ContactAttributeChangesFilter from './components/ContactAttributeChangesFilter/ContactAttributeChangesFilter'
 import ContactAttributeChangesFiltersContextProvider from '../../contexts/ContactAttributeChangesFiltersContext/ContactAttributeChangesFiltersContextProvider'
 import ContactAttributeChangesTable from './components/ContactAttributeChangesTable/ContactAttributeChangesTable'
 import ContactsAttributeChangesFilterMobile from './components/ContactsAttributeChangesFilterMobile/ContactsAttributeChangesFilterMobile'
-import ContactsMenu from '../../../ContactsMenu/ContactsMenu'
 import Page from '../../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 import useContactAttributeChangesView from './hooks/useContactAttributeChangesView'
@@ -23,7 +23,7 @@ const ContactAttributeChanges: FC = () => {
             <ContactAttributeChangesFiltersContextProvider>
                 <Page
                     title={title}
-                    firstSidebar={<ContactsMenu />}
+                    firstSidebar={<ClientsMenu />}
                     secondSidebar={<ContactAttributeChangesFilter />}
                     secondSidebarMobile={<ContactsAttributeChangesFilterMobile />}
                     onClickCancel={onClickCancel}

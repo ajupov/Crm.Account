@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from 'react'
 
+import ClientsMenu from '../ClientsMenu/ClientsMenu'
 import ContactContextProvider from './contexts/ContactContext/ContactContextProvider'
 import ContactDelete from './components/ContactDelete/ContactDelete'
 import ContactRestore from './components/ContactRestore/ContactRestore'
@@ -8,7 +9,6 @@ import ContactsContextProvider from './contexts/ContactsContext/ContactsContextP
 import ContactsFilter from './components/ContactsFilter/ContactsFilter'
 import ContactsFilterMobile from './components/ContactsFilterMobile/ContactsFilterMobile'
 import ContactsFiltersContextProvider from './contexts/ContactsFiltersContext/ContactsFiltersContextProvider'
-import ContactsMenu from '../ContactsMenu/ContactsMenu'
 import ContactsTable from './components/ContactsTable/ContactsTable'
 import Page from '../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../helpers/productNameHelper'
@@ -26,7 +26,7 @@ const Contacts: FC = () => {
                     <ContactContextProvider>
                         <Page
                             title={title}
-                            firstSidebar={<ContactsMenu />}
+                            firstSidebar={<ClientsMenu />}
                             secondSidebar={<ContactsFilter />}
                             secondSidebarMobile={<ContactsFilterMobile />}
                         >

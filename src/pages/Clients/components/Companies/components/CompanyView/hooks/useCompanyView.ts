@@ -1,18 +1,18 @@
 import { useCallback, useContext } from 'react'
 
-import Contact from '../../../../../../../../api/contacts/models/Contact'
-import ContactContext from '../../../contexts/ContactContext/ContactContext'
-import ContactsActionsContext from '../../../contexts/ContactsActionsContext/ContactsActionsContext'
-import ContactsRoutes from '../../../routes/ContactsRoutes'
+import CompaniesActionsContext from '../../../contexts/CompaniesActionsContext/CompaniesActionsContext'
+import CompaniesRoutes from '../../../routes/CompaniesRoutes'
+import Company from '../../../../../../../../api/companies/models/Company'
+import CompanyContext from '../../../contexts/CompanyContext/CompanyContext'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
-import { joinAttributes } from '../../../mappers/contactAttributesMapper'
-import { joinBankAccounts } from '../../../mappers/contactBankAccountsMapper'
+import { joinAttributes } from '../../../mappers/companyAttributesMapper'
+import { joinBankAccounts } from '../../../mappers/companyBankAccountsMapper'
 import useCompanyName from '../../../hooks/useCompanyName'
 import { useHistory } from 'react-router'
 import useLeadName from '../../../hooks/useLeadName'
 
-interface UseContactViewReturn {
-    map: (contact: Contact) => ViewDataProps[]
+interface UseCompanyViewReturn {
+    map: (company: Company) => ViewDataProps[]
     onClickEdit: (id: string) => void
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
@@ -21,14 +21,14 @@ interface UseContactViewReturn {
 }
 
 // TODO: Move to l10n
-const useContactView = (): UseContactViewReturn => {
+const useCompanyView = (): UseCompanyViewReturn => {
     const history = useHistory()
-    const contactState = useContext(ContactContext)
-    const actionsState = useContext(ContactsActionsContext)
-    const { getCompanyName } = useCompanyName(contactState.contact.companyId)
-    const { getLeadName } = useLeadName(contactState.contact.leadId)
+    const companyState = useContext(CompanyContext)
+    const actionsState = useContext(CompaniesActionsContext)
+    const { getCompanyName } = useCompanyName(companyState.company.companyId)
+    const { getLeadName } = useLeadName(companyState.company.leadId)
 
-    const onClickEdit = useCallback((id: string) => history.push(`${ContactsRoutes.Edit}/${id}`), [history])
+    const onClickEdit = useCallback((id: string) => history.push(`${CompaniesRoutes.Edit}/${id}`), [history])
 
     const onClickDelete = useCallback(
         (id: string) => {
@@ -46,20 +46,20 @@ const useContactView = (): UseContactViewReturn => {
         [actionsState]
     )
 
-    const onClickHistory = useCallback((id: string) => history.push(`${ContactsRoutes.Changes}/${id}`), [history])
+    const onClickHistory = useCallback((id: string) => history.push(`${CompaniesRoutes.Changes}/${id}`), [history])
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const mapAttributes = useCallback(() => joinAttributes(contactState.contact.attributeLinks), [
-        contactState.contact.attributeLinks
+    const mapAttributes = useCallback(() => joinAttributes(companyState.company.attributeLinks), [
+        companyState.company.attributeLinks
     ])
 
-    const mapBankAccounts = useCallback(() => joinBankAccounts(contactState.contact.bankAccounts), [
-        contactState.contact.bankAccounts
+    const mapBankAccounts = useCallback(() => joinBankAccounts(companyState.company.bankAccounts), [
+        companyState.company.bankAccounts
     ])
 
     const map = useCallback(
-        (contact: Contact): ViewDataProps[] => [
+        (company: Company): ViewDataProps[] => [
             {
                 label: 'Лид',
                 value: getLeadName()
@@ -68,25 +68,25 @@ const useContactView = (): UseContactViewReturn => {
                 label: 'Компания',
                 value: getCompanyName()
             },
-            { label: 'Фамилия', value: contact.surname },
-            { label: 'Имя', value: contact.name },
-            { label: 'Отчество', value: contact.patronymic },
-            { label: 'Телефон', value: contact.phone },
-            { label: 'Email', value: contact.email },
-            { label: 'ИНН', value: contact.taxNumber },
-            { label: 'Должность', value: contact.post },
-            { label: 'Почтовый индекс', value: contact.postcode },
-            { label: 'Страна', value: contact.country },
-            { label: 'Регион', value: contact.region },
-            { label: 'Район/провинция', value: contact.province },
-            { label: 'Город/населенный пункт', value: contact.city },
-            { label: 'Улица', value: contact.street },
-            { label: 'Дом/строение', value: contact.house },
-            { label: 'Квартира', value: contact.apartment },
-            { label: 'Дата рождения', value: contact.birthDate },
+            { label: 'Фамилия', value: company.surname },
+            { label: 'Имя', value: company.name },
+            { label: 'Отчество', value: company.patronymic },
+            { label: 'Телефон', value: company.phone },
+            { label: 'Email', value: company.email },
+            { label: 'ИНН', value: company.taxNumber },
+            { label: 'Должность', value: company.post },
+            { label: 'Почтовый индекс', value: company.postcode },
+            { label: 'Страна', value: company.country },
+            { label: 'Регион', value: company.region },
+            { label: 'Район/провинция', value: company.province },
+            { label: 'Город/населенный пункт', value: company.city },
+            { label: 'Улица', value: company.street },
+            { label: 'Дом/строение', value: company.house },
+            { label: 'Квартира', value: company.apartment },
+            { label: 'Дата рождения', value: company.birthDate },
             { label: 'Категории', value: mapBankAccounts() },
             { label: 'Атрибуты', value: mapAttributes() },
-            { label: 'Удален', value: contact.isDeleted ? 'Да' : 'Нет' }
+            { label: 'Удален', value: company.isDeleted ? 'Да' : 'Нет' }
         ],
         [getCompanyName, getLeadName, mapAttributes, mapBankAccounts]
     )
@@ -94,4 +94,4 @@ const useContactView = (): UseContactViewReturn => {
     return { map, onClickEdit, onClickDelete, onClickRestore, onClickHistory, onClickCancel }
 }
 
-export default useContactView
+export default useCompanyView

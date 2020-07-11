@@ -1,23 +1,23 @@
-import Contact from '../../../../../../api/contacts/models/Contact'
-import ContactGetPagedListRequest from '../../../../../../api/contacts/models/ContactGetPagedListRequest'
-import ContactGetPagedListResponse from '../../../../../../api/contacts/models/ContactGetPagedListResponse'
+import Company from '../../../../../../api/companies/models/Company'
+import CompanyGetPagedListRequest from '../../../../../../api/companies/models/CompanyGetPagedListRequest'
+import CompanyGetPagedListResponse from '../../../../../../api/companies/models/CompanyGetPagedListResponse'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'
 const DefaultOrderBy = 'desc'
 
-export default interface ContactsState {
-    request: ContactGetPagedListRequest
-    setRequest: (request: ContactGetPagedListRequest) => void
+export default interface CompaniesState {
+    request: CompanyGetPagedListRequest
+    setRequest: (request: CompanyGetPagedListRequest) => void
     isLoading: boolean
-    contacts: Contact[]
+    companies: Company[]
     total: number
     lastModifyDateTime: string
     getPagedList: () => Promise<void>
-    getAll: () => Promise<ContactGetPagedListResponse>
+    getAll: () => Promise<CompanyGetPagedListResponse>
 }
 
-export const conactsInitialState: ContactsState = {
+export const conactsInitialState: CompaniesState = {
     request: {
         isDeleted: false,
         offset: 0,
@@ -25,9 +25,9 @@ export const conactsInitialState: ContactsState = {
         sortBy: DefaultSortBy,
         orderBy: DefaultOrderBy
     },
-    setRequest: (_: ContactGetPagedListRequest) => void 0,
+    setRequest: (_: CompanyGetPagedListRequest) => void 0,
     isLoading: false,
-    contacts: [],
+    companies: [],
     total: 0,
     lastModifyDateTime: '',
     getPagedList: () => Promise.resolve(void 0),

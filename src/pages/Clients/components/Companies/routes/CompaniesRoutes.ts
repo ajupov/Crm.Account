@@ -1,9 +1,9 @@
-const ContactsRoutes = {
-    Index: '/clients/contacts',
-    View: '/clients/contacts/view',
-    Create: '/clients/contacts/create',
-    Edit: '/clients/contacts/edit',
-    Changes: '/clients/contacts/changes'
+const CompaniesRoutes = {
+    Index: '/clients/companies',
+    View: '/clients/companies/view',
+    Create: '/clients/companies/create',
+    Edit: '/clients/companies/edit',
+    Changes: '/clients/companies/changes'
 }
 
-export default ContactsRoutes
+export default CompaniesRoutes

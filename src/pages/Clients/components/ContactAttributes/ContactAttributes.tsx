@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from 'react'
 
+import ClientsMenu from '../ClientsMenu/ClientsMenu'
 import ContactAttributeContextProvider from './contexts/ContactAttributeContext/ContactAttributeContextProvider'
 import ContactAttributeDelete from './components/ContactAttributeDelete/ContactAttributeDelete'
 import ContactAttributeRestore from './components/ContactAttributeRestore/ContactAttributeRestore'
@@ -9,7 +10,6 @@ import ContactAttributesFilter from './components/ContactAttributesFilter/Contac
 import ContactAttributesFilterMobile from './components/ContactAttributesFilterMobile/ContactAttributesFilterMobile'
 import ContactAttributesFiltersContextProvider from './contexts/ContactAttributesFiltersContext/ContactAttributesFiltersContextProvider'
 import ContactAttributesTable from './components/ContactAttributesTable/ContactAttributesTable'
-import ContactsMenu from '../ContactsMenu/ContactsMenu'
 import Page from '../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../helpers/productNameHelper'
 
@@ -26,7 +26,7 @@ const ContactAttributes: FC = () => {
                     <ContactAttributeContextProvider>
                         <Page
                             title={title}
-                            firstSidebar={<ContactsMenu />}
+                            firstSidebar={<ClientsMenu />}
                             secondSidebar={<ContactAttributesFilter />}
                             secondSidebarMobile={<ContactAttributesFilterMobile />}
                         >

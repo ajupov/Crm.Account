@@ -1,10 +1,10 @@
 import React, { FC, useContext } from 'react'
 
-import ContactsFiltersContext from '../../contexts/ContactsFiltersContext/ContactsFiltersContext'
+import CompaniesFiltersContext from '../../contexts/CompaniesFiltersContext/CompaniesFiltersContext'
 import FilterForm from '../../../../../../components/common/forms/FilterForm/FilterForm'
 
-const ContactsFilter: FC = () => {
-    const state = useContext(ContactsFiltersContext)
+const CompaniesFilter: FC = () => {
+    const state = useContext(CompaniesFiltersContext)
 
     return (
         <FilterForm
@@ -17,4 +17,4 @@ const ContactsFilter: FC = () => {
     )
 }
 
-export default ContactsFilter
+export default CompaniesFilter

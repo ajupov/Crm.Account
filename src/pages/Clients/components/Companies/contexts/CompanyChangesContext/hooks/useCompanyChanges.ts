@@ -1,20 +1,20 @@
-import ContactChangesState, { contactChangesInitialState } from '../../../states/ContactChangesState'
+import CompanyChangesState, { companyChangesInitialState } from '../../../states/CompanyChangesState'
 import { useCallback, useEffect, useState } from 'react'
 
-import ContactChangesClient from '../../../../../../../../api/contacts/clients/ContactChangesClient'
+import CompanyChangesClient from '../../../../../../../../api/companies/clients/CompanyChangesClient'
 import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
 import { useParams } from 'react-router'
 
-const contactChangesClient = new ContactChangesClient(HttpClientFactoryInstance.Api)
+const companyChangesClient = new CompanyChangesClient(HttpClientFactoryInstance.Api)
 
-const useContactChanges = (): ContactChangesState => {
+const useCompanyChanges = (): CompanyChangesState => {
     const MaxLimit = 1048576
 
     const { id }: { id: string } = useParams()
-    const [request, setRequest] = useState(contactChangesInitialState.request)
-    const [isLoading, setIsLoading] = useState(contactChangesInitialState.isLoading)
-    const [changes, setChanges] = useState(contactChangesInitialState.changes)
-    const [total, setTotal] = useState(contactChangesInitialState.total)
+    const [request, setRequest] = useState(companyChangesInitialState.request)
+    const [isLoading, setIsLoading] = useState(companyChangesInitialState.isLoading)
+    const [changes, setChanges] = useState(companyChangesInitialState.changes)
+    const [total, setTotal] = useState(companyChangesInitialState.total)
 
     const getPagedList = useCallback(async () => {
         if (!id) {
@@ -23,7 +23,7 @@ const useContactChanges = (): ContactChangesState => {
 
         setIsLoading(true)
 
-        const response = await contactChangesClient.GetPagedListAsync({ ...request, contactId: id })
+        const response = await companyChangesClient.GetPagedListAsync({ ...request, companyId: id })
 
         setChanges(response.changes ?? [])
         setTotal(response.totalCount)
@@ -38,9 +38,9 @@ const useContactChanges = (): ContactChangesState => {
 
         setIsLoading(true)
 
-        const response = await contactChangesClient.GetPagedListAsync({
+        const response = await companyChangesClient.GetPagedListAsync({
             ...request,
-            contactId: id,
+            companyId: id,
             offset: 0,
             limit: MaxLimit
         })
@@ -63,4 +63,4 @@ const useContactChanges = (): ContactChangesState => {
     return { request, setRequest, isLoading, total, changes, getAll }
 }
 
-export default useContactChanges
+export default useCompanyChanges

@@ -1,13 +1,13 @@
 import React, { FC, useContext } from 'react'
 
-import ContactsActionsContext from '../../contexts/ContactsActionsContext/ContactsActionsContext'
+import CompaniesActionsContext from '../../contexts/CompaniesActionsContext/CompaniesActionsContext'
 import DeleteModal from '../../../../../../components/common/modals/DeleteModal/DeleteModal'
-import useContactDelete from './hooks/useContactDelete'
+import useCompanyDelete from './hooks/useCompanyDelete'
 
 // TODO: Move to l10n
-const ContactDelete: FC = () => {
-    const state = useContext(ContactsActionsContext)
-    const { onClickConfirm, onClickCancel } = useContactDelete()
+const CompanyDelete: FC = () => {
+    const state = useContext(CompaniesActionsContext)
+    const { onClickConfirm, onClickCancel } = useCompanyDelete()
 
     return (
         <DeleteModal
@@ -20,4 +20,4 @@ const ContactDelete: FC = () => {
     )
 }
 
-export default ContactDelete
+export default CompanyDelete

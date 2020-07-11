@@ -5,7 +5,7 @@ interface UseProductViewReturn {
     onClickCancel: () => void
 }
 
-const useContactChangesView = (): UseProductViewReturn => {
+const useCompanyChangesView = (): UseProductViewReturn => {
     const history = useHistory()
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
@@ -13,4 +13,4 @@ const useContactChangesView = (): UseProductViewReturn => {
     return { onClickCancel }
 }
 
-export default useContactChangesView
+export default useCompanyChangesView

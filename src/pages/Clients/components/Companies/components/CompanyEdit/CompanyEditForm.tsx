@@ -1,23 +1,23 @@
 import React, { FC, useContext } from 'react'
 
-import ContactContext from '../../contexts/ContactContext/ContactContext'
+import CompanyContext from '../../contexts/CompanyContext/CompanyContext'
 import EditForm from '../../../../../../components/common/forms/EditForm/EditForm'
-import useContactEdit from './hooks/useContactEdit'
-import useContactsActions from '../../contexts/ContactsActionsContext/hooks/useContactsActions'
+import useCompaniesActions from '../../contexts/CompaniesActionsContext/hooks/useCompaniesActions'
+import useCompanyEdit from './hooks/useCompanyEdit'
 
-const ContactEditForm: FC = () => {
-    const state = useContext(ContactContext)
-    const { isLoading } = useContactsActions()
-    const { fields, isConfirmEnabled, onClickHistory, onClickCancel, onClickConfirm } = useContactEdit()
+const CompanyEditForm: FC = () => {
+    const state = useContext(CompanyContext)
+    const { isLoading } = useCompaniesActions()
+    const { fields, isConfirmEnabled, onClickHistory, onClickCancel, onClickConfirm } = useCompanyEdit()
 
-    return state.contact.id ? (
+    return state.company.id ? (
         <EditForm
-            id={state.contact.id}
+            id={state.company.id}
             fields={fields}
             isLoading={state.isLoading || isLoading}
             isConfirmEnabled={isConfirmEnabled}
-            createDate={state.contact.createDateTime}
-            lastModifyDateTime={state.contact.modifyDateTime}
+            createDate={state.company.createDateTime}
+            lastModifyDateTime={state.company.modifyDateTime}
             onClickHistory={onClickHistory}
             onClickConfirm={onClickConfirm}
             onClickCancel={onClickCancel}
@@ -25,4 +25,4 @@ const ContactEditForm: FC = () => {
     ) : null
 }
 
-export default ContactEditForm
+export default CompanyEditForm

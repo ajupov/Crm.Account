@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 
-import ContactsFiltersContext from './ContactsFiltersContext'
-import useContactsFilters from './hooks/useContactsFilters'
+import CompaniesFiltersContext from './CompaniesFiltersContext'
+import useCompaniesFilters from './hooks/useCompaniesFilters'
 
-const ContactsFiltersContextProvider: FC = ({ children }) => {
-    const state = useContactsFilters()
+const CompaniesFiltersContextProvider: FC = ({ children }) => {
+    const state = useCompaniesFilters()
 
-    return <ContactsFiltersContext.Provider value={state}>{children}</ContactsFiltersContext.Provider>
+    return <CompaniesFiltersContext.Provider value={state}>{children}</CompaniesFiltersContext.Provider>
 }
 
-export default ContactsFiltersContextProvider
+export default CompaniesFiltersContextProvider

@@ -1,12 +1,12 @@
 import React, { FC, useContext } from 'react'
 
-import ContactChangesContext from '../../../../contexts/ContactChangesContext/ContactChangesContext'
+import CompanyChangesContext from '../../../../contexts/CompanyChangesContext/CompanyChangesContext'
 import Table from '../../../../../../../../components/common/collections/Table/Table'
-import useContactChangesTable from './hooks/useContactChangesTable'
+import useCompanyChangesTable from './hooks/useCompanyChangesTable'
 
-const ContactChangesTable: FC = () => {
-    const state = useContext(ContactChangesContext)
-    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useContactChangesTable()
+const CompanyChangesTable: FC = () => {
+    const state = useContext(CompanyChangesContext)
+    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useCompanyChangesTable()
 
     return (
         <Table
@@ -19,4 +19,4 @@ const ContactChangesTable: FC = () => {
     )
 }
 
-export default ContactChangesTable
+export default CompanyChangesTable
