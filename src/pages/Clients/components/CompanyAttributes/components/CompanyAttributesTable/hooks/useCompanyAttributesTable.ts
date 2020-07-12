@@ -38,7 +38,7 @@ const useCompanyAttributesTable = (): UseCompanyAttributesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('Атрибуты контакта')
+        const fileName = getFileNameWithDateTime('Атрибуты компании')
         const headers = ['Идентификатор', 'Тип', 'Наименование', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...attributes])
 

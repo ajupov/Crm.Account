@@ -60,14 +60,8 @@ const useContactView = (): UseContactViewReturn => {
 
     const map = useCallback(
         (contact: Contact): ViewDataProps[] => [
-            {
-                label: 'Лид',
-                value: getLeadName()
-            },
-            {
-                label: 'Компания',
-                value: getCompanyName()
-            },
+            { label: 'Лид', value: getLeadName() },
+            { label: 'Компания', value: getCompanyName() },
             { label: 'Фамилия', value: contact.surname },
             { label: 'Имя', value: contact.name },
             { label: 'Отчество', value: contact.patronymic },

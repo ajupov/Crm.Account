@@ -12,8 +12,8 @@ const CompanyDelete: FC = () => {
     return (
         <DeleteModal
             isDeleting={state.isDeleting}
-            title="Удаление контакта"
-            content="Вы уверены, что хотите удалить контакт?"
+            title="Удаление компании"
+            content="Вы уверены, что хотите удалить компанию?"
             onClickConfirm={onClickConfirm}
             onClickCancel={onClickCancel}
         />

@@ -3,7 +3,11 @@ import { arrayToDictionary, dictionaryToArray } from '../../../../../../../utils
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import CompaniesContext from '../../CompaniesContext/CompaniesContext'
+import CompanyIndustryType from '../../../../../../../../api/companies/models/CompanyIndustryType'
+import CompanyType from '../../../../../../../../api/companies/models/CompanyType'
 import { FilterFormFieldProps } from '../../../../../../../components/common/forms/FilterForm/FilterForm'
+import { getCompanyIndustryTypesAsSelectOptions } from '../../../helpers/helpers/companyIndustryTypeHelper'
+import { getCompanyTypesAsSelectOptions } from '../../../helpers/helpers/companyTypeHelper'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
 import useCompaniesSelectOptions from '../../../hooks/useCompaniesSelectOptions'
 
@@ -12,23 +16,36 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
     const state = useContext(CompaniesContext)
     const { getActualAttributes } = useCompaniesSelectOptions()
 
-    const [surname, setSurname] = useState(state.request.surname ?? '')
-    const [name, setName] = useState(state.request.name ?? '')
-    const [patronymic, setPatronymic] = useState(state.request.patronymic ?? '')
+    const [types, setTypes] = useState(state.request.types ?? [])
+    const [industryTypes, setIndustryTypes] = useState(state.request.industryTypes ?? [])
+    const [fullName, setFullName] = useState(state.request.fullName ?? '')
+    const [shortName, setShortName] = useState(state.request.shortName ?? '')
     const [phone, setPhone] = useState(state.request.phone ?? '')
     const [email, setEmail] = useState(state.request.email ?? '')
     const [taxNumber, setTaxNumber] = useState(state.request.taxNumber ?? '')
-    const [post, setPost] = useState(state.request.post ?? '')
-    const [postcode, setPostcode] = useState(state.request.postcode ?? '')
-    const [country, setCountry] = useState(state.request.country ?? '')
-    const [region, setRegion] = useState(state.request.region ?? '')
-    const [province, setProvince] = useState(state.request.province ?? '')
-    const [city, setCity] = useState(state.request.city ?? '')
-    const [street, setStreet] = useState(state.request.street ?? '')
-    const [house, setHouse] = useState(state.request.house ?? '')
-    const [apartment, setApartment] = useState(state.request.apartment ?? '')
-    const [minBirthDate, setMinBirthDate] = useState(state.request.minBirthDate ?? '')
-    const [maxBirthDate, setMaxBirthDate] = useState(state.request.maxBirthDate ?? '')
+    const [registrationNumber, setRegistrationNumber] = useState(state.request.registrationNumber ?? '')
+    const [minRegistrationDate, setMinRegistrationDate] = useState(state.request.minRegistrationDate ?? '')
+    const [maxRegistrationDate, setMaxRegistrationDate] = useState(state.request.maxRegistrationDate ?? '')
+    const [minEmployeesCount, setMinEmployeesCount] = useState(state.request.minEmployeesCount)
+    const [maxEmployeesCount, setMaxEmployeesCount] = useState(state.request.maxEmployeesCount)
+    const [minYearlyTurnover, setMinYearlyTurnover] = useState(state.request.minYearlyTurnover)
+    const [maxYearlyTurnover, setMaxYearlyTurnover] = useState(state.request.maxYearlyTurnover)
+    const [juridicalPostcode, setJuridicalPostcode] = useState(state.request.juridicalPostcode ?? '')
+    const [juridicalCountry, setJuridicalCountry] = useState(state.request.juridicalCountry ?? '')
+    const [juridicalRegion, setJuridicalRegion] = useState(state.request.juridicalRegion ?? '')
+    const [juridicalProvince, setJuridicalProvince] = useState(state.request.juridicalProvince ?? '')
+    const [juridicalCity, setJuridicalCity] = useState(state.request.juridicalCity ?? '')
+    const [juridicalStreet, setJuridicalStreet] = useState(state.request.juridicalStreet ?? '')
+    const [juridicalHouse, setJuridicalHouse] = useState(state.request.juridicalHouse ?? '')
+    const [juridicalApartment, setJuridicalApartment] = useState(state.request.juridicalApartment ?? '')
+    const [legalPostcode, setLegalPostcode] = useState(state.request.legalPostcode ?? '')
+    const [legalCountry, setLegalCountry] = useState(state.request.legalCountry ?? '')
+    const [legalRegion, setLegalRegion] = useState(state.request.legalRegion ?? '')
+    const [legalProvince, setLegalProvince] = useState(state.request.legalProvince ?? '')
+    const [legalCity, setLegalCity] = useState(state.request.legalCity ?? '')
+    const [legalStreet, setLegalStreet] = useState(state.request.legalStreet ?? '')
+    const [legalHouse, setLegalHouse] = useState(state.request.legalHouse ?? '')
+    const [legalApartment, setLegalApartment] = useState(state.request.legalApartment ?? '')
     const [bankAccountNumber, setBankAccountNumber] = useState(state.request.bankAccountNumber ?? '')
     const [bankAccountBankName, setBankAccountBankName] = useState(state.request.bankAccountBankName ?? '')
     const [attributeIds, setAttributeIds] = useState(state.request.attributes ?? {})
@@ -41,18 +58,21 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
     const [isResetEnabled, setIsResetEnabled] = useState(companiesFiltersInitialState.isResetEnabled)
     const [isShowMobile, setIsShowMobile] = useState(companiesFiltersInitialState.isShowMobile)
 
-    const onChangeName = useCallback((_, { value }) => {
-        setName(value)
+    const onChangeTypes = useCallback((_: any, { value }) => {
+        setTypes(value as CompanyType[])
+    }, [])
+
+    const onChangeIndustryTypes = useCallback((_: any, { value }) => {
+        setIndustryTypes(value as CompanyIndustryType[])
+    }, [])
+
+    const onChangeFullName = useCallback((_, { value }) => {
+        setFullName(value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeSurname = useCallback((_, { value }) => {
-        setSurname(value)
-        setIsApplyEnabled(true)
-    }, [])
-
-    const onChangePatronymic = useCallback((_, { value }) => {
-        setPatronymic(value)
+    const onChangeShortName = useCallback((_, { value }) => {
+        setShortName(value)
         setIsApplyEnabled(true)
     }, [])
 
@@ -71,58 +91,120 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangePost = useCallback((_, { value }) => {
-        setPost(value)
+    const onChangeregistrationNumber = useCallback((_, { value }) => {
+        setRegistrationNumber(value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangePostcode = useCallback((_, { value }) => {
-        setPostcode(value)
+    const onChangeMinRegistrationDate = useCallback((_, data) => {
+        setMinRegistrationDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeCountry = useCallback((_, { value }) => {
-        setCountry(value)
+    const onChangeMaxRegistrationDate = useCallback((_, data) => {
+        setMaxRegistrationDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeRegion = useCallback((_, { value }) => {
-        setRegion(value)
+    const onChangeMinEmployeesCount = useCallback((_, data) => {
+        setMinEmployeesCount(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeProvince = useCallback((_, { value }) => {
-        setProvince(value)
+    const onChangeMaxEmployeesCount = useCallback((_, data) => {
+        setMaxEmployeesCount(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeCity = useCallback((_, { value }) => {
-        setCity(value)
+    const onChangeMinYearlyTurnover = useCallback((_, data) => {
+        setMinYearlyTurnover(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeStreet = useCallback((_, { value }) => {
-        setStreet(value)
+    const onChangeMaxYearlyTurnover = useCallback((_, data) => {
+        setMaxYearlyTurnover(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeHouse = useCallback((_, { value }) => {
-        setHouse(value)
+    //
+    const onChangeJuridicalPostcode = useCallback((_, { value }) => {
+        setJuridicalPostcode(value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeApartment = useCallback((_, { value }) => {
-        setApartment(value)
+    const onChangeJuridicalCountry = useCallback((_, { value }) => {
+        setJuridicalCountry(value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMinBirthDate = useCallback((_, { value }) => {
-        setMinBirthDate(value)
+    const onChangeJuridicalRegion = useCallback((_, { value }) => {
+        setJuridicalRegion(value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMaxBirthDate = useCallback((_, { value }) => {
-        setMaxBirthDate(value)
+    const onChangeJuridicalProvince = useCallback((_, { value }) => {
+        setJuridicalProvince(value)
+        setIsApplyEnabled(true)
+    }, [])
+
+    const onChangeJuridicalCity = useCallback((_, { value }) => {
+        setJuridicalCity(value)
+        setIsApplyEnabled(true)
+    }, [])
+
+    const onChangeJuridicalStreet = useCallback((_, { value }) => {
+        setJuridicalStreet(value)
+        setIsApplyEnabled(true)
+    }, [])
+
+    const onChangeJuridicalHouse = useCallback((_, { value }) => {
+        setJuridicalHouse(value)
+        setIsApplyEnabled(true)
+    }, [])
+
+    const onChangeJuridicalApartment = useCallback((_, { value }) => {
+        setJuridicalApartment(value)
+        setIsApplyEnabled(true)
+    }, [])
+
+    //
+    const onChangeLegalPostcode = useCallback((_, { value }) => {
+        setLegalPostcode(value)
+        setIsApplyEnabled(true)
+    }, [])
+
+    const onChangeLegalCountry = useCallback((_, { value }) => {
+        setLegalCountry(value)
+        setIsApplyEnabled(true)
+    }, [])
+
+    const onChangeLegalRegion = useCallback((_, { value }) => {
+        setLegalRegion(value)
+        setIsApplyEnabled(true)
+    }, [])
+
+    const onChangeLegalProvince = useCallback((_, { value }) => {
+        setLegalProvince(value)
+        setIsApplyEnabled(true)
+    }, [])
+
+    const onChangeLegalCity = useCallback((_, { value }) => {
+        setLegalCity(value)
+        setIsApplyEnabled(true)
+    }, [])
+
+    const onChangeLegalStreet = useCallback((_, { value }) => {
+        setLegalStreet(value)
+        setIsApplyEnabled(true)
+    }, [])
+
+    const onChangeLegalHouse = useCallback((_, { value }) => {
+        setLegalHouse(value)
+        setIsApplyEnabled(true)
+    }, [])
+
+    const onChangeLegalApartment = useCallback((_, { value }) => {
+        setLegalApartment(value)
         setIsApplyEnabled(true)
     }, [])
 
@@ -169,31 +251,44 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
     const onApply = useCallback(() => {
         state.setRequest({
             ...state.request,
-            surname,
-            name,
-            patronymic,
+            types,
+            industryTypes,
+            fullName,
+            shortName,
             phone,
             email,
             taxNumber,
-            post,
-            postcode,
-            country,
-            region,
-            province,
-            city,
-            street,
-            house,
-            apartment,
-            minBirthDate,
-            maxBirthDate,
-            bankAccountNumber,
-            bankAccountBankName,
-            allAttributes: true,
-            attributes: attributeIds,
+            registrationNumber,
+            minRegistrationDate,
+            maxRegistrationDate,
+            minEmployeesCount,
+            maxEmployeesCount,
+            minYearlyTurnover,
+            maxYearlyTurnover,
+            juridicalPostcode,
+            juridicalCountry,
+            juridicalRegion,
+            juridicalProvince,
+            juridicalCity,
+            juridicalStreet,
+            juridicalHouse,
+            juridicalApartment,
+            legalPostcode,
+            legalCountry,
+            legalRegion,
+            legalProvince,
+            legalCity,
+            legalStreet,
+            legalHouse,
+            legalApartment,
             minCreateDate,
             maxCreateDate,
             minModifyDate,
             maxModifyDate,
+            bankAccountNumber,
+            allAttributes: true,
+            attributes: attributeIds,
+            bankAccountBankName,
             isDeleted,
             offset: 0
         })
@@ -202,53 +297,80 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
         setIsApplyEnabled(false)
         setIsResetEnabled(true)
     }, [
-        apartment,
         attributeIds,
         bankAccountBankName,
         bankAccountNumber,
-        city,
-        country,
         email,
-        house,
+        fullName,
+        industryTypes,
         isDeleted,
-        maxBirthDate,
+        juridicalApartment,
+        juridicalCity,
+        juridicalCountry,
+        juridicalHouse,
+        juridicalPostcode,
+        juridicalProvince,
+        juridicalRegion,
+        juridicalStreet,
+        legalApartment,
+        legalCity,
+        legalCountry,
+        legalHouse,
+        legalPostcode,
+        legalProvince,
+        legalRegion,
+        legalStreet,
         maxCreateDate,
+        maxEmployeesCount,
         maxModifyDate,
-        minBirthDate,
+        maxRegistrationDate,
+        maxYearlyTurnover,
         minCreateDate,
+        minEmployeesCount,
         minModifyDate,
-        name,
-        patronymic,
+        minRegistrationDate,
+        minYearlyTurnover,
         phone,
-        post,
-        postcode,
-        province,
-        region,
+        registrationNumber,
+        shortName,
         state,
-        street,
-        surname,
-        taxNumber
+        taxNumber,
+        types
     ])
 
     const onReset = useCallback(() => {
-        setSurname('')
-        setName('')
-        setPatronymic('')
+        setTypes([])
+        setIndustryTypes([])
+        setFullName('')
+        setShortName('')
         setPhone('')
         setEmail('')
         setTaxNumber('')
-        setPost('')
-        setPostcode('')
-        setCountry('')
-        setRegion('')
-        setProvince('')
-        setCity('')
-        setStreet('')
-        setHouse('')
-        setApartment('')
-        setMinBirthDate('')
-        setMaxBirthDate('')
+        setRegistrationNumber('')
+        setMinRegistrationDate('')
+        setMaxRegistrationDate('')
+        setMinEmployeesCount(void 0)
+        setMaxEmployeesCount(void 0)
+        setMinYearlyTurnover(void 0)
+        setMaxYearlyTurnover(void 0)
+        setJuridicalPostcode('')
+        setJuridicalCountry('')
+        setJuridicalRegion('')
+        setJuridicalProvince('')
+        setJuridicalCity('')
+        setJuridicalStreet('')
+        setJuridicalHouse('')
+        setJuridicalApartment('')
+        setLegalPostcode('')
+        setLegalCountry('')
+        setLegalRegion('')
+        setLegalProvince('')
+        setLegalCity('')
+        setLegalStreet('')
+        setLegalHouse('')
+        setLegalApartment('')
         setBankAccountNumber('')
+        setBankAccountBankName('')
         setAttributeIds({})
         setMinCreateDate('')
         setMaxCreateDate('')
@@ -316,22 +438,32 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
     const fields: FilterFormFieldProps[] = useMemo(
         () => [
             {
-                type: 'text',
-                topLabel: 'Фамилия',
-                value: surname,
-                onChange: onChangeSurname
+                type: 'dropdown',
+                multiple: true,
+                label: 'Тип',
+                value: types,
+                options: getCompanyTypesAsSelectOptions(),
+                onChange: onChangeTypes
+            },
+            {
+                type: 'dropdown',
+                multiple: true,
+                label: 'Род деятельности',
+                value: industryTypes,
+                options: getCompanyIndustryTypesAsSelectOptions(),
+                onChange: onChangeIndustryTypes
             },
             {
                 type: 'text',
-                topLabel: 'Имя',
-                value: name,
-                onChange: onChangeName
+                topLabel: 'Полное название',
+                value: fullName,
+                onChange: onChangeFullName
             },
             {
                 type: 'text',
-                topLabel: 'Отчество',
-                value: patronymic,
-                onChange: onChangePatronymic
+                topLabel: 'Краткое название',
+                value: shortName,
+                onChange: onChangeShortName
             },
             {
                 type: 'text',
@@ -353,65 +485,129 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
             },
             {
                 type: 'text',
-                topLabel: 'Должность',
-                value: post,
-                onChange: onChangePost
-            },
-            {
-                type: 'text',
-                topLabel: 'Почтовый индекс',
-                value: postcode,
-                onChange: onChangePostcode
-            },
-            {
-                type: 'text',
-                topLabel: 'Страна',
-                value: country,
-                onChange: onChangeCountry
-            },
-            {
-                type: 'text',
-                topLabel: 'Регион',
-                value: region,
-                onChange: onChangeRegion
-            },
-            {
-                type: 'text',
-                topLabel: 'Район/провинция',
-                value: province,
-                onChange: onChangeProvince
-            },
-            {
-                type: 'text',
-                topLabel: 'Город/населенный пункт',
-                value: city,
-                onChange: onChangeCity
-            },
-            {
-                type: 'text',
-                topLabel: 'Улица',
-                value: street,
-                onChange: onChangeStreet
-            },
-            {
-                type: 'text',
-                topLabel: 'Дом/строение',
-                value: house,
-                onChange: onChangeHouse
-            },
-            {
-                type: 'text',
-                topLabel: 'Квартира',
-                value: apartment,
-                onChange: onChangeApartment
+                topLabel: 'ОГРН',
+                value: registrationNumber,
+                onChange: onChangeregistrationNumber
             },
             {
                 type: 'date',
-                topLabel: 'Дата создания',
-                value1: minBirthDate,
-                onChange1: onChangeMinBirthDate,
-                value2: maxBirthDate,
-                onChange2: onChangeMaxBirthDate
+                topLabel: 'Дата регистрации',
+                value1: minRegistrationDate,
+                onChange1: onChangeMinRegistrationDate,
+                value2: maxRegistrationDate,
+                onChange2: onChangeMaxRegistrationDate
+            },
+            {
+                type: 'number',
+                topLabel: 'Количество сотрудников',
+                value1: minEmployeesCount,
+                onChange1: onChangeMinEmployeesCount,
+                value2: maxEmployeesCount,
+                onChange2: onChangeMaxEmployeesCount
+            },
+            {
+                type: 'number',
+                topLabel: 'Годовой оборот',
+                value1: minYearlyTurnover,
+                onChange1: onChangeMinYearlyTurnover,
+                value2: maxYearlyTurnover,
+                onChange2: onChangeMaxYearlyTurnover
+            },
+            {
+                type: 'text',
+                topLabel: 'Почтовый индекс (юридический адрес)',
+                value: juridicalPostcode,
+                onChange: onChangeJuridicalPostcode
+            },
+            {
+                type: 'text',
+                topLabel: 'Страна (юридический адрес)',
+                value: juridicalCountry,
+                onChange: onChangeJuridicalCountry
+            },
+            {
+                type: 'text',
+                topLabel: 'Регион (юридический адрес)',
+                value: juridicalRegion,
+                onChange: onChangeJuridicalRegion
+            },
+            {
+                type: 'text',
+                topLabel: 'Район/провинция (юридический адрес)',
+                value: juridicalProvince,
+                onChange: onChangeJuridicalProvince
+            },
+            {
+                type: 'text',
+                topLabel: 'Город/населенный пункт (юридический адрес)',
+                value: juridicalCity,
+                onChange: onChangeJuridicalCity
+            },
+            {
+                type: 'text',
+                topLabel: 'Улица (юридический адрес)',
+                value: juridicalStreet,
+                onChange: onChangeJuridicalStreet
+            },
+            {
+                type: 'text',
+                topLabel: 'Дом/строение (юридический адрес)',
+                value: juridicalHouse,
+                onChange: onChangeJuridicalHouse
+            },
+            {
+                type: 'text',
+                topLabel: 'Квартира (юридический адрес)',
+                value: juridicalApartment,
+                onChange: onChangeJuridicalApartment
+            },
+            {
+                type: 'text',
+                topLabel: 'Почтовый индекс (фактический адрес)',
+                value: legalPostcode,
+                onChange: onChangeLegalPostcode
+            },
+            {
+                type: 'text',
+                topLabel: 'Страна (фактический адрес)',
+                value: legalCountry,
+                onChange: onChangeLegalCountry
+            },
+            {
+                type: 'text',
+                topLabel: 'Регион (фактический адрес)',
+                value: legalRegion,
+                onChange: onChangeLegalRegion
+            },
+            {
+                type: 'text',
+                topLabel: 'Район/провинция (фактический адрес)',
+                value: legalProvince,
+                onChange: onChangeLegalProvince
+            },
+            {
+                type: 'text',
+                topLabel: 'Город/населенный пункт (фактический адрес)',
+                value: legalCity,
+                onChange: onChangeLegalCity
+            },
+            {
+                type: 'text',
+                topLabel: 'Улица (фактический адрес)',
+                value: legalStreet,
+                onChange: onChangeLegalStreet
+            },
+            {
+                type: 'text',
+                topLabel: 'Дом/строение (фактический адрес)',
+                value: legalHouse,
+                onChange: onChangeLegalHouse
+            },
+            {
+                type: 'text',
+                topLabel: 'Квартира (фактический адрес)',
+                value: legalApartment,
+                onChange: onChangeLegalApartment
             },
             {
                 type: 'text',
@@ -465,57 +661,83 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
             }
         ],
         [
-            apartment,
             attributeIds,
             bankAccountBankName,
             bankAccountNumber,
-            city,
-            country,
             email,
+            fullName,
             getActualAttributes,
-            house,
+            industryTypes,
             isDeleted,
-            maxBirthDate,
+            juridicalApartment,
+            juridicalCity,
+            juridicalCountry,
+            juridicalHouse,
+            juridicalPostcode,
+            juridicalProvince,
+            juridicalRegion,
+            juridicalStreet,
+            legalApartment,
+            legalCity,
+            legalCountry,
+            legalHouse,
+            legalPostcode,
+            legalProvince,
+            legalRegion,
+            legalStreet,
             maxCreateDate,
+            maxEmployeesCount,
             maxModifyDate,
-            minBirthDate,
+            maxRegistrationDate,
+            maxYearlyTurnover,
             minCreateDate,
+            minEmployeesCount,
             minModifyDate,
-            name,
-            onChangeApartment,
+            minRegistrationDate,
+            minYearlyTurnover,
             onChangeAttributeIds,
             onChangeBankAccountBankName,
             onChangeBankAccountNumber,
-            onChangeCity,
-            onChangeCountry,
             onChangeEmail,
-            onChangeHouse,
+            onChangeFullName,
+            onChangeIndustryTypes,
             onChangeIsDeleted,
-            onChangeMaxBirthDate,
+            onChangeJuridicalApartment,
+            onChangeJuridicalCity,
+            onChangeJuridicalCountry,
+            onChangeJuridicalHouse,
+            onChangeJuridicalPostcode,
+            onChangeJuridicalProvince,
+            onChangeJuridicalRegion,
+            onChangeJuridicalStreet,
+            onChangeLegalApartment,
+            onChangeLegalCity,
+            onChangeLegalCountry,
+            onChangeLegalHouse,
+            onChangeLegalPostcode,
+            onChangeLegalProvince,
+            onChangeLegalRegion,
+            onChangeLegalStreet,
             onChangeMaxCreateDate,
+            onChangeMaxEmployeesCount,
             onChangeMaxModifyDate,
-            onChangeMinBirthDate,
+            onChangeMaxRegistrationDate,
+            onChangeMaxYearlyTurnover,
             onChangeMinCreateDate,
+            onChangeMinEmployeesCount,
             onChangeMinModifyDate,
-            onChangeName,
-            onChangePatronymic,
+            onChangeMinRegistrationDate,
+            onChangeMinYearlyTurnover,
             onChangePhone,
-            onChangePost,
-            onChangePostcode,
-            onChangeProvince,
-            onChangeRegion,
-            onChangeStreet,
-            onChangeSurname,
+            onChangeShortName,
             onChangeTaxNumber,
-            patronymic,
+            onChangeTypes,
+            onChangeregistrationNumber,
             phone,
-            post,
-            postcode,
-            province,
-            region,
-            street,
-            surname,
-            taxNumber
+            registrationNumber,
+            shortName,
+            taxNumber,
+            types
         ]
     )
 

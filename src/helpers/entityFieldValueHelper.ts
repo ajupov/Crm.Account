@@ -1,4 +1,4 @@
-export function getValueOrEmpty(value?: boolean | string): string {
+export function getValueOrEmpty(value?: boolean | number | string): string {
     if (typeof value === 'boolean') {
         if (value) {
             // TODO: Move to l10n
@@ -9,5 +9,5 @@ export function getValueOrEmpty(value?: boolean | string): string {
         return 'Нет'
     }
 
-    return value === void 0 || value === null || value === '' ? '...' : value
+    return value === void 0 || value === null || value === '' ? '...' : value.toString()
 }

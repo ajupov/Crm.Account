@@ -36,7 +36,6 @@ const useCompanies = (): CompaniesState => {
                 delete v.accountId
                 delete v.createUserId
                 delete v.responsibleUserId
-                delete v.photo
                 delete v.bankAccounts
                 delete v.attributeLinks
             })

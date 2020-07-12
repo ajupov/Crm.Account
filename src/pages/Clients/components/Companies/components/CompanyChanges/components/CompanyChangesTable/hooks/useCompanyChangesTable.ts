@@ -9,6 +9,8 @@ import CompanyChange from '../../../../../../../../../../api/companies/models/Co
 import CompanyChangesContext from '../../../../../contexts/CompanyChangesContext/CompanyChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../../components/common/collections/Table/TableHeader'
+import { getCompanyIndustryTypeName } from '../../../../../helpers/helpers/companyIndustryTypeHelper'
+import { getCompanyTypeName } from '../../../../../helpers/helpers/companyTypeHelper'
 import { getFileNameWithDateTime } from '../../../../../../../../../helpers/fileNameHelper'
 import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
 import { joinAttributes } from '../../../../../mappers/companyAttributesMapper'
@@ -33,8 +35,8 @@ const useCompanyChangesTable = (): UseCompanyChangesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('История изменений контакта')
-        const headers = ['Идентификатор', 'Идентификатор контакта', 'Дата и время', 'Старое значение', 'Новое значение']
+        const fileName = getFileNameWithDateTime('История изменений компании')
+        const headers = ['Идентификатор', 'Идентификатор компании', 'Дата и время', 'Старое значение', 'Новое значение']
         const csv = convertObjectToCSV([headers, ...changes])
 
         downloadAsCsv(fileName, csv)
@@ -73,29 +75,84 @@ const useCompanyChangesTable = (): UseCompanyChangesTableReturn => {
 
             return [
                 `ID Лида: ${getValueOrEmpty(oldValue?.leadId)} → ${getValueOrEmpty(newValue?.leadId)}`,
-                `ID Компании: ${getValueOrEmpty(oldValue?.companyId)} → ${getValueOrEmpty(newValue?.companyId)}`,
-                `Фамилия: ${getValueOrEmpty(oldValue?.surname)} → ${getValueOrEmpty(newValue?.surname)}`,
-                `Имя: ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
-                `Отчество: ${getValueOrEmpty(oldValue?.patronymic)} → ${getValueOrEmpty(newValue?.patronymic)}`,
+                `Тип: ${getValueOrEmpty(getCompanyTypeName(oldValue?.type))} → ${getValueOrEmpty(
+                    getCompanyTypeName(newValue?.type)
+                )}`,
+                `Род деятельности: ${getValueOrEmpty(
+                    getCompanyIndustryTypeName(oldValue?.industryType)
+                )} → ${getValueOrEmpty(getCompanyIndustryTypeName(newValue?.industryType))}`,
+                `Полное название: ${getValueOrEmpty(oldValue?.fullName)} → ${getValueOrEmpty(newValue?.fullName)}`,
+                `Краткое название: ${getValueOrEmpty(oldValue?.shortName)} → ${getValueOrEmpty(newValue?.shortName)}`,
                 `Телефон: ${getValueOrEmpty(oldValue?.phone)} → ${getValueOrEmpty(newValue?.phone)}`,
                 `Email: ${getValueOrEmpty(oldValue?.email)} → ${getValueOrEmpty(newValue?.email)}`,
                 `ИНН: ${getValueOrEmpty(oldValue?.taxNumber)} → ${getValueOrEmpty(newValue?.taxNumber)}`,
-                `Должность: ${getValueOrEmpty(oldValue?.post)} → ${getValueOrEmpty(newValue?.post)}`,
-                `Почтовый индекс: ${getValueOrEmpty(oldValue?.postcode)} → ${getValueOrEmpty(newValue?.postcode)}`,
-                `Страна: ${getValueOrEmpty(oldValue?.country)} → ${getValueOrEmpty(newValue?.country)}`,
-                `Регион: ${getValueOrEmpty(oldValue?.region)} → ${getValueOrEmpty(newValue?.region)}`,
-                `Район/провинция: ${getValueOrEmpty(oldValue?.province)} → ${getValueOrEmpty(newValue?.province)}`,
-                `Город/населенный пункт: ${getValueOrEmpty(oldValue?.city)} → ${getValueOrEmpty(newValue?.city)}`,
-                `Улица: ${getValueOrEmpty(oldValue?.street)} → ${getValueOrEmpty(newValue?.street)}`,
-                `Дом/строение: ${getValueOrEmpty(oldValue?.house)} → ${getValueOrEmpty(newValue?.house)}`,
-                `Квартира: ${getValueOrEmpty(oldValue?.apartment)} → ${getValueOrEmpty(newValue?.apartment)}`,
-                `Дата рождения: ${getValueOrEmpty(oldValue?.birthDate)} → ${getValueOrEmpty(newValue?.birthDate)}`,
-                `Удален: ${getValueOrEmpty(oldValue?.isDeleted)} → ${getValueOrEmpty(newValue?.isDeleted)}`,
-                `Расчетные счета: ${getValueOrEmpty(mapAttributes(oldValue?.attributeLinks))} → ${getValueOrEmpty(
-                    mapAttributes(newValue?.attributeLinks)
+                `ОГРН: ${getValueOrEmpty(oldValue?.registrationNumber)} → ${getValueOrEmpty(
+                    newValue?.registrationNumber
                 )}`,
-                `Атрибуты: ${getValueOrEmpty(mapBankAccounts(oldValue?.bankAccounts))} → ${getValueOrEmpty(
+                `Дата регистрации: ${getValueOrEmpty(oldValue?.registrationDate)} → ${getValueOrEmpty(
+                    newValue?.registrationDate
+                )}`,
+                `Количество сотрудников: ${getValueOrEmpty(oldValue?.employeesCount)} → ${getValueOrEmpty(
+                    newValue?.employeesCount
+                )}`,
+                `Годовой оборот: ${getValueOrEmpty(oldValue?.yearlyTurnover)} → ${getValueOrEmpty(
+                    newValue?.yearlyTurnover
+                )}`,
+                `Почтовый индекс (юридический адрес): ${getValueOrEmpty(
+                    oldValue?.juridicalPostcode
+                )} → ${getValueOrEmpty(newValue?.juridicalPostcode)}`,
+                `Страна (юридический адрес): ${getValueOrEmpty(oldValue?.juridicalCountry)} → ${getValueOrEmpty(
+                    newValue?.juridicalCountry
+                )}`,
+                `Регион (юридический адрес): ${getValueOrEmpty(oldValue?.juridicalRegion)} → ${getValueOrEmpty(
+                    newValue?.juridicalRegion
+                )}`,
+                `Район/провинция (юридический адрес): ${getValueOrEmpty(
+                    oldValue?.juridicalProvince
+                )} → ${getValueOrEmpty(newValue?.juridicalProvince)}`,
+                `Город/населенный пункт (юридический адрес): ${getValueOrEmpty(
+                    oldValue?.juridicalCity
+                )} → ${getValueOrEmpty(newValue?.juridicalCity)}`,
+                `Улица (юридический адрес): ${getValueOrEmpty(oldValue?.juridicalStreet)} → ${getValueOrEmpty(
+                    newValue?.juridicalStreet
+                )}`,
+                `Дом/строение (юридический адрес): ${getValueOrEmpty(oldValue?.juridicalHouse)} → ${getValueOrEmpty(
+                    newValue?.juridicalHouse
+                )}`,
+                `Квартира (юридический адрес): ${getValueOrEmpty(oldValue?.juridicalApartment)} → ${getValueOrEmpty(
+                    newValue?.juridicalApartment
+                )}`,
+                `Почтовый индекс (фактический адрес): ${getValueOrEmpty(oldValue?.legalPostcode)} → ${getValueOrEmpty(
+                    newValue?.legalPostcode
+                )}`,
+                `Страна (фактический адрес): ${getValueOrEmpty(oldValue?.legalCountry)} → ${getValueOrEmpty(
+                    newValue?.legalCountry
+                )}`,
+                `Регион (фактический адрес): ${getValueOrEmpty(oldValue?.legalRegion)} → ${getValueOrEmpty(
+                    newValue?.legalRegion
+                )}`,
+                `Район/провинция (фактический адрес): ${getValueOrEmpty(oldValue?.legalProvince)} → ${getValueOrEmpty(
+                    newValue?.legalProvince
+                )}`,
+                `Город/населенный пункт (фактический адрес): ${getValueOrEmpty(
+                    oldValue?.legalCity
+                )} → ${getValueOrEmpty(newValue?.legalCity)}`,
+                `Улица (фактический адрес): ${getValueOrEmpty(oldValue?.legalStreet)} → ${getValueOrEmpty(
+                    newValue?.legalStreet
+                )}`,
+                `Дом/строение (фактический адрес): ${getValueOrEmpty(oldValue?.legalHouse)} → ${getValueOrEmpty(
+                    newValue?.legalHouse
+                )}`,
+                `Квартира (фактический адрес): ${getValueOrEmpty(oldValue?.legalApartment)} → ${getValueOrEmpty(
+                    newValue?.legalApartment
+                )}`,
+
+                `Удален: ${getValueOrEmpty(oldValue?.isDeleted)} → ${getValueOrEmpty(newValue?.isDeleted)}`,
+                `Расчетные счета: ${getValueOrEmpty(mapBankAccounts(oldValue?.bankAccounts))} → ${getValueOrEmpty(
                     mapBankAccounts(newValue?.bankAccounts)
+                )}`,
+                `Атрибуты: ${getValueOrEmpty(mapAttributes(oldValue?.attributeLinks))} → ${getValueOrEmpty(
+                    mapAttributes(newValue?.attributeLinks)
                 )}`
             ]
         },

@@ -5,9 +5,10 @@ import CompaniesRoutes from '../../../routes/CompaniesRoutes'
 import Company from '../../../../../../../../api/companies/models/Company'
 import CompanyContext from '../../../contexts/CompanyContext/CompanyContext'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
+import { getCompanyIndustryTypeName } from '../../../helpers/helpers/companyIndustryTypeHelper'
+import { getCompanyTypeName } from '../../../helpers/helpers/companyTypeHelper'
 import { joinAttributes } from '../../../mappers/companyAttributesMapper'
 import { joinBankAccounts } from '../../../mappers/companyBankAccountsMapper'
-import useCompanyName from '../../../hooks/useCompanyName'
 import { useHistory } from 'react-router'
 import useLeadName from '../../../hooks/useLeadName'
 
@@ -25,7 +26,6 @@ const useCompanyView = (): UseCompanyViewReturn => {
     const history = useHistory()
     const companyState = useContext(CompanyContext)
     const actionsState = useContext(CompaniesActionsContext)
-    const { getCompanyName } = useCompanyName(companyState.company.companyId)
     const { getLeadName } = useLeadName(companyState.company.leadId)
 
     const onClickEdit = useCallback((id: string) => history.push(`${CompaniesRoutes.Edit}/${id}`), [history])
@@ -60,35 +60,38 @@ const useCompanyView = (): UseCompanyViewReturn => {
 
     const map = useCallback(
         (company: Company): ViewDataProps[] => [
-            {
-                label: 'Лид',
-                value: getLeadName()
-            },
-            {
-                label: 'Компания',
-                value: getCompanyName()
-            },
-            { label: 'Фамилия', value: company.surname },
-            { label: 'Имя', value: company.name },
-            { label: 'Отчество', value: company.patronymic },
+            { label: 'Лид', value: getLeadName() },
+            { label: 'Тип', value: getCompanyTypeName(company.type) },
+            { label: 'Род деятельности', value: getCompanyIndustryTypeName(company.industryType) },
+            { label: 'Полное название', value: company.fullName },
+            { label: 'Краткое название', value: company.shortName },
             { label: 'Телефон', value: company.phone },
             { label: 'Email', value: company.email },
             { label: 'ИНН', value: company.taxNumber },
-            { label: 'Должность', value: company.post },
-            { label: 'Почтовый индекс', value: company.postcode },
-            { label: 'Страна', value: company.country },
-            { label: 'Регион', value: company.region },
-            { label: 'Район/провинция', value: company.province },
-            { label: 'Город/населенный пункт', value: company.city },
-            { label: 'Улица', value: company.street },
-            { label: 'Дом/строение', value: company.house },
-            { label: 'Квартира', value: company.apartment },
-            { label: 'Дата рождения', value: company.birthDate },
+            { label: 'ОГРН', value: company.registrationNumber },
+            { label: 'Количество сотрудников', value: company.employeesCount.toString() },
+            { label: 'Годовой оборот', value: company.yearlyTurnover.toString() },
+            { label: 'Почтовый индекс (юридический адрес)', value: company.juridicalPostcode },
+            { label: 'Страна (юридический адрес)', value: company.juridicalCountry },
+            { label: 'Регион (юридический адрес)', value: company.juridicalRegion },
+            { label: 'Район/провинция (юридический адрес)', value: company.juridicalProvince },
+            { label: 'Город/населенный пункт (юридический адрес)', value: company.juridicalCity },
+            { label: 'Улица (юридический адрес)', value: company.juridicalStreet },
+            { label: 'Дом/строение (юридический адрес)', value: company.juridicalHouse },
+            { label: 'Квартира (юридический адрес)', value: company.juridicalApartment },
+            { label: 'Почтовый индекс (фактический адрес)', value: company.legalPostcode },
+            { label: 'Страна (фактический адрес)', value: company.legalCountry },
+            { label: 'Регион (фактический адрес)', value: company.legalRegion },
+            { label: 'Район/провинция (фактический адрес)', value: company.legalProvince },
+            { label: 'Город/населенный пункт (фактический адрес)', value: company.legalCity },
+            { label: 'Улица (фактический адрес)', value: company.legalStreet },
+            { label: 'Дом/строение (фактический адрес)', value: company.legalHouse },
+            { label: 'Квартира (фактический адрес)', value: company.legalApartment },
             { label: 'Категории', value: mapBankAccounts() },
             { label: 'Атрибуты', value: mapAttributes() },
             { label: 'Удален', value: company.isDeleted ? 'Да' : 'Нет' }
         ],
-        [getCompanyName, getLeadName, mapAttributes, mapBankAccounts]
+        [getLeadName, mapAttributes, mapBankAccounts]
     )
 
     return { map, onClickEdit, onClickDelete, onClickRestore, onClickHistory, onClickCancel }

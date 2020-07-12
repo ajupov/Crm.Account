@@ -249,6 +249,7 @@ const useContactsFilters = (): ContactsFiltersState => {
         setMinBirthDate('')
         setMaxBirthDate('')
         setBankAccountNumber('')
+        setBankAccountBankName('')
         setAttributeIds({})
         setMinCreateDate('')
         setMaxCreateDate('')
@@ -389,7 +390,7 @@ const useContactsFilters = (): ContactsFiltersState => {
             },
             {
                 type: 'date',
-                topLabel: 'Дата создания',
+                topLabel: 'Дата рождения',
                 value1: minBirthDate,
                 onChange1: onChangeMinBirthDate,
                 value2: maxBirthDate,

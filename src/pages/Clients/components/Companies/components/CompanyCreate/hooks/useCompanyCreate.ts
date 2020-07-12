@@ -1,6 +1,12 @@
+import {
+    getCompanyIndustryTypeName,
+    getCompanyIndustryTypesAsSelectOptions
+} from '../../../helpers/helpers/companyIndustryTypeHelper'
+import { getCompanyTypeName, getCompanyTypesAsSelectOptions } from '../../../helpers/helpers/companyTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import CompanyContext from '../../../contexts/CompanyContext/CompanyContext'
+import CompanyType from '../../../../../../../../api/companies/models/CompanyType'
 import { CreateFormFieldProps } from '../../../../../../../components/common/forms/CreateForm/CreateForm'
 import useCompaniesSelectOptions from '../../../hooks/useCompaniesSelectOptions'
 import { useHistory } from 'react-router'
@@ -15,14 +21,7 @@ interface UseCompanyCreateReturn {
 // TODO: Move to l10n
 const useCompanyCreate = (): UseCompanyCreateReturn => {
     const history = useHistory()
-    const {
-        getActualLeads,
-        getAllLeads,
-        getActualCompanies,
-        getAllCompanies,
-        getActualAttributes,
-        getAllAttributes
-    } = useCompaniesSelectOptions()
+    const { getActualLeads, getAllLeads, getActualAttributes, getAllAttributes } = useCompaniesSelectOptions()
     const state = useContext(CompanyContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
@@ -34,33 +33,25 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
         [state]
     )
 
-    const onChangeCompanyId = useCallback(
+    const onChangeType = useCallback(
         (_, data) => {
-            state.setCompany({ ...state.company, companyId: data.value as string })
+            state.setCompany({ ...state.company, type: data.value as CompanyType })
             setIsConfirmEnabled(true)
         },
         [state]
     )
 
-    const onChangeSurname = useCallback(
+    const onChangeFullName = useCallback(
         (_, data) => {
-            state.setCompany({ ...state.company, surname: data.value })
+            state.setCompany({ ...state.company, fullName: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
     )
 
-    const onChangeName = useCallback(
+    const onChangeShortName = useCallback(
         (_, data) => {
-            state.setCompany({ ...state.company, name: data.value })
-            setIsConfirmEnabled(true)
-        },
-        [state]
-    )
-
-    const onChangePatronymic = useCallback(
-        (_, data) => {
-            state.setCompany({ ...state.company, patronymic: data.value })
+            state.setCompany({ ...state.company, shortName: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -82,89 +73,153 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
         [state]
     )
 
-    const onChangeTaxNumber = useCallback(
+    const onChangeRegistrationDate = useCallback(
         (_, data) => {
-            state.setCompany({ ...state.company, taxNumber: data.value })
+            state.setCompany({ ...state.company, registrationDate: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
     )
 
-    const onChangePost = useCallback(
+    const onChangeEmployeesCount = useCallback(
         (_, data) => {
-            state.setCompany({ ...state.company, post: data.value })
+            state.setCompany({ ...state.company, employeesCount: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
     )
 
-    const onChangePostcode = useCallback(
+    const onChangeYearlyTurnover = useCallback(
         (_, data) => {
-            state.setCompany({ ...state.company, postcode: data.value })
+            state.setCompany({ ...state.company, yearlyTurnover: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
     )
 
-    const onChangeCountry = useCallback(
+    const onChangeJuridicalPostcode = useCallback(
         (_, data) => {
-            state.setCompany({ ...state.company, country: data.value })
+            state.setCompany({ ...state.company, juridicalPostcode: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
     )
 
-    const onChangeRegion = useCallback(
+    const onChangeJuridicalCountry = useCallback(
         (_, data) => {
-            state.setCompany({ ...state.company, region: data.value })
+            state.setCompany({ ...state.company, juridicalCountry: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
     )
 
-    const onChangeProvince = useCallback(
+    const onChangeJuridicalRegion = useCallback(
         (_, data) => {
-            state.setCompany({ ...state.company, province: data.value })
+            state.setCompany({ ...state.company, juridicalRegion: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
     )
 
-    const onChangeCity = useCallback(
+    const onChangeJuridicalProvince = useCallback(
         (_, data) => {
-            state.setCompany({ ...state.company, city: data.value })
+            state.setCompany({ ...state.company, juridicalProvince: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
     )
 
-    const onChangeStreet = useCallback(
+    const onChangeJuridicalCity = useCallback(
         (_, data) => {
-            state.setCompany({ ...state.company, street: data.value })
+            state.setCompany({ ...state.company, juridicalCity: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
     )
 
-    const onChangeHouse = useCallback(
+    const onChangeJuridicalStreet = useCallback(
         (_, data) => {
-            state.setCompany({ ...state.company, house: data.value })
+            state.setCompany({ ...state.company, juridicalStreet: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
     )
 
-    const onChangeApartment = useCallback(
+    const onChangeJuridicalHouse = useCallback(
         (_, data) => {
-            state.setCompany({ ...state.company, apartment: data.value })
+            state.setCompany({ ...state.company, juridicalHouse: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
     )
 
-    const onChangeBirthDate = useCallback(
+    const onChangeJuridicalApartment = useCallback(
         (_, data) => {
-            state.setCompany({ ...state.company, birthDate: data.value })
+            state.setCompany({ ...state.company, juridicalApartment: data.value })
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
+    const onChangeLegalPostcode = useCallback(
+        (_, data) => {
+            state.setCompany({ ...state.company, legalPostcode: data.value })
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
+    const onChangeLegalCountry = useCallback(
+        (_, data) => {
+            state.setCompany({ ...state.company, legalCountry: data.value })
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
+    const onChangeLegalRegion = useCallback(
+        (_, data) => {
+            state.setCompany({ ...state.company, legalRegion: data.value })
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
+    const onChangeLegalProvince = useCallback(
+        (_, data) => {
+            state.setCompany({ ...state.company, legalProvince: data.value })
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
+    const onChangeLegalCity = useCallback(
+        (_, data) => {
+            state.setCompany({ ...state.company, legalCity: data.value })
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
+    const onChangeLegalStreet = useCallback(
+        (_, data) => {
+            state.setCompany({ ...state.company, legalStreet: data.value })
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
+    const onChangeLegalHouse = useCallback(
+        (_, data) => {
+            state.setCompany({ ...state.company, legalHouse: data.value })
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
+    const onChangeLegalApartment = useCallback(
+        (_, data) => {
+            state.setCompany({ ...state.company, legalApartment: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -252,32 +307,36 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
                 onChange: onChangeLeadId
             },
             {
-                type: 'text',
+                type: 'dropdown',
                 required: true,
-                topLabel: 'Фамилия',
-                value: state.company.surname,
-                onChange: onChangeSurname
+                label: 'Тип',
+                value: state.company.type,
+                text: getCompanyTypeName(state.company.type),
+                options: getCompanyTypesAsSelectOptions(),
+                onChange: onChangeType
+            },
+            {
+                type: 'dropdown',
+                required: true,
+                label: 'Род деятельности',
+                value: state.company.industryType,
+                text: getCompanyIndustryTypeName(state.company.industryType),
+                options: getCompanyIndustryTypesAsSelectOptions(),
+                onChange: onChangeType
             },
             {
                 type: 'text',
                 required: true,
-                topLabel: 'Имя',
-                value: state.company.name,
-                onChange: onChangeName
+                topLabel: 'Полное название',
+                value: state.company.fullName,
+                onChange: onChangeFullName
             },
             {
                 type: 'text',
                 required: true,
-                topLabel: 'Отчество',
-                value: state.company.patronymic,
-                onChange: onChangePatronymic
-            },
-            {
-                type: 'text',
-                required: true,
-                topLabel: 'Отчество',
-                value: state.company.patronymic,
-                onChange: onChangePatronymic
+                topLabel: 'Краткое название',
+                value: state.company.shortName,
+                onChange: onChangeShortName
             },
             {
                 type: 'text',
@@ -297,78 +356,149 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
                 type: 'text',
                 required: true,
                 topLabel: 'ИНН',
-                value: state.company.taxNumber,
-                onChange: onChangeTaxNumber
+                value: state.company.email,
+                onChange: onChangeEmail
             },
             {
                 type: 'text',
                 required: true,
-                topLabel: 'Должность',
-                value: state.company.post,
-                onChange: onChangePost
-            },
-            {
-                type: 'text',
-                required: true,
-                topLabel: 'Почтовый индекс',
-                value: state.company.postcode,
-                onChange: onChangePostcode
-            },
-            {
-                type: 'text',
-                required: true,
-                topLabel: 'Страна',
-                value: state.company.country,
-                onChange: onChangeCountry
-            },
-            {
-                type: 'text',
-                required: true,
-                topLabel: 'Регион',
-                value: state.company.region,
-                onChange: onChangeRegion
-            },
-            {
-                type: 'text',
-                required: true,
-                topLabel: 'Район/провинция',
-                value: state.company.province,
-                onChange: onChangeProvince
-            },
-            {
-                type: 'text',
-                required: true,
-                topLabel: 'Город/населенный пункт',
-                value: state.company.city,
-                onChange: onChangeCity
-            },
-            {
-                type: 'text',
-                required: true,
-                topLabel: 'Улица',
-                value: state.company.street,
-                onChange: onChangeStreet
-            },
-            {
-                type: 'text',
-                required: true,
-                topLabel: 'Дом/строение',
-                value: state.company.house,
-                onChange: onChangeHouse
-            },
-            {
-                type: 'text',
-                required: true,
-                topLabel: 'Квартира',
-                value: state.company.apartment,
-                onChange: onChangeApartment
+                topLabel: 'ОГРН',
+                value: state.company.email,
+                onChange: onChangeEmail
             },
             {
                 type: 'date',
                 required: true,
-                topLabel: 'Дата рождения',
-                value: state.company.birthDate,
-                onChange: onChangeBirthDate
+                topLabel: 'Дата регистрации',
+                value: state.company.registrationDate,
+                onChange: onChangeRegistrationDate
+            },
+            {
+                type: 'number',
+                required: true,
+                topLabel: 'Количество сотрудников',
+                value: state.company.employeesCount,
+                onChange: onChangeEmployeesCount
+            },
+            {
+                type: 'number',
+                required: true,
+                topLabel: 'Годовой оборот',
+                value: state.company.yearlyTurnover,
+                onChange: onChangeYearlyTurnover
+            },
+
+            {
+                type: 'text',
+                required: true,
+                topLabel: 'Почтовый индекс (юридический адрес)',
+                value: state.company.juridicalPostcode,
+                onChange: onChangeJuridicalPostcode
+            },
+            {
+                type: 'text',
+                required: true,
+                topLabel: 'Страна (юридический адрес)',
+                value: state.company.juridicalCountry,
+                onChange: onChangeJuridicalCountry
+            },
+            {
+                type: 'text',
+                required: true,
+                topLabel: 'Регион (юридический адрес)',
+                value: state.company.juridicalRegion,
+                onChange: onChangeJuridicalRegion
+            },
+            {
+                type: 'text',
+                required: true,
+                topLabel: 'Район/провинция (юридический адрес)',
+                value: state.company.juridicalProvince,
+                onChange: onChangeJuridicalProvince
+            },
+            {
+                type: 'text',
+                required: true,
+                topLabel: 'Город/населенный пункт (юридический адрес)',
+                value: state.company.juridicalCity,
+                onChange: onChangeJuridicalCity
+            },
+            {
+                type: 'text',
+                required: true,
+                topLabel: 'Улица (юридический адрес)',
+                value: state.company.juridicalStreet,
+                onChange: onChangeJuridicalStreet
+            },
+            {
+                type: 'text',
+                required: true,
+                topLabel: 'Дом/строение (юридический адрес)',
+                value: state.company.juridicalHouse,
+                onChange: onChangeJuridicalHouse
+            },
+            {
+                type: 'text',
+                required: true,
+                topLabel: 'Квартира (юридический адрес)',
+                value: state.company.juridicalApartment,
+                onChange: onChangeJuridicalApartment
+            },
+            {
+                type: 'text',
+                required: true,
+                topLabel: 'Почтовый индекс (фактический адрес)',
+                value: state.company.legalPostcode,
+                onChange: onChangeLegalPostcode
+            },
+            {
+                type: 'text',
+                required: true,
+                topLabel: 'Страна (фактический адрес)',
+                value: state.company.legalCountry,
+                onChange: onChangeLegalCountry
+            },
+            {
+                type: 'text',
+                required: true,
+                topLabel: 'Регион (фактический адрес)',
+                value: state.company.legalRegion,
+                onChange: onChangeLegalRegion
+            },
+            {
+                type: 'text',
+                required: true,
+                topLabel: 'Район/провинция (фактический адрес)',
+                value: state.company.legalProvince,
+                onChange: onChangeLegalProvince
+            },
+            {
+                type: 'text',
+                required: true,
+                topLabel: 'Город/населенный пункт (фактический адрес)',
+                value: state.company.legalCity,
+                onChange: onChangeLegalCity
+            },
+            {
+                type: 'text',
+                required: true,
+                topLabel: 'Улица (фактический адрес)',
+                value: state.company.legalStreet,
+                onChange: onChangeLegalStreet
+            },
+            {
+                type: 'text',
+                required: true,
+                topLabel: 'Дом/строение (фактический адрес)',
+                value: state.company.legalHouse,
+                onChange: onChangeLegalHouse
+            },
+            {
+                type: 'text',
+                required: true,
+                topLabel: 'Квартира (фактический адрес)',
+                value: state.company.legalApartment,
+                onChange: onChangeLegalApartment
             },
             {
                 type: 'attributes',
@@ -385,7 +515,6 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
                 })),
                 onClickAddItem: onClickAddAttributeItem
             },
-
             {
                 type: 'checkbox',
                 label: 'Удален',
@@ -395,54 +524,67 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
         ],
         [
             getActualAttributes,
-            getActualCompanies,
             getActualLeads,
             getAllAttributes,
-            getAllCompanies,
             getAllLeads,
-            onChangeApartment,
             onChangeAttributeKey,
             onChangeAttributeValue,
-            onChangeBirthDate,
-            onChangeCity,
-            onChangeCompanyId,
-            onChangeCountry,
             onChangeEmail,
-            onChangeHouse,
+            onChangeEmployeesCount,
+            onChangeFullName,
             onChangeIsDeleted,
+            onChangeJuridicalApartment,
+            onChangeJuridicalCity,
+            onChangeJuridicalCountry,
+            onChangeJuridicalHouse,
+            onChangeJuridicalPostcode,
+            onChangeJuridicalProvince,
+            onChangeJuridicalRegion,
+            onChangeJuridicalStreet,
             onChangeLeadId,
-            onChangeName,
-            onChangePatronymic,
+            onChangeLegalApartment,
+            onChangeLegalCity,
+            onChangeLegalCountry,
+            onChangeLegalHouse,
+            onChangeLegalPostcode,
+            onChangeLegalProvince,
+            onChangeLegalRegion,
+            onChangeLegalStreet,
             onChangePhone,
-            onChangePost,
-            onChangePostcode,
-            onChangeProvince,
-            onChangeRegion,
-            onChangeStreet,
-            onChangeSurname,
-            onChangeTaxNumber,
+            onChangeRegistrationDate,
+            onChangeShortName,
+            onChangeType,
+            onChangeYearlyTurnover,
             onClickAddAttributeItem,
             onDeleteAttribute,
-            state.company.apartment,
             state.company.attributeLinks,
-            state.company.birthDate,
-            state.company.city,
-            state.company.companyId,
-            state.company.country,
             state.company.email,
-            state.company.house,
+            state.company.employeesCount,
+            state.company.fullName,
+            state.company.industryType,
             state.company.isDeleted,
+            state.company.juridicalApartment,
+            state.company.juridicalCity,
+            state.company.juridicalCountry,
+            state.company.juridicalHouse,
+            state.company.juridicalPostcode,
+            state.company.juridicalProvince,
+            state.company.juridicalRegion,
+            state.company.juridicalStreet,
             state.company.leadId,
-            state.company.name,
-            state.company.patronymic,
+            state.company.legalApartment,
+            state.company.legalCity,
+            state.company.legalCountry,
+            state.company.legalHouse,
+            state.company.legalPostcode,
+            state.company.legalProvince,
+            state.company.legalRegion,
+            state.company.legalStreet,
             state.company.phone,
-            state.company.post,
-            state.company.postcode,
-            state.company.province,
-            state.company.region,
-            state.company.street,
-            state.company.surname,
-            state.company.taxNumber
+            state.company.registrationDate,
+            state.company.shortName,
+            state.company.type,
+            state.company.yearlyTurnover
         ]
     )
 

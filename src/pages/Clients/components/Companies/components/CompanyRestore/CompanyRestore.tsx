@@ -12,8 +12,8 @@ const CompanyRestore: FC = () => {
     return (
         <RestoreModal
             isRestoring={state.isRestoring}
-            title="Восстановление контакта"
-            content="Вы уверены, что хотите восстановить контакт?"
+            title="Восстановление компании"
+            content="Вы уверены, что хотите восстановить компанию?"
             onClickCancel={onClickCancel}
             onClickConfirm={onClickConfirm}
         />

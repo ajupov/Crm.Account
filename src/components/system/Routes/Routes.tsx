@@ -3,6 +3,18 @@ import { Route, Switch } from 'react-router'
 
 import Activities from '../../../pages/Activities/Activities'
 import Calendar from '../../../pages/Calendar/Calendar'
+import Companies from '../../../pages/Clients/components/Companies/Companies'
+import CompaniesRoutes from '../../../pages/Clients/components/Companies/routes/CompaniesRoutes'
+import CompanyAttributeChanges from '../../../pages/Clients/components/CompanyAttributes/components/CompanyAttributeChanges/CompanyAttributeChanges'
+import CompanyAttributeCreate from '../../../pages/Clients/components/CompanyAttributes/components/CompanyAttributeCreate/CompanyAttributeCreate'
+import CompanyAttributeEdit from '../../../pages/Clients/components/CompanyAttributes/components/CompanyAttributeEdit/CompanyAttributeEdit'
+import CompanyAttributeView from '../../../pages/Clients/components/CompanyAttributes/components/CompanyAttributeView/CompanyAttributeView'
+import CompanyAttributes from '../../../pages/Clients/components/CompanyAttributes/CompanyAttributes'
+import CompanyAttributesRoutes from '../../../pages/Clients/components/CompanyAttributes/routes/CompanyAttributesRoutes'
+import CompanyChanges from '../../../pages/Clients/components/Companies/components/CompanyChanges/CompanyChanges'
+import CompanyCreate from '../../../pages/Clients/components/Companies/components/CompanyCreate/CompanyCreate'
+import CompanyEdit from '../../../pages/Clients/components/Companies/components/CompanyEdit/CompanyEdit'
+import CompanyView from '../../../pages/Clients/components/Companies/components/CompanyView/CompanyView'
 import ContactAttributeChanges from '../../../pages/Clients/components/ContactAttributes/components/ContactAttributeChanges/ContactAttributeChanges'
 import ContactAttributeCreate from '../../../pages/Clients/components/ContactAttributes/components/ContactAttributeCreate/ContactAttributeCreate'
 import ContactAttributeEdit from '../../../pages/Clients/components/ContactAttributes/components/ContactAttributeEdit/ContactAttributeEdit'
@@ -93,6 +105,20 @@ const Routes: FC = () => {
             <Route path={withId(ContactAttributesRoutes.View)} exact component={ContactAttributeView} />
             <Route path={withId(ContactAttributesRoutes.Edit)} exact component={ContactAttributeEdit} />
             <Route path={withId(ContactAttributesRoutes.Changes)} exact component={ContactAttributeChanges} />
+
+            {/*  */}
+
+            <Route path={CompaniesRoutes.Index} exact component={Companies} />
+            <Route path={CompaniesRoutes.Create} exact component={CompanyCreate} />
+            <Route path={withId(CompaniesRoutes.View)} exact component={CompanyView} />
+            <Route path={withId(CompaniesRoutes.Edit)} exact component={CompanyEdit} />
+            <Route path={withId(CompaniesRoutes.Changes)} exact component={CompanyChanges} />
+
+            <Route path={CompanyAttributesRoutes.Index} exact component={CompanyAttributes} />
+            <Route path={CompanyAttributesRoutes.Create} exact component={CompanyAttributeCreate} />
+            <Route path={withId(CompanyAttributesRoutes.View)} exact component={CompanyAttributeView} />
+            <Route path={withId(CompanyAttributesRoutes.Edit)} exact component={CompanyAttributeEdit} />
+            <Route path={withId(CompanyAttributesRoutes.Changes)} exact component={CompanyAttributeChanges} />
 
             <Route path="/settings" component={Settings} />
             <Route component={NotFound} />

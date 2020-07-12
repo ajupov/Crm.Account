@@ -58,10 +58,7 @@ const useProductView = (): UseProductViewReturn => {
 
     const map = useCallback(
         (product: Product): ViewDataProps[] => [
-            {
-                label: 'Родительский продукт',
-                value: getProductName()
-            },
+            { label: 'Родительский продукт', value: getProductName() },
             { label: 'Тип', value: getProductTypeName(product.type) },
             { label: 'Статус', value: product.status?.name },
             { label: 'Категории', value: mapCategories() },

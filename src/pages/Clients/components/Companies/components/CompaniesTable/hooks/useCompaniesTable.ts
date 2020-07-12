@@ -37,7 +37,7 @@ const useCompaniesTable = (): UseCompaniesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('Контакты')
+        const fileName = getFileNameWithDateTime('Компании')
         const headers = [
             'Идентификатор',
             'Идентификатор лида',
