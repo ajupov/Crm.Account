@@ -1,11 +1,11 @@
-import { toLocaleDateTime } from '../utils/dateTime/dateTimeUtils'
+import { getDateTimeAsRecently } from '../utils/dateTime/dateTimeUtils'
 
 export function getCreateDateTimeText(value?: string): string {
     if (!value) {
         return ''
     }
 
-    const lastModifyDateTime = toLocaleDateTime(value)
+    const lastModifyDateTime = getDateTimeAsRecently(new Date(value))
 
     if (!lastModifyDateTime) {
         return ''
@@ -20,12 +20,12 @@ export function getLastChangeDateTimeText(value?: string): string {
         return ''
     }
 
-    const lastModifyDateTime = toLocaleDateTime(value)
+    const lastModifyDateTime = getDateTimeAsRecently(new Date(value))
 
     if (!lastModifyDateTime) {
         return ''
     }
 
     // TODO: Move to l10n
-    return `Изменен: ${lastModifyDateTime}`
+    return `Последнее изменение: ${lastModifyDateTime}`
 }

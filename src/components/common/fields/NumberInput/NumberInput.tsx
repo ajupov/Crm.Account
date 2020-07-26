@@ -23,7 +23,7 @@ const NumberInput: FC<NumberInputProps> = ({ required, topLabel, value, precessi
             onChange={onChange}
             precession={precession ?? 0}
             min={min ?? 0}
-            max={max ?? 0}
+            max={max}
             fluid
         />
     </Form.Field>
