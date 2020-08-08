@@ -9,13 +9,13 @@ import ProductChange from '../../../../../../../../../../api/products/models/Pro
 import ProductChangesContext from '../../../../../contexts/ProductChangesContext/ProductChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../../components/common/collections/Table/TableHeader'
+import { getDateTimeAsRecently } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../../../helpers/fileNameHelper'
 import { getProductTypeName } from '../../../../../helpers/productTypeHelper'
 import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
 import { joinAttributes } from '../../../../../mappers/productAttributesMapper'
 import { joinCategoryIds } from '../../../../../mappers/productCategoriesMapper'
 import { toCurrency } from '../../../../../../../../../utils/currency/currencyUtils'
-import { toLocaleDateTime } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 
 interface UseProductChangesTableReturn {
     page: number
@@ -108,7 +108,12 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
                         cells: [
                             { value: getChangeName(change), textAlign: 'center' },
                             { value: getChangeValue(change), textAlign: 'left' },
-                            { value: toLocaleDateTime(change.createDateTime), textAlign: 'center' }
+                            {
+                                value: change.createDateTime
+                                    ? getDateTimeAsRecently(new Date(change.createDateTime))
+                                    : '',
+                                textAlign: 'center'
+                            }
                         ]
                     } as TableBodyRowProps)
             ),

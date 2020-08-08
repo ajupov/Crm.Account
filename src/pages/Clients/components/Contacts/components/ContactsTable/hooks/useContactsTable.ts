@@ -7,8 +7,8 @@ import ContactsContext from '../../../contexts/ContactsContext/ContactsContext'
 import ContactsRoutes from '../../../routes/ContactsRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
+import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
-import { toLocaleDateTime } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import useContactView from '../../ContactView/hooks/useContactView'
 import { useHistory } from 'react-router'
 
@@ -106,7 +106,12 @@ const useContactsTable = (): UseContactsTableReturn => {
                             { value: contact.patronymic, textAlign: 'left' },
                             { value: contact.phone, textAlign: 'left' },
                             { value: contact.email, textAlign: 'left' },
-                            { value: toLocaleDateTime(contact.createDateTime), textAlign: 'center' }
+                            {
+                                value: contact.createDateTime
+                                    ? getDateTimeAsRecently(new Date(contact.createDateTime))
+                                    : '',
+                                textAlign: 'center'
+                            }
                         ],
                         isDeleted: contact.isDeleted,
                         onClickRow: onClickView,

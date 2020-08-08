@@ -7,8 +7,8 @@ import ProductCategoriesRoutes from '../../../routes/ProductCategoriesRoutes'
 import ProductCategory from '../../../../../../../../api/products/models/ProductCategory'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
+import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
-import { toLocaleDateTime } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { useHistory } from 'react-router'
 import useProductCategoryView from '../../ProductCategoryView/hooks/useProductCategoryView'
 
@@ -79,7 +79,12 @@ const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
                         id: category.id,
                         cells: [
                             { value: category.name, textAlign: 'left' },
-                            { value: toLocaleDateTime(category.createDateTime), textAlign: 'center' }
+                            {
+                                value: category.createDateTime
+                                    ? getDateTimeAsRecently(new Date(category.createDateTime))
+                                    : '',
+                                textAlign: 'center'
+                            }
                         ],
                         isDeleted: category.isDeleted,
                         onClickRow: onClickView,

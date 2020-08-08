@@ -64,7 +64,7 @@ export function getDateTimeAsRecently(
             return `${`${minutes === 1 ? '' : minutes.toString()} ${getPluralform(
                 minutes,
                 translateOptions.firstPlural.minute,
-                translateOptions.secondPlural.second,
+                translateOptions.secondPlural.minute,
                 translateOptions.thirdPlural.minute
             )}`} ${translateOptions.ago}`
         }

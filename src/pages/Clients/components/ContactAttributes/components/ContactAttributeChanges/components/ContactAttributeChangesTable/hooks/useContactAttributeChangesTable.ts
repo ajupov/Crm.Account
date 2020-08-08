@@ -8,9 +8,9 @@ import ContactAttributeChangesContext from '../../../../../contexts/ContactAttri
 import { TableBodyRowProps } from '../../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../../components/common/collections/Table/TableHeader'
 import { getAttributeTypeName } from '../../../../../../../../../helpers/entityAttributeTypeHelper'
+import { getDateTimeAsRecently } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../../../helpers/fileNameHelper'
 import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
-import { toLocaleDateTime } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 
 interface UseContactAttributeChangesTableReturn {
     page: number
@@ -80,7 +80,12 @@ const useContactAttributeChangesTable = (): UseContactAttributeChangesTableRetur
                         cells: [
                             { value: getChangeName(change), textAlign: 'center' },
                             { value: getChangeValue(change), textAlign: 'left' },
-                            { value: toLocaleDateTime(change.createDateTime), textAlign: 'center' }
+                            {
+                                value: change.createDateTime
+                                    ? getDateTimeAsRecently(new Date(change.createDateTime))
+                                    : '',
+                                textAlign: 'center'
+                            }
                         ]
                     } as TableBodyRowProps)
             ),

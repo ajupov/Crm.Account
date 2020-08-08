@@ -3,8 +3,10 @@ import ContactBankAccount from '../../../../../../api/contacts/models/ContactBan
 const joinBankAccounts = (accounts?: ContactBankAccount[]): string =>
     accounts
         ?.map(
-            x =>
-                `Номер счета: ${x.number}, БИК банка: ${x.bankNumber}, Корреспондентский счет банка: ${x.bankCorrespondentNumber}, Название банка: ${x.bankName}`
+            () =>
+                accounts
+                    ?.map(x => `${x.number}, БИК банка: ${x.bankNumber}, Название банка: ${x.bankName}`)
+                    .join(', ') ?? ''
         )
         .join(', ') ?? ''
 

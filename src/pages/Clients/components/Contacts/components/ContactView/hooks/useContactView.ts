@@ -78,7 +78,7 @@ const useContactView = (): UseContactViewReturn => {
             { label: 'Дом/строение', value: contact.house },
             { label: 'Квартира', value: contact.apartment },
             { label: 'Дата рождения', value: contact.birthDate },
-            { label: 'Категории', value: mapBankAccounts() },
+            { label: 'Банковские реквизиты', value: mapBankAccounts() },
             { label: 'Атрибуты', value: mapAttributes() },
             { label: 'Удален', value: contact.isDeleted ? 'Да' : 'Нет' }
         ],

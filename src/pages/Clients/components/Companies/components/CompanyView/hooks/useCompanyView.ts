@@ -87,7 +87,7 @@ const useCompanyView = (): UseCompanyViewReturn => {
             { label: 'Улица (фактический адрес)', value: company.legalStreet },
             { label: 'Дом/строение (фактический адрес)', value: company.legalHouse },
             { label: 'Квартира (фактический адрес)', value: company.legalApartment },
-            { label: 'Категории', value: mapBankAccounts() },
+            { label: 'Банковские реквизиты', value: mapBankAccounts() },
             { label: 'Атрибуты', value: mapAttributes() },
             { label: 'Удален', value: company.isDeleted ? 'Да' : 'Нет' }
         ],

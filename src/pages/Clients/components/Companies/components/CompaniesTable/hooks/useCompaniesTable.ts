@@ -7,8 +7,8 @@ import CompaniesRoutes from '../../../routes/CompaniesRoutes'
 import Company from '../../../../../../../../api/companies/models/Company'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
+import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
-import { toLocaleDateTime } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import useCompanyView from '../../CompanyView/hooks/useCompanyView'
 import { useHistory } from 'react-router'
 
@@ -116,7 +116,12 @@ const useCompaniesTable = (): UseCompaniesTableReturn => {
                             { value: company.juridicalRegion, textAlign: 'left' },
                             { value: company.juridicalProvince, textAlign: 'left' },
                             { value: company.juridicalCity, textAlign: 'left' },
-                            { value: toLocaleDateTime(company.createDateTime), textAlign: 'center' }
+                            {
+                                value: company.createDateTime
+                                    ? getDateTimeAsRecently(new Date(company.createDateTime))
+                                    : '',
+                                textAlign: 'center'
+                            }
                         ],
                         isDeleted: company.isDeleted,
                         onClickRow: onClickView,

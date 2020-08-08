@@ -7,9 +7,9 @@ import ProductStatusChange from '../../../../../../../../../../api/products/mode
 import ProductStatusChangesContext from '../../../../../contexts/ProductStatusChangesContext/ProductStatusChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../../components/common/collections/Table/TableHeader'
+import { getDateTimeAsRecently } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../../../helpers/fileNameHelper'
 import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
-import { toLocaleDateTime } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 
 interface UseProductStatusChangesTableReturn {
     page: number
@@ -76,7 +76,12 @@ const useProductStatusChangesTable = (): UseProductStatusChangesTableReturn => {
                         cells: [
                             { value: getChangeName(change), textAlign: 'center' },
                             { value: getChangeValue(change), textAlign: 'left' },
-                            { value: toLocaleDateTime(change.createDateTime), textAlign: 'center' }
+                            {
+                                value: change.createDateTime
+                                    ? getDateTimeAsRecently(new Date(change.createDateTime))
+                                    : '',
+                                textAlign: 'center'
+                            }
                         ]
                     } as TableBodyRowProps)
             ),

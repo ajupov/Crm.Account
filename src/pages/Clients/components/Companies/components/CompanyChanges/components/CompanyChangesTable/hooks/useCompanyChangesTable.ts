@@ -11,11 +11,11 @@ import { TableBodyRowProps } from '../../../../../../../../../components/common/
 import { TableHeaderCellProps } from '../../../../../../../../../components/common/collections/Table/TableHeader'
 import { getCompanyIndustryTypeName } from '../../../../../helpers/helpers/companyIndustryTypeHelper'
 import { getCompanyTypeName } from '../../../../../helpers/helpers/companyTypeHelper'
+import { getDateTimeAsRecently } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../../../helpers/fileNameHelper'
 import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
 import { joinAttributes } from '../../../../../mappers/companyAttributesMapper'
 import { joinBankAccounts } from '../../../../../mappers/companyBankAccountsMapper'
-import { toLocaleDateTime } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 
 interface UseCompanyChangesTableReturn {
     page: number
@@ -168,7 +168,12 @@ const useCompanyChangesTable = (): UseCompanyChangesTableReturn => {
                         cells: [
                             { value: getChangeName(change), textAlign: 'center' },
                             { value: getChangeValue(change), textAlign: 'left' },
-                            { value: toLocaleDateTime(change.createDateTime), textAlign: 'center' }
+                            {
+                                value: change.createDateTime
+                                    ? getDateTimeAsRecently(new Date(change.createDateTime))
+                                    : '',
+                                textAlign: 'center'
+                            }
                         ]
                     } as TableBodyRowProps)
             ),

@@ -8,8 +8,8 @@ import ProductAttributesRoutes from '../../../routes/ProductAttributesRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
 import { getAttributeTypeName } from '../../../../../../../helpers/entityAttributeTypeHelper'
+import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
-import { toLocaleDateTime } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { useHistory } from 'react-router'
 import useProductAttributeView from '../../ProductAttributeView/hooks/useProductAttributeView'
 
@@ -81,7 +81,12 @@ const useProductAttributesTable = (): UseProductAttributesTableReturn => {
                         cells: [
                             { value: getAttributeTypeName(attribute.type), textAlign: 'left' },
                             { value: attribute.key, textAlign: 'left' },
-                            { value: toLocaleDateTime(attribute.createDateTime), textAlign: 'center' }
+                            {
+                                value: attribute.createDateTime
+                                    ? getDateTimeAsRecently(new Date(attribute.createDateTime))
+                                    : '',
+                                textAlign: 'center'
+                            }
                         ],
                         isDeleted: attribute.isDeleted,
                         onClickRow: onClickView,

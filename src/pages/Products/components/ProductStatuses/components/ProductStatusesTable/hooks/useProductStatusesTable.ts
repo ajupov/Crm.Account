@@ -7,8 +7,8 @@ import ProductStatusesContext from '../../../contexts/ProductStatusesContext/Pro
 import ProductStatusesRoutes from '../../../routes/ProductStatusesRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
+import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
-import { toLocaleDateTime } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { useHistory } from 'react-router'
 import useProductStatusView from '../../ProductStatusView/hooks/useProductStatusView'
 
@@ -80,7 +80,12 @@ const useProductStatusesTable = (): UseProductStatusesTableReturn => {
                         id: status.id,
                         cells: [
                             { value: status.name, textAlign: 'left' },
-                            { value: toLocaleDateTime(status.createDateTime), textAlign: 'center' }
+                            {
+                                value: status.createDateTime
+                                    ? getDateTimeAsRecently(new Date(status.createDateTime))
+                                    : '',
+                                textAlign: 'center'
+                            }
                         ],
                         isDeleted: status.isDeleted,
                         onClickRow: onClickView,

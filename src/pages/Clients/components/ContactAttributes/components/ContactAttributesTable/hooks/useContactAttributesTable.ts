@@ -8,8 +8,8 @@ import ContactAttributesRoutes from '../../../routes/ContactAttributesRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
 import { getAttributeTypeName } from '../../../../../../../helpers/entityAttributeTypeHelper'
+import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
-import { toLocaleDateTime } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import useContactAttributeView from '../../ContactAttributeView/hooks/useContactAttributeView'
 import { useHistory } from 'react-router'
 
@@ -81,7 +81,12 @@ const useContactAttributesTable = (): UseContactAttributesTableReturn => {
                         cells: [
                             { value: getAttributeTypeName(attribute.type), textAlign: 'left' },
                             { value: attribute.key, textAlign: 'left' },
-                            { value: toLocaleDateTime(attribute.createDateTime), textAlign: 'center' }
+                            {
+                                value: attribute.createDateTime
+                                    ? getDateTimeAsRecently(new Date(attribute.createDateTime))
+                                    : '',
+                                textAlign: 'center'
+                            }
                         ],
                         isDeleted: attribute.isDeleted,
                         onClickRow: onClickView,
