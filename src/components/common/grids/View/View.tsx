@@ -108,21 +108,23 @@ const View: FC<ViewProps> = ({
             <Card.Meta textAlign="right">{getCreateDateTimeText(createDate)}</Card.Meta>
             <Card.Meta textAlign="right">{getLastModifyDateTimeText(lastModifyDateTime)}</Card.Meta>
             {renderData(data)}
-            {!isDeleted && (
-                <Button.Group basic floated="right" style={{ marginTop: '30px' }}>
-                    <Button onClick={_onClickEdit}>
-                        <Icon name="edit" /> Редактировать
+            <div style={{ marginTop: '20px', marginBottom: '80px' }}>
+                {!isDeleted && (
+                    <Button.Group basic floated="right">
+                        <Button onClick={_onClickEdit}>
+                            <Icon name="edit" /> Редактировать
+                        </Button>
+                        <Button onClick={_onClickDelete}>
+                            <Icon name="trash" /> Удалить
+                        </Button>
+                    </Button.Group>
+                )}
+                {isDeleted && (
+                    <Button basic floated="right" onClick={_onClickRestore}>
+                        <Icon name="redo" /> Восстановить
                     </Button>
-                    <Button onClick={_onClickDelete}>
-                        <Icon name="trash" /> Удалить
-                    </Button>
-                </Button.Group>
-            )}
-            {isDeleted && (
-                <Button basic floated="right" style={{ marginTop: '30px' }} onClick={_onClickRestore}>
-                    <Icon name="redo" /> Восстановить
-                </Button>
-            )}
+                )}
+            </div>
         </>
     )
 }

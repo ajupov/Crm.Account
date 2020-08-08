@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react'
 
 import ClientsMenu from '../../../ClientsMenu/ClientsMenu'
+import ContactComments from '../ContactComments/ContactComments'
 import ContactContextProvider from '../../contexts/ContactContext/ContactContextProvider'
 import ContactDelete from '../ContactDelete/ContactDelete'
 import ContactRestore from '../ContactRestore/ContactRestore'
@@ -20,6 +21,7 @@ const ContactView: FC = () => {
             <ContactContextProvider>
                 <Page title={title} firstSidebar={<ClientsMenu />}>
                     <ContactViewForm />
+                    <ContactComments />
                     <ContactDelete />
                     <ContactRestore />
                 </Page>
