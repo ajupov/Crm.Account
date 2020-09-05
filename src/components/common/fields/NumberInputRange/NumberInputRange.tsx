@@ -55,7 +55,7 @@ const NumberInputRange: FC<NumberInputRangeProps> = ({
             precession={precession ?? 0}
             min={min ?? 0}
             max={max ?? MaxIntValue}
-            label="от"
+            label="до"
             fluid
         />
     </Form.Field>

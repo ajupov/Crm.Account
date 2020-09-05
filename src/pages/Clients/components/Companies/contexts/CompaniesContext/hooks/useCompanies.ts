@@ -11,7 +11,7 @@ const useCompanies = (): CompaniesState => {
 
     const [request, setRequest] = useState(conactsInitialState.request)
     const [isLoading, setIsLoading] = useState(conactsInitialState.isLoading)
-    const [companies, setAttributes] = useState(conactsInitialState.companies)
+    const [companies, setCompanies] = useState(conactsInitialState.companies)
     const [total, setTotal] = useState(conactsInitialState.total)
     const [lastModifyDateTime, setLastModifyDateTime] = useState(conactsInitialState.lastModifyDateTime)
 
@@ -20,7 +20,7 @@ const useCompanies = (): CompaniesState => {
 
         const response = await companiesClient.GetPagedListAsync(request)
 
-        setAttributes(response.companies ?? [])
+        setCompanies(response.companies ?? [])
         setTotal(response.totalCount)
         setLastModifyDateTime(response.lastModifyDateTime ?? '')
 

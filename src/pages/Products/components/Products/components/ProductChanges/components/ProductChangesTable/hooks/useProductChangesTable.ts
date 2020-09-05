@@ -43,8 +43,7 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
     }, [state])
 
     const onClickChangePage = useCallback(
-        (page: number): void =>
-            state.setRequest({ ...state.request, offset: calculateOffset(page, state.request.limit) }),
+        (page: number) => state.setRequest({ ...state.request, offset: calculateOffset(page, state.request.limit) }),
         [state]
     )
 

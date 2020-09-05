@@ -11,7 +11,7 @@ const useProducts = (): ProductsState => {
 
     const [request, setRequest] = useState(productsInitialState.request)
     const [isLoading, setIsLoading] = useState(productsInitialState.isLoading)
-    const [products, setAttributes] = useState(productsInitialState.products)
+    const [products, setProducts] = useState(productsInitialState.products)
     const [total, setTotal] = useState(productsInitialState.total)
     const [lastModifyDateTime, setLastModifyDateTime] = useState(productsInitialState.lastModifyDateTime)
 
@@ -20,7 +20,7 @@ const useProducts = (): ProductsState => {
 
         const response = await productsClient.GetPagedListAsync(request)
 
-        setAttributes(response.products ?? [])
+        setProducts(response.products ?? [])
         setTotal(response.totalCount)
         setLastModifyDateTime(response.lastModifyDateTime ?? '')
 

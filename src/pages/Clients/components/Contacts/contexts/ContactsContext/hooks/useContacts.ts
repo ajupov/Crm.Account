@@ -11,7 +11,7 @@ const useContacts = (): ContactsState => {
 
     const [request, setRequest] = useState(conactsInitialState.request)
     const [isLoading, setIsLoading] = useState(conactsInitialState.isLoading)
-    const [contacts, setAttributes] = useState(conactsInitialState.contacts)
+    const [contacts, setContacts] = useState(conactsInitialState.contacts)
     const [total, setTotal] = useState(conactsInitialState.total)
     const [lastModifyDateTime, setLastModifyDateTime] = useState(conactsInitialState.lastModifyDateTime)
 
@@ -20,7 +20,7 @@ const useContacts = (): ContactsState => {
 
         const response = await contactsClient.GetPagedListAsync(request)
 
-        setAttributes(response.contacts ?? [])
+        setContacts(response.contacts ?? [])
         setTotal(response.totalCount)
         setLastModifyDateTime(response.lastModifyDateTime ?? '')
 
