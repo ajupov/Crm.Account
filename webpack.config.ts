@@ -54,7 +54,6 @@ const webpackConfig: (env: any, options: any) => Configuration = (_, { mode }) =
         hot: true,
         hotOnly: true,
         historyApiFallback: true,
-        open: 'chrome',
         port: 11000
     },
 
