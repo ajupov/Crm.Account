@@ -1,10 +1,5 @@
 export default interface ActivityCommentGetPagedListRequest {
     activityId: string
-    value?: string
-    minCreateDate?: string
-    maxCreateDate?: string
-    offset: number
+    afterCreateDateTime?: string
     limit: number
-    sortBy?: string
-    orderBy?: string
 }

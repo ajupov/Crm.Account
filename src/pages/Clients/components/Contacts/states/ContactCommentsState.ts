@@ -2,8 +2,6 @@ import ContactComment from '../../../../../../api/contacts/models/ContactComment
 import ContactCommentGetPagedListRequest from '../../../../../../api/contacts/models/ContactCommentGetPagedListRequest'
 
 const DefaultLimit = 10
-const DefaultSortBy = 'CreateDateTime'
-const DefaultOrderBy = 'desc'
 
 export default interface ContactCommentsState {
     request: ContactCommentGetPagedListRequest
@@ -16,10 +14,8 @@ export default interface ContactCommentsState {
 export const conactCommentsInitialState: ContactCommentsState = {
     request: {
         contactId: '',
-        offset: 0,
-        limit: DefaultLimit,
-        sortBy: DefaultSortBy,
-        orderBy: DefaultOrderBy
+        afterCreateDateTime: void 0,
+        limit: DefaultLimit
     },
     setRequest: (_: ContactCommentGetPagedListRequest) => void 0,
     isLoading: false,

@@ -13,7 +13,7 @@ const useContactComments = (): UseContactCommentsTableReturn => {
     const state = useContext(ContactCommentsContext)
 
     const onClickLoadPrevious = useCallback(
-        () => state.setRequest({ ...state.request, offset: state.request.offset + state.request.limit }),
+        () => state.setRequest({ ...state.request, afterCreateDateTime: state.request.afterCreateDateTime }),
         [state]
     )
 
