@@ -1,25 +1,22 @@
 import React, { FC, useContext } from 'react'
 
 import Comments from '../../../../../../components/common/collections/Comments/Comments'
-import UserInfoContext from '../../../../../../components/system/UserInfo/contexts/UserInfoContext/UserInfoContext'
+import ContactCommentContext from '../../contexts/ContactCommentContext/ContactCommentContext'
+import ContactCommentsContext from '../../contexts/ContactCommentsContext/ContactCommentsContext'
+import useContactComments from './hooks/useContactComments'
 
 const ContactComments: FC = () => {
-    const { name } = useContext(UserInfoContext)
+    const commentsState = useContext(ContactCommentsContext)
+    const commentState = useContext(ContactCommentContext)
+    const { onChangeCommentToSend, map, onClickLoadPrevious, onClickSend } = useContactComments()
 
     return (
         <Comments
-            comments={[
-                {
-                    author: name,
-                    dateTime: new Date(),
-                    text: 'Это восхитительно!'
-                },
-                {
-                    author: name,
-                    dateTime: new Date('2020-08-08 13:12'),
-                    text: 'Соглашусь!'
-                }
-            ]}
+            commentToSend={commentState.comment.value}
+            onChangeCommentToSend={onChangeCommentToSend}
+            comments={map(commentsState.comments)}
+            onClickLoadPrevious={onClickLoadPrevious}
+            onClickSendComment={onClickSend}
         />
     )
 }
