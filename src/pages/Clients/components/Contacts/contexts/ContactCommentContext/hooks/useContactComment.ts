@@ -1,5 +1,5 @@
 import ContactCommentState, { contactCommentInitialState } from '../../../states/ContactCommentState'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import ContactCommentsClient from '../../../../../../../../api/contacts/clients/ContactCommentsClient'
 import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
@@ -13,9 +13,15 @@ const useContactComment = (): ContactCommentState => {
     const [comment, setComment] = useState(contactCommentInitialState.comment)
 
     const create = useCallback(async () => {
+        if (!comment.value) {
+            return
+        }
+
         setIsLoading(true)
 
         await contactCommentsClient.CreateAsync({ ...comment, contactId: id })
+
+        setComment({ ...comment, value: '' })
 
         setIsLoading(false)
     }, [comment, id])

@@ -14,7 +14,10 @@ export default interface ContactCommentsState {
     setIsNeedLoadingAfter: (value: boolean) => void
     isLoading: boolean
     comments: ContactComment[]
+    hasCommentsBefore: boolean
     getPagedList: () => Promise<void>
+    getNext: () => Promise<void>
+    getPrevious: () => Promise<void>
 }
 
 export const contactCommentsInitialState: ContactCommentsState = {
@@ -33,5 +36,8 @@ export const contactCommentsInitialState: ContactCommentsState = {
     setIsNeedLoadingAfter: (_: boolean) => void 0,
     isLoading: false,
     comments: [],
-    getPagedList: () => Promise.resolve(void 0)
+    hasCommentsBefore: false,
+    getPagedList: () => Promise.resolve(void 0),
+    getNext: () => Promise.resolve(void 0),
+    getPrevious: () => Promise.resolve(void 0)
 }

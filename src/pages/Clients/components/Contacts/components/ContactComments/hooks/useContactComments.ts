@@ -13,19 +13,6 @@ interface UseContactCommentsTableReturn {
     onClickLoadPrevious: () => void
 }
 
-function getMaxCreateDateTime(comments: ContactComment[]): string | undefined {
-    return comments.reduce((x, y) =>
-        new Date(x.createDateTime!).getTime() > new Date(y.createDateTime!).getTime() ? x : y
-    ).createDateTime
-}
-
-function getMinCreateDateTime(comments: ContactComment[]): string | undefined {
-    return comments.reduce((x, y) =>
-        new Date(x.createDateTime!).getTime() < new Date(y.createDateTime!).getTime() ? x : y
-    ).createDateTime
-}
-
-// TODO: Move to l10n
 const useContactComments = (): UseContactCommentsTableReturn => {
     const commentsState = useContext(ContactCommentsContext)
     const commentState = useContext(ContactCommentContext)
@@ -49,31 +36,12 @@ const useContactComments = (): UseContactCommentsTableReturn => {
     ])
 
     const onClickSend = useCallback(async () => {
-        if (!commentState.comment.value) {
-            return
-        }
-
         await commentState.create()
-
-        commentState.setComment({ ...commentState, value: void 0 })
-
-        const afterCreateDateTime = getMaxCreateDateTime(commentsState.comments)
-
-        commentsState.setRequest({
-            ...commentsState.request,
-            afterCreateDateTime
-        })
-
-        commentsState.setIsNeedLoadingAfter(true)
+        await commentsState.getNext()
     }, [commentState, commentsState])
 
-    const onClickLoadPrevious = useCallback(() => {
-        const beforeCreateDateTime = getMinCreateDateTime(commentsState.comments)
-
-        commentsState.setRequest({
-            ...commentsState.request,
-            beforeCreateDateTime
-        })
+    const onClickLoadPrevious = useCallback(async () => {
+        await commentsState.getPrevious()
     }, [commentsState])
 
     return { onChangeCommentToSend, map, onClickSend, onClickLoadPrevious }

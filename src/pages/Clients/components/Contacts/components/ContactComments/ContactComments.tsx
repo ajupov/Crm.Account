@@ -15,6 +15,7 @@ const ContactComments: FC = () => {
             commentToSend={commentState.comment.value}
             onChangeCommentToSend={onChangeCommentToSend}
             comments={map(commentsState.comments)}
+            isShowLoadPrevious={commentsState.hasCommentsBefore}
             onClickLoadPrevious={onClickLoadPrevious}
             onClickSendComment={onClickSend}
         />

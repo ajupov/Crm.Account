@@ -8,7 +8,10 @@ export interface LoadMoreLinkProps {
 
 // TODO: Move to l10n
 const LoadMoreLink: FC<LoadMoreLinkProps> = ({ onClick }) => (
-    <a style={{ color: 'grey', lineHeight: '3rem' }} onClick={onClick}>
+    <a
+        style={{ color: 'grey', lineHeight: '2rem', width: '150px', margin: 'auto', display: 'block' }}
+        onClick={onClick}
+    >
         <Icon name="arrow up" /> Загрузить еще
     </a>
 )

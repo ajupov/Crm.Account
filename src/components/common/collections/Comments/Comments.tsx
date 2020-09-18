@@ -9,6 +9,7 @@ interface CommentsProps {
     commentToSend?: string
     onChangeCommentToSend: (value: string) => void
     onClickSendComment: () => void
+    isShowLoadPrevious: boolean
     onClickLoadPrevious: () => void
 }
 
@@ -18,6 +19,7 @@ const Comments: FC<CommentsProps> = ({
     commentToSend,
     onChangeCommentToSend,
     onClickSendComment,
+    isShowLoadPrevious,
     onClickLoadPrevious
 }) => {
     const _onChange = useCallback((_, data: TextAreaProps) => onChangeCommentToSend(data.value?.toString() ?? ''), [
@@ -25,10 +27,10 @@ const Comments: FC<CommentsProps> = ({
     ])
 
     return (
-        <SemanticComment.Group>
+        <SemanticComment.Group style={{ maxWidth: '100%' }}>
             <Divider />
             <Header as="h3">Комментарии</Header>
-            <LoadMoreLink onClick={onClickLoadPrevious} />
+            {isShowLoadPrevious && <LoadMoreLink onClick={onClickLoadPrevious} />}
             {comments.map((x, i) => (
                 <Comment key={i} {...x} />
             ))}
