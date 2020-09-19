@@ -40,7 +40,7 @@ const webpackConfig: (env: any, options: any) => Configuration = (_, { mode }) =
         splitChunks: {
             cacheGroups: {
                 vendors: {
-                    test: /[\\/]node_modules[\\/]/,
+                    test: /[/\\]node_modules[/\\]/,
                     name: 'vendor',
                     chunks: 'all'
                 }

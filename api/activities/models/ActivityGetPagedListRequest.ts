@@ -1,4 +1,5 @@
 import ActivityPriority from '../models/ActivityPriority'
+import { Dictionary } from '../../../src/utils/dictionary/dictionaryUtils'
 
 export default interface ActivityGetPagedListRequest {
     name?: string
