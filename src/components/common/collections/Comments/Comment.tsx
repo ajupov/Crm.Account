@@ -15,7 +15,7 @@ const Comment: FC<CommentProps> = ({ author, dateTime, text }) => (
         <SemanticComment.Content>
             <SemanticComment.Author as="span">{author}</SemanticComment.Author>
             <SemanticComment.Metadata>{getDateTimeAsRecently(dateTime)}</SemanticComment.Metadata>
-            <SemanticComment.Text>{text}</SemanticComment.Text>
+            <SemanticComment.Text style={{ whiteSpace: 'break-spaces' }}>{text}</SemanticComment.Text>
         </SemanticComment.Content>
     </SemanticComment>
 )

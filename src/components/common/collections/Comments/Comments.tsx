@@ -26,20 +26,38 @@ const Comments: FC<CommentsProps> = ({
         onChangeCommentToSend
     ])
 
+    const _onInput = useCallback(
+        (e: any) => {
+            const enterKeyCode = 13
+
+            if (e.keyCode === enterKeyCode && e.ctrlKey) {
+                onClickSendComment()
+            }
+        },
+        [onClickSendComment]
+    )
+
     return (
         <SemanticComment.Group style={{ maxWidth: '100%' }}>
             <Divider />
             <Header as="h3">Комментарии</Header>
             {isShowLoadPrevious && <LoadMoreLink onClick={onClickLoadPrevious} />}
-            {comments.map((x, i) => (
-                <Comment key={i} {...x} />
-            ))}
+            {comments && comments.length ? (
+                comments.map((x, i) => <Comment key={i} {...x} />)
+            ) : (
+                <Header style={{ color: 'grey', textAlign: 'center' }} as="h5">
+                    Пока нет ни одного комментария
+                </Header>
+            )}
             <Form reply>
-                <Form.TextArea value={commentToSend} onChange={_onChange} />
+                <Form.TextArea value={commentToSend} onChange={_onChange} onKeyDown={_onInput} />
                 <Button floated="right" basic onClick={onClickSendComment}>
                     <Icon name="comment" />
                     Комментировать
                 </Button>
+                <Header as="h6" style={{ margin: 0 }}>
+                    Ctrl + Enter - отправить сообщение
+                </Header>
             </Form>
         </SemanticComment.Group>
     )
