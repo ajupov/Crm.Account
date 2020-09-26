@@ -1,31 +1,16 @@
 import ContactCommentsState, { contactCommentsInitialState } from '../../../states/ContactCommentsState'
+import {
+    getMaxCreateDateTime,
+    getMinCreateDateTime,
+    mergeAndSort
+} from '../../../../../../../helpers/createDateTimeHelper'
 import { useCallback, useEffect, useState } from 'react'
 
-import ContactComment from '../../../../../../../../api/contacts/models/ContactComment'
 import ContactCommentsClient from '../../../../../../../../api/contacts/clients/ContactCommentsClient'
 import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
 import { useParams } from 'react-router'
 
 const contactCommentsClient = new ContactCommentsClient(HttpClientFactoryInstance.Api)
-
-function mergeAndSort(first: ContactComment[], second: ContactComment[] = []): ContactComment[] {
-    return [...new Set([...first, ...second])]
-        .map(x => (x.createDateTime ? { key: new Date(x.createDateTime).getTime(), value: x } : null))
-        .sort((x, y) => x!.key - y!.key)
-        .flatMap(x => x!.value)
-}
-
-function getMaxCreateDateTime(comments: ContactComment[]): string | undefined {
-    return comments.reduce((x, y) =>
-        new Date(x.createDateTime!).getTime() > new Date(y.createDateTime!).getTime() ? x : y
-    ).createDateTime
-}
-
-function getMinCreateDateTime(comments: ContactComment[]): string | undefined {
-    return comments.reduce((x, y) =>
-        new Date(x.createDateTime!).getTime() < new Date(y.createDateTime!).getTime() ? x : y
-    ).createDateTime
-}
 
 const useContactComments = (): ContactCommentsState => {
     const { id }: { id: string } = useParams()
