@@ -16,7 +16,7 @@ const useUserInfo = (): UserInfoState => {
     const get = useCallback(async () => {
         const isAuthenticated = await authClient.IsAuthenticatedAsync()
         if (!isAuthenticated) {
-            window.location.href = configuration.LoginUrl
+            window.location.href = configuration.LoginUrl + '?redirectUri=' + window.location.href
         }
 
         const userInfo = await userInfoClient.GetAsync()
