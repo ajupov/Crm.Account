@@ -64,17 +64,19 @@ const webpackConfig: (env: any, options: any) => Configuration = (_, { mode }) =
             template: resolve(__dirname, 'public/index.html'),
             favicon: resolve(__dirname, 'public/content/images/favicon.ico')
         }),
-        new ForkTsCheckerWebpackPlugin({ eslint: true, useTypescriptIncrementalApi: false }),
+        new ForkTsCheckerWebpackPlugin(),
         new Dotenv({
             path: resolve(__dirname, `./config/${mode}.env`)
         }),
-        new copyWebpackPlugin([
-            {
-                from: 'public/content/**/*',
-                to: 'content/',
-                flatten: true
-            }
-        ])
+        new copyWebpackPlugin({
+            patterns: [
+                {
+                    from: 'public/content/**/*',
+                    to: 'content/',
+                    flatten: true
+                }
+            ]
+        })
     ]
 })
 

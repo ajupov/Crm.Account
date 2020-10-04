@@ -14,7 +14,7 @@ export default class HttpClient {
         this._host = host
     }
 
-    public async get<T>(uri: string, data?: object): Promise<T> {
+    public async get<T>(uri: string, data?: Record<string, any>): Promise<T> {
         const fetchParams = this.getFetchParams('GET')
         const queryParams = data ? '?' + stringify(data) : ''
 
@@ -26,7 +26,7 @@ export default class HttpClient {
         return this.convertToJson<T>(response)
     }
 
-    public async post<T>(uri: string, body?: object): Promise<T> {
+    public async post<T>(uri: string, body?: Record<string, any>): Promise<T> {
         const fetchParams = this.getFetchParams('POST', body)
         const response = await fetch(this.combineUrl(this._host, uri), fetchParams)
 
@@ -36,7 +36,7 @@ export default class HttpClient {
         return this.convertToJson<T>(response)
     }
 
-    public async put<T>(uri: string, body?: object): Promise<T> {
+    public async put<T>(uri: string, body?: Record<string, any>): Promise<T> {
         const fetchParams = this.getFetchParams('PUT', body)
         const response = await fetch(this.combineUrl(this._host, uri), fetchParams)
 
@@ -46,7 +46,7 @@ export default class HttpClient {
         return this.convertToJson<T>(response)
     }
 
-    public async patch<T>(uri: string, body?: object): Promise<T> {
+    public async patch<T>(uri: string, body?: Record<string, any>): Promise<T> {
         const fetchParams = this.getFetchParams('PATCH', body)
         const response = await fetch(this.combineUrl(this._host, uri), fetchParams)
 
@@ -56,7 +56,7 @@ export default class HttpClient {
         return this.convertToJson<T>(response)
     }
 
-    public async delete<T>(uri: string, data?: object): Promise<T> {
+    public async delete<T>(uri: string, data?: Record<string, any>): Promise<T> {
         const fetchParams = this.getFetchParams('DELETE')
         const queryParams = data ? '?' + stringify(data) : ''
 
@@ -72,7 +72,7 @@ export default class HttpClient {
         return this._host ? this.combineUrl(this._host, uri) : uri
     }
 
-    private getFetchParams(method: HttpMethod, body?: object): any {
+    private getFetchParams(method: HttpMethod, body?: any): RequestInit {
         return {
             method,
             mode: 'cors',
@@ -114,8 +114,8 @@ export default class HttpClient {
             return (void 0 as unknown) as T
         }
 
-        const result = await response?.json()
-        return (result as unknown) as T
+        const result = (await response?.json()) as unknown
+        return result as T
     }
 
     private combineUrl(host?: string, path?: string): string {

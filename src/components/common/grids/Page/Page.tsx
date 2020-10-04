@@ -1,4 +1,5 @@
-import { Card, Grid, Header, Responsive } from 'semantic-ui-react'
+import { Card, Grid, Header, Segment } from 'semantic-ui-react'
+import { Media, MediaContextProvider } from '../../../../tokens/Tokens'
 import React, { FC } from 'react'
 
 import BackLink from '../../links/BackLink/BackLink'
@@ -30,15 +31,17 @@ const Page: FC<PageProps> = ({ onClickCancel, title, children, firstSidebar, sec
             </Card>
         </Grid.Column>
         <Grid.Column tablet={5} computer={4} widescreen={2} style={{ paddingLeft: 0 }}>
-            <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>{firstSidebar}</Responsive>
-            <Responsive minWidth={Responsive.onlyMobile.maxWidth}>
-                {firstSidebar}
-                {secondSidebar && (
-                    <Card fluid>
-                        <Card.Content>{secondSidebar}</Card.Content>
-                    </Card>
-                )}
-            </Responsive>
+            <MediaContextProvider>
+                <Media lessThan="tablet">{firstSidebar}</Media>
+                <Media greaterThanOrEqual="tablet">
+                    {firstSidebar}
+                    {secondSidebar && (
+                        <Card fluid>
+                            <Card.Content>{secondSidebar}</Card.Content>
+                        </Card>
+                    )}
+                </Media>
+            </MediaContextProvider>
         </Grid.Column>
     </Grid>
 )

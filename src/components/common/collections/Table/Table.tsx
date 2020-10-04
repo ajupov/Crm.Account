@@ -1,10 +1,11 @@
+import { Media, MediaContextProvider } from '../../../../tokens/Tokens'
 import React, { FC, useCallback } from 'react'
-import { Responsive, Table as SemanticUiTable } from 'semantic-ui-react'
 import TableBody, { TableBodyRowProps } from './TableBody'
 import TableFooter, { TableFooterProps } from './TableFooter'
 import TableHeader, { TableHeaderCellProps } from './TableHeader'
 
 import Loader from '../../other/Loader/Loader'
+import { Table as SemanticUiTable } from 'semantic-ui-react'
 import TableCardHeader from './TableCardHeader'
 
 export interface TableProps {
@@ -55,12 +56,10 @@ const Table: FC<TableProps> = ({
                 onClickCreate={onClickCreate}
                 onClickDownloadAsCsv={onClickDownloadAsCsv}
             />
-            <Responsive maxWidth={Responsive.onlyMobile.maxWidth} style={{ overflow: 'auto' }}>
-                {getTable('block')}
-            </Responsive>
-            <Responsive minWidth={Responsive.onlyMobile.maxWidth} style={{ overflow: 'auto' }}>
-                {getTable('table')}
-            </Responsive>
+            <MediaContextProvider>
+                <Media lessThan="mobile">{getTable('block')}</Media>
+                <Media greaterThanOrEqual="tablet">{getTable('table')}</Media>
+            </MediaContextProvider>
         </>
     )
 }
