@@ -16,7 +16,6 @@ interface UseContactsTableReturn {
     page: number
     headers: TableHeaderCellProps[]
     map: (contacts: Contact[]) => TableBodyRowProps[]
-    onClickCreate: () => void
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
@@ -26,8 +25,6 @@ const useContactsTable = (): UseContactsTableReturn => {
     const history = useHistory()
     const state = useContext(ContactsContext)
     const { onClickEdit, onClickDelete, onClickRestore } = useContactView()
-
-    const onClickCreate = useCallback(() => history.push(ContactsRoutes.Create), [history])
 
     const onClickView = useCallback((id: string) => history.push(`${ContactsRoutes.View}/${id}`), [history])
 
@@ -176,7 +173,7 @@ const useContactsTable = (): UseContactsTableReturn => {
         state.request.offset
     ])
 
-    return { page, headers, map, onClickCreate, onClickDownloadAsCsv, onClickChangePage }
+    return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
 export default useContactsTable

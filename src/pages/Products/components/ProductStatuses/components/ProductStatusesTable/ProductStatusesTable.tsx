@@ -1,12 +1,13 @@
 import React, { FC, useContext } from 'react'
 
 import ProductStatusesContext from '../../contexts/ProductStatusesContext/ProductStatusesContext'
+import ProductStatusesRoutes from '../../routes/ProductStatusesRoutes'
 import Table from '../../../../../../components/common/collections/Table/Table'
 import useProductStatusesTable from './hooks/useProductStatusesTable'
 
 const ProductStatusesTable: FC = () => {
     const state = useContext(ProductStatusesContext)
-    const { page, headers, map, onClickCreate, onClickDownloadAsCsv, onClickChangePage } = useProductStatusesTable()
+    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useProductStatusesTable()
 
     return (
         <Table
@@ -16,7 +17,7 @@ const ProductStatusesTable: FC = () => {
             rows={map(state.statuses)}
             footer={{ page, limit: state.request.limit, total: state.total, onClickChangePage }}
             lastModifyDateTime={state.lastModifyDateTime}
-            onClickCreate={onClickCreate}
+            createLink={ProductStatusesRoutes.Create}
             onClickDownloadAsCsv={onClickDownloadAsCsv}
         />
     )

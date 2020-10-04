@@ -1,12 +1,13 @@
 import React, { FC, useContext } from 'react'
 
 import ProductAttributesContext from '../../contexts/ProductAttributesContext/ProductAttributesContext'
+import ProductAttributesRoutes from '../../routes/ProductAttributesRoutes'
 import Table from '../../../../../../components/common/collections/Table/Table'
 import useProductAttributesTable from './hooks/useProductAttributesTable'
 
 const ProductAttributesTable: FC = () => {
     const state = useContext(ProductAttributesContext)
-    const { page, headers, map, onClickCreate, onClickDownloadAsCsv, onClickChangePage } = useProductAttributesTable()
+    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useProductAttributesTable()
 
     return (
         <Table
@@ -16,7 +17,7 @@ const ProductAttributesTable: FC = () => {
             rows={map(state.attributes)}
             footer={{ page, limit: state.request.limit, total: state.total, onClickChangePage }}
             lastModifyDateTime={state.lastModifyDateTime}
-            onClickCreate={onClickCreate}
+            createLink={ProductAttributesRoutes.Create}
             onClickDownloadAsCsv={onClickDownloadAsCsv}
         />
     )

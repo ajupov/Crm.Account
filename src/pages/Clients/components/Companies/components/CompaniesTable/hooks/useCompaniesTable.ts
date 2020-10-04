@@ -16,7 +16,6 @@ interface UseCompaniesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
     map: (companies: Company[]) => TableBodyRowProps[]
-    onClickCreate: () => void
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
@@ -26,8 +25,6 @@ const useCompaniesTable = (): UseCompaniesTableReturn => {
     const history = useHistory()
     const state = useContext(CompaniesContext)
     const { onClickEdit, onClickDelete, onClickRestore } = useCompanyView()
-
-    const onClickCreate = useCallback(() => history.push(CompaniesRoutes.Create), [history])
 
     const onClickView = useCallback((id: string) => history.push(`${CompaniesRoutes.View}/${id}`), [history])
 
@@ -186,7 +183,7 @@ const useCompaniesTable = (): UseCompaniesTableReturn => {
         state.request.offset
     ])
 
-    return { page, headers, map, onClickCreate, onClickDownloadAsCsv, onClickChangePage }
+    return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
 export default useCompaniesTable

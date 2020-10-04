@@ -16,7 +16,6 @@ interface UseProductCategoriesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
     map: (categories: ProductCategory[]) => TableBodyRowProps[]
-    onClickCreate: () => void
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
@@ -26,8 +25,6 @@ const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
     const history = useHistory()
     const state = useContext(ProductCategoriesContext)
     const { onClickEdit, onClickDelete, onClickRestore } = useProductCategoryView()
-
-    const onClickCreate = useCallback(() => history.push(ProductCategoriesRoutes.Create), [history])
 
     const onClickView = useCallback((id: string) => history.push(`${ProductCategoriesRoutes.View}/${id}`), [history])
 
@@ -121,7 +118,7 @@ const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
         state.request.offset
     ])
 
-    return { page, headers, map, onClickCreate, onClickDownloadAsCsv, onClickChangePage }
+    return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
 export default useProductCategoriesTable

@@ -1,12 +1,13 @@
 import React, { FC, useContext } from 'react'
 
 import ContactAttributesContext from '../../contexts/ContactAttributesContext/ContactAttributesContext'
+import ContactAttributesRoutes from '../../routes/ContactAttributesRoutes'
 import Table from '../../../../../../components/common/collections/Table/Table'
 import useContactAttributesTable from './hooks/useContactAttributesTable'
 
 const ContactAttributesTable: FC = () => {
     const state = useContext(ContactAttributesContext)
-    const { page, headers, map, onClickCreate, onClickDownloadAsCsv, onClickChangePage } = useContactAttributesTable()
+    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useContactAttributesTable()
 
     return (
         <Table
@@ -16,7 +17,7 @@ const ContactAttributesTable: FC = () => {
             rows={map(state.attributes)}
             footer={{ page, limit: state.request.limit, total: state.total, onClickChangePage }}
             lastModifyDateTime={state.lastModifyDateTime}
-            onClickCreate={onClickCreate}
+            createLink={ContactAttributesRoutes.Create}
             onClickDownloadAsCsv={onClickDownloadAsCsv}
         />
     )

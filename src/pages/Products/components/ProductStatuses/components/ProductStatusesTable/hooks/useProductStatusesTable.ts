@@ -16,7 +16,6 @@ interface UseProductStatusesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
     map: (statuses: ProductStatus[]) => TableBodyRowProps[]
-    onClickCreate: () => void
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
@@ -26,8 +25,6 @@ const useProductStatusesTable = (): UseProductStatusesTableReturn => {
     const history = useHistory()
     const state = useContext(ProductStatusesContext)
     const { onClickEdit, onClickDelete, onClickRestore } = useProductStatusView()
-
-    const onClickCreate = useCallback(() => history.push(ProductStatusesRoutes.Create), [history])
 
     const onClickView = useCallback((id: string) => history.push(`${ProductStatusesRoutes.View}/${id}`), [history])
 
@@ -121,7 +118,7 @@ const useProductStatusesTable = (): UseProductStatusesTableReturn => {
         state.request.offset
     ])
 
-    return { page, headers, map, onClickCreate, onClickDownloadAsCsv, onClickChangePage }
+    return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
 export default useProductStatusesTable

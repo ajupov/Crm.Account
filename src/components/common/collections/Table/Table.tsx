@@ -15,7 +15,7 @@ export interface TableProps {
     rows: TableBodyRowProps[]
     footer: TableFooterProps
     lastModifyDateTime?: string
-    onClickCreate?: () => void
+    createLink?: string
     onClickDownloadAsCsv?: () => void
 }
 
@@ -26,24 +26,26 @@ const Table: FC<TableProps> = ({
     footer,
     hasActions,
     lastModifyDateTime,
-    onClickCreate,
+    createLink,
     onClickDownloadAsCsv
 }) => {
     const getTable = useCallback(
         (display: string) => (
-            <SemanticUiTable
-                sortable={hasActions}
-                compact
-                celled
-                striped
-                selectable={hasActions}
-                color="black"
-                style={{ display }}
-            >
-                <TableHeader headers={headers} hasActions={hasActions} />
-                <TableBody rows={rows} hasActions={hasActions} />
-                <TableFooter {...footer} columnsCount={headers.length} />
-            </SemanticUiTable>
+            <div style={{ overflow: 'auto' }}>
+                <SemanticUiTable
+                    sortable={hasActions}
+                    compact
+                    celled
+                    striped
+                    selectable={hasActions}
+                    color="black"
+                    style={{ display }}
+                >
+                    <TableHeader headers={headers} hasActions={hasActions} />
+                    <TableBody rows={rows} hasActions={hasActions} />
+                    <TableFooter {...footer} columnsCount={headers.length} />
+                </SemanticUiTable>
+            </div>
         ),
         [footer, hasActions, headers, rows]
     )
@@ -53,11 +55,11 @@ const Table: FC<TableProps> = ({
             <Loader isLoading={isLoading} />
             <TableCardHeader
                 lastModifyDateTime={lastModifyDateTime}
-                onClickCreate={onClickCreate}
+                createLink={createLink}
                 onClickDownloadAsCsv={onClickDownloadAsCsv}
             />
             <MediaContextProvider>
-                <Media lessThan="mobile">{getTable('block')}</Media>
+                <Media lessThan="tablet">{getTable('block')}</Media>
                 <Media greaterThanOrEqual="tablet">{getTable('table')}</Media>
             </MediaContextProvider>
         </>

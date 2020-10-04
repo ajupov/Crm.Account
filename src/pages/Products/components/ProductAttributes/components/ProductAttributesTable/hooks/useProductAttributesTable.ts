@@ -17,7 +17,6 @@ interface UseProductAttributesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
     map: (attributes: ProductAttribute[]) => TableBodyRowProps[]
-    onClickCreate: () => void
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
@@ -27,8 +26,6 @@ const useProductAttributesTable = (): UseProductAttributesTableReturn => {
     const history = useHistory()
     const state = useContext(ProductAttributesContext)
     const { onClickEdit, onClickDelete, onClickRestore } = useProductAttributeView()
-
-    const onClickCreate = useCallback(() => history.push(ProductAttributesRoutes.Create), [history])
 
     const onClickView = useCallback((id: string) => history.push(`${ProductAttributesRoutes.View}/${id}`), [history])
 
@@ -130,7 +127,7 @@ const useProductAttributesTable = (): UseProductAttributesTableReturn => {
         state.request.offset
     ])
 
-    return { page, headers, map, onClickCreate, onClickDownloadAsCsv, onClickChangePage }
+    return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
 export default useProductAttributesTable

@@ -17,7 +17,6 @@ interface UseCompanyAttributesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
     map: (attributes: CompanyAttribute[]) => TableBodyRowProps[]
-    onClickCreate: () => void
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
@@ -27,8 +26,6 @@ const useCompanyAttributesTable = (): UseCompanyAttributesTableReturn => {
     const history = useHistory()
     const state = useContext(CompanyAttributesContext)
     const { onClickEdit, onClickDelete, onClickRestore } = useCompanyAttributeView()
-
-    const onClickCreate = useCallback(() => history.push(CompanyAttributesRoutes.Create), [history])
 
     const onClickView = useCallback((id: string) => history.push(`${CompanyAttributesRoutes.View}/${id}`), [history])
 
@@ -130,7 +127,7 @@ const useCompanyAttributesTable = (): UseCompanyAttributesTableReturn => {
         state.request.offset
     ])
 
-    return { page, headers, map, onClickCreate, onClickDownloadAsCsv, onClickChangePage }
+    return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
 export default useCompanyAttributesTable
