@@ -159,6 +159,7 @@
             "files": ["*.ts", "*.tsx"],
             "rules": {
                 "no-confusing-arrow": "off",
+                "no-nested-ternary": "off",
                 "no-shadow": "off",
                 "react/jsx-no-literals": "off",
                 "id-match": "off",

@@ -10,7 +10,6 @@ import { TableHeaderCellProps } from '../../../../../../../components/common/col
 import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
 import useCompanyView from '../../CompanyView/hooks/useCompanyView'
-import { useHistory } from 'react-router'
 
 interface UseCompaniesTableReturn {
     page: number
@@ -22,11 +21,8 @@ interface UseCompaniesTableReturn {
 
 // TODO: Move to l10n
 const useCompaniesTable = (): UseCompaniesTableReturn => {
-    const history = useHistory()
     const state = useContext(CompaniesContext)
     const { onClickDelete, onClickRestore } = useCompanyView()
-
-    const onClickView = useCallback((id: string) => history.push(`${CompaniesRoutes.View}/${id}`), [history])
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const companies = (await state.getAll())?.companies
@@ -121,13 +117,13 @@ const useCompaniesTable = (): UseCompaniesTableReturn => {
                             }
                         ],
                         isDeleted: company.isDeleted,
-                        onClickRow: onClickView,
+                        viewLink: CompaniesRoutes.View,
                         editLink: CompaniesRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
             ),
-        [onClickDelete, onClickRestore, onClickView]
+        [onClickDelete, onClickRestore]
     )
 
     const headers: TableHeaderCellProps[] = useMemo(

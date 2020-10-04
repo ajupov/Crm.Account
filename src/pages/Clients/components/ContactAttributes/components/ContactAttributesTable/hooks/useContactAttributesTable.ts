@@ -11,7 +11,6 @@ import { getAttributeTypeName } from '../../../../../../../helpers/entityAttribu
 import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
 import useContactAttributeView from '../../ContactAttributeView/hooks/useContactAttributeView'
-import { useHistory } from 'react-router'
 
 interface UseContactAttributesTableReturn {
     page: number
@@ -23,11 +22,8 @@ interface UseContactAttributesTableReturn {
 
 // TODO: Move to l10n
 const useContactAttributesTable = (): UseContactAttributesTableReturn => {
-    const history = useHistory()
     const state = useContext(ContactAttributesContext)
     const { onClickDelete, onClickRestore } = useContactAttributeView()
-
-    const onClickView = useCallback((id: string) => history.push(`${ContactAttributesRoutes.View}/${id}`), [history])
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const attributes = (await state.getAll())?.attributes
@@ -86,13 +82,13 @@ const useContactAttributesTable = (): UseContactAttributesTableReturn => {
                             }
                         ],
                         isDeleted: attribute.isDeleted,
-                        onClickRow: onClickView,
+                        viewLink: ContactAttributesRoutes.View,
                         editLink: ContactAttributesRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
             ),
-        [onClickDelete, onClickRestore, onClickView]
+        [onClickDelete, onClickRestore]
     )
 
     const headers: TableHeaderCellProps[] = useMemo(

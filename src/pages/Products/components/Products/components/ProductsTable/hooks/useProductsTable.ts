@@ -10,7 +10,6 @@ import { TableHeaderCellProps } from '../../../../../../../components/common/col
 import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
 import { toCurrency } from '../../../../../../../utils/currency/currencyUtils'
-import { useHistory } from 'react-router'
 import useProductView from '../../ProductView/hooks/useProductView'
 
 interface UseProductsTableReturn {
@@ -23,11 +22,8 @@ interface UseProductsTableReturn {
 
 // TODO: Move to l10n
 const useProductsTable = (): UseProductsTableReturn => {
-    const history = useHistory()
     const state = useContext(ProductsContext)
     const { onClickDelete, onClickRestore } = useProductView()
-
-    const onClickView = useCallback((id: string) => history.push(`${ProductsRoutes.View}/${id}`), [history])
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const products = (await state.getAll())?.products
@@ -88,13 +84,13 @@ const useProductsTable = (): UseProductsTableReturn => {
                             }
                         ],
                         isDeleted: product.isDeleted,
-                        onClickRow: onClickView,
+                        viewLink: ProductsRoutes.View,
                         editLink: ProductsRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
             ),
-        [onClickDelete, onClickRestore, onClickView]
+        [onClickDelete, onClickRestore]
     )
 
     const headers: TableHeaderCellProps[] = useMemo(

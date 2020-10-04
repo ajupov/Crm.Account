@@ -9,7 +9,6 @@ import { TableBodyRowProps } from '../../../../../../../components/common/collec
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
 import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
-import { useHistory } from 'react-router'
 import useProductCategoryView from '../../ProductCategoryView/hooks/useProductCategoryView'
 
 interface UseProductCategoriesTableReturn {
@@ -22,11 +21,8 @@ interface UseProductCategoriesTableReturn {
 
 // TODO: Move to l10n
 const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
-    const history = useHistory()
     const state = useContext(ProductCategoriesContext)
     const { onClickDelete, onClickRestore } = useProductCategoryView()
-
-    const onClickView = useCallback((id: string) => history.push(`${ProductCategoriesRoutes.View}/${id}`), [history])
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const categories = (await state.getAll())?.categories
@@ -84,13 +80,13 @@ const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
                             }
                         ],
                         isDeleted: category.isDeleted,
-                        onClickRow: onClickView,
+                        viewLink: ProductCategoriesRoutes.View,
                         editLink: ProductCategoriesRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
             ),
-        [onClickDelete, onClickRestore, onClickView]
+        [onClickDelete, onClickRestore]
     )
 
     const headers: TableHeaderCellProps[] = useMemo(

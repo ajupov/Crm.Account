@@ -11,7 +11,6 @@ import { getAttributeTypeName } from '../../../../../../../helpers/entityAttribu
 import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
 import useCompanyAttributeView from '../../CompanyAttributeView/hooks/useCompanyAttributeView'
-import { useHistory } from 'react-router'
 
 interface UseCompanyAttributesTableReturn {
     page: number
@@ -23,11 +22,8 @@ interface UseCompanyAttributesTableReturn {
 
 // TODO: Move to l10n
 const useCompanyAttributesTable = (): UseCompanyAttributesTableReturn => {
-    const history = useHistory()
     const state = useContext(CompanyAttributesContext)
     const { onClickDelete, onClickRestore } = useCompanyAttributeView()
-
-    const onClickView = useCallback((id: string) => history.push(`${CompanyAttributesRoutes.View}/${id}`), [history])
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const attributes = (await state.getAll())?.attributes
@@ -86,13 +82,13 @@ const useCompanyAttributesTable = (): UseCompanyAttributesTableReturn => {
                             }
                         ],
                         isDeleted: attribute.isDeleted,
-                        onClickRow: onClickView,
+                        viewLink: CompanyAttributesRoutes.View,
                         editLink: CompanyAttributesRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
             ),
-        [onClickDelete, onClickRestore, onClickView]
+        [onClickDelete, onClickRestore]
     )
 
     const headers: TableHeaderCellProps[] = useMemo(

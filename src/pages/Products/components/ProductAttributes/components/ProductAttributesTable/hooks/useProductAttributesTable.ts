@@ -10,7 +10,6 @@ import { TableHeaderCellProps } from '../../../../../../../components/common/col
 import { getAttributeTypeName } from '../../../../../../../helpers/entityAttributeTypeHelper'
 import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
-import { useHistory } from 'react-router'
 import useProductAttributeView from '../../ProductAttributeView/hooks/useProductAttributeView'
 
 interface UseProductAttributesTableReturn {
@@ -23,11 +22,8 @@ interface UseProductAttributesTableReturn {
 
 // TODO: Move to l10n
 const useProductAttributesTable = (): UseProductAttributesTableReturn => {
-    const history = useHistory()
     const state = useContext(ProductAttributesContext)
     const { onClickDelete, onClickRestore } = useProductAttributeView()
-
-    const onClickView = useCallback((id: string) => history.push(`${ProductAttributesRoutes.View}/${id}`), [history])
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const attributes = (await state.getAll())?.attributes
@@ -86,13 +82,13 @@ const useProductAttributesTable = (): UseProductAttributesTableReturn => {
                             }
                         ],
                         isDeleted: attribute.isDeleted,
-                        onClickRow: onClickView,
+                        viewLink: ProductAttributesRoutes.View,
                         editLink: ProductAttributesRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
             ),
-        [onClickDelete, onClickRestore, onClickView]
+        [onClickDelete, onClickRestore]
     )
 
     const headers: TableHeaderCellProps[] = useMemo(

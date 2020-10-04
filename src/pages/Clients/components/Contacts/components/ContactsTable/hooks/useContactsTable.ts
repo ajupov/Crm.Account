@@ -10,7 +10,6 @@ import { TableHeaderCellProps } from '../../../../../../../components/common/col
 import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
 import useContactView from '../../ContactView/hooks/useContactView'
-import { useHistory } from 'react-router'
 
 interface UseContactsTableReturn {
     page: number
@@ -22,11 +21,8 @@ interface UseContactsTableReturn {
 
 // TODO: Move to l10n
 const useContactsTable = (): UseContactsTableReturn => {
-    const history = useHistory()
     const state = useContext(ContactsContext)
     const { onClickDelete, onClickRestore } = useContactView()
-
-    const onClickView = useCallback((id: string) => history.push(`${ContactsRoutes.View}/${id}`), [history])
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const contacts = (await state.getAll())?.contacts
@@ -111,13 +107,13 @@ const useContactsTable = (): UseContactsTableReturn => {
                             }
                         ],
                         isDeleted: contact.isDeleted,
-                        onClickRow: onClickView,
+                        viewLink: ContactsRoutes.View,
                         editLink: ContactsRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
             ),
-        [onClickDelete, onClickRestore, onClickView]
+        [onClickDelete, onClickRestore]
     )
 
     const headers: TableHeaderCellProps[] = useMemo(
