@@ -3,7 +3,6 @@ import { useCallback, useContext } from 'react'
 import Contact from '../../../../../../../../api/contacts/models/Contact'
 import ContactContext from '../../../contexts/ContactContext/ContactContext'
 import ContactsActionsContext from '../../../contexts/ContactsActionsContext/ContactsActionsContext'
-import ContactsRoutes from '../../../routes/ContactsRoutes'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { joinAttributes } from '../../../mappers/contactAttributesMapper'
 import { joinBankAccounts } from '../../../mappers/contactBankAccountsMapper'
@@ -13,7 +12,6 @@ import useLeadName from '../../../hooks/useLeadName'
 
 interface UseContactViewReturn {
     map: (contact: Contact) => ViewDataProps[]
-    onClickEdit: (id: string) => void
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
     onClickCancel: () => void
@@ -26,8 +24,6 @@ const useContactView = (): UseContactViewReturn => {
     const actionsState = useContext(ContactsActionsContext)
     const { getCompanyName } = useCompanyName(contactState.contact.companyId)
     const { getLeadName } = useLeadName(contactState.contact.leadId)
-
-    const onClickEdit = useCallback((id: string) => history.push(`${ContactsRoutes.Edit}/${id}`), [history])
 
     const onClickDelete = useCallback(
         (id: string) => {
@@ -82,7 +78,7 @@ const useContactView = (): UseContactViewReturn => {
         [getCompanyName, getLeadName, mapAttributes, mapBankAccounts]
     )
 
-    return { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel }
+    return { map, onClickDelete, onClickRestore, onClickCancel }
 }
 
 export default useContactView

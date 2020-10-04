@@ -9,7 +9,7 @@ import useProductsActions from '../../contexts/ProductsActionsContext/hooks/useP
 const ProductViewForm: FC = () => {
     const state = useContext(ProductContext)
     const { isLoading } = useProductsActions()
-    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel } = useProductView()
+    const { map, onClickDelete, onClickRestore, onClickCancel } = useProductView()
 
     return (
         <View
@@ -19,7 +19,7 @@ const ProductViewForm: FC = () => {
             createDate={state.product.createDateTime}
             lastModifyDateTime={state.product.modifyDateTime}
             data={map(state.product)}
-            onClickEdit={onClickEdit}
+            editLink={ProductsRoutes.Edit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
             historyLink={ProductsRoutes.Changes}

@@ -24,7 +24,7 @@ interface UseContactsTableReturn {
 const useContactsTable = (): UseContactsTableReturn => {
     const history = useHistory()
     const state = useContext(ContactsContext)
-    const { onClickEdit, onClickDelete, onClickRestore } = useContactView()
+    const { onClickDelete, onClickRestore } = useContactView()
 
     const onClickView = useCallback((id: string) => history.push(`${ContactsRoutes.View}/${id}`), [history])
 
@@ -112,12 +112,12 @@ const useContactsTable = (): UseContactsTableReturn => {
                         ],
                         isDeleted: contact.isDeleted,
                         onClickRow: onClickView,
-                        onClickEditButton: onClickEdit,
+                        editLink: ContactsRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
             ),
-        [onClickDelete, onClickEdit, onClickRestore, onClickView]
+        [onClickDelete, onClickRestore, onClickView]
     )
 
     const headers: TableHeaderCellProps[] = useMemo(

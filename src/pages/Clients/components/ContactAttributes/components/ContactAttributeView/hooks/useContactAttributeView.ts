@@ -2,14 +2,12 @@ import { useCallback, useContext } from 'react'
 
 import ContactAttribute from '../../../../../../../../api/contacts/models/ContactAttribute'
 import ContactAttributesActionsContext from '../../../contexts/ContactAttributesActionsContext/ContactAttributesActionsContext'
-import ContactAttributesRoutes from '../../../routes/ContactAttributesRoutes'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { getAttributeTypeName } from '../../../../../../../helpers/entityAttributeTypeHelper'
 import { useHistory } from 'react-router'
 
 interface UseContactAttributeViewReturn {
     map: (attribute: ContactAttribute) => ViewDataProps[]
-    onClickEdit: (id: string) => void
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
     onClickCancel: () => void
@@ -19,8 +17,6 @@ interface UseContactAttributeViewReturn {
 const useContactAttributeView = (): UseContactAttributeViewReturn => {
     const history = useHistory()
     const state = useContext(ContactAttributesActionsContext)
-
-    const onClickEdit = useCallback((id: string) => history.push(`${ContactAttributesRoutes.Edit}/${id}`), [history])
 
     const onClickDelete = useCallback(
         (id: string) => {
@@ -49,7 +45,7 @@ const useContactAttributeView = (): UseContactAttributeViewReturn => {
         []
     )
 
-    return { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel }
+    return { map, onClickDelete, onClickRestore, onClickCancel }
 }
 
 export default useContactAttributeView

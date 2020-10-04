@@ -1,6 +1,8 @@
 import { Button, List, Table } from 'semantic-ui-react'
 import React, { FC, useCallback, useMemo } from 'react'
 
+import { Link } from 'react-router-dom'
+
 interface TableBodyCellProps {
     value?: string | string[]
     textAlign?: TableCellTextAlign
@@ -11,7 +13,7 @@ export interface TableBodyRowProps {
     isDeleted?: boolean
     cells: TableBodyCellProps[]
     onClickRow?: (id: string) => void
-    onClickEditButton?: (id: string) => void
+    editLink?: string
     onClickDeleteButton?: (id: string) => void
     onClickRestoreButton?: (id: string) => void
 }
@@ -28,17 +30,6 @@ const TableBody: FC<TableBodyProps> = ({ rows, hasActions }) => {
         (row: TableBodyRowProps) => (event: React.MouseEvent) => {
             if (row.id && row.onClickRow) {
                 row.onClickRow(row.id)
-            }
-
-            event.stopPropagation()
-        },
-        []
-    )
-
-    const onClickEdit = useCallback(
-        (row: TableBodyRowProps) => (event: React.MouseEvent) => {
-            if (row.id && row.onClickEditButton) {
-                row.onClickEditButton(row.id)
             }
 
             event.stopPropagation()
@@ -90,13 +81,15 @@ const TableBody: FC<TableBodyProps> = ({ rows, hasActions }) => {
                     key={row.id}
                     negative={row.isDeleted}
                     style={{ cursor: row.onClickRow ? 'pointer' : 'default' }}
-                    onClick={onClick(row)}
+                    // onClick={onClick(row)}
                 >
                     {renderCells(row)}
                     {hasActions && (
                         <Table.Cell textAlign="center">
                             <Button.Group basic compact fluid size="mini">
-                                {row.onClickEditButton && <Button onClick={onClickEdit(row)} icon="edit" />}
+                                {row.id && row.editLink && (
+                                    <Button as={Link} to={row.editLink + '/' + row.id} icon="edit" />
+                                )}
                                 {!row.isDeleted && row.onClickDeleteButton && (
                                     <Button onClick={onClickDelete(row)} icon="trash" />
                                 )}
@@ -108,7 +101,7 @@ const TableBody: FC<TableBodyProps> = ({ rows, hasActions }) => {
                     )}
                 </Table.Row>
             )),
-        [hasActions, onClick, onClickDelete, onClickEdit, onClickRestore, renderCells, rows]
+        [hasActions, onClick, onClickDelete, onClickRestore, renderCells, rows]
     )
 
     return <Table.Body>{rowComponents}</Table.Body>

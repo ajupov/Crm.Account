@@ -3,7 +3,6 @@ import { useCallback, useContext } from 'react'
 import Product from '../../../../../../../../api/products/models/Product'
 import ProductContext from '../../../contexts/ProductContext/ProductContext'
 import ProductsActionsContext from '../../../contexts/ProductsActionsContext/ProductsActionsContext'
-import ProductsRoutes from '../../../routes/ProductsRoutes'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { getProductTypeName } from '../../../helpers/productTypeHelper'
 import { joinAttributes } from '../../../mappers/productAttributesMapper'
@@ -14,7 +13,6 @@ import useProductName from '../../../hooks/useProductName'
 
 interface UseProductViewReturn {
     map: (product: Product) => ViewDataProps[]
-    onClickEdit: (id: string) => void
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
     onClickCancel: () => void
@@ -26,8 +24,6 @@ const useProductView = (): UseProductViewReturn => {
     const productState = useContext(ProductContext)
     const actionsState = useContext(ProductsActionsContext)
     const { getProductName } = useProductName(productState.product.parentProductId)
-
-    const onClickEdit = useCallback((id: string) => history.push(`${ProductsRoutes.Edit}/${id}`), [history])
 
     const onClickDelete = useCallback(
         (id: string) => {
@@ -69,7 +65,7 @@ const useProductView = (): UseProductViewReturn => {
         [getProductName, mapAttributes, mapCategories]
     )
 
-    return { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel }
+    return { map, onClickDelete, onClickRestore, onClickCancel }
 }
 
 export default useProductView

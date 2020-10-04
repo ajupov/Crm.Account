@@ -9,7 +9,7 @@ import useCompanyAttributesActions from '../../contexts/CompanyAttributesActions
 const CompanyAttributeViewForm: FC = () => {
     const state = useContext(CompanyAttributeContext)
     const { isLoading } = useCompanyAttributesActions()
-    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel } = useCompanyAttributeView()
+    const { map, onClickDelete, onClickRestore, onClickCancel } = useCompanyAttributeView()
 
     return (
         <View
@@ -19,7 +19,7 @@ const CompanyAttributeViewForm: FC = () => {
             createDate={state.attribute.createDateTime}
             lastModifyDateTime={state.attribute.modifyDateTime}
             data={map(state.attribute)}
-            onClickEdit={onClickEdit}
+            editLink={CompanyAttributesRoutes.Edit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
             historyLink={CompanyAttributesRoutes.Changes}

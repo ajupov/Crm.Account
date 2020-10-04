@@ -7,6 +7,7 @@ import {
 
 import BackLink from '../../links/BackLink/BackLink'
 import HistoryLink from '../../links/HistoryLink/HistoryLink'
+import { Link } from 'react-router-dom'
 import Loader from '../../other/Loader/Loader'
 
 export interface ViewDataProps {
@@ -21,7 +22,7 @@ export interface ViewProps {
     createDate?: string
     lastModifyDateTime?: string
     data: ViewDataProps[]
-    onClickEdit: (id: string) => void
+    editLink: string
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
     historyLink: string
@@ -38,7 +39,7 @@ const View: FC<ViewProps> = ({
     data,
     onClickCancel,
     historyLink,
-    onClickEdit,
+    editLink,
     onClickDelete,
     onClickRestore
 }) => {
@@ -54,17 +55,6 @@ const View: FC<ViewProps> = ({
                     )
             ),
         []
-    )
-
-    const _onClickEdit = useCallback(
-        (event: React.MouseEvent) => {
-            if (id) {
-                onClickEdit(id)
-            }
-
-            event.stopPropagation()
-        },
-        [id, onClickEdit]
     )
 
     const _onClickDelete = useCallback(
@@ -100,9 +90,11 @@ const View: FC<ViewProps> = ({
             <div style={{ marginTop: '20px', marginBottom: '80px' }}>
                 {!isDeleted && (
                     <Button.Group basic floated="right">
-                        <Button onClick={_onClickEdit}>
-                            <Icon name="edit" /> Редактировать
-                        </Button>
+                        {id && editLink && (
+                            <Button as={Link} to={`${editLink}/${id}`}>
+                                <Icon name="edit" /> Редактировать
+                            </Button>
+                        )}
                         <Button onClick={_onClickDelete}>
                             <Icon name="trash" /> Удалить
                         </Button>

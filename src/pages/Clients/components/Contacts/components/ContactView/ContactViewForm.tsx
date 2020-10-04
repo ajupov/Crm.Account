@@ -9,7 +9,7 @@ import useContactsActions from '../../contexts/ContactsActionsContext/hooks/useC
 const ContactViewForm: FC = () => {
     const state = useContext(ContactContext)
     const { isLoading } = useContactsActions()
-    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel } = useContactView()
+    const { map, onClickDelete, onClickRestore, onClickCancel } = useContactView()
 
     return (
         <View
@@ -19,7 +19,7 @@ const ContactViewForm: FC = () => {
             createDate={state.contact.createDateTime}
             lastModifyDateTime={state.contact.modifyDateTime}
             data={map(state.contact)}
-            onClickEdit={onClickEdit}
+            editLink={ContactsRoutes.Edit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
             historyLink={ContactsRoutes.Changes}

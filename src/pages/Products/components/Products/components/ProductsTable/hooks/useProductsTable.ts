@@ -25,7 +25,7 @@ interface UseProductsTableReturn {
 const useProductsTable = (): UseProductsTableReturn => {
     const history = useHistory()
     const state = useContext(ProductsContext)
-    const { onClickEdit, onClickDelete, onClickRestore } = useProductView()
+    const { onClickDelete, onClickRestore } = useProductView()
 
     const onClickView = useCallback((id: string) => history.push(`${ProductsRoutes.View}/${id}`), [history])
 
@@ -89,12 +89,12 @@ const useProductsTable = (): UseProductsTableReturn => {
                         ],
                         isDeleted: product.isDeleted,
                         onClickRow: onClickView,
-                        onClickEditButton: onClickEdit,
+                        editLink: ProductsRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
             ),
-        [onClickDelete, onClickEdit, onClickRestore, onClickView]
+        [onClickDelete, onClickRestore, onClickView]
     )
 
     const headers: TableHeaderCellProps[] = useMemo(

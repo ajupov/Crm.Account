@@ -25,7 +25,7 @@ interface UseCompanyAttributesTableReturn {
 const useCompanyAttributesTable = (): UseCompanyAttributesTableReturn => {
     const history = useHistory()
     const state = useContext(CompanyAttributesContext)
-    const { onClickEdit, onClickDelete, onClickRestore } = useCompanyAttributeView()
+    const { onClickDelete, onClickRestore } = useCompanyAttributeView()
 
     const onClickView = useCallback((id: string) => history.push(`${CompanyAttributesRoutes.View}/${id}`), [history])
 
@@ -87,12 +87,12 @@ const useCompanyAttributesTable = (): UseCompanyAttributesTableReturn => {
                         ],
                         isDeleted: attribute.isDeleted,
                         onClickRow: onClickView,
-                        onClickEditButton: onClickEdit,
+                        editLink: CompanyAttributesRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
             ),
-        [onClickDelete, onClickEdit, onClickRestore, onClickView]
+        [onClickDelete, onClickRestore, onClickView]
     )
 
     const headers: TableHeaderCellProps[] = useMemo(

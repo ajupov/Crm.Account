@@ -1,7 +1,6 @@
 import { useCallback, useContext } from 'react'
 
 import CompaniesActionsContext from '../../../contexts/CompaniesActionsContext/CompaniesActionsContext'
-import CompaniesRoutes from '../../../routes/CompaniesRoutes'
 import Company from '../../../../../../../../api/companies/models/Company'
 import CompanyContext from '../../../contexts/CompanyContext/CompanyContext'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
@@ -14,7 +13,6 @@ import useLeadName from '../../../hooks/useLeadName'
 
 interface UseCompanyViewReturn {
     map: (company: Company) => ViewDataProps[]
-    onClickEdit: (id: string) => void
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
     onClickCancel: () => void
@@ -26,8 +24,6 @@ const useCompanyView = (): UseCompanyViewReturn => {
     const companyState = useContext(CompanyContext)
     const actionsState = useContext(CompaniesActionsContext)
     const { getLeadName } = useLeadName(companyState.company.leadId)
-
-    const onClickEdit = useCallback((id: string) => history.push(`${CompaniesRoutes.Edit}/${id}`), [history])
 
     const onClickDelete = useCallback(
         (id: string) => {
@@ -91,7 +87,7 @@ const useCompanyView = (): UseCompanyViewReturn => {
         [getLeadName, mapAttributes, mapBankAccounts]
     )
 
-    return { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel }
+    return { map, onClickDelete, onClickRestore, onClickCancel }
 }
 
 export default useCompanyView

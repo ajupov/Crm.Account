@@ -9,7 +9,7 @@ import useProductCategoryView from './hooks/useProductCategoryView'
 const ProductCategoryViewForm: FC = () => {
     const state = useContext(ProductCategoryContext)
     const { isLoading } = useProductCategoriesActions()
-    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel } = useProductCategoryView()
+    const { map, onClickDelete, onClickRestore, onClickCancel } = useProductCategoryView()
 
     return (
         <View
@@ -19,7 +19,7 @@ const ProductCategoryViewForm: FC = () => {
             createDate={state.category.createDateTime}
             lastModifyDateTime={state.category.modifyDateTime}
             data={map(state.category)}
-            onClickEdit={onClickEdit}
+            editLink={ProductCategoriesRoutes.Edit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
             historyLink={ProductCategoriesRoutes.Changes}

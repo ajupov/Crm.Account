@@ -24,7 +24,7 @@ interface UseCompaniesTableReturn {
 const useCompaniesTable = (): UseCompaniesTableReturn => {
     const history = useHistory()
     const state = useContext(CompaniesContext)
-    const { onClickEdit, onClickDelete, onClickRestore } = useCompanyView()
+    const { onClickDelete, onClickRestore } = useCompanyView()
 
     const onClickView = useCallback((id: string) => history.push(`${CompaniesRoutes.View}/${id}`), [history])
 
@@ -122,12 +122,12 @@ const useCompaniesTable = (): UseCompaniesTableReturn => {
                         ],
                         isDeleted: company.isDeleted,
                         onClickRow: onClickView,
-                        onClickEditButton: onClickEdit,
+                        editLink: CompaniesRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
             ),
-        [onClickDelete, onClickEdit, onClickRestore, onClickView]
+        [onClickDelete, onClickRestore, onClickView]
     )
 
     const headers: TableHeaderCellProps[] = useMemo(

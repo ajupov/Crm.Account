@@ -9,7 +9,7 @@ import useContactAttributesActions from '../../contexts/ContactAttributesActions
 const ContactAttributeViewForm: FC = () => {
     const state = useContext(ContactAttributeContext)
     const { isLoading } = useContactAttributesActions()
-    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel } = useContactAttributeView()
+    const { map, onClickDelete, onClickRestore, onClickCancel } = useContactAttributeView()
 
     return (
         <View
@@ -19,7 +19,7 @@ const ContactAttributeViewForm: FC = () => {
             createDate={state.attribute.createDateTime}
             lastModifyDateTime={state.attribute.modifyDateTime}
             data={map(state.attribute)}
-            onClickEdit={onClickEdit}
+            editLink={ContactAttributesRoutes.Edit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
             historyLink={ContactAttributesRoutes.Changes}

@@ -2,14 +2,12 @@ import { useCallback, useContext } from 'react'
 
 import CompanyAttribute from '../../../../../../../../api/companies/models/CompanyAttribute'
 import CompanyAttributesActionsContext from '../../../contexts/CompanyAttributesActionsContext/CompanyAttributesActionsContext'
-import CompanyAttributesRoutes from '../../../routes/CompanyAttributesRoutes'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { getAttributeTypeName } from '../../../../../../../helpers/entityAttributeTypeHelper'
 import { useHistory } from 'react-router'
 
 interface UseCompanyAttributeViewReturn {
     map: (attribute: CompanyAttribute) => ViewDataProps[]
-    onClickEdit: (id: string) => void
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
     onClickCancel: () => void
@@ -19,8 +17,6 @@ interface UseCompanyAttributeViewReturn {
 const useCompanyAttributeView = (): UseCompanyAttributeViewReturn => {
     const history = useHistory()
     const state = useContext(CompanyAttributesActionsContext)
-
-    const onClickEdit = useCallback((id: string) => history.push(`${CompanyAttributesRoutes.Edit}/${id}`), [history])
 
     const onClickDelete = useCallback(
         (id: string) => {
@@ -49,7 +45,7 @@ const useCompanyAttributeView = (): UseCompanyAttributeViewReturn => {
         []
     )
 
-    return { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel }
+    return { map, onClickDelete, onClickRestore, onClickCancel }
 }
 
 export default useCompanyAttributeView

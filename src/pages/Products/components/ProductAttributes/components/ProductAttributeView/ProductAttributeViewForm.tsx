@@ -9,7 +9,7 @@ import useProductAttributesActions from '../../contexts/ProductAttributesActions
 const ProductAttributeViewForm: FC = () => {
     const state = useContext(ProductAttributeContext)
     const { isLoading } = useProductAttributesActions()
-    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel } = useProductAttributeView()
+    const { map, onClickDelete, onClickRestore, onClickCancel } = useProductAttributeView()
 
     return (
         <View
@@ -19,7 +19,7 @@ const ProductAttributeViewForm: FC = () => {
             createDate={state.attribute.createDateTime}
             lastModifyDateTime={state.attribute.modifyDateTime}
             data={map(state.attribute)}
-            onClickEdit={onClickEdit}
+            editLink={ProductAttributesRoutes.Edit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
             historyLink={ProductAttributesRoutes.Changes}

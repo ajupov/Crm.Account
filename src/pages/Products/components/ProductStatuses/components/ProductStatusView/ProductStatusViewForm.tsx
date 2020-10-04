@@ -9,7 +9,7 @@ import useProductStatusesActions from '../../contexts/ProductStatusesActionsCont
 const ProductStatusViewForm: FC = () => {
     const state = useContext(ProductStatusContext)
     const { isLoading } = useProductStatusesActions()
-    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel } = useProductStatusView()
+    const { map, onClickDelete, onClickRestore, onClickCancel } = useProductStatusView()
 
     return (
         <View
@@ -19,7 +19,7 @@ const ProductStatusViewForm: FC = () => {
             createDate={state.status.createDateTime}
             lastModifyDateTime={state.status.modifyDateTime}
             data={map(state.status)}
-            onClickEdit={onClickEdit}
+            editLink={ProductStatusesRoutes.Edit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
             historyLink={ProductStatusesRoutes.Changes}

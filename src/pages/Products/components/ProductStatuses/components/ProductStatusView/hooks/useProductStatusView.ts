@@ -2,13 +2,11 @@ import { useCallback, useContext } from 'react'
 
 import ProductStatus from '../../../../../../../../api/products/models/ProductStatus'
 import ProductStatusesActionsContext from '../../../contexts/ProductStatusesActionsContext/ProductStatusesActionsContext'
-import ProductStatusesRoutes from '../../../routes/ProductStatusesRoutes'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { useHistory } from 'react-router'
 
 interface UseProductStatusViewReturn {
     map: (status: ProductStatus) => ViewDataProps[]
-    onClickEdit: (id: string) => void
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
     onClickCancel: () => void
@@ -18,8 +16,6 @@ interface UseProductStatusViewReturn {
 const useProductStatusView = (): UseProductStatusViewReturn => {
     const history = useHistory()
     const state = useContext(ProductStatusesActionsContext)
-
-    const onClickEdit = useCallback((id: string) => history.push(`${ProductStatusesRoutes.Edit}/${id}`), [history])
 
     const onClickDelete = useCallback(
         (id: string) => {
@@ -47,7 +43,7 @@ const useProductStatusView = (): UseProductStatusViewReturn => {
         []
     )
 
-    return { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel }
+    return { map, onClickDelete, onClickRestore, onClickCancel }
 }
 
 export default useProductStatusView

@@ -9,7 +9,7 @@ import useCompanyView from './hooks/useCompanyView'
 const CompanyViewForm: FC = () => {
     const state = useContext(CompanyContext)
     const { isLoading } = useCompaniesActions()
-    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel } = useCompanyView()
+    const { map, onClickDelete, onClickRestore, onClickCancel } = useCompanyView()
 
     return (
         <View
@@ -19,7 +19,7 @@ const CompanyViewForm: FC = () => {
             createDate={state.company.createDateTime}
             lastModifyDateTime={state.company.modifyDateTime}
             data={map(state.company)}
-            onClickEdit={onClickEdit}
+            editLink={CompaniesRoutes.Edit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
             historyLink={CompaniesRoutes.Changes}

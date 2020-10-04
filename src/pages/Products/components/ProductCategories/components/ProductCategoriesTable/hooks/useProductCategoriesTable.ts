@@ -24,7 +24,7 @@ interface UseProductCategoriesTableReturn {
 const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
     const history = useHistory()
     const state = useContext(ProductCategoriesContext)
-    const { onClickEdit, onClickDelete, onClickRestore } = useProductCategoryView()
+    const { onClickDelete, onClickRestore } = useProductCategoryView()
 
     const onClickView = useCallback((id: string) => history.push(`${ProductCategoriesRoutes.View}/${id}`), [history])
 
@@ -85,12 +85,12 @@ const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
                         ],
                         isDeleted: category.isDeleted,
                         onClickRow: onClickView,
-                        onClickEditButton: onClickEdit,
+                        editLink: ProductCategoriesRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
             ),
-        [onClickDelete, onClickEdit, onClickRestore, onClickView]
+        [onClickDelete, onClickRestore, onClickView]
     )
 
     const headers: TableHeaderCellProps[] = useMemo(
