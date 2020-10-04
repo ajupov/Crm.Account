@@ -1,6 +1,7 @@
 import React, { FC, useContext } from 'react'
 
 import ContactAttributeContext from '../../contexts/ContactAttributeContext/ContactAttributeContext'
+import ContactAttributesRoutes from '../../routes/ContactAttributesRoutes'
 import EditForm from '../../../../../../components/common/forms/EditForm/EditForm'
 import useContactAttributeEdit from './hooks/useContactAttributeEdit'
 import useContactAttributesActions from '../../contexts/ContactAttributesActionsContext/hooks/useContactAttributesActions'
@@ -8,7 +9,7 @@ import useContactAttributesActions from '../../contexts/ContactAttributesActions
 const ContactAttributeEditForm: FC = () => {
     const state = useContext(ContactAttributeContext)
     const { isLoading } = useContactAttributesActions()
-    const { fields, isConfirmEnabled, onClickHistory, onClickCancel, onClickConfirm } = useContactAttributeEdit()
+    const { fields, isConfirmEnabled, onClickCancel, onClickConfirm } = useContactAttributeEdit()
 
     return state.attribute.id ? (
         <EditForm
@@ -18,7 +19,7 @@ const ContactAttributeEditForm: FC = () => {
             isConfirmEnabled={isConfirmEnabled}
             createDate={state.attribute.createDateTime}
             lastModifyDateTime={state.attribute.modifyDateTime}
-            onClickHistory={onClickHistory}
+            historyLink={ContactAttributesRoutes.Changes}
             onClickConfirm={onClickConfirm}
             onClickCancel={onClickCancel}
         />

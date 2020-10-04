@@ -12,7 +12,6 @@ interface UseCompanyAttributeViewReturn {
     onClickEdit: (id: string) => void
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
-    onClickHistory: (id: string) => void
     onClickCancel: () => void
 }
 
@@ -39,10 +38,6 @@ const useCompanyAttributeView = (): UseCompanyAttributeViewReturn => {
         [state]
     )
 
-    const onClickHistory = useCallback((id: string) => history.push(`${CompanyAttributesRoutes.Changes}/${id}`), [
-        history
-    ])
-
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
     const map = useCallback(
@@ -54,7 +49,7 @@ const useCompanyAttributeView = (): UseCompanyAttributeViewReturn => {
         []
     )
 
-    return { map, onClickEdit, onClickDelete, onClickRestore, onClickHistory, onClickCancel }
+    return { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel }
 }
 
 export default useCompanyAttributeView

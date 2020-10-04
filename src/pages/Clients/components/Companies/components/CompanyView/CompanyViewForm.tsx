@@ -1,5 +1,6 @@
 import React, { FC, useContext } from 'react'
 
+import CompaniesRoutes from '../../routes/CompaniesRoutes'
 import CompanyContext from '../../contexts/CompanyContext/CompanyContext'
 import View from '../../../../../../components/common/grids/View/View'
 import useCompaniesActions from '../../contexts/CompaniesActionsContext/hooks/useCompaniesActions'
@@ -8,7 +9,7 @@ import useCompanyView from './hooks/useCompanyView'
 const CompanyViewForm: FC = () => {
     const state = useContext(CompanyContext)
     const { isLoading } = useCompaniesActions()
-    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel, onClickHistory } = useCompanyView()
+    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel } = useCompanyView()
 
     return (
         <View
@@ -21,7 +22,7 @@ const CompanyViewForm: FC = () => {
             onClickEdit={onClickEdit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
-            onClickHistory={onClickHistory}
+            historyLink={CompaniesRoutes.Changes}
             onClickCancel={onClickCancel}
         />
     )

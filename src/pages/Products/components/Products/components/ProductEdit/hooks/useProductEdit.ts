@@ -11,7 +11,6 @@ import useProductsSelectOptions from '../../../hooks/useProductsSelectOptions'
 interface UseProductEditReturn {
     fields: EditFormFieldProps[]
     isConfirmEnabled: boolean
-    onClickHistory: (id: string) => void
     onClickConfirm: () => void
     onClickCancel: () => void
 }
@@ -172,8 +171,6 @@ const useProductEdit = (): UseProductEditReturn => {
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const onClickHistory = useCallback((id: string) => history.push(`${ProductsRoutes.Changes}/${id}`), [history])
-
     const fields: EditFormFieldProps[] = useMemo(
         () => [
             {
@@ -294,7 +291,7 @@ const useProductEdit = (): UseProductEditReturn => {
         ]
     )
 
-    return { fields, isConfirmEnabled, onClickHistory, onClickConfirm, onClickCancel }
+    return { fields, isConfirmEnabled, onClickConfirm, onClickCancel }
 }
 
 export default useProductEdit

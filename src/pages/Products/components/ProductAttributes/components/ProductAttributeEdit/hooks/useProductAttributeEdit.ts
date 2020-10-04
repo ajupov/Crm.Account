@@ -13,7 +13,6 @@ import { useHistory } from 'react-router'
 interface UseProductAttributeEditReturn {
     fields: EditFormFieldProps[]
     isConfirmEnabled: boolean
-    onClickHistory: (id: string) => void
     onClickConfirm: () => void
     onClickCancel: () => void
 }
@@ -55,10 +54,6 @@ const useProductAttributeEdit = (): UseProductAttributeEditReturn => {
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const onClickHistory = useCallback((id: string) => history.push(`${ProductAttributesRoutes.Changes}/${id}`), [
-        history
-    ])
-
     const fields: EditFormFieldProps[] = useMemo(
         () => [
             {
@@ -94,7 +89,7 @@ const useProductAttributeEdit = (): UseProductAttributeEditReturn => {
         ]
     )
 
-    return { fields, isConfirmEnabled, onClickHistory, onClickConfirm, onClickCancel }
+    return { fields, isConfirmEnabled, onClickConfirm, onClickCancel }
 }
 
 export default useProductAttributeEdit

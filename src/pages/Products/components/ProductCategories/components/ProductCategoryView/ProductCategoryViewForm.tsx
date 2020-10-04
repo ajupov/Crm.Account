@@ -1,5 +1,6 @@
 import React, { FC, useContext } from 'react'
 
+import ProductCategoriesRoutes from '../../routes/ProductCategoriesRoutes'
 import ProductCategoryContext from '../../contexts/ProductCategoryContext/ProductCategoryContext'
 import View from '../../../../../../components/common/grids/View/View'
 import useProductCategoriesActions from '../../contexts/ProductCategoriesActionsContext/hooks/useProductCategoriesActions'
@@ -8,7 +9,7 @@ import useProductCategoryView from './hooks/useProductCategoryView'
 const ProductCategoryViewForm: FC = () => {
     const state = useContext(ProductCategoryContext)
     const { isLoading } = useProductCategoriesActions()
-    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel, onClickHistory } = useProductCategoryView()
+    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel } = useProductCategoryView()
 
     return (
         <View
@@ -21,7 +22,7 @@ const ProductCategoryViewForm: FC = () => {
             onClickEdit={onClickEdit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
-            onClickHistory={onClickHistory}
+            historyLink={ProductCategoriesRoutes.Changes}
             onClickCancel={onClickCancel}
         />
     )

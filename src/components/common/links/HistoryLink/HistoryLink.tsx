@@ -1,16 +1,17 @@
-import React, { FC, MouseEventHandler } from 'react'
+import React, { FC } from 'react'
 
 import { Icon } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 export interface HistoryLinkProps {
-    onClick: MouseEventHandler
+    link: string
 }
 
 // TODO: Move to l10n
-const HistoryLink: FC<HistoryLinkProps> = ({ onClick }) => (
-    <a style={{ color: 'grey', paddingLeft: '30px' }} onClick={onClick}>
+const HistoryLink: FC<HistoryLinkProps> = ({ link }) => (
+    <Link style={{ color: 'grey', paddingLeft: '30px' }} to={link}>
         <Icon name="history" /> История изменений
-    </a>
+    </Link>
 )
 
 export default HistoryLink

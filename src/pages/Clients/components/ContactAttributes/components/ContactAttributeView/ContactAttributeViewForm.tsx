@@ -1,6 +1,7 @@
 import React, { FC, useContext } from 'react'
 
 import ContactAttributeContext from '../../contexts/ContactAttributeContext/ContactAttributeContext'
+import ContactAttributesRoutes from '../../routes/ContactAttributesRoutes'
 import View from '../../../../../../components/common/grids/View/View'
 import useContactAttributeView from './hooks/useContactAttributeView'
 import useContactAttributesActions from '../../contexts/ContactAttributesActionsContext/hooks/useContactAttributesActions'
@@ -8,7 +9,7 @@ import useContactAttributesActions from '../../contexts/ContactAttributesActions
 const ContactAttributeViewForm: FC = () => {
     const state = useContext(ContactAttributeContext)
     const { isLoading } = useContactAttributesActions()
-    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel, onClickHistory } = useContactAttributeView()
+    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel } = useContactAttributeView()
 
     return (
         <View
@@ -21,7 +22,7 @@ const ContactAttributeViewForm: FC = () => {
             onClickEdit={onClickEdit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
-            onClickHistory={onClickHistory}
+            historyLink={ContactAttributesRoutes.Changes}
             onClickCancel={onClickCancel}
         />
     )

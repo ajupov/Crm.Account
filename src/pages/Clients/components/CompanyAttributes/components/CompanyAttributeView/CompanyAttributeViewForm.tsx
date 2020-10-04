@@ -1,6 +1,7 @@
 import React, { FC, useContext } from 'react'
 
 import CompanyAttributeContext from '../../contexts/CompanyAttributeContext/CompanyAttributeContext'
+import CompanyAttributesRoutes from '../../routes/CompanyAttributesRoutes'
 import View from '../../../../../../components/common/grids/View/View'
 import useCompanyAttributeView from './hooks/useCompanyAttributeView'
 import useCompanyAttributesActions from '../../contexts/CompanyAttributesActionsContext/hooks/useCompanyAttributesActions'
@@ -8,7 +9,7 @@ import useCompanyAttributesActions from '../../contexts/CompanyAttributesActions
 const CompanyAttributeViewForm: FC = () => {
     const state = useContext(CompanyAttributeContext)
     const { isLoading } = useCompanyAttributesActions()
-    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel, onClickHistory } = useCompanyAttributeView()
+    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel } = useCompanyAttributeView()
 
     return (
         <View
@@ -21,7 +22,7 @@ const CompanyAttributeViewForm: FC = () => {
             onClickEdit={onClickEdit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
-            onClickHistory={onClickHistory}
+            historyLink={CompanyAttributesRoutes.Changes}
             onClickCancel={onClickCancel}
         />
     )

@@ -17,7 +17,6 @@ interface UseCompanyViewReturn {
     onClickEdit: (id: string) => void
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
-    onClickHistory: (id: string) => void
     onClickCancel: () => void
 }
 
@@ -45,8 +44,6 @@ const useCompanyView = (): UseCompanyViewReturn => {
         },
         [actionsState]
     )
-
-    const onClickHistory = useCallback((id: string) => history.push(`${CompaniesRoutes.Changes}/${id}`), [history])
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
@@ -94,7 +91,7 @@ const useCompanyView = (): UseCompanyViewReturn => {
         [getLeadName, mapAttributes, mapBankAccounts]
     )
 
-    return { map, onClickEdit, onClickDelete, onClickRestore, onClickHistory, onClickCancel }
+    return { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel }
 }
 
 export default useCompanyView

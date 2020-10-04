@@ -16,7 +16,6 @@ interface UseContactViewReturn {
     onClickEdit: (id: string) => void
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
-    onClickHistory: (id: string) => void
     onClickCancel: () => void
 }
 
@@ -45,8 +44,6 @@ const useContactView = (): UseContactViewReturn => {
         },
         [actionsState]
     )
-
-    const onClickHistory = useCallback((id: string) => history.push(`${ContactsRoutes.Changes}/${id}`), [history])
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
@@ -85,7 +82,7 @@ const useContactView = (): UseContactViewReturn => {
         [getCompanyName, getLeadName, mapAttributes, mapBankAccounts]
     )
 
-    return { map, onClickEdit, onClickDelete, onClickRestore, onClickHistory, onClickCancel }
+    return { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel }
 }
 
 export default useContactView

@@ -24,7 +24,7 @@ export interface ViewProps {
     onClickEdit: (id: string) => void
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
-    onClickHistory: (id: string) => void
+    historyLink: string
     onClickCancel: () => void
 }
 
@@ -37,7 +37,7 @@ const View: FC<ViewProps> = ({
     lastModifyDateTime,
     data,
     onClickCancel,
-    onClickHistory,
+    historyLink,
     onClickEdit,
     onClickDelete,
     onClickRestore
@@ -67,17 +67,6 @@ const View: FC<ViewProps> = ({
         [id, onClickEdit]
     )
 
-    const _onClickHistory = useCallback(
-        (event: React.MouseEvent) => {
-            if (id) {
-                onClickHistory(id)
-            }
-
-            event.stopPropagation()
-        },
-        [id, onClickHistory]
-    )
-
     const _onClickDelete = useCallback(
         (event: React.MouseEvent) => {
             if (id) {
@@ -104,7 +93,7 @@ const View: FC<ViewProps> = ({
         <>
             <Loader isLoading={isLoading} />
             <BackLink onClick={onClickCancel} />
-            <HistoryLink onClick={_onClickHistory} />
+            {id && historyLink && <HistoryLink link={`${historyLink}/${id}`} />}
             <Card.Meta textAlign="right">{getCreateDateTimeText(createDate)}</Card.Meta>
             <Card.Meta textAlign="right">{getLastModifyDateTimeText(lastModifyDateTime)}</Card.Meta>
             {renderData(data)}

@@ -1,14 +1,12 @@
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
-import ProductCategoriesRoutes from '../../../routes/ProductCategoriesRoutes'
 import ProductCategoryContext from '../../../contexts/ProductCategoryContext/ProductCategoryContext'
 import { useHistory } from 'react-router'
 
 interface UseProductCategoryEditReturn {
     fields: EditFormFieldProps[]
     isConfirmEnabled: boolean
-    onClickHistory: (id: string) => void
     onClickConfirm: () => void
     onClickCancel: () => void
 }
@@ -42,10 +40,6 @@ const useProductCategoryEdit = (): UseProductCategoryEditReturn => {
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const onClickHistory = useCallback((id: string) => history.push(`${ProductCategoriesRoutes.Changes}/${id}`), [
-        history
-    ])
-
     const fields: EditFormFieldProps[] = useMemo(
         () => [
             {
@@ -65,7 +59,7 @@ const useProductCategoryEdit = (): UseProductCategoryEditReturn => {
         [onChangeIsDeleted, onChangeName, state.category.isDeleted, state.category.name]
     )
 
-    return { fields, isConfirmEnabled, onClickHistory, onClickConfirm, onClickCancel }
+    return { fields, isConfirmEnabled, onClickConfirm, onClickCancel }
 }
 
 export default useProductCategoryEdit

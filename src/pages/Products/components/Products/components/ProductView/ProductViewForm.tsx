@@ -1,6 +1,7 @@
 import React, { FC, useContext } from 'react'
 
 import ProductContext from '../../contexts/ProductContext/ProductContext'
+import ProductsRoutes from '../../routes/ProductsRoutes'
 import View from '../../../../../../components/common/grids/View/View'
 import useProductView from './hooks/useProductView'
 import useProductsActions from '../../contexts/ProductsActionsContext/hooks/useProductsActions'
@@ -8,7 +9,7 @@ import useProductsActions from '../../contexts/ProductsActionsContext/hooks/useP
 const ProductViewForm: FC = () => {
     const state = useContext(ProductContext)
     const { isLoading } = useProductsActions()
-    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel, onClickHistory } = useProductView()
+    const { map, onClickEdit, onClickDelete, onClickRestore, onClickCancel } = useProductView()
 
     return (
         <View
@@ -21,7 +22,7 @@ const ProductViewForm: FC = () => {
             onClickEdit={onClickEdit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
-            onClickHistory={onClickHistory}
+            historyLink={ProductsRoutes.Changes}
             onClickCancel={onClickCancel}
         />
     )

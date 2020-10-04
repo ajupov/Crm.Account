@@ -6,7 +6,7 @@ import Checkbox, { CheckboxProps } from '../../fields/Checkbox/Checkbox'
 import DateInput, { DateInputProps } from '../../fields/DateInput/DateInput'
 import Dropdown, { DropdownProps } from '../../fields/Dropdown/Dropdown'
 import NumberInput, { NumberInputProps } from '../../fields/NumberInput/NumberInput'
-import React, { FC, useCallback, useMemo } from 'react'
+import React, { FC, useMemo } from 'react'
 import TextInput, { TextInputProps } from '../../fields/TextInput/TextInput'
 import { getCreateDateTimeText, getLastChangeDateTimeText } from '../../../../helpers/entityDateTimeHelper'
 
@@ -29,7 +29,7 @@ export interface EditFormProps {
     isConfirmEnabled: boolean
     createDate?: string
     lastModifyDateTime?: string
-    onClickHistory: (id: string) => void
+    historyLink: string
     onClickConfirm: () => void
     onClickCancel: () => void
 }
@@ -42,21 +42,10 @@ const EditForm: FC<EditFormProps> = ({
     isConfirmEnabled,
     createDate,
     lastModifyDateTime,
-    onClickHistory,
+    historyLink,
     onClickConfirm,
     onClickCancel
 }) => {
-    const _onClickHistory = useCallback(
-        (event: React.MouseEvent) => {
-            if (id) {
-                onClickHistory(id)
-            }
-
-            event.stopPropagation()
-        },
-        [id, onClickHistory]
-    )
-
     const fieldComponents = useMemo(
         () =>
             fields.map(x => {
@@ -82,7 +71,7 @@ const EditForm: FC<EditFormProps> = ({
         <>
             <Loader isLoading={isLoading} />
             <BackLink onClick={onClickCancel} />
-            <HistoryLink onClick={_onClickHistory} />
+            {id && historyLink && <HistoryLink link={`${historyLink}/${id}`} />}
             <Card.Meta textAlign="right">{getCreateDateTimeText(createDate)}</Card.Meta>
             <Card.Meta textAlign="right">{getLastChangeDateTimeText(lastModifyDateTime)}</Card.Meta>
             <Form onSubmit={onClickConfirm}>

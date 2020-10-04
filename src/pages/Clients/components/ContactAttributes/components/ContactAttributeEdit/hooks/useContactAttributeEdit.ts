@@ -13,7 +13,6 @@ import { useHistory } from 'react-router'
 interface UseContactAttributeEditReturn {
     fields: EditFormFieldProps[]
     isConfirmEnabled: boolean
-    onClickHistory: (id: string) => void
     onClickConfirm: () => void
     onClickCancel: () => void
 }
@@ -55,10 +54,6 @@ const useContactAttributeEdit = (): UseContactAttributeEditReturn => {
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const onClickHistory = useCallback((id: string) => history.push(`${ContactAttributesRoutes.Changes}/${id}`), [
-        history
-    ])
-
     const fields: EditFormFieldProps[] = useMemo(
         () => [
             {
@@ -94,7 +89,7 @@ const useContactAttributeEdit = (): UseContactAttributeEditReturn => {
         ]
     )
 
-    return { fields, isConfirmEnabled, onClickHistory, onClickConfirm, onClickCancel }
+    return { fields, isConfirmEnabled, onClickConfirm, onClickCancel }
 }
 
 export default useContactAttributeEdit

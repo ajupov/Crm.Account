@@ -1,6 +1,7 @@
 import React, { FC, useContext } from 'react'
 
 import CompanyAttributeContext from '../../contexts/CompanyAttributeContext/CompanyAttributeContext'
+import CompanyAttributesRoutes from '../../routes/CompanyAttributesRoutes'
 import EditForm from '../../../../../../components/common/forms/EditForm/EditForm'
 import useCompanyAttributeEdit from './hooks/useCompanyAttributeEdit'
 import useCompanyAttributesActions from '../../contexts/CompanyAttributesActionsContext/hooks/useCompanyAttributesActions'
@@ -8,7 +9,7 @@ import useCompanyAttributesActions from '../../contexts/CompanyAttributesActions
 const CompanyAttributeEditForm: FC = () => {
     const state = useContext(CompanyAttributeContext)
     const { isLoading } = useCompanyAttributesActions()
-    const { fields, isConfirmEnabled, onClickHistory, onClickCancel, onClickConfirm } = useCompanyAttributeEdit()
+    const { fields, isConfirmEnabled, onClickCancel, onClickConfirm } = useCompanyAttributeEdit()
 
     return state.attribute.id ? (
         <EditForm
@@ -18,7 +19,7 @@ const CompanyAttributeEditForm: FC = () => {
             isConfirmEnabled={isConfirmEnabled}
             createDate={state.attribute.createDateTime}
             lastModifyDateTime={state.attribute.modifyDateTime}
-            onClickHistory={onClickHistory}
+            historyLink={CompanyAttributesRoutes.Changes}
             onClickConfirm={onClickConfirm}
             onClickCancel={onClickCancel}
         />
