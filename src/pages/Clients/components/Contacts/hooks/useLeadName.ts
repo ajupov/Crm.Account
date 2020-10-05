@@ -24,12 +24,13 @@ const useLeadName = (id?: string): UseLeadNameReturn => {
         setLead(response)
     }, [id])
 
-    const getLeadName = useCallback(() => `${lead?.surname ?? ''} ${lead?.name ?? ''} ${lead?.patronymic ?? ''}`.trim(), [
-        lead
-    ])
+    const getLeadName = useCallback(
+        () => `${lead?.surname ?? ''} ${lead?.name ?? ''} ${lead?.patronymic ?? ''}`.trim(),
+        [lead]
+    )
 
     useEffect(() => {
-        getLead()
+        void getLead()
     }, [getLead])
 
     return { getLeadName }

@@ -27,7 +27,7 @@ const useCompanyName = (id?: string): UseCompanyNameReturn => {
     const getCompanyName = useCallback(() => company?.fullName ?? company?.shortName ?? '', [company])
 
     useEffect(() => {
-        getCompany()
+        void getCompany()
     }, [getCompany])
 
     return { getCompanyName }

@@ -1,3 +1,4 @@
+import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import {
     getAttributeTypeName,
     getAttributeTypesAsSelectOptions
@@ -6,7 +7,6 @@ import { useCallback, useContext, useMemo, useState } from 'react'
 
 import CompanyAttributeContext from '../../../contexts/CompanyAttributeContext/CompanyAttributeContext'
 import CompanyAttributeType from '../../../../../../../../api/companies/models/CompanyAttributeType'
-import CompanyAttributesRoutes from '../../../routes/CompanyAttributesRoutes'
 import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
 import { useHistory } from 'react-router'
 
@@ -24,7 +24,7 @@ const useCompanyAttributeEdit = (): UseCompanyAttributeEditReturn => {
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeType = useCallback(
-        (_, data) => {
+        (_, data: DropdownProps) => {
             state.setAttribute({ ...state.attribute, type: data.value as CompanyAttributeType })
             setIsConfirmEnabled(true)
         },
@@ -32,7 +32,7 @@ const useCompanyAttributeEdit = (): UseCompanyAttributeEditReturn => {
     )
 
     const onChangeName = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setAttribute({ ...state.attribute, key: data.value })
             setIsConfirmEnabled(true)
         },

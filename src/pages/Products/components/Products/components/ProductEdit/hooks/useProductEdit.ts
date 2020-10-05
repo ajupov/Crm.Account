@@ -1,10 +1,10 @@
+import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import { getProductTypeName, getProductTypesAsSelectOptions } from '../../../helpers/productTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
 import ProductContext from '../../../contexts/ProductContext/ProductContext'
 import ProductType from '../../../../../../../../api/products/models/ProductType'
-import ProductsRoutes from '../../../routes/ProductsRoutes'
 import { useHistory } from 'react-router'
 import useProductsSelectOptions from '../../../hooks/useProductsSelectOptions'
 
@@ -31,7 +31,7 @@ const useProductEdit = (): UseProductEditReturn => {
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeParentProductId = useCallback(
-        (_, data) => {
+        (_, data: DropdownProps) => {
             state.setProduct({ ...state.product, parentProductId: data.value as string })
             setIsConfirmEnabled(true)
         },
@@ -39,7 +39,7 @@ const useProductEdit = (): UseProductEditReturn => {
     )
 
     const onChangeType = useCallback(
-        (_, data) => {
+        (_, data: DropdownProps) => {
             state.setProduct({ ...state.product, type: data.value as ProductType })
             setIsConfirmEnabled(true)
         },
@@ -47,7 +47,7 @@ const useProductEdit = (): UseProductEditReturn => {
     )
 
     const onChangeStatusId = useCallback(
-        (_, data) => {
+        (_, data: DropdownProps) => {
             state.setProduct({ ...state.product, statusId: data.value as string })
             setIsConfirmEnabled(true)
         },
@@ -70,7 +70,7 @@ const useProductEdit = (): UseProductEditReturn => {
     )
 
     const onChangeName = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setProduct({ ...state.product, name: data.value })
             setIsConfirmEnabled(true)
         },
@@ -78,7 +78,7 @@ const useProductEdit = (): UseProductEditReturn => {
     )
 
     const onChangeVendorCode = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setProduct({ ...state.product, vendorCode: data.value })
             setIsConfirmEnabled(true)
         },
@@ -86,7 +86,7 @@ const useProductEdit = (): UseProductEditReturn => {
     )
 
     const onChangePrice = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setProduct({ ...state.product, price: (data.value as unknown) as number })
             setIsConfirmEnabled(true)
         },

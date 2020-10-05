@@ -1,6 +1,7 @@
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
+import { InputOnChangeData } from 'semantic-ui-react'
 import ProductCategoryContext from '../../../contexts/ProductCategoryContext/ProductCategoryContext'
 import { useHistory } from 'react-router'
 
@@ -18,7 +19,7 @@ const useProductCategoryEdit = (): UseProductCategoryEditReturn => {
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeName = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCategory({ ...state.category, name: data.value })
             setIsConfirmEnabled(true)
         },

@@ -55,7 +55,7 @@ const useContact = (): ContactState => {
     }, [contact])
 
     useEffect(() => {
-        get()
+        void get()
     }, [get])
 
     return { isLoading, contact, setContact, attributes, create, update }

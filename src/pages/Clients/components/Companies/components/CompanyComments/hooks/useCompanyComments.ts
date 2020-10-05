@@ -31,9 +31,10 @@ const useCompanyComments = (): UseCompanyCommentsTableReturn => {
         [name, commentsState.comments]
     )
 
-    const onChangeCommentToSend = useCallback(value => commentState.setComment({ ...commentState.comment, value }), [
-        commentState
-    ])
+    const onChangeCommentToSend = useCallback(
+        (value: string) => commentState.setComment({ ...commentState.comment, value }),
+        [commentState]
+    )
 
     const onClickSend = useCallback(async () => {
         await commentState.create()

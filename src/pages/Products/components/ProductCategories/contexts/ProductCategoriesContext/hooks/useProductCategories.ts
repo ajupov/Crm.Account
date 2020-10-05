@@ -43,7 +43,7 @@ const useProductCategories = (): ProductCategoriesState => {
     }, [request])
 
     useEffect(() => {
-        getPagedList()
+        void getPagedList()
     }, [getPagedList])
 
     return { request, setRequest, isLoading, categories, total, lastModifyDateTime, getPagedList, getAll }

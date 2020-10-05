@@ -1,3 +1,4 @@
+import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import {
     getCompanyIndustryTypeName,
     getCompanyIndustryTypesAsSelectOptions
@@ -26,7 +27,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeLeadId = useCallback(
-        (_, data) => {
+        (_, data: DropdownProps) => {
             state.setCompany({ ...state.company, leadId: data.value as string })
             setIsConfirmEnabled(true)
         },
@@ -34,7 +35,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeType = useCallback(
-        (_, data) => {
+        (_, data: DropdownProps) => {
             state.setCompany({ ...state.company, type: data.value as CompanyType })
             setIsConfirmEnabled(true)
         },
@@ -42,7 +43,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeFullName = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, fullName: data.value })
             setIsConfirmEnabled(true)
         },
@@ -50,7 +51,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeShortName = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, shortName: data.value })
             setIsConfirmEnabled(true)
         },
@@ -58,7 +59,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangePhone = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, phone: data.value })
             setIsConfirmEnabled(true)
         },
@@ -66,7 +67,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeEmail = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, email: data.value })
             setIsConfirmEnabled(true)
         },
@@ -74,7 +75,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeRegistrationDate = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, registrationDate: data.value })
             setIsConfirmEnabled(true)
         },
@@ -82,23 +83,23 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeEmployeesCount = useCallback(
-        (_, data) => {
-            state.setCompany({ ...state.company, employeesCount: data.value })
+        (_, data: InputOnChangeData) => {
+            state.setCompany({ ...state.company, employeesCount: parseInt(data.value, 10) })
             setIsConfirmEnabled(true)
         },
         [state]
     )
 
     const onChangeYearlyTurnover = useCallback(
-        (_, data) => {
-            state.setCompany({ ...state.company, yearlyTurnover: data.value })
+        (_, data: InputOnChangeData) => {
+            state.setCompany({ ...state.company, yearlyTurnover: parseInt(data.value, 10) })
             setIsConfirmEnabled(true)
         },
         [state]
     )
 
     const onChangeJuridicalPostcode = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, juridicalPostcode: data.value })
             setIsConfirmEnabled(true)
         },
@@ -106,7 +107,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeJuridicalCountry = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, juridicalCountry: data.value })
             setIsConfirmEnabled(true)
         },
@@ -114,7 +115,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeJuridicalRegion = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, juridicalRegion: data.value })
             setIsConfirmEnabled(true)
         },
@@ -122,7 +123,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeJuridicalProvince = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, juridicalProvince: data.value })
             setIsConfirmEnabled(true)
         },
@@ -130,7 +131,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeJuridicalCity = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, juridicalCity: data.value })
             setIsConfirmEnabled(true)
         },
@@ -138,7 +139,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeJuridicalStreet = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, juridicalStreet: data.value })
             setIsConfirmEnabled(true)
         },
@@ -146,7 +147,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeJuridicalHouse = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, juridicalHouse: data.value })
             setIsConfirmEnabled(true)
         },
@@ -154,7 +155,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeJuridicalApartment = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, juridicalApartment: data.value })
             setIsConfirmEnabled(true)
         },
@@ -162,7 +163,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeLegalPostcode = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, legalPostcode: data.value })
             setIsConfirmEnabled(true)
         },
@@ -170,7 +171,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeLegalCountry = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, legalCountry: data.value })
             setIsConfirmEnabled(true)
         },
@@ -178,7 +179,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeLegalRegion = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, legalRegion: data.value })
             setIsConfirmEnabled(true)
         },
@@ -186,7 +187,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeLegalProvince = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, legalProvince: data.value })
             setIsConfirmEnabled(true)
         },
@@ -194,7 +195,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeLegalCity = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, legalCity: data.value })
             setIsConfirmEnabled(true)
         },
@@ -202,7 +203,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeLegalStreet = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, legalStreet: data.value })
             setIsConfirmEnabled(true)
         },
@@ -210,7 +211,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeLegalHouse = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, legalHouse: data.value })
             setIsConfirmEnabled(true)
         },
@@ -218,7 +219,7 @@ const useCompanyCreate = (): UseCompanyCreateReturn => {
     )
 
     const onChangeLegalApartment = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, legalApartment: data.value })
             setIsConfirmEnabled(true)
         },

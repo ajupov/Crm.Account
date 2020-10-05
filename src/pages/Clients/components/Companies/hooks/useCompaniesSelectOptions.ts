@@ -92,9 +92,9 @@ const useCompaniesSelectOptions = (): UseCompaniesSelectOptionsReturn => {
     const getAllAttributes = useCallback(() => attributes.map(mapCompanyAttribute), [attributes, mapCompanyAttribute])
 
     useEffect(() => {
-        getLeads()
-        getCompanies()
-        getAttributes()
+        void getLeads()
+        void getCompanies()
+        void getAttributes()
     }, [getAttributes, getCompanies, getLeads])
 
     return {

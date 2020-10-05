@@ -74,7 +74,7 @@ const useContactComments = (): ContactCommentsState => {
     }, [comments, id, request])
 
     useEffect(() => {
-        getPagedList()
+        void getPagedList()
     }, [getPagedList])
 
     return {

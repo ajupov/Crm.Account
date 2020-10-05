@@ -43,7 +43,7 @@ const useProductStatus = (): ProductStatusState => {
     }, [status])
 
     useEffect(() => {
-        get()
+        void get()
     }, [get])
 
     return { isLoading, status, setStatus, create, update }

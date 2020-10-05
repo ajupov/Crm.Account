@@ -47,7 +47,7 @@ const useCompanies = (): CompaniesState => {
     }, [request])
 
     useEffect(() => {
-        getPagedList()
+        void getPagedList()
     }, [getPagedList])
 
     return { request, setRequest, isLoading, companies, total, lastModifyDateTime, getPagedList, getAll }

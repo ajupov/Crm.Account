@@ -1,7 +1,7 @@
+import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import ContactContext from '../../../contexts/ContactContext/ContactContext'
-import ContactsRoutes from '../../../routes/ContactsRoutes'
 import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
 import useContactsSelectOptions from '../../../hooks/useContactsSelectOptions'
 import { useHistory } from 'react-router'
@@ -28,7 +28,7 @@ const useContactEdit = (): UseContactEditReturn => {
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeLeadId = useCallback(
-        (_, data) => {
+        (_, data: DropdownProps) => {
             state.setContact({ ...state.contact, leadId: data.value as string })
             setIsConfirmEnabled(true)
         },
@@ -36,7 +36,7 @@ const useContactEdit = (): UseContactEditReturn => {
     )
 
     const onChangeCompanyId = useCallback(
-        (_, data) => {
+        (_, data: DropdownProps) => {
             state.setContact({ ...state.contact, companyId: data.value as string })
             setIsConfirmEnabled(true)
         },
@@ -44,7 +44,7 @@ const useContactEdit = (): UseContactEditReturn => {
     )
 
     const onChangeSurname = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setContact({ ...state.contact, surname: data.value })
             setIsConfirmEnabled(true)
         },
@@ -52,7 +52,7 @@ const useContactEdit = (): UseContactEditReturn => {
     )
 
     const onChangeName = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setContact({ ...state.contact, name: data.value })
             setIsConfirmEnabled(true)
         },
@@ -60,7 +60,7 @@ const useContactEdit = (): UseContactEditReturn => {
     )
 
     const onChangePatronymic = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setContact({ ...state.contact, patronymic: data.value })
             setIsConfirmEnabled(true)
         },
@@ -68,7 +68,7 @@ const useContactEdit = (): UseContactEditReturn => {
     )
 
     const onChangePhone = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setContact({ ...state.contact, phone: data.value })
             setIsConfirmEnabled(true)
         },
@@ -76,7 +76,7 @@ const useContactEdit = (): UseContactEditReturn => {
     )
 
     const onChangeEmail = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setContact({ ...state.contact, email: data.value })
             setIsConfirmEnabled(true)
         },
@@ -84,7 +84,7 @@ const useContactEdit = (): UseContactEditReturn => {
     )
 
     const onChangeTaxNumber = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setContact({ ...state.contact, taxNumber: data.value })
             setIsConfirmEnabled(true)
         },
@@ -92,7 +92,7 @@ const useContactEdit = (): UseContactEditReturn => {
     )
 
     const onChangePost = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setContact({ ...state.contact, post: data.value })
             setIsConfirmEnabled(true)
         },
@@ -100,7 +100,7 @@ const useContactEdit = (): UseContactEditReturn => {
     )
 
     const onChangePostcode = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setContact({ ...state.contact, postcode: data.value })
             setIsConfirmEnabled(true)
         },
@@ -108,7 +108,7 @@ const useContactEdit = (): UseContactEditReturn => {
     )
 
     const onChangeCountry = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setContact({ ...state.contact, country: data.value })
             setIsConfirmEnabled(true)
         },
@@ -116,7 +116,7 @@ const useContactEdit = (): UseContactEditReturn => {
     )
 
     const onChangeRegion = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setContact({ ...state.contact, region: data.value })
             setIsConfirmEnabled(true)
         },
@@ -124,7 +124,7 @@ const useContactEdit = (): UseContactEditReturn => {
     )
 
     const onChangeProvince = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setContact({ ...state.contact, province: data.value })
             setIsConfirmEnabled(true)
         },
@@ -132,7 +132,7 @@ const useContactEdit = (): UseContactEditReturn => {
     )
 
     const onChangeCity = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setContact({ ...state.contact, city: data.value })
             setIsConfirmEnabled(true)
         },
@@ -140,7 +140,7 @@ const useContactEdit = (): UseContactEditReturn => {
     )
 
     const onChangeStreet = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setContact({ ...state.contact, street: data.value })
             setIsConfirmEnabled(true)
         },
@@ -148,7 +148,7 @@ const useContactEdit = (): UseContactEditReturn => {
     )
 
     const onChangeHouse = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setContact({ ...state.contact, house: data.value })
             setIsConfirmEnabled(true)
         },
@@ -156,7 +156,7 @@ const useContactEdit = (): UseContactEditReturn => {
     )
 
     const onChangeApartment = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setContact({ ...state.contact, apartment: data.value })
             setIsConfirmEnabled(true)
         },
@@ -164,7 +164,7 @@ const useContactEdit = (): UseContactEditReturn => {
     )
 
     const onChangeBirthDate = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setContact({ ...state.contact, birthDate: data.value })
             setIsConfirmEnabled(true)
         },

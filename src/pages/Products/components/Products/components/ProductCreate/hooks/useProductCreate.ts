@@ -1,3 +1,4 @@
+import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import { getProductTypeName, getProductTypesAsSelectOptions } from '../../../helpers/productTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
@@ -30,7 +31,7 @@ const useProductCreate = (): UseProductCreateReturn => {
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeParentProductId = useCallback(
-        (_, data) => {
+        (_, data: DropdownProps) => {
             state.setProduct({ ...state.product, parentProductId: data.value as string })
             setIsConfirmEnabled(true)
         },
@@ -38,7 +39,7 @@ const useProductCreate = (): UseProductCreateReturn => {
     )
 
     const onChangeType = useCallback(
-        (_, data) => {
+        (_, data: DropdownProps) => {
             state.setProduct({ ...state.product, type: data.value as ProductType })
             setIsConfirmEnabled(true)
         },
@@ -46,7 +47,7 @@ const useProductCreate = (): UseProductCreateReturn => {
     )
 
     const onChangeStatusId = useCallback(
-        (_, data) => {
+        (_, data: DropdownProps) => {
             state.setProduct({ ...state.product, statusId: data.value as string })
             setIsConfirmEnabled(true)
         },
@@ -69,7 +70,7 @@ const useProductCreate = (): UseProductCreateReturn => {
     )
 
     const onChangeName = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setProduct({ ...state.product, name: data.value })
             setIsConfirmEnabled(true)
         },
@@ -77,7 +78,7 @@ const useProductCreate = (): UseProductCreateReturn => {
     )
 
     const onChangeVendorCode = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setProduct({ ...state.product, vendorCode: data.value })
             setIsConfirmEnabled(true)
         },
@@ -85,7 +86,7 @@ const useProductCreate = (): UseProductCreateReturn => {
     )
 
     const onChangePrice = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setProduct({ ...state.product, price: (data.value as unknown) as number })
             setIsConfirmEnabled(true)
         },

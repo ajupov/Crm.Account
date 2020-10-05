@@ -1,4 +1,4 @@
-import { Card, Grid, Header, Segment } from 'semantic-ui-react'
+import { Card, Grid, Header } from 'semantic-ui-react'
 import { Media, MediaContextProvider } from '../../../../tokens/Tokens'
 import React, { FC } from 'react'
 

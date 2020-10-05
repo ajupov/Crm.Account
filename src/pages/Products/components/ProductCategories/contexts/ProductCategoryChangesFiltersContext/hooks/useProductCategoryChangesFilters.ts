@@ -4,6 +4,7 @@ import ProductCategoryChangesFiltersState, {
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { FilterFormFieldProps } from '../../../../../../../components/common/forms/FilterForm/FilterForm'
+import { InputOnChangeData } from 'semantic-ui-react'
 import ProductCategoryChangesContext from '../../ProductCategoryChangesContext/ProductCategoryChangesContext'
 
 // TODO: Move to l10n
@@ -15,12 +16,12 @@ const useProductCategoryChangesFilters = (): ProductCategoryChangesFiltersState 
     const [isResetEnabled, setIsResetEnabled] = useState(false)
     const [isShowMobile, setIsShowMobile] = useState(productCategoryChangesFiltersInitialState.isShowMobile)
 
-    const onChangeMinCreateDate = useCallback((_, data) => {
+    const onChangeMinCreateDate = useCallback((_, data: InputOnChangeData) => {
         setMinCreateDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMaxCreateDate = useCallback((_, data) => {
+    const onChangeMaxCreateDate = useCallback((_, data: InputOnChangeData) => {
         setMaxCreateDate(data.value)
         setIsApplyEnabled(true)
     }, [])

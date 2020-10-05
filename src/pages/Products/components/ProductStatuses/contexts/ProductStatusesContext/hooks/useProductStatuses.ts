@@ -43,7 +43,7 @@ const useProductStatuses = (): ProductStatusesState => {
     }, [request])
 
     useEffect(() => {
-        getPagedList()
+        void getPagedList()
     }, [getPagedList])
 
     return { request, setRequest, isLoading, statuses, total, lastModifyDateTime, getPagedList, getAll }

@@ -43,7 +43,7 @@ const useContactAttributes = (): ContactAttributesState => {
     }, [request])
 
     useEffect(() => {
-        getPagedList()
+        void getPagedList()
     }, [getPagedList])
 
     return { request, setRequest, isLoading, attributes, total, lastModifyDateTime, getPagedList, getAll }

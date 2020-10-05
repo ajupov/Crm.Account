@@ -1,3 +1,4 @@
+import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import {
     getAttributeTypeName,
     getAttributeTypesAsSelectOptions
@@ -7,7 +8,6 @@ import { useCallback, useContext, useMemo, useState } from 'react'
 import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
 import ProductAttributeContext from '../../../contexts/ProductAttributeContext/ProductAttributeContext'
 import ProductAttributeType from '../../../../../../../../api/products/models/ProductAttributeType'
-import ProductAttributesRoutes from '../../../routes/ProductAttributesRoutes'
 import { useHistory } from 'react-router'
 
 interface UseProductAttributeEditReturn {
@@ -24,7 +24,7 @@ const useProductAttributeEdit = (): UseProductAttributeEditReturn => {
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeType = useCallback(
-        (_, data) => {
+        (_, data: DropdownProps) => {
             state.setAttribute({ ...state.attribute, type: data.value as ProductAttributeType })
             setIsConfirmEnabled(true)
         },
@@ -32,7 +32,7 @@ const useProductAttributeEdit = (): UseProductAttributeEditReturn => {
     )
 
     const onChangeName = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setAttribute({ ...state.attribute, key: data.value })
             setIsConfirmEnabled(true)
         },

@@ -55,7 +55,7 @@ const useCompany = (): CompanyState => {
     }, [company])
 
     useEffect(() => {
-        get()
+        void get()
     }, [get])
 
     return { isLoading, company, setCompany, attributes, create, update }

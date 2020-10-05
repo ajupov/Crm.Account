@@ -1,3 +1,4 @@
+import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import {
     getCompanyIndustryTypeName,
     getCompanyIndustryTypesAsSelectOptions
@@ -5,7 +6,6 @@ import {
 import { getCompanyTypeName, getCompanyTypesAsSelectOptions } from '../../../helpers/helpers/companyTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import CompaniesRoutes from '../../../routes/CompaniesRoutes'
 import CompanyContext from '../../../contexts/CompanyContext/CompanyContext'
 import CompanyType from '../../../../../../../../api/companies/models/CompanyType'
 import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
@@ -27,7 +27,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeLeadId = useCallback(
-        (_, data) => {
+        (_, data: DropdownProps) => {
             state.setCompany({ ...state.company, leadId: data.value as string })
             setIsConfirmEnabled(true)
         },
@@ -35,7 +35,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeType = useCallback(
-        (_, data) => {
+        (_, data: DropdownProps) => {
             state.setCompany({ ...state.company, type: data.value as CompanyType })
             setIsConfirmEnabled(true)
         },
@@ -43,7 +43,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeFullName = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, fullName: data.value })
             setIsConfirmEnabled(true)
         },
@@ -51,7 +51,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeShortName = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, shortName: data.value })
             setIsConfirmEnabled(true)
         },
@@ -59,7 +59,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangePhone = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, phone: data.value })
             setIsConfirmEnabled(true)
         },
@@ -67,7 +67,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeEmail = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, email: data.value })
             setIsConfirmEnabled(true)
         },
@@ -75,7 +75,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeRegistrationDate = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, registrationDate: data.value })
             setIsConfirmEnabled(true)
         },
@@ -83,23 +83,23 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeEmployeesCount = useCallback(
-        (_, data) => {
-            state.setCompany({ ...state.company, employeesCount: data.value })
+        (_, data: InputOnChangeData) => {
+            state.setCompany({ ...state.company, employeesCount: parseInt(data.value, 10) })
             setIsConfirmEnabled(true)
         },
         [state]
     )
 
     const onChangeYearlyTurnover = useCallback(
-        (_, data) => {
-            state.setCompany({ ...state.company, yearlyTurnover: data.value })
+        (_, data: InputOnChangeData) => {
+            state.setCompany({ ...state.company, yearlyTurnover: parseInt(data.value, 10) })
             setIsConfirmEnabled(true)
         },
         [state]
     )
 
     const onChangeJuridicalPostcode = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, juridicalPostcode: data.value })
             setIsConfirmEnabled(true)
         },
@@ -107,7 +107,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeJuridicalCountry = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, juridicalCountry: data.value })
             setIsConfirmEnabled(true)
         },
@@ -115,7 +115,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeJuridicalRegion = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, juridicalRegion: data.value })
             setIsConfirmEnabled(true)
         },
@@ -123,7 +123,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeJuridicalProvince = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, juridicalProvince: data.value })
             setIsConfirmEnabled(true)
         },
@@ -131,7 +131,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeJuridicalCity = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, juridicalCity: data.value })
             setIsConfirmEnabled(true)
         },
@@ -139,7 +139,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeJuridicalStreet = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, juridicalStreet: data.value })
             setIsConfirmEnabled(true)
         },
@@ -147,7 +147,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeJuridicalHouse = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, juridicalHouse: data.value })
             setIsConfirmEnabled(true)
         },
@@ -155,7 +155,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeJuridicalApartment = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, juridicalApartment: data.value })
             setIsConfirmEnabled(true)
         },
@@ -163,7 +163,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeLegalPostcode = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, legalPostcode: data.value })
             setIsConfirmEnabled(true)
         },
@@ -171,7 +171,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeLegalCountry = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, legalCountry: data.value })
             setIsConfirmEnabled(true)
         },
@@ -179,7 +179,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeLegalRegion = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, legalRegion: data.value })
             setIsConfirmEnabled(true)
         },
@@ -187,7 +187,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeLegalProvince = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, legalProvince: data.value })
             setIsConfirmEnabled(true)
         },
@@ -195,7 +195,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeLegalCity = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, legalCity: data.value })
             setIsConfirmEnabled(true)
         },
@@ -203,7 +203,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeLegalStreet = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, legalStreet: data.value })
             setIsConfirmEnabled(true)
         },
@@ -211,7 +211,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeLegalHouse = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, legalHouse: data.value })
             setIsConfirmEnabled(true)
         },
@@ -219,7 +219,7 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
     )
 
     const onChangeLegalApartment = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setCompany({ ...state.company, legalApartment: data.value })
             setIsConfirmEnabled(true)
         },

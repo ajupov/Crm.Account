@@ -43,7 +43,7 @@ const useProductCategory = (): ProductCategoryState => {
     }, [category])
 
     useEffect(() => {
-        get()
+        void get()
     }, [get])
 
     return { isLoading, category, setCategory, create, update }

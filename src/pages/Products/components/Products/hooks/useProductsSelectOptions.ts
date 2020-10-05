@@ -119,10 +119,10 @@ const useProductsSelectOptions = (): UseProductsSelectOptionsReturn => {
     const getAllAttributes = useCallback(() => attributes.map(mapProductAttribute), [attributes, mapProductAttribute])
 
     useEffect(() => {
-        getProducts()
-        getStatuses()
-        getCategories()
-        getAttributes()
+        void getProducts()
+        void getStatuses()
+        void getCategories()
+        void getAttributes()
     }, [getAttributes, getCategories, getProducts, getStatuses])
 
     return {

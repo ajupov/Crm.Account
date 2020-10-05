@@ -92,9 +92,9 @@ const useContactsSelectOptions = (): UseContactsSelectOptionsReturn => {
     const getAllAttributes = useCallback(() => attributes.map(mapContactAttribute), [attributes, mapContactAttribute])
 
     useEffect(() => {
-        getLeads()
-        getCompanies()
-        getAttributes()
+        void getLeads()
+        void getCompanies()
+        void getAttributes()
     }, [getAttributes, getCompanies, getLeads])
 
     return {

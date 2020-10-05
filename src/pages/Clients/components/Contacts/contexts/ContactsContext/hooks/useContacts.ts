@@ -48,7 +48,7 @@ const useContacts = (): ContactsState => {
     }, [request])
 
     useEffect(() => {
-        getPagedList()
+        void getPagedList()
     }, [getPagedList])
 
     return { request, setRequest, isLoading, contacts, total, lastModifyDateTime, getPagedList, getAll }

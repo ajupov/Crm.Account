@@ -1,3 +1,4 @@
+import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import ProductsFiltersState, { productsFiltersInitialState } from '../../../states/ProductsFiltersState'
 import { arrayToDictionary, dictionaryToArray } from '../../../../../../../utils/dictionary/dictionaryUtils'
 import { useCallback, useContext, useMemo, useState } from 'react'
@@ -30,36 +31,36 @@ const useProductsFilters = (): ProductsFiltersState => {
     const [isResetEnabled, setIsResetEnabled] = useState(productsFiltersInitialState.isResetEnabled)
     const [isShowMobile, setIsShowMobile] = useState(productsFiltersInitialState.isShowMobile)
 
-    const onChangeType = useCallback((_: any, { value }) => {
+    const onChangeType = useCallback((_: any, { value }: CheckboxProps) => {
         setType(value as ProductType)
     }, [])
 
-    const onChangeStatusIds = useCallback((_: any, { value }) => {
-        setStatusIds(value as string[])
+    const onChangeStatusIds = useCallback((_: any, data: DropdownProps) => {
+        setStatusIds(data.value as string[])
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeCategoryIds = useCallback((_: any, { value }) => {
-        setCategoryIds(value as string[])
+    const onChangeCategoryIds = useCallback((_: any, data: DropdownProps) => {
+        setCategoryIds(data.value as string[])
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeName = useCallback((_, { value }) => {
-        setName(value)
+    const onChangeName = useCallback((_, data: InputOnChangeData) => {
+        setName(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeVendorCode = useCallback((_, { value }) => {
-        setVendorCode(value)
+    const onChangeVendorCode = useCallback((_, data: InputOnChangeData) => {
+        setVendorCode(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMinPrice = useCallback((_, data) => {
+    const onChangeMinPrice = useCallback((_, data: InputOnChangeData) => {
         setMinPrice(parseInt(data.value, 10))
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMaxPrice = useCallback((_, data) => {
+    const onChangeMaxPrice = useCallback((_, data: InputOnChangeData) => {
         setMaxPrice(parseInt(data.value, 10))
         setIsApplyEnabled(true)
     }, [])
@@ -69,32 +70,32 @@ const useProductsFilters = (): ProductsFiltersState => {
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeIsHidden = useCallback((_, data) => {
+    const onChangeIsHidden = useCallback((_, data: CheckboxProps) => {
         setIsHidden(toBooleanNullable(data.value))
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMinCreateDate = useCallback((_, data) => {
+    const onChangeMinCreateDate = useCallback((_, data: InputOnChangeData) => {
         setMinCreateDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMaxCreateDate = useCallback((_, data) => {
+    const onChangeMaxCreateDate = useCallback((_, data: InputOnChangeData) => {
         setMaxCreateDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMinModifyDate = useCallback((_, data) => {
+    const onChangeMinModifyDate = useCallback((_, data: InputOnChangeData) => {
         setMinModifyDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMaxModifyDate = useCallback((_, data) => {
+    const onChangeMaxModifyDate = useCallback((_, data: InputOnChangeData) => {
         setMaxModifyDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeIsDeleted = useCallback((_, data) => {
+    const onChangeIsDeleted = useCallback((_, data: CheckboxProps) => {
         setIsDeleted(toBooleanNullable(data.value))
         setIsApplyEnabled(true)
     }, [])

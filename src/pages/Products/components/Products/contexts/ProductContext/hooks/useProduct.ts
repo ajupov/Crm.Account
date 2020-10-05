@@ -67,7 +67,7 @@ const useProduct = (): ProductState => {
     }, [product])
 
     useEffect(() => {
-        get()
+        void get()
     }, [get])
 
     return { isLoading, product, setProduct, categories, attributes, create, update }

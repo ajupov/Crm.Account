@@ -43,7 +43,7 @@ const useCompanyAttribute = (): CompanyAttributeState => {
     }, [attribute])
 
     useEffect(() => {
-        get()
+        void get()
     }, [get])
 
     return { isLoading, attribute, setAttribute, create, update }

@@ -31,7 +31,7 @@ const useContactComments = (): UseContactCommentsTableReturn => {
         [name, commentsState.comments]
     )
 
-    const onChangeCommentToSend = useCallback(value => commentState.setComment({ ...commentState.comment, value }), [
+    const onChangeCommentToSend = useCallback((value: string) => commentState.setComment({ ...commentState.comment, value }), [
         commentState
     ])
 

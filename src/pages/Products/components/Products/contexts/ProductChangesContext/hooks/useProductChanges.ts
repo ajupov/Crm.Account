@@ -57,7 +57,7 @@ const useProductChanges = (): ProductChangesState => {
     }, [id, request])
 
     useEffect(() => {
-        getPagedList()
+        void getPagedList()
     }, [getPagedList])
 
     return { request, setRequest, isLoading, total, changes, getAll }

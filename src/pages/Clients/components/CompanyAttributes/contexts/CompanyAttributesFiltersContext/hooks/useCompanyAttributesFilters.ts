@@ -1,3 +1,4 @@
+import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import CompanyAttributesFiltersState, {
     companyAttributesFiltersInitialState
 } from '../../../states/CompanyAttributesFiltersState'
@@ -22,37 +23,37 @@ const useCompanyAttributesFilters = (): CompanyAttributesFiltersState => {
     const [isResetEnabled, setIsResetEnabled] = useState(companyAttributesFiltersInitialState.isResetEnabled)
     const [isShowMobile, setIsShowMobile] = useState(companyAttributesFiltersInitialState.isShowMobile)
 
-    const onChangeTypes = useCallback((_: any, { value }) => {
-        setTypes(value as [])
+    const onChangeTypes = useCallback((_: any, data: DropdownProps) => {
+        setTypes(data.value as [])
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeKey = useCallback((_, { value }) => {
-        setKey(value)
+    const onChangeKey = useCallback((_, data: InputOnChangeData) => {
+        setKey(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMinCreateDate = useCallback((_, data) => {
+    const onChangeMinCreateDate = useCallback((_, data: InputOnChangeData) => {
         setMinCreateDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMaxCreateDate = useCallback((_, data) => {
+    const onChangeMaxCreateDate = useCallback((_, data: InputOnChangeData) => {
         setMaxCreateDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMinModifyDate = useCallback((_, data) => {
+    const onChangeMinModifyDate = useCallback((_, data: InputOnChangeData) => {
         setMinModifyDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMaxModifyDate = useCallback((_, data) => {
+    const onChangeMaxModifyDate = useCallback((_, data: InputOnChangeData) => {
         setMaxModifyDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeIsDeleted = useCallback((_, data) => {
+    const onChangeIsDeleted = useCallback((_, data: CheckboxProps) => {
         setIsDeleted(toBooleanNullable(data.value))
         setIsApplyEnabled(true)
     }, [])

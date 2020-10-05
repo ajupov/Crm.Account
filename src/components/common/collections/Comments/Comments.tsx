@@ -27,7 +27,7 @@ const Comments: FC<CommentsProps> = ({
     ])
 
     const _onInput = useCallback(
-        (e: any) => {
+        (e: KeyboardEvent) => {
             const enterKeyCode = 13
 
             if (e.keyCode === enterKeyCode && e.ctrlKey) {

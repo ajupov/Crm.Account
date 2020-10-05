@@ -29,7 +29,7 @@ const useUserInfo = (): UserInfoState => {
     }, [])
 
     useEffect(() => {
-        get()
+        void get()
     }, [get])
 
     return userInfo

@@ -5,6 +5,7 @@ import { useCallback, useContext, useMemo, useState } from 'react'
 
 import CompanyChangesContext from '../../CompanyChangesContext/CompanyChangesContext'
 import { FilterFormFieldProps } from '../../../../../../../components/common/forms/FilterForm/FilterForm'
+import { InputOnChangeData } from 'semantic-ui-react'
 
 // TODO: Move to l10n
 const useCompanyChangesFilters = (): CompanyChangesFiltersState => {
@@ -15,12 +16,12 @@ const useCompanyChangesFilters = (): CompanyChangesFiltersState => {
     const [isResetEnabled, setIsResetEnabled] = useState(false)
     const [isShowMobile, setIsShowMobile] = useState(companyChangesFiltersInitialState.isShowMobile)
 
-    const onChangeMinCreateDate = useCallback((_, data) => {
+    const onChangeMinCreateDate = useCallback((_, data: InputOnChangeData) => {
         setMinCreateDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMaxCreateDate = useCallback((_, data) => {
+    const onChangeMaxCreateDate = useCallback((_, data: InputOnChangeData) => {
         setMaxCreateDate(data.value)
         setIsApplyEnabled(true)
     }, [])

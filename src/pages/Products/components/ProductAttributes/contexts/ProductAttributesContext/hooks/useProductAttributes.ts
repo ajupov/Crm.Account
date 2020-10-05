@@ -43,7 +43,7 @@ const useProductAttributes = (): ProductAttributesState => {
     }, [request])
 
     useEffect(() => {
-        getPagedList()
+        void getPagedList()
     }, [getPagedList])
 
     return { request, setRequest, isLoading, attributes, total, lastModifyDateTime, getPagedList, getAll }

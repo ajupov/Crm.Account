@@ -1,8 +1,8 @@
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
+import { InputOnChangeData } from 'semantic-ui-react'
 import ProductStatusContext from '../../../contexts/ProductStatusContext/ProductStatusContext'
-import ProductStatusesRoutes from '../../../routes/ProductStatusesRoutes'
 import { useHistory } from 'react-router'
 
 interface UseProductStatusEditReturn {
@@ -19,7 +19,7 @@ const useProductStatusEdit = (): UseProductStatusEditReturn => {
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeName = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setStatus({ ...state.status, name: data.value })
             setIsConfirmEnabled(true)
         },

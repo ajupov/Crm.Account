@@ -27,7 +27,7 @@ const useProductName = (id?: string): UseProductNameReturn => {
     const getProductName = useCallback(() => product?.name ?? '', [product])
 
     useEffect(() => {
-        getProduct()
+        void getProduct()
     }, [getProduct])
 
     return { getProductName }

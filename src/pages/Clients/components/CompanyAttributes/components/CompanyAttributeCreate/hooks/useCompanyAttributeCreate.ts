@@ -1,3 +1,4 @@
+import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import {
     getAttributeTypeName,
     getAttributeTypesAsSelectOptions
@@ -23,7 +24,7 @@ const useCompanyAttributeCreate = (): UseCompanyAttributeCreateReturn => {
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeType = useCallback(
-        (_, data) => {
+        (_, data: DropdownProps) => {
             state.setAttribute({ ...state.attribute, type: data.value as CompanyAttributeType })
             setIsConfirmEnabled(true)
         },
@@ -31,7 +32,7 @@ const useCompanyAttributeCreate = (): UseCompanyAttributeCreateReturn => {
     )
 
     const onChangeKey = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setAttribute({ ...state.attribute, key: data.value })
             setIsConfirmEnabled(true)
         },

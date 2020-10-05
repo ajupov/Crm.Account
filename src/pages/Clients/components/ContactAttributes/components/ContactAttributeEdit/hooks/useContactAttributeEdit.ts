@@ -1,3 +1,4 @@
+import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import {
     getAttributeTypeName,
     getAttributeTypesAsSelectOptions
@@ -6,7 +7,6 @@ import { useCallback, useContext, useMemo, useState } from 'react'
 
 import ContactAttributeContext from '../../../contexts/ContactAttributeContext/ContactAttributeContext'
 import ContactAttributeType from '../../../../../../../../api/contacts/models/ContactAttributeType'
-import ContactAttributesRoutes from '../../../routes/ContactAttributesRoutes'
 import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
 import { useHistory } from 'react-router'
 
@@ -24,7 +24,7 @@ const useContactAttributeEdit = (): UseContactAttributeEditReturn => {
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeType = useCallback(
-        (_, data) => {
+        (_, data: DropdownProps) => {
             state.setAttribute({ ...state.attribute, type: data.value as ContactAttributeType })
             setIsConfirmEnabled(true)
         },
@@ -32,7 +32,7 @@ const useContactAttributeEdit = (): UseContactAttributeEditReturn => {
     )
 
     const onChangeName = useCallback(
-        (_, data) => {
+        (_, data: InputOnChangeData) => {
             state.setAttribute({ ...state.attribute, key: data.value })
             setIsConfirmEnabled(true)
         },

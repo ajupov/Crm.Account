@@ -1,3 +1,4 @@
+import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import ContactsFiltersState, { contactsFiltersInitialState } from '../../../states/ContactsFiltersState'
 import { arrayToDictionary, dictionaryToArray } from '../../../../../../../utils/dictionary/dictionaryUtils'
 import { useCallback, useContext, useMemo, useState } from 'react'
@@ -41,127 +42,127 @@ const useContactsFilters = (): ContactsFiltersState => {
     const [isResetEnabled, setIsResetEnabled] = useState(contactsFiltersInitialState.isResetEnabled)
     const [isShowMobile, setIsShowMobile] = useState(contactsFiltersInitialState.isShowMobile)
 
-    const onChangeName = useCallback((_, { value }) => {
-        setName(value)
+    const onChangeName = useCallback((_, data: InputOnChangeData) => {
+        setName(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeSurname = useCallback((_, { value }) => {
-        setSurname(value)
+    const onChangeSurname = useCallback((_, data: InputOnChangeData) => {
+        setSurname(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangePatronymic = useCallback((_, { value }) => {
-        setPatronymic(value)
+    const onChangePatronymic = useCallback((_, data: InputOnChangeData) => {
+        setPatronymic(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangePhone = useCallback((_, { value }) => {
-        setPhone(value)
+    const onChangePhone = useCallback((_, data: InputOnChangeData) => {
+        setPhone(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeEmail = useCallback((_, { value }) => {
-        setEmail(value)
+    const onChangeEmail = useCallback((_, data: InputOnChangeData) => {
+        setEmail(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeTaxNumber = useCallback((_, { value }) => {
-        setTaxNumber(value)
+    const onChangeTaxNumber = useCallback((_, data: InputOnChangeData) => {
+        setTaxNumber(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangePost = useCallback((_, { value }) => {
-        setPost(value)
+    const onChangePost = useCallback((_, data: InputOnChangeData) => {
+        setPost(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangePostcode = useCallback((_, { value }) => {
-        setPostcode(value)
+    const onChangePostcode = useCallback((_, data: InputOnChangeData) => {
+        setPostcode(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeCountry = useCallback((_, { value }) => {
-        setCountry(value)
+    const onChangeCountry = useCallback((_, data: InputOnChangeData) => {
+        setCountry(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeRegion = useCallback((_, { value }) => {
-        setRegion(value)
+    const onChangeRegion = useCallback((_, data: InputOnChangeData) => {
+        setRegion(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeProvince = useCallback((_, { value }) => {
-        setProvince(value)
+    const onChangeProvince = useCallback((_, data: InputOnChangeData) => {
+        setProvince(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeCity = useCallback((_, { value }) => {
-        setCity(value)
+    const onChangeCity = useCallback((_, data: InputOnChangeData) => {
+        setCity(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeStreet = useCallback((_, { value }) => {
-        setStreet(value)
+    const onChangeStreet = useCallback((_, data: InputOnChangeData) => {
+        setStreet(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeHouse = useCallback((_, { value }) => {
-        setHouse(value)
+    const onChangeHouse = useCallback((_, data: InputOnChangeData) => {
+        setHouse(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeApartment = useCallback((_, { value }) => {
-        setApartment(value)
+    const onChangeApartment = useCallback((_, data: InputOnChangeData) => {
+        setApartment(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMinBirthDate = useCallback((_, { value }) => {
-        setMinBirthDate(value)
+    const onChangeMinBirthDate = useCallback((_, data: InputOnChangeData) => {
+        setMinBirthDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMaxBirthDate = useCallback((_, { value }) => {
-        setMaxBirthDate(value)
+    const onChangeMaxBirthDate = useCallback((_, data: InputOnChangeData) => {
+        setMaxBirthDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeBankAccountNumber = useCallback((_, data) => {
+    const onChangeBankAccountNumber = useCallback((_, data: InputOnChangeData) => {
         setBankAccountNumber(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeBankAccountBankName = useCallback((_, data) => {
+    const onChangeBankAccountBankName = useCallback((_, data: InputOnChangeData) => {
         setBankAccountBankName(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeAttributeIds = useCallback((_: any, { value }) => {
-        setAttributeIds(arrayToDictionary(value as string[]))
+    const onChangeAttributeIds = useCallback((_: any, data: DropdownProps) => {
+        setAttributeIds(arrayToDictionary(data.value as string[]))
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMinCreateDate = useCallback((_, data) => {
+    const onChangeMinCreateDate = useCallback((_, data: InputOnChangeData) => {
         setMinCreateDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMaxCreateDate = useCallback((_, data) => {
+    const onChangeMaxCreateDate = useCallback((_, data: InputOnChangeData) => {
         setMaxCreateDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMinModifyDate = useCallback((_, data) => {
+    const onChangeMinModifyDate = useCallback((_, data: InputOnChangeData) => {
         setMinModifyDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeMaxModifyDate = useCallback((_, data) => {
+    const onChangeMaxModifyDate = useCallback((_, data: InputOnChangeData) => {
         setMaxModifyDate(data.value)
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeIsDeleted = useCallback((_, data) => {
+    const onChangeIsDeleted = useCallback((_, data: CheckboxProps) => {
         setIsDeleted(toBooleanNullable(data.value))
         setIsApplyEnabled(true)
     }, [])

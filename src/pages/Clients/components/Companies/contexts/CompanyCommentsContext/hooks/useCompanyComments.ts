@@ -74,7 +74,7 @@ const useCompanyComments = (): CompanyCommentsState => {
     }, [comments, id, request])
 
     useEffect(() => {
-        getPagedList()
+        void getPagedList()
     }, [getPagedList])
 
     return {

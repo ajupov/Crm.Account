@@ -1,4 +1,4 @@
-export function convertObjectToCSV(objectArray: object[]): string {
+export function convertObjectToCSV(objectArray: (string[] | Record<string, any>)[]): string {
     let table = ''
 
     for (const object of objectArray) {

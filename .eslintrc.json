@@ -159,6 +159,8 @@
             "files": ["*.ts", "*.tsx"],
             "rules": {
                 "no-confusing-arrow": "off",
+                "@typescript-eslint/camelcase": "off",
+                "@typescript-eslint/restrict-template-expressions": "off",
                 "no-nested-ternary": "off",
                 "no-shadow": "off",
                 "react/jsx-no-literals": "off",
