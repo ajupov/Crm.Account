@@ -1,22 +1,23 @@
 import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
-import { getProductTypeName, getProductTypesAsSelectOptions } from '../../../helpers/productTypeHelper'
+import { getProductTypeName, getProductTypesAsSelectOptions } from '../helpers/productTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
-import ProductContext from '../../../contexts/ProductContext/ProductContext'
-import ProductType from '../../../../../../../../api/products/models/ProductType'
+import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
+import ProductContext from '../contexts/ProductContext/ProductContext'
+import ProductType from '../../../../../../api/products/models/ProductType'
 import { useHistory } from 'react-router'
-import useProductsSelectOptions from '../../../hooks/useProductsSelectOptions'
+import useProductsSelectOptions from './useProductsSelectOptions'
 
-interface UseProductEditReturn {
-    fields: EditFormFieldProps[]
+interface UseProductOnChangeReturn {
+    fields: CreateFormFieldProps[]
     isConfirmEnabled: boolean
-    onClickConfirm: () => void
+    onClickConfirmCreate: () => void
+    onClickConfirmUpdate: () => void
     onClickCancel: () => void
 }
 
 // TODO: Move to l10n
-const useProductEdit = (): UseProductEditReturn => {
+const useProductOnChange = (): UseProductOnChangeReturn => {
     const history = useHistory()
     const {
         getActualProducts,
@@ -164,14 +165,19 @@ const useProductEdit = (): UseProductEditReturn => {
         [state]
     )
 
-    const onClickConfirm = useCallback(async () => {
+    const onClickConfirmCreate = useCallback(async () => {
+        await state.create()
+        history.goBack()
+    }, [state, history])
+
+    const onClickConfirmUpdate = useCallback(async () => {
         await state.update()
         history.goBack()
     }, [state, history])
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const fields: EditFormFieldProps[] = useMemo(
+    const fields: CreateFormFieldProps[] = useMemo(
         () => [
             {
                 type: 'dropdown',
@@ -258,40 +264,40 @@ const useProductEdit = (): UseProductEditReturn => {
             }
         ],
         [
-            getActualAttributes,
-            getActualCategories,
-            getActualProducts,
-            getActualStatuses,
-            getAllAttributes,
             getAllProducts,
-            getAllStatuses,
-            onChangeAttributeKey,
-            onChangeAttributeValue,
-            onChangeCategoryIds,
-            onChangeIsDeleted,
-            onChangeIsHidden,
-            onChangeName,
-            onChangeParentProductId,
-            onChangePrice,
-            onChangeStatusId,
-            onChangeType,
-            onChangeVendorCode,
-            onClickAddAttributeItem,
-            onDeleteAttribute,
-            state.product.attributeLinks,
-            state.product.categoryLinks,
-            state.product.isDeleted,
-            state.product.isHidden,
-            state.product.name,
             state.product.parentProductId,
-            state.product.price,
-            state.product.statusId,
             state.product.type,
-            state.product.vendorCode
+            state.product.statusId,
+            state.product.categoryLinks,
+            state.product.name,
+            state.product.vendorCode,
+            state.product.price,
+            state.product.attributeLinks,
+            state.product.isHidden,
+            state.product.isDeleted,
+            getActualProducts,
+            onChangeParentProductId,
+            onChangeType,
+            getAllStatuses,
+            getActualStatuses,
+            onChangeStatusId,
+            getActualCategories,
+            onChangeCategoryIds,
+            onChangeName,
+            onChangeVendorCode,
+            onChangePrice,
+            getActualAttributes,
+            onClickAddAttributeItem,
+            onChangeIsHidden,
+            onChangeIsDeleted,
+            onChangeAttributeKey,
+            getAllAttributes,
+            onChangeAttributeValue,
+            onDeleteAttribute
         ]
     )
 
-    return { fields, isConfirmEnabled, onClickConfirm, onClickCancel }
+    return { fields, isConfirmEnabled, onClickConfirmCreate, onClickConfirmUpdate, onClickCancel }
 }
 
-export default useProductEdit
+export default useProductOnChange

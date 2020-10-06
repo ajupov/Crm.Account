@@ -1,16 +1,16 @@
 import React, { FC } from 'react'
 
 import CreateForm from '../../../../../../components/common/forms/CreateForm/CreateForm'
-import useProductCategoryCreate from './hooks/useProductCategoryCreate'
+import useProductCategoryOnChange from '../../hooks/useProductCategoryOnChange'
 
 const ProductCategoryCreateForm: FC = () => {
-    const { isConfirmEnabled, fields, onClickConfirm, onClickCancel } = useProductCategoryCreate()
+    const { isConfirmEnabled, fields, onClickConfirmCreate, onClickCancel } = useProductCategoryOnChange()
 
     return (
         <CreateForm
             fields={fields}
             isConfirmEnabled={isConfirmEnabled}
-            onClickConfirm={onClickConfirm}
+            onClickConfirm={onClickConfirmCreate}
             onClickCancel={onClickCancel}
         />
     )

@@ -3,13 +3,13 @@ import React, { FC, useContext } from 'react'
 import EditForm from '../../../../../../components/common/forms/EditForm/EditForm'
 import ProductStatusContext from '../../contexts/ProductStatusContext/ProductStatusContext'
 import ProductStatusesRoutes from '../../routes/ProductStatusesRoutes'
-import useProductStatusEdit from './hooks/useProductStatusEdit'
+import useProductStatusOnChange from '../../hooks/useProductStatusOnChange'
 import useProductStatusesActions from '../../contexts/ProductStatusesActionsContext/hooks/useProductStatusesActions'
 
 const ProductStatusEditForm: FC = () => {
     const state = useContext(ProductStatusContext)
     const { isLoading } = useProductStatusesActions()
-    const { fields, isConfirmEnabled, onClickCancel, onClickConfirm } = useProductStatusEdit()
+    const { fields, isConfirmEnabled, onClickConfirmUpdate, onClickCancel } = useProductStatusOnChange()
 
     return state.status.id ? (
         <EditForm
@@ -20,7 +20,7 @@ const ProductStatusEditForm: FC = () => {
             createDate={state.status.createDateTime}
             lastModifyDateTime={state.status.modifyDateTime}
             historyLink={ProductStatusesRoutes.Changes}
-            onClickConfirm={onClickConfirm}
+            onClickConfirm={onClickConfirmUpdate}
             onClickCancel={onClickCancel}
         />
     ) : null

@@ -1,16 +1,16 @@
 import React, { FC } from 'react'
 
 import CreateForm from '../../../../../../components/common/forms/CreateForm/CreateForm'
-import useProductStatusCreate from './hooks/useProductStatusCreate'
+import useProductStatusOnChange from '../../hooks/useProductStatusOnChange'
 
 const ProductStatusCreateForm: FC = () => {
-    const { isConfirmEnabled, fields, onClickConfirm, onClickCancel } = useProductStatusCreate()
+    const { isConfirmEnabled, fields, onClickConfirmCreate, onClickCancel } = useProductStatusOnChange()
 
     return (
         <CreateForm
             fields={fields}
             isConfirmEnabled={isConfirmEnabled}
-            onClickConfirm={onClickConfirm}
+            onClickConfirm={onClickConfirmCreate}
             onClickCancel={onClickCancel}
         />
     )

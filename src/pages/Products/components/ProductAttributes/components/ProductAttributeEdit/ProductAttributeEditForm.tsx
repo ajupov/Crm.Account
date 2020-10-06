@@ -3,13 +3,13 @@ import React, { FC, useContext } from 'react'
 import EditForm from '../../../../../../components/common/forms/EditForm/EditForm'
 import ProductAttributeContext from '../../contexts/ProductAttributeContext/ProductAttributeContext'
 import ProductAttributesRoutes from '../../routes/ProductAttributesRoutes'
-import useProductAttributeEdit from './hooks/useProductAttributeEdit'
+import useProductAttributeOnChange from '../../hooks/useProductAttributeOnChange'
 import useProductAttributesActions from '../../contexts/ProductAttributesActionsContext/hooks/useProductAttributesActions'
 
 const ProductAttributeEditForm: FC = () => {
     const state = useContext(ProductAttributeContext)
     const { isLoading } = useProductAttributesActions()
-    const { fields, isConfirmEnabled, onClickCancel, onClickConfirm } = useProductAttributeEdit()
+    const { fields, isConfirmEnabled, onClickConfirmUpdate, onClickCancel } = useProductAttributeOnChange()
 
     return state.attribute.id ? (
         <EditForm
@@ -20,7 +20,7 @@ const ProductAttributeEditForm: FC = () => {
             createDate={state.attribute.createDateTime}
             lastModifyDateTime={state.attribute.modifyDateTime}
             historyLink={ProductAttributesRoutes.Changes}
-            onClickConfirm={onClickConfirm}
+            onClickConfirm={onClickConfirmUpdate}
             onClickCancel={onClickCancel}
         />
     ) : null

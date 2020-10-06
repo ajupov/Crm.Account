@@ -1,16 +1,16 @@
 import React, { FC } from 'react'
 
 import CreateForm from '../../../../../../components/common/forms/CreateForm/CreateForm'
-import useContactCreate from './hooks/useContactCreate'
+import useContactOnChange from '../../hooks/useContactOnChange'
 
 const ContactCreateForm: FC = () => {
-    const { isConfirmEnabled, fields, onClickConfirm, onClickCancel } = useContactCreate()
+    const { isConfirmEnabled, fields, onClickConfirmCreate, onClickCancel } = useContactOnChange()
 
     return (
         <CreateForm
             fields={fields}
             isConfirmEnabled={isConfirmEnabled}
-            onClickConfirm={onClickConfirm}
+            onClickConfirm={onClickConfirmCreate}
             onClickCancel={onClickCancel}
         />
     )

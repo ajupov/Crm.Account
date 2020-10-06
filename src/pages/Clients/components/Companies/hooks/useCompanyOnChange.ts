@@ -2,25 +2,26 @@ import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import {
     getCompanyIndustryTypeName,
     getCompanyIndustryTypesAsSelectOptions
-} from '../../../helpers/helpers/companyIndustryTypeHelper'
-import { getCompanyTypeName, getCompanyTypesAsSelectOptions } from '../../../helpers/helpers/companyTypeHelper'
+} from '../helpers/helpers/companyIndustryTypeHelper'
+import { getCompanyTypeName, getCompanyTypesAsSelectOptions } from '../helpers/helpers/companyTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import CompanyContext from '../../../contexts/CompanyContext/CompanyContext'
-import CompanyType from '../../../../../../../../api/companies/models/CompanyType'
-import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
-import useCompaniesSelectOptions from '../../../hooks/useCompaniesSelectOptions'
+import CompanyContext from '../contexts/CompanyContext/CompanyContext'
+import CompanyType from '../../../../../../api/companies/models/CompanyType'
+import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
+import useCompaniesSelectOptions from './useCompaniesSelectOptions'
 import { useHistory } from 'react-router'
 
-interface UseCompanyEditReturn {
-    fields: EditFormFieldProps[]
+interface UseCompanyOnChangeReturn {
+    fields: CreateFormFieldProps[]
     isConfirmEnabled: boolean
-    onClickConfirm: () => void
+    onClickConfirmCreate: () => void
+    onClickConfirmUpdate: () => void
     onClickCancel: () => void
 }
 
 // TODO: Move to l10n
-const useCompanyEdit = (): UseCompanyEditReturn => {
+const useCompanyOnChange = (): UseCompanyOnChangeReturn => {
     const history = useHistory()
     const { getActualLeads, getAllLeads, getActualAttributes, getAllAttributes } = useCompaniesSelectOptions()
     const state = useContext(CompanyContext)
@@ -289,14 +290,19 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
         [state]
     )
 
-    const onClickConfirm = useCallback(async () => {
+    const onClickConfirmCreate = useCallback(async () => {
         await state.create()
+        history.goBack()
+    }, [state, history])
+
+    const onClickConfirmUpdate = useCallback(async () => {
+        await state.update()
         history.goBack()
     }, [state, history])
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const fields: EditFormFieldProps[] = useMemo(
+    const fields: CreateFormFieldProps[] = useMemo(
         () => [
             {
                 type: 'dropdown',
@@ -524,72 +530,72 @@ const useCompanyEdit = (): UseCompanyEditReturn => {
             }
         ],
         [
-            getAllLeads,
-            state.company.leadId,
-            state.company.type,
-            state.company.industryType,
-            state.company.fullName,
-            state.company.shortName,
-            state.company.phone,
-            state.company.email,
-            state.company.registrationDate,
-            state.company.employeesCount,
-            state.company.yearlyTurnover,
-            state.company.juridicalPostcode,
-            state.company.juridicalCountry,
-            state.company.juridicalRegion,
-            state.company.juridicalProvince,
-            state.company.juridicalCity,
-            state.company.juridicalStreet,
-            state.company.juridicalHouse,
-            state.company.juridicalApartment,
-            state.company.legalPostcode,
-            state.company.legalCountry,
-            state.company.legalRegion,
-            state.company.legalProvince,
-            state.company.legalCity,
-            state.company.legalStreet,
-            state.company.legalHouse,
-            state.company.legalApartment,
-            state.company.attributeLinks,
-            state.company.isDeleted,
-            getActualLeads,
-            onChangeLeadId,
-            onChangeType,
-            onChangeFullName,
-            onChangeShortName,
-            onChangePhone,
-            onChangeEmail,
-            onChangeRegistrationDate,
-            onChangeEmployeesCount,
-            onChangeYearlyTurnover,
-            onChangeJuridicalPostcode,
-            onChangeJuridicalCountry,
-            onChangeJuridicalRegion,
-            onChangeJuridicalProvince,
-            onChangeJuridicalCity,
-            onChangeJuridicalStreet,
-            onChangeJuridicalHouse,
-            onChangeJuridicalApartment,
-            onChangeLegalPostcode,
-            onChangeLegalCountry,
-            onChangeLegalRegion,
-            onChangeLegalProvince,
-            onChangeLegalCity,
-            onChangeLegalStreet,
-            onChangeLegalHouse,
-            onChangeLegalApartment,
             getActualAttributes,
-            onClickAddAttributeItem,
-            onChangeIsDeleted,
-            onChangeAttributeKey,
+            getActualLeads,
             getAllAttributes,
+            getAllLeads,
+            onChangeAttributeKey,
             onChangeAttributeValue,
-            onDeleteAttribute
+            onChangeEmail,
+            onChangeEmployeesCount,
+            onChangeFullName,
+            onChangeIsDeleted,
+            onChangeJuridicalApartment,
+            onChangeJuridicalCity,
+            onChangeJuridicalCountry,
+            onChangeJuridicalHouse,
+            onChangeJuridicalPostcode,
+            onChangeJuridicalProvince,
+            onChangeJuridicalRegion,
+            onChangeJuridicalStreet,
+            onChangeLeadId,
+            onChangeLegalApartment,
+            onChangeLegalCity,
+            onChangeLegalCountry,
+            onChangeLegalHouse,
+            onChangeLegalPostcode,
+            onChangeLegalProvince,
+            onChangeLegalRegion,
+            onChangeLegalStreet,
+            onChangePhone,
+            onChangeRegistrationDate,
+            onChangeShortName,
+            onChangeType,
+            onChangeYearlyTurnover,
+            onClickAddAttributeItem,
+            onDeleteAttribute,
+            state.company.attributeLinks,
+            state.company.email,
+            state.company.employeesCount,
+            state.company.fullName,
+            state.company.industryType,
+            state.company.isDeleted,
+            state.company.juridicalApartment,
+            state.company.juridicalCity,
+            state.company.juridicalCountry,
+            state.company.juridicalHouse,
+            state.company.juridicalPostcode,
+            state.company.juridicalProvince,
+            state.company.juridicalRegion,
+            state.company.juridicalStreet,
+            state.company.leadId,
+            state.company.legalApartment,
+            state.company.legalCity,
+            state.company.legalCountry,
+            state.company.legalHouse,
+            state.company.legalPostcode,
+            state.company.legalProvince,
+            state.company.legalRegion,
+            state.company.legalStreet,
+            state.company.phone,
+            state.company.registrationDate,
+            state.company.shortName,
+            state.company.type,
+            state.company.yearlyTurnover
         ]
     )
 
-    return { fields, isConfirmEnabled, onClickConfirm, onClickCancel }
+    return { fields, isConfirmEnabled, onClickConfirmCreate, onClickConfirmUpdate, onClickCancel }
 }
 
-export default useCompanyEdit
+export default useCompanyOnChange

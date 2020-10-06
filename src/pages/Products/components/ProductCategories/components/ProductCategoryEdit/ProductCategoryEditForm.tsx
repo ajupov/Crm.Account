@@ -4,12 +4,12 @@ import EditForm from '../../../../../../components/common/forms/EditForm/EditFor
 import ProductCategoriesRoutes from '../../routes/ProductCategoriesRoutes'
 import ProductCategoryContext from '../../contexts/ProductCategoryContext/ProductCategoryContext'
 import useProductCategoriesActions from '../../contexts/ProductCategoriesActionsContext/hooks/useProductCategoriesActions'
-import useProductCategoryEdit from './hooks/useProductCategoryEdit'
+import useProductCategoryOnChange from '../../hooks/useProductCategoryOnChange'
 
 const ProductCategoryEditForm: FC = () => {
     const state = useContext(ProductCategoryContext)
     const { isLoading } = useProductCategoriesActions()
-    const { fields, isConfirmEnabled, onClickCancel, onClickConfirm } = useProductCategoryEdit()
+    const { fields, isConfirmEnabled, onClickConfirmUpdate, onClickCancel } = useProductCategoryOnChange()
 
     return state.category.id ? (
         <EditForm
@@ -20,7 +20,7 @@ const ProductCategoryEditForm: FC = () => {
             createDate={state.category.createDateTime}
             lastModifyDateTime={state.category.modifyDateTime}
             historyLink={ProductCategoriesRoutes.Changes}
-            onClickConfirm={onClickConfirm}
+            onClickConfirm={onClickConfirmUpdate}
             onClickCancel={onClickCancel}
         />
     ) : null

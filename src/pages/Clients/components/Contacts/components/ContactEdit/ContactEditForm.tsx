@@ -3,13 +3,13 @@ import React, { FC, useContext } from 'react'
 import ContactContext from '../../contexts/ContactContext/ContactContext'
 import ContactsRoutes from '../../routes/ContactsRoutes'
 import EditForm from '../../../../../../components/common/forms/EditForm/EditForm'
-import useContactEdit from './hooks/useContactEdit'
+import useContactOnChange from '../../hooks/useContactOnChange'
 import useContactsActions from '../../contexts/ContactsActionsContext/hooks/useContactsActions'
 
 const ContactEditForm: FC = () => {
     const state = useContext(ContactContext)
     const { isLoading } = useContactsActions()
-    const { fields, isConfirmEnabled, onClickCancel, onClickConfirm } = useContactEdit()
+    const { fields, isConfirmEnabled, onClickConfirmUpdate, onClickCancel } = useContactOnChange()
 
     return state.contact.id ? (
         <EditForm
@@ -20,7 +20,7 @@ const ContactEditForm: FC = () => {
             createDate={state.contact.createDateTime}
             lastModifyDateTime={state.contact.modifyDateTime}
             historyLink={ContactsRoutes.Changes}
-            onClickConfirm={onClickConfirm}
+            onClickConfirm={onClickConfirmUpdate}
             onClickCancel={onClickCancel}
         />
     ) : null

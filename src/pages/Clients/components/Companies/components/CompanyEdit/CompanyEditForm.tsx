@@ -4,12 +4,12 @@ import CompaniesRoutes from '../../routes/CompaniesRoutes'
 import CompanyContext from '../../contexts/CompanyContext/CompanyContext'
 import EditForm from '../../../../../../components/common/forms/EditForm/EditForm'
 import useCompaniesActions from '../../contexts/CompaniesActionsContext/hooks/useCompaniesActions'
-import useCompanyEdit from './hooks/useCompanyEdit'
+import useCompanyOnChange from '../../hooks/useCompanyOnChange'
 
 const CompanyEditForm: FC = () => {
     const state = useContext(CompanyContext)
     const { isLoading } = useCompaniesActions()
-    const { fields, isConfirmEnabled, onClickCancel, onClickConfirm } = useCompanyEdit()
+    const { fields, isConfirmEnabled, onClickConfirmUpdate, onClickCancel } = useCompanyOnChange()
 
     return state.company.id ? (
         <EditForm
@@ -20,7 +20,7 @@ const CompanyEditForm: FC = () => {
             createDate={state.company.createDateTime}
             lastModifyDateTime={state.company.modifyDateTime}
             historyLink={CompaniesRoutes.Changes}
-            onClickConfirm={onClickConfirm}
+            onClickConfirm={onClickConfirmUpdate}
             onClickCancel={onClickCancel}
         />
     ) : null

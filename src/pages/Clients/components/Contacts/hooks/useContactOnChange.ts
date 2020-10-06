@@ -1,20 +1,21 @@
 import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import ContactContext from '../../../contexts/ContactContext/ContactContext'
-import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
-import useContactsSelectOptions from '../../../hooks/useContactsSelectOptions'
+import ContactContext from '../contexts/ContactContext/ContactContext'
+import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
+import useContactsSelectOptions from './useContactsSelectOptions'
 import { useHistory } from 'react-router'
 
-interface UseContactEditReturn {
-    fields: EditFormFieldProps[]
+interface UseContactOnChangeReturn {
+    fields: CreateFormFieldProps[]
     isConfirmEnabled: boolean
-    onClickConfirm: () => void
+    onClickConfirmCreate: () => void
+    onClickConfirmUpdate: () => void
     onClickCancel: () => void
 }
 
 // TODO: Move to l10n
-const useContactEdit = (): UseContactEditReturn => {
+const useContactOnChange = (): UseContactOnChangeReturn => {
     const history = useHistory()
     const {
         getActualLeads,
@@ -234,14 +235,19 @@ const useContactEdit = (): UseContactEditReturn => {
         [state]
     )
 
-    const onClickConfirm = useCallback(async () => {
+    const onClickConfirmCreate = useCallback(async () => {
         await state.create()
+        history.goBack()
+    }, [state, history])
+
+    const onClickConfirmUpdate = useCallback(async () => {
+        await state.update()
         history.goBack()
     }, [state, history])
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const fields: EditFormFieldProps[] = useMemo(
+    const fields: CreateFormFieldProps[] = useMemo(
         () => [
             {
                 type: 'dropdown',
@@ -456,7 +462,7 @@ const useContactEdit = (): UseContactEditReturn => {
         ]
     )
 
-    return { fields, isConfirmEnabled, onClickConfirm, onClickCancel }
+    return { fields, isConfirmEnabled, onClickConfirmCreate, onClickConfirmUpdate, onClickCancel }
 }
 
-export default useContactEdit
+export default useContactOnChange

@@ -1,19 +1,20 @@
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { EditFormFieldProps } from '../../../../../../../components/common/forms/EditForm/EditForm'
+import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
 import { InputOnChangeData } from 'semantic-ui-react'
-import ProductStatusContext from '../../../contexts/ProductStatusContext/ProductStatusContext'
+import ProductStatusContext from '../contexts/ProductStatusContext/ProductStatusContext'
 import { useHistory } from 'react-router'
 
-interface UseProductStatusEditReturn {
-    fields: EditFormFieldProps[]
+interface UseProductStatusOnChangeReturn {
+    fields: CreateFormFieldProps[]
     isConfirmEnabled: boolean
-    onClickConfirm: () => void
+    onClickConfirmCreate: () => void
+    onClickConfirmUpdate: () => void
     onClickCancel: () => void
 }
 
 // TODO: Move to l10n
-const useProductStatusEdit = (): UseProductStatusEditReturn => {
+const useProductStatusOnChange = (): UseProductStatusOnChangeReturn => {
     const history = useHistory()
     const state = useContext(ProductStatusContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
@@ -34,14 +35,19 @@ const useProductStatusEdit = (): UseProductStatusEditReturn => {
         [state]
     )
 
-    const onClickConfirm = useCallback(async () => {
+    const onClickConfirmCreate = useCallback(async () => {
+        await state.create()
+        history.goBack()
+    }, [state, history])
+
+    const onClickConfirmUpdate = useCallback(async () => {
         await state.update()
         history.goBack()
     }, [state, history])
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const fields: EditFormFieldProps[] = useMemo(
+    const fields: CreateFormFieldProps[] = useMemo(
         () => [
             {
                 type: 'text',
@@ -60,7 +66,7 @@ const useProductStatusEdit = (): UseProductStatusEditReturn => {
         [onChangeIsDeleted, onChangeName, state.status.isDeleted, state.status.name]
     )
 
-    return { fields, isConfirmEnabled, onClickConfirm, onClickCancel }
+    return { fields, isConfirmEnabled, onClickConfirmCreate, onClickConfirmUpdate, onClickCancel }
 }
 
-export default useProductStatusEdit
+export default useProductStatusOnChange

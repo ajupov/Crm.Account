@@ -1,16 +1,16 @@
 import React, { FC } from 'react'
 
 import CreateForm from '../../../../../../components/common/forms/CreateForm/CreateForm'
-import useCompanyCreate from './hooks/useCompanyCreate'
+import useCompanyOnChange from '../../hooks/useCompanyOnChange'
 
 const CompanyCreateForm: FC = () => {
-    const { isConfirmEnabled, fields, onClickConfirm, onClickCancel } = useCompanyCreate()
+    const { isConfirmEnabled, fields, onClickConfirmCreate, onClickCancel } = useCompanyOnChange()
 
     return (
         <CreateForm
             fields={fields}
             isConfirmEnabled={isConfirmEnabled}
-            onClickConfirm={onClickConfirm}
+            onClickConfirm={onClickConfirmCreate}
             onClickCancel={onClickCancel}
         />
     )

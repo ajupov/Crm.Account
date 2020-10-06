@@ -2,30 +2,31 @@ import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import {
     getAttributeTypeName,
     getAttributeTypesAsSelectOptions
-} from '../../../../../../../helpers/entityAttributeTypeHelper'
+} from '../../../../../helpers/entityAttributeTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import CompanyAttributeContext from '../../../contexts/CompanyAttributeContext/CompanyAttributeContext'
-import CompanyAttributeType from '../../../../../../../../api/companies/models/CompanyAttributeType'
-import { CreateFormFieldProps } from '../../../../../../../components/common/forms/CreateForm/CreateForm'
+import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
+import ProductAttributeContext from '../contexts/ProductAttributeContext/ProductAttributeContext'
+import ProductAttributeType from '../../../../../../api/products/models/ProductAttributeType'
 import { useHistory } from 'react-router'
 
-interface UseCompanyAttributeCreateReturn {
+interface UseProductAttributeOnChangeReturn {
     fields: CreateFormFieldProps[]
     isConfirmEnabled: boolean
-    onClickConfirm: () => void
+    onClickConfirmCreate: () => void
+    onClickConfirmUpdate: () => void
     onClickCancel: () => void
 }
 
 // TODO: Move to l10n
-const useCompanyAttributeCreate = (): UseCompanyAttributeCreateReturn => {
+const useProductAttributeOnChange = (): UseProductAttributeOnChangeReturn => {
     const history = useHistory()
-    const state = useContext(CompanyAttributeContext)
+    const state = useContext(ProductAttributeContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeType = useCallback(
         (_, data: DropdownProps) => {
-            state.setAttribute({ ...state.attribute, type: data.value as CompanyAttributeType })
+            state.setAttribute({ ...state.attribute, type: data.value as ProductAttributeType })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -47,8 +48,13 @@ const useCompanyAttributeCreate = (): UseCompanyAttributeCreateReturn => {
         [state]
     )
 
-    const onClickConfirm = useCallback(async () => {
+    const onClickConfirmCreate = useCallback(async () => {
         await state.create()
+        history.goBack()
+    }, [state, history])
+
+    const onClickConfirmUpdate = useCallback(async () => {
+        await state.update()
         history.goBack()
     }, [state, history])
 
@@ -89,7 +95,7 @@ const useCompanyAttributeCreate = (): UseCompanyAttributeCreateReturn => {
         ]
     )
 
-    return { fields, isConfirmEnabled, onClickConfirm, onClickCancel }
+    return { fields, isConfirmEnabled, onClickConfirmCreate, onClickConfirmUpdate, onClickCancel }
 }
 
-export default useCompanyAttributeCreate
+export default useProductAttributeOnChange

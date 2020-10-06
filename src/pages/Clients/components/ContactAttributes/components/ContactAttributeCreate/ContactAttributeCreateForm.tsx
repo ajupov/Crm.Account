@@ -1,16 +1,16 @@
 import React, { FC } from 'react'
 
 import CreateForm from '../../../../../../components/common/forms/CreateForm/CreateForm'
-import useContactAttributeCreate from './hooks/useContactAttributeCreate'
+import useContactAttributeOnChange from '../../hooks/useContactAttributeOnChange'
 
 const ContactAttributeCreateForm: FC = () => {
-    const { isConfirmEnabled, fields, onClickConfirm, onClickCancel } = useContactAttributeCreate()
+    const { isConfirmEnabled, fields, onClickConfirmCreate, onClickCancel } = useContactAttributeOnChange()
 
     return (
         <CreateForm
             fields={fields}
             isConfirmEnabled={isConfirmEnabled}
-            onClickConfirm={onClickConfirm}
+            onClickConfirm={onClickConfirmCreate}
             onClickCancel={onClickCancel}
         />
     )
