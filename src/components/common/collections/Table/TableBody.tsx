@@ -76,7 +76,7 @@ const TableBody: FC<TableBodyProps> = ({ rows, hasActions }) => {
                             {renderCellValue(cell)}
                         </Link>
                     ) : (
-                        renderCellValue(cell)
+                        <div style={{ padding: '10px' }}>{renderCellValue(cell)}</div>
                     )}
                 </Table.Cell>
             )),

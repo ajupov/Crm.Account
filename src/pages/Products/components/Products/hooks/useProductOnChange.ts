@@ -181,7 +181,6 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
         () => [
             {
                 type: 'dropdown',
-                required: true,
                 label: 'Родительский продукт',
                 text: getAllProducts().find(x => x.value === state.product.parentProductId)?.text,
                 value: state.product.parentProductId,
@@ -209,7 +208,6 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
             {
                 type: 'dropdown',
                 multiple: true,
-                required: true,
                 label: 'Категории',
                 value: state.product.categoryLinks?.map(x => x.productCategoryId ?? ''),
                 options: getActualCategories(),
@@ -224,13 +222,13 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
             },
             {
                 type: 'text',
+                required: true,
                 topLabel: 'Артикул',
                 value: state.product.vendorCode,
                 onChange: onChangeVendorCode
             },
             {
                 type: 'number',
-                required: true,
                 topLabel: 'Цена',
                 value: state.product.price,
                 onChange: onChangePrice
