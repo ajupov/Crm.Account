@@ -10,7 +10,6 @@ interface TableBodyCellProps {
 
 export interface TableBodyRowProps {
     id?: string
-    height?: number
     isDeleted?: boolean
     cells: TableBodyCellProps[]
     viewLink?: string
@@ -63,21 +62,18 @@ const TableBody: FC<TableBodyProps> = ({ rows, hasActions }) => {
     const renderCells = useCallback(
         (row: TableBodyRowProps) =>
             row.cells.map((cell, index) => (
-                <Table.Cell key={index} style={{ height: row.height ?? '100px' }}>
+                <Table.Cell key={index} style={{ padding: 0 }}>
                     {row.id && row.viewLink ? (
                         <Link
                             to={`${row.viewLink}/${row.id}`}
                             style={{
                                 color: 'rgba(0, 0, 0, 0.87)',
                                 display: 'block',
-                                height: '100%',
                                 textAlign: cell.textAlign ?? 'left',
-                                position: 'relative'
+                                padding: '10px'
                             }}
                         >
-                            <div style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)' }}>
-                                {renderCellValue(cell)}
-                            </div>
+                            {renderCellValue(cell)}
                         </Link>
                     ) : (
                         renderCellValue(cell)
