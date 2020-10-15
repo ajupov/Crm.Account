@@ -6,7 +6,7 @@ export interface DateInputProps {
     required?: boolean
     topLabel?: string
     value?: string
-    onChange: (_: any, { value }: InputOnChangeData) => void
+    onChange: (_: any, data: InputOnChangeData) => void
 }
 
 const DateInput: FC<DateInputProps> = ({ required, topLabel, value, onChange }) => (

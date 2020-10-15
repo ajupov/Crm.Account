@@ -9,8 +9,8 @@ export interface DateInputRangeProps {
     label2?: string
     value1?: string
     value2?: string
-    onChange1?: (_: any, { value }: InputOnChangeData) => void
-    onChange2?: (_: any, { value }: InputOnChangeData) => void
+    onChange1?: (_: any, data: InputOnChangeData) => void
+    onChange2?: (_: any, data: InputOnChangeData) => void
 }
 
 // TODO: Move to l10n

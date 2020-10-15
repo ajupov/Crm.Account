@@ -39,8 +39,8 @@ const AttributeLinks: FC<AttributeLinksProps> = ({ options, items, onClickAddIte
     )
 
     const _onChangeKey = useCallback(
-        (item: AttributeLinksItemProps) => (event: React.SyntheticEvent, { value }: DropdownProps) => {
-            item.onChangeKey(item.index, value as string)
+        (item: AttributeLinksItemProps) => (event: React.SyntheticEvent, data: DropdownProps) => {
+            item.onChangeKey(item.index, data.value as string)
 
             event.stopPropagation()
             event.preventDefault()
@@ -49,8 +49,8 @@ const AttributeLinks: FC<AttributeLinksProps> = ({ options, items, onClickAddIte
     )
 
     const _onChangeValue = useCallback(
-        (item: AttributeLinksItemProps) => (_: any, { value }: InputOnChangeData) => {
-            item.onChangeValue(item.index, value)
+        (item: AttributeLinksItemProps) => (_: any, data: InputOnChangeData) => {
+            item.onChangeValue(item.index, data.value)
         },
         []
     )

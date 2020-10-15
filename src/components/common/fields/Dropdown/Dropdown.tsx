@@ -14,7 +14,7 @@ export interface DropdownProps {
     value?: number | string | (number | string)[]
     text?: string
     options: DropdownItemProps[]
-    onChange: (_: any, { value }: SemanticDropdownProps) => void
+    onChange: (_: any, data: SemanticDropdownProps) => void
 }
 
 const MaxDropdownOptionsCountWithoutSearch = 5

@@ -6,7 +6,7 @@ export interface TextInputProps {
     required?: boolean
     topLabel?: string
     value?: string
-    onChange?: (_: any, { value }: InputOnChangeData) => void
+    onChange?: (_: any, data: InputOnChangeData) => void
 }
 
 const TextInput: FC<TextInputProps> = ({ required, topLabel, value, onChange }) => (

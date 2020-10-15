@@ -31,8 +31,8 @@ const useProductsFilters = (): ProductsFiltersState => {
     const [isResetEnabled, setIsResetEnabled] = useState(productsFiltersInitialState.isResetEnabled)
     const [isShowMobile, setIsShowMobile] = useState(productsFiltersInitialState.isShowMobile)
 
-    const onChangeType = useCallback((_: any, { value }: CheckboxProps) => {
-        setType(value as ProductType)
+    const onChangeType = useCallback((_: any, data: CheckboxProps) => {
+        setType(data.value as ProductType)
     }, [])
 
     const onChangeStatusIds = useCallback((_: any, data: DropdownProps) => {
@@ -65,8 +65,8 @@ const useProductsFilters = (): ProductsFiltersState => {
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeAttributeIds = useCallback((_: any, { value }) => {
-        setAttributeIds(arrayToDictionary(value as string[]))
+    const onChangeAttributeIds = useCallback((_: any, data: DropdownProps) => {
+        setAttributeIds(arrayToDictionary(data.value as string[]))
         setIsApplyEnabled(true)
     }, [])
 

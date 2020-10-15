@@ -56,10 +56,10 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
     )
 
     const onChangeCategoryIds = useCallback(
-        (_, { value }) => {
+        (_, data: DropdownProps) => {
             state.setProduct({
                 ...state.product,
-                categoryLinks: (value as string[]).map(x => ({
+                categoryLinks: (data.value as string[]).map(x => ({
                     id: '',
                     productId: state.product.id,
                     productCategoryId: x

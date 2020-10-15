@@ -14,7 +14,7 @@ export interface RadioGroupProps {
     checked1?: boolean
     checked2?: boolean
     checked3?: boolean
-    onChange: (_: any, { value }: CheckboxProps) => void
+    onChange: (_: any, data: CheckboxProps) => void
 }
 
 const RadioGroup: FC<RadioGroupProps> = ({

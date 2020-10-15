@@ -1,4 +1,4 @@
-import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
+import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import ProductAttributesFiltersState, {
     productAttributesFiltersInitialState
 } from '../../../states/ProductAttributesFiltersState'
@@ -23,13 +23,13 @@ const useProductAttributesFilters = (): ProductAttributesFiltersState => {
     const [isResetEnabled, setIsResetEnabled] = useState(productAttributesFiltersInitialState.isResetEnabled)
     const [isShowMobile, setIsShowMobile] = useState(productAttributesFiltersInitialState.isShowMobile)
 
-    const onChangeTypes = useCallback((_: any, { value }) => {
-        setTypes(value as [])
+    const onChangeTypes = useCallback((_: any, data: DropdownProps) => {
+        setTypes(data.value as [])
         setIsApplyEnabled(true)
     }, [])
 
-    const onChangeKey = useCallback((_, { value }) => {
-        setKey(value)
+    const onChangeKey = useCallback((_, data: InputOnChangeData) => {
+        setKey(data.value)
         setIsApplyEnabled(true)
     }, [])
 

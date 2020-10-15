@@ -5,7 +5,7 @@ export interface CheckboxProps {
     type: 'checkbox'
     label?: string
     checked: boolean
-    onChange: (_: any, { value }: SemanticCheckboxProps) => void
+    onChange: (_: any, data: SemanticCheckboxProps) => void
 }
 
 const Checkbox: FC<CheckboxProps> = ({ label, checked, onChange }) => (

@@ -12,8 +12,8 @@ export interface NumberInputRangeProps {
     precession?: number
     min?: number
     max?: number
-    onChange1?: (_: any, { value }: InputOnChangeData) => void
-    onChange2?: (_: any, { value }: InputOnChangeData) => void
+    onChange1?: (_: any, data: InputOnChangeData) => void
+    onChange2?: (_: any, data: InputOnChangeData) => void
 }
 
 const MaxIntValue = 2147483647

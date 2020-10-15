@@ -9,7 +9,7 @@ export interface NumberInputProps {
     precession?: number
     min?: number
     max?: number
-    onChange?: (_: any, { value }: InputOnChangeData) => void
+    onChange?: (_: any, data: InputOnChangeData) => void
 }
 
 const NumberInput: FC<NumberInputProps> = ({ required, topLabel, value, precession, min, max, onChange }) => (

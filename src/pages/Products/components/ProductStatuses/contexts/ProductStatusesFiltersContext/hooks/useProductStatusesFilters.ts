@@ -21,8 +21,8 @@ const useProductStatusesFilters = (): ProductStatusesFiltersState => {
     const [isResetEnabled, setIsResetEnabled] = useState(productStatusesFiltersInitialState.isResetEnabled)
     const [isShowMobile, setIsShowMobile] = useState(productStatusesFiltersInitialState.isShowMobile)
 
-    const onChangeName = useCallback((_, { value }) => {
-        setName(value)
+    const onChangeName = useCallback((_, data: InputOnChangeData) => {
+        setName(data.value)
         setIsApplyEnabled(true)
     }, [])
 
