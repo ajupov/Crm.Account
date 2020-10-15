@@ -1,3 +1,4 @@
+import Autocomplete, { AutocompleteProps } from '../../fields/Autocomplete/Autocomplete'
 import { Button, Form, Header } from 'semantic-ui-react'
 import DateInputRange, { DateInputRangeProps } from '../../fields/DateInputRange/DateInputRange'
 import Dropdown, { DropdownProps } from '../../fields/Dropdown/Dropdown'
@@ -12,6 +13,7 @@ export type FilterFormFieldProps =
     | DateInputRangeProps
     | RadioGroupProps
     | DropdownProps
+    | AutocompleteProps
 
 export interface FilterFormProps {
     fields: FilterFormFieldProps[]
@@ -37,6 +39,8 @@ const FilterForm: FC<FilterFormProps> = ({ fields, isApplyEnabled, onApply, isRe
                         return <RadioGroup {...x} key={x.topLabel ?? x.label1} />
                     case 'dropdown':
                         return <Dropdown {...x} key={x.label} />
+                    case 'autocomplete':
+                        return <Autocomplete {...x} key={x.label} />
                 }
             }),
         [fields]

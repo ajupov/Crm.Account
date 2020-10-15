@@ -50,7 +50,8 @@ const Leads: FC = () => {
             <h1>Лиды</h1>
             <Autocomplete
                 required
-                label={'Афтокомплит'}
+                type="autocomplete"
+                label="Афтокомплит"
                 load={load}
                 options={options}
                 onChange={onChange}

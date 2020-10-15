@@ -7,7 +7,7 @@ export interface AutocompleteItemProps {
 }
 
 export interface AutocompleteProps {
-    // type: 'autocomplete'
+    type: 'autocomplete'
     required?: boolean
     multiple?: boolean
     label: string

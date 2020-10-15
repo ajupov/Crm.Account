@@ -17,6 +17,7 @@ const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryIns
 const productAttributesClient = new ProductAttributesClient(HttpClientFactoryInstance.Api)
 
 interface UseProductsSelectOptionsReturn {
+    loadStatuses: (value?: string) => Promise<void>
     getActualProducts: () => DropdownItemProps[]
     getAllProducts: () => DropdownItemProps[]
     getActualStatuses: () => DropdownItemProps[]
@@ -55,10 +56,12 @@ const useProductsSelectOptions = (): UseProductsSelectOptionsReturn => {
         setProducts(response.products ?? [])
     }, [])
 
-    const getStatuses = useCallback(async () => {
+    const loadStatuses = useCallback(async (value?: string) => {
         const response = await productStatusesClient.GetPagedListAsync({
+            name: value,
             sortBy: 'Name',
             orderBy: 'asc',
+            isDeleted: false,
             offset: 0,
             limit: MaxLimit
         })
@@ -120,12 +123,13 @@ const useProductsSelectOptions = (): UseProductsSelectOptionsReturn => {
 
     useEffect(() => {
         void getProducts()
-        void getStatuses()
+        // void getStatuses()
         void getCategories()
         void getAttributes()
-    }, [getAttributes, getCategories, getProducts, getStatuses])
+    }, [getAttributes, getCategories, getProducts])
 
     return {
+        loadStatuses,
         getActualProducts,
         getAllProducts,
         getActualStatuses,

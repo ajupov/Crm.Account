@@ -12,7 +12,7 @@ import useProductsSelectOptions from '../../../hooks/useProductsSelectOptions'
 // TODO: Move to l10n
 const useProductsFilters = (): ProductsFiltersState => {
     const state = useContext(ProductsContext)
-    const { getActualStatuses, getActualCategories, getActualAttributes } = useProductsSelectOptions()
+    const { loadStatuses, getActualStatuses, getActualCategories, getActualAttributes } = useProductsSelectOptions()
     const [type, setType] = useState(state.request.types?.[0] ?? ProductType.Material)
     const [statusIds, setStatusIds] = useState(state.request.statusIds ?? [])
     const [categoryIds, setCategoryIds] = useState(state.request.categoryIds ?? [])
@@ -208,11 +208,20 @@ const useProductsFilters = (): ProductsFiltersState => {
                     })
                 }
             },
+            // {
+            //     type: 'dropdown',
+            //     multiple: true,
+            //     label: 'Статус',
+            //     value: statusIds,
+            //     options: getActualStatuses(),
+            //     onChange: onChangeStatusIds
+            // },
             {
-                type: 'dropdown',
+                type: 'autocomplete',
                 multiple: true,
                 label: 'Статус',
                 value: statusIds,
+                load: loadStatuses,
                 options: getActualStatuses(),
                 onChange: onChangeStatusIds
             },
@@ -302,6 +311,7 @@ const useProductsFilters = (): ProductsFiltersState => {
             getActualStatuses,
             isDeleted,
             isHidden,
+            loadStatuses,
             maxCreateDate,
             maxModifyDate,
             maxPrice,
