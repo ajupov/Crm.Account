@@ -6,7 +6,10 @@ import { CreateFormFieldProps } from '../../../../../components/common/forms/Cre
 import ProductContext from '../contexts/ProductContext/ProductContext'
 import ProductType from '../../../../../../api/products/models/ProductType'
 import { useHistory } from 'react-router'
-import useProductsSelectOptions from './useProductsSelectOptions'
+import useProductAttributesAutocompleteOptions from './autocomplete/useProductAttributesAutocompleteOptions'
+import useProductCategoriesAutocompleteOptions from './autocomplete/useProductCategoriesAutocompleteOptions'
+import useProductStatusesAutocompleteOptions from './autocomplete/useProductStatusesAutocompleteOptions'
+import useProductsAutocompleteOptions from './autocomplete/useProductsAutocompleteOptions'
 
 interface UseProductOnChangeReturn {
     fields: CreateFormFieldProps[]
@@ -19,15 +22,11 @@ interface UseProductOnChangeReturn {
 // TODO: Move to l10n
 const useProductOnChange = (): UseProductOnChangeReturn => {
     const history = useHistory()
-    const {
-        getActualProducts,
-        getAllProducts,
-        getActualStatuses,
-        getAllStatuses,
-        getActualCategories,
-        getActualAttributes,
-        getAllAttributes
-    } = useProductsSelectOptions()
+    const { loadActualProducts, actualProductsAsOptions } = useProductsAutocompleteOptions()
+    const { loadActualStatuses, actualStatusesAsOptions } = useProductStatusesAutocompleteOptions()
+    const { loadActualCategories, actualCategoriesAsOptions } = useProductCategoriesAutocompleteOptions()
+    const { actualAttributesAsOptions } = useProductAttributesAutocompleteOptions()
+
     const state = useContext(ProductContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
@@ -180,11 +179,11 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
     const fields: CreateFormFieldProps[] = useMemo(
         () => [
             {
-                type: 'dropdown',
+                type: 'autocomplete',
                 label: 'Родительский продукт',
-                text: getAllProducts().find(x => x.value === state.product.parentProductId)?.text,
                 value: state.product.parentProductId,
-                options: getActualProducts(),
+                load: loadActualProducts,
+                options: actualProductsAsOptions,
                 onChange: onChangeParentProductId
             },
             {
@@ -197,20 +196,21 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
                 onChange: onChangeType
             },
             {
-                type: 'dropdown',
+                type: 'autocomplete',
                 required: true,
                 label: 'Статус',
-                text: getAllStatuses().find(x => x.value === state.product.statusId)?.text,
                 value: state.product.statusId,
-                options: getActualStatuses(),
+                load: loadActualStatuses,
+                options: actualStatusesAsOptions,
                 onChange: onChangeStatusId
             },
             {
-                type: 'dropdown',
+                type: 'autocomplete',
                 multiple: true,
                 label: 'Категории',
                 value: state.product.categoryLinks?.map(x => x.productCategoryId ?? ''),
-                options: getActualCategories(),
+                load: loadActualCategories,
+                options: actualCategoriesAsOptions,
                 onChange: onChangeCategoryIds
             },
             {
@@ -236,13 +236,13 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
             {
                 type: 'attributes',
                 label: 'Атрибуты',
-                options: getActualAttributes(),
+                options: actualAttributesAsOptions,
                 items: state.product.attributeLinks?.map((x, i) => ({
                     index: i,
                     key: x.productAttributeId ?? '',
                     onChangeKey: onChangeAttributeKey,
                     value: x.value ?? '',
-                    text: getAllAttributes().find(a => a.value === x.productAttributeId)?.text,
+                    text: actualAttributesAsOptions.find(a => a.value === x.productAttributeId)?.text,
                     onChangeValue: onChangeAttributeValue,
                     onClickDelete: onDeleteAttribute
                 })),
@@ -262,7 +262,6 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
             }
         ],
         [
-            getAllProducts,
             state.product.parentProductId,
             state.product.type,
             state.product.statusId,
@@ -273,23 +272,24 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
             state.product.attributeLinks,
             state.product.isHidden,
             state.product.isDeleted,
-            getActualProducts,
+            loadActualProducts,
+            actualProductsAsOptions,
             onChangeParentProductId,
             onChangeType,
-            getAllStatuses,
-            getActualStatuses,
+            loadActualStatuses,
+            actualStatusesAsOptions,
             onChangeStatusId,
-            getActualCategories,
+            loadActualCategories,
+            actualCategoriesAsOptions,
             onChangeCategoryIds,
             onChangeName,
             onChangeVendorCode,
             onChangePrice,
-            getActualAttributes,
+            actualAttributesAsOptions,
             onClickAddAttributeItem,
             onChangeIsHidden,
             onChangeIsDeleted,
             onChangeAttributeKey,
-            getAllAttributes,
             onChangeAttributeValue,
             onDeleteAttribute
         ]

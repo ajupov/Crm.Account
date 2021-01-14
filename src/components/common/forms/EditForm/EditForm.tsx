@@ -1,6 +1,7 @@
 import AttributeLinksGroup, {
     AttributesLinksGroupProps
 } from '../../fields/AttributesLinksGroupProps/AttributeLinksGroup'
+import Autocomplete, { AutocompleteProps } from '../../fields/Autocomplete/Autocomplete'
 import { Button, Card, Form, Icon } from 'semantic-ui-react'
 import Checkbox, { CheckboxProps } from '../../fields/Checkbox/Checkbox'
 import DateInput, { DateInputProps } from '../../fields/DateInput/DateInput'
@@ -21,6 +22,7 @@ export type EditFormFieldProps =
     | CheckboxProps
     | DropdownProps
     | AttributesLinksGroupProps
+    | AutocompleteProps
 
 export interface EditFormProps {
     id: string
@@ -62,6 +64,8 @@ const EditForm: FC<EditFormProps> = ({
                         return <Dropdown {...x} key={x.label} />
                     case 'attributes':
                         return <AttributeLinksGroup {...x} key={x.label} />
+                    case 'autocomplete':
+                        return <Autocomplete {...x} key={x.label} />
                 }
             }),
         [fields]

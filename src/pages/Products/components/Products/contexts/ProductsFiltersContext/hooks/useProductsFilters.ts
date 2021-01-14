@@ -7,12 +7,16 @@ import { FilterFormFieldProps } from '../../../../../../../components/common/for
 import ProductType from '../../../../../../../../api/products/models/ProductType'
 import ProductsContext from '../../ProductsContext/ProductsContext'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
-import useProductsSelectOptions from '../../../hooks/useProductsSelectOptions'
+import useProductAttributesAutocompleteOptions from '../../../hooks/autocomplete/useProductAttributesAutocompleteOptions'
+import useProductCategoriesAutocompleteOptions from '../../../hooks/autocomplete/useProductCategoriesAutocompleteOptions'
+import useProductStatusesAutocompleteOptions from '../../../hooks/autocomplete/useProductStatusesAutocompleteOptions'
 
 // TODO: Move to l10n
 const useProductsFilters = (): ProductsFiltersState => {
     const state = useContext(ProductsContext)
-    const { loadStatuses, getActualStatuses, getActualCategories, getActualAttributes } = useProductsSelectOptions()
+    const { loadActualStatuses, actualStatusesAsOptions } = useProductStatusesAutocompleteOptions()
+    const { loadActualCategories, actualCategoriesAsOptions } = useProductCategoriesAutocompleteOptions()
+    const { loadActualAttributes, actualAttributesAsOptions } = useProductAttributesAutocompleteOptions()
     const [type, setType] = useState(state.request.types?.[0] ?? ProductType.Material)
     const [statusIds, setStatusIds] = useState(state.request.statusIds ?? [])
     const [categoryIds, setCategoryIds] = useState(state.request.categoryIds ?? [])
@@ -208,29 +212,22 @@ const useProductsFilters = (): ProductsFiltersState => {
                     })
                 }
             },
-            // {
-            //     type: 'dropdown',
-            //     multiple: true,
-            //     label: 'Статус',
-            //     value: statusIds,
-            //     options: getActualStatuses(),
-            //     onChange: onChangeStatusIds
-            // },
             {
                 type: 'autocomplete',
                 multiple: true,
                 label: 'Статус',
                 value: statusIds,
-                load: loadStatuses,
-                options: getActualStatuses(),
+                load: loadActualStatuses,
+                options: actualStatusesAsOptions,
                 onChange: onChangeStatusIds
             },
             {
-                type: 'dropdown',
+                type: 'autocomplete',
                 label: 'Категория',
                 multiple: true,
                 value: categoryIds,
-                options: getActualCategories(),
+                load: loadActualCategories,
+                options: actualCategoriesAsOptions,
                 onChange: onChangeCategoryIds
             },
             {
@@ -254,11 +251,12 @@ const useProductsFilters = (): ProductsFiltersState => {
                 onChange2: onChangeMaxPrice
             },
             {
-                type: 'dropdown',
+                type: 'autocomplete',
                 multiple: true,
                 label: 'Атрибуты',
                 value: dictionaryToArray(attributeIds),
-                options: getActualAttributes(),
+                load: loadActualAttributes,
+                options: actualAttributesAsOptions,
                 onChange: onChangeAttributeIds
             },
             {
@@ -304,39 +302,41 @@ const useProductsFilters = (): ProductsFiltersState => {
             }
         ],
         [
-            attributeIds,
-            categoryIds,
-            getActualAttributes,
-            getActualCategories,
-            getActualStatuses,
-            isDeleted,
-            isHidden,
-            loadStatuses,
-            maxCreateDate,
-            maxModifyDate,
-            maxPrice,
-            minCreateDate,
-            minModifyDate,
-            minPrice,
-            name,
-            onChangeAttributeIds,
-            onChangeCategoryIds,
-            onChangeIsDeleted,
-            onChangeIsHidden,
-            onChangeMaxCreateDate,
-            onChangeMaxModifyDate,
-            onChangeMaxPrice,
-            onChangeMinCreateDate,
-            onChangeMinModifyDate,
-            onChangeMinPrice,
-            onChangeName,
-            onChangeStatusIds,
-            onChangeType,
-            onChangeVendorCode,
-            state,
-            statusIds,
             type,
-            vendorCode
+            statusIds,
+            loadActualStatuses,
+            actualStatusesAsOptions,
+            onChangeStatusIds,
+            categoryIds,
+            loadActualCategories,
+            actualCategoriesAsOptions,
+            onChangeCategoryIds,
+            name,
+            onChangeName,
+            vendorCode,
+            onChangeVendorCode,
+            minPrice,
+            onChangeMinPrice,
+            maxPrice,
+            onChangeMaxPrice,
+            attributeIds,
+            loadActualAttributes,
+            actualAttributesAsOptions,
+            onChangeAttributeIds,
+            isHidden,
+            onChangeIsHidden,
+            minCreateDate,
+            onChangeMinCreateDate,
+            maxCreateDate,
+            onChangeMaxCreateDate,
+            minModifyDate,
+            onChangeMinModifyDate,
+            maxModifyDate,
+            onChangeMaxModifyDate,
+            isDeleted,
+            onChangeIsDeleted,
+            onChangeType,
+            state
         ]
     )
 

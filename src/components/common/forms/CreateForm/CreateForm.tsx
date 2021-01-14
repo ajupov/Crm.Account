@@ -1,6 +1,7 @@
 import AttributeLinksGroup, {
     AttributesLinksGroupProps
 } from '../../fields/AttributesLinksGroupProps/AttributeLinksGroup'
+import Autocomplete, { AutocompleteProps } from '../../fields/Autocomplete/Autocomplete'
 import { Button, Form, Icon } from 'semantic-ui-react'
 import Checkbox, { CheckboxProps } from '../../fields/Checkbox/Checkbox'
 import DateInput, { DateInputProps } from '../../fields/DateInput/DateInput'
@@ -18,6 +19,7 @@ export type CreateFormFieldProps =
     | CheckboxProps
     | DropdownProps
     | AttributesLinksGroupProps
+    | AutocompleteProps
 
 export interface CreateFormProps {
     fields: CreateFormFieldProps[]
@@ -44,6 +46,8 @@ const CreateForm: FC<CreateFormProps> = ({ fields, isConfirmEnabled, onClickConf
                         return <Dropdown {...x} key={x.label} />
                     case 'attributes':
                         return <AttributeLinksGroup {...x} key={x.label} />
+                    case 'autocomplete':
+                        return <Autocomplete {...x} key={x.label} />
                 }
             }),
         [fields]
