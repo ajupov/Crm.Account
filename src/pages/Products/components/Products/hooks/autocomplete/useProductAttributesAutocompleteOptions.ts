@@ -20,7 +20,7 @@ const useProductAttributesAutocompleteOptions = (): UseProductAttributesAutocomp
     const loadActualAttributes = useCallback(async (value?: string) => {
         const response = await productAttributesClient.GetPagedListAsync({
             key: value,
-            sortBy: 'Name',
+            sortBy: 'Key',
             orderBy: 'asc',
             isDeleted: false,
             offset: 0,

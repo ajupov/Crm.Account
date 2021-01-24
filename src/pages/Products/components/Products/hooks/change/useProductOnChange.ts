@@ -1,15 +1,17 @@
 import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
-import { getProductTypeName, getProductTypesAsSelectOptions } from '../helpers/productTypeHelper'
+import { getProductTypeName, getProductTypesAsSelectOptions } from '../../helpers/productTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
-import ProductContext from '../contexts/ProductContext/ProductContext'
-import ProductType from '../../../../../../api/products/models/ProductType'
+import { CreateFormFieldProps } from '../../../../../../components/common/forms/CreateForm/CreateForm'
+import ProductContext from '../../contexts/ProductContext/ProductContext'
+import ProductType from '../../../../../../../api/products/models/ProductType'
 import { useHistory } from 'react-router'
-import useProductAttributesAutocompleteOptions from './autocomplete/useProductAttributesAutocompleteOptions'
-import useProductCategoriesAutocompleteOptions from './autocomplete/useProductCategoriesAutocompleteOptions'
-import useProductStatusesAutocompleteOptions from './autocomplete/useProductStatusesAutocompleteOptions'
-import useProductsAutocompleteOptions from './autocomplete/useProductsAutocompleteOptions'
+import useProductAttributesAutocompleteOptions from '../autocomplete/useProductAttributesAutocompleteOptions'
+import useProductCategories from '../load/useProductCategories'
+import useProductCategoriesAutocompleteOptions from '../autocomplete/useProductCategoriesAutocompleteOptions'
+import useProductStatus from '../load/useProductStatus'
+import useProductStatusesAutocompleteOptions from '../autocomplete/useProductStatusesAutocompleteOptions'
+import useProductsAutocompleteOptions from '../autocomplete/useProductsAutocompleteOptions'
 
 interface UseProductOnChangeReturn {
     fields: CreateFormFieldProps[]
@@ -28,6 +30,9 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
     const { actualAttributesAsOptions } = useProductAttributesAutocompleteOptions()
 
     const state = useContext(ProductContext)
+    const { productStatusName } = useProductStatus(state.product.statusId)
+    const { productCategoriesAsOptions } = useProductCategories(state.product.categoryLinks ?? [])
+
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeParentProductId = useCallback(
@@ -116,13 +121,13 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
                 return
             }
 
-            const neww = [...state.product.attributeLinks]
+            const attributeLinks = [...state.product.attributeLinks]
 
-            neww[index].value = value
+            attributeLinks[index].value = value
 
             state.setProduct({
                 ...state.product,
-                attributeLinks: neww
+                attributeLinks
             })
 
             setIsConfirmEnabled(true)
@@ -151,14 +156,6 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
     const onChangeIsHidden = useCallback(
         (_, __) => {
             state.setProduct({ ...state.product, isHidden: !state.product.isHidden })
-            setIsConfirmEnabled(true)
-        },
-        [state]
-    )
-
-    const onChangeIsDeleted = useCallback(
-        (_, __) => {
-            state.setProduct({ ...state.product, isDeleted: !state.product.isDeleted })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -200,6 +197,7 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
                 required: true,
                 label: 'Статус',
                 value: state.product.statusId,
+                text: productStatusName,
                 load: loadActualStatuses,
                 options: actualStatusesAsOptions,
                 onChange: onChangeStatusId
@@ -210,7 +208,9 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
                 label: 'Категории',
                 value: state.product.categoryLinks?.map(x => x.productCategoryId ?? ''),
                 load: loadActualCategories,
-                options: actualCategoriesAsOptions,
+                options:
+                    actualCategoriesAsOptions.length > 0 ? actualCategoriesAsOptions : productCategoriesAsOptions ?? [],
+
                 onChange: onChangeCategoryIds
             },
             {
@@ -253,12 +253,6 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
                 label: 'Черновик',
                 checked: state.product.isHidden,
                 onChange: onChangeIsHidden
-            },
-            {
-                type: 'checkbox',
-                label: 'Удален',
-                checked: state.product.isDeleted,
-                onChange: onChangeIsDeleted
             }
         ],
         [
@@ -271,16 +265,17 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
             state.product.price,
             state.product.attributeLinks,
             state.product.isHidden,
-            state.product.isDeleted,
             loadActualProducts,
             actualProductsAsOptions,
             onChangeParentProductId,
             onChangeType,
+            productStatusName,
             loadActualStatuses,
             actualStatusesAsOptions,
             onChangeStatusId,
             loadActualCategories,
             actualCategoriesAsOptions,
+            productCategoriesAsOptions,
             onChangeCategoryIds,
             onChangeName,
             onChangeVendorCode,
@@ -288,7 +283,6 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
             actualAttributesAsOptions,
             onClickAddAttributeItem,
             onChangeIsHidden,
-            onChangeIsDeleted,
             onChangeAttributeKey,
             onChangeAttributeValue,
             onDeleteAttribute
