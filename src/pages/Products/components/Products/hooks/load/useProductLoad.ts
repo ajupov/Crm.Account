@@ -6,14 +6,14 @@ import ProductsClient from '../../../../../../../api/products/clients/ProductsCl
 
 const productsClient = new ProductsClient(HttpClientFactoryInstance.Api)
 
-interface UseProductReturn {
-    productName?: string
+interface UseProductLoadReturn {
+    product: Product | undefined
 }
 
-const useProduct = (id?: string): UseProductReturn => {
+const useProductLoad = (id?: string): UseProductLoadReturn => {
     const [product, setProduct] = useState<Product>()
 
-    const get = useCallback(async () => {
+    const loadProduct = useCallback(async () => {
         if (!id) {
             return
         }
@@ -24,10 +24,10 @@ const useProduct = (id?: string): UseProductReturn => {
     }, [id])
 
     useEffect(() => {
-        void get()
-    }, [get])
+        void loadProduct()
+    }, [loadProduct])
 
-    return { productName: product?.name }
+    return { product }
 }
 
-export default useProduct
+export default useProductLoad

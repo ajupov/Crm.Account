@@ -8,17 +8,17 @@ import ProductsClient from '../../../../../../../api/products/clients/ProductsCl
 
 const productsClient = new ProductsClient(HttpClientFactoryInstance.Api)
 
-interface UseProductsAutocompleteOptionsReturn {
-    loadActualProducts: (value?: string) => Promise<void>
-    actualProductsAsOptions: DropdownItemProps[]
+interface UseProductsAutocompleteReturn {
+    loadProducts: (value?: string) => Promise<void>
+    productsAsOptions: DropdownItemProps[]
 }
 
-const useProductsAutocompleteOptions = (): UseProductsAutocompleteOptionsReturn => {
+const useProductsAutocomplete = (): UseProductsAutocompleteReturn => {
     const MaxLimit = 10
 
     const [products, setProducts] = useState<Product[]>([])
 
-    const loadActualProducts = useCallback(async (value?: string) => {
+    const loadProducts = useCallback(async (value?: string) => {
         const response = await productsClient.GetPagedListAsync({
             name: value,
             sortBy: 'Name',
@@ -31,11 +31,11 @@ const useProductsAutocompleteOptions = (): UseProductsAutocompleteOptionsReturn 
         setProducts(response.products ?? [])
     }, [])
 
-    const mapProduct = useCallback((x: ProductStatus) => ({ value: x.id ?? '', text: x.name ?? '' }), [])
+    const map = useCallback((x: ProductStatus) => ({ value: x.id ?? '', text: x.name ?? '' }), [])
 
-    const actualProductsAsOptions = useMemo(() => products.map(mapProduct), [mapProduct, products])
+    const productsAsOptions = useMemo(() => products.map(map), [map, products])
 
-    return { loadActualProducts, actualProductsAsOptions }
+    return { loadProducts, productsAsOptions }
 }
 
-export default useProductsAutocompleteOptions
+export default useProductsAutocomplete

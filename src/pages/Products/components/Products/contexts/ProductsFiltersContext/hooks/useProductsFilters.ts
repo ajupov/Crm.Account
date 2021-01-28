@@ -7,17 +7,20 @@ import { FilterFormFieldProps } from '../../../../../../../components/common/for
 import ProductType from '../../../../../../../../api/products/models/ProductType'
 import ProductsContext from '../../ProductsContext/ProductsContext'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
-import useProductAttributesAutocompleteOptions from '../../../hooks/autocomplete/useProductAttributesAutocompleteOptions'
-import useProductCategoriesAutocompleteOptions from '../../../hooks/autocomplete/useProductCategoriesAutocompleteOptions'
-import useProductStatusesAutocompleteOptions from '../../../hooks/autocomplete/useProductStatusesAutocompleteOptions'
+import useProductAttributesLoad from '../../../hooks/load/useProductAttributesLoad'
+import useProductCategoriesLoad from '../../../hooks/load/useProductCategoriesLoad'
+import useProductStatusesLoad from '../../../hooks/load/useProductStatusesLoad'
+import useProductsAutocomplete from '../../../hooks/autocomplete/useProductsAutocomplete'
 
 // TODO: Move to l10n
 const useProductsFilters = (): ProductsFiltersState => {
     const state = useContext(ProductsContext)
-    const { loadActualStatuses, actualStatusesAsOptions } = useProductStatusesAutocompleteOptions()
-    const { loadActualCategories, actualCategoriesAsOptions } = useProductCategoriesAutocompleteOptions()
-    const { loadActualAttributes, actualAttributesAsOptions } = useProductAttributesAutocompleteOptions()
+    const { loadProducts, productsAsOptions } = useProductsAutocomplete()
+    const { statusesAsOptions } = useProductStatusesLoad()
+    const { categoriesAsOptions } = useProductCategoriesLoad()
+    const { attributesAsOptions } = useProductAttributesLoad()
     const [type, setType] = useState(state.request.types?.[0] ?? ProductType.Material)
+    const [parentProductId, setParentProductId] = useState(state.request.parentProductId)
     const [statusIds, setStatusIds] = useState(state.request.statusIds ?? [])
     const [categoryIds, setCategoryIds] = useState(state.request.categoryIds ?? [])
     const [name, setName] = useState(state.request.name ?? '')
@@ -37,6 +40,11 @@ const useProductsFilters = (): ProductsFiltersState => {
 
     const onChangeType = useCallback((_: any, data: CheckboxProps) => {
         setType(data.value as ProductType)
+    }, [])
+
+    const ontParentProductId = useCallback((_: any, data: DropdownProps) => {
+        setParentProductId(data.value as string)
+        setIsApplyEnabled(true)
     }, [])
 
     const onChangeStatusIds = useCallback((_: any, data: DropdownProps) => {
@@ -108,6 +116,7 @@ const useProductsFilters = (): ProductsFiltersState => {
         state.setRequest({
             ...state.request,
             types: [type],
+            parentProductId,
             statusIds,
             allCategoryIds: false,
             categoryIds,
@@ -141,6 +150,7 @@ const useProductsFilters = (): ProductsFiltersState => {
         minModifyDate,
         minPrice,
         name,
+        parentProductId,
         state,
         statusIds,
         type,
@@ -149,6 +159,7 @@ const useProductsFilters = (): ProductsFiltersState => {
 
     const onReset = useCallback(() => {
         setType(ProductType.Material)
+        setParentProductId(void 0)
         setStatusIds([])
         setCategoryIds([])
         setName('')
@@ -166,6 +177,7 @@ const useProductsFilters = (): ProductsFiltersState => {
         state.setRequest({
             ...state.request,
             types: [],
+            parentProductId: void 0,
             statusIds: [],
             allCategoryIds: false,
             categoryIds: [],
@@ -214,20 +226,26 @@ const useProductsFilters = (): ProductsFiltersState => {
             },
             {
                 type: 'autocomplete',
+                label: 'Родительский продукт',
+                value: parentProductId,
+                load: loadProducts,
+                options: productsAsOptions,
+                onChange: ontParentProductId
+            },
+            {
+                type: 'dropdown',
                 multiple: true,
                 label: 'Статус',
                 value: statusIds,
-                load: loadActualStatuses,
-                options: actualStatusesAsOptions,
+                options: statusesAsOptions,
                 onChange: onChangeStatusIds
             },
             {
-                type: 'autocomplete',
+                type: 'dropdown',
                 label: 'Категория',
                 multiple: true,
                 value: categoryIds,
-                load: loadActualCategories,
-                options: actualCategoriesAsOptions,
+                options: categoriesAsOptions,
                 onChange: onChangeCategoryIds
             },
             {
@@ -251,12 +269,11 @@ const useProductsFilters = (): ProductsFiltersState => {
                 onChange2: onChangeMaxPrice
             },
             {
-                type: 'autocomplete',
+                type: 'dropdown',
                 multiple: true,
                 label: 'Атрибуты',
                 value: dictionaryToArray(attributeIds),
-                load: loadActualAttributes,
-                options: actualAttributesAsOptions,
+                options: attributesAsOptions,
                 onChange: onChangeAttributeIds
             },
             {
@@ -303,13 +320,15 @@ const useProductsFilters = (): ProductsFiltersState => {
         ],
         [
             type,
+            parentProductId,
+            loadProducts,
+            productsAsOptions,
+            ontParentProductId,
             statusIds,
-            loadActualStatuses,
-            actualStatusesAsOptions,
+            statusesAsOptions,
             onChangeStatusIds,
             categoryIds,
-            loadActualCategories,
-            actualCategoriesAsOptions,
+            categoriesAsOptions,
             onChangeCategoryIds,
             name,
             onChangeName,
@@ -320,8 +339,7 @@ const useProductsFilters = (): ProductsFiltersState => {
             maxPrice,
             onChangeMaxPrice,
             attributeIds,
-            loadActualAttributes,
-            actualAttributesAsOptions,
+            attributesAsOptions,
             onChangeAttributeIds,
             isHidden,
             onChangeIsHidden,

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { DropdownItemProps } from '../../../../../../components/common/fields/Dropdown/Dropdown'
 import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
@@ -7,22 +7,19 @@ import ProductStatusesClient from '../../../../../../../api/products/clients/Pro
 
 const productStatusesClient = new ProductStatusesClient(HttpClientFactoryInstance.Api)
 
-interface UseProductStatusesAutocompleteOptionsReturn {
-    loadActualStatuses: (value?: string) => Promise<void>
-    actualStatusesAsOptions: DropdownItemProps[]
+interface UseProductStatusesLoadReturn {
+    statusesAsOptions: DropdownItemProps[]
 }
 
-const useProductStatusesAutocompleteOptions = (): UseProductStatusesAutocompleteOptionsReturn => {
-    const MaxLimit = 10
+const useProductStatusesLoad = (): UseProductStatusesLoadReturn => {
+    const MaxLimit = 2147483647
 
     const [statuses, setStatuses] = useState<ProductStatus[]>([])
 
-    const loadActualStatuses = useCallback(async (value?: string) => {
+    const loadStatuses = useCallback(async () => {
         const response = await productStatusesClient.GetPagedListAsync({
-            name: value,
             sortBy: 'Name',
             orderBy: 'asc',
-            isDeleted: false,
             offset: 0,
             limit: MaxLimit
         })
@@ -30,11 +27,15 @@ const useProductStatusesAutocompleteOptions = (): UseProductStatusesAutocomplete
         setStatuses(response.statuses ?? [])
     }, [])
 
-    const mapStatus = useCallback((x: ProductStatus) => ({ value: x.id ?? '', text: x.name ?? '' }), [])
+    useEffect(() => {
+        void loadStatuses()
+    }, [loadStatuses])
 
-    const actualStatusesAsOptions = useMemo(() => statuses.map(mapStatus), [mapStatus, statuses])
+    const map = useCallback((x: ProductStatus) => ({ value: x.id ?? '', text: x.name ?? '' }), [])
 
-    return { loadActualStatuses, actualStatusesAsOptions }
+    const statusesAsOptions = useMemo(() => statuses.filter(x => !x.isDeleted).map(map), [statuses, map])
+
+    return { statusesAsOptions }
 }
 
-export default useProductStatusesAutocompleteOptions
+export default useProductStatusesLoad

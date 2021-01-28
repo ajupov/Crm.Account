@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { DropdownItemProps } from '../../../../../../components/common/fields/Dropdown/Dropdown'
 import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
@@ -7,19 +7,17 @@ import ProductCategory from '../../../../../../../api/products/models/ProductCat
 
 const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
 
-interface UseProductCategoriesAutocompleteOptionsReturn {
-    loadActualCategories: (value?: string) => Promise<void>
-    actualCategoriesAsOptions: DropdownItemProps[]
+interface UseProductCategoriesLoadReturn {
+    categoriesAsOptions: DropdownItemProps[]
 }
 
-const useProductCategoriesAutocompleteOptions = (): UseProductCategoriesAutocompleteOptionsReturn => {
-    const MaxLimit = 10
+const useProductCategoriesLoad = (): UseProductCategoriesLoadReturn => {
+    const MaxLimit = 2147483647
 
     const [categories, setCategories] = useState<ProductCategory[]>([])
 
-    const loadActualCategories = useCallback(async () => {
+    const loadCategories = useCallback(async () => {
         const response = await productCategoriesClient.GetPagedListAsync({
-            isDeleted: false,
             sortBy: 'Name',
             orderBy: 'asc',
             offset: 0,
@@ -29,11 +27,15 @@ const useProductCategoriesAutocompleteOptions = (): UseProductCategoriesAutocomp
         setCategories(response.categories ?? [])
     }, [])
 
-    const mapCategory = useCallback((x: ProductCategory) => ({ value: x.id ?? '', text: x.name ?? '' }), [])
+    useEffect(() => {
+        void loadCategories()
+    }, [loadCategories])
 
-    const actualCategoriesAsOptions = useMemo(() => categories.map(mapCategory), [categories, mapCategory])
+    const map = useCallback((x: ProductCategory) => ({ value: x.id ?? '', text: x.name ?? '' }), [])
 
-    return { loadActualCategories, actualCategoriesAsOptions }
+    const categoriesAsOptions = useMemo(() => categories.filter(x => !x.isDeleted).map(map), [categories, map])
+
+    return { categoriesAsOptions }
 }
 
-export default useProductCategoriesAutocompleteOptions
+export default useProductCategoriesLoad
