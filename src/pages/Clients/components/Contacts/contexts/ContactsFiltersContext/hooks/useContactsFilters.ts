@@ -6,13 +6,18 @@ import { useCallback, useContext, useMemo, useState } from 'react'
 import ContactsContext from '../../ContactsContext/ContactsContext'
 import { FilterFormFieldProps } from '../../../../../../../components/common/forms/FilterForm/FilterForm'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
-import useContactsSelectOptions from '../../../hooks/useContactsSelectOptions'
+import useCompaniesAutocomplete from '../../../hooks/autocomplete/useCompaniesAutocomplete'
+import useContactAttributesLoad from '../../../hooks/load/useContactAttributesLoad'
+import useLeadsAutocomplete from '../../../hooks/autocomplete/useLeadsAutocomplete'
 
 // TODO: Move to l10n
 const useContactsFilters = (): ContactsFiltersState => {
     const state = useContext(ContactsContext)
-    const { getActualAttributes } = useContactsSelectOptions()
-
+    const { loadLeads, leadsAsOptions } = useLeadsAutocomplete()
+    const { loadCompanies, companiesAsOptions } = useCompaniesAutocomplete()
+    const { attributesAsOptions } = useContactAttributesLoad()
+    const [leadIds, setLeadIds] = useState(state.request.leadIds)
+    const [companyIds, setCompanyIds] = useState(state.request.companyIds)
     const [surname, setSurname] = useState(state.request.surname ?? '')
     const [name, setName] = useState(state.request.name ?? '')
     const [patronymic, setPatronymic] = useState(state.request.patronymic ?? '')
@@ -41,6 +46,16 @@ const useContactsFilters = (): ContactsFiltersState => {
     const [isApplyEnabled, setIsApplyEnabled] = useState(contactsFiltersInitialState.isApplyEnabled)
     const [isResetEnabled, setIsResetEnabled] = useState(contactsFiltersInitialState.isResetEnabled)
     const [isShowMobile, setIsShowMobile] = useState(contactsFiltersInitialState.isShowMobile)
+
+    const onChangeLeadId = useCallback((_: any, data: DropdownProps) => {
+        setLeadIds([data.value as string])
+        setIsApplyEnabled(true)
+    }, [])
+
+    const onChangeCompanyId = useCallback((_: any, data: DropdownProps) => {
+        setCompanyIds([data.value as string])
+        setIsApplyEnabled(true)
+    }, [])
 
     const onChangeName = useCallback((_, data: InputOnChangeData) => {
         setName(data.value)
@@ -170,6 +185,8 @@ const useContactsFilters = (): ContactsFiltersState => {
     const onApply = useCallback(() => {
         state.setRequest({
             ...state.request,
+            leadIds,
+            companyIds,
             surname,
             name,
             patronymic,
@@ -208,10 +225,12 @@ const useContactsFilters = (): ContactsFiltersState => {
         bankAccountBankName,
         bankAccountNumber,
         city,
+        companyIds,
         country,
         email,
         house,
         isDeleted,
+        leadIds,
         maxBirthDate,
         maxCreateDate,
         maxModifyDate,
@@ -232,6 +251,8 @@ const useContactsFilters = (): ContactsFiltersState => {
     ])
 
     const onReset = useCallback(() => {
+        setLeadIds([])
+        setCompanyIds([])
         setSurname('')
         setName('')
         setPatronymic('')
@@ -260,6 +281,8 @@ const useContactsFilters = (): ContactsFiltersState => {
 
         state.setRequest({
             ...state.request,
+            leadIds: [],
+            companyIds: [],
             surname: void 0,
             name: void 0,
             patronymic: void 0,
@@ -280,7 +303,7 @@ const useContactsFilters = (): ContactsFiltersState => {
             bankAccountNumber: void 0,
             bankAccountBankName: void 0,
             allAttributes: true,
-            attributes: {},
+            attributes: void 0,
             minCreateDate: void 0,
             maxCreateDate: void 0,
             minModifyDate: void 0,
@@ -299,6 +322,22 @@ const useContactsFilters = (): ContactsFiltersState => {
 
     const fields: FilterFormFieldProps[] = useMemo(
         () => [
+            {
+                type: 'autocomplete',
+                label: 'Лид',
+                value: leadIds ? leadIds[0] : '',
+                load: loadLeads,
+                options: leadsAsOptions,
+                onChange: onChangeLeadId
+            },
+            {
+                type: 'autocomplete',
+                label: 'Компания',
+                value: companyIds ? companyIds[0] : '',
+                load: loadCompanies,
+                options: companiesAsOptions,
+                onChange: onChangeCompanyId
+            },
             {
                 type: 'text',
                 topLabel: 'Фамилия',
@@ -414,7 +453,7 @@ const useContactsFilters = (): ContactsFiltersState => {
                 multiple: true,
                 label: 'Атрибуты',
                 value: dictionaryToArray(attributeIds),
-                options: getActualAttributes(),
+                options: attributesAsOptions,
                 onChange: onChangeAttributeIds
             },
             {
@@ -451,14 +490,20 @@ const useContactsFilters = (): ContactsFiltersState => {
         [
             apartment,
             attributeIds,
+            attributesAsOptions,
             bankAccountBankName,
             bankAccountNumber,
             city,
+            companiesAsOptions,
+            companyIds,
             country,
             email,
-            getActualAttributes,
             house,
             isDeleted,
+            leadIds,
+            leadsAsOptions,
+            loadCompanies,
+            loadLeads,
             maxBirthDate,
             maxCreateDate,
             maxModifyDate,
@@ -471,10 +516,12 @@ const useContactsFilters = (): ContactsFiltersState => {
             onChangeBankAccountBankName,
             onChangeBankAccountNumber,
             onChangeCity,
+            onChangeCompanyId,
             onChangeCountry,
             onChangeEmail,
             onChangeHouse,
             onChangeIsDeleted,
+            onChangeLeadId,
             onChangeMaxBirthDate,
             onChangeMaxCreateDate,
             onChangeMaxModifyDate,

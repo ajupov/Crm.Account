@@ -1,10 +1,14 @@
 import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import ContactContext from '../contexts/ContactContext/ContactContext'
-import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
-import useContactsSelectOptions from './useContactsSelectOptions'
+import ContactContext from '../../contexts/ContactContext/ContactContext'
+import { CreateFormFieldProps } from '../../../../../../components/common/forms/CreateForm/CreateForm'
+import useCompaniesAutocomplete from '../autocomplete/useCompaniesAutocomplete'
+import useCompanyLoad from '../load/useCompanyLoad'
+import useContactAttributesLoad from '../load/useContactAttributesLoad'
 import { useHistory } from 'react-router'
+import useLeadLoad from '../load/useLeadLoad'
+import useLeadsAutocomplete from '../autocomplete/useLeadsAutocomplete'
 
 interface UseContactOnChangeReturn {
     fields: CreateFormFieldProps[]
@@ -17,15 +21,13 @@ interface UseContactOnChangeReturn {
 // TODO: Move to l10n
 const useContactOnChange = (): UseContactOnChangeReturn => {
     const history = useHistory()
-    const {
-        getActualLeads,
-        getAllLeads,
-        getActualCompanies,
-        getAllCompanies,
-        getActualAttributes,
-        getAllAttributes
-    } = useContactsSelectOptions()
     const state = useContext(ContactContext)
+    const { lead } = useLeadLoad(state.contact.leadId)
+    const { company } = useCompanyLoad(state.contact.companyId)
+    const { loadLeads, leadsAsOptions } = useLeadsAutocomplete()
+    const { loadCompanies, companiesAsOptions } = useCompaniesAutocomplete()
+    const { attributesAsOptions } = useContactAttributesLoad()
+
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeLeadId = useCallback(
@@ -250,21 +252,21 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
     const fields: CreateFormFieldProps[] = useMemo(
         () => [
             {
-                type: 'dropdown',
-                required: true,
+                type: 'autocomplete',
                 label: 'Лид',
-                text: getAllLeads().find(x => x.value === state.contact.leadId)?.text,
                 value: state.contact.leadId,
-                options: getActualLeads(),
+                text: lead ? `${lead?.surname} ${lead?.name} ${lead?.patronymic}`.trim() : '',
+                load: loadLeads,
+                options: leadsAsOptions,
                 onChange: onChangeLeadId
             },
             {
-                type: 'dropdown',
-                required: true,
+                type: 'autocomplete',
                 label: 'Компания',
-                text: getAllCompanies().find(x => x.value === state.contact.companyId)?.text,
                 value: state.contact.companyId,
-                options: getActualCompanies(),
+                text: company?.fullName ?? '',
+                load: loadCompanies,
+                options: companiesAsOptions,
                 onChange: onChangeCompanyId
             },
             {
@@ -280,13 +282,6 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
                 topLabel: 'Имя',
                 value: state.contact.name,
                 onChange: onChangeName
-            },
-            {
-                type: 'text',
-                required: true,
-                topLabel: 'Отчество',
-                value: state.contact.patronymic,
-                onChange: onChangePatronymic
             },
             {
                 type: 'text',
@@ -389,13 +384,12 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
             {
                 type: 'attributes',
                 label: 'Атрибуты',
-                options: getActualAttributes(),
+                options: attributesAsOptions,
                 items: state.contact.attributeLinks?.map((x, i) => ({
                     index: i,
                     key: x.contactAttributeId ?? '',
                     onChangeKey: onChangeAttributeKey,
                     value: x.value ?? '',
-                    text: getAllAttributes().find(a => a.value === x.contactAttributeId)?.text,
                     onChangeValue: onChangeAttributeValue,
                     onClickDelete: onDeleteAttribute
                 })),
@@ -410,12 +404,13 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
             }
         ],
         [
-            getActualAttributes,
-            getActualCompanies,
-            getActualLeads,
-            getAllAttributes,
-            getAllCompanies,
-            getAllLeads,
+            attributesAsOptions,
+            companiesAsOptions,
+            company?.fullName,
+            lead,
+            leadsAsOptions,
+            loadCompanies,
+            loadLeads,
             onChangeApartment,
             onChangeAttributeKey,
             onChangeAttributeValue,

@@ -9,7 +9,7 @@ import { getCompanyTypeName } from '../../../helpers/helpers/companyTypeHelper'
 import { joinAttributes } from '../../../mappers/companyAttributesMapper'
 import { joinBankAccounts } from '../../../mappers/companyBankAccountsMapper'
 import { useHistory } from 'react-router'
-import useLeadName from '../../../hooks/useLeadName'
+import useLeadLoad from '../../../hooks/load/useLeadLoad'
 
 interface UseCompanyViewReturn {
     map: (company: Company) => ViewDataProps[]
@@ -23,7 +23,7 @@ const useCompanyView = (): UseCompanyViewReturn => {
     const history = useHistory()
     const companyState = useContext(CompanyContext)
     const actionsState = useContext(CompaniesActionsContext)
-    const { getLeadName } = useLeadName(companyState.company.leadId)
+    const { lead } = useLeadLoad(companyState.company.leadId)
 
     const onClickDelete = useCallback(
         (id: string) => {
@@ -53,7 +53,7 @@ const useCompanyView = (): UseCompanyViewReturn => {
 
     const map = useCallback(
         (company: Company): ViewDataProps[] => [
-            { label: 'Лид', value: getLeadName() },
+            { label: 'Лид', value: lead ? `${lead?.surname} ${lead?.name} ${lead?.patronymic}`.trim() : '' },
             { label: 'Тип', value: getCompanyTypeName(company.type) },
             { label: 'Род деятельности', value: getCompanyIndustryTypeName(company.industryType) },
             { label: 'Полное название', value: company.fullName },
@@ -84,7 +84,7 @@ const useCompanyView = (): UseCompanyViewReturn => {
             { label: 'Атрибуты', value: mapAttributes() },
             { label: 'Удален', value: company.isDeleted ? 'Да' : 'Нет' }
         ],
-        [getLeadName, mapAttributes, mapBankAccounts]
+        [lead, mapAttributes, mapBankAccounts]
     )
 
     return { map, onClickDelete, onClickRestore, onClickCancel }

@@ -4,7 +4,7 @@ import CompaniesRoutes from '../../routes/CompaniesRoutes'
 import CompanyContext from '../../contexts/CompanyContext/CompanyContext'
 import EditForm from '../../../../../../components/common/forms/EditForm/EditForm'
 import useCompaniesActions from '../../contexts/CompaniesActionsContext/hooks/useCompaniesActions'
-import useCompanyOnChange from '../../hooks/useCompanyOnChange'
+import useCompanyOnChange from '../../hooks/change/useCompanyOnChange'
 
 const CompanyEditForm: FC = () => {
     const state = useContext(CompanyContext)

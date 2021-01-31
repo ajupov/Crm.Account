@@ -1,23 +1,23 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
+import CompanyAttribute from '../../../../../../../api/companies/models/CompanyAttribute'
+import CompanyAttributesClient from '../../../../../../../api/companies/clients/CompanyAttributesClient'
 import { DropdownItemProps } from '../../../../../../components/common/fields/Dropdown/Dropdown'
 import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import ProductAttribute from '../../../../../../../api/products/models/ProductAttribute'
-import ProductAttributesClient from '../../../../../../../api/products/clients/ProductAttributesClient'
 
-const productAttributesClient = new ProductAttributesClient(HttpClientFactoryInstance.Api)
+const companyAttributesClient = new CompanyAttributesClient(HttpClientFactoryInstance.Api)
 
-interface UseProductAttributesLoadReturn {
+interface UseCompanyAttributesLoadReturn {
     attributesAsOptions: DropdownItemProps[]
 }
 
-const useProductAttributesLoad = (): UseProductAttributesLoadReturn => {
+const useCompanyAttributesLoad = (): UseCompanyAttributesLoadReturn => {
     const MaxLimit = 2147483647
 
-    const [attributes, setAttributes] = useState<ProductAttribute[]>([])
+    const [attributes, setAttributes] = useState<CompanyAttribute[]>([])
 
     const loadAttributes = useCallback(async () => {
-        const response = await productAttributesClient.GetPagedListAsync({
+        const response = await companyAttributesClient.GetPagedListAsync({
             sortBy: 'Key',
             orderBy: 'asc',
             offset: 0,
@@ -31,11 +31,11 @@ const useProductAttributesLoad = (): UseProductAttributesLoadReturn => {
         void loadAttributes()
     }, [loadAttributes])
 
-    const map = useCallback((x: ProductAttribute) => ({ value: x.id ?? '', text: x.key ?? '' }), [])
+    const map = useCallback((x: CompanyAttribute) => ({ value: x.id ?? '', text: x.key ?? '' }), [])
 
     const attributesAsOptions = useMemo(() => attributes.filter(x => !x.isDeleted).map(map), [attributes, map])
 
     return { attributesAsOptions }
 }
 
-export default useProductAttributesLoad
+export default useCompanyAttributesLoad

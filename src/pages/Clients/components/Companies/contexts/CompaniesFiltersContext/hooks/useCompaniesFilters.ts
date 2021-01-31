@@ -10,13 +10,15 @@ import { FilterFormFieldProps } from '../../../../../../../components/common/for
 import { getCompanyIndustryTypesAsSelectOptions } from '../../../helpers/helpers/companyIndustryTypeHelper'
 import { getCompanyTypesAsSelectOptions } from '../../../helpers/helpers/companyTypeHelper'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
-import useCompaniesSelectOptions from '../../../hooks/useCompaniesSelectOptions'
+import useCompanyAttributesLoad from '../../../hooks/load/useCompanyAttributesLoad'
+import useLeadsAutocomplete from '../../../hooks/autocomplete/useLeadsAutocomplete'
 
 // TODO: Move to l10n
 const useCompaniesFilters = (): CompaniesFiltersState => {
     const state = useContext(CompaniesContext)
-    const { getActualAttributes } = useCompaniesSelectOptions()
-
+    const { loadLeads, leadsAsOptions } = useLeadsAutocomplete()
+    const { attributesAsOptions } = useCompanyAttributesLoad()
+    const [leadId, setLeadId] = useState(state.request.leadId)
     const [types, setTypes] = useState(state.request.types ?? [])
     const [industryTypes, setIndustryTypes] = useState(state.request.industryTypes ?? [])
     const [fullName, setFullName] = useState(state.request.fullName ?? '')
@@ -58,6 +60,11 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
     const [isApplyEnabled, setIsApplyEnabled] = useState(companiesFiltersInitialState.isApplyEnabled)
     const [isResetEnabled, setIsResetEnabled] = useState(companiesFiltersInitialState.isResetEnabled)
     const [isShowMobile, setIsShowMobile] = useState(companiesFiltersInitialState.isShowMobile)
+
+    const onChangeLeadId = useCallback((_: any, data: DropdownProps) => {
+        setLeadId(data.value as string)
+        setIsApplyEnabled(true)
+    }, [])
 
     const onChangeTypes = useCallback((_: any, data: DropdownProps) => {
         setTypes(data.value as CompanyType[])
@@ -250,6 +257,7 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
     const onApply = useCallback(() => {
         state.setRequest({
             ...state.request,
+            leadId,
             types,
             industryTypes,
             fullName,
@@ -311,6 +319,7 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
         juridicalProvince,
         juridicalRegion,
         juridicalStreet,
+        leadId,
         legalApartment,
         legalCity,
         legalCountry,
@@ -338,6 +347,7 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
     ])
 
     const onReset = useCallback(() => {
+        setLeadId(void 0)
         setTypes([])
         setIndustryTypes([])
         setFullName('')
@@ -436,6 +446,14 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
 
     const fields: FilterFormFieldProps[] = useMemo(
         () => [
+            {
+                type: 'autocomplete',
+                label: 'Лид',
+                value: leadId,
+                load: loadLeads,
+                options: leadsAsOptions,
+                onChange: onChangeLeadId
+            },
             {
                 type: 'dropdown',
                 multiple: true,
@@ -625,7 +643,7 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
                 multiple: true,
                 label: 'Атрибуты',
                 value: dictionaryToArray(attributeIds),
-                options: getActualAttributes(),
+                options: attributesAsOptions,
                 onChange: onChangeAttributeIds
             },
             {
@@ -661,11 +679,11 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
         ],
         [
             attributeIds,
+            attributesAsOptions,
             bankAccountBankName,
             bankAccountNumber,
             email,
             fullName,
-            getActualAttributes,
             industryTypes,
             isDeleted,
             juridicalApartment,
@@ -676,6 +694,8 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
             juridicalProvince,
             juridicalRegion,
             juridicalStreet,
+            leadId,
+            leadsAsOptions,
             legalApartment,
             legalCity,
             legalCountry,
@@ -684,6 +704,7 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
             legalProvince,
             legalRegion,
             legalStreet,
+            loadLeads,
             maxCreateDate,
             maxEmployeesCount,
             maxModifyDate,
@@ -709,6 +730,7 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
             onChangeJuridicalProvince,
             onChangeJuridicalRegion,
             onChangeJuridicalStreet,
+            onChangeLeadId,
             onChangeLegalApartment,
             onChangeLegalCity,
             onChangeLegalCountry,

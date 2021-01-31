@@ -6,9 +6,9 @@ import ContactsActionsContext from '../../../contexts/ContactsActionsContext/Con
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { joinAttributes } from '../../../mappers/contactAttributesMapper'
 import { joinBankAccounts } from '../../../mappers/contactBankAccountsMapper'
-import useCompanyName from '../../../hooks/useCompanyName'
+import useCompanyLoad from '../../../hooks/load/useCompanyLoad'
 import { useHistory } from 'react-router'
-import useLeadName from '../../../hooks/useLeadName'
+import useLeadLoad from '../../../hooks/load/useLeadLoad'
 
 interface UseContactViewReturn {
     map: (contact: Contact) => ViewDataProps[]
@@ -22,8 +22,8 @@ const useContactView = (): UseContactViewReturn => {
     const history = useHistory()
     const contactState = useContext(ContactContext)
     const actionsState = useContext(ContactsActionsContext)
-    const { getCompanyName } = useCompanyName(contactState.contact.companyId)
-    const { getLeadName } = useLeadName(contactState.contact.leadId)
+    const { lead } = useLeadLoad(contactState.contact.leadId)
+    const { company } = useCompanyLoad(contactState.contact.companyId)
 
     const onClickDelete = useCallback(
         (id: string) => {
@@ -53,8 +53,8 @@ const useContactView = (): UseContactViewReturn => {
 
     const map = useCallback(
         (contact: Contact): ViewDataProps[] => [
-            { label: 'Лид', value: getLeadName() },
-            { label: 'Компания', value: getCompanyName() },
+            { label: 'Лид', value: lead ? `${lead?.surname} ${lead?.name} ${lead?.patronymic}`.trim() : '' },
+            { label: 'Компания', value: company?.fullName ?? '' },
             { label: 'Фамилия', value: contact.surname },
             { label: 'Имя', value: contact.name },
             { label: 'Отчество', value: contact.patronymic },
@@ -75,7 +75,7 @@ const useContactView = (): UseContactViewReturn => {
             { label: 'Атрибуты', value: mapAttributes() },
             { label: 'Удален', value: contact.isDeleted ? 'Да' : 'Нет' }
         ],
-        [getCompanyName, getLeadName, mapAttributes, mapBankAccounts]
+        [company?.fullName, lead, mapAttributes, mapBankAccounts]
     )
 
     return { map, onClickDelete, onClickRestore, onClickCancel }

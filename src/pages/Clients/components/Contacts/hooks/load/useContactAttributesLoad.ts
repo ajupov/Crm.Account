@@ -1,23 +1,23 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
+import ContactAttribute from '../../../../../../../api/contacts/models/ContactAttribute'
+import ContactAttributesClient from '../../../../../../../api/contacts/clients/ContactAttributesClient'
 import { DropdownItemProps } from '../../../../../../components/common/fields/Dropdown/Dropdown'
 import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import ProductAttribute from '../../../../../../../api/products/models/ProductAttribute'
-import ProductAttributesClient from '../../../../../../../api/products/clients/ProductAttributesClient'
 
-const productAttributesClient = new ProductAttributesClient(HttpClientFactoryInstance.Api)
+const contactAttributesClient = new ContactAttributesClient(HttpClientFactoryInstance.Api)
 
-interface UseProductAttributesLoadReturn {
+interface UseContactAttributesLoadReturn {
     attributesAsOptions: DropdownItemProps[]
 }
 
-const useProductAttributesLoad = (): UseProductAttributesLoadReturn => {
+const useContactAttributesLoad = (): UseContactAttributesLoadReturn => {
     const MaxLimit = 2147483647
 
-    const [attributes, setAttributes] = useState<ProductAttribute[]>([])
+    const [attributes, setAttributes] = useState<ContactAttribute[]>([])
 
     const loadAttributes = useCallback(async () => {
-        const response = await productAttributesClient.GetPagedListAsync({
+        const response = await contactAttributesClient.GetPagedListAsync({
             sortBy: 'Key',
             orderBy: 'asc',
             offset: 0,
@@ -31,11 +31,11 @@ const useProductAttributesLoad = (): UseProductAttributesLoadReturn => {
         void loadAttributes()
     }, [loadAttributes])
 
-    const map = useCallback((x: ProductAttribute) => ({ value: x.id ?? '', text: x.key ?? '' }), [])
+    const map = useCallback((x: ContactAttribute) => ({ value: x.id ?? '', text: x.key ?? '' }), [])
 
     const attributesAsOptions = useMemo(() => attributes.filter(x => !x.isDeleted).map(map), [attributes, map])
 
     return { attributesAsOptions }
 }
 
-export default useProductAttributesLoad
+export default useContactAttributesLoad

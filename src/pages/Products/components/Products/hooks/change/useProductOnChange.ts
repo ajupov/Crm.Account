@@ -8,6 +8,7 @@ import ProductType from '../../../../../../../api/products/models/ProductType'
 import { useHistory } from 'react-router'
 import useProductAttributesLoad from '../load/useProductAttributesLoad'
 import useProductCategoriesLoad from '../load/useProductCategoriesLoad'
+import useProductLoad from '../load/useProductLoad'
 import useProductStatusesLoad from '../load/useProductStatusesLoad'
 import useProductsAutocomplete from '../autocomplete/useProductsAutocomplete'
 
@@ -24,6 +25,7 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
     const history = useHistory()
     const state = useContext(ProductContext)
     const { loadProducts, productsAsOptions } = useProductsAutocomplete()
+    const { product: parentProduct } = useProductLoad(state.product.parentProductId)
     const { statusesAsOptions } = useProductStatusesLoad()
     const { categoriesAsOptions } = useProductCategoriesLoad()
     const { attributesAsOptions } = useProductAttributesLoad()
@@ -174,6 +176,7 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
                 type: 'autocomplete',
                 label: 'Родительский продукт',
                 value: state.product.parentProductId,
+                text: parentProduct?.name,
                 load: loadProducts,
                 options: productsAsOptions,
                 onChange: onChangeParentProductId
@@ -254,6 +257,7 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
             state.product.price,
             state.product.attributeLinks,
             state.product.isHidden,
+            parentProduct?.name,
             loadProducts,
             productsAsOptions,
             onChangeParentProductId,

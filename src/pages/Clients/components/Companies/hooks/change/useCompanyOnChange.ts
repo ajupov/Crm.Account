@@ -2,15 +2,17 @@ import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import {
     getCompanyIndustryTypeName,
     getCompanyIndustryTypesAsSelectOptions
-} from '../helpers/helpers/companyIndustryTypeHelper'
-import { getCompanyTypeName, getCompanyTypesAsSelectOptions } from '../helpers/helpers/companyTypeHelper'
+} from '../../helpers/helpers/companyIndustryTypeHelper'
+import { getCompanyTypeName, getCompanyTypesAsSelectOptions } from '../../helpers/helpers/companyTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import CompanyContext from '../contexts/CompanyContext/CompanyContext'
-import CompanyType from '../../../../../../api/companies/models/CompanyType'
-import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
-import useCompaniesSelectOptions from './useCompaniesSelectOptions'
+import CompanyContext from '../../contexts/CompanyContext/CompanyContext'
+import CompanyType from '../../../../../../../api/companies/models/CompanyType'
+import { CreateFormFieldProps } from '../../../../../../components/common/forms/CreateForm/CreateForm'
+import useCompanyAttributesLoad from '../load/useCompanyAttributesLoad'
 import { useHistory } from 'react-router'
+import useLeadLoad from '../load/useLeadLoad'
+import useLeadsAutocomplete from '../autocomplete/useLeadsAutocomplete'
 
 interface UseCompanyOnChangeReturn {
     fields: CreateFormFieldProps[]
@@ -23,8 +25,10 @@ interface UseCompanyOnChangeReturn {
 // TODO: Move to l10n
 const useCompanyOnChange = (): UseCompanyOnChangeReturn => {
     const history = useHistory()
-    const { getActualLeads, getAllLeads, getActualAttributes, getAllAttributes } = useCompaniesSelectOptions()
     const state = useContext(CompanyContext)
+    const { lead } = useLeadLoad(state.company.leadId)
+    const { loadLeads, leadsAsOptions } = useLeadsAutocomplete()
+    const { attributesAsOptions } = useCompanyAttributesLoad()
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeLeadId = useCallback(
@@ -305,12 +309,11 @@ const useCompanyOnChange = (): UseCompanyOnChangeReturn => {
     const fields: CreateFormFieldProps[] = useMemo(
         () => [
             {
-                type: 'dropdown',
-                required: true,
+                type: 'autocomplete',
                 label: 'Лид',
-                text: getAllLeads().find(x => x.value === state.company.leadId)?.text,
-                value: state.company.leadId,
-                options: getActualLeads(),
+                text: lead ? `${lead?.surname} ${lead?.name} ${lead?.patronymic}`.trim() : '',
+                load: loadLeads,
+                options: leadsAsOptions,
                 onChange: onChangeLeadId
             },
             {
@@ -510,13 +513,12 @@ const useCompanyOnChange = (): UseCompanyOnChangeReturn => {
             {
                 type: 'attributes',
                 label: 'Атрибуты',
-                options: getActualAttributes(),
+                options: attributesAsOptions,
                 items: state.company.attributeLinks?.map((x, i) => ({
                     index: i,
                     key: x.companyAttributeId ?? '',
                     onChangeKey: onChangeAttributeKey,
                     value: x.value ?? '',
-                    text: getAllAttributes().find(a => a.value === x.companyAttributeId)?.text,
                     onChangeValue: onChangeAttributeValue,
                     onClickDelete: onDeleteAttribute
                 })),
@@ -530,10 +532,10 @@ const useCompanyOnChange = (): UseCompanyOnChangeReturn => {
             }
         ],
         [
-            getActualAttributes,
-            getActualLeads,
-            getAllAttributes,
-            getAllLeads,
+            attributesAsOptions,
+            lead,
+            leadsAsOptions,
+            loadLeads,
             onChangeAttributeKey,
             onChangeAttributeValue,
             onChangeEmail,
@@ -578,7 +580,6 @@ const useCompanyOnChange = (): UseCompanyOnChangeReturn => {
             state.company.juridicalProvince,
             state.company.juridicalRegion,
             state.company.juridicalStreet,
-            state.company.leadId,
             state.company.legalApartment,
             state.company.legalCity,
             state.company.legalCountry,

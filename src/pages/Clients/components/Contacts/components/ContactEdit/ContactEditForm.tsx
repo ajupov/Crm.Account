@@ -3,7 +3,7 @@ import React, { FC, useContext } from 'react'
 import ContactContext from '../../contexts/ContactContext/ContactContext'
 import ContactsRoutes from '../../routes/ContactsRoutes'
 import EditForm from '../../../../../../components/common/forms/EditForm/EditForm'
-import useContactOnChange from '../../hooks/useContactOnChange'
+import useContactOnChange from '../../hooks/change/useContactOnChange'
 import useContactsActions from '../../contexts/ContactsActionsContext/hooks/useContactsActions'
 
 const ContactEditForm: FC = () => {

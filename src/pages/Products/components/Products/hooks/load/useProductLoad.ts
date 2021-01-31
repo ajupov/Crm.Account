@@ -7,7 +7,7 @@ import ProductsClient from '../../../../../../../api/products/clients/ProductsCl
 const productsClient = new ProductsClient(HttpClientFactoryInstance.Api)
 
 interface UseProductLoadReturn {
-    product: Product | undefined
+    product?: Product
 }
 
 const useProductLoad = (id?: string): UseProductLoadReturn => {

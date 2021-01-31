@@ -3,7 +3,6 @@ import { useCallback, useMemo, useState } from 'react'
 import { DropdownItemProps } from '../../../../../../components/common/fields/Dropdown/Dropdown'
 import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
 import Product from '../../../../../../../api/products/models/Product'
-import ProductStatus from '../../../../../../../api/products/models/ProductStatus'
 import ProductsClient from '../../../../../../../api/products/clients/ProductsClient'
 
 const productsClient = new ProductsClient(HttpClientFactoryInstance.Api)
@@ -31,7 +30,7 @@ const useProductsAutocomplete = (): UseProductsAutocompleteReturn => {
         setProducts(response.products ?? [])
     }, [])
 
-    const map = useCallback((x: ProductStatus) => ({ value: x.id ?? '', text: x.name ?? '' }), [])
+    const map = useCallback((x: Product) => ({ value: x.id ?? '', text: x.name ?? '' }), [])
 
     const productsAsOptions = useMemo(() => products.map(map), [map, products])
 
