@@ -1,8 +1,8 @@
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
+import { CreateFormFieldProps } from '../../../../../../components/common/forms/CreateForm/CreateForm'
 import { InputOnChangeData } from 'semantic-ui-react'
-import ProductCategoryContext from '../contexts/ProductCategoryContext/ProductCategoryContext'
+import ProductCategoryContext from '../../contexts/ProductCategoryContext/ProductCategoryContext'
 import { useHistory } from 'react-router'
 
 interface UseProductCategoryOnChangeReturn {

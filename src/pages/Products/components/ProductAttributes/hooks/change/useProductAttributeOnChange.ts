@@ -2,12 +2,12 @@ import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import {
     getAttributeTypeName,
     getAttributeTypesAsSelectOptions
-} from '../../../../../helpers/entityAttributeTypeHelper'
+} from '../../../../../../helpers/entityAttributeTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
-import ProductAttributeContext from '../contexts/ProductAttributeContext/ProductAttributeContext'
-import ProductAttributeType from '../../../../../../api/products/models/ProductAttributeType'
+import { CreateFormFieldProps } from '../../../../../../components/common/forms/CreateForm/CreateForm'
+import ProductAttributeContext from '../../contexts/ProductAttributeContext/ProductAttributeContext'
+import ProductAttributeType from '../../../../../../../api/products/models/ProductAttributeType'
 import { useHistory } from 'react-router'
 
 interface UseProductAttributeOnChangeReturn {

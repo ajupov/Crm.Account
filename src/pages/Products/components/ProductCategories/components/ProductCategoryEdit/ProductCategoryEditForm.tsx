@@ -4,7 +4,7 @@ import EditForm from '../../../../../../components/common/forms/EditForm/EditFor
 import ProductCategoriesRoutes from '../../routes/ProductCategoriesRoutes'
 import ProductCategoryContext from '../../contexts/ProductCategoryContext/ProductCategoryContext'
 import useProductCategoriesActions from '../../contexts/ProductCategoriesActionsContext/hooks/useProductCategoriesActions'
-import useProductCategoryOnChange from '../../hooks/useProductCategoryOnChange'
+import useProductCategoryOnChange from '../../hooks/change/useProductCategoryOnChange'
 
 const ProductCategoryEditForm: FC = () => {
     const state = useContext(ProductCategoryContext)

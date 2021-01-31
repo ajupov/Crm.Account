@@ -3,7 +3,7 @@ import React, { FC, useContext } from 'react'
 import EditForm from '../../../../../../components/common/forms/EditForm/EditForm'
 import ProductAttributeContext from '../../contexts/ProductAttributeContext/ProductAttributeContext'
 import ProductAttributesRoutes from '../../routes/ProductAttributesRoutes'
-import useProductAttributeOnChange from '../../hooks/useProductAttributeOnChange'
+import useProductAttributeOnChange from '../../hooks/change/useProductAttributeOnChange'
 import useProductAttributesActions from '../../contexts/ProductAttributesActionsContext/hooks/useProductAttributesActions'
 
 const ProductAttributeEditForm: FC = () => {

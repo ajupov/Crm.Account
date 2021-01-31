@@ -3,7 +3,7 @@ import React, { FC, useContext } from 'react'
 import EditForm from '../../../../../../components/common/forms/EditForm/EditForm'
 import ProductStatusContext from '../../contexts/ProductStatusContext/ProductStatusContext'
 import ProductStatusesRoutes from '../../routes/ProductStatusesRoutes'
-import useProductStatusOnChange from '../../hooks/useProductStatusOnChange'
+import useProductStatusOnChange from '../../hooks/change/useProductStatusOnChange'
 import useProductStatusesActions from '../../contexts/ProductStatusesActionsContext/hooks/useProductStatusesActions'
 
 const ProductStatusEditForm: FC = () => {
