@@ -29,7 +29,12 @@ import Contacts from '../../../pages/Clients/components/Contacts/Contacts'
 import ContactsRoutes from '../../../pages/Clients/components/Contacts/routes/ContactsRoutes'
 import Dashboard from '../../../pages/Dashboard/Dashboard'
 import Deals from '../../../pages/Deals/Deals'
-import Leads from '../../../pages/Leads/Leads'
+import LeadAttributeChanges from '../../../pages/Leads/components/LeadsAttributes/components/LeadAttributeChanges/LeadAttributeChanges'
+import LeadAttributeCreate from '../../../pages/Leads/components/LeadsAttributes/components/LeadAttributeCreate/LeadAttributeCreate'
+import LeadAttributeEdit from '../../../pages/Leads/components/LeadsAttributes/components/LeadAttributeEdit/LeadAttributeEdit'
+import LeadAttributeView from '../../../pages/Leads/components/LeadsAttributes/components/LeadAttributeView/LeadAttributeView'
+import LeadAttributes from '../../../pages/Leads/components/LeadsAttributes/LeadAttributes'
+import LeadAttributesRoutes from '../../../pages/Leads/components/LeadsAttributes/routes/LeadAttributesRoutes'
 import NotFound from '../../../pages/NotFound/NotFound'
 import ProductAttributeChanges from '../../../pages/Products/components/ProductAttributes/components/ProductAttributeChanges/ProductAttributeChanges'
 import ProductAttributeCreate from '../../../pages/Products/components/ProductAttributes/components/ProductAttributeCreate/ProductAttributeCreate'
@@ -66,31 +71,15 @@ const Routes: FC = () => {
             <Route path="/calendar" component={Calendar} />
             <Route path="/activities" component={Activities} />
             <Route path="/deals" component={Deals} />
-            <Route path="/leads" component={Leads} />
+            <Route path="/settings" component={Settings} />
 
-            <Route path={ProductsRoutes.Index} exact component={Products} />
-            <Route path={ProductsRoutes.Create} exact component={ProductCreate} />
-            <Route path={withId(ProductsRoutes.View)} exact component={ProductView} />
-            <Route path={withId(ProductsRoutes.Edit)} exact component={ProductEdit} />
-            <Route path={withId(ProductsRoutes.Changes)} exact component={ProductChanges} />
+            {/*  */}
 
-            <Route path={ProductCategoriesRoutes.Index} exact component={ProductCategories} />
-            <Route path={ProductCategoriesRoutes.Create} exact component={ProductCategoryCreate} />
-            <Route path={withId(ProductCategoriesRoutes.View)} exact component={ProductCategoryView} />
-            <Route path={withId(ProductCategoriesRoutes.Edit)} exact component={ProductCategoryEdit} />
-            <Route path={withId(ProductCategoriesRoutes.Changes)} exact component={ProductCategoryChanges} />
-
-            <Route path={ProductAttributesRoutes.Index} exact component={ProductAttributes} />
-            <Route path={ProductAttributesRoutes.Create} exact component={ProductAttributeCreate} />
-            <Route path={withId(ProductAttributesRoutes.View)} exact component={ProductAttributeView} />
-            <Route path={withId(ProductAttributesRoutes.Edit)} exact component={ProductAttributeEdit} />
-            <Route path={withId(ProductAttributesRoutes.Changes)} exact component={ProductAttributeChanges} />
-
-            <Route path={ProductStatusesRoutes.Index} exact component={ProductStatuses} />
-            <Route path={ProductStatusesRoutes.Create} exact component={ProductStatusCreate} />
-            <Route path={withId(ProductStatusesRoutes.View)} exact component={ProductStatusView} />
-            <Route path={withId(ProductStatusesRoutes.Edit)} exact component={ProductStatusEdit} />
-            <Route path={withId(ProductStatusesRoutes.Changes)} exact component={ProductStatusChanges} />
+            <Route path={LeadAttributesRoutes.Index} exact component={LeadAttributes} />
+            <Route path={LeadAttributesRoutes.Create} exact component={LeadAttributeCreate} />
+            <Route path={withId(LeadAttributesRoutes.View)} exact component={LeadAttributeView} />
+            <Route path={withId(LeadAttributesRoutes.Edit)} exact component={LeadAttributeEdit} />
+            <Route path={withId(LeadAttributesRoutes.Changes)} exact component={LeadAttributeChanges} />
 
             {/*  */}
 
@@ -120,7 +109,34 @@ const Routes: FC = () => {
             <Route path={withId(CompanyAttributesRoutes.Edit)} exact component={CompanyAttributeEdit} />
             <Route path={withId(CompanyAttributesRoutes.Changes)} exact component={CompanyAttributeChanges} />
 
-            <Route path="/settings" component={Settings} />
+            {/*  */}
+
+            <Route path={ProductsRoutes.Index} exact component={Products} />
+            <Route path={ProductsRoutes.Create} exact component={ProductCreate} />
+            <Route path={withId(ProductsRoutes.View)} exact component={ProductView} />
+            <Route path={withId(ProductsRoutes.Edit)} exact component={ProductEdit} />
+            <Route path={withId(ProductsRoutes.Changes)} exact component={ProductChanges} />
+
+            <Route path={ProductCategoriesRoutes.Index} exact component={ProductCategories} />
+            <Route path={ProductCategoriesRoutes.Create} exact component={ProductCategoryCreate} />
+            <Route path={withId(ProductCategoriesRoutes.View)} exact component={ProductCategoryView} />
+            <Route path={withId(ProductCategoriesRoutes.Edit)} exact component={ProductCategoryEdit} />
+            <Route path={withId(ProductCategoriesRoutes.Changes)} exact component={ProductCategoryChanges} />
+
+            <Route path={ProductAttributesRoutes.Index} exact component={ProductAttributes} />
+            <Route path={ProductAttributesRoutes.Create} exact component={ProductAttributeCreate} />
+            <Route path={withId(ProductAttributesRoutes.View)} exact component={ProductAttributeView} />
+            <Route path={withId(ProductAttributesRoutes.Edit)} exact component={ProductAttributeEdit} />
+            <Route path={withId(ProductAttributesRoutes.Changes)} exact component={ProductAttributeChanges} />
+
+            <Route path={ProductStatusesRoutes.Index} exact component={ProductStatuses} />
+            <Route path={ProductStatusesRoutes.Create} exact component={ProductStatusCreate} />
+            <Route path={withId(ProductStatusesRoutes.View)} exact component={ProductStatusView} />
+            <Route path={withId(ProductStatusesRoutes.Edit)} exact component={ProductStatusEdit} />
+            <Route path={withId(ProductStatusesRoutes.Changes)} exact component={ProductStatusChanges} />
+
+            {/*  */}
+
             <Route component={NotFound} />
         </Switch>
     )
