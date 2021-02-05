@@ -38,6 +38,12 @@ import LeadAttributesRoutes from '../../../pages/Leads/components/LeadsAttribute
 import LeadChanges from '../../../pages/Leads/components/Leads/components/LeadChanges/LeadChanges'
 import LeadCreate from '../../../pages/Leads/components/Leads/components/LeadCreate/LeadCreate'
 import LeadEdit from '../../../pages/Leads/components/Leads/components/LeadEdit/LeadEdit'
+import LeadSourceChanges from '../../../pages/Leads/components/LeadSources/components/LeadSourceChanges/LeadSourceChanges'
+import LeadSourceCreate from '../../../pages/Leads/components/LeadSources/components/LeadSourceCreate/LeadSourceCreate'
+import LeadSourceEdit from '../../../pages/Leads/components/LeadSources/components/LeadSourceEdit/LeadSourceEdit'
+import LeadSourceView from '../../../pages/Leads/components/LeadSources/components/LeadSourceView/LeadSourceView'
+import LeadSources from '../../../pages/Leads/components/LeadSources/LeadSources'
+import LeadSourcesRoutes from '../../../pages/Leads/components/LeadSources/routes/LeadSourcesRoutes'
 import LeadView from '../../../pages/Leads/components/Leads/components/LeadView/LeadView'
 import Leads from '../../../pages/Leads/components/Leads/Leads'
 import LeadsRoutes from '../../../pages/Leads/components/Leads/routes/LeadsRoutes'
@@ -86,6 +92,12 @@ const Routes: FC = () => {
             <Route path={withId(LeadsRoutes.View)} exact component={LeadView} />
             <Route path={withId(LeadsRoutes.Edit)} exact component={LeadEdit} />
             <Route path={withId(LeadsRoutes.Changes)} exact component={LeadChanges} />
+
+            <Route path={LeadSourcesRoutes.Index} exact component={LeadSources} />
+            <Route path={LeadSourcesRoutes.Create} exact component={LeadSourceCreate} />
+            <Route path={withId(LeadSourcesRoutes.View)} exact component={LeadSourceView} />
+            <Route path={withId(LeadSourcesRoutes.Edit)} exact component={LeadSourceEdit} />
+            <Route path={withId(LeadSourcesRoutes.Changes)} exact component={LeadSourceChanges} />
 
             <Route path={LeadAttributesRoutes.Index} exact component={LeadAttributes} />
             <Route path={LeadAttributesRoutes.Create} exact component={LeadAttributeCreate} />
