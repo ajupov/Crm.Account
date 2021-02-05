@@ -254,13 +254,13 @@ const useCompanyOnChange = (): UseCompanyOnChangeReturn => {
                 return
             }
 
-            const neww = [...state.company.attributeLinks]
+            const newLinks = [...state.company.attributeLinks]
 
-            neww[index].value = value
+            newLinks[index].value = value
 
             state.setCompany({
                 ...state.company,
-                attributeLinks: neww
+                attributeLinks: newLinks
             })
 
             setIsConfirmEnabled(true)

@@ -2,30 +2,28 @@ import { calculateOffset, calculatePage } from '../../../../../../../../../utils
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import Contact from '../../../../../../../../../../api/contacts/models/Contact'
-import ContactAttributeLink from '../../../../../../../../../../api/contacts/models/ContactAttributeLink'
-import ContactBankAccount from '../../../../../../../../../../api/contacts/models/ContactBankAccount'
-import ContactChange from '../../../../../../../../../../api/contacts/models/ContactChange'
-import ContactChangesContext from '../../../../../contexts/ContactChangesContext/ContactChangesContext'
+import Lead from '../../../../../../../../../../api/leads/models/Lead'
+import LeadAttributeLink from '../../../../../../../../../../api/leads/models/LeadAttributeLink'
+import LeadChange from '../../../../../../../../../../api/leads/models/LeadChange'
+import LeadChangesContext from '../../../../../contexts/LeadChangesContext/LeadChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../../components/common/collections/Table/TableHeader'
 import { getDateTimeAsRecently } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../../../helpers/fileNameHelper'
 import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
-import { joinAttributes } from '../../../../../mappers/contactAttributesMapper'
-import { joinBankAccounts } from '../../../../../mappers/contactBankAccountsMapper'
+import { joinAttributes } from '../../../../../mappers/leadAttributesMapper'
 
-interface UseContactChangesTableReturn {
+interface UseLeadChangesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (contacts: ContactChange[]) => TableBodyRowProps[]
+    map: (leads: LeadChange[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
 
 // TODO: Move to l10n
-const useContactChangesTable = (): UseContactChangesTableReturn => {
-    const state = useContext(ContactChangesContext)
+const useLeadChangesTable = (): UseLeadChangesTableReturn => {
+    const state = useContext(LeadChangesContext)
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const changes = (await state.getAll())?.changes
@@ -45,7 +43,7 @@ const useContactChangesTable = (): UseContactChangesTableReturn => {
         [state]
     )
 
-    const getChangeName = useCallback((change: ContactChange) => {
+    const getChangeName = useCallback((change: LeadChange) => {
         if (!change.oldValueJson && change.newValueJson) {
             return 'Создан'
         }
@@ -61,24 +59,20 @@ const useContactChangesTable = (): UseContactChangesTableReturn => {
         return ''
     }, [])
 
-    const mapAttributes = useCallback((links?: ContactAttributeLink[]) => joinAttributes(links), [])
-
-    const mapBankAccounts = useCallback((accounts?: ContactBankAccount[]) => joinBankAccounts(accounts), [])
+    const mapAttributes = useCallback((links?: LeadAttributeLink[]) => joinAttributes(links), [])
 
     const getChangeValue = useCallback(
-        (change: ContactChange) => {
-            const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as Contact) : void 0
-            const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as Contact) : void 0
+        (change: LeadChange) => {
+            const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as Lead) : void 0
+            const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as Lead) : void 0
 
             return [
-                `ID Лида: ${getValueOrEmpty(oldValue?.leadId)} → ${getValueOrEmpty(newValue?.leadId)}`,
-                `ID Компании: ${getValueOrEmpty(oldValue?.companyId)} → ${getValueOrEmpty(newValue?.companyId)}`,
+                `ID Источника: ${getValueOrEmpty(oldValue?.sourceId)} → ${getValueOrEmpty(newValue?.sourceId)}`,
                 `Фамилия: ${getValueOrEmpty(oldValue?.surname)} → ${getValueOrEmpty(newValue?.surname)}`,
                 `Имя: ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
                 `Отчество: ${getValueOrEmpty(oldValue?.patronymic)} → ${getValueOrEmpty(newValue?.patronymic)}`,
                 `Телефон: ${getValueOrEmpty(oldValue?.phone)} → ${getValueOrEmpty(newValue?.phone)}`,
                 `Email: ${getValueOrEmpty(oldValue?.email)} → ${getValueOrEmpty(newValue?.email)}`,
-                `ИНН: ${getValueOrEmpty(oldValue?.taxNumber)} → ${getValueOrEmpty(newValue?.taxNumber)}`,
                 `Должность: ${getValueOrEmpty(oldValue?.post)} → ${getValueOrEmpty(newValue?.post)}`,
                 `Почтовый индекс: ${getValueOrEmpty(oldValue?.postcode)} → ${getValueOrEmpty(newValue?.postcode)}`,
                 `Страна: ${getValueOrEmpty(oldValue?.country)} → ${getValueOrEmpty(newValue?.country)}`,
@@ -88,21 +82,20 @@ const useContactChangesTable = (): UseContactChangesTableReturn => {
                 `Улица: ${getValueOrEmpty(oldValue?.street)} → ${getValueOrEmpty(newValue?.street)}`,
                 `Дом/строение: ${getValueOrEmpty(oldValue?.house)} → ${getValueOrEmpty(newValue?.house)}`,
                 `Квартира: ${getValueOrEmpty(oldValue?.apartment)} → ${getValueOrEmpty(newValue?.apartment)}`,
-                `Дата рождения: ${getValueOrEmpty(oldValue?.birthDate)} → ${getValueOrEmpty(newValue?.birthDate)}`,
-                `Удален: ${getValueOrEmpty(oldValue?.isDeleted)} → ${getValueOrEmpty(newValue?.isDeleted)}`,
-                `Расчетные счета: ${getValueOrEmpty(mapBankAccounts(oldValue?.bankAccounts))} → ${getValueOrEmpty(
-                    mapBankAccounts(newValue?.bankAccounts)
+                `Сумма потенциальной сделки: ${getValueOrEmpty(oldValue?.opportunitySum)} → ${getValueOrEmpty(
+                    newValue?.opportunitySum
                 )}`,
+                `Удален: ${getValueOrEmpty(oldValue?.isDeleted)} → ${getValueOrEmpty(newValue?.isDeleted)}`,
                 `Атрибуты: ${getValueOrEmpty(mapAttributes(oldValue?.attributeLinks))} → ${getValueOrEmpty(
                     mapAttributes(newValue?.attributeLinks)
                 )}`
             ]
         },
-        [mapAttributes, mapBankAccounts]
+        [mapAttributes]
     )
 
     const map = useCallback(
-        (changes: ContactChange[]) =>
+        (changes: LeadChange[]) =>
             changes.map(
                 change =>
                     ({
@@ -151,4 +144,4 @@ const useContactChangesTable = (): UseContactChangesTableReturn => {
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
-export default useContactChangesTable
+export default useLeadChangesTable

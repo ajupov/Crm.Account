@@ -1,16 +1,13 @@
 import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import ContactContext from '../../contexts/ContactContext/ContactContext'
 import { CreateFormFieldProps } from '../../../../../../components/common/forms/CreateForm/CreateForm'
-import useCompaniesAutocomplete from '../autocomplete/useCompaniesAutocomplete'
-import useCompanyLoad from '../load/useCompanyLoad'
-import useContactAttributesLoad from '../load/useContactAttributesLoad'
+import LeadContext from '../../contexts/LeadContext/LeadContext'
 import { useHistory } from 'react-router'
-import useLeadLoad from '../load/useLeadLoad'
-import useLeadsAutocomplete from '../autocomplete/useLeadsAutocomplete'
+import useLeadAttributesLoad from '../load/useLeadAttributesLoad'
+import useLeadSourcesLoad from '../load/useLeadSourcesLoad'
 
-interface UseContactOnChangeReturn {
+interface UseLeadOnChangeReturn {
     fields: CreateFormFieldProps[]
     isConfirmEnabled: boolean
     onClickConfirmCreate: () => void
@@ -19,28 +16,16 @@ interface UseContactOnChangeReturn {
 }
 
 // TODO: Move to l10n
-const useContactOnChange = (): UseContactOnChangeReturn => {
+const useLeadOnChange = (): UseLeadOnChangeReturn => {
     const history = useHistory()
-    const state = useContext(ContactContext)
-    const { lead } = useLeadLoad(state.contact.leadId)
-    const { company } = useCompanyLoad(state.contact.companyId)
-    const { loadLeads, leadsAsOptions } = useLeadsAutocomplete()
-    const { loadCompanies, companiesAsOptions } = useCompaniesAutocomplete()
-    const { attributesAsOptions } = useContactAttributesLoad()
-
+    const state = useContext(LeadContext)
+    const { sourcesAsOptions } = useLeadSourcesLoad()
+    const { attributesAsOptions } = useLeadAttributesLoad()
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
-    const onChangeLeadId = useCallback(
+    const onChangeSourceId = useCallback(
         (_, data: DropdownProps) => {
-            state.setContact({ ...state.contact, leadId: data.value as string })
-            setIsConfirmEnabled(true)
-        },
-        [state]
-    )
-
-    const onChangeCompanyId = useCallback(
-        (_, data: DropdownProps) => {
-            state.setContact({ ...state.contact, companyId: data.value as string })
+            state.setLead({ ...state.lead, sourceId: data.value as string })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -48,7 +33,7 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
 
     const onChangeSurname = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setContact({ ...state.contact, surname: data.value })
+            state.setLead({ ...state.lead, surname: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -56,7 +41,7 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
 
     const onChangeName = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setContact({ ...state.contact, name: data.value })
+            state.setLead({ ...state.lead, name: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -64,7 +49,7 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
 
     const onChangePatronymic = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setContact({ ...state.contact, patronymic: data.value })
+            state.setLead({ ...state.lead, patronymic: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -72,7 +57,7 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
 
     const onChangePhone = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setContact({ ...state.contact, phone: data.value })
+            state.setLead({ ...state.lead, phone: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -80,15 +65,7 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
 
     const onChangeEmail = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setContact({ ...state.contact, email: data.value })
-            setIsConfirmEnabled(true)
-        },
-        [state]
-    )
-
-    const onChangeTaxNumber = useCallback(
-        (_, data: InputOnChangeData) => {
-            state.setContact({ ...state.contact, taxNumber: data.value })
+            state.setLead({ ...state.lead, email: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -96,7 +73,7 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
 
     const onChangePost = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setContact({ ...state.contact, post: data.value })
+            state.setLead({ ...state.lead, post: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -104,7 +81,7 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
 
     const onChangePostcode = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setContact({ ...state.contact, postcode: data.value })
+            state.setLead({ ...state.lead, postcode: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -112,7 +89,7 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
 
     const onChangeCountry = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setContact({ ...state.contact, country: data.value })
+            state.setLead({ ...state.lead, country: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -120,7 +97,7 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
 
     const onChangeRegion = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setContact({ ...state.contact, region: data.value })
+            state.setLead({ ...state.lead, region: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -128,7 +105,7 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
 
     const onChangeProvince = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setContact({ ...state.contact, province: data.value })
+            state.setLead({ ...state.lead, province: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -136,7 +113,7 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
 
     const onChangeCity = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setContact({ ...state.contact, city: data.value })
+            state.setLead({ ...state.lead, city: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -144,7 +121,7 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
 
     const onChangeStreet = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setContact({ ...state.contact, street: data.value })
+            state.setLead({ ...state.lead, street: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -152,7 +129,7 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
 
     const onChangeHouse = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setContact({ ...state.contact, house: data.value })
+            state.setLead({ ...state.lead, house: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -160,15 +137,15 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
 
     const onChangeApartment = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setContact({ ...state.contact, apartment: data.value })
+            state.setLead({ ...state.lead, apartment: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
     )
 
-    const onChangeBirthDate = useCallback(
+    const onChangeOpportunitySum = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setContact({ ...state.contact, birthDate: data.value })
+            state.setLead({ ...state.lead, opportunitySum: parseInt(data.value, 10) })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -176,14 +153,14 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
 
     const onChangeAttributeKey = useCallback(
         (index: number, value: string) => {
-            if (!state.contact.attributeLinks) {
+            if (!state.lead.attributeLinks) {
                 return
             }
 
-            state.contact.attributeLinks[index].contactAttributeId = value
+            state.lead.attributeLinks[index].leadAttributeId = value
 
-            state.setContact({
-                ...state.contact
+            state.setLead({
+                ...state.lead
             })
 
             setIsConfirmEnabled(true)
@@ -193,16 +170,16 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
 
     const onChangeAttributeValue = useCallback(
         (index: number, value: string) => {
-            if (!state.contact.attributeLinks) {
+            if (!state.lead.attributeLinks) {
                 return
             }
 
-            const newLinks = [...state.contact.attributeLinks]
+            const newLinks = [...state.lead.attributeLinks]
 
             newLinks[index].value = value
 
-            state.setContact({
-                ...state.contact,
+            state.setLead({
+                ...state.lead,
                 attributeLinks: newLinks
             })
 
@@ -213,9 +190,9 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
 
     const onDeleteAttribute = useCallback(
         (index: number) => {
-            state.setContact({
-                ...state.contact,
-                attributeLinks: state.contact.attributeLinks?.filter((_, i) => i !== index)
+            state.setLead({
+                ...state.lead,
+                attributeLinks: state.lead.attributeLinks?.filter((_, i) => i !== index)
             })
 
             setIsConfirmEnabled(true)
@@ -224,14 +201,14 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
     )
 
     const onClickAddAttributeItem = useCallback(() => {
-        state.setContact({ ...state.contact, attributeLinks: [...(state.contact.attributeLinks ?? []), {}] })
+        state.setLead({ ...state.lead, attributeLinks: [...(state.lead.attributeLinks ?? []), {}] })
 
         setIsConfirmEnabled(true)
     }, [state])
 
     const onChangeIsDeleted = useCallback(
         (_, __) => {
-            state.setContact({ ...state.contact, isDeleted: !state.contact.isDeleted })
+            state.setLead({ ...state.lead, isDeleted: !state.lead.isDeleted })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -252,142 +229,125 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
     const fields: CreateFormFieldProps[] = useMemo(
         () => [
             {
-                type: 'autocomplete',
-                label: 'Лид',
-                value: state.contact.leadId,
-                text: lead ? `${lead?.surname} ${lead?.name} ${lead?.patronymic}`.trim() : '',
-                load: loadLeads,
-                options: leadsAsOptions,
-                onChange: onChangeLeadId
-            },
-            {
-                type: 'autocomplete',
-                label: 'Компания',
-                value: state.contact.companyId,
-                text: company?.fullName ?? '',
-                load: loadCompanies,
-                options: companiesAsOptions,
-                onChange: onChangeCompanyId
+                type: 'dropdown',
+                required: true,
+                label: 'Источник',
+                value: state.lead.sourceId,
+                options: sourcesAsOptions,
+                onChange: onChangeSourceId
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Фамилия',
-                value: state.contact.surname,
+                value: state.lead.surname,
                 onChange: onChangeSurname
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Имя',
-                value: state.contact.name,
+                value: state.lead.name,
                 onChange: onChangeName
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Отчество',
-                value: state.contact.patronymic,
+                value: state.lead.patronymic,
                 onChange: onChangePatronymic
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Телефон',
-                value: state.contact.phone,
+                value: state.lead.phone,
                 onChange: onChangePhone
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Email',
-                value: state.contact.email,
+                value: state.lead.email,
                 onChange: onChangeEmail
             },
             {
                 type: 'text',
                 required: true,
-                topLabel: 'ИНН',
-                value: state.contact.taxNumber,
-                onChange: onChangeTaxNumber
-            },
-            {
-                type: 'text',
-                required: true,
                 topLabel: 'Должность',
-                value: state.contact.post,
+                value: state.lead.post,
                 onChange: onChangePost
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Почтовый индекс',
-                value: state.contact.postcode,
+                value: state.lead.postcode,
                 onChange: onChangePostcode
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Страна',
-                value: state.contact.country,
+                value: state.lead.country,
                 onChange: onChangeCountry
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Регион',
-                value: state.contact.region,
+                value: state.lead.region,
                 onChange: onChangeRegion
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Район/провинция',
-                value: state.contact.province,
+                value: state.lead.province,
                 onChange: onChangeProvince
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Город/населенный пункт',
-                value: state.contact.city,
+                value: state.lead.city,
                 onChange: onChangeCity
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Улица',
-                value: state.contact.street,
+                value: state.lead.street,
                 onChange: onChangeStreet
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Дом/строение',
-                value: state.contact.house,
+                value: state.lead.house,
                 onChange: onChangeHouse
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Квартира',
-                value: state.contact.apartment,
+                value: state.lead.apartment,
                 onChange: onChangeApartment
             },
             {
-                type: 'date',
+                type: 'number',
                 required: true,
-                topLabel: 'Дата рождения',
-                value: state.contact.birthDate,
-                onChange: onChangeBirthDate
+                topLabel: 'Сумма потенциальной сделки',
+                value: state.lead.opportunitySum,
+                onChange: onChangeOpportunitySum
             },
             {
                 type: 'attributes',
                 label: 'Атрибуты',
                 options: attributesAsOptions,
-                items: state.contact.attributeLinks?.map((x, i) => ({
+                items: state.lead.attributeLinks?.map((x, i) => ({
                     index: i,
-                    key: x.contactAttributeId ?? '',
+                    key: x.leadAttributeId ?? '',
                     onChangeKey: onChangeAttributeKey,
                     value: x.value ?? '',
                     onChangeValue: onChangeAttributeValue,
@@ -399,65 +359,56 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
             {
                 type: 'checkbox',
                 label: 'Удален',
-                checked: state.contact.isDeleted,
+                checked: state.lead.isDeleted,
                 onChange: onChangeIsDeleted
             }
         ],
         [
             attributesAsOptions,
-            companiesAsOptions,
-            company?.fullName,
-            lead,
-            leadsAsOptions,
-            loadCompanies,
-            loadLeads,
             onChangeApartment,
             onChangeAttributeKey,
             onChangeAttributeValue,
-            onChangeBirthDate,
             onChangeCity,
-            onChangeCompanyId,
             onChangeCountry,
             onChangeEmail,
             onChangeHouse,
             onChangeIsDeleted,
-            onChangeLeadId,
             onChangeName,
+            onChangeOpportunitySum,
             onChangePatronymic,
             onChangePhone,
             onChangePost,
             onChangePostcode,
             onChangeProvince,
             onChangeRegion,
+            onChangeSourceId,
             onChangeStreet,
             onChangeSurname,
-            onChangeTaxNumber,
             onClickAddAttributeItem,
             onDeleteAttribute,
-            state.contact.apartment,
-            state.contact.attributeLinks,
-            state.contact.birthDate,
-            state.contact.city,
-            state.contact.companyId,
-            state.contact.country,
-            state.contact.email,
-            state.contact.house,
-            state.contact.isDeleted,
-            state.contact.leadId,
-            state.contact.name,
-            state.contact.patronymic,
-            state.contact.phone,
-            state.contact.post,
-            state.contact.postcode,
-            state.contact.province,
-            state.contact.region,
-            state.contact.street,
-            state.contact.surname,
-            state.contact.taxNumber
+            sourcesAsOptions,
+            state.lead.apartment,
+            state.lead.attributeLinks,
+            state.lead.city,
+            state.lead.country,
+            state.lead.email,
+            state.lead.house,
+            state.lead.isDeleted,
+            state.lead.name,
+            state.lead.opportunitySum,
+            state.lead.patronymic,
+            state.lead.phone,
+            state.lead.post,
+            state.lead.postcode,
+            state.lead.province,
+            state.lead.region,
+            state.lead.sourceId,
+            state.lead.street,
+            state.lead.surname
         ]
     )
 
     return { fields, isConfirmEnabled, onClickConfirmCreate, onClickConfirmUpdate, onClickCancel }
 }
 
-export default useContactOnChange
+export default useLeadOnChange

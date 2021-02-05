@@ -35,6 +35,12 @@ import LeadAttributeEdit from '../../../pages/Leads/components/LeadsAttributes/c
 import LeadAttributeView from '../../../pages/Leads/components/LeadsAttributes/components/LeadAttributeView/LeadAttributeView'
 import LeadAttributes from '../../../pages/Leads/components/LeadsAttributes/LeadAttributes'
 import LeadAttributesRoutes from '../../../pages/Leads/components/LeadsAttributes/routes/LeadAttributesRoutes'
+import LeadChanges from '../../../pages/Leads/components/Leads/components/LeadChanges/LeadChanges'
+import LeadCreate from '../../../pages/Leads/components/Leads/components/LeadCreate/LeadCreate'
+import LeadEdit from '../../../pages/Leads/components/Leads/components/LeadEdit/LeadEdit'
+import LeadView from '../../../pages/Leads/components/Leads/components/LeadView/LeadView'
+import Leads from '../../../pages/Leads/components/Leads/Leads'
+import LeadsRoutes from '../../../pages/Leads/components/Leads/routes/LeadsRoutes'
 import NotFound from '../../../pages/NotFound/NotFound'
 import ProductAttributeChanges from '../../../pages/Products/components/ProductAttributes/components/ProductAttributeChanges/ProductAttributeChanges'
 import ProductAttributeCreate from '../../../pages/Products/components/ProductAttributes/components/ProductAttributeCreate/ProductAttributeCreate'
@@ -74,6 +80,12 @@ const Routes: FC = () => {
             <Route path="/settings" component={Settings} />
 
             {/*  */}
+
+            <Route path={LeadsRoutes.Index} exact component={Leads} />
+            <Route path={LeadsRoutes.Create} exact component={LeadCreate} />
+            <Route path={withId(LeadsRoutes.View)} exact component={LeadView} />
+            <Route path={withId(LeadsRoutes.Edit)} exact component={LeadEdit} />
+            <Route path={withId(LeadsRoutes.Changes)} exact component={LeadChanges} />
 
             <Route path={LeadAttributesRoutes.Index} exact component={LeadAttributes} />
             <Route path={LeadAttributesRoutes.Create} exact component={LeadAttributeCreate} />
