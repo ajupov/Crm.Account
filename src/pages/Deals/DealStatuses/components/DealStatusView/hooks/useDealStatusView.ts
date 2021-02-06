@@ -38,6 +38,7 @@ const useDealStatusView = (): UseDealStatusViewReturn => {
     const map = useCallback(
         (status: DealStatus): ViewDataProps[] => [
             { label: 'Наименование', value: status.name },
+            { label: 'Конечный', value: status.isFinish ? 'Да' : 'Нет' },
             { label: 'Удален', value: status.isDeleted ? 'Да' : 'Нет' }
         ],
         []

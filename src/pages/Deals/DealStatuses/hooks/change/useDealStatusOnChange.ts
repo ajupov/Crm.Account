@@ -27,6 +27,14 @@ const useDealStatusOnChange = (): UseDealStatusOnChangeReturn => {
         [state]
     )
 
+    const onChangeIsFinish = useCallback(
+        (_, __) => {
+            state.setStatus({ ...state.status, isFinish: !state.status.isFinish })
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
     const onChangeIsDeleted = useCallback(
         (_, __) => {
             state.setStatus({ ...state.status, isDeleted: !state.status.isDeleted })
@@ -58,12 +66,25 @@ const useDealStatusOnChange = (): UseDealStatusOnChangeReturn => {
             },
             {
                 type: 'checkbox',
+                label: 'Конечный',
+                checked: state.status.isFinish,
+                onChange: onChangeIsFinish
+            },
+            {
+                type: 'checkbox',
                 label: 'Удален',
                 checked: state.status.isDeleted,
                 onChange: onChangeIsDeleted
             }
         ],
-        [onChangeIsDeleted, onChangeName, state.status.isDeleted, state.status.name]
+        [
+            onChangeIsDeleted,
+            onChangeIsFinish,
+            onChangeName,
+            state.status.isDeleted,
+            state.status.isFinish,
+            state.status.name
+        ]
     )
 
     return { fields, isConfirmEnabled, onClickConfirmCreate, onClickConfirmUpdate, onClickCancel }

@@ -14,6 +14,7 @@ const useDealStatusesFilters = (): DealStatusesFiltersState => {
     const [maxCreateDate, setMaxCreateDate] = useState(state.request.maxCreateDate ?? '')
     const [minModifyDate, setMinModifyDate] = useState(state.request.minModifyDate ?? '')
     const [maxModifyDate, setMaxModifyDate] = useState(state.request.maxModifyDate ?? '')
+    const [isFinish, setIsFinish] = useState(state.request.isFinish)
     const [isDeleted, setIsDeleted] = useState(state.request.isDeleted)
     const [isApplyEnabled, setIsApplyEnabled] = useState(dealStatusesFiltersInitialState.isApplyEnabled)
     const [isResetEnabled, setIsResetEnabled] = useState(dealStatusesFiltersInitialState.isResetEnabled)
@@ -44,6 +45,11 @@ const useDealStatusesFilters = (): DealStatusesFiltersState => {
         setIsApplyEnabled(true)
     }, [])
 
+    const onChangeIsFinish = useCallback((_, data: CheckboxProps) => {
+        setIsFinish(toBooleanNullable(data.value))
+        setIsApplyEnabled(true)
+    }, [])
+
     const onChangeIsDeleted = useCallback((_, data: CheckboxProps) => {
         setIsDeleted(toBooleanNullable(data.value))
         setIsApplyEnabled(true)
@@ -57,6 +63,7 @@ const useDealStatusesFilters = (): DealStatusesFiltersState => {
             maxCreateDate,
             minModifyDate,
             maxModifyDate,
+            isFinish,
             isDeleted,
             offset: 0
         })
@@ -64,7 +71,7 @@ const useDealStatusesFilters = (): DealStatusesFiltersState => {
         setIsShowMobile(false)
         setIsApplyEnabled(false)
         setIsResetEnabled(true)
-    }, [isDeleted, maxCreateDate, maxModifyDate, minCreateDate, minModifyDate, name, state])
+    }, [isDeleted, isFinish, maxCreateDate, maxModifyDate, minCreateDate, minModifyDate, name, state])
 
     const onReset = useCallback(() => {
         setName('')
@@ -72,6 +79,7 @@ const useDealStatusesFilters = (): DealStatusesFiltersState => {
         setMaxCreateDate('')
         setMinModifyDate('')
         setMaxModifyDate('')
+        setIsFinish(false)
         setIsDeleted(false)
 
         state.setRequest({
@@ -81,6 +89,7 @@ const useDealStatusesFilters = (): DealStatusesFiltersState => {
             maxCreateDate: '',
             minModifyDate: '',
             maxModifyDate: '',
+            isFinish: false,
             isDeleted: false,
             offset: 0
         })
@@ -119,6 +128,20 @@ const useDealStatusesFilters = (): DealStatusesFiltersState => {
             },
             {
                 type: 'radio',
+                topLabel: 'Конечность',
+                label1: 'Все',
+                value1: void 0,
+                checked1: isFinish === void 0,
+                label2: 'Не конечные',
+                value2: 'false',
+                checked2: isFinish === false,
+                label3: 'Конечные',
+                value3: 'true',
+                checked3: isFinish === true,
+                onChange: onChangeIsFinish
+            },
+            {
+                type: 'radio',
                 topLabel: 'Удаленность',
                 label1: 'Все',
                 value1: void 0,
@@ -134,12 +157,14 @@ const useDealStatusesFilters = (): DealStatusesFiltersState => {
         ],
         [
             isDeleted,
+            isFinish,
             maxCreateDate,
             maxModifyDate,
             minCreateDate,
             minModifyDate,
             name,
             onChangeIsDeleted,
+            onChangeIsFinish,
             onChangeMaxCreateDate,
             onChangeMaxModifyDate,
             onChangeMinCreateDate,
