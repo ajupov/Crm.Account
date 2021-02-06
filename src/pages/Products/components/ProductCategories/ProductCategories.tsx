@@ -4,12 +4,12 @@ import Page from '../../../../components/common/grids/Page/Page'
 import ProductCategoriesActionsContextProvider from './contexts/ProductCategoriesActionsContext/ProductCategoriesActionsContextProvider'
 import ProductCategoriesContextProvider from './contexts/ProductCategoriesContext/ProductCategoriesContextProvider'
 import ProductCategoriesFilter from './components/ProductCategoriesFilter/ProductCategoriesFilter'
+import ProductCategoriesFilterMobile from './components/ProductCategoriesFilterMobile/ProductCategoriesFilterMobile'
 import ProductCategoriesFiltersContextProvider from './contexts/ProductCategoriesFiltersContext/ProductCategoriesFiltersContextProvider'
 import ProductCategoriesTable from './components/ProductCategoriesTable/ProductCategoriesTable'
 import ProductCategoryContextProvider from './contexts/ProductCategoryContext/ProductCategoryContextProvider'
 import ProductCategoryDelete from './components/ProductCategoryDelete/ProductCategoryDelete'
 import ProductCategoryRestore from './components/ProductCategoryRestore/ProductCategoryRestore'
-import ProductsCategoriesFilterMobile from './components/ProductsCategoriesFilterMobile/ProductsCategoriesFilterMobile'
 import ProductsMenu from '../ProductsMenu/ProductsMenu'
 import { setPageTitle } from '../../../../helpers/productNameHelper'
 
@@ -27,7 +27,7 @@ const ProductCategories: FC = () => {
                             title={title}
                             firstSidebar={<ProductsMenu />}
                             secondSidebar={<ProductCategoriesFilter />}
-                            secondSidebarMobile={<ProductsCategoriesFilterMobile />}
+                            secondSidebarMobile={<ProductCategoriesFilterMobile />}
                         >
                             <ProductCategoriesTable />
                             <ProductCategoryDelete />

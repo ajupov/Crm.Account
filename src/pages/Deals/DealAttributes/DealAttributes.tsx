@@ -6,9 +6,9 @@ import DealAttributeRestore from './components/DealAttributeRestore/DealAttribut
 import DealAttributesActionsContextProvider from './contexts/DealAttributesActionsContext/DealAttributesActionsContextProvider'
 import DealAttributesContextProvider from './contexts/DealAttributesContext/DealAttributesContextProvider'
 import DealAttributesFilter from './components/DealAttributesFilter/DealAttributesFilter'
+import DealAttributesFilterMobile from './components/DealAttributesFilterMobile/DealAttributesFilterMobile'
 import DealAttributesFiltersContextProvider from './contexts/DealAttributesFiltersContext/DealAttributesFiltersContextProvider'
 import DealAttributesTable from './components/DealAttributesTable/DealAttributesTable'
-import DealsAttributesFilterMobile from './components/DealsAttributesFilterMobile/DealsAttributesFilterMobile'
 import DealsMenu from '../DealsMenu/DealsMenu'
 import Page from '../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../helpers/productNameHelper'
@@ -28,7 +28,7 @@ const DealAttributes: FC = () => {
                             title={title}
                             firstSidebar={<DealsMenu />}
                             secondSidebar={<DealAttributesFilter />}
-                            secondSidebarMobile={<DealsAttributesFilterMobile />}
+                            secondSidebarMobile={<DealAttributesFilterMobile />}
                         >
                             <DealAttributesTable />
                             <DealAttributeDelete />

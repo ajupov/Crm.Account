@@ -6,10 +6,10 @@ import LeadSourceRestore from './components/LeadSourceRestore/LeadSourceRestore'
 import LeadSourcesActionsContextProvider from './contexts/LeadSourcesActionsContext/LeadSourcesActionsContextProvider'
 import LeadSourcesContextProvider from './contexts/LeadSourcesContext/LeadSourcesContextProvider'
 import LeadSourcesFilter from './components/LeadSourcesFilter/LeadSourcesFilter'
+import LeadSourcesFilterMobile from './components/LeadSourcesFilterMobile/LeadSourcesFilterMobile'
 import LeadSourcesFiltersContextProvider from './contexts/LeadSourcesFiltersContext/LeadSourcesFiltersContextProvider'
 import LeadSourcesTable from './components/LeadSourcesTable/LeadSourcesTable'
 import LeadsMenu from '../LeadsMenu/LeadsMenu'
-import LeadsSourcesFilterMobile from './components/LeadsSourcesFilterMobile/LeadsSourcesFilterMobile'
 import Page from '../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../helpers/productNameHelper'
 
@@ -28,7 +28,7 @@ const LeadSources: FC = () => {
                             title={title}
                             firstSidebar={<LeadsMenu />}
                             secondSidebar={<LeadSourcesFilter />}
-                            secondSidebarMobile={<LeadsSourcesFilterMobile />}
+                            secondSidebarMobile={<LeadSourcesFilterMobile />}
                         >
                             <LeadSourcesTable />
                             <LeadSourceDelete />

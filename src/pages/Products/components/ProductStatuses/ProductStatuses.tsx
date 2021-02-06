@@ -7,10 +7,10 @@ import ProductStatusRestore from './components/ProductStatusRestore/ProductStatu
 import ProductStatusesActionsContextProvider from './contexts/ProductStatusesActionsContext/ProductStatusesActionsContextProvider'
 import ProductStatusesContextProvider from './contexts/ProductStatusesContext/ProductStatusesContextProvider'
 import ProductStatusesFilter from './components/ProductStatusesFilter/ProductStatusesFilter'
+import ProductStatusesFilterMobile from './components/ProductStatusesFilterMobile/ProductStatusesFilterMobile'
 import ProductStatusesFiltersContextProvider from './contexts/ProductStatusesFiltersContext/ProductStatusesFiltersContextProvider'
 import ProductStatusesTable from './components/ProductStatusesTable/ProductStatusesTable'
 import ProductsMenu from '../ProductsMenu/ProductsMenu'
-import ProductsStatusesFilterMobile from './components/ProductsStatusesFilterMobile/ProductsStatusesFilterMobile'
 import { setPageTitle } from '../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
@@ -28,7 +28,7 @@ const ProductStatuses: FC = () => {
                             title={title}
                             firstSidebar={<ProductsMenu />}
                             secondSidebar={<ProductStatusesFilter />}
-                            secondSidebarMobile={<ProductsStatusesFilterMobile />}
+                            secondSidebarMobile={<ProductStatusesFilterMobile />}
                         >
                             <ProductStatusesTable />
                             <ProductStatusDelete />

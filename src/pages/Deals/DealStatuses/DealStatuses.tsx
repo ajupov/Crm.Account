@@ -6,10 +6,10 @@ import DealStatusRestore from './components/DealStatusRestore/DealStatusRestore'
 import DealStatusesActionsContextProvider from './contexts/DealStatusesActionsContext/DealStatusesActionsContextProvider'
 import DealStatusesContextProvider from './contexts/DealStatusesContext/DealStatusesContextProvider'
 import DealStatusesFilter from './components/DealStatusesFilter/DealStatusesFilter'
+import DealStatusesFilterMobile from './components/DealStatusesFilterMobile/DealStatusesFilterMobile'
 import DealStatusesFiltersContextProvider from './contexts/DealStatusesFiltersContext/DealStatusesFiltersContextProvider'
 import DealStatusesTable from './components/DealStatusesTable/DealStatusesTable'
 import DealsMenu from '../DealsMenu/DealsMenu'
-import DealsStatusesFilterMobile from './components/DealsStatusesFilterMobile/DealsStatusesFilterMobile'
 import Page from '../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../helpers/productNameHelper'
 
@@ -28,7 +28,7 @@ const DealStatuses: FC = () => {
                             title={title}
                             firstSidebar={<DealsMenu />}
                             secondSidebar={<DealStatusesFilter />}
-                            secondSidebarMobile={<DealsStatusesFilterMobile />}
+                            secondSidebarMobile={<DealStatusesFilterMobile />}
                         >
                             <DealStatusesTable />
                             <DealStatusDelete />
