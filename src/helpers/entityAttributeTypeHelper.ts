@@ -1,5 +1,6 @@
 import CompanyAttributeType from '../../api/companies/models/CompanyAttributeType'
 import ContactAttributeType from '../../api/contacts/models/ContactAttributeType'
+import DealAttributeType from '../../api/deals/models/DealAttributeType'
 import { Dictionary } from '../utils/dictionary/dictionaryUtils'
 import { DropdownItemProps } from '../components/common/fields/Dropdown/Dropdown'
 import LeadAttributeType from '../../api/leads/models/LeadAttributeType'
@@ -44,7 +45,7 @@ export function getAttributeTypesAsSelectOptions(): DropdownItemProps[] {
 }
 
 export function getAttributeTypeName(
-    type?: ProductAttributeType | ContactAttributeType | CompanyAttributeType | LeadAttributeType
+    type?: ProductAttributeType | ContactAttributeType | CompanyAttributeType | LeadAttributeType | DealAttributeType
 ): string {
     return type ? AttributeTypeWithNames[type] : ''
 }

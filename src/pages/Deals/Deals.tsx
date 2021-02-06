@@ -1,11 +1,27 @@
 import React, { FC, useEffect } from 'react'
 
-const Deals: FC = () => {
-    useEffect(() => {
-        document.title = 'Сделки'
-    })
+import DealsMenu from './DealsMenu/DealsMenu'
+import Page from '../../components/common/grids/Page/Page'
+import { setPageTitle } from '../../helpers/productNameHelper'
 
-    return <h1>Сделки</h1>
+// TODO: Move to l10n
+const Deals: FC = () => {
+    const title = 'Сделки'
+
+    useEffect(() => setPageTitle(title), [])
+
+    return (
+        <>
+            <h1>Сделки</h1>
+
+            <Page
+                title={title}
+                firstSidebar={<DealsMenu />}
+                // secondSidebar={<LeadsFilter />}
+                // secondSidebarMobile={<LeadsFilterMobile />}
+            ></Page>
+        </>
+    )
 }
 
 export default Deals

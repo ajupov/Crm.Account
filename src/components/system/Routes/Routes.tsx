@@ -28,7 +28,20 @@ import ContactView from '../../../pages/Clients/components/Contacts/components/C
 import Contacts from '../../../pages/Clients/components/Contacts/Contacts'
 import ContactsRoutes from '../../../pages/Clients/components/Contacts/routes/ContactsRoutes'
 import Dashboard from '../../../pages/Dashboard/Dashboard'
+import DealAttributeChanges from '../../../pages/Deals/DealAttributes/components/DealAttributeChanges/DealAttributeChanges'
+import DealAttributeCreate from '../../../pages/Deals/DealAttributes/components/DealAttributeCreate/DealAttributeCreate'
+import DealAttributeEdit from '../../../pages/Deals/DealAttributes/components/DealAttributeEdit/DealAttributeEdit'
+import DealAttributeView from '../../../pages/Deals/DealAttributes/components/DealAttributeView/DealAttributeView'
+import DealAttributes from '../../../pages/Deals/DealAttributes/DealAttributes'
+import DealAttributesRoutes from '../../../pages/Deals/DealAttributes/routes/DealAttributesRoutes'
+import DealStatusChanges from '../../../pages/Deals/DealStatuses/components/DealStatusChanges/DealStatusChanges'
+import DealStatusCreate from '../../../pages/Deals/DealStatuses/components/DealStatusCreate/DealStatusCreate'
+import DealStatusEdit from '../../../pages/Deals/DealStatuses/components/DealStatusEdit/DealStatusEdit'
+import DealStatusView from '../../../pages/Deals/DealStatuses/components/DealStatusView/DealStatusView'
+import DealStatuses from '../../../pages/Deals/DealStatuses/DealStatuses'
+import DealStatusesRoutes from '../../../pages/Deals/DealStatuses/routes/DealStatusesRoutes'
 import Deals from '../../../pages/Deals/Deals'
+import DealsRoutes from '../../../pages/Deals/Deals/routes/DealsRoutes'
 import LeadAttributeChanges from '../../../pages/Leads/components/LeadsAttributes/components/LeadAttributeChanges/LeadAttributeChanges'
 import LeadAttributeCreate from '../../../pages/Leads/components/LeadsAttributes/components/LeadAttributeCreate/LeadAttributeCreate'
 import LeadAttributeEdit from '../../../pages/Leads/components/LeadsAttributes/components/LeadAttributeEdit/LeadAttributeEdit'
@@ -82,8 +95,27 @@ const Routes: FC = () => {
             <Route path="/" exact component={Dashboard} />
             <Route path="/calendar" component={Calendar} />
             <Route path="/activities" component={Activities} />
-            <Route path="/deals" component={Deals} />
             <Route path="/settings" component={Settings} />
+
+            {/*  */}
+
+            <Route path={DealsRoutes.Index} exact component={Deals} />
+            <Route path={DealsRoutes.Create} exact component={LeadCreate} />
+            <Route path={withId(DealsRoutes.View)} exact component={LeadView} />
+            <Route path={withId(DealsRoutes.Edit)} exact component={LeadEdit} />
+            <Route path={withId(DealsRoutes.Changes)} exact component={LeadChanges} />
+
+            <Route path={DealStatusesRoutes.Index} exact component={DealStatuses} />
+            <Route path={DealStatusesRoutes.Create} exact component={DealStatusCreate} />
+            <Route path={withId(DealStatusesRoutes.View)} exact component={DealStatusView} />
+            <Route path={withId(DealStatusesRoutes.Edit)} exact component={DealStatusEdit} />
+            <Route path={withId(DealStatusesRoutes.Changes)} exact component={DealStatusChanges} />
+
+            <Route path={DealAttributesRoutes.Index} exact component={DealAttributes} />
+            <Route path={DealAttributesRoutes.Create} exact component={DealAttributeCreate} />
+            <Route path={withId(DealAttributesRoutes.View)} exact component={DealAttributeView} />
+            <Route path={withId(DealAttributesRoutes.Edit)} exact component={DealAttributeEdit} />
+            <Route path={withId(DealAttributesRoutes.Changes)} exact component={DealAttributeChanges} />
 
             {/*  */}
 
