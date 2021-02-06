@@ -30,7 +30,7 @@ const useLeadSourcesTable = (): UseLeadSourcesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('Статусы продукта')
+        const fileName = getFileNameWithDateTime('Источники лида')
         const headers = ['Идентификатор', 'Наименование', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...sources])
 

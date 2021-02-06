@@ -40,6 +40,12 @@ import DealStatusEdit from '../../../pages/Deals/DealStatuses/components/DealSta
 import DealStatusView from '../../../pages/Deals/DealStatuses/components/DealStatusView/DealStatusView'
 import DealStatuses from '../../../pages/Deals/DealStatuses/DealStatuses'
 import DealStatusesRoutes from '../../../pages/Deals/DealStatuses/routes/DealStatusesRoutes'
+import DealTypeChanges from '../../../pages/Deals/DealTypes/components/DealTypeChanges/DealTypeChanges'
+import DealTypeCreate from '../../../pages/Deals/DealTypes/components/DealTypeCreate/DealTypeCreate'
+import DealTypeEdit from '../../../pages/Deals/DealTypes/components/DealTypeEdit/DealTypeEdit'
+import DealTypeView from '../../../pages/Deals/DealTypes/components/DealTypeView/DealTypeView'
+import DealTypes from '../../../pages/Deals/DealTypes/DealTypes'
+import DealTypesRoutes from '../../../pages/Deals/DealTypes/routes/DealTypesRoutes'
 import Deals from '../../../pages/Deals/Deals'
 import DealsRoutes from '../../../pages/Deals/Deals/routes/DealsRoutes'
 import LeadAttributeChanges from '../../../pages/Leads/components/LeadsAttributes/components/LeadAttributeChanges/LeadAttributeChanges'
@@ -110,6 +116,12 @@ const Routes: FC = () => {
             <Route path={withId(DealStatusesRoutes.View)} exact component={DealStatusView} />
             <Route path={withId(DealStatusesRoutes.Edit)} exact component={DealStatusEdit} />
             <Route path={withId(DealStatusesRoutes.Changes)} exact component={DealStatusChanges} />
+
+            <Route path={DealTypesRoutes.Index} exact component={DealTypes} />
+            <Route path={DealTypesRoutes.Create} exact component={DealTypeCreate} />
+            <Route path={withId(DealTypesRoutes.View)} exact component={DealTypeView} />
+            <Route path={withId(DealTypesRoutes.Edit)} exact component={DealTypeEdit} />
+            <Route path={withId(DealTypesRoutes.Changes)} exact component={DealTypeChanges} />
 
             <Route path={DealAttributesRoutes.Index} exact component={DealAttributes} />
             <Route path={DealAttributesRoutes.Create} exact component={DealAttributeCreate} />

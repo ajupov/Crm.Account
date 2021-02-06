@@ -30,7 +30,7 @@ const useDealStatusesTable = (): UseDealStatusesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('Статусы продукта')
+        const fileName = getFileNameWithDateTime('Статусы сделки')
         const headers = ['Идентификатор', 'Наименование', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...statuses])
 

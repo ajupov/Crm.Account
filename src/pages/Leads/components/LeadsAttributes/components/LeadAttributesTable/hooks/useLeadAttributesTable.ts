@@ -31,7 +31,7 @@ const useLeadAttributesTable = (): UseLeadAttributesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('Атрибуты контакта')
+        const fileName = getFileNameWithDateTime('Атрибуты лида')
         const headers = ['Идентификатор', 'Тип', 'Наименование', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...attributes])
 

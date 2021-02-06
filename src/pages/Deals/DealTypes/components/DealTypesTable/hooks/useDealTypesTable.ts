@@ -2,38 +2,37 @@ import { calculateOffset, calculatePage } from '../../../../../../utils/paginati
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import DealAttribute from '../../../../../../../api/deals/models/DealAttribute'
-import DealAttributesContext from '../../../contexts/DealAttributesContext/DealAttributesContext'
-import DealAttributesRoutes from '../../../routes/DealAttributesRoutes'
+import DealType from '../../../../../../../api/deals/models/DealType'
+import DealTypesContext from '../../../contexts/DealTypesContext/DealTypesContext'
+import DealTypesRoutes from '../../../routes/DealTypesRoutes'
 import { TableBodyRowProps } from '../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../components/common/collections/Table/TableHeader'
-import { getAttributeTypeName } from '../../../../../../helpers/entityAttributeTypeHelper'
 import { getDateTimeAsRecently } from '../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../helpers/fileNameHelper'
-import useDealAttributeView from '../../DealAttributeView/hooks/useDealAttributeView'
+import useDealTypeView from '../../DealTypeView/hooks/useDealTypeView'
 
-interface UseDealAttributesTableReturn {
+interface UseDealTypesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (attributes: DealAttribute[]) => TableBodyRowProps[]
+    map: (types: DealType[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
 
 // TODO: Move to l10n
-const useDealAttributesTable = (): UseDealAttributesTableReturn => {
-    const state = useContext(DealAttributesContext)
-    const { onClickDelete, onClickRestore } = useDealAttributeView()
+const useDealTypesTable = (): UseDealTypesTableReturn => {
+    const state = useContext(DealTypesContext)
+    const { onClickDelete, onClickRestore } = useDealTypeView()
 
     const onClickDownloadAsCsv = useCallback(async () => {
-        const attributes = (await state.getAll())?.attributes
-        if (!attributes) {
+        const types = (await state.getAll())?.types
+        if (!types) {
             return
         }
 
-        const fileName = getFileNameWithDateTime('Атрибуты сделки')
-        const headers = ['Идентификатор', 'Тип', 'Наименование', 'Удален', 'Создан', 'Изменен']
-        const csv = convertObjectToCSV([headers, ...attributes])
+        const fileName = getFileNameWithDateTime('Типы сделки')
+        const headers = ['Идентификатор', 'Наименование', 'Удален', 'Создан', 'Изменен']
+        const csv = convertObjectToCSV([headers, ...types])
 
         downloadAsCsv(fileName, csv)
     }, [state])
@@ -66,24 +65,21 @@ const useDealAttributesTable = (): UseDealAttributesTableReturn => {
     )
 
     const map = useCallback(
-        (attributes: DealAttribute[]) =>
-            attributes.map(
-                attribute =>
+        (types: DealType[]) =>
+            types.map(
+                type =>
                     ({
-                        id: attribute.id,
+                        id: type.id,
                         cells: [
-                            { value: getAttributeTypeName(attribute.type), textAlign: 'left' },
-                            { value: attribute.key, textAlign: 'left' },
+                            { value: type.name, textAlign: 'left' },
                             {
-                                value: attribute.createDateTime
-                                    ? getDateTimeAsRecently(new Date(attribute.createDateTime))
-                                    : '',
+                                value: type.createDateTime ? getDateTimeAsRecently(new Date(type.createDateTime)) : '',
                                 textAlign: 'center'
                             }
                         ],
-                        isDeleted: attribute.isDeleted,
-                        viewLink: DealAttributesRoutes.View,
-                        editLink: DealAttributesRoutes.Edit,
+                        isDeleted: type.isDeleted,
+                        viewLink: DealTypesRoutes.View,
+                        editLink: DealTypesRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
@@ -94,18 +90,11 @@ const useDealAttributesTable = (): UseDealAttributesTableReturn => {
     const headers: TableHeaderCellProps[] = useMemo(
         () => [
             {
-                key: 'Type',
-                label: 'Тип',
-                width: 4,
-                onClick: () => onClickSort('Type'),
-                orderBy: getOrderBy('Type')
-            },
-            {
-                key: 'Key',
+                key: 'Name',
                 label: 'Наименование',
-                width: 6,
-                onClick: () => onClickSort('Key'),
-                orderBy: getOrderBy('Key')
+                width: 10,
+                onClick: () => onClickSort('Name'),
+                orderBy: getOrderBy('Name')
             },
             {
                 key: 'CreateDateTime',
@@ -126,4 +115,4 @@ const useDealAttributesTable = (): UseDealAttributesTableReturn => {
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
-export default useDealAttributesTable
+export default useDealTypesTable
