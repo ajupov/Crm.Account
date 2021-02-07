@@ -8,7 +8,7 @@ import DesktopSidebarMenu from './DesktopSidebarMenu'
 const DesktopContainer: FC = ({ children }) => (
     <MediaContextProvider>
         <Media greaterThanOrEqual="tablet">
-            <Segment>
+            <Segment style={{ margin: '-20px' }}>
                 <Menu fixed="top" inverted style={{ backgroundColor: '#263238' }} borderless>
                     <DesktopMenu />
                 </Menu>
@@ -17,7 +17,7 @@ const DesktopContainer: FC = ({ children }) => (
                 <Sidebar.Pushable>
                     <Sidebar
                         as={Menu}
-                        style={{ backgroundColor: '#37474F', width: '130px' }}
+                        style={{ backgroundColor: '#37474F', width: '130px', paddingTop: '54px' }}
                         inverted
                         vertical
                         visible
@@ -29,7 +29,8 @@ const DesktopContainer: FC = ({ children }) => (
                         style={{
                             transform: 'translate3d(0,0,0)',
                             paddingLeft: '130px',
-                            minHeight: 'calc(100vh - 54px)'
+                            minHeight: '100vh',
+                            paddingTop: '54px'
                         }}
                     >
                         {children}
