@@ -1,11 +1,17 @@
-import React, { FC, useEffect } from 'react'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable sonarjs/no-duplicate-string */
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+
+import React, { FC, useEffect, useState } from 'react'
 
 import Board from '@lourenci/react-kanban'
 import DealsMenu from './DealsMenu/DealsMenu'
 import Page from '../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../helpers/productNameHelper'
 
-const board = {
+const initialBoard = {
     columns: [
         {
             id: 1,
@@ -14,7 +20,6 @@ const board = {
                 {
                     id: 1,
                     title: 'Card title 1',
-                    // eslint-disable-next-line sonarjs/no-duplicate-string
                     description: 'Card content'
                 },
                 {
@@ -81,6 +86,17 @@ const Deals: FC = () => {
 
     useEffect(() => setPageTitle(title), [])
 
+    const [board, setBoard] = useState(initialBoard)
+
+    const renderCardF = (_dragging: boolean, content: any, removeCard: () => void) => (
+        <div>
+            {content}
+            <button type="button" onClick={removeCard}>
+                Remove Card
+            </button>
+        </div>
+    )
+
     return (
         <Page
             title={title}
@@ -88,7 +104,13 @@ const Deals: FC = () => {
             // secondSidebar={<LeadsFilter />}
             // secondSidebarMobile={<LeadsFilterMobile />}
         >
-            <Board initialBoard={board} />
+            <Board
+                renderCard={({ content }: any, { removeCard, dragging }: any) =>
+                    renderCardF(dragging, content, removeCard)
+                }
+            >
+                {board}
+            </Board>
         </Page>
     )
 }
