@@ -3,3 +3,16 @@
     -webkit-tap-highlight-color: transparent;
     box-sizing: border-box;
 }
+
+.react-kanban-column {
+    background: rgb(249, 250, 251);
+    padding: 10px;
+    border-radius: 2px;
+    margin: 5px;
+    max-width: 310px;
+    box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+}
+
+.react-kanban-column > div[role='button'] {
+    margin-bottom: 15px;
+}

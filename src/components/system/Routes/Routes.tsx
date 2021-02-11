@@ -46,7 +46,7 @@ import DealTypeEdit from '../../../pages/Deals/DealTypes/components/DealTypeEdit
 import DealTypeView from '../../../pages/Deals/DealTypes/components/DealTypeView/DealTypeView'
 import DealTypes from '../../../pages/Deals/DealTypes/DealTypes'
 import DealTypesRoutes from '../../../pages/Deals/DealTypes/routes/DealTypesRoutes'
-import Deals from '../../../pages/Deals/Deals'
+import Deals from '../../../pages/Deals/Deals/Deals'
 import DealsRoutes from '../../../pages/Deals/Deals/routes/DealsRoutes'
 import LeadAttributeChanges from '../../../pages/Leads/components/LeadsAttributes/components/LeadAttributeChanges/LeadAttributeChanges'
 import LeadAttributeCreate from '../../../pages/Leads/components/LeadsAttributes/components/LeadAttributeCreate/LeadAttributeCreate'

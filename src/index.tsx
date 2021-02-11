@@ -1,6 +1,5 @@
 import 'semantic-ui-css/semantic.min.css'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import '@lourenci/react-kanban/dist/styles.css'
 import './index.css'
 
 import Application from './components/system/Application/Application'
