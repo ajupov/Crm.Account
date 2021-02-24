@@ -6,16 +6,30 @@ import BackLink from '../../links/BackLink/BackLink'
 
 export interface PageProps {
     title: string
+    useFullHeight?: boolean
     firstSidebar?: JSX.Element
     secondSidebar?: JSX.Element
     secondSidebarMobile?: JSX.Element
     onClickCancel?: () => void
 }
 
-const Page: FC<PageProps> = ({ onClickCancel, title, children, firstSidebar, secondSidebar, secondSidebarMobile }) => (
-    <Grid columns="equal" stackable reversed="mobile" style={{ margin: 0 }}>
+const Page: FC<PageProps> = ({
+    onClickCancel,
+    title,
+    useFullHeight,
+    children,
+    firstSidebar,
+    secondSidebar,
+    secondSidebarMobile
+}) => (
+    <Grid
+        columns="equal"
+        stackable
+        reversed="mobile"
+        style={{ margin: 0, height: useFullHeight ? 'calc(100vh - 54px)' : '100%' }}
+    >
         <Grid.Column>
-            <Card fluid>
+            <Card fluid style={{ height: useFullHeight ? '100%' : 'auto' }}>
                 <Card.Content>
                     <Grid columns="equal" verticalAlign="middle" style={{ margin: 0 }}>
                         <Grid.Column style={{ padding: '0', paddingBottom: '10px' }}>

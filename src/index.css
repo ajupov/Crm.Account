@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+.react-kanban-board {
+    height: calc(100% - 28px);
+}
+
 .react-kanban-column {
     background: rgb(249, 250, 251);
     padding: 10px;

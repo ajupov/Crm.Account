@@ -14,7 +14,7 @@ const Deals: FC = () => {
 
     return (
         <DealStatusesContextProvider>
-            <Page title={title} firstSidebar={<DealsMenu />}>
+            <Page title={title} useFullHeight firstSidebar={<DealsMenu />}>
                 <DealsBoard />
             </Page>
         </DealStatusesContextProvider>
