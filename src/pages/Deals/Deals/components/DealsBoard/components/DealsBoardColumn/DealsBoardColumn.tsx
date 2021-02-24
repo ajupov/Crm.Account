@@ -14,7 +14,7 @@ const DealsBoardColumn: FC<DealsBoardColumnProps> = ({ title, onClickAddCard }) 
     <Grid>
         <Grid.Row column="2">
             <Grid.Column width="12">
-                <h4 style={{ whiteSpace: 'break-spaces' }}>{title}</h4>
+                <h5 style={{ whiteSpace: 'break-spaces' }}>{title}</h5>
             </Grid.Column>
             <Grid.Column width="4">
                 <Button basic size="mini" onClick={onClickAddCard}>

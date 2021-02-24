@@ -19,9 +19,11 @@ interface DealsBoardCardProps {
 }
 
 const DealsBoardCard: FC<DealsBoardCardProps> = ({ content }) => (
-    <Card>
+    <Card style={{ width: '100%' }}>
         <Card.Content>
-            <Card.Header>{content.title}</Card.Header>
+            <Card.Header>
+                <h5>{content.title}</h5>
+            </Card.Header>
             <Card.Meta>{getDateTimeAsRecently(new Date())}</Card.Meta>
             <Card.Description>{content.description}</Card.Description>
         </Card.Content>
