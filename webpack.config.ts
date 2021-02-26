@@ -49,6 +49,8 @@ const webpackConfig: (env: any, options: any) => Configuration = (_, { mode }) =
     },
     devServer: {
         contentBase: join(__dirname, 'dist'),
+        https: true,
+        open: 'chrome',
         compress: true,
         inline: true,
         hot: true,
