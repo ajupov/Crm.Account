@@ -14,7 +14,7 @@ Account pages for [Lite CRM](https://litecrm.org)
 1. Run `yarn` for restore `node_modules`
 2. Run `yarn build` for build bundles
 3. Run `yarn start` for running application with `DevServer`
-4. The application will be run on https://localhost:11000
+4. The application will be run on http://localhost:11000
 
 ## Development
 

@@ -90,14 +90,8 @@
         "sort-imports": "error", // enforce sorted import declarations within modules
         "template-curly-spacing": "error", // require or disallow spacing around embedded expressions of template strings
         "id-match": ["error", "^[a-zA-Z][a-z0-9]*(?:[A-Z][a-z0-9]+)*$", { "onlyDeclarations": true }],
-
         "promise/prefer-await-to-then": "error", // refer await to then() for reading Promise values,
-        // TODO: Waiting this rule to be fixed
-        // "promise/prefer-await-to-callbacks": "error", // Prefer async/await to the callback pattern
-        // https://github.com/xjamundx/eslint-plugin-promise/issues/175
-
         "optimize-regex/optimize-regex": "error", // Optimize regex literals
-
         "@typescript-eslint/no-extra-parens": ["error", "functions"], // Disallow unnecessary parentheses
         "@typescript-eslint/semi": ["error", "never"], // Require or disallow semicolons instead of ASI
         "@typescript-eslint/member-delimiter-style": ["error", { "multiline": { "delimiter": "none" } }], // Require a specific member delimiter style for interfaces and type literals
@@ -135,11 +129,6 @@
                 "asyncArrow": "always"
             }
         ], // enforce consistent spacing before function definition opening parenthesis
-
-        // TODO: waiting for this rule to be fixed for TS
-        // "no-invalid-this": "error", // disallow this keywords outside of classes or class-like objects
-        // https://github.com/typescript-eslint/typescript-eslint/issues/491
-        // https://github.com/typescript-eslint/typescript-eslint/issues/604
 
         "react/no-access-state-in-setstate": "error", // Prevent using this.state inside this.setState
         "react/no-danger": "error", // Prevent usage of dangerous JSX properties
