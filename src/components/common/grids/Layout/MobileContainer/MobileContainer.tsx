@@ -28,7 +28,7 @@ const MobileContainer: FC = ({ children }) => {
                 </Sidebar>
                 <Sidebar.Pusher
                     dimmed={isSidebarMenuVisible}
-                    style={{ height: '100vh', paddingBottom: 0, overflowY: 'auto' }}
+                    style={{ height: '100%', paddingBottom: 0, overflowY: 'auto' }}
                 >
                     <Segment inverted vertical style={{ backgroundColor: '#263238' }}>
                         <Menu inverted secondary>
