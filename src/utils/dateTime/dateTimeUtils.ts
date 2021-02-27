@@ -23,28 +23,34 @@ export function toLocaleDateTime(value: string | Date | undefined): string {
 }
 
 export function getDateTimeAsRecently(
-    value: Date,
+    value?: Date,
     translateOptions: DateTimeAsRecentlyTranslateOptions = defaultTranslateOptions
 ): string {
+    if (!value) {
+        return ''
+    }
+
+    const valueAsDate = typeof value === 'string' ? new Date(value) : value
+
     const now = new Date()
 
     const yesterday = new Date(now)
     yesterday.setDate(now.getDate() - 1)
 
     if (
-        value.getFullYear() === yesterday.getFullYear() &&
-        value.getMonth() === yesterday.getMonth() &&
-        value.getDate() === yesterday.getDate()
+        valueAsDate.getFullYear() === yesterday.getFullYear() &&
+        valueAsDate.getMonth() === yesterday.getMonth() &&
+        valueAsDate.getDate() === yesterday.getDate()
     ) {
-        return translateOptions.yesterday + ' в ' + toLocalTime(value)
+        return translateOptions.yesterday + ' в ' + toLocalTime(valueAsDate)
     }
 
     if (
-        value.getFullYear() === now.getFullYear() &&
-        value.getMonth() === now.getMonth() &&
-        value.getDate() === now.getDate()
+        valueAsDate.getFullYear() === now.getFullYear() &&
+        valueAsDate.getMonth() === now.getMonth() &&
+        valueAsDate.getDate() === now.getDate()
     ) {
-        const milliSeconds = now.getTime() - value.getTime()
+        const milliSeconds = now.getTime() - valueAsDate.getTime()
         if (milliSeconds < 1000) {
             return translateOptions.now
         }
@@ -74,8 +80,8 @@ export function getDateTimeAsRecently(
             return `${translateOptions.firstPlural.hour} ${translateOptions.ago}`
         }
 
-        return `${translateOptions.today} в ${toLocalTime(value)}`
+        return `${translateOptions.today} в ${toLocalTime(valueAsDate)}`
     }
 
-    return toLocaleDateTime(value)
+    return toLocaleDateTime(valueAsDate)
 }

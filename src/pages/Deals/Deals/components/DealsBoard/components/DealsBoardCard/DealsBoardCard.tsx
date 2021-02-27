@@ -6,7 +6,8 @@ import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateT
 export type RenderCardContent = {
     id: number
     title: string
-    description: string
+    date?: Date
+    progress?: number
 }
 
 export type RenderCardState = {
@@ -18,16 +19,22 @@ interface DealsBoardCardProps {
     content: RenderCardContent
 }
 
-const DealsBoardCard: FC<DealsBoardCardProps> = ({ content }) => (
-    <Card style={{ width: '100%' }}>
-        <Card.Content>
-            <Card.Header>
-                <h5>{content.title}</h5>
-            </Card.Header>
-            <Card.Meta>{getDateTimeAsRecently(new Date())}</Card.Meta>
-            <Card.Description>{content.description}</Card.Description>
-        </Card.Content>
-    </Card>
-)
+const DealsBoardCard: FC<DealsBoardCardProps> = ({ content }) => {
+    const _100Percent = 100
+
+    const getProgres = (value?: number): string => (value ? `${Math.round(value / _100Percent)}%` : '')
+
+    return (
+        <Card raised style={{ width: '100%', marginBottom: '8px' }}>
+            <Card.Content>
+                <Card.Header>
+                    <h5>{content.title}</h5>
+                </Card.Header>
+                <Card.Meta>{getDateTimeAsRecently(content.date)}</Card.Meta>
+                <Card.Description>{getProgres(content.progress)}</Card.Description>
+            </Card.Content>
+        </Card>
+    )
+}
 
 export default DealsBoardCard

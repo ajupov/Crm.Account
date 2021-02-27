@@ -2,6 +2,7 @@ import React, { FC, useEffect } from 'react'
 
 import DealStatusesContextProvider from './contexts/DealStatusesContext/DealStatusesContextProvider'
 import DealsBoard from './components/DealsBoard/DealsBoard'
+import DealsContextProvider from './contexts/DealsContext/DealsContextProvider'
 import DealsMenu from '../DealsMenu/DealsMenu'
 import Page from '../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../helpers/productNameHelper'
@@ -14,9 +15,11 @@ const Deals: FC = () => {
 
     return (
         <DealStatusesContextProvider>
-            <Page title={title} useFullHeight firstSidebar={<DealsMenu />}>
-                <DealsBoard />
-            </Page>
+            <DealsContextProvider>
+                <Page title={title} useFullHeight firstSidebar={<DealsMenu />}>
+                    <DealsBoard />
+                </Page>
+            </DealsContextProvider>
         </DealStatusesContextProvider>
     )
 }

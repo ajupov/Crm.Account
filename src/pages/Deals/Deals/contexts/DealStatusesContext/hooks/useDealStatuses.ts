@@ -7,7 +7,7 @@ import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory
 const dealStatusesClient = new DealStatusesClient(HttpClientFactoryInstance.Api)
 
 const useDealStatuses = (): DealStatusesState => {
-    const MaxLimit = 5
+    const MaxLimit = 2147483647
 
     const [isLoading, setIsLoading] = useState(dealStatusesInitialState.isLoading)
     const [statuses, setStatuses] = useState(dealStatusesInitialState.statuses)
