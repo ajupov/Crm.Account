@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import DealsBoardCard, { RenderCardContent } from './components/DealsBoardCard/DealsBoardCard'
 import DealsBoardColumn, { RenderColumnTitle } from './components/DealsBoardColumn/DealsBoardColumn'
 import React, { FC, useCallback, useContext } from 'react'
@@ -31,14 +33,16 @@ const DealsBoard: FC = () => {
 
     const onRenderCard = useCallback((content: RenderCardContent) => <DealsBoardCard content={content} />, [])
 
-    const onCardDragEnd = useCallback(() => {
-        // setBoard(board)
+    const onCardDragEnd = useCallback((card: any, source: any, destination: any) => {
+        global.console.log(card)
+        global.console.log(source)
+        global.console.log(destination)
     }, [])
 
     const renderBoard = useCallback(() => {
         const board = {
-            columns: dealStatusesState.statuses.map((x, i) => ({
-                id: i,
+            columns: dealStatusesState.statuses.map(x => ({
+                id: x.id,
                 title: x.name ?? '',
                 cards: dealsState.deals
                     .filter(d => d.statusId === x.id)
