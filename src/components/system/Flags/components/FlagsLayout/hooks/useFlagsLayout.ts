@@ -1,9 +1,9 @@
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import AccountFlagType from '../../../../../../../api/flags/models/AccountFlagType'
+import AccountFlagType from '../../../../../../../api/account/models/AccountFlagType'
 import AccountFlagsContext from '../../../contexts/AccountFlagsContext/AccountFlagsContext'
 import { FlagStep } from '../../FlagSteps/FlagSteps'
-import UserFlagType from '../../../../../../../api/flags/models/UserFlagType'
+import UserFlagType from '../../../../../../../api/user/models/UserFlagType'
 import UserFlagsContext from '../../../contexts/UserFlagsContext/UserFlagsContext'
 
 interface UseFlagsLayoutReturn {

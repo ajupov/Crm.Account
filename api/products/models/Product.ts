@@ -9,7 +9,7 @@ export default interface Product {
     parentProductId?: string
     type: ProductType
     statusId?: string
-    name?: string
+    name: string
     vendorCode?: string
     price: number
     image?: string

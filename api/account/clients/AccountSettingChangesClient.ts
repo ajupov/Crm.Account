@@ -13,5 +13,5 @@ export default class AccountSettingChangesClient {
     public GetPagedListAsync = (request?: AccountSettingGetPagedListRequest): Promise<AccountSettingGetPagedListResponse> =>
         this.httpClientFactory
             .createClient(this.httpClientFactory.host)
-            .post<AccountSettingGetPagedListResponse>('/Settings/Account/Changes/v1/GetPagedList', request)
+            .post<AccountSettingGetPagedListResponse>('/Account/Settings/Changes/v1/GetPagedList', request)
 }

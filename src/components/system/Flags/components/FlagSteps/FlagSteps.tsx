@@ -1,9 +1,11 @@
-import AccountFlagType from '../../../../../../api/flags/models/AccountFlagType'
+import AccountFlagType from '../../../../../../api/account/models/AccountFlagType'
 import React from 'react'
-import UserFlagType from '../../../../../../api/flags/models/UserFlagType'
+import UserFlagType from '../../../../../../api/user/models/UserFlagType'
+
+export type FlagStepType = 'account' | 'user'
 
 export type FlagStep = {
-    type: 'account' | 'user'
+    type: FlagStepType
     flag: AccountFlagType | UserFlagType
     title: string
     description: string
@@ -13,7 +15,7 @@ export type FlagStep = {
 const FlagSteps: FlagStep[] = [
     {
         type: 'account',
-        flag: AccountFlagType.IsShownSelectionOfActivitiesIndustry,
+        flag: AccountFlagType.IsShownSelectionOfActivityIndustry,
         title: 'Выбрать вид деятельности',
         description: 'Выберите вид деятельности',
         component: <p>вид деятельности</p>

@@ -1,4 +1,4 @@
-import AccountFlagType from '../../../../../api/flags/models/AccountFlagType'
+import AccountFlagType from '../../../../../api/account/models/AccountFlagType'
 
 export default interface AccountFlagsState {
     notSetFlags: AccountFlagType[]

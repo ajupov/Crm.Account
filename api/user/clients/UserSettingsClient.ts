@@ -9,8 +9,8 @@ export default class UserSettingsClient {
     }
 
     // prettier-ignore
-    public GetNotSetListAsync = (): Promise<UserSetting> =>
+    public GetAsync = (): Promise<UserSetting> =>
         this.httpClientFactory
             .createClient(this.httpClientFactory.host)
-            .get<UserSetting>('/Settings/User/v1/Get')
+            .get<UserSetting>('/User/Settings/v1/Get')
 }

@@ -1,8 +1,8 @@
 import AccountFlagsState, { accountFlagsInitialState } from '../../../states/AccountFlagsState'
 import { useCallback, useEffect, useState } from 'react'
 
-import AccountFlagType from '../../../../../../../api/flags/models/AccountFlagType'
-import AccountFlagsClient from '../../../../../../../api/flags/clients/AccountFlagsClient'
+import AccountFlagType from '../../../../../../../api/account/models/AccountFlagType'
+import AccountFlagsClient from '../../../../../../../api/account/clients/AccountFlagsClient'
 import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
 
 const accountFlagsClient = new AccountFlagsClient(HttpClientFactoryInstance.Api)

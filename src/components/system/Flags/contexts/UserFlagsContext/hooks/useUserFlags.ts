@@ -2,8 +2,8 @@ import UserFlagsState, { userFlagsInitialState } from '../../../states/UserFlags
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import UserFlagType from '../../../../../../../api/flags/models/UserFlagType'
-import UserFlagsClient from '../../../../../../../api/flags/clients/UserFlagsClient'
+import UserFlagType from '../../../../../../../api/user/models/UserFlagType'
+import UserFlagsClient from '../../../../../../../api/user/clients/UserFlagsClient'
 
 const userFlagsClient = new UserFlagsClient(HttpClientFactoryInstance.Api)
 

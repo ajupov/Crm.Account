@@ -1,4 +1,4 @@
-import UserFlagType from '../../../../../api/flags/models/UserFlagType'
+import UserFlagType from '../../../../../api/user/models/UserFlagType'
 
 export default interface UserFlagsState {
     notSetFlags: UserFlagType[]

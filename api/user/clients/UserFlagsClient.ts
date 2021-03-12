@@ -12,17 +12,17 @@ export default class UserFlagsClient {
     public IsSetAsync = (type: UserFlagType): Promise<boolean> =>
         this.httpClientFactory
             .createClient(this.httpClientFactory.host)
-            .get<boolean>('/Flags/User/v1/IsSet', { type })
+            .get<boolean>('/User/Flags/v1/IsSet', { type })
 
     // prettier-ignore
     public GetNotSetListAsync = (): Promise<UserFlagType[]> =>
         this.httpClientFactory
             .createClient(this.httpClientFactory.host)
-            .get<UserFlagType[]>('/Flags/User/v1/GetNotSetList')
+            .get<UserFlagType[]>('/User/Flags/v1/GetNotSetList')
 
     // prettier-ignore
     public SetAsync = (type: UserFlagType): Promise<void> =>
         this.httpClientFactory
             .createClient(this.httpClientFactory.host)
-            .put('/Flags/User/v1/Set', { type })
+            .put('/User/Flags/v1/Set', { type })
 }

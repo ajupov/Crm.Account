@@ -1,5 +1,5 @@
 enum AccountFlagType {
-    IsShownSelectionOfActivitiesIndustry = 1,
+    IsShownSelectionOfActivityIndustry = 1,
     IsShownCreationDefaultEntities = 2
 }
 

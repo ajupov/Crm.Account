@@ -1,6 +1,6 @@
 import IHttpClientFactory from '../../IHttpClientFactory'
 import UserSettingGetPagedListRequest from '../models/UserSettingChangeGetPagedListRequest'
-import UserSettingGetPagedListResponse from '../models/UserSettingChangeGetPagedListResponse'
+import UserSettingGetPagedListResponse from '../../user/models/UserSettingChangeGetPagedListResponse'
 
 export default class UserSettingChangesClient {
     private readonly httpClientFactory: IHttpClientFactory
@@ -13,5 +13,5 @@ export default class UserSettingChangesClient {
     public GetPagedListAsync = (request?: UserSettingGetPagedListRequest): Promise<UserSettingGetPagedListResponse> =>
         this.httpClientFactory
             .createClient(this.httpClientFactory.host)
-            .post<UserSettingGetPagedListResponse>('/Settings/User/Changes/v1/GetPagedList', request)
+            .post<UserSettingGetPagedListResponse>('/User/Settings/Changes/v1/GetPagedList', request)
 }

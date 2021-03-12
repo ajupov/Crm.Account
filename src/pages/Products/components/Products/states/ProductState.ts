@@ -21,7 +21,7 @@ export const productInitialState: ProductState = {
         parentProductId: void 0,
         type: ProductType.Material,
         statusId: void 0,
-        name: void 0,
+        name: '',
         vendorCode: void 0,
         price: 0,
         image: void 0,
