@@ -10,5 +10,6 @@ export default class UserSettingsClient {
         this._factory = factory
     }
 
-    public GetAsync = (): Promise<UserSetting> => this._factory.getAsync<UserSetting>('/User/Settings/v1/Get')
+    public GetAsync = (): Promise<UserSetting> =>
+        this._factory.getAsync<UserSetting>(this._host + '/User/Settings/v1/Get')
 }

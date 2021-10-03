@@ -7,12 +7,14 @@ export default class UserSettingChangesClient {
     private readonly _factory: IJsonHttpClientFactory
 
     constructor(host: string, factory: IJsonHttpClientFactory) {
-                this._host = host
+        this._host = host
         this._factory = factory
     }
 
     public GetPagedListAsync = (request?: UserSettingGetPagedListRequest): Promise<UserSettingGetPagedListResponse> =>
-        this._factory
-            .
-            .postAsync<UserSettingGetPagedListResponse>('/User/Settings/Changes/v1/GetPagedList', request)
+        this._factory.postAsync<UserSettingGetPagedListResponse>(
+            this._host + '/User/Settings/Changes/v1/GetPagedList',
+            void 0,
+            request
+        )
 }
