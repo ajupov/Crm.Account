@@ -1,4 +1,4 @@
-import LeadCommentsState, { leadCommentsInitialState } from '../../../states/LeadCommentsState'
+import CustomerCommentsState, { customerCommentsInitialState } from '../../../states/CustomerCommentsState'
 import {
     getMaxCreateDateTime,
     getMinCreateDateTime,
@@ -7,24 +7,24 @@ import {
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
-import LeadCommentsClient from '../../../../../../../../api/customers/clients/LeadCommentsClient'
+import CustomerCommentsClient from '../../../../../../../../api/customers/clients/CustomerCommentsClient'
 import { useParams } from 'react-router'
 
-const leadCommentsClient = new LeadCommentsClient(HttpClientFactory.Api)
+const customerCommentsClient = new CustomerCommentsClient(HttpClientFactory.Api)
 
-const useLeadComments = (): LeadCommentsState => {
+const useCustomerComments = (): CustomerCommentsState => {
     const { id }: { id: string } = useParams()
-    const [request, setRequest] = useState(leadCommentsInitialState.request)
-    const [isLoading, setIsLoading] = useState(leadCommentsInitialState.isLoading)
-    const [isNeedLoadingBefore, setIsNeedLoadingBefore] = useState(leadCommentsInitialState.isNeedLoadingBefore)
-    const [isNeedLoadingAfter, setIsNeedLoadingAfter] = useState(leadCommentsInitialState.isNeedLoadingAfter)
-    const [comments, setComments] = useState(leadCommentsInitialState.comments)
-    const [hasCommentsBefore, setHasCommentsBefore] = useState(leadCommentsInitialState.hasCommentsBefore)
+    const [request, setRequest] = useState(customerCommentsInitialState.request)
+    const [isLoading, setIsLoading] = useState(customerCommentsInitialState.isLoading)
+    const [isNeedLoadingBefore, setIsNeedLoadingBefore] = useState(customerCommentsInitialState.isNeedLoadingBefore)
+    const [isNeedLoadingAfter, setIsNeedLoadingAfter] = useState(customerCommentsInitialState.isNeedLoadingAfter)
+    const [comments, setComments] = useState(customerCommentsInitialState.comments)
+    const [hasCommentsBefore, setHasCommentsBefore] = useState(customerCommentsInitialState.hasCommentsBefore)
 
     const getPagedList = useCallback(async () => {
         setIsLoading(true)
 
-        const response = await leadCommentsClient.GetPagedListAsync({ ...request, leadId: id })
+        const response = await customerCommentsClient.GetPagedListAsync({ ...request, customerId: id })
 
         if (response?.comments?.length) {
             setComments(mergeAndSort(response?.comments))
@@ -40,9 +40,9 @@ const useLeadComments = (): LeadCommentsState => {
 
         const afterCreateDateTime = getMaxCreateDateTime(comments)
 
-        const response = await leadCommentsClient.GetPagedListAsync({
+        const response = await customerCommentsClient.GetPagedListAsync({
             ...request,
-            leadId: id,
+            customerId: id,
             afterCreateDateTime
         })
 
@@ -58,9 +58,9 @@ const useLeadComments = (): LeadCommentsState => {
 
         const beforeCreateDateTime = getMinCreateDateTime(comments)
 
-        const response = await leadCommentsClient.GetPagedListAsync({
+        const response = await customerCommentsClient.GetPagedListAsync({
             ...request,
-            leadId: id,
+            customerId: id,
             beforeCreateDateTime
         })
 
@@ -93,4 +93,4 @@ const useLeadComments = (): LeadCommentsState => {
     }
 }
 
-export default useLeadComments
+export default useCustomerComments

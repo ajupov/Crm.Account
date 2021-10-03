@@ -1,12 +1,12 @@
 import React, { FC, useContext } from 'react'
 
-import LeadAttributeChangesContext from '../../../../contexts/LeadAttributeChangesContext/LeadAttributeChangesContext'
+import CustomerAttributeChangesContext from '../../../../contexts/CustomerAttributeChangesContext/CustomerAttributeChangesContext'
 import Table from '../../../../../../../../components/common/collections/Table/Table'
-import useLeadAttributeChangesTable from './hooks/useLeadAttributeChangesTable'
+import useCustomerAttributeChangesTable from './hooks/useCustomerAttributeChangesTable'
 
-const LeadAttributeChangesTable: FC = () => {
-    const state = useContext(LeadAttributeChangesContext)
-    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useLeadAttributeChangesTable()
+const CustomerAttributeChangesTable: FC = () => {
+    const state = useContext(CustomerAttributeChangesContext)
+    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useCustomerAttributeChangesTable()
 
     return (
         <Table
@@ -19,4 +19,4 @@ const LeadAttributeChangesTable: FC = () => {
     )
 }
 
-export default LeadAttributeChangesTable
+export default CustomerAttributeChangesTable

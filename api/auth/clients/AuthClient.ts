@@ -1,12 +1,14 @@
-import IHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
+import IJsonHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 
 export default class AuthClient {
-    private readonly httpClientFactory: IHttpClientFactory
+    private readonly _host: string
+    private readonly _factory: IJsonHttpClientFactory
 
-    constructor(httpClientFactory: IHttpClientFactory) {
-        this.httpClientFactory = httpClientFactory
+    constructor(host: string, factory: IJsonHttpClientFactory) {
+        this._host = host
+        this._factory = factory
     }
 
     public IsAuthenticatedAsync = (): Promise<boolean> =>
-        this.httpClientFactory.createClient(this.httpClientFactory.host).get<boolean>('/Auth/IsAuthenticated')
+        this._factory.getAsync<boolean>(this._host + '/Auth/IsAuthenticated')
 }

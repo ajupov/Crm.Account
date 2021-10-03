@@ -1,16 +1,16 @@
-import { LeadSourceState, leadSourceInitialState } from '../../../states/LeadSourceState'
+import { CustomerSourceState, customerSourceInitialState } from '../../../states/CustomerSourceState'
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
-import LeadSourcesClient from '../../../../../../../../api/customers/clients/LeadSourcesClient'
+import CustomerSourcesClient from '../../../../../../../../api/customers/clients/CustomerSourcesClient'
 import { useParams } from 'react-router'
 
-const leadSourcesClient = new LeadSourcesClient(HttpClientFactory.Api)
+const customerSourcesClient = new CustomerSourcesClient(HttpClientFactory.Api)
 
-const useLeadSource = (): LeadSourceState => {
+const useCustomerSource = (): CustomerSourceState => {
     const { id }: { id: string } = useParams()
-    const [isLoading, setIsLoading] = useState(leadSourceInitialState.isLoading)
-    const [source, setSource] = useState(leadSourceInitialState.source)
+    const [isLoading, setIsLoading] = useState(customerSourceInitialState.isLoading)
+    const [source, setSource] = useState(customerSourceInitialState.source)
 
     const get = useCallback(async () => {
         if (!id) {
@@ -19,7 +19,7 @@ const useLeadSource = (): LeadSourceState => {
 
         setIsLoading(true)
 
-        const response = await leadSourcesClient.GetAsync(id)
+        const response = await customerSourcesClient.GetAsync(id)
 
         setSource(response)
 
@@ -29,7 +29,7 @@ const useLeadSource = (): LeadSourceState => {
     const create = useCallback(async () => {
         setIsLoading(true)
 
-        await leadSourcesClient.CreateAsync(source)
+        await customerSourcesClient.CreateAsync(source)
 
         setIsLoading(false)
     }, [source])
@@ -37,7 +37,7 @@ const useLeadSource = (): LeadSourceState => {
     const update = useCallback(async () => {
         setIsLoading(true)
 
-        await leadSourcesClient.UpdateAsync(source)
+        await customerSourcesClient.UpdateAsync(source)
 
         setIsLoading(false)
     }, [source])
@@ -49,4 +49,4 @@ const useLeadSource = (): LeadSourceState => {
     return { isLoading, source, setSource, create, update }
 }
 
-export default useLeadSource
+export default useCustomerSource

@@ -1,13 +1,13 @@
 import React, { FC, useContext } from 'react'
 
-import LeadAttributesContext from '../../contexts/LeadAttributesContext/LeadAttributesContext'
-import LeadAttributesRoutes from '../../routes/LeadAttributesRoutes'
+import CustomerAttributesContext from '../../contexts/CustomerAttributesContext/CustomerAttributesContext'
+import CustomerAttributesRoutes from '../../routes/CustomerAttributesRoutes'
 import Table from '../../../../../../components/common/collections/Table/Table'
-import useLeadAttributesTable from './hooks/useLeadAttributesTable'
+import useCustomerAttributesTable from './hooks/useCustomerAttributesTable'
 
-const LeadAttributesTable: FC = () => {
-    const state = useContext(LeadAttributesContext)
-    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useLeadAttributesTable()
+const CustomerAttributesTable: FC = () => {
+    const state = useContext(CustomerAttributesContext)
+    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useCustomerAttributesTable()
 
     return (
         <Table
@@ -17,10 +17,10 @@ const LeadAttributesTable: FC = () => {
             rows={map(state.attributes)}
             footer={{ page, limit: state.request.limit, total: state.total, onClickChangePage }}
             lastModifyDateTime={state.lastModifyDateTime}
-            createLink={LeadAttributesRoutes.Create}
+            createLink={CustomerAttributesRoutes.Create}
             onClickDownloadAsCsv={onClickDownloadAsCsv}
         />
     )
 }
 
-export default LeadAttributesTable
+export default CustomerAttributesTable

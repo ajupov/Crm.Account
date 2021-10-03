@@ -11,8 +11,8 @@ import CompanyType from '../../../../../../../api/companies/models/CompanyType'
 import { CreateFormFieldProps } from '../../../../../../components/common/forms/CreateForm/CreateForm'
 import useCompanyAttributesLoad from '../load/useCompanyAttributesLoad'
 import { useHistory } from 'react-router'
-import useLeadLoad from '../load/useLeadLoad'
-import useLeadsAutocomplete from '../autocomplete/useLeadsAutocomplete'
+import useCustomerLoad from '../load/useCustomerLoad'
+import useCustomersAutocomplete from '../autocomplete/useCustomersAutocomplete'
 
 interface UseCompanyOnChangeReturn {
     fields: CreateFormFieldProps[]
@@ -26,14 +26,14 @@ interface UseCompanyOnChangeReturn {
 const useCompanyOnChange = (): UseCompanyOnChangeReturn => {
     const history = useHistory()
     const state = useContext(CompanyContext)
-    const { lead } = useLeadLoad(state.company.leadId)
-    const { loadLeads, leadsAsOptions } = useLeadsAutocomplete()
+    const { customer } = useCustomerLoad(state.company.customerId)
+    const { loadCustomers, customersAsOptions } = useCustomersAutocomplete()
     const { attributesAsOptions } = useCompanyAttributesLoad()
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
-    const onChangeLeadId = useCallback(
+    const onChangeCustomerId = useCallback(
         (_, data: DropdownProps) => {
-            state.setCompany({ ...state.company, leadId: data.value as string })
+            state.setCompany({ ...state.company, customerId: data.value as string })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -311,10 +311,10 @@ const useCompanyOnChange = (): UseCompanyOnChangeReturn => {
             {
                 type: 'autocomplete',
                 label: 'Лид',
-                text: lead ? `${lead?.surname} ${lead?.name} ${lead?.patronymic}`.trim() : '',
-                load: loadLeads,
-                options: leadsAsOptions,
-                onChange: onChangeLeadId
+                text: customer ? `${customer?.surname} ${customer?.name} ${customer?.patronymic}`.trim() : '',
+                load: loadCustomers,
+                options: customersAsOptions,
+                onChange: onChangeCustomerId
             },
             {
                 type: 'dropdown',
@@ -533,9 +533,9 @@ const useCompanyOnChange = (): UseCompanyOnChangeReturn => {
         ],
         [
             attributesAsOptions,
-            lead,
-            leadsAsOptions,
-            loadLeads,
+            customer,
+            customersAsOptions,
+            loadCustomers,
             onChangeAttributeKey,
             onChangeAttributeValue,
             onChangeEmail,
@@ -550,7 +550,7 @@ const useCompanyOnChange = (): UseCompanyOnChangeReturn => {
             onChangeJuridicalProvince,
             onChangeJuridicalRegion,
             onChangeJuridicalStreet,
-            onChangeLeadId,
+            onChangeCustomerId,
             onChangeLegalApartment,
             onChangeLegalCity,
             onChangeLegalCountry,

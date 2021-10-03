@@ -1,5 +1,5 @@
-export default interface LeadCommentGetPagedListRequest {
-    leadId: string
+export default interface CustomerCommentGetPagedListRequest {
+    customerId: string
     beforeCreateDateTime?: string
     afterCreateDateTime?: string
     limit: number

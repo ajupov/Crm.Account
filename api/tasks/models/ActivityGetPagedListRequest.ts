@@ -18,7 +18,7 @@ export default interface ActivityGetPagedListRequest {
     maxModifyDate?: string
     typeIds?: string[]
     statusIds?: string[]
-    leadIds?: string[]
+    customerIds?: string[]
     companyIds?: string[]
     contactIds?: string[]
     dealIds?: string[]

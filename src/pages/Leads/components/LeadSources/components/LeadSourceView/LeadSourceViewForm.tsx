@@ -1,15 +1,15 @@
 import React, { FC, useContext } from 'react'
 
-import LeadSourceContext from '../../contexts/LeadSourceContext/LeadSourceContext'
-import LeadSourcesRoutes from '../../routes/LeadSourcesRoutes'
+import CustomerSourceContext from '../../contexts/CustomerSourceContext/CustomerSourceContext'
+import CustomerSourcesRoutes from '../../routes/CustomerSourcesRoutes'
 import View from '../../../../../../components/common/grids/View/View'
-import useLeadSourceView from './hooks/useLeadSourceView'
-import useLeadSourcesActions from '../../contexts/LeadSourcesActionsContext/hooks/useLeadSourcesActions'
+import useCustomerSourceView from './hooks/useCustomerSourceView'
+import useCustomerSourcesActions from '../../contexts/CustomerSourcesActionsContext/hooks/useCustomerSourcesActions'
 
-const LeadSourceViewForm: FC = () => {
-    const state = useContext(LeadSourceContext)
-    const { isLoading } = useLeadSourcesActions()
-    const { map, onClickDelete, onClickRestore, onClickCancel } = useLeadSourceView()
+const CustomerSourceViewForm: FC = () => {
+    const state = useContext(CustomerSourceContext)
+    const { isLoading } = useCustomerSourcesActions()
+    const { map, onClickDelete, onClickRestore, onClickCancel } = useCustomerSourceView()
 
     return (
         <View
@@ -19,13 +19,13 @@ const LeadSourceViewForm: FC = () => {
             createDate={state.source.createDateTime}
             lastModifyDateTime={state.source.modifyDateTime}
             data={map(state.source)}
-            editLink={LeadSourcesRoutes.Edit}
+            editLink={CustomerSourcesRoutes.Edit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
-            historyLink={LeadSourcesRoutes.Changes}
+            historyLink={CustomerSourcesRoutes.Changes}
             onClickCancel={onClickCancel}
         />
     )
 }
 
-export default LeadSourceViewForm
+export default CustomerSourceViewForm

@@ -1,16 +1,16 @@
-import { LeadAttributeState, leadAttributeInitialState } from '../../../states/LeadAttributeState'
+import { CustomerAttributeState, customerAttributeInitialState } from '../../../states/CustomerAttributeState'
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
-import LeadAttributesClient from '../../../../../../../../api/customers/clients/LeadAttributesClient'
+import CustomerAttributesClient from '../../../../../../../../api/customers/clients/CustomerAttributesClient'
 import { useParams } from 'react-router'
 
-const leadAttributesClient = new LeadAttributesClient(HttpClientFactory.Api)
+const customerAttributesClient = new CustomerAttributesClient(HttpClientFactory.Api)
 
-const useLeadAttribute = (): LeadAttributeState => {
+const useCustomerAttribute = (): CustomerAttributeState => {
     const { id }: { id: string } = useParams()
-    const [isLoading, setIsLoading] = useState(leadAttributeInitialState.isLoading)
-    const [attribute, setAttribute] = useState(leadAttributeInitialState.attribute)
+    const [isLoading, setIsLoading] = useState(customerAttributeInitialState.isLoading)
+    const [attribute, setAttribute] = useState(customerAttributeInitialState.attribute)
 
     const get = useCallback(async () => {
         if (!id) {
@@ -19,7 +19,7 @@ const useLeadAttribute = (): LeadAttributeState => {
 
         setIsLoading(true)
 
-        const response = await leadAttributesClient.GetAsync(id)
+        const response = await customerAttributesClient.GetAsync(id)
 
         setAttribute(response)
 
@@ -29,7 +29,7 @@ const useLeadAttribute = (): LeadAttributeState => {
     const create = useCallback(async () => {
         setIsLoading(true)
 
-        await leadAttributesClient.CreateAsync(attribute)
+        await customerAttributesClient.CreateAsync(attribute)
 
         setIsLoading(false)
     }, [attribute])
@@ -37,7 +37,7 @@ const useLeadAttribute = (): LeadAttributeState => {
     const update = useCallback(async () => {
         setIsLoading(true)
 
-        await leadAttributesClient.UpdateAsync(attribute)
+        await customerAttributesClient.UpdateAsync(attribute)
 
         setIsLoading(false)
     }, [attribute])
@@ -49,4 +49,4 @@ const useLeadAttribute = (): LeadAttributeState => {
     return { isLoading, attribute, setAttribute, create, update }
 }
 
-export default useLeadAttribute
+export default useCustomerAttribute

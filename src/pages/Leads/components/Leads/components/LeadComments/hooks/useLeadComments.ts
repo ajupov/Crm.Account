@@ -1,21 +1,21 @@
 import { useCallback, useContext } from 'react'
 
 import { CommentProps } from '../../../../../../../components/common/collections/Comments/Comment'
-import LeadComment from '../../../../../../../../api/customers/models/LeadComment'
-import LeadCommentContext from '../../../contexts/LeadCommentContext/LeadCommentContext'
-import LeadCommentsContext from '../../../contexts/LeadCommentsContext/LeadCommentsContext'
+import CustomerComment from '../../../../../../../../api/customers/models/CustomerComment'
+import CustomerCommentContext from '../../../contexts/CustomerCommentContext/CustomerCommentContext'
+import CustomerCommentsContext from '../../../contexts/CustomerCommentsContext/CustomerCommentsContext'
 import UserInfoContext from '../../../../../../../components/system/UserInfo/contexts/UserInfoContext/UserInfoContext'
 
-interface UseLeadCommentsTableReturn {
+interface UseCustomerCommentsTableReturn {
     onChangeCommentToSend: (value: string) => void
     onClickSend: () => void
-    map: (comments: LeadComment[]) => CommentProps[]
+    map: (comments: CustomerComment[]) => CommentProps[]
     onClickLoadPrevious: () => void
 }
 
-const useLeadComments = (): UseLeadCommentsTableReturn => {
-    const commentsState = useContext(LeadCommentsContext)
-    const commentState = useContext(LeadCommentContext)
+const useCustomerComments = (): UseCustomerCommentsTableReturn => {
+    const commentsState = useContext(CustomerCommentsContext)
+    const commentState = useContext(CustomerCommentContext)
     const { name } = useContext(UserInfoContext)
 
     const map = useCallback(
@@ -48,4 +48,4 @@ const useLeadComments = (): UseLeadCommentsTableReturn => {
     return { onChangeCommentToSend, map, onClickSend, onClickLoadPrevious }
 }
 
-export default useLeadComments
+export default useCustomerComments

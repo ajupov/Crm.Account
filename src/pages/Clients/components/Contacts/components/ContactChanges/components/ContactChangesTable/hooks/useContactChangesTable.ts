@@ -71,7 +71,7 @@ const useContactChangesTable = (): UseContactChangesTableReturn => {
             const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as Contact) : void 0
 
             return [
-                `ID Лида: ${getValueOrEmpty(oldValue?.leadId)} → ${getValueOrEmpty(newValue?.leadId)}`,
+                `ID Лида: ${getValueOrEmpty(oldValue?.customerId)} → ${getValueOrEmpty(newValue?.customerId)}`,
                 `ID Компании: ${getValueOrEmpty(oldValue?.companyId)} → ${getValueOrEmpty(newValue?.companyId)}`,
                 `Фамилия: ${getValueOrEmpty(oldValue?.surname)} → ${getValueOrEmpty(newValue?.surname)}`,
                 `Имя: ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
@@ -143,10 +143,10 @@ const useContactChangesTable = (): UseContactChangesTableReturn => {
         []
     )
 
-    const page = useMemo(() => calculatePage(state.request.offset, state.request.limit), [
-        state.request.limit,
-        state.request.offset
-    ])
+    const page = useMemo(
+        () => calculatePage(state.request.offset, state.request.limit),
+        [state.request.limit, state.request.offset]
+    )
 
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }

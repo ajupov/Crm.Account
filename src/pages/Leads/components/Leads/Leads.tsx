@@ -1,44 +1,44 @@
 import React, { FC, useEffect } from 'react'
 
-import LeadContextProvider from './contexts/LeadContext/LeadContextProvider'
-import LeadDelete from './components/LeadDelete/LeadDelete'
-import LeadRestore from './components/LeadRestore/LeadRestore'
-import LeadsActionsContextProvider from './contexts/LeadsActionsContext/LeadsActionsContextProvider'
-import LeadsContextProvider from './contexts/LeadsContext/LeadsContextProvider'
-import LeadsFilter from './components/LeadsFilter/LeadsFilter'
-import LeadsFilterMobile from './components/LeadsFilterMobile/LeadsFilterMobile'
-import LeadsFiltersContextProvider from './contexts/LeadsFiltersContext/LeadsFiltersContextProvider'
-import LeadsMenu from '../LeadsMenu/LeadsMenu'
-import LeadsTable from './components/LeadsTable/LeadsTable'
+import CustomerContextProvider from './contexts/CustomerContext/CustomerContextProvider'
+import CustomerDelete from './components/CustomerDelete/CustomerDelete'
+import CustomerRestore from './components/CustomerRestore/CustomerRestore'
+import CustomersActionsContextProvider from './contexts/CustomersActionsContext/CustomersActionsContextProvider'
+import CustomersContextProvider from './contexts/CustomersContext/CustomersContextProvider'
+import CustomersFilter from './components/CustomersFilter/CustomersFilter'
+import CustomersFilterMobile from './components/CustomersFilterMobile/CustomersFilterMobile'
+import CustomersFiltersContextProvider from './contexts/CustomersFiltersContext/CustomersFiltersContextProvider'
+import CustomersMenu from '../CustomersMenu/CustomersMenu'
+import CustomersTable from './components/CustomersTable/CustomersTable'
 import Page from '../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
-const Leads: FC = () => {
+const Customers: FC = () => {
     const title = 'Лиды'
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <LeadsContextProvider>
-            <LeadsActionsContextProvider>
-                <LeadsFiltersContextProvider>
-                    <LeadContextProvider>
+        <CustomersContextProvider>
+            <CustomersActionsContextProvider>
+                <CustomersFiltersContextProvider>
+                    <CustomerContextProvider>
                         <Page
                             title={title}
-                            firstSidebar={<LeadsMenu />}
-                            secondSidebar={<LeadsFilter />}
-                            secondSidebarMobile={<LeadsFilterMobile />}
+                            firstSidebar={<CustomersMenu />}
+                            secondSidebar={<CustomersFilter />}
+                            secondSidebarMobile={<CustomersFilterMobile />}
                         >
-                            <LeadsTable />
-                            <LeadDelete />
-                            <LeadRestore />
+                            <CustomersTable />
+                            <CustomerDelete />
+                            <CustomerRestore />
                         </Page>
-                    </LeadContextProvider>
-                </LeadsFiltersContextProvider>
-            </LeadsActionsContextProvider>
-        </LeadsContextProvider>
+                    </CustomerContextProvider>
+                </CustomersFiltersContextProvider>
+            </CustomersActionsContextProvider>
+        </CustomersContextProvider>
     )
 }
 
-export default Leads
+export default Customers

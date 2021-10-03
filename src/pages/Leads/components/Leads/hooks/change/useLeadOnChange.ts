@@ -2,12 +2,12 @@ import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { CreateFormFieldProps } from '../../../../../../components/common/forms/CreateForm/CreateForm'
-import LeadContext from '../../contexts/LeadContext/LeadContext'
+import CustomerContext from '../../contexts/CustomerContext/CustomerContext'
 import { useHistory } from 'react-router'
-import useLeadAttributesLoad from '../load/useLeadAttributesLoad'
-import useLeadSourcesLoad from '../load/useLeadSourcesLoad'
+import useCustomerAttributesLoad from '../load/useCustomerAttributesLoad'
+import useCustomerSourcesLoad from '../load/useCustomerSourcesLoad'
 
-interface UseLeadOnChangeReturn {
+interface UseCustomerOnChangeReturn {
     fields: CreateFormFieldProps[]
     isConfirmEnabled: boolean
     onClickConfirmCreate: () => void
@@ -16,16 +16,16 @@ interface UseLeadOnChangeReturn {
 }
 
 // TODO: Move to l10n
-const useLeadOnChange = (): UseLeadOnChangeReturn => {
+const useCustomerOnChange = (): UseCustomerOnChangeReturn => {
     const history = useHistory()
-    const state = useContext(LeadContext)
-    const { sourcesAsOptions } = useLeadSourcesLoad()
-    const { attributesAsOptions } = useLeadAttributesLoad()
+    const state = useContext(CustomerContext)
+    const { sourcesAsOptions } = useCustomerSourcesLoad()
+    const { attributesAsOptions } = useCustomerAttributesLoad()
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeSourceId = useCallback(
         (_, data: DropdownProps) => {
-            state.setLead({ ...state.lead, sourceId: data.value as string })
+            state.setCustomer({ ...state.customer, sourceId: data.value as string })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -33,7 +33,7 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
 
     const onChangeSurname = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setLead({ ...state.lead, surname: data.value })
+            state.setCustomer({ ...state.customer, surname: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -41,7 +41,7 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
 
     const onChangeName = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setLead({ ...state.lead, name: data.value })
+            state.setCustomer({ ...state.customer, name: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -49,7 +49,7 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
 
     const onChangePatronymic = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setLead({ ...state.lead, patronymic: data.value })
+            state.setCustomer({ ...state.customer, patronymic: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -57,7 +57,7 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
 
     const onChangePhone = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setLead({ ...state.lead, phone: data.value })
+            state.setCustomer({ ...state.customer, phone: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -65,7 +65,7 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
 
     const onChangeEmail = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setLead({ ...state.lead, email: data.value })
+            state.setCustomer({ ...state.customer, email: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -73,7 +73,7 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
 
     const onChangePost = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setLead({ ...state.lead, post: data.value })
+            state.setCustomer({ ...state.customer, post: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -81,7 +81,7 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
 
     const onChangePostcode = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setLead({ ...state.lead, postcode: data.value })
+            state.setCustomer({ ...state.customer, postcode: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -89,7 +89,7 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
 
     const onChangeCountry = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setLead({ ...state.lead, country: data.value })
+            state.setCustomer({ ...state.customer, country: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -97,7 +97,7 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
 
     const onChangeRegion = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setLead({ ...state.lead, region: data.value })
+            state.setCustomer({ ...state.customer, region: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -105,7 +105,7 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
 
     const onChangeProvince = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setLead({ ...state.lead, province: data.value })
+            state.setCustomer({ ...state.customer, province: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -113,7 +113,7 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
 
     const onChangeCity = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setLead({ ...state.lead, city: data.value })
+            state.setCustomer({ ...state.customer, city: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -121,7 +121,7 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
 
     const onChangeStreet = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setLead({ ...state.lead, street: data.value })
+            state.setCustomer({ ...state.customer, street: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -129,7 +129,7 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
 
     const onChangeHouse = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setLead({ ...state.lead, house: data.value })
+            state.setCustomer({ ...state.customer, house: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -137,7 +137,7 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
 
     const onChangeApartment = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setLead({ ...state.lead, apartment: data.value })
+            state.setCustomer({ ...state.customer, apartment: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -145,7 +145,7 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
 
     const onChangeOpportunitySum = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setLead({ ...state.lead, opportunitySum: parseInt(data.value, 10) })
+            state.setCustomer({ ...state.customer, opportunitySum: parseInt(data.value, 10) })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -153,14 +153,14 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
 
     const onChangeAttributeKey = useCallback(
         (index: number, value: string) => {
-            if (!state.lead.attributeLinks) {
+            if (!state.customer.attributeLinks) {
                 return
             }
 
-            state.lead.attributeLinks[index].leadAttributeId = value
+            state.customer.attributeLinks[index].customerAttributeId = value
 
-            state.setLead({
-                ...state.lead
+            state.setCustomer({
+                ...state.customer
             })
 
             setIsConfirmEnabled(true)
@@ -170,16 +170,16 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
 
     const onChangeAttributeValue = useCallback(
         (index: number, value: string) => {
-            if (!state.lead.attributeLinks) {
+            if (!state.customer.attributeLinks) {
                 return
             }
 
-            const newLinks = [...state.lead.attributeLinks]
+            const newLinks = [...state.customer.attributeLinks]
 
             newLinks[index].value = value
 
-            state.setLead({
-                ...state.lead,
+            state.setCustomer({
+                ...state.customer,
                 attributeLinks: newLinks
             })
 
@@ -190,9 +190,9 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
 
     const onDeleteAttribute = useCallback(
         (index: number) => {
-            state.setLead({
-                ...state.lead,
-                attributeLinks: state.lead.attributeLinks?.filter((_, i) => i !== index)
+            state.setCustomer({
+                ...state.customer,
+                attributeLinks: state.customer.attributeLinks?.filter((_, i) => i !== index)
             })
 
             setIsConfirmEnabled(true)
@@ -201,14 +201,14 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
     )
 
     const onClickAddAttributeItem = useCallback(() => {
-        state.setLead({ ...state.lead, attributeLinks: [...(state.lead.attributeLinks ?? []), {}] })
+        state.setCustomer({ ...state.customer, attributeLinks: [...(state.customer.attributeLinks ?? []), {}] })
 
         setIsConfirmEnabled(true)
     }, [state])
 
     const onChangeIsDeleted = useCallback(
         (_, __) => {
-            state.setLead({ ...state.lead, isDeleted: !state.lead.isDeleted })
+            state.setCustomer({ ...state.customer, isDeleted: !state.customer.isDeleted })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -232,7 +232,7 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
                 type: 'dropdown',
                 required: true,
                 label: 'Источник',
-                value: state.lead.sourceId,
+                value: state.customer.sourceId,
                 options: sourcesAsOptions,
                 onChange: onChangeSourceId
             },
@@ -240,114 +240,114 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
                 type: 'text',
                 required: true,
                 topLabel: 'Фамилия',
-                value: state.lead.surname,
+                value: state.customer.surname,
                 onChange: onChangeSurname
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Имя',
-                value: state.lead.name,
+                value: state.customer.name,
                 onChange: onChangeName
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Отчество',
-                value: state.lead.patronymic,
+                value: state.customer.patronymic,
                 onChange: onChangePatronymic
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Телефон',
-                value: state.lead.phone,
+                value: state.customer.phone,
                 onChange: onChangePhone
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Email',
-                value: state.lead.email,
+                value: state.customer.email,
                 onChange: onChangeEmail
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Должность',
-                value: state.lead.post,
+                value: state.customer.post,
                 onChange: onChangePost
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Почтовый индекс',
-                value: state.lead.postcode,
+                value: state.customer.postcode,
                 onChange: onChangePostcode
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Страна',
-                value: state.lead.country,
+                value: state.customer.country,
                 onChange: onChangeCountry
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Регион',
-                value: state.lead.region,
+                value: state.customer.region,
                 onChange: onChangeRegion
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Район/провинция',
-                value: state.lead.province,
+                value: state.customer.province,
                 onChange: onChangeProvince
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Город/населенный пункт',
-                value: state.lead.city,
+                value: state.customer.city,
                 onChange: onChangeCity
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Улица',
-                value: state.lead.street,
+                value: state.customer.street,
                 onChange: onChangeStreet
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Дом/строение',
-                value: state.lead.house,
+                value: state.customer.house,
                 onChange: onChangeHouse
             },
             {
                 type: 'text',
                 required: true,
                 topLabel: 'Квартира',
-                value: state.lead.apartment,
+                value: state.customer.apartment,
                 onChange: onChangeApartment
             },
             {
                 type: 'number',
                 required: true,
                 topLabel: 'Сумма потенциальной сделки',
-                value: state.lead.opportunitySum,
+                value: state.customer.opportunitySum,
                 onChange: onChangeOpportunitySum
             },
             {
                 type: 'attributes',
                 label: 'Атрибуты',
                 options: attributesAsOptions,
-                items: state.lead.attributeLinks?.map((x, i) => ({
+                items: state.customer.attributeLinks?.map((x, i) => ({
                     index: i,
-                    key: x.leadAttributeId ?? '',
+                    key: x.customerAttributeId ?? '',
                     onChangeKey: onChangeAttributeKey,
                     value: x.value ?? '',
                     onChangeValue: onChangeAttributeValue,
@@ -359,7 +359,7 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
             {
                 type: 'checkbox',
                 label: 'Удален',
-                checked: state.lead.isDeleted,
+                checked: state.customer.isDeleted,
                 onChange: onChangeIsDeleted
             }
         ],
@@ -387,28 +387,28 @@ const useLeadOnChange = (): UseLeadOnChangeReturn => {
             onClickAddAttributeItem,
             onDeleteAttribute,
             sourcesAsOptions,
-            state.lead.apartment,
-            state.lead.attributeLinks,
-            state.lead.city,
-            state.lead.country,
-            state.lead.email,
-            state.lead.house,
-            state.lead.isDeleted,
-            state.lead.name,
-            state.lead.opportunitySum,
-            state.lead.patronymic,
-            state.lead.phone,
-            state.lead.post,
-            state.lead.postcode,
-            state.lead.province,
-            state.lead.region,
-            state.lead.sourceId,
-            state.lead.street,
-            state.lead.surname
+            state.customer.apartment,
+            state.customer.attributeLinks,
+            state.customer.city,
+            state.customer.country,
+            state.customer.email,
+            state.customer.house,
+            state.customer.isDeleted,
+            state.customer.name,
+            state.customer.opportunitySum,
+            state.customer.patronymic,
+            state.customer.phone,
+            state.customer.post,
+            state.customer.postcode,
+            state.customer.province,
+            state.customer.region,
+            state.customer.sourceId,
+            state.customer.street,
+            state.customer.surname
         ]
     )
 
     return { fields, isConfirmEnabled, onClickConfirmCreate, onClickConfirmUpdate, onClickCancel }
 }
 
-export default useLeadOnChange
+export default useCustomerOnChange

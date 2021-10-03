@@ -1,31 +1,31 @@
 import React, { FC, useEffect } from 'react'
 
-import LeadSourceContextProvider from '../../contexts/LeadSourceContext/LeadSourceContextProvider'
-import LeadSourceDelete from '../LeadSourceDelete/LeadSourceDelete'
-import LeadSourceRestore from '../LeadSourceRestore/LeadSourceRestore'
-import LeadSourceViewForm from './LeadSourceViewForm'
-import LeadSourcesActionsContextProvider from '../../contexts/LeadSourcesActionsContext/LeadSourcesActionsContextProvider'
-import LeadsMenu from '../../../LeadsMenu/LeadsMenu'
+import CustomerSourceContextProvider from '../../contexts/CustomerSourceContext/CustomerSourceContextProvider'
+import CustomerSourceDelete from '../CustomerSourceDelete/CustomerSourceDelete'
+import CustomerSourceRestore from '../CustomerSourceRestore/CustomerSourceRestore'
+import CustomerSourceViewForm from './CustomerSourceViewForm'
+import CustomerSourcesActionsContextProvider from '../../contexts/CustomerSourcesActionsContext/CustomerSourcesActionsContextProvider'
+import CustomersMenu from '../../../CustomersMenu/CustomersMenu'
 import Page from '../../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
-const LeadSourceView: FC = () => {
+const CustomerSourceView: FC = () => {
     const title = 'Просмотр источника'
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <LeadSourcesActionsContextProvider>
-            <LeadSourceContextProvider>
-                <Page title={title} firstSidebar={<LeadsMenu />}>
-                    <LeadSourceViewForm />
-                    <LeadSourceDelete />
-                    <LeadSourceRestore />
+        <CustomerSourcesActionsContextProvider>
+            <CustomerSourceContextProvider>
+                <Page title={title} firstSidebar={<CustomersMenu />}>
+                    <CustomerSourceViewForm />
+                    <CustomerSourceDelete />
+                    <CustomerSourceRestore />
                 </Page>
-            </LeadSourceContextProvider>
-        </LeadSourcesActionsContextProvider>
+            </CustomerSourceContextProvider>
+        </CustomerSourcesActionsContextProvider>
     )
 }
 
-export default LeadSourceView
+export default CustomerSourceView

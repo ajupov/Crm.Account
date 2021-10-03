@@ -1,38 +1,38 @@
 import React, { FC, useEffect } from 'react'
 
-import LeadSourceChangesContextProvider from '../../contexts/LeadSourceChangesContext/LeadSourceChangesContextProvider'
-import LeadSourceChangesFilter from './components/LeadSourceChangesFilter/LeadSourceChangesFilter'
-import LeadSourceChangesFiltersContextProvider from '../../contexts/LeadSourceChangesFiltersContext/LeadSourceChangesFiltersContextProvider'
-import LeadSourceChangesTable from './components/LeadSourceChangesTable/LeadSourceChangesTable'
-import LeadsMenu from '../../../LeadsMenu/LeadsMenu'
-import LeadsSourceChangesFilterMobile from './components/LeadsSourceChangesFilterMobile/LeadsSourceChangesFilterMobile'
+import CustomerSourceChangesContextProvider from '../../contexts/CustomerSourceChangesContext/CustomerSourceChangesContextProvider'
+import CustomerSourceChangesFilter from './components/CustomerSourceChangesFilter/CustomerSourceChangesFilter'
+import CustomerSourceChangesFiltersContextProvider from '../../contexts/CustomerSourceChangesFiltersContext/CustomerSourceChangesFiltersContextProvider'
+import CustomerSourceChangesTable from './components/CustomerSourceChangesTable/CustomerSourceChangesTable'
+import CustomersMenu from '../../../CustomersMenu/CustomersMenu'
+import CustomersSourceChangesFilterMobile from './components/CustomersSourceChangesFilterMobile/CustomersSourceChangesFilterMobile'
 import Page from '../../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
-import useLeadSourceChangesView from './hooks/useLeadSourceChangesView'
+import useCustomerSourceChangesView from './hooks/useCustomerSourceChangesView'
 
 // TODO: Move to l10n
-const LeadSourceChanges: FC = () => {
+const CustomerSourceChanges: FC = () => {
     const title = 'История изменений'
 
-    const { onClickCancel } = useLeadSourceChangesView()
+    const { onClickCancel } = useCustomerSourceChangesView()
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <LeadSourceChangesContextProvider>
-            <LeadSourceChangesFiltersContextProvider>
+        <CustomerSourceChangesContextProvider>
+            <CustomerSourceChangesFiltersContextProvider>
                 <Page
                     title={title}
-                    firstSidebar={<LeadsMenu />}
-                    secondSidebar={<LeadSourceChangesFilter />}
-                    secondSidebarMobile={<LeadsSourceChangesFilterMobile />}
+                    firstSidebar={<CustomersMenu />}
+                    secondSidebar={<CustomerSourceChangesFilter />}
+                    secondSidebarMobile={<CustomersSourceChangesFilterMobile />}
                     onClickCancel={onClickCancel}
                 >
-                    <LeadSourceChangesTable />
+                    <CustomerSourceChangesTable />
                 </Page>
-            </LeadSourceChangesFiltersContextProvider>
-        </LeadSourceChangesContextProvider>
+            </CustomerSourceChangesFiltersContextProvider>
+        </CustomerSourceChangesContextProvider>
     )
 }
 
-export default LeadSourceChanges
+export default CustomerSourceChanges

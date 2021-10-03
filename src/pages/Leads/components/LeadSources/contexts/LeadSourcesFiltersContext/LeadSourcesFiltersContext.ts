@@ -1,9 +1,9 @@
-import LeadSourcesFiltersState, {
-    leadSourcesFiltersInitialState
-} from '../../states/LeadSourcesFiltersState'
+import CustomerSourcesFiltersState, {
+    customerSourcesFiltersInitialState
+} from '../../states/CustomerSourcesFiltersState'
 
 import { createContext } from 'react'
 
-const LeadSourcesFiltersContext = createContext<LeadSourcesFiltersState>(leadSourcesFiltersInitialState)
+const CustomerSourcesFiltersContext = createContext<CustomerSourcesFiltersState>(customerSourcesFiltersInitialState)
 
-export default LeadSourcesFiltersContext
+export default CustomerSourcesFiltersContext

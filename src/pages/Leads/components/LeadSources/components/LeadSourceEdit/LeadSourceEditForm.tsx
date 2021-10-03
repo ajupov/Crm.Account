@@ -1,15 +1,15 @@
 import React, { FC, useContext } from 'react'
 
 import EditForm from '../../../../../../components/common/forms/EditForm/EditForm'
-import LeadSourceContext from '../../contexts/LeadSourceContext/LeadSourceContext'
-import LeadSourcesRoutes from '../../routes/LeadSourcesRoutes'
-import useLeadSourceOnChange from '../../hooks/change/useLeadSourceOnChange'
-import useLeadSourcesActions from '../../contexts/LeadSourcesActionsContext/hooks/useLeadSourcesActions'
+import CustomerSourceContext from '../../contexts/CustomerSourceContext/CustomerSourceContext'
+import CustomerSourcesRoutes from '../../routes/CustomerSourcesRoutes'
+import useCustomerSourceOnChange from '../../hooks/change/useCustomerSourceOnChange'
+import useCustomerSourcesActions from '../../contexts/CustomerSourcesActionsContext/hooks/useCustomerSourcesActions'
 
-const LeadSourceEditForm: FC = () => {
-    const state = useContext(LeadSourceContext)
-    const { isLoading } = useLeadSourcesActions()
-    const { fields, isConfirmEnabled, onClickConfirmUpdate, onClickCancel } = useLeadSourceOnChange()
+const CustomerSourceEditForm: FC = () => {
+    const state = useContext(CustomerSourceContext)
+    const { isLoading } = useCustomerSourcesActions()
+    const { fields, isConfirmEnabled, onClickConfirmUpdate, onClickCancel } = useCustomerSourceOnChange()
 
     return state.source.id ? (
         <EditForm
@@ -19,11 +19,11 @@ const LeadSourceEditForm: FC = () => {
             isConfirmEnabled={isConfirmEnabled}
             createDate={state.source.createDateTime}
             lastModifyDateTime={state.source.modifyDateTime}
-            historyLink={LeadSourcesRoutes.Changes}
+            historyLink={CustomerSourcesRoutes.Changes}
             onClickConfirm={onClickConfirmUpdate}
             onClickCancel={onClickCancel}
         />
     ) : null
 }
 
-export default LeadSourceEditForm
+export default CustomerSourceEditForm

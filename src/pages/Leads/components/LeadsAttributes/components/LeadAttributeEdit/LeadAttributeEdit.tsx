@@ -1,24 +1,24 @@
 import React, { FC, useEffect } from 'react'
 
-import ClientsMenu from '../../../LeadsMenu/LeadsMenu'
-import LeadAttributeContextProvider from '../../contexts/LeadAttributeContext/LeadAttributeContextProvider'
-import LeadAttributeEditForm from './LeadAttributeEditForm'
+import ClientsMenu from '../../../CustomersMenu/CustomersMenu'
+import CustomerAttributeContextProvider from '../../contexts/CustomerAttributeContext/CustomerAttributeContextProvider'
+import CustomerAttributeEditForm from './CustomerAttributeEditForm'
 import Page from '../../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
-const LeadAttributeEdit: FC = () => {
+const CustomerAttributeEdit: FC = () => {
     const title = 'Изменение атрибута'
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <LeadAttributeContextProvider>
+        <CustomerAttributeContextProvider>
             <Page title={title} firstSidebar={<ClientsMenu />}>
-                <LeadAttributeEditForm />
+                <CustomerAttributeEditForm />
             </Page>
-        </LeadAttributeContextProvider>
+        </CustomerAttributeContextProvider>
     )
 }
 
-export default LeadAttributeEdit
+export default CustomerAttributeEdit

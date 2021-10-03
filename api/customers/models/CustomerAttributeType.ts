@@ -1,15 +1,15 @@
-enum LeadAttributeType {
+enum CustomerAttributeType {
     Tag = 1,
     Bool = 2,
-    Byte = 3,
-    Short = 4,
-    UnsignedShort = 5,
+    // Byte = 3,
+    // Short = 4,
+    // UnsignedShort = 5,
     Integer = 6,
-    UnsignedInteger = 7,
+    // UnsignedInteger = 7,
     Long = 8,
-    UnsignedLong = 9,
+    // UnsignedLong = 9,
     Decimal = 10,
-    Single = 11,
+    // Single = 11,
     Double = 12,
     Date = 20,
     Time = 21,
@@ -31,4 +31,4 @@ enum LeadAttributeType {
     Text = 64
 }
 
-export default LeadAttributeType
+export default CustomerAttributeType

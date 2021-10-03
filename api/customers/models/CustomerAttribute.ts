@@ -1,9 +1,9 @@
-import LeadAttributeType from './LeadAttributeType'
+import CustomerAttributeType from './CustomerAttributeType'
 
-export default interface LeadAttribute {
+export default interface CustomerAttribute {
     id?: string
     accountId?: string
-    type: LeadAttributeType
+    type: CustomerAttributeType
     key?: string
     isDeleted: boolean
     createDateTime?: string

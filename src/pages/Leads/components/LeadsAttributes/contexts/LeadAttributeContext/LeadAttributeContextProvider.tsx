@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 
-import LeadAttributeContext from './LeadAttributeContext'
-import useLeadAttribute from './hooks/useLeadAttribute'
+import CustomerAttributeContext from './CustomerAttributeContext'
+import useCustomerAttribute from './hooks/useCustomerAttribute'
 
-const LeadAttributeContextProvider: FC = ({ children }) => {
-    const state = useLeadAttribute()
+const CustomerAttributeContextProvider: FC = ({ children }) => {
+    const state = useCustomerAttribute()
 
-    return <LeadAttributeContext.Provider value={state}>{children}</LeadAttributeContext.Provider>
+    return <CustomerAttributeContext.Provider value={state}>{children}</CustomerAttributeContext.Provider>
 }
 
-export default LeadAttributeContextProvider
+export default CustomerAttributeContextProvider

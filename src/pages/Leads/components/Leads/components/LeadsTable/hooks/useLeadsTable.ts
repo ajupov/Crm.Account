@@ -2,31 +2,31 @@ import { calculateOffset, calculatePage } from '../../../../../../../utils/pagin
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import Lead from '../../../../../../../../api/customers/models/Lead'
-import LeadsContext from '../../../contexts/LeadsContext/LeadsContext'
-import LeadsRoutes from '../../../routes/LeadsRoutes'
+import Customer from '../../../../../../../../api/customers/models/Customer'
+import CustomersContext from '../../../contexts/CustomersContext/CustomersContext'
+import CustomersRoutes from '../../../routes/CustomersRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
 import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
-import useLeadView from '../../LeadView/hooks/useLeadView'
+import useCustomerView from '../../CustomerView/hooks/useCustomerView'
 
-interface UseLeadsTableReturn {
+interface UseCustomersTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (leads: Lead[]) => TableBodyRowProps[]
+    map: (customers: Customer[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
 
 // TODO: Move to l10n
-const useLeadsTable = (): UseLeadsTableReturn => {
-    const state = useContext(LeadsContext)
-    const { onClickDelete, onClickRestore } = useLeadView()
+const useCustomersTable = (): UseCustomersTableReturn => {
+    const state = useContext(CustomersContext)
+    const { onClickDelete, onClickRestore } = useCustomerView()
 
     const onClickDownloadAsCsv = useCallback(async () => {
-        const leads = (await state.getAll())?.leads
-        if (!leads) {
+        const customers = (await state.getAll())?.customers
+        if (!customers) {
             return
         }
 
@@ -55,7 +55,7 @@ const useLeadsTable = (): UseLeadsTableReturn => {
             'Создан',
             'Изменен'
         ]
-        const csv = convertObjectToCSV([headers, ...leads])
+        const csv = convertObjectToCSV([headers, ...customers])
 
         downloadAsCsv(fileName, csv)
     }, [state])
@@ -88,26 +88,28 @@ const useLeadsTable = (): UseLeadsTableReturn => {
     )
 
     const map = useCallback(
-        (leads: Lead[]) =>
-            leads.map(
-                lead =>
+        (customers: Customer[]) =>
+            customers.map(
+                customer =>
                     ({
-                        id: lead.id,
+                        id: customer.id,
                         cells: [
-                            { value: lead.surname, textAlign: 'left' },
-                            { value: lead.name, textAlign: 'left' },
-                            { value: lead.patronymic, textAlign: 'left' },
-                            { value: lead.companyName, textAlign: 'left' },
-                            { value: lead.phone, textAlign: 'left' },
-                            { value: lead.email, textAlign: 'left' },
+                            { value: customer.surname, textAlign: 'left' },
+                            { value: customer.name, textAlign: 'left' },
+                            { value: customer.patronymic, textAlign: 'left' },
+                            { value: customer.companyName, textAlign: 'left' },
+                            { value: customer.phone, textAlign: 'left' },
+                            { value: customer.email, textAlign: 'left' },
                             {
-                                value: lead.createDateTime ? getDateTimeAsRecently(new Date(lead.createDateTime)) : '',
+                                value: customer.createDateTime
+                                    ? getDateTimeAsRecently(new Date(customer.createDateTime))
+                                    : '',
                                 textAlign: 'center'
                             }
                         ],
-                        isDeleted: lead.isDeleted,
-                        viewLink: LeadsRoutes.View,
-                        editLink: LeadsRoutes.Edit,
+                        isDeleted: customer.isDeleted,
+                        viewLink: CustomersRoutes.View,
+                        editLink: CustomersRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
@@ -178,4 +180,4 @@ const useLeadsTable = (): UseLeadsTableReturn => {
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
-export default useLeadsTable
+export default useCustomersTable

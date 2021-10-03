@@ -1,16 +1,18 @@
-import IHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
+import IJsonHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 import UserSettingGetPagedListRequest from '../models/UserSettingChangeGetPagedListRequest'
 import UserSettingGetPagedListResponse from '../../user/models/UserSettingChangeGetPagedListResponse'
 
 export default class UserSettingChangesClient {
-    private readonly httpClientFactory: IHttpClientFactory
+    private readonly _host: string
+    private readonly _factory: IJsonHttpClientFactory
 
-    constructor(httpClientFactory: IHttpClientFactory) {
-        this.httpClientFactory = httpClientFactory
+    constructor(host: string, factory: IJsonHttpClientFactory) {
+                this._host = host
+        this._factory = factory
     }
 
     public GetPagedListAsync = (request?: UserSettingGetPagedListRequest): Promise<UserSettingGetPagedListResponse> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .post<UserSettingGetPagedListResponse>('/User/Settings/Changes/v1/GetPagedList', request)
+        this._factory
+            .
+            .postAsync<UserSettingGetPagedListResponse>('/User/Settings/Changes/v1/GetPagedList', request)
 }

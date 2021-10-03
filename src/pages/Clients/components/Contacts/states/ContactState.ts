@@ -15,7 +15,7 @@ export const contactInitialState: ContactState = {
     contact: {
         id: void 0,
         accountId: void 0,
-        leadId: void 0,
+        customerId: void 0,
         companyId: void 0,
         createUserId: void 0,
         responsibleUserId: void 0,

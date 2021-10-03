@@ -1,4 +1,4 @@
-export default interface LeadSourceGetPagedListRequest {
+export default interface CustomerSourceGetPagedListRequest {
     name?: string
     isDeleted?: boolean
     minCreateDate?: string

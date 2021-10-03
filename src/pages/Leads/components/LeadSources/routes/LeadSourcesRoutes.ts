@@ -1,9 +1,9 @@
-const LeadSourcesRoutes = {
-    Index: '/leads/sources',
-    View: '/leads/sources/view',
-    Create: '/leads/sources/create',
-    Edit: '/leads/sources/edit',
-    Changes: '/leads/sources/changes'
+const CustomerSourcesRoutes = {
+    Index: '/customers/sources',
+    View: '/customers/sources/view',
+    Create: '/customers/sources/create',
+    Edit: '/customers/sources/edit',
+    Changes: '/customers/sources/changes'
 }
 
-export default LeadSourcesRoutes
+export default CustomerSourcesRoutes

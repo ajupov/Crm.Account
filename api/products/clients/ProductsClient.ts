@@ -25,17 +25,17 @@ export default class ProductsClient {
         this._factory.postAsync<string>(this._host + '/Products/v1/Create', void 0, product)
 
     public UpdateAsync = (product?: Product): Promise<void> =>
-        this._factory.patchAsync(this._host + '/Products/v1/Update', void 0, product)
+        this._factory.patchAsyncAsync(this._host + '/Products/v1/Update', void 0, product)
 
     public HideAsync = (values?: string[]): Promise<void> =>
-        this._factory.patchAsync(this._host + '/Products/v1/Hide', void 0, values)
+        this._factory.patchAsyncAsync(this._host + '/Products/v1/Hide', void 0, values)
 
     public ShowAsync = (values?: string[]): Promise<void> =>
-        this._factory.patchAsync(this._host + '/Products/v1/Show', void 0, values)
+        this._factory.patchAsyncAsync(this._host + '/Products/v1/Show', void 0, values)
 
     public DeleteAsync = (values?: string[]): Promise<void> =>
-        this._factory.patchAsync(this._host + '/Products/v1/Delete', void 0, values)
+        this._factory.patchAsyncAsync(this._host + '/Products/v1/Delete', void 0, values)
 
     public RestoreAsync = (values?: string[]): Promise<void> =>
-        this._factory.patchAsync(this._host + '/Products/v1/Restore', void 0, values)
+        this._factory.patchAsyncAsync(this._host + '/Products/v1/Restore', void 0, values)
 }

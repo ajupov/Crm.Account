@@ -2,27 +2,27 @@ import { calculateOffset, calculatePage } from '../../../../../../../utils/pagin
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import LeadSource from '../../../../../../../../api/customers/models/LeadSource'
-import LeadSourcesContext from '../../../contexts/LeadSourcesContext/LeadSourcesContext'
-import LeadSourcesRoutes from '../../../routes/LeadSourcesRoutes'
+import CustomerSource from '../../../../../../../../api/customers/models/CustomerSource'
+import CustomerSourcesContext from '../../../contexts/CustomerSourcesContext/CustomerSourcesContext'
+import CustomerSourcesRoutes from '../../../routes/CustomerSourcesRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
 import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
-import useLeadSourceView from '../../LeadSourceView/hooks/useLeadSourceView'
+import useCustomerSourceView from '../../CustomerSourceView/hooks/useCustomerSourceView'
 
-interface UseLeadSourcesTableReturn {
+interface UseCustomerSourcesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (sources: LeadSource[]) => TableBodyRowProps[]
+    map: (sources: CustomerSource[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
 
 // TODO: Move to l10n
-const useLeadSourcesTable = (): UseLeadSourcesTableReturn => {
-    const state = useContext(LeadSourcesContext)
-    const { onClickDelete, onClickRestore } = useLeadSourceView()
+const useCustomerSourcesTable = (): UseCustomerSourcesTableReturn => {
+    const state = useContext(CustomerSourcesContext)
+    const { onClickDelete, onClickRestore } = useCustomerSourceView()
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const sources = (await state.getAll())?.sources
@@ -65,7 +65,7 @@ const useLeadSourcesTable = (): UseLeadSourcesTableReturn => {
     )
 
     const map = useCallback(
-        (sources: LeadSource[]) =>
+        (sources: CustomerSource[]) =>
             sources.map(
                 source =>
                     ({
@@ -80,8 +80,8 @@ const useLeadSourcesTable = (): UseLeadSourcesTableReturn => {
                             }
                         ],
                         isDeleted: source.isDeleted,
-                        viewLink: LeadSourcesRoutes.View,
-                        editLink: LeadSourcesRoutes.Edit,
+                        viewLink: CustomerSourcesRoutes.View,
+                        editLink: CustomerSourcesRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
@@ -117,4 +117,4 @@ const useLeadSourcesTable = (): UseLeadSourcesTableReturn => {
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
-export default useLeadSourcesTable
+export default useCustomerSourcesTable

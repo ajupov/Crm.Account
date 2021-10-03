@@ -1,12 +1,12 @@
 import React, { FC, useContext } from 'react'
 
-import LeadSourceChangesContext from '../../../../contexts/LeadSourceChangesContext/LeadSourceChangesContext'
+import CustomerSourceChangesContext from '../../../../contexts/CustomerSourceChangesContext/CustomerSourceChangesContext'
 import Table from '../../../../../../../../components/common/collections/Table/Table'
-import useLeadSourceChangesTable from './hooks/useLeadSourceChangesTable'
+import useCustomerSourceChangesTable from './hooks/useCustomerSourceChangesTable'
 
-const LeadSourceChangesTable: FC = () => {
-    const state = useContext(LeadSourceChangesContext)
-    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useLeadSourceChangesTable()
+const CustomerSourceChangesTable: FC = () => {
+    const state = useContext(CustomerSourceChangesContext)
+    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useCustomerSourceChangesTable()
 
     return (
         <Table
@@ -19,4 +19,4 @@ const LeadSourceChangesTable: FC = () => {
     )
 }
 
-export default LeadSourceChangesTable
+export default CustomerSourceChangesTable

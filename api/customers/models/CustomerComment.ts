@@ -1,6 +1,6 @@
-export default interface LeadComment {
+export default interface CustomerComment {
     id?: string
-    leadId?: string
+    customerId?: string
     commentatorUserId?: string
     value?: string
     createDateTime?: string

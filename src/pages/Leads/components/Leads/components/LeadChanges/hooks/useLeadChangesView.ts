@@ -5,7 +5,7 @@ interface UseProductViewReturn {
     onClickCancel: () => void
 }
 
-const useLeadChangesView = (): UseProductViewReturn => {
+const useCustomerChangesView = (): UseProductViewReturn => {
     const history = useHistory()
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
@@ -13,4 +13,4 @@ const useLeadChangesView = (): UseProductViewReturn => {
     return { onClickCancel }
 }
 
-export default useLeadChangesView
+export default useCustomerChangesView

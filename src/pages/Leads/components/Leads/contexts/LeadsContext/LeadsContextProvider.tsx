@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 
-import LeadsContext from './LeadsContext'
-import useLeads from './hooks/useLeads'
+import CustomersContext from './CustomersContext'
+import useCustomers from './hooks/useCustomers'
 
-const LeadsContextProvider: FC = ({ children }) => {
-    const state = useLeads()
+const CustomersContextProvider: FC = ({ children }) => {
+    const state = useCustomers()
 
-    return <LeadsContext.Provider value={state}>{children}</LeadsContext.Provider>
+    return <CustomersContext.Provider value={state}>{children}</CustomersContext.Provider>
 }
 
-export default LeadsContextProvider
+export default CustomersContextProvider

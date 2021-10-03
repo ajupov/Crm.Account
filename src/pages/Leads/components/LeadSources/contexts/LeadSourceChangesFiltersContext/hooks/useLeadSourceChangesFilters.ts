@@ -1,20 +1,20 @@
-import LeadSourceChangesFiltersState, {
-    leadSourceChangesFiltersInitialState
-} from '../../../states/LeadSourceChangesFiltersState'
+import CustomerSourceChangesFiltersState, {
+    customerSourceChangesFiltersInitialState
+} from '../../../states/CustomerSourceChangesFiltersState'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { FilterFormFieldProps } from '../../../../../../../components/common/forms/FilterForm/FilterForm'
 import { InputOnChangeData } from 'semantic-ui-react'
-import LeadSourceChangesContext from '../../LeadSourceChangesContext/LeadSourceChangesContext'
+import CustomerSourceChangesContext from '../../CustomerSourceChangesContext/CustomerSourceChangesContext'
 
 // TODO: Move to l10n
-const useLeadSourceChangesFilters = (): LeadSourceChangesFiltersState => {
-    const state = useContext(LeadSourceChangesContext)
+const useCustomerSourceChangesFilters = (): CustomerSourceChangesFiltersState => {
+    const state = useContext(CustomerSourceChangesContext)
     const [minCreateDate, setMinCreateDate] = useState('')
     const [maxCreateDate, setMaxCreateDate] = useState('')
     const [isApplyEnabled, setIsApplyEnabled] = useState(false)
     const [isResetEnabled, setIsResetEnabled] = useState(false)
-    const [isShowMobile, setIsShowMobile] = useState(leadSourceChangesFiltersInitialState.isShowMobile)
+    const [isShowMobile, setIsShowMobile] = useState(customerSourceChangesFiltersInitialState.isShowMobile)
 
     const onChangeMinCreateDate = useCallback((_, data: InputOnChangeData) => {
         setMinCreateDate(data.value)
@@ -75,4 +75,4 @@ const useLeadSourceChangesFilters = (): LeadSourceChangesFiltersState => {
     return { fields, isApplyEnabled, onApply, isResetEnabled, onReset, isShowMobile, onShowMobile, onHideMobile }
 }
 
-export default useLeadSourceChangesFilters
+export default useCustomerSourceChangesFilters

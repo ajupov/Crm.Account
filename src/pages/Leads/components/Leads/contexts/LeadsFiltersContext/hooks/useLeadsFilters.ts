@@ -1,19 +1,19 @@
 import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
-import LeadsFiltersState, { leadsFiltersInitialState } from '../../../states/LeadsFiltersState'
+import CustomersFiltersState, { customersFiltersInitialState } from '../../../states/CustomersFiltersState'
 import { arrayToDictionary, dictionaryToArray } from '../../../../../../../utils/dictionary/dictionaryUtils'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { FilterFormFieldProps } from '../../../../../../../components/common/forms/FilterForm/FilterForm'
-import LeadsContext from '../../LeadsContext/LeadsContext'
+import CustomersContext from '../../CustomersContext/CustomersContext'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
-import useLeadAttributesLoad from '../../../hooks/load/useLeadAttributesLoad'
-import useLeadSourcesLoad from '../../../hooks/load/useLeadSourcesLoad'
+import useCustomerAttributesLoad from '../../../hooks/load/useCustomerAttributesLoad'
+import useCustomerSourcesLoad from '../../../hooks/load/useCustomerSourcesLoad'
 
 // TODO: Move to l10n
-const useLeadsFilters = (): LeadsFiltersState => {
-    const state = useContext(LeadsContext)
-    const { sourcesAsOptions } = useLeadSourcesLoad()
-    const { attributesAsOptions } = useLeadAttributesLoad()
+const useCustomersFilters = (): CustomersFiltersState => {
+    const state = useContext(CustomersContext)
+    const { sourcesAsOptions } = useCustomerSourcesLoad()
+    const { attributesAsOptions } = useCustomerAttributesLoad()
     const [sourceIds, setSourceIds] = useState(state.request.sourceIds)
     const [surname, setSurname] = useState(state.request.surname ?? '')
     const [name, setName] = useState(state.request.name ?? '')
@@ -37,9 +37,9 @@ const useLeadsFilters = (): LeadsFiltersState => {
     const [minModifyDate, setMinModifyDate] = useState(state.request.minModifyDate ?? '')
     const [maxModifyDate, setMaxModifyDate] = useState(state.request.maxModifyDate ?? '')
     const [isDeleted, setIsDeleted] = useState(state.request.isDeleted)
-    const [isApplyEnabled, setIsApplyEnabled] = useState(leadsFiltersInitialState.isApplyEnabled)
-    const [isResetEnabled, setIsResetEnabled] = useState(leadsFiltersInitialState.isResetEnabled)
-    const [isShowMobile, setIsShowMobile] = useState(leadsFiltersInitialState.isShowMobile)
+    const [isApplyEnabled, setIsApplyEnabled] = useState(customersFiltersInitialState.isApplyEnabled)
+    const [isResetEnabled, setIsResetEnabled] = useState(customersFiltersInitialState.isResetEnabled)
+    const [isShowMobile, setIsShowMobile] = useState(customersFiltersInitialState.isShowMobile)
 
     const onChangeSourceId = useCallback((_: any, data: DropdownProps) => {
         setSourceIds([data.value as string])
@@ -473,4 +473,4 @@ const useLeadsFilters = (): LeadsFiltersState => {
     return { fields, isApplyEnabled, onApply, isResetEnabled, onReset, isShowMobile, onShowMobile, onHideMobile }
 }
 
-export default useLeadsFilters
+export default useCustomersFilters

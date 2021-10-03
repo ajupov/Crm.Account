@@ -1,6 +1,6 @@
 import { FilterFormFieldProps } from '../../../../../components/common/forms/FilterForm/FilterForm'
 
-export default interface LeadsFiltersState {
+export default interface CustomersFiltersState {
     fields: FilterFormFieldProps[]
     isApplyEnabled: boolean
     onApply: () => void
@@ -11,7 +11,7 @@ export default interface LeadsFiltersState {
     onHideMobile: () => void
 }
 
-export const leadsFiltersInitialState: LeadsFiltersState = {
+export const customersFiltersInitialState: CustomersFiltersState = {
     fields: [],
     isApplyEnabled: false,
     onApply: () => void 0,

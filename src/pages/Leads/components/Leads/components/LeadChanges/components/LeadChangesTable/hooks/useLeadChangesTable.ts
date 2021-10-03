@@ -2,28 +2,28 @@ import { calculateOffset, calculatePage } from '../../../../../../../../../utils
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import Lead from '../../../../../../../../../../api/customers/models/Lead'
-import LeadAttributeLink from '../../../../../../../../../../api/customers/models/LeadAttributeLink'
-import LeadChange from '../../../../../../../../../../api/customers/models/LeadChange'
-import LeadChangesContext from '../../../../../contexts/LeadChangesContext/LeadChangesContext'
+import Customer from '../../../../../../../../../../api/customers/models/Customer'
+import CustomerAttributeLink from '../../../../../../../../../../api/customers/models/CustomerAttributeLink'
+import CustomerChange from '../../../../../../../../../../api/customers/models/CustomerChange'
+import CustomerChangesContext from '../../../../../contexts/CustomerChangesContext/CustomerChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../../components/common/collections/Table/TableHeader'
 import { getDateTimeAsRecently } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../../../helpers/fileNameHelper'
 import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
-import { joinAttributes } from '../../../../../mappers/leadAttributesMapper'
+import { joinAttributes } from '../../../../../mappers/customerAttributesMapper'
 
-interface UseLeadChangesTableReturn {
+interface UseCustomerChangesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (leads: LeadChange[]) => TableBodyRowProps[]
+    map: (customers: CustomerChange[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
 
 // TODO: Move to l10n
-const useLeadChangesTable = (): UseLeadChangesTableReturn => {
-    const state = useContext(LeadChangesContext)
+const useCustomerChangesTable = (): UseCustomerChangesTableReturn => {
+    const state = useContext(CustomerChangesContext)
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const changes = (await state.getAll())?.changes
@@ -43,7 +43,7 @@ const useLeadChangesTable = (): UseLeadChangesTableReturn => {
         [state]
     )
 
-    const getChangeName = useCallback((change: LeadChange) => {
+    const getChangeName = useCallback((change: CustomerChange) => {
         if (!change.oldValueJson && change.newValueJson) {
             return 'Создан'
         }
@@ -59,12 +59,12 @@ const useLeadChangesTable = (): UseLeadChangesTableReturn => {
         return ''
     }, [])
 
-    const mapAttributes = useCallback((links?: LeadAttributeLink[]) => joinAttributes(links), [])
+    const mapAttributes = useCallback((links?: CustomerAttributeLink[]) => joinAttributes(links), [])
 
     const getChangeValue = useCallback(
-        (change: LeadChange) => {
-            const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as Lead) : void 0
-            const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as Lead) : void 0
+        (change: CustomerChange) => {
+            const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as Customer) : void 0
+            const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as Customer) : void 0
 
             return [
                 `ID Источника: ${getValueOrEmpty(oldValue?.sourceId)} → ${getValueOrEmpty(newValue?.sourceId)}`,
@@ -95,7 +95,7 @@ const useLeadChangesTable = (): UseLeadChangesTableReturn => {
     )
 
     const map = useCallback(
-        (changes: LeadChange[]) =>
+        (changes: CustomerChange[]) =>
             changes.map(
                 change =>
                     ({
@@ -144,4 +144,4 @@ const useLeadChangesTable = (): UseLeadChangesTableReturn => {
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
-export default useLeadChangesTable
+export default useCustomerChangesTable

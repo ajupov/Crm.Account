@@ -1,23 +1,23 @@
-import Lead from '../../../../../../api/customers/models/Lead'
-import LeadGetPagedListRequest from '../../../../../../api/customers/models/LeadGetPagedListRequest'
-import LeadGetPagedListResponse from '../../../../../../api/customers/models/LeadGetPagedListResponse'
+import Customer from '../../../../../../api/customers/models/Customer'
+import CustomerGetPagedListRequest from '../../../../../../api/customers/models/CustomerGetPagedListRequest'
+import CustomerGetPagedListResponse from '../../../../../../api/customers/models/CustomerGetPagedListResponse'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'
 const DefaultOrderBy = 'desc'
 
-export default interface LeadsState {
-    request: LeadGetPagedListRequest
-    setRequest: (request: LeadGetPagedListRequest) => void
+export default interface CustomersState {
+    request: CustomerGetPagedListRequest
+    setRequest: (request: CustomerGetPagedListRequest) => void
     isLoading: boolean
-    leads: Lead[]
+    customers: Customer[]
     total: number
     lastModifyDateTime: string
     getPagedList: () => Promise<void>
-    getAll: () => Promise<LeadGetPagedListResponse>
+    getAll: () => Promise<CustomerGetPagedListResponse>
 }
 
-export const conactsInitialState: LeadsState = {
+export const conactsInitialState: CustomersState = {
     request: {
         isDeleted: false,
         offset: 0,
@@ -25,9 +25,9 @@ export const conactsInitialState: LeadsState = {
         sortBy: DefaultSortBy,
         orderBy: DefaultOrderBy
     },
-    setRequest: (_: LeadGetPagedListRequest) => void 0,
+    setRequest: (_: CustomerGetPagedListRequest) => void 0,
     isLoading: false,
-    leads: [],
+    customers: [],
     total: 0,
     lastModifyDateTime: '',
     getPagedList: () => Promise.resolve(void 0),

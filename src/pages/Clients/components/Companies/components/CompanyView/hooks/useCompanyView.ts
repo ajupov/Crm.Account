@@ -9,7 +9,7 @@ import { getCompanyTypeName } from '../../../helpers/helpers/companyTypeHelper'
 import { joinAttributes } from '../../../mappers/companyAttributesMapper'
 import { joinBankAccounts } from '../../../mappers/companyBankAccountsMapper'
 import { useHistory } from 'react-router'
-import useLeadLoad from '../../../hooks/load/useLeadLoad'
+import useCustomerLoad from '../../../hooks/load/useCustomerLoad'
 
 interface UseCompanyViewReturn {
     map: (company: Company) => ViewDataProps[]
@@ -23,7 +23,7 @@ const useCompanyView = (): UseCompanyViewReturn => {
     const history = useHistory()
     const companyState = useContext(CompanyContext)
     const actionsState = useContext(CompaniesActionsContext)
-    const { lead } = useLeadLoad(companyState.company.leadId)
+    const { customer } = useCustomerLoad(companyState.company.customerId)
 
     const onClickDelete = useCallback(
         (id: string) => {
@@ -43,17 +43,22 @@ const useCompanyView = (): UseCompanyViewReturn => {
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const mapAttributes = useCallback(() => joinAttributes(companyState.company.attributeLinks), [
-        companyState.company.attributeLinks
-    ])
+    const mapAttributes = useCallback(
+        () => joinAttributes(companyState.company.attributeLinks),
+        [companyState.company.attributeLinks]
+    )
 
-    const mapBankAccounts = useCallback(() => joinBankAccounts(companyState.company.bankAccounts), [
-        companyState.company.bankAccounts
-    ])
+    const mapBankAccounts = useCallback(
+        () => joinBankAccounts(companyState.company.bankAccounts),
+        [companyState.company.bankAccounts]
+    )
 
     const map = useCallback(
         (company: Company): ViewDataProps[] => [
-            { label: 'Лид', value: lead ? `${lead?.surname} ${lead?.name} ${lead?.patronymic}`.trim() : '' },
+            {
+                label: 'Лид',
+                value: customer ? `${customer?.surname} ${customer?.name} ${customer?.patronymic}`.trim() : ''
+            },
             { label: 'Тип', value: getCompanyTypeName(company.type) },
             { label: 'Род деятельности', value: getCompanyIndustryTypeName(company.industryType) },
             { label: 'Полное название', value: company.fullName },
@@ -84,7 +89,7 @@ const useCompanyView = (): UseCompanyViewReturn => {
             { label: 'Атрибуты', value: mapAttributes() },
             { label: 'Удален', value: company.isDeleted ? 'Да' : 'Нет' }
         ],
-        [lead, mapAttributes, mapBankAccounts]
+        [customer, mapAttributes, mapBankAccounts]
     )
 
     return { map, onClickDelete, onClickRestore, onClickCancel }

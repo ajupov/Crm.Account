@@ -1,20 +1,22 @@
-import LeadAttributeChangesState, { leadAttributeChangesInitialState } from '../../../states/LeadAttributeChangesState'
+import CustomerAttributeChangesState, {
+    customerAttributeChangesInitialState
+} from '../../../states/CustomerAttributeChangesState'
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
-import LeadAttributeChangesClient from '../../../../../../../../api/customers/clients/LeadAttributeChangesClient'
+import CustomerAttributeChangesClient from '../../../../../../../../api/customers/clients/CustomerAttributeChangesClient'
 import { useParams } from 'react-router'
 
-const leadAttributeChangesClient = new LeadAttributeChangesClient(HttpClientFactory.Api)
+const customerAttributeChangesClient = new CustomerAttributeChangesClient(HttpClientFactory.Api)
 
-const useLeadAttributeChanges = (): LeadAttributeChangesState => {
+const useCustomerAttributeChanges = (): CustomerAttributeChangesState => {
     const MaxLimit = 1048576
 
     const { id }: { id: string } = useParams()
-    const [request, setRequest] = useState(leadAttributeChangesInitialState.request)
-    const [isLoading, setIsLoading] = useState(leadAttributeChangesInitialState.isLoading)
-    const [changes, setChanges] = useState(leadAttributeChangesInitialState.changes)
-    const [total, setTotal] = useState(leadAttributeChangesInitialState.total)
+    const [request, setRequest] = useState(customerAttributeChangesInitialState.request)
+    const [isLoading, setIsLoading] = useState(customerAttributeChangesInitialState.isLoading)
+    const [changes, setChanges] = useState(customerAttributeChangesInitialState.changes)
+    const [total, setTotal] = useState(customerAttributeChangesInitialState.total)
 
     const getPagedList = useCallback(async () => {
         if (!id) {
@@ -23,7 +25,7 @@ const useLeadAttributeChanges = (): LeadAttributeChangesState => {
 
         setIsLoading(true)
 
-        const response = await leadAttributeChangesClient.GetPagedListAsync({ ...request, attributeId: id })
+        const response = await customerAttributeChangesClient.GetPagedListAsync({ ...request, attributeId: id })
 
         setChanges(response.changes ?? [])
         setTotal(response.totalCount)
@@ -38,7 +40,7 @@ const useLeadAttributeChanges = (): LeadAttributeChangesState => {
 
         setIsLoading(true)
 
-        const response = await leadAttributeChangesClient.GetPagedListAsync({
+        const response = await customerAttributeChangesClient.GetPagedListAsync({
             ...request,
             attributeId: id,
             offset: 0,
@@ -63,4 +65,4 @@ const useLeadAttributeChanges = (): LeadAttributeChangesState => {
     return { request, setRequest, isLoading, total, changes, getAll }
 }
 
-export default useLeadAttributeChanges
+export default useCustomerAttributeChanges

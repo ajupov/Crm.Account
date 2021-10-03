@@ -1,15 +1,15 @@
 import React, { FC, useContext } from 'react'
 
 import EditForm from '../../../../../../components/common/forms/EditForm/EditForm'
-import LeadAttributeContext from '../../contexts/LeadAttributeContext/LeadAttributeContext'
-import LeadAttributesRoutes from '../../routes/LeadAttributesRoutes'
-import useLeadAttributeOnChange from '../../hooks/useLeadAttributeOnChange'
-import useLeadAttributesActions from '../../contexts/LeadAttributesActionsContext/hooks/useLeadAttributesActions'
+import CustomerAttributeContext from '../../contexts/CustomerAttributeContext/CustomerAttributeContext'
+import CustomerAttributesRoutes from '../../routes/CustomerAttributesRoutes'
+import useCustomerAttributeOnChange from '../../hooks/useCustomerAttributeOnChange'
+import useCustomerAttributesActions from '../../contexts/CustomerAttributesActionsContext/hooks/useCustomerAttributesActions'
 
-const LeadAttributeEditForm: FC = () => {
-    const state = useContext(LeadAttributeContext)
-    const { isLoading } = useLeadAttributesActions()
-    const { fields, isConfirmEnabled, onClickConfirmUpdate, onClickCancel } = useLeadAttributeOnChange()
+const CustomerAttributeEditForm: FC = () => {
+    const state = useContext(CustomerAttributeContext)
+    const { isLoading } = useCustomerAttributesActions()
+    const { fields, isConfirmEnabled, onClickConfirmUpdate, onClickCancel } = useCustomerAttributeOnChange()
 
     return state.attribute.id ? (
         <EditForm
@@ -19,11 +19,11 @@ const LeadAttributeEditForm: FC = () => {
             isConfirmEnabled={isConfirmEnabled}
             createDate={state.attribute.createDateTime}
             lastModifyDateTime={state.attribute.modifyDateTime}
-            historyLink={LeadAttributesRoutes.Changes}
+            historyLink={CustomerAttributesRoutes.Changes}
             onClickConfirm={onClickConfirmUpdate}
             onClickCancel={onClickCancel}
         />
     ) : null
 }
 
-export default LeadAttributeEditForm
+export default CustomerAttributeEditForm

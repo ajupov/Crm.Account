@@ -1,24 +1,24 @@
-import LeadAttributesState, { leadAttributesInitialState } from '../../../states/LeadAttributesState'
+import CustomerAttributesState, { customerAttributesInitialState } from '../../../states/CustomerAttributesState'
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
-import LeadAttributesClient from '../../../../../../../../api/customers/clients/LeadAttributesClient'
+import CustomerAttributesClient from '../../../../../../../../api/customers/clients/CustomerAttributesClient'
 
-const leadAttributesClient = new LeadAttributesClient(HttpClientFactory.Api)
+const customerAttributesClient = new CustomerAttributesClient(HttpClientFactory.Api)
 
-const useLeadAttributes = (): LeadAttributesState => {
+const useCustomerAttributes = (): CustomerAttributesState => {
     const MaxLimit = 1048576
 
-    const [request, setRequest] = useState(leadAttributesInitialState.request)
-    const [isLoading, setIsLoading] = useState(leadAttributesInitialState.isLoading)
-    const [attributes, setAttributes] = useState(leadAttributesInitialState.attributes)
-    const [total, setTotal] = useState(leadAttributesInitialState.total)
-    const [lastModifyDateTime, setLastModifyDateTime] = useState(leadAttributesInitialState.lastModifyDateTime)
+    const [request, setRequest] = useState(customerAttributesInitialState.request)
+    const [isLoading, setIsLoading] = useState(customerAttributesInitialState.isLoading)
+    const [attributes, setAttributes] = useState(customerAttributesInitialState.attributes)
+    const [total, setTotal] = useState(customerAttributesInitialState.total)
+    const [lastModifyDateTime, setLastModifyDateTime] = useState(customerAttributesInitialState.lastModifyDateTime)
 
     const getPagedList = useCallback(async () => {
         setIsLoading(true)
 
-        const response = await leadAttributesClient.GetPagedListAsync(request)
+        const response = await customerAttributesClient.GetPagedListAsync(request)
 
         setAttributes(response.attributes ?? [])
         setTotal(response.totalCount)
@@ -30,7 +30,7 @@ const useLeadAttributes = (): LeadAttributesState => {
     const getAll = useCallback(async () => {
         setIsLoading(true)
 
-        const response = await leadAttributesClient.GetPagedListAsync({ ...request, offset: 0, limit: MaxLimit })
+        const response = await customerAttributesClient.GetPagedListAsync({ ...request, offset: 0, limit: MaxLimit })
         if (response.attributes) {
             response.attributes.forEach(v => {
                 delete v.accountId
@@ -49,4 +49,4 @@ const useLeadAttributes = (): LeadAttributesState => {
     return { request, setRequest, isLoading, attributes, total, lastModifyDateTime, getPagedList, getAll }
 }
 
-export default useLeadAttributes
+export default useCustomerAttributes

@@ -2,22 +2,22 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { DropdownItemProps } from '../../../../../../components/common/fields/Dropdown/Dropdown'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
-import LeadSource from '../../../../../../../api/customers/models/LeadSource'
-import LeadSourcesClient from '../../../../../../../api/customers/clients/LeadSourcesClient'
+import CustomerSource from '../../../../../../../api/customers/models/CustomerSource'
+import CustomerSourcesClient from '../../../../../../../api/customers/clients/CustomerSourcesClient'
 
-const leadSourcesClient = new LeadSourcesClient(HttpClientFactory.Api)
+const customerSourcesClient = new CustomerSourcesClient(HttpClientFactory.Api)
 
-interface UseLeadSourcesLoadReturn {
+interface UseCustomerSourcesLoadReturn {
     sourcesAsOptions: DropdownItemProps[]
 }
 
-const useLeadSourcesLoad = (): UseLeadSourcesLoadReturn => {
+const useCustomerSourcesLoad = (): UseCustomerSourcesLoadReturn => {
     const MaxLimit = 2147483647
 
-    const [sources, setSources] = useState<LeadSource[]>([])
+    const [sources, setSources] = useState<CustomerSource[]>([])
 
     const loadSources = useCallback(async () => {
-        const response = await leadSourcesClient.GetPagedListAsync({
+        const response = await customerSourcesClient.GetPagedListAsync({
             sortBy: 'Name',
             orderBy: 'asc',
             offset: 0,
@@ -31,11 +31,11 @@ const useLeadSourcesLoad = (): UseLeadSourcesLoadReturn => {
         void loadSources()
     }, [loadSources])
 
-    const map = useCallback((x: LeadSource) => ({ value: x.id ?? '', text: x.name ?? '' }), [])
+    const map = useCallback((x: CustomerSource) => ({ value: x.id ?? '', text: x.name ?? '' }), [])
 
     const sourcesAsOptions = useMemo(() => sources.filter(x => !x.isDeleted).map(map), [sources, map])
 
     return { sourcesAsOptions }
 }
 
-export default useLeadSourcesLoad
+export default useCustomerSourcesLoad

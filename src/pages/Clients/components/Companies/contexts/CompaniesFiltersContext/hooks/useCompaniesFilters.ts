@@ -11,14 +11,14 @@ import { getCompanyIndustryTypesAsSelectOptions } from '../../../helpers/helpers
 import { getCompanyTypesAsSelectOptions } from '../../../helpers/helpers/companyTypeHelper'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
 import useCompanyAttributesLoad from '../../../hooks/load/useCompanyAttributesLoad'
-import useLeadsAutocomplete from '../../../hooks/autocomplete/useLeadsAutocomplete'
+import useCustomersAutocomplete from '../../../hooks/autocomplete/useCustomersAutocomplete'
 
 // TODO: Move to l10n
 const useCompaniesFilters = (): CompaniesFiltersState => {
     const state = useContext(CompaniesContext)
-    const { loadLeads, leadsAsOptions } = useLeadsAutocomplete()
+    const { loadCustomers, customersAsOptions } = useCustomersAutocomplete()
     const { attributesAsOptions } = useCompanyAttributesLoad()
-    const [leadId, setLeadId] = useState(state.request.leadId)
+    const [customerId, setCustomerId] = useState(state.request.customerId)
     const [types, setTypes] = useState(state.request.types ?? [])
     const [industryTypes, setIndustryTypes] = useState(state.request.industryTypes ?? [])
     const [fullName, setFullName] = useState(state.request.fullName ?? '')
@@ -61,8 +61,8 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
     const [isResetEnabled, setIsResetEnabled] = useState(companiesFiltersInitialState.isResetEnabled)
     const [isShowMobile, setIsShowMobile] = useState(companiesFiltersInitialState.isShowMobile)
 
-    const onChangeLeadId = useCallback((_: any, data: DropdownProps) => {
-        setLeadId(data.value as string)
+    const onChangeCustomerId = useCallback((_: any, data: DropdownProps) => {
+        setCustomerId(data.value as string)
         setIsApplyEnabled(true)
     }, [])
 
@@ -257,7 +257,7 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
     const onApply = useCallback(() => {
         state.setRequest({
             ...state.request,
-            leadId,
+            customerId,
             types,
             industryTypes,
             fullName,
@@ -319,7 +319,7 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
         juridicalProvince,
         juridicalRegion,
         juridicalStreet,
-        leadId,
+        customerId,
         legalApartment,
         legalCity,
         legalCountry,
@@ -347,7 +347,7 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
     ])
 
     const onReset = useCallback(() => {
-        setLeadId(void 0)
+        setCustomerId(void 0)
         setTypes([])
         setIndustryTypes([])
         setFullName('')
@@ -389,7 +389,7 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
 
         state.setRequest({
             ...state.request,
-            leadId: void 0,
+            customerId: void 0,
             fullName: void 0,
             shortName: void 0,
             phone: void 0,
@@ -449,10 +449,10 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
             {
                 type: 'autocomplete',
                 label: 'Лид',
-                value: leadId,
-                load: loadLeads,
-                options: leadsAsOptions,
-                onChange: onChangeLeadId
+                value: customerId,
+                load: loadCustomers,
+                options: customersAsOptions,
+                onChange: onChangeCustomerId
             },
             {
                 type: 'dropdown',
@@ -694,8 +694,8 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
             juridicalProvince,
             juridicalRegion,
             juridicalStreet,
-            leadId,
-            leadsAsOptions,
+            customerId,
+            customersAsOptions,
             legalApartment,
             legalCity,
             legalCountry,
@@ -704,7 +704,7 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
             legalProvince,
             legalRegion,
             legalStreet,
-            loadLeads,
+            loadCustomers,
             maxCreateDate,
             maxEmployeesCount,
             maxModifyDate,
@@ -730,7 +730,7 @@ const useCompaniesFilters = (): CompaniesFiltersState => {
             onChangeJuridicalProvince,
             onChangeJuridicalRegion,
             onChangeJuridicalStreet,
-            onChangeLeadId,
+            onChangeCustomerId,
             onChangeLegalApartment,
             onChangeLegalCity,
             onChangeLegalCountry,

@@ -1,25 +1,25 @@
 import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
-import LeadSourcesFiltersState, {
-    leadSourcesFiltersInitialState
-} from '../../../states/LeadSourcesFiltersState'
+import CustomerSourcesFiltersState, {
+    customerSourcesFiltersInitialState
+} from '../../../states/CustomerSourcesFiltersState'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { FilterFormFieldProps } from '../../../../../../../components/common/forms/FilterForm/FilterForm'
-import LeadSourcesContext from '../../LeadSourcesContext/LeadSourcesContext'
+import CustomerSourcesContext from '../../CustomerSourcesContext/CustomerSourcesContext'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
 
 // TODO: Move to l10n
-const useLeadSourcesFilters = (): LeadSourcesFiltersState => {
-    const state = useContext(LeadSourcesContext)
+const useCustomerSourcesFilters = (): CustomerSourcesFiltersState => {
+    const state = useContext(CustomerSourcesContext)
     const [name, setName] = useState(state.request.name ?? '')
     const [minCreateDate, setMinCreateDate] = useState(state.request.minCreateDate ?? '')
     const [maxCreateDate, setMaxCreateDate] = useState(state.request.maxCreateDate ?? '')
     const [minModifyDate, setMinModifyDate] = useState(state.request.minModifyDate ?? '')
     const [maxModifyDate, setMaxModifyDate] = useState(state.request.maxModifyDate ?? '')
     const [isDeleted, setIsDeleted] = useState(state.request.isDeleted)
-    const [isApplyEnabled, setIsApplyEnabled] = useState(leadSourcesFiltersInitialState.isApplyEnabled)
-    const [isResetEnabled, setIsResetEnabled] = useState(leadSourcesFiltersInitialState.isResetEnabled)
-    const [isShowMobile, setIsShowMobile] = useState(leadSourcesFiltersInitialState.isShowMobile)
+    const [isApplyEnabled, setIsApplyEnabled] = useState(customerSourcesFiltersInitialState.isApplyEnabled)
+    const [isResetEnabled, setIsResetEnabled] = useState(customerSourcesFiltersInitialState.isResetEnabled)
+    const [isShowMobile, setIsShowMobile] = useState(customerSourcesFiltersInitialState.isShowMobile)
 
     const onChangeName = useCallback((_, data: InputOnChangeData) => {
         setName(data.value)
@@ -153,4 +153,4 @@ const useLeadSourcesFilters = (): LeadSourcesFiltersState => {
     return { fields, isApplyEnabled, onApply, isResetEnabled, onReset, isShowMobile, onShowMobile, onHideMobile }
 }
 
-export default useLeadSourcesFilters
+export default useCustomerSourcesFilters

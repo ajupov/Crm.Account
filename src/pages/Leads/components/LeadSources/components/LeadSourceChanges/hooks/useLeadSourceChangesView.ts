@@ -1,11 +1,11 @@
 import { useCallback } from 'react'
 import { useHistory } from 'react-router'
 
-interface UseLeadSourceViewReturn {
+interface UseCustomerSourceViewReturn {
     onClickCancel: () => void
 }
 
-const useLeadSourceChangesView = (): UseLeadSourceViewReturn => {
+const useCustomerSourceChangesView = (): UseCustomerSourceViewReturn => {
     const history = useHistory()
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
@@ -13,4 +13,4 @@ const useLeadSourceChangesView = (): UseLeadSourceViewReturn => {
     return { onClickCancel }
 }
 
-export default useLeadSourceChangesView
+export default useCustomerSourceChangesView

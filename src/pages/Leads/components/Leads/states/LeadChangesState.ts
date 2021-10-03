@@ -1,23 +1,23 @@
-import LeadChange from '../../../../../../api/customers/models/LeadChange'
-import LeadChangeGetPagedListRequest from '../../../../../../api/customers/models/LeadChangeGetPagedListRequest'
-import LeadChangeGetPagedListResponse from '../../../../../../api/customers/models/LeadChangeGetPagedListResponse'
+import CustomerChange from '../../../../../../api/customers/models/CustomerChange'
+import CustomerChangeGetPagedListRequest from '../../../../../../api/customers/models/CustomerChangeGetPagedListRequest'
+import CustomerChangeGetPagedListResponse from '../../../../../../api/customers/models/CustomerChangeGetPagedListResponse'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'
 const DefaultOrderBy = 'desc'
 
-export default interface LeadChangesState {
-    request: LeadChangeGetPagedListRequest
-    setRequest: (request: LeadChangeGetPagedListRequest) => void
+export default interface CustomerChangesState {
+    request: CustomerChangeGetPagedListRequest
+    setRequest: (request: CustomerChangeGetPagedListRequest) => void
     isLoading: boolean
-    changes: LeadChange[]
+    changes: CustomerChange[]
     total: number
-    getAll: () => Promise<LeadChangeGetPagedListResponse | undefined>
+    getAll: () => Promise<CustomerChangeGetPagedListResponse | undefined>
 }
 
-export const leadChangesInitialState: LeadChangesState = {
+export const customerChangesInitialState: CustomerChangesState = {
     request: {
-        leadId: '',
+        customerId: '',
         minCreateDate: void 0,
         maxCreateDate: void 0,
         offset: 0,
@@ -25,7 +25,7 @@ export const leadChangesInitialState: LeadChangesState = {
         sortBy: DefaultSortBy,
         orderBy: DefaultOrderBy
     },
-    setRequest: (_: LeadChangeGetPagedListRequest) => void 0,
+    setRequest: (_: CustomerChangeGetPagedListRequest) => void 0,
     isLoading: false,
     changes: [],
     total: 0,

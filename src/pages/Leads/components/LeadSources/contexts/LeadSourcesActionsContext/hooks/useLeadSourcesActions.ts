@@ -1,21 +1,23 @@
-import LeadSourcesActionsState, { leadSourcesActionsInitialState } from '../../../states/LeadSourcesActionsState'
+import CustomerSourcesActionsState, {
+    customerSourcesActionsInitialState
+} from '../../../states/CustomerSourcesActionsState'
 import { useCallback, useState } from 'react'
 
 import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
-import LeadSourcesClient from '../../../../../../../../api/customers/clients/LeadSourcesClient'
+import CustomerSourcesClient from '../../../../../../../../api/customers/clients/CustomerSourcesClient'
 
-const leadSourcesClient = new LeadSourcesClient(HttpClientFactory.Api)
+const customerSourcesClient = new CustomerSourcesClient(HttpClientFactory.Api)
 
-const useLeadSourcesActions = (): LeadSourcesActionsState => {
-    const [ids, setIds] = useState(leadSourcesActionsInitialState.ids)
-    const [isLoading, setIsLoading] = useState(leadSourcesActionsInitialState.isLoading)
-    const [isDeleting, setIsDeleting] = useState(leadSourcesActionsInitialState.isDeleting)
-    const [isRestoring, setIsRestoring] = useState(leadSourcesActionsInitialState.isRestoring)
+const useCustomerSourcesActions = (): CustomerSourcesActionsState => {
+    const [ids, setIds] = useState(customerSourcesActionsInitialState.ids)
+    const [isLoading, setIsLoading] = useState(customerSourcesActionsInitialState.isLoading)
+    const [isDeleting, setIsDeleting] = useState(customerSourcesActionsInitialState.isDeleting)
+    const [isRestoring, setIsRestoring] = useState(customerSourcesActionsInitialState.isRestoring)
 
     const _delete = useCallback(async () => {
         setIsLoading(true)
 
-        await leadSourcesClient.DeleteAsync(ids)
+        await customerSourcesClient.DeleteAsync(ids)
 
         setIsDeleting(false)
         setIsLoading(false)
@@ -24,7 +26,7 @@ const useLeadSourcesActions = (): LeadSourcesActionsState => {
     const restore = useCallback(async () => {
         setIsLoading(true)
 
-        await leadSourcesClient.RestoreAsync(ids)
+        await customerSourcesClient.RestoreAsync(ids)
 
         setIsRestoring(false)
         setIsLoading(false)
@@ -33,4 +35,4 @@ const useLeadSourcesActions = (): LeadSourcesActionsState => {
     return { isLoading, ids, setIds, isDeleting, setIsDeleting, delete: _delete, isRestoring, setIsRestoring, restore }
 }
 
-export default useLeadSourcesActions
+export default useCustomerSourcesActions

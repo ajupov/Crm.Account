@@ -1,43 +1,45 @@
-import IHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
+import IJsonHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 import ProductStatus from '../models/ProductStatus'
 import ProductStatusGetPagedListRequest from '../models/ProductStatusGetPagedListRequest'
 import ProductStatusGetPagedListResponse from '../models/ProductStatusGetPagedListResponse'
 
 export default class ProductStatusesClient {
-    private readonly httpClientFactory: IHttpClientFactory
+    private readonly _host: string
+    private readonly _factory: IJsonHttpClientFactory
 
-    constructor(httpClientFactory: IHttpClientFactory) {
-        this.httpClientFactory = httpClientFactory
+    constructor(host: string, factory: IJsonHttpClientFactory) {
+                this._host = host
+        this._factory = factory
     }
 
     public GetAsync = (id: string): Promise<ProductStatus> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .get<ProductStatus>('/Products/Statuses/v1/Get', { id })
+        this._factory
+            .
+            .getAsync<ProductStatus>('/Products/Statuses/v1/Get', { id })
 
     public GetListAsync = (values?: string[]): Promise<ProductStatus[]> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .post<ProductStatus[]>('/Products/Statuses/v1/GetList', values)
+        this._factory
+            .
+            .postAsync<ProductStatus[]>('/Products/Statuses/v1/GetList', values)
 
     public GetPagedListAsync = (
         request?: ProductStatusGetPagedListRequest
     ): Promise<ProductStatusGetPagedListResponse> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .post<ProductStatusGetPagedListResponse>('/Products/Statuses/v1/GetPagedList', request)
+        this._factory
+            .
+            .postAsync<ProductStatusGetPagedListResponse>('/Products/Statuses/v1/GetPagedList', request)
 
     public CreateAsync = (status?: ProductStatus): Promise<string> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
+        this._factory
+            .
             .put<string>('/Products/Statuses/v1/Create', status)
 
     public UpdateAsync = (status?: ProductStatus): Promise<void> =>
-        this.httpClientFactory.createClient(this.httpClientFactory.host).patch('/Products/Statuses/v1/Update', status)
+        this._factory.patchAsync('/Products/Statuses/v1/Update', status)
 
     public DeleteAsync = (values?: string[]): Promise<void> =>
-        this.httpClientFactory.createClient(this.httpClientFactory.host).patch('/Products/Statuses/v1/Delete', values)
+        this._factory.patchAsync('/Products/Statuses/v1/Delete', values)
 
     public RestoreAsync = (values?: string[]): Promise<void> =>
-        this.httpClientFactory.createClient(this.httpClientFactory.host).patch('/Products/Statuses/v1/Restore', values)
+        this._factory.patchAsync('/Products/Statuses/v1/Restore', values)
 }

@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 
-import LeadCommentContext from './LeadCommentContext'
-import useLeads from './hooks/useLeadComment'
+import CustomerCommentContext from './CustomerCommentContext'
+import useCustomers from './hooks/useCustomerComment'
 
-const LeadCommentContextProvider: FC = ({ children }) => {
-    const state = useLeads()
+const CustomerCommentContextProvider: FC = ({ children }) => {
+    const state = useCustomers()
 
-    return <LeadCommentContext.Provider value={state}>{children}</LeadCommentContext.Provider>
+    return <CustomerCommentContext.Provider value={state}>{children}</CustomerCommentContext.Provider>
 }
 
-export default LeadCommentContextProvider
+export default CustomerCommentContextProvider

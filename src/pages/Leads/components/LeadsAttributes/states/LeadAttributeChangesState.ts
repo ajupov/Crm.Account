@@ -1,21 +1,21 @@
-import LeadAttributeChange from '../../../../../../api/customers/models/LeadAttributeChange'
-import LeadAttributeChangeGetPagedListRequest from '../../../../../../api/customers/models/LeadAttributeChangeGetPagedListRequest'
-import LeadAttributeChangeGetPagedListResponse from '../../../../../../api/customers/models/LeadAttributeChangeGetPagedListResponse'
+import CustomerAttributeChange from '../../../../../../api/customers/models/CustomerAttributeChange'
+import CustomerAttributeChangeGetPagedListRequest from '../../../../../../api/customers/models/CustomerAttributeChangeGetPagedListRequest'
+import CustomerAttributeChangeGetPagedListResponse from '../../../../../../api/customers/models/CustomerAttributeChangeGetPagedListResponse'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'
 const DefaultOrderBy = 'desc'
 
-export default interface LeadAttributeChangesState {
-    request: LeadAttributeChangeGetPagedListRequest
-    setRequest: (request: LeadAttributeChangeGetPagedListRequest) => void
+export default interface CustomerAttributeChangesState {
+    request: CustomerAttributeChangeGetPagedListRequest
+    setRequest: (request: CustomerAttributeChangeGetPagedListRequest) => void
     isLoading: boolean
-    changes: LeadAttributeChange[]
+    changes: CustomerAttributeChange[]
     total: number
-    getAll: () => Promise<LeadAttributeChangeGetPagedListResponse | undefined>
+    getAll: () => Promise<CustomerAttributeChangeGetPagedListResponse | undefined>
 }
 
-export const leadAttributeChangesInitialState: LeadAttributeChangesState = {
+export const customerAttributeChangesInitialState: CustomerAttributeChangesState = {
     request: {
         attributeId: '',
         minCreateDate: void 0,
@@ -25,7 +25,7 @@ export const leadAttributeChangesInitialState: LeadAttributeChangesState = {
         sortBy: DefaultSortBy,
         orderBy: DefaultOrderBy
     },
-    setRequest: (_: LeadAttributeChangeGetPagedListRequest) => void 0,
+    setRequest: (_: CustomerAttributeChangeGetPagedListRequest) => void 0,
     isLoading: false,
     changes: [],
     total: 0,

@@ -1,20 +1,22 @@
 import ActivityAttributeChangeGetPagedListRequest from '../models/ActivityAttributeChangeGetPagedListRequest'
 import ActivityAttributeChangeGetPagedListResponse from '../models/ActivityAttributeChangeGetPagedListResponse'
-import IHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
+import IJsonHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 
 export default class ActivityAttributeChangesClient {
-    private readonly httpClientFactory: IHttpClientFactory
+    private readonly _host: string
+    private readonly _factory: IJsonHttpClientFactory
 
-    constructor(httpClientFactory: IHttpClientFactory) {
-        this.httpClientFactory = httpClientFactory
+    constructor(host: string, factory: IJsonHttpClientFactory) {
+                this._host = host
+        this._factory = factory
     }
 
     public GetPagedListAsync = (
         request?: ActivityAttributeChangeGetPagedListRequest
     ): Promise<ActivityAttributeChangeGetPagedListResponse> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .post<ActivityAttributeChangeGetPagedListResponse>(
+        this._factory
+            .
+            .postAsync<ActivityAttributeChangeGetPagedListResponse>(
                 '/Activities/Attributes/Changes/v1/GetPagedList',
                 request
             )

@@ -1,33 +1,33 @@
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
-import Lead from '../../../../../../../api/customers/models/Lead'
-import LeadsClient from '../../../../../../../api/customers/clients/LeadsClient'
+import Customer from '../../../../../../../api/customers/models/Customer'
+import CustomersClient from '../../../../../../../api/customers/clients/CustomersClient'
 
-const leadsClient = new LeadsClient(HttpClientFactory.Api)
+const customersClient = new CustomersClient(HttpClientFactory.Api)
 
-interface UseLeadLoadReturn {
-    lead?: Lead
+interface UseCustomerLoadReturn {
+    customer?: Customer
 }
 
-const useLeadLoad = (id?: string): UseLeadLoadReturn => {
-    const [lead, setLead] = useState<Lead>()
+const useCustomerLoad = (id?: string): UseCustomerLoadReturn => {
+    const [customer, setCustomer] = useState<Customer>()
 
-    const loadLead = useCallback(async () => {
+    const loadCustomer = useCallback(async () => {
         if (!id) {
             return
         }
 
-        const response = await leadsClient.GetAsync(id)
+        const response = await customersClient.GetAsync(id)
 
-        setLead(response)
+        setCustomer(response)
     }, [id])
 
     useEffect(() => {
-        void loadLead()
-    }, [loadLead])
+        void loadCustomer()
+    }, [loadCustomer])
 
-    return { lead }
+    return { customer }
 }
 
-export default useLeadLoad
+export default useCustomerLoad

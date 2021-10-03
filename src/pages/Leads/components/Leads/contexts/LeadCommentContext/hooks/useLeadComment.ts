@@ -1,16 +1,16 @@
-import LeadCommentState, { leadCommentInitialState } from '../../../states/LeadCommentState'
+import CustomerCommentState, { customerCommentInitialState } from '../../../states/CustomerCommentState'
 import { useCallback, useState } from 'react'
 
 import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
-import LeadCommentsClient from '../../../../../../../../api/customers/clients/LeadCommentsClient'
+import CustomerCommentsClient from '../../../../../../../../api/customers/clients/CustomerCommentsClient'
 import { useParams } from 'react-router'
 
-const leadCommentsClient = new LeadCommentsClient(HttpClientFactory.Api)
+const customerCommentsClient = new CustomerCommentsClient(HttpClientFactory.Api)
 
-const useLeadComment = (): LeadCommentState => {
+const useCustomerComment = (): CustomerCommentState => {
     const { id }: { id: string } = useParams()
-    const [isLoading, setIsLoading] = useState(leadCommentInitialState.isLoading)
-    const [comment, setComment] = useState(leadCommentInitialState.comment)
+    const [isLoading, setIsLoading] = useState(customerCommentInitialState.isLoading)
+    const [comment, setComment] = useState(customerCommentInitialState.comment)
 
     const create = useCallback(async () => {
         if (!comment.value) {
@@ -19,7 +19,7 @@ const useLeadComment = (): LeadCommentState => {
 
         setIsLoading(true)
 
-        await leadCommentsClient.CreateAsync({ ...comment, leadId: id })
+        await customerCommentsClient.CreateAsync({ ...comment, customerId: id })
 
         setComment({ ...comment, value: '' })
 
@@ -29,4 +29,4 @@ const useLeadComment = (): LeadCommentState => {
     return { isLoading, comment, setComment, create }
 }
 
-export default useLeadComment
+export default useCustomerComment

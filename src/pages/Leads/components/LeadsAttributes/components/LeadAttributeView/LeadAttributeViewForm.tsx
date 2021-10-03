@@ -1,15 +1,15 @@
 import React, { FC, useContext } from 'react'
 
-import LeadAttributeContext from '../../contexts/LeadAttributeContext/LeadAttributeContext'
-import LeadAttributesRoutes from '../../routes/LeadAttributesRoutes'
+import CustomerAttributeContext from '../../contexts/CustomerAttributeContext/CustomerAttributeContext'
+import CustomerAttributesRoutes from '../../routes/CustomerAttributesRoutes'
 import View from '../../../../../../components/common/grids/View/View'
-import useLeadAttributeView from './hooks/useLeadAttributeView'
-import useLeadAttributesActions from '../../contexts/LeadAttributesActionsContext/hooks/useLeadAttributesActions'
+import useCustomerAttributeView from './hooks/useCustomerAttributeView'
+import useCustomerAttributesActions from '../../contexts/CustomerAttributesActionsContext/hooks/useCustomerAttributesActions'
 
-const LeadAttributeViewForm: FC = () => {
-    const state = useContext(LeadAttributeContext)
-    const { isLoading } = useLeadAttributesActions()
-    const { map, onClickDelete, onClickRestore, onClickCancel } = useLeadAttributeView()
+const CustomerAttributeViewForm: FC = () => {
+    const state = useContext(CustomerAttributeContext)
+    const { isLoading } = useCustomerAttributesActions()
+    const { map, onClickDelete, onClickRestore, onClickCancel } = useCustomerAttributeView()
 
     return (
         <View
@@ -19,13 +19,13 @@ const LeadAttributeViewForm: FC = () => {
             createDate={state.attribute.createDateTime}
             lastModifyDateTime={state.attribute.modifyDateTime}
             data={map(state.attribute)}
-            editLink={LeadAttributesRoutes.Edit}
+            editLink={CustomerAttributesRoutes.Edit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
-            historyLink={LeadAttributesRoutes.Changes}
+            historyLink={CustomerAttributesRoutes.Changes}
             onClickCancel={onClickCancel}
         />
     )
 }
 
-export default LeadAttributeViewForm
+export default CustomerAttributeViewForm

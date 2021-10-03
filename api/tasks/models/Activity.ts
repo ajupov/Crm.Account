@@ -6,7 +6,7 @@ export default interface Activity {
     accountId?: string
     typeId?: string
     statusId?: string
-    leadId?: string
+    customerId?: string
     companyId?: string
     contactId?: string
     dealId?: string

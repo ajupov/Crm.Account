@@ -1,24 +1,24 @@
 import { useCallback, useContext } from 'react'
 
-import LeadAttributesActionsContext from '../../../contexts/LeadAttributesActionsContext/LeadAttributesActionsContext'
-import LeadAttributesContext from '../../../contexts/LeadAttributesContext/LeadAttributesContext'
-import LeadAttributesRoutes from '../../../routes/LeadAttributesRoutes'
+import CustomerAttributesActionsContext from '../../../contexts/CustomerAttributesActionsContext/CustomerAttributesActionsContext'
+import CustomerAttributesContext from '../../../contexts/CustomerAttributesContext/CustomerAttributesContext'
+import CustomerAttributesRoutes from '../../../routes/CustomerAttributesRoutes'
 import { useHistory } from 'react-router'
 
-interface UseLeadAttributeDelete {
+interface UseCustomerAttributeDelete {
     onClickConfirm: () => void
     onClickCancel: () => void
 }
 
-const useLeadAttributeDelete = (): UseLeadAttributeDelete => {
+const useCustomerAttributeDelete = (): UseCustomerAttributeDelete => {
     const history = useHistory()
-    const actionsState = useContext(LeadAttributesActionsContext)
-    const attributesState = useContext(LeadAttributesContext)
+    const actionsState = useContext(CustomerAttributesActionsContext)
+    const attributesState = useContext(CustomerAttributesContext)
 
     const onClickConfirm = useCallback(async () => {
         await actionsState.delete()
         actionsState.setIsDeleting(false)
-        history.push(LeadAttributesRoutes.Index)
+        history.push(CustomerAttributesRoutes.Index)
         await attributesState.getPagedList()
     }, [actionsState, history, attributesState])
 
@@ -30,4 +30,4 @@ const useLeadAttributeDelete = (): UseLeadAttributeDelete => {
     return { onClickConfirm, onClickCancel }
 }
 
-export default useLeadAttributeDelete
+export default useCustomerAttributeDelete

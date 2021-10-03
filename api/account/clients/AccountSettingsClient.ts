@@ -14,5 +14,5 @@ export default class AccountSettingsClient {
         this._factory.getAsync<AccountSetting>(this._host + '/Account/Settings/v1/Get')
 
     public SetActivityIndustryAsync = (industry: AccountSettingActivityIndustry): Promise<void> =>
-        this._factory.putAsync('/Account/Settings/v1/SetActivityIndustry', void 0, { industry })
+        this._factory.putAsync(this._host + '/Account/Settings/v1/SetActivityIndustry', void 0, { industry })
 }

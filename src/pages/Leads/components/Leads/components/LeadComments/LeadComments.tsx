@@ -1,14 +1,14 @@
 import React, { FC, useContext } from 'react'
 
 import Comments from '../../../../../../components/common/collections/Comments/Comments'
-import LeadCommentContext from '../../contexts/LeadCommentContext/LeadCommentContext'
-import LeadCommentsContext from '../../contexts/LeadCommentsContext/LeadCommentsContext'
-import useLeadComments from './hooks/useLeadComments'
+import CustomerCommentContext from '../../contexts/CustomerCommentContext/CustomerCommentContext'
+import CustomerCommentsContext from '../../contexts/CustomerCommentsContext/CustomerCommentsContext'
+import useCustomerComments from './hooks/useCustomerComments'
 
-const LeadComments: FC = () => {
-    const commentsState = useContext(LeadCommentsContext)
-    const commentState = useContext(LeadCommentContext)
-    const { onChangeCommentToSend, map, onClickLoadPrevious, onClickSend } = useLeadComments()
+const CustomerComments: FC = () => {
+    const commentsState = useContext(CustomerCommentsContext)
+    const commentState = useContext(CustomerCommentContext)
+    const { onChangeCommentToSend, map, onClickLoadPrevious, onClickSend } = useCustomerComments()
 
     return (
         <Comments
@@ -22,4 +22,4 @@ const LeadComments: FC = () => {
     )
 }
 
-export default LeadComments
+export default CustomerComments

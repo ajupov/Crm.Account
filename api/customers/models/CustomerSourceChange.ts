@@ -1,7 +1,7 @@
-export default interface LeadChange {
+export default interface CustomerSourceChange {
     id?: string
     changerUserId?: string
-    leadId?: string
+    sourceId?: string
     createDateTime?: string
     oldValueJson?: string
     newValueJson?: string

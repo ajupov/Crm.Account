@@ -73,7 +73,7 @@ const useCompanyChangesTable = (): UseCompanyChangesTableReturn => {
             const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as Company) : void 0
 
             return [
-                `ID Лида: ${getValueOrEmpty(oldValue?.leadId)} → ${getValueOrEmpty(newValue?.leadId)}`,
+                `ID Лида: ${getValueOrEmpty(oldValue?.customerId)} → ${getValueOrEmpty(newValue?.customerId)}`,
                 `Тип: ${getValueOrEmpty(getCompanyTypeName(oldValue?.type))} → ${getValueOrEmpty(
                     getCompanyTypeName(newValue?.type)
                 )}`,
@@ -200,10 +200,10 @@ const useCompanyChangesTable = (): UseCompanyChangesTableReturn => {
         []
     )
 
-    const page = useMemo(() => calculatePage(state.request.offset, state.request.limit), [
-        state.request.limit,
-        state.request.offset
-    ])
+    const page = useMemo(
+        () => calculatePage(state.request.offset, state.request.limit),
+        [state.request.limit, state.request.offset]
+    )
 
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }

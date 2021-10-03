@@ -1,6 +1,6 @@
-import LeadAttributeLink from '../../../../../../api/customers/models/LeadAttributeLink'
+import CustomerAttributeLink from '../../../../../../api/customers/models/CustomerAttributeLink'
 
-const joinAttributes = (categories?: LeadAttributeLink[]): string =>
-    categories?.map(x => (x.leadAttributeId ?? '') + (x.value ? ': ' + x.value : '')).join(', ') ?? ''
+const joinAttributes = (categories?: CustomerAttributeLink[]): string =>
+    categories?.map(x => (x.customerAttributeId ?? '') + (x.value ? ': ' + x.value : '')).join(', ') ?? ''
 
 export { joinAttributes }

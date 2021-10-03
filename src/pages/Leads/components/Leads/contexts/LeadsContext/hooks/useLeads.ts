@@ -1,26 +1,26 @@
-import LeadsState, { conactsInitialState } from '../../../states/LeadsState'
+import CustomersState, { conactsInitialState } from '../../../states/CustomersState'
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
-import LeadsClient from '../../../../../../../../api/customers/clients/LeadsClient'
+import CustomersClient from '../../../../../../../../api/customers/clients/CustomersClient'
 
-const leadsClient = new LeadsClient(HttpClientFactory.Api)
+const customersClient = new CustomersClient(HttpClientFactory.Api)
 
-const useLeads = (): LeadsState => {
+const useCustomers = (): CustomersState => {
     const MaxLimit = 1048576
 
     const [request, setRequest] = useState(conactsInitialState.request)
     const [isLoading, setIsLoading] = useState(conactsInitialState.isLoading)
-    const [leads, setLeads] = useState(conactsInitialState.leads)
+    const [customers, setCustomers] = useState(conactsInitialState.customers)
     const [total, setTotal] = useState(conactsInitialState.total)
     const [lastModifyDateTime, setLastModifyDateTime] = useState(conactsInitialState.lastModifyDateTime)
 
     const getPagedList = useCallback(async () => {
         setIsLoading(true)
 
-        const response = await leadsClient.GetPagedListAsync(request)
+        const response = await customersClient.GetPagedListAsync(request)
 
-        setLeads(response.leads ?? [])
+        setCustomers(response.customers ?? [])
         setTotal(response.totalCount)
         setLastModifyDateTime(response.lastModifyDateTime ?? '')
 
@@ -30,9 +30,9 @@ const useLeads = (): LeadsState => {
     const getAll = useCallback(async () => {
         setIsLoading(true)
 
-        const response = await leadsClient.GetPagedListAsync({ ...request, offset: 0, limit: MaxLimit })
-        if (response.leads) {
-            response.leads.forEach(v => {
+        const response = await customersClient.GetPagedListAsync({ ...request, offset: 0, limit: MaxLimit })
+        if (response.customers) {
+            response.customers.forEach(v => {
                 delete v.accountId
                 delete v.createUserId
                 delete v.responsibleUserId
@@ -50,7 +50,7 @@ const useLeads = (): LeadsState => {
         void getPagedList()
     }, [getPagedList])
 
-    return { request, setRequest, isLoading, leads, total, lastModifyDateTime, getPagedList, getAll }
+    return { request, setRequest, isLoading, customers, total, lastModifyDateTime, getPagedList, getAll }
 }
 
-export default useLeads
+export default useCustomers

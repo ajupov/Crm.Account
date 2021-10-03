@@ -1,18 +1,20 @@
-import IHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
+import IJsonHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 import ProductCategoryChangeGetPagedListRequest from '../models/ProductCategoryChangeGetPagedListRequest'
 import ProductCategoryChangeGetPagedListResponse from '../models/ProductCategoryChangeGetPagedListResponse'
 
 export default class ProductCategoryChangesClient {
-    private readonly httpClientFactory: IHttpClientFactory
+    private readonly _host: string
+    private readonly _factory: IJsonHttpClientFactory
 
-    constructor(httpClientFactory: IHttpClientFactory) {
-        this.httpClientFactory = httpClientFactory
+    constructor(host: string, factory: IJsonHttpClientFactory) {
+                this._host = host
+        this._factory = factory
     }
 
     public GetPagedListAsync = (
         request?: ProductCategoryChangeGetPagedListRequest
     ): Promise<ProductCategoryChangeGetPagedListResponse> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .post<ProductCategoryChangeGetPagedListResponse>('/Products/Categories/Changes/v1/GetPagedList', request)
+        this._factory
+            .
+            .postAsync<ProductCategoryChangeGetPagedListResponse>('/Products/Categories/Changes/v1/GetPagedList', request)
 }

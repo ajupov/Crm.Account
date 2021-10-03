@@ -1,18 +1,18 @@
 import React, { FC } from 'react'
 
-import LeadAttributesRoutes from '../LeadsAttributes/routes/LeadAttributesRoutes'
-import LeadSourcesRoutes from '../LeadSources/routes/LeadSourcesRoutes'
-import LeadsRoutes from '../Leads/routes/LeadsRoutes'
+import CustomerAttributesRoutes from '../CustomersAttributes/routes/CustomerAttributesRoutes'
+import CustomerSourcesRoutes from '../CustomerSources/routes/CustomerSourcesRoutes'
+import CustomersRoutes from '../Customers/routes/CustomersRoutes'
 import Menu from '../../../../components/common/collections/Menu/Menu'
 
-const LeadsMenu: FC = () => (
+const CustomersMenu: FC = () => (
     <Menu
         items={[
-            { name: 'Лиды', path: LeadsRoutes.Index },
-            { name: 'Источники', path: LeadSourcesRoutes.Index },
-            { name: 'Атрибуты', path: LeadAttributesRoutes.Index }
+            { name: 'Лиды', path: CustomersRoutes.Index },
+            { name: 'Источники', path: CustomerSourcesRoutes.Index },
+            { name: 'Атрибуты', path: CustomerAttributesRoutes.Index }
         ]}
     />
 )
 
-export default LeadsMenu
+export default CustomersMenu

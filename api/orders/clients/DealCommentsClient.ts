@@ -1,20 +1,22 @@
 import DealComment from '../models/DealComment'
 import DealCommentGetPagedListRequest from '../models/DealCommentGetPagedListRequest'
 import DealCommentGetPagedListResponse from '../models/DealCommentGetPagedListResponse'
-import IHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
+import IJsonHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 
 export default class DealCommentsClient {
-    private readonly httpClientFactory: IHttpClientFactory
+    private readonly _host: string
+    private readonly _factory: IJsonHttpClientFactory
 
-    constructor(httpClientFactory: IHttpClientFactory) {
-        this.httpClientFactory = httpClientFactory
+    constructor(host: string, factory: IJsonHttpClientFactory) {
+        this._host = host
+        this._factory = factory
     }
 
     public GetPagedListAsync = (request?: DealCommentGetPagedListRequest): Promise<DealCommentGetPagedListResponse> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .post<DealCommentGetPagedListResponse>('/Deals/Comments/v1/GetPagedList', request)
+        this._factory
+            .
+            .postAsync<DealCommentGetPagedListResponse>('/Deals/Comments/v1/GetPagedList', request)
 
     public CreateAsync = (comment?: DealComment): Promise<void> =>
-        this.httpClientFactory.createClient(this.httpClientFactory.host).put('/Deals/Comments/v1/Create', comment)
+        this._factory.putAsync('/Deals/Comments/v1/Create', comment)
 }

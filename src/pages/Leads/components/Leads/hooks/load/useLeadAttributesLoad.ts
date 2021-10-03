@@ -2,22 +2,22 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { DropdownItemProps } from '../../../../../../components/common/fields/Dropdown/Dropdown'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
-import LeadAttribute from '../../../../../../../api/customers/models/LeadAttribute'
-import LeadAttributesClient from '../../../../../../../api/customers/clients/LeadAttributesClient'
+import CustomerAttribute from '../../../../../../../api/customers/models/CustomerAttribute'
+import CustomerAttributesClient from '../../../../../../../api/customers/clients/CustomerAttributesClient'
 
-const leadAttributesClient = new LeadAttributesClient(HttpClientFactory.Api)
+const customerAttributesClient = new CustomerAttributesClient(HttpClientFactory.Api)
 
-interface UseLeadAttributesLoadReturn {
+interface UseCustomerAttributesLoadReturn {
     attributesAsOptions: DropdownItemProps[]
 }
 
-const useLeadAttributesLoad = (): UseLeadAttributesLoadReturn => {
+const useCustomerAttributesLoad = (): UseCustomerAttributesLoadReturn => {
     const MaxLimit = 2147483647
 
-    const [attributes, setAttributes] = useState<LeadAttribute[]>([])
+    const [attributes, setAttributes] = useState<CustomerAttribute[]>([])
 
     const loadAttributes = useCallback(async () => {
-        const response = await leadAttributesClient.GetPagedListAsync({
+        const response = await customerAttributesClient.GetPagedListAsync({
             sortBy: 'Key',
             orderBy: 'asc',
             offset: 0,
@@ -31,11 +31,11 @@ const useLeadAttributesLoad = (): UseLeadAttributesLoadReturn => {
         void loadAttributes()
     }, [loadAttributes])
 
-    const map = useCallback((x: LeadAttribute) => ({ value: x.id ?? '', text: x.key ?? '' }), [])
+    const map = useCallback((x: CustomerAttribute) => ({ value: x.id ?? '', text: x.key ?? '' }), [])
 
     const attributesAsOptions = useMemo(() => attributes.filter(x => !x.isDeleted).map(map), [attributes, map])
 
     return { attributesAsOptions }
 }
 
-export default useLeadAttributesLoad
+export default useCustomerAttributesLoad

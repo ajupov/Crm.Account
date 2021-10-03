@@ -1,7 +1,7 @@
-import LeadsActionsState, { leadsActionsInitialState } from '../../states/LeadsActionsState'
+import CustomersActionsState, { customersActionsInitialState } from '../../states/CustomersActionsState'
 
 import { createContext } from 'react'
 
-const LeadsActionsContext = createContext<LeadsActionsState>(leadsActionsInitialState)
+const CustomersActionsContext = createContext<CustomersActionsState>(customersActionsInitialState)
 
-export default LeadsActionsContext
+export default CustomersActionsContext

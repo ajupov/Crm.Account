@@ -1,22 +1,22 @@
 import { useCallback, useContext } from 'react'
 
-import LeadAttribute from '../../../../../../../../api/customers/models/LeadAttribute'
-import LeadAttributesActionsContext from '../../../contexts/LeadAttributesActionsContext/LeadAttributesActionsContext'
+import CustomerAttribute from '../../../../../../../../api/customers/models/CustomerAttribute'
+import CustomerAttributesActionsContext from '../../../contexts/CustomerAttributesActionsContext/CustomerAttributesActionsContext'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { getAttributeTypeName } from '../../../../../../../helpers/entityAttributeTypeHelper'
 import { useHistory } from 'react-router'
 
-interface UseLeadAttributeViewReturn {
-    map: (attribute: LeadAttribute) => ViewDataProps[]
+interface UseCustomerAttributeViewReturn {
+    map: (attribute: CustomerAttribute) => ViewDataProps[]
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
     onClickCancel: () => void
 }
 
 // TODO: Move to l10n
-const useLeadAttributeView = (): UseLeadAttributeViewReturn => {
+const useCustomerAttributeView = (): UseCustomerAttributeViewReturn => {
     const history = useHistory()
-    const state = useContext(LeadAttributesActionsContext)
+    const state = useContext(CustomerAttributesActionsContext)
 
     const onClickDelete = useCallback(
         (id: string) => {
@@ -37,7 +37,7 @@ const useLeadAttributeView = (): UseLeadAttributeViewReturn => {
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
     const map = useCallback(
-        (attribute: LeadAttribute): ViewDataProps[] => [
+        (attribute: CustomerAttribute): ViewDataProps[] => [
             { label: 'Тип', value: getAttributeTypeName(attribute.type) },
             { label: 'Наименование', value: attribute.key },
             { label: 'Удален', value: attribute.isDeleted ? 'Да' : 'Нет' }
@@ -48,4 +48,4 @@ const useLeadAttributeView = (): UseLeadAttributeViewReturn => {
     return { map, onClickDelete, onClickRestore, onClickCancel }
 }
 
-export default useLeadAttributeView
+export default useCustomerAttributeView

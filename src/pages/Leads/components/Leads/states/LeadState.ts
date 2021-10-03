@@ -1,18 +1,18 @@
-import Lead from '../../../../../../api/customers/models/Lead'
-import LeadAttribute from '../../../../../../api/customers/models/LeadAttribute'
+import Customer from '../../../../../../api/customers/models/Customer'
+import CustomerAttribute from '../../../../../../api/customers/models/CustomerAttribute'
 
-export interface LeadState {
+export interface CustomerState {
     isLoading: boolean
-    lead: Lead
-    attributes: LeadAttribute[]
-    setLead: (lead: Lead) => void
+    customer: Customer
+    attributes: CustomerAttribute[]
+    setCustomer: (customer: Customer) => void
     create: () => Promise<void>
     update: () => Promise<void>
 }
 
-export const leadInitialState: LeadState = {
+export const customerInitialState: CustomerState = {
     isLoading: false,
-    lead: {
+    customer: {
         id: void 0,
         accountId: void 0,
         sourceId: void 0,
@@ -41,7 +41,7 @@ export const leadInitialState: LeadState = {
         attributeLinks: []
     },
     attributes: [],
-    setLead: (_: Lead) => void 0,
+    setCustomer: (_: Customer) => void 0,
     create: () => Promise.resolve(void 0),
     update: () => Promise.resolve(void 0)
 }

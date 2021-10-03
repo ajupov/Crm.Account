@@ -1,16 +1,18 @@
 import DealChangeGetPagedListRequest from '../models/DealChangeGetPagedListRequest'
 import DealChangeGetPagedListResponse from '../models/DealChangeGetPagedListResponse'
-import IHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
+import IJsonHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 
 export default class DealChangesClient {
-    private readonly httpClientFactory: IHttpClientFactory
+    private readonly _host: string
+    private readonly _factory: IJsonHttpClientFactory
 
-    constructor(httpClientFactory: IHttpClientFactory) {
-        this.httpClientFactory = httpClientFactory
+    constructor(host: string, factory: IJsonHttpClientFactory) {
+        this._host = host
+        this._factory = factory
     }
 
     public GetPagedListAsync = (request?: DealChangeGetPagedListRequest): Promise<DealChangeGetPagedListResponse> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .post<DealChangeGetPagedListResponse>('/Deals/Changes/v1/GetPagedList', request)
+        this._factory
+            .
+            .postAsync<DealChangeGetPagedListResponse>('/Deals/Changes/v1/GetPagedList', request)
 }

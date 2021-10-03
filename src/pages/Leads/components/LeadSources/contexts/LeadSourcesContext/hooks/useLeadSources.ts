@@ -1,24 +1,24 @@
-import LeadSourcesState, { leadSourcesInitialState } from '../../../states/LeadSourcesState'
+import CustomerSourcesState, { customerSourcesInitialState } from '../../../states/CustomerSourcesState'
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
-import LeadSourcesClient from '../../../../../../../../api/customers/clients/LeadSourcesClient'
+import CustomerSourcesClient from '../../../../../../../../api/customers/clients/CustomerSourcesClient'
 
-const leadSourcesClient = new LeadSourcesClient(HttpClientFactory.Api)
+const customerSourcesClient = new CustomerSourcesClient(HttpClientFactory.Api)
 
-const useLeadSources = (): LeadSourcesState => {
+const useCustomerSources = (): CustomerSourcesState => {
     const MaxLimit = 1048576
 
-    const [request, setRequest] = useState(leadSourcesInitialState.request)
-    const [isLoading, setIsLoading] = useState(leadSourcesInitialState.isLoading)
-    const [sources, setSources] = useState(leadSourcesInitialState.sources)
-    const [total, setTotal] = useState(leadSourcesInitialState.total)
-    const [lastModifyDateTime, setLastModifyDateTime] = useState(leadSourcesInitialState.lastModifyDateTime)
+    const [request, setRequest] = useState(customerSourcesInitialState.request)
+    const [isLoading, setIsLoading] = useState(customerSourcesInitialState.isLoading)
+    const [sources, setSources] = useState(customerSourcesInitialState.sources)
+    const [total, setTotal] = useState(customerSourcesInitialState.total)
+    const [lastModifyDateTime, setLastModifyDateTime] = useState(customerSourcesInitialState.lastModifyDateTime)
 
     const getPagedList = useCallback(async () => {
         setIsLoading(true)
 
-        const response = await leadSourcesClient.GetPagedListAsync(request)
+        const response = await customerSourcesClient.GetPagedListAsync(request)
 
         setSources(response.sources ?? [])
         setTotal(response.totalCount)
@@ -30,7 +30,7 @@ const useLeadSources = (): LeadSourcesState => {
     const getAll = useCallback(async () => {
         setIsLoading(true)
 
-        const response = await leadSourcesClient.GetPagedListAsync({ ...request, offset: 0, limit: MaxLimit })
+        const response = await customerSourcesClient.GetPagedListAsync({ ...request, offset: 0, limit: MaxLimit })
         if (response.sources) {
             response.sources.forEach(v => {
                 delete v.accountId
@@ -49,4 +49,4 @@ const useLeadSources = (): LeadSourcesState => {
     return { request, setRequest, isLoading, sources, total, lastModifyDateTime, getPagedList, getAll }
 }
 
-export default useLeadSources
+export default useCustomerSources

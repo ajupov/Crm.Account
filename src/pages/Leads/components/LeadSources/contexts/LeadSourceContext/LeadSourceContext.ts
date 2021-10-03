@@ -1,7 +1,7 @@
-import { LeadSourceState, leadSourceInitialState } from '../../states/LeadSourceState'
+import { CustomerSourceState, customerSourceInitialState } from '../../states/CustomerSourceState'
 
 import { createContext } from 'react'
 
-const LeadSourceContext = createContext<LeadSourceState>(leadSourceInitialState)
+const CustomerSourceContext = createContext<CustomerSourceState>(customerSourceInitialState)
 
-export default LeadSourceContext
+export default CustomerSourceContext

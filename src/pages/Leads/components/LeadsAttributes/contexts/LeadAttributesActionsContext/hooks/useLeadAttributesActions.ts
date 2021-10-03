@@ -1,23 +1,23 @@
-import LeadAttributesActionsState, {
-    leadAttributesActionsInitialState
-} from '../../../states/LeadAttributesActionsState'
+import CustomerAttributesActionsState, {
+    customerAttributesActionsInitialState
+} from '../../../states/CustomerAttributesActionsState'
 import { useCallback, useState } from 'react'
 
 import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
-import LeadAttributesClient from '../../../../../../../../api/customers/clients/LeadAttributesClient'
+import CustomerAttributesClient from '../../../../../../../../api/customers/clients/CustomerAttributesClient'
 
-const leadAttributesClient = new LeadAttributesClient(HttpClientFactory.Api)
+const customerAttributesClient = new CustomerAttributesClient(HttpClientFactory.Api)
 
-const useLeadAttributesActions = (): LeadAttributesActionsState => {
-    const [ids, setIds] = useState(leadAttributesActionsInitialState.ids)
-    const [isLoading, setIsLoading] = useState(leadAttributesActionsInitialState.isLoading)
-    const [isDeleting, setIsDeleting] = useState(leadAttributesActionsInitialState.isDeleting)
-    const [isRestoring, setIsRestoring] = useState(leadAttributesActionsInitialState.isRestoring)
+const useCustomerAttributesActions = (): CustomerAttributesActionsState => {
+    const [ids, setIds] = useState(customerAttributesActionsInitialState.ids)
+    const [isLoading, setIsLoading] = useState(customerAttributesActionsInitialState.isLoading)
+    const [isDeleting, setIsDeleting] = useState(customerAttributesActionsInitialState.isDeleting)
+    const [isRestoring, setIsRestoring] = useState(customerAttributesActionsInitialState.isRestoring)
 
     const _delete = useCallback(async () => {
         setIsLoading(true)
 
-        await leadAttributesClient.DeleteAsync(ids)
+        await customerAttributesClient.DeleteAsync(ids)
 
         setIsDeleting(false)
         setIsLoading(false)
@@ -26,7 +26,7 @@ const useLeadAttributesActions = (): LeadAttributesActionsState => {
     const restore = useCallback(async () => {
         setIsLoading(true)
 
-        await leadAttributesClient.RestoreAsync(ids)
+        await customerAttributesClient.RestoreAsync(ids)
 
         setIsRestoring(false)
         setIsLoading(false)
@@ -35,4 +35,4 @@ const useLeadAttributesActions = (): LeadAttributesActionsState => {
     return { isLoading, ids, setIds, isDeleting, setIsDeleting, delete: _delete, isRestoring, setIsRestoring, restore }
 }
 
-export default useLeadAttributesActions
+export default useCustomerAttributesActions

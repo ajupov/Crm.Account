@@ -1,18 +1,18 @@
-import LeadComment from '../../../../../../api/customers/models/LeadComment'
+import CustomerComment from '../../../../../../api/customers/models/CustomerComment'
 
-export default interface LeadCommentState {
+export default interface CustomerCommentState {
     isLoading: boolean
-    comment: LeadComment
-    setComment: (comment: LeadComment) => void
+    comment: CustomerComment
+    setComment: (comment: CustomerComment) => void
     create: () => Promise<void>
 }
 
-export const leadCommentInitialState: LeadCommentState = {
+export const customerCommentInitialState: CustomerCommentState = {
     isLoading: false,
     comment: {
         id: void 0,
         value: void 0
     },
-    setComment: (_: LeadComment) => Promise.resolve(void 0),
+    setComment: (_: CustomerComment) => Promise.resolve(void 0),
     create: () => Promise.resolve(void 0)
 }

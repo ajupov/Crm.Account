@@ -2,28 +2,28 @@ import { calculateOffset, calculatePage } from '../../../../../../../utils/pagin
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import LeadAttribute from '../../../../../../../../api/customers/models/LeadAttribute'
-import LeadAttributesContext from '../../../contexts/LeadAttributesContext/LeadAttributesContext'
-import LeadAttributesRoutes from '../../../routes/LeadAttributesRoutes'
+import CustomerAttribute from '../../../../../../../../api/customers/models/CustomerAttribute'
+import CustomerAttributesContext from '../../../contexts/CustomerAttributesContext/CustomerAttributesContext'
+import CustomerAttributesRoutes from '../../../routes/CustomerAttributesRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
 import { getAttributeTypeName } from '../../../../../../../helpers/entityAttributeTypeHelper'
 import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
-import useLeadAttributeView from '../../LeadAttributeView/hooks/useLeadAttributeView'
+import useCustomerAttributeView from '../../CustomerAttributeView/hooks/useCustomerAttributeView'
 
-interface UseLeadAttributesTableReturn {
+interface UseCustomerAttributesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (attributes: LeadAttribute[]) => TableBodyRowProps[]
+    map: (attributes: CustomerAttribute[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
 
 // TODO: Move to l10n
-const useLeadAttributesTable = (): UseLeadAttributesTableReturn => {
-    const state = useContext(LeadAttributesContext)
-    const { onClickDelete, onClickRestore } = useLeadAttributeView()
+const useCustomerAttributesTable = (): UseCustomerAttributesTableReturn => {
+    const state = useContext(CustomerAttributesContext)
+    const { onClickDelete, onClickRestore } = useCustomerAttributeView()
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const attributes = (await state.getAll())?.attributes
@@ -66,7 +66,7 @@ const useLeadAttributesTable = (): UseLeadAttributesTableReturn => {
     )
 
     const map = useCallback(
-        (attributes: LeadAttribute[]) =>
+        (attributes: CustomerAttribute[]) =>
             attributes.map(
                 attribute =>
                     ({
@@ -82,8 +82,8 @@ const useLeadAttributesTable = (): UseLeadAttributesTableReturn => {
                             }
                         ],
                         isDeleted: attribute.isDeleted,
-                        viewLink: LeadAttributesRoutes.View,
-                        editLink: LeadAttributesRoutes.Edit,
+                        viewLink: CustomerAttributesRoutes.View,
+                        editLink: CustomerAttributesRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
@@ -126,4 +126,4 @@ const useLeadAttributesTable = (): UseLeadAttributesTableReturn => {
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
-export default useLeadAttributesTable
+export default useCustomerAttributesTable

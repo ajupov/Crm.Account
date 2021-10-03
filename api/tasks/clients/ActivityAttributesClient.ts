@@ -1,54 +1,56 @@
 import ActivityAttribute from '../models/ActivityAttribute'
 import ActivityAttributeGetPagedListRequest from '../models/ActivityAttributeGetPagedListRequest'
 import ActivityAttributeGetPagedListResponse from '../models/ActivityAttributeGetPagedListResponse'
-import IHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
+import IJsonHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 
 export default class ActivityAttributesClient {
-    private readonly httpClientFactory: IHttpClientFactory
+    private readonly _host: string
+    private readonly _factory: IJsonHttpClientFactory
 
-    constructor(httpClientFactory: IHttpClientFactory) {
-        this.httpClientFactory = httpClientFactory
+    constructor(host: string, factory: IJsonHttpClientFactory) {
+                this._host = host
+        this._factory = factory
     }
 
     public GetTypesAsync = (): Promise<object> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .get<object>('/Activities/Attributes/v1/GetTypes')
+        this._factory
+            .
+            .getAsync<object>('/Activities/Attributes/v1/GetTypes')
 
     public GetAsync = (id: string): Promise<ActivityAttribute> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .get<ActivityAttribute>('/Activities/Attributes/v1/Get', { id })
+        this._factory
+            .
+            .getAsync<ActivityAttribute>('/Activities/Attributes/v1/Get', { id })
 
     public GetListAsync = (values?: string[]): Promise<ActivityAttribute[]> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .post<ActivityAttribute[]>('/Activities/Attributes/v1/GetList', values)
+        this._factory
+            .
+            .postAsync<ActivityAttribute[]>('/Activities/Attributes/v1/GetList', values)
 
     public GetPagedListAsync = (
         request?: ActivityAttributeGetPagedListRequest
     ): Promise<ActivityAttributeGetPagedListResponse> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .post<ActivityAttributeGetPagedListResponse>('/Activities/Attributes/v1/GetPagedList', request)
+        this._factory
+            .
+            .postAsync<ActivityAttributeGetPagedListResponse>('/Activities/Attributes/v1/GetPagedList', request)
 
     public CreateAsync = (attribute?: ActivityAttribute): Promise<string> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
+        this._factory
+            .
             .put<string>('/Activities/Attributes/v1/Create', attribute)
 
     public UpdateAsync = (attribute?: ActivityAttribute): Promise<void> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
+        this._factory
+            .
             .patch('/Activities/Attributes/v1/Update', attribute)
 
     public DeleteAsync = (values?: string[]): Promise<void> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
+        this._factory
+            .
             .patch('/Activities/Attributes/v1/Delete', values)
 
     public RestoreAsync = (values?: string[]): Promise<void> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
+        this._factory
+            .
             .patch('/Activities/Attributes/v1/Restore', values)
 }

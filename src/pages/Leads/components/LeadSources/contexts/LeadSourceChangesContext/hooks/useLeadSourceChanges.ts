@@ -1,20 +1,22 @@
-import LeadSourceChangesState, { leadSourceChangesInitialState } from '../../../states/LeadSourceChangesState'
+import CustomerSourceChangesState, {
+    customerSourceChangesInitialState
+} from '../../../states/CustomerSourceChangesState'
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
-import LeadSourcesChangesClient from '../../../../../../../../api/customers/clients/LeadSourcesChangesClient'
+import CustomerSourcesChangesClient from '../../../../../../../../api/customers/clients/CustomerSourcesChangesClient'
 import { useParams } from 'react-router'
 
-const leadSourcesChangesClient = new LeadSourcesChangesClient(HttpClientFactory.Api)
+const customerSourcesChangesClient = new CustomerSourcesChangesClient(HttpClientFactory.Api)
 
-const useLeadSourceChanges = (): LeadSourceChangesState => {
+const useCustomerSourceChanges = (): CustomerSourceChangesState => {
     const MaxLimit = 1048576
 
     const { id }: { id: string } = useParams()
-    const [request, setRequest] = useState(leadSourceChangesInitialState.request)
-    const [isLoading, setIsLoading] = useState(leadSourceChangesInitialState.isLoading)
-    const [changes, setChanges] = useState(leadSourceChangesInitialState.changes)
-    const [total, setTotal] = useState(leadSourceChangesInitialState.total)
+    const [request, setRequest] = useState(customerSourceChangesInitialState.request)
+    const [isLoading, setIsLoading] = useState(customerSourceChangesInitialState.isLoading)
+    const [changes, setChanges] = useState(customerSourceChangesInitialState.changes)
+    const [total, setTotal] = useState(customerSourceChangesInitialState.total)
 
     const getPagedList = useCallback(async () => {
         if (!id) {
@@ -23,7 +25,7 @@ const useLeadSourceChanges = (): LeadSourceChangesState => {
 
         setIsLoading(true)
 
-        const response = await leadSourcesChangesClient.GetPagedListAsync({ ...request, sourceId: id })
+        const response = await customerSourcesChangesClient.GetPagedListAsync({ ...request, sourceId: id })
 
         setChanges(response.changes ?? [])
         setTotal(response.totalCount)
@@ -38,7 +40,7 @@ const useLeadSourceChanges = (): LeadSourceChangesState => {
 
         setIsLoading(true)
 
-        const response = await leadSourcesChangesClient.GetPagedListAsync({
+        const response = await customerSourcesChangesClient.GetPagedListAsync({
             ...request,
             sourceId: id,
             offset: 0,
@@ -63,4 +65,4 @@ const useLeadSourceChanges = (): LeadSourceChangesState => {
     return { request, setRequest, isLoading, total, changes, getAll }
 }
 
-export default useLeadSourceChanges
+export default useCustomerSourceChanges

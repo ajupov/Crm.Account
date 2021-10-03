@@ -1,13 +1,13 @@
 import React, { FC, useContext } from 'react'
 
-import LeadAttributesActionsContext from '../../contexts/LeadAttributesActionsContext/LeadAttributesActionsContext'
+import CustomerAttributesActionsContext from '../../contexts/CustomerAttributesActionsContext/CustomerAttributesActionsContext'
 import RestoreModal from '../../../../../../components/common/modals/RestoreModal/RestoreModal'
-import useLeadAttributeRestore from './hooks/useLeadAttributeRestore'
+import useCustomerAttributeRestore from './hooks/useCustomerAttributeRestore'
 
 // TODO: Move to l10n
-const LeadAttributeRestore: FC = () => {
-    const state = useContext(LeadAttributesActionsContext)
-    const { onClickConfirm, onClickCancel } = useLeadAttributeRestore()
+const CustomerAttributeRestore: FC = () => {
+    const state = useContext(CustomerAttributesActionsContext)
+    const { onClickConfirm, onClickCancel } = useCustomerAttributeRestore()
 
     return (
         <RestoreModal
@@ -20,4 +20,4 @@ const LeadAttributeRestore: FC = () => {
     )
 }
 
-export default LeadAttributeRestore
+export default CustomerAttributeRestore

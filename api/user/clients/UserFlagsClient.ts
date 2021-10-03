@@ -1,21 +1,23 @@
-import IHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
+import IJsonHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 import UserFlagType from '../models/UserFlagType'
 
 export default class UserFlagsClient {
-    private readonly httpClientFactory: IHttpClientFactory
+    private readonly _host: string
+    private readonly _factory: IJsonHttpClientFactory
 
-    constructor(httpClientFactory: IHttpClientFactory) {
-        this.httpClientFactory = httpClientFactory
+    constructor(host: string, factory: IJsonHttpClientFactory) {
+                this._host = host
+        this._factory = factory
     }
 
     public IsSetAsync = (type: UserFlagType): Promise<boolean> =>
-        this.httpClientFactory.createClient(this.httpClientFactory.host).get<boolean>('/User/Flags/v1/IsSet', { type })
+        this._factory.getAsync<boolean>('/User/Flags/v1/IsSet', { type })
 
     public GetNotSetListAsync = (): Promise<UserFlagType[]> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .get<UserFlagType[]>('/User/Flags/v1/GetNotSetList')
+        this._factory
+            .
+            .getAsync<UserFlagType[]>('/User/Flags/v1/GetNotSetList')
 
     public SetAsync = (type: UserFlagType): Promise<void> =>
-        this.httpClientFactory.createClient(this.httpClientFactory.host).put('/User/Flags/v1/Set', { type })
+        this._factory.putAsync('/User/Flags/v1/Set', { type })
 }

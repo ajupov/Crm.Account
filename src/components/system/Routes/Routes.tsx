@@ -48,24 +48,24 @@ import DealTypes from '../../../pages/Deals/DealTypes/DealTypes'
 import DealTypesRoutes from '../../../pages/Deals/DealTypes/routes/DealTypesRoutes'
 import Deals from '../../../pages/Deals/Deals/Deals'
 import DealsRoutes from '../../../pages/Deals/Deals/routes/DealsRoutes'
-import LeadAttributeChanges from '../../../pages/Leads/components/LeadsAttributes/components/LeadAttributeChanges/LeadAttributeChanges'
-import LeadAttributeCreate from '../../../pages/Leads/components/LeadsAttributes/components/LeadAttributeCreate/LeadAttributeCreate'
-import LeadAttributeEdit from '../../../pages/Leads/components/LeadsAttributes/components/LeadAttributeEdit/LeadAttributeEdit'
-import LeadAttributeView from '../../../pages/Leads/components/LeadsAttributes/components/LeadAttributeView/LeadAttributeView'
-import LeadAttributes from '../../../pages/Leads/components/LeadsAttributes/LeadAttributes'
-import LeadAttributesRoutes from '../../../pages/Leads/components/LeadsAttributes/routes/LeadAttributesRoutes'
-import LeadChanges from '../../../pages/Leads/components/Leads/components/LeadChanges/LeadChanges'
-import LeadCreate from '../../../pages/Leads/components/Leads/components/LeadCreate/LeadCreate'
-import LeadEdit from '../../../pages/Leads/components/Leads/components/LeadEdit/LeadEdit'
-import LeadSourceChanges from '../../../pages/Leads/components/LeadSources/components/LeadSourceChanges/LeadSourceChanges'
-import LeadSourceCreate from '../../../pages/Leads/components/LeadSources/components/LeadSourceCreate/LeadSourceCreate'
-import LeadSourceEdit from '../../../pages/Leads/components/LeadSources/components/LeadSourceEdit/LeadSourceEdit'
-import LeadSourceView from '../../../pages/Leads/components/LeadSources/components/LeadSourceView/LeadSourceView'
-import LeadSources from '../../../pages/Leads/components/LeadSources/LeadSources'
-import LeadSourcesRoutes from '../../../pages/Leads/components/LeadSources/routes/LeadSourcesRoutes'
-import LeadView from '../../../pages/Leads/components/Leads/components/LeadView/LeadView'
-import Leads from '../../../pages/Leads/components/Leads/Leads'
-import LeadsRoutes from '../../../pages/Leads/components/Leads/routes/LeadsRoutes'
+import CustomerAttributeChanges from '../../../pages/Customers/components/CustomersAttributes/components/CustomerAttributeChanges/CustomerAttributeChanges'
+import CustomerAttributeCreate from '../../../pages/Customers/components/CustomersAttributes/components/CustomerAttributeCreate/CustomerAttributeCreate'
+import CustomerAttributeEdit from '../../../pages/Customers/components/CustomersAttributes/components/CustomerAttributeEdit/CustomerAttributeEdit'
+import CustomerAttributeView from '../../../pages/Customers/components/CustomersAttributes/components/CustomerAttributeView/CustomerAttributeView'
+import CustomerAttributes from '../../../pages/Customers/components/CustomersAttributes/CustomerAttributes'
+import CustomerAttributesRoutes from '../../../pages/Customers/components/CustomersAttributes/routes/CustomerAttributesRoutes'
+import CustomerChanges from '../../../pages/Customers/components/Customers/components/CustomerChanges/CustomerChanges'
+import CustomerCreate from '../../../pages/Customers/components/Customers/components/CustomerCreate/CustomerCreate'
+import CustomerEdit from '../../../pages/Customers/components/Customers/components/CustomerEdit/CustomerEdit'
+import CustomerSourceChanges from '../../../pages/Customers/components/CustomerSources/components/CustomerSourceChanges/CustomerSourceChanges'
+import CustomerSourceCreate from '../../../pages/Customers/components/CustomerSources/components/CustomerSourceCreate/CustomerSourceCreate'
+import CustomerSourceEdit from '../../../pages/Customers/components/CustomerSources/components/CustomerSourceEdit/CustomerSourceEdit'
+import CustomerSourceView from '../../../pages/Customers/components/CustomerSources/components/CustomerSourceView/CustomerSourceView'
+import CustomerSources from '../../../pages/Customers/components/CustomerSources/CustomerSources'
+import CustomerSourcesRoutes from '../../../pages/Customers/components/CustomerSources/routes/CustomerSourcesRoutes'
+import CustomerView from '../../../pages/Customers/components/Customers/components/CustomerView/CustomerView'
+import Customers from '../../../pages/Customers/components/Customers/Customers'
+import CustomersRoutes from '../../../pages/Customers/components/Customers/routes/CustomersRoutes'
 import NotFound from '../../../pages/NotFound/NotFound'
 import ProductAttributeChanges from '../../../pages/Products/components/ProductAttributes/components/ProductAttributeChanges/ProductAttributeChanges'
 import ProductAttributeCreate from '../../../pages/Products/components/ProductAttributes/components/ProductAttributeCreate/ProductAttributeCreate'
@@ -106,10 +106,10 @@ const Routes: FC = () => {
             {/*  */}
 
             <Route path={DealsRoutes.Index} exact component={Deals} />
-            <Route path={DealsRoutes.Create} exact component={LeadCreate} />
-            <Route path={withId(DealsRoutes.View)} exact component={LeadView} />
-            <Route path={withId(DealsRoutes.Edit)} exact component={LeadEdit} />
-            <Route path={withId(DealsRoutes.Changes)} exact component={LeadChanges} />
+            <Route path={DealsRoutes.Create} exact component={CustomerCreate} />
+            <Route path={withId(DealsRoutes.View)} exact component={CustomerView} />
+            <Route path={withId(DealsRoutes.Edit)} exact component={CustomerEdit} />
+            <Route path={withId(DealsRoutes.Changes)} exact component={CustomerChanges} />
 
             <Route path={DealStatusesRoutes.Index} exact component={DealStatuses} />
             <Route path={DealStatusesRoutes.Create} exact component={DealStatusCreate} />
@@ -131,23 +131,23 @@ const Routes: FC = () => {
 
             {/*  */}
 
-            <Route path={LeadsRoutes.Index} exact component={Leads} />
-            <Route path={LeadsRoutes.Create} exact component={LeadCreate} />
-            <Route path={withId(LeadsRoutes.View)} exact component={LeadView} />
-            <Route path={withId(LeadsRoutes.Edit)} exact component={LeadEdit} />
-            <Route path={withId(LeadsRoutes.Changes)} exact component={LeadChanges} />
+            <Route path={CustomersRoutes.Index} exact component={Customers} />
+            <Route path={CustomersRoutes.Create} exact component={CustomerCreate} />
+            <Route path={withId(CustomersRoutes.View)} exact component={CustomerView} />
+            <Route path={withId(CustomersRoutes.Edit)} exact component={CustomerEdit} />
+            <Route path={withId(CustomersRoutes.Changes)} exact component={CustomerChanges} />
 
-            <Route path={LeadSourcesRoutes.Index} exact component={LeadSources} />
-            <Route path={LeadSourcesRoutes.Create} exact component={LeadSourceCreate} />
-            <Route path={withId(LeadSourcesRoutes.View)} exact component={LeadSourceView} />
-            <Route path={withId(LeadSourcesRoutes.Edit)} exact component={LeadSourceEdit} />
-            <Route path={withId(LeadSourcesRoutes.Changes)} exact component={LeadSourceChanges} />
+            <Route path={CustomerSourcesRoutes.Index} exact component={CustomerSources} />
+            <Route path={CustomerSourcesRoutes.Create} exact component={CustomerSourceCreate} />
+            <Route path={withId(CustomerSourcesRoutes.View)} exact component={CustomerSourceView} />
+            <Route path={withId(CustomerSourcesRoutes.Edit)} exact component={CustomerSourceEdit} />
+            <Route path={withId(CustomerSourcesRoutes.Changes)} exact component={CustomerSourceChanges} />
 
-            <Route path={LeadAttributesRoutes.Index} exact component={LeadAttributes} />
-            <Route path={LeadAttributesRoutes.Create} exact component={LeadAttributeCreate} />
-            <Route path={withId(LeadAttributesRoutes.View)} exact component={LeadAttributeView} />
-            <Route path={withId(LeadAttributesRoutes.Edit)} exact component={LeadAttributeEdit} />
-            <Route path={withId(LeadAttributesRoutes.Changes)} exact component={LeadAttributeChanges} />
+            <Route path={CustomerAttributesRoutes.Index} exact component={CustomerAttributes} />
+            <Route path={CustomerAttributesRoutes.Create} exact component={CustomerAttributeCreate} />
+            <Route path={withId(CustomerAttributesRoutes.View)} exact component={CustomerAttributeView} />
+            <Route path={withId(CustomerAttributesRoutes.Edit)} exact component={CustomerAttributeEdit} />
+            <Route path={withId(CustomerAttributesRoutes.Changes)} exact component={CustomerAttributeChanges} />
 
             {/*  */}
 

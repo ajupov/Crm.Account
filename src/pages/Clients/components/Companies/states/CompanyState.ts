@@ -17,7 +17,7 @@ export const companyInitialState: CompanyState = {
     company: {
         id: void 0,
         accountId: void 0,
-        leadId: void 0,
+        customerId: void 0,
         createUserId: void 0,
         responsibleUserId: void 0,
         type: CompanyType.Commercial,

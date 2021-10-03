@@ -1,10 +1,10 @@
 import React, { FC, useContext } from 'react'
 
 import FilterForm from '../../../../../../components/common/forms/FilterForm/FilterForm'
-import LeadSourcesFiltersContext from '../../contexts/LeadSourcesFiltersContext/LeadSourcesFiltersContext'
+import CustomerSourcesFiltersContext from '../../contexts/CustomerSourcesFiltersContext/CustomerSourcesFiltersContext'
 
-const LeadSourcesFilter: FC = () => {
-    const state = useContext(LeadSourcesFiltersContext)
+const CustomerSourcesFilter: FC = () => {
+    const state = useContext(CustomerSourcesFiltersContext)
 
     return (
         <FilterForm
@@ -17,4 +17,4 @@ const LeadSourcesFilter: FC = () => {
     )
 }
 
-export default LeadSourcesFilter
+export default CustomerSourcesFilter

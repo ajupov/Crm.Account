@@ -1,21 +1,21 @@
-import LeadsActionsState, { leadsActionsInitialState } from '../../../states/LeadsActionsState'
+import CustomersActionsState, { customersActionsInitialState } from '../../../states/CustomersActionsState'
 import { useCallback, useState } from 'react'
 
 import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
-import LeadsClient from '../../../../../../../../api/customers/clients/LeadsClient'
+import CustomersClient from '../../../../../../../../api/customers/clients/CustomersClient'
 
-const leadsClient = new LeadsClient(HttpClientFactory.Api)
+const customersClient = new CustomersClient(HttpClientFactory.Api)
 
-const useLeadsActions = (): LeadsActionsState => {
-    const [ids, setIds] = useState(leadsActionsInitialState.ids)
-    const [isLoading, setIsLoading] = useState(leadsActionsInitialState.isLoading)
-    const [isDeleting, setIsDeleting] = useState(leadsActionsInitialState.isDeleting)
-    const [isRestoring, setIsRestoring] = useState(leadsActionsInitialState.isRestoring)
+const useCustomersActions = (): CustomersActionsState => {
+    const [ids, setIds] = useState(customersActionsInitialState.ids)
+    const [isLoading, setIsLoading] = useState(customersActionsInitialState.isLoading)
+    const [isDeleting, setIsDeleting] = useState(customersActionsInitialState.isDeleting)
+    const [isRestoring, setIsRestoring] = useState(customersActionsInitialState.isRestoring)
 
     const _delete = useCallback(async () => {
         setIsLoading(true)
 
-        await leadsClient.DeleteAsync(ids)
+        await customersClient.DeleteAsync(ids)
 
         setIsDeleting(false)
         setIsLoading(false)
@@ -24,7 +24,7 @@ const useLeadsActions = (): LeadsActionsState => {
     const restore = useCallback(async () => {
         setIsLoading(true)
 
-        await leadsClient.RestoreAsync(ids)
+        await customersClient.RestoreAsync(ids)
 
         setIsRestoring(false)
         setIsLoading(false)
@@ -33,4 +33,4 @@ const useLeadsActions = (): LeadsActionsState => {
     return { isLoading, ids, setIds, isDeleting, setIsDeleting, delete: _delete, isRestoring, setIsRestoring, restore }
 }
 
-export default useLeadsActions
+export default useCustomersActions

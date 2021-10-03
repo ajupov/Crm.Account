@@ -1,24 +1,24 @@
 import { useCallback, useContext } from 'react'
 
-import Lead from '../../../../../../../../api/customers/models/Lead'
-import LeadContext from '../../../contexts/LeadContext/LeadContext'
-import LeadsActionsContext from '../../../contexts/LeadsActionsContext/LeadsActionsContext'
+import Customer from '../../../../../../../../api/customers/models/Customer'
+import CustomerContext from '../../../contexts/CustomerContext/CustomerContext'
+import CustomersActionsContext from '../../../contexts/CustomersActionsContext/CustomersActionsContext'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
-import { joinAttributes } from '../../../mappers/leadAttributesMapper'
+import { joinAttributes } from '../../../mappers/customerAttributesMapper'
 import { useHistory } from 'react-router'
 
-interface UseLeadViewReturn {
-    map: (lead: Lead) => ViewDataProps[]
+interface UseCustomerViewReturn {
+    map: (customer: Customer) => ViewDataProps[]
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
     onClickCancel: () => void
 }
 
 // TODO: Move to l10n
-const useLeadView = (): UseLeadViewReturn => {
+const useCustomerView = (): UseCustomerViewReturn => {
     const history = useHistory()
-    const leadState = useContext(LeadContext)
-    const actionsState = useContext(LeadsActionsContext)
+    const customerState = useContext(CustomerContext)
+    const actionsState = useContext(CustomersActionsContext)
 
     const onClickDelete = useCallback(
         (id: string) => {
@@ -39,30 +39,30 @@ const useLeadView = (): UseLeadViewReturn => {
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
     const mapAttributes = useCallback(
-        () => joinAttributes(leadState.lead.attributeLinks),
-        [leadState.lead.attributeLinks]
+        () => joinAttributes(customerState.customer.attributeLinks),
+        [customerState.customer.attributeLinks]
     )
 
     const map = useCallback(
-        (lead: Lead): ViewDataProps[] => [
-            { label: 'Источник', value: lead.source ? lead.source.name : '' },
-            { label: 'Фамилия', value: lead.surname },
-            { label: 'Имя', value: lead.name },
-            { label: 'Отчество', value: lead.patronymic },
-            { label: 'Телефон', value: lead.phone },
-            { label: 'Email', value: lead.email },
-            { label: 'Должность', value: lead.post },
-            { label: 'Почтовый индекс', value: lead.postcode },
-            { label: 'Страна', value: lead.country },
-            { label: 'Регион', value: lead.region },
-            { label: 'Район/провинция', value: lead.province },
-            { label: 'Город/населенный пункт', value: lead.city },
-            { label: 'Улица', value: lead.street },
-            { label: 'Дом/строение', value: lead.house },
-            { label: 'Квартира', value: lead.apartment },
-            { label: 'Сумма потенциальной сделки', value: lead.opportunitySum.toString() },
+        (customer: Customer): ViewDataProps[] => [
+            { label: 'Источник', value: customer.source ? customer.source.name : '' },
+            { label: 'Фамилия', value: customer.surname },
+            { label: 'Имя', value: customer.name },
+            { label: 'Отчество', value: customer.patronymic },
+            { label: 'Телефон', value: customer.phone },
+            { label: 'Email', value: customer.email },
+            { label: 'Должность', value: customer.post },
+            { label: 'Почтовый индекс', value: customer.postcode },
+            { label: 'Страна', value: customer.country },
+            { label: 'Регион', value: customer.region },
+            { label: 'Район/провинция', value: customer.province },
+            { label: 'Город/населенный пункт', value: customer.city },
+            { label: 'Улица', value: customer.street },
+            { label: 'Дом/строение', value: customer.house },
+            { label: 'Квартира', value: customer.apartment },
+            { label: 'Сумма потенциальной сделки', value: customer.opportunitySum.toString() },
             { label: 'Атрибуты', value: mapAttributes() },
-            { label: 'Удален', value: lead.isDeleted ? 'Да' : 'Нет' }
+            { label: 'Удален', value: customer.isDeleted ? 'Да' : 'Нет' }
         ],
         [mapAttributes]
     )
@@ -70,4 +70,4 @@ const useLeadView = (): UseLeadViewReturn => {
     return { map, onClickDelete, onClickRestore, onClickCancel }
 }
 
-export default useLeadView
+export default useCustomerView

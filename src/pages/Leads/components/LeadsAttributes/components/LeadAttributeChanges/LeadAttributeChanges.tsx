@@ -1,38 +1,38 @@
 import React, { FC, useEffect } from 'react'
 
-import ClientsMenu from '../../../LeadsMenu/LeadsMenu'
-import LeadAttributeChangesContextProvider from '../../contexts/LeadAttributeChangesContext/LeadAttributeChangesContextProvider'
-import LeadAttributeChangesFilter from './components/LeadAttributeChangesFilter/LeadAttributeChangesFilter'
-import LeadAttributeChangesFiltersContextProvider from '../../contexts/LeadAttributeChangesFiltersContext/LeadAttributeChangesFiltersContextProvider'
-import LeadAttributeChangesTable from './components/LeadAttributeChangesTable/LeadAttributeChangesTable'
-import LeadsAttributeChangesFilterMobile from './components/LeadsAttributeChangesFilterMobile/LeadsAttributeChangesFilterMobile'
+import ClientsMenu from '../../../CustomersMenu/CustomersMenu'
+import CustomerAttributeChangesContextProvider from '../../contexts/CustomerAttributeChangesContext/CustomerAttributeChangesContextProvider'
+import CustomerAttributeChangesFilter from './components/CustomerAttributeChangesFilter/CustomerAttributeChangesFilter'
+import CustomerAttributeChangesFiltersContextProvider from '../../contexts/CustomerAttributeChangesFiltersContext/CustomerAttributeChangesFiltersContextProvider'
+import CustomerAttributeChangesTable from './components/CustomerAttributeChangesTable/CustomerAttributeChangesTable'
+import CustomersAttributeChangesFilterMobile from './components/CustomersAttributeChangesFilterMobile/CustomersAttributeChangesFilterMobile'
 import Page from '../../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../../helpers/productNameHelper'
-import useLeadAttributeChangesView from './hooks/useLeadAttributeChangesView'
+import useCustomerAttributeChangesView from './hooks/useCustomerAttributeChangesView'
 
 // TODO: Move to l10n
-const LeadAttributeChanges: FC = () => {
+const CustomerAttributeChanges: FC = () => {
     const title = 'История изменений'
 
-    const { onClickCancel } = useLeadAttributeChangesView()
+    const { onClickCancel } = useCustomerAttributeChangesView()
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <LeadAttributeChangesContextProvider>
-            <LeadAttributeChangesFiltersContextProvider>
+        <CustomerAttributeChangesContextProvider>
+            <CustomerAttributeChangesFiltersContextProvider>
                 <Page
                     title={title}
                     firstSidebar={<ClientsMenu />}
-                    secondSidebar={<LeadAttributeChangesFilter />}
-                    secondSidebarMobile={<LeadsAttributeChangesFilterMobile />}
+                    secondSidebar={<CustomerAttributeChangesFilter />}
+                    secondSidebarMobile={<CustomersAttributeChangesFilterMobile />}
                     onClickCancel={onClickCancel}
                 >
-                    <LeadAttributeChangesTable />
+                    <CustomerAttributeChangesTable />
                 </Page>
-            </LeadAttributeChangesFiltersContextProvider>
-        </LeadAttributeChangesContextProvider>
+            </CustomerAttributeChangesFiltersContextProvider>
+        </CustomerAttributeChangesContextProvider>
     )
 }
 
-export default LeadAttributeChanges
+export default CustomerAttributeChanges

@@ -1,29 +1,29 @@
 import React, { FC, useContext } from 'react'
 
 import EditForm from '../../../../../../components/common/forms/EditForm/EditForm'
-import LeadContext from '../../contexts/LeadContext/LeadContext'
-import LeadsRoutes from '../../routes/LeadsRoutes'
-import useLeadOnChange from '../../hooks/change/useLeadOnChange'
-import useLeadsActions from '../../contexts/LeadsActionsContext/hooks/useLeadsActions'
+import CustomerContext from '../../contexts/CustomerContext/CustomerContext'
+import CustomersRoutes from '../../routes/CustomersRoutes'
+import useCustomerOnChange from '../../hooks/change/useCustomerOnChange'
+import useCustomersActions from '../../contexts/CustomersActionsContext/hooks/useCustomersActions'
 
-const LeadEditForm: FC = () => {
-    const state = useContext(LeadContext)
-    const { isLoading } = useLeadsActions()
-    const { fields, isConfirmEnabled, onClickConfirmUpdate, onClickCancel } = useLeadOnChange()
+const CustomerEditForm: FC = () => {
+    const state = useContext(CustomerContext)
+    const { isLoading } = useCustomersActions()
+    const { fields, isConfirmEnabled, onClickConfirmUpdate, onClickCancel } = useCustomerOnChange()
 
-    return state.lead.id ? (
+    return state.customer.id ? (
         <EditForm
-            id={state.lead.id}
+            id={state.customer.id}
             fields={fields}
             isLoading={state.isLoading || isLoading}
             isConfirmEnabled={isConfirmEnabled}
-            createDate={state.lead.createDateTime}
-            lastModifyDateTime={state.lead.modifyDateTime}
-            historyLink={LeadsRoutes.Changes}
+            createDate={state.customer.createDateTime}
+            lastModifyDateTime={state.customer.modifyDateTime}
+            historyLink={CustomersRoutes.Changes}
             onClickConfirm={onClickConfirmUpdate}
             onClickCancel={onClickCancel}
         />
     ) : null
 }
 
-export default LeadEditForm
+export default CustomerEditForm

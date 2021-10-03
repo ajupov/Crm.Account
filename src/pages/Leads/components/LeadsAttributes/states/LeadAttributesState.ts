@@ -1,23 +1,23 @@
-import LeadAttribute from '../../../../../../api/customers/models/LeadAttribute'
-import LeadAttributeGetPagedListRequest from '../../../../../../api/customers/models/LeadAttributeGetPagedListRequest'
-import LeadAttributeGetPagedListResponse from '../../../../../../api/customers/models/LeadAttributeGetPagedListResponse'
+import CustomerAttribute from '../../../../../../api/customers/models/CustomerAttribute'
+import CustomerAttributeGetPagedListRequest from '../../../../../../api/customers/models/CustomerAttributeGetPagedListRequest'
+import CustomerAttributeGetPagedListResponse from '../../../../../../api/customers/models/CustomerAttributeGetPagedListResponse'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'
 const DefaultOrderBy = 'desc'
 
-export default interface LeadAttributesState {
-    request: LeadAttributeGetPagedListRequest
-    setRequest: (request: LeadAttributeGetPagedListRequest) => void
+export default interface CustomerAttributesState {
+    request: CustomerAttributeGetPagedListRequest
+    setRequest: (request: CustomerAttributeGetPagedListRequest) => void
     isLoading: boolean
-    attributes: LeadAttribute[]
+    attributes: CustomerAttribute[]
     total: number
     lastModifyDateTime: string
     getPagedList: () => Promise<void>
-    getAll: () => Promise<LeadAttributeGetPagedListResponse>
+    getAll: () => Promise<CustomerAttributeGetPagedListResponse>
 }
 
-export const leadAttributesInitialState: LeadAttributesState = {
+export const customerAttributesInitialState: CustomerAttributesState = {
     request: {
         isDeleted: false,
         offset: 0,
@@ -25,7 +25,7 @@ export const leadAttributesInitialState: LeadAttributesState = {
         sortBy: DefaultSortBy,
         orderBy: DefaultOrderBy
     },
-    setRequest: (_: LeadAttributeGetPagedListRequest) => void 0,
+    setRequest: (_: CustomerAttributeGetPagedListRequest) => void 0,
     isLoading: false,
     attributes: [],
     total: 0,

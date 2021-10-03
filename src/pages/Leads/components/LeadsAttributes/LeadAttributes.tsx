@@ -1,44 +1,44 @@
 import React, { FC, useEffect } from 'react'
 
-import ClientsMenu from '../LeadsMenu/LeadsMenu'
-import LeadAttributeContextProvider from './contexts/LeadAttributeContext/LeadAttributeContextProvider'
-import LeadAttributeDelete from './components/LeadAttributeDelete/LeadAttributeDelete'
-import LeadAttributeRestore from './components/LeadAttributeRestore/LeadAttributeRestore'
-import LeadAttributesActionsContextProvider from './contexts/LeadAttributesActionsContext/LeadAttributesActionsContextProvider'
-import LeadAttributesContextProvider from './contexts/LeadAttributesContext/LeadAttributesContextProvider'
-import LeadAttributesFilter from './components/LeadAttributesFilter/LeadAttributesFilter'
-import LeadAttributesFilterMobile from './components/LeadAttributesFilterMobile/LeadAttributesFilterMobile'
-import LeadAttributesFiltersContextProvider from './contexts/LeadAttributesFiltersContext/LeadAttributesFiltersContextProvider'
-import LeadAttributesTable from './components/LeadAttributesTable/LeadAttributesTable'
+import ClientsMenu from '../CustomersMenu/CustomersMenu'
+import CustomerAttributeContextProvider from './contexts/CustomerAttributeContext/CustomerAttributeContextProvider'
+import CustomerAttributeDelete from './components/CustomerAttributeDelete/CustomerAttributeDelete'
+import CustomerAttributeRestore from './components/CustomerAttributeRestore/CustomerAttributeRestore'
+import CustomerAttributesActionsContextProvider from './contexts/CustomerAttributesActionsContext/CustomerAttributesActionsContextProvider'
+import CustomerAttributesContextProvider from './contexts/CustomerAttributesContext/CustomerAttributesContextProvider'
+import CustomerAttributesFilter from './components/CustomerAttributesFilter/CustomerAttributesFilter'
+import CustomerAttributesFilterMobile from './components/CustomerAttributesFilterMobile/CustomerAttributesFilterMobile'
+import CustomerAttributesFiltersContextProvider from './contexts/CustomerAttributesFiltersContext/CustomerAttributesFiltersContextProvider'
+import CustomerAttributesTable from './components/CustomerAttributesTable/CustomerAttributesTable'
 import Page from '../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
-const LeadAttributes: FC = () => {
+const CustomerAttributes: FC = () => {
     const title = 'Аттрибуты'
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <LeadAttributesContextProvider>
-            <LeadAttributesActionsContextProvider>
-                <LeadAttributesFiltersContextProvider>
-                    <LeadAttributeContextProvider>
+        <CustomerAttributesContextProvider>
+            <CustomerAttributesActionsContextProvider>
+                <CustomerAttributesFiltersContextProvider>
+                    <CustomerAttributeContextProvider>
                         <Page
                             title={title}
                             firstSidebar={<ClientsMenu />}
-                            secondSidebar={<LeadAttributesFilter />}
-                            secondSidebarMobile={<LeadAttributesFilterMobile />}
+                            secondSidebar={<CustomerAttributesFilter />}
+                            secondSidebarMobile={<CustomerAttributesFilterMobile />}
                         >
-                            <LeadAttributesTable />
-                            <LeadAttributeDelete />
-                            <LeadAttributeRestore />
+                            <CustomerAttributesTable />
+                            <CustomerAttributeDelete />
+                            <CustomerAttributeRestore />
                         </Page>
-                    </LeadAttributeContextProvider>
-                </LeadAttributesFiltersContextProvider>
-            </LeadAttributesActionsContextProvider>
-        </LeadAttributesContextProvider>
+                    </CustomerAttributeContextProvider>
+                </CustomerAttributesFiltersContextProvider>
+            </CustomerAttributesActionsContextProvider>
+        </CustomerAttributesContextProvider>
     )
 }
 
-export default LeadAttributes
+export default CustomerAttributes

@@ -1,21 +1,11 @@
-export default interface LeadGetPagedListRequest {
+export default interface CustomerGetPagedListRequest {
     surname?: string
     name?: string
     patronymic?: string
     phone?: string
     email?: string
-    companyName?: string
-    post?: string
-    postcode?: string
-    country?: string
-    region?: string
-    province?: string
-    city?: string
-    street?: string
-    house?: string
-    apartment?: string
-    minOpportunitySum?: number
-    maxOpportunitySum?: number
+    minBirthDate?: string
+    maxBirthDate?: string
     isDeleted?: boolean
     minCreateDate?: string
     maxCreateDate?: string

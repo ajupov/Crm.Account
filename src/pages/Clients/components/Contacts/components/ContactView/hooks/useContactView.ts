@@ -8,7 +8,7 @@ import { joinAttributes } from '../../../mappers/contactAttributesMapper'
 import { joinBankAccounts } from '../../../mappers/contactBankAccountsMapper'
 import useCompanyLoad from '../../../hooks/load/useCompanyLoad'
 import { useHistory } from 'react-router'
-import useLeadLoad from '../../../hooks/load/useLeadLoad'
+import useCustomerLoad from '../../../hooks/load/useCustomerLoad'
 
 interface UseContactViewReturn {
     map: (contact: Contact) => ViewDataProps[]
@@ -22,7 +22,7 @@ const useContactView = (): UseContactViewReturn => {
     const history = useHistory()
     const contactState = useContext(ContactContext)
     const actionsState = useContext(ContactsActionsContext)
-    const { lead } = useLeadLoad(contactState.contact.leadId)
+    const { customer } = useCustomerLoad(contactState.contact.customerId)
     const { company } = useCompanyLoad(contactState.contact.companyId)
 
     const onClickDelete = useCallback(
@@ -43,17 +43,22 @@ const useContactView = (): UseContactViewReturn => {
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const mapAttributes = useCallback(() => joinAttributes(contactState.contact.attributeLinks), [
-        contactState.contact.attributeLinks
-    ])
+    const mapAttributes = useCallback(
+        () => joinAttributes(contactState.contact.attributeLinks),
+        [contactState.contact.attributeLinks]
+    )
 
-    const mapBankAccounts = useCallback(() => joinBankAccounts(contactState.contact.bankAccounts), [
-        contactState.contact.bankAccounts
-    ])
+    const mapBankAccounts = useCallback(
+        () => joinBankAccounts(contactState.contact.bankAccounts),
+        [contactState.contact.bankAccounts]
+    )
 
     const map = useCallback(
         (contact: Contact): ViewDataProps[] => [
-            { label: 'Лид', value: lead ? `${lead?.surname} ${lead?.name} ${lead?.patronymic}`.trim() : '' },
+            {
+                label: 'Лид',
+                value: customer ? `${customer?.surname} ${customer?.name} ${customer?.patronymic}`.trim() : ''
+            },
             { label: 'Компания', value: company?.fullName ?? '' },
             { label: 'Фамилия', value: contact.surname },
             { label: 'Имя', value: contact.name },
@@ -75,7 +80,7 @@ const useContactView = (): UseContactViewReturn => {
             { label: 'Атрибуты', value: mapAttributes() },
             { label: 'Удален', value: contact.isDeleted ? 'Да' : 'Нет' }
         ],
-        [company?.fullName, lead, mapAttributes, mapBankAccounts]
+        [company?.fullName, customer, mapAttributes, mapBankAccounts]
     )
 
     return { map, onClickDelete, onClickRestore, onClickCancel }

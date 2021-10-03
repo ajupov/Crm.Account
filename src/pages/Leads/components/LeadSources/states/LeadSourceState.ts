@@ -1,14 +1,14 @@
-import LeadSource from '../../../../../../api/customers/models/LeadSource'
+import CustomerSource from '../../../../../../api/customers/models/CustomerSource'
 
-export interface LeadSourceState {
+export interface CustomerSourceState {
     isLoading: boolean
-    source: LeadSource
-    setSource: (Source: LeadSource) => void
+    source: CustomerSource
+    setSource: (Source: CustomerSource) => void
     create: () => Promise<void>
     update: () => Promise<void>
 }
 
-export const leadSourceInitialState: LeadSourceState = {
+export const customerSourceInitialState: CustomerSourceState = {
     isLoading: false,
     source: {
         id: void 0,
@@ -18,7 +18,7 @@ export const leadSourceInitialState: LeadSourceState = {
         createDateTime: void 0,
         modifyDateTime: void 0
     },
-    setSource: (_: LeadSource) => void 0,
+    setSource: (_: CustomerSource) => void 0,
     create: () => Promise.resolve(void 0),
     update: () => Promise.resolve(void 0)
 }

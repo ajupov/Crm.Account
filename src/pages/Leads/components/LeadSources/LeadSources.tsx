@@ -1,44 +1,44 @@
 import React, { FC, useEffect } from 'react'
 
-import LeadSourceContextProvider from './contexts/LeadSourceContext/LeadSourceContextProvider'
-import LeadSourceDelete from './components/LeadSourceDelete/LeadSourceDelete'
-import LeadSourceRestore from './components/LeadSourceRestore/LeadSourceRestore'
-import LeadSourcesActionsContextProvider from './contexts/LeadSourcesActionsContext/LeadSourcesActionsContextProvider'
-import LeadSourcesContextProvider from './contexts/LeadSourcesContext/LeadSourcesContextProvider'
-import LeadSourcesFilter from './components/LeadSourcesFilter/LeadSourcesFilter'
-import LeadSourcesFilterMobile from './components/LeadSourcesFilterMobile/LeadSourcesFilterMobile'
-import LeadSourcesFiltersContextProvider from './contexts/LeadSourcesFiltersContext/LeadSourcesFiltersContextProvider'
-import LeadSourcesTable from './components/LeadSourcesTable/LeadSourcesTable'
-import LeadsMenu from '../LeadsMenu/LeadsMenu'
+import CustomerSourceContextProvider from './contexts/CustomerSourceContext/CustomerSourceContextProvider'
+import CustomerSourceDelete from './components/CustomerSourceDelete/CustomerSourceDelete'
+import CustomerSourceRestore from './components/CustomerSourceRestore/CustomerSourceRestore'
+import CustomerSourcesActionsContextProvider from './contexts/CustomerSourcesActionsContext/CustomerSourcesActionsContextProvider'
+import CustomerSourcesContextProvider from './contexts/CustomerSourcesContext/CustomerSourcesContextProvider'
+import CustomerSourcesFilter from './components/CustomerSourcesFilter/CustomerSourcesFilter'
+import CustomerSourcesFilterMobile from './components/CustomerSourcesFilterMobile/CustomerSourcesFilterMobile'
+import CustomerSourcesFiltersContextProvider from './contexts/CustomerSourcesFiltersContext/CustomerSourcesFiltersContextProvider'
+import CustomerSourcesTable from './components/CustomerSourcesTable/CustomerSourcesTable'
+import CustomersMenu from '../CustomersMenu/CustomersMenu'
 import Page from '../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
-const LeadSources: FC = () => {
+const CustomerSources: FC = () => {
     const title = 'Источники'
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <LeadSourcesContextProvider>
-            <LeadSourcesActionsContextProvider>
-                <LeadSourcesFiltersContextProvider>
-                    <LeadSourceContextProvider>
+        <CustomerSourcesContextProvider>
+            <CustomerSourcesActionsContextProvider>
+                <CustomerSourcesFiltersContextProvider>
+                    <CustomerSourceContextProvider>
                         <Page
                             title={title}
-                            firstSidebar={<LeadsMenu />}
-                            secondSidebar={<LeadSourcesFilter />}
-                            secondSidebarMobile={<LeadSourcesFilterMobile />}
+                            firstSidebar={<CustomersMenu />}
+                            secondSidebar={<CustomerSourcesFilter />}
+                            secondSidebarMobile={<CustomerSourcesFilterMobile />}
                         >
-                            <LeadSourcesTable />
-                            <LeadSourceDelete />
-                            <LeadSourceRestore />
+                            <CustomerSourcesTable />
+                            <CustomerSourceDelete />
+                            <CustomerSourceRestore />
                         </Page>
-                    </LeadSourceContextProvider>
-                </LeadSourcesFiltersContextProvider>
-            </LeadSourcesActionsContextProvider>
-        </LeadSourcesContextProvider>
+                    </CustomerSourceContextProvider>
+                </CustomerSourcesFiltersContextProvider>
+            </CustomerSourcesActionsContextProvider>
+        </CustomerSourcesContextProvider>
     )
 }
 
-export default LeadSources
+export default CustomerSources

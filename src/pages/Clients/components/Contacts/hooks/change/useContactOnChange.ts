@@ -7,8 +7,8 @@ import useCompaniesAutocomplete from '../autocomplete/useCompaniesAutocomplete'
 import useCompanyLoad from '../load/useCompanyLoad'
 import useContactAttributesLoad from '../load/useContactAttributesLoad'
 import { useHistory } from 'react-router'
-import useLeadLoad from '../load/useLeadLoad'
-import useLeadsAutocomplete from '../autocomplete/useLeadsAutocomplete'
+import useCustomerLoad from '../load/useCustomerLoad'
+import useCustomersAutocomplete from '../autocomplete/useCustomersAutocomplete'
 
 interface UseContactOnChangeReturn {
     fields: CreateFormFieldProps[]
@@ -22,17 +22,17 @@ interface UseContactOnChangeReturn {
 const useContactOnChange = (): UseContactOnChangeReturn => {
     const history = useHistory()
     const state = useContext(ContactContext)
-    const { lead } = useLeadLoad(state.contact.leadId)
+    const { customer } = useCustomerLoad(state.contact.customerId)
     const { company } = useCompanyLoad(state.contact.companyId)
-    const { loadLeads, leadsAsOptions } = useLeadsAutocomplete()
+    const { loadCustomers, customersAsOptions } = useCustomersAutocomplete()
     const { loadCompanies, companiesAsOptions } = useCompaniesAutocomplete()
     const { attributesAsOptions } = useContactAttributesLoad()
 
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
-    const onChangeLeadId = useCallback(
+    const onChangeCustomerId = useCallback(
         (_, data: DropdownProps) => {
-            state.setContact({ ...state.contact, leadId: data.value as string })
+            state.setContact({ ...state.contact, customerId: data.value as string })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -254,11 +254,11 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
             {
                 type: 'autocomplete',
                 label: 'Лид',
-                value: state.contact.leadId,
-                text: lead ? `${lead?.surname} ${lead?.name} ${lead?.patronymic}`.trim() : '',
-                load: loadLeads,
-                options: leadsAsOptions,
-                onChange: onChangeLeadId
+                value: state.contact.customerId,
+                text: customer ? `${customer?.surname} ${customer?.name} ${customer?.patronymic}`.trim() : '',
+                load: loadCustomers,
+                options: customersAsOptions,
+                onChange: onChangeCustomerId
             },
             {
                 type: 'autocomplete',
@@ -407,10 +407,10 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
             attributesAsOptions,
             companiesAsOptions,
             company?.fullName,
-            lead,
-            leadsAsOptions,
+            customer,
+            customersAsOptions,
             loadCompanies,
-            loadLeads,
+            loadCustomers,
             onChangeApartment,
             onChangeAttributeKey,
             onChangeAttributeValue,
@@ -421,7 +421,7 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
             onChangeEmail,
             onChangeHouse,
             onChangeIsDeleted,
-            onChangeLeadId,
+            onChangeCustomerId,
             onChangeName,
             onChangePatronymic,
             onChangePhone,
@@ -443,7 +443,7 @@ const useContactOnChange = (): UseContactOnChangeReturn => {
             state.contact.email,
             state.contact.house,
             state.contact.isDeleted,
-            state.contact.leadId,
+            state.contact.customerId,
             state.contact.name,
             state.contact.patronymic,
             state.contact.phone,

@@ -1,13 +1,13 @@
 import React, { FC, useContext } from 'react'
 
 import DeleteModal from '../../../../../../components/common/modals/DeleteModal/DeleteModal'
-import LeadsActionsContext from '../../contexts/LeadsActionsContext/LeadsActionsContext'
-import useLeadDelete from './hooks/useLeadDelete'
+import CustomersActionsContext from '../../contexts/CustomersActionsContext/CustomersActionsContext'
+import useCustomerDelete from './hooks/useCustomerDelete'
 
 // TODO: Move to l10n
-const LeadDelete: FC = () => {
-    const state = useContext(LeadsActionsContext)
-    const { onClickConfirm, onClickCancel } = useLeadDelete()
+const CustomerDelete: FC = () => {
+    const state = useContext(CustomersActionsContext)
+    const { onClickConfirm, onClickCancel } = useCustomerDelete()
 
     return (
         <DeleteModal
@@ -20,4 +20,4 @@ const LeadDelete: FC = () => {
     )
 }
 
-export default LeadDelete
+export default CustomerDelete

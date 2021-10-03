@@ -1,9 +1,9 @@
-const LeadAttributesRoutes = {
-    Index: '/leads/attributes',
-    View: '/leads/attributes/view',
-    Create: '/leads/attributes/create',
-    Edit: '/leads/attributes/edit',
-    Changes: '/leads/attributes/changes'
+const CustomerAttributesRoutes = {
+    Index: '/customers/attributes',
+    View: '/customers/attributes/view',
+    Create: '/customers/attributes/create',
+    Edit: '/customers/attributes/edit',
+    Changes: '/customers/attributes/changes'
 }
 
-export default LeadAttributesRoutes
+export default CustomerAttributesRoutes

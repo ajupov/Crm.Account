@@ -1,7 +1,7 @@
-import LeadAttributeType from './LeadAttributeType'
+import CustomerAttributeType from './CustomerAttributeType'
 
-export default interface LeadAttributeGetPagedListRequest {
-    types?: LeadAttributeType[]
+export default interface CustomerAttributeGetPagedListRequest {
+    types?: CustomerAttributeType[]
     key?: string
     isDeleted?: boolean
     minCreateDate?: string

@@ -1,35 +1,37 @@
 import Deal from '../models/Deal'
 import DealGetPagedListRequest from '../models/DealGetPagedListRequest'
 import DealGetPagedListResponse from '../models/DealGetPagedListResponse'
-import IHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
+import IJsonHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 
 export default class DealsClient {
-    private readonly httpClientFactory: IHttpClientFactory
+    private readonly _host: string
+    private readonly _factory: IJsonHttpClientFactory
 
-    constructor(httpClientFactory: IHttpClientFactory) {
-        this.httpClientFactory = httpClientFactory
+    constructor(host: string, factory: IJsonHttpClientFactory) {
+        this._host = host
+        this._factory = factory
     }
 
     public GetAsync = (id: string): Promise<Deal> =>
-        this.httpClientFactory.createClient(this.httpClientFactory.host).get<Deal>('/Deals/v1/Get', { id })
+        this._factory.getAsync<Deal>('/Deals/v1/Get', { id })
 
     public GetListAsync = (values?: string[]): Promise<Deal[]> =>
-        this.httpClientFactory.createClient(this.httpClientFactory.host).post<Deal[]>('/Deals/v1/GetList', values)
+        this._factory.postAsync<Deal[]>('/Deals/v1/GetList', values)
 
     public GetPagedListAsync = (request?: DealGetPagedListRequest): Promise<DealGetPagedListResponse> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .post<DealGetPagedListResponse>('/Deals/v1/GetPagedList', request)
+        this._factory
+            .
+            .postAsync<DealGetPagedListResponse>('/Deals/v1/GetPagedList', request)
 
     public CreateAsync = (deal?: Deal): Promise<string> =>
-        this.httpClientFactory.createClient(this.httpClientFactory.host).put<string>('/Deals/v1/Create', deal)
+        this._factory.putAsync<string>('/Deals/v1/Create', deal)
 
     public UpdateAsync = (deal?: Deal): Promise<void> =>
-        this.httpClientFactory.createClient(this.httpClientFactory.host).patch('/Deals/v1/Update', deal)
+        this._factory.patchAsync('/Deals/v1/Update', deal)
 
     public DeleteAsync = (values?: string[]): Promise<void> =>
-        this.httpClientFactory.createClient(this.httpClientFactory.host).patch('/Deals/v1/Delete', values)
+        this._factory.patchAsync('/Deals/v1/Delete', values)
 
     public RestoreAsync = (values?: string[]): Promise<void> =>
-        this.httpClientFactory.createClient(this.httpClientFactory.host).patch('/Deals/v1/Restore', values)
+        this._factory.patchAsync('/Deals/v1/Restore', values)
 }

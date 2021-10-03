@@ -1,23 +1,23 @@
-import LeadSource from '../../../../../../api/customers/models/LeadSource'
-import LeadSourceGetPagedListRequest from '../../../../../../api/customers/models/LeadSourceGetPagedListRequest'
-import LeadSourceGetPagedListResponse from '../../../../../../api/customers/models/LeadSourceGetPagedListResponse'
+import CustomerSource from '../../../../../../api/customers/models/CustomerSource'
+import CustomerSourceGetPagedListRequest from '../../../../../../api/customers/models/CustomerSourceGetPagedListRequest'
+import CustomerSourceGetPagedListResponse from '../../../../../../api/customers/models/CustomerSourceGetPagedListResponse'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'
 const DefaultOrderBy = 'desc'
 
-export default interface LeadSourcesState {
-    request: LeadSourceGetPagedListRequest
-    setRequest: (request: LeadSourceGetPagedListRequest) => void
+export default interface CustomerSourcesState {
+    request: CustomerSourceGetPagedListRequest
+    setRequest: (request: CustomerSourceGetPagedListRequest) => void
     isLoading: boolean
-    sources: LeadSource[]
+    sources: CustomerSource[]
     total: number
     lastModifyDateTime: string
     getPagedList: () => Promise<void>
-    getAll: () => Promise<LeadSourceGetPagedListResponse>
+    getAll: () => Promise<CustomerSourceGetPagedListResponse>
 }
 
-export const leadSourcesInitialState: LeadSourcesState = {
+export const customerSourcesInitialState: CustomerSourcesState = {
     request: {
         isDeleted: false,
         offset: 0,
@@ -25,7 +25,7 @@ export const leadSourcesInitialState: LeadSourcesState = {
         sortBy: DefaultSortBy,
         orderBy: DefaultOrderBy
     },
-    setRequest: (_: LeadSourceGetPagedListRequest) => void 0,
+    setRequest: (_: CustomerSourceGetPagedListRequest) => void 0,
     isLoading: false,
     sources: [],
     total: 0,

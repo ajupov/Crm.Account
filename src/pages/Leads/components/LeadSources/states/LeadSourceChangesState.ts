@@ -1,21 +1,21 @@
-import LeadSourceChange from '../../../../../../api/customers/models/LeadSourceChange'
-import LeadSourceChangeGetPagedListRequest from '../../../../../../api/customers/models/LeadSourceChangeGetPagedListRequest'
-import LeadSourceChangeGetPagedListResponse from '../../../../../../api/customers/models/LeadSourceChangeGetPagedListResponse'
+import CustomerSourceChange from '../../../../../../api/customers/models/CustomerSourceChange'
+import CustomerSourceChangeGetPagedListRequest from '../../../../../../api/customers/models/CustomerSourceChangeGetPagedListRequest'
+import CustomerSourceChangeGetPagedListResponse from '../../../../../../api/customers/models/CustomerSourceChangeGetPagedListResponse'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'
 const DefaultOrderBy = 'desc'
 
-export default interface LeadSourceChangesState {
-    request: LeadSourceChangeGetPagedListRequest
-    setRequest: (request: LeadSourceChangeGetPagedListRequest) => void
+export default interface CustomerSourceChangesState {
+    request: CustomerSourceChangeGetPagedListRequest
+    setRequest: (request: CustomerSourceChangeGetPagedListRequest) => void
     isLoading: boolean
-    changes: LeadSourceChange[]
+    changes: CustomerSourceChange[]
     total: number
-    getAll: () => Promise<LeadSourceChangeGetPagedListResponse | undefined>
+    getAll: () => Promise<CustomerSourceChangeGetPagedListResponse | undefined>
 }
 
-export const leadSourceChangesInitialState: LeadSourceChangesState = {
+export const customerSourceChangesInitialState: CustomerSourceChangesState = {
     request: {
         sourceId: '',
         minCreateDate: void 0,
@@ -25,7 +25,7 @@ export const leadSourceChangesInitialState: LeadSourceChangesState = {
         sortBy: DefaultSortBy,
         orderBy: DefaultOrderBy
     },
-    setRequest: (_: LeadSourceChangeGetPagedListRequest) => void 0,
+    setRequest: (_: CustomerSourceChangeGetPagedListRequest) => void 0,
     isLoading: false,
     changes: [],
     total: 0,

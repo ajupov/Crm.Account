@@ -8,15 +8,15 @@ import { FilterFormFieldProps } from '../../../../../../../components/common/for
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
 import useCompaniesAutocomplete from '../../../hooks/autocomplete/useCompaniesAutocomplete'
 import useContactAttributesLoad from '../../../hooks/load/useContactAttributesLoad'
-import useLeadsAutocomplete from '../../../hooks/autocomplete/useLeadsAutocomplete'
+import useCustomersAutocomplete from '../../../hooks/autocomplete/useCustomersAutocomplete'
 
 // TODO: Move to l10n
 const useContactsFilters = (): ContactsFiltersState => {
     const state = useContext(ContactsContext)
-    const { loadLeads, leadsAsOptions } = useLeadsAutocomplete()
+    const { loadCustomers, customersAsOptions } = useCustomersAutocomplete()
     const { loadCompanies, companiesAsOptions } = useCompaniesAutocomplete()
     const { attributesAsOptions } = useContactAttributesLoad()
-    const [leadIds, setLeadIds] = useState(state.request.leadIds)
+    const [customerIds, setCustomerIds] = useState(state.request.customerIds)
     const [companyIds, setCompanyIds] = useState(state.request.companyIds)
     const [surname, setSurname] = useState(state.request.surname ?? '')
     const [name, setName] = useState(state.request.name ?? '')
@@ -47,8 +47,8 @@ const useContactsFilters = (): ContactsFiltersState => {
     const [isResetEnabled, setIsResetEnabled] = useState(contactsFiltersInitialState.isResetEnabled)
     const [isShowMobile, setIsShowMobile] = useState(contactsFiltersInitialState.isShowMobile)
 
-    const onChangeLeadId = useCallback((_: any, data: DropdownProps) => {
-        setLeadIds([data.value as string])
+    const onChangeCustomerId = useCallback((_: any, data: DropdownProps) => {
+        setCustomerIds([data.value as string])
         setIsApplyEnabled(true)
     }, [])
 
@@ -185,7 +185,7 @@ const useContactsFilters = (): ContactsFiltersState => {
     const onApply = useCallback(() => {
         state.setRequest({
             ...state.request,
-            leadIds,
+            customerIds,
             companyIds,
             surname,
             name,
@@ -230,7 +230,7 @@ const useContactsFilters = (): ContactsFiltersState => {
         email,
         house,
         isDeleted,
-        leadIds,
+        customerIds,
         maxBirthDate,
         maxCreateDate,
         maxModifyDate,
@@ -251,7 +251,7 @@ const useContactsFilters = (): ContactsFiltersState => {
     ])
 
     const onReset = useCallback(() => {
-        setLeadIds([])
+        setCustomerIds([])
         setCompanyIds([])
         setSurname('')
         setName('')
@@ -281,7 +281,7 @@ const useContactsFilters = (): ContactsFiltersState => {
 
         state.setRequest({
             ...state.request,
-            leadIds: [],
+            customerIds: [],
             companyIds: [],
             surname: void 0,
             name: void 0,
@@ -325,10 +325,10 @@ const useContactsFilters = (): ContactsFiltersState => {
             {
                 type: 'autocomplete',
                 label: 'Лид',
-                value: leadIds ? leadIds[0] : '',
-                load: loadLeads,
-                options: leadsAsOptions,
-                onChange: onChangeLeadId
+                value: customerIds ? customerIds[0] : '',
+                load: loadCustomers,
+                options: customersAsOptions,
+                onChange: onChangeCustomerId
             },
             {
                 type: 'autocomplete',
@@ -500,10 +500,10 @@ const useContactsFilters = (): ContactsFiltersState => {
             email,
             house,
             isDeleted,
-            leadIds,
-            leadsAsOptions,
+            customerIds,
+            customersAsOptions,
             loadCompanies,
-            loadLeads,
+            loadCustomers,
             maxBirthDate,
             maxCreateDate,
             maxModifyDate,
@@ -521,7 +521,7 @@ const useContactsFilters = (): ContactsFiltersState => {
             onChangeEmail,
             onChangeHouse,
             onChangeIsDeleted,
-            onChangeLeadId,
+            onChangeCustomerId,
             onChangeMaxBirthDate,
             onChangeMaxCreateDate,
             onChangeMaxModifyDate,

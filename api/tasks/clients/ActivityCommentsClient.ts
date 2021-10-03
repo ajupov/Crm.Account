@@ -1,22 +1,24 @@
 import ActivityComment from '../models/ActivityComment'
 import ActivityCommentGetPagedListRequest from '../models/ActivityCommentGetPagedListRequest'
 import ActivityCommentGetPagedListResponse from '../models/ActivityCommentGetPagedListResponse'
-import IHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
+import IJsonHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 
 export default class ActivityCommentsClient {
-    private readonly httpClientFactory: IHttpClientFactory
+    private readonly _host: string
+    private readonly _factory: IJsonHttpClientFactory
 
-    constructor(httpClientFactory: IHttpClientFactory) {
-        this.httpClientFactory = httpClientFactory
+    constructor(host: string, factory: IJsonHttpClientFactory) {
+                this._host = host
+        this._factory = factory
     }
 
     public GetPagedListAsync = (
         request?: ActivityCommentGetPagedListRequest
     ): Promise<ActivityCommentGetPagedListResponse> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .post<ActivityCommentGetPagedListResponse>('/Activities/Comments/v1/GetPagedList', request)
+        this._factory
+            .
+            .postAsync<ActivityCommentGetPagedListResponse>('/Activities/Comments/v1/GetPagedList', request)
 
     public CreateAsync = (comment?: ActivityComment): Promise<void> =>
-        this.httpClientFactory.createClient(this.httpClientFactory.host).put('/Activities/Comments/v1/Create', comment)
+        this._factory.putAsync('/Activities/Comments/v1/Create', comment)
 }

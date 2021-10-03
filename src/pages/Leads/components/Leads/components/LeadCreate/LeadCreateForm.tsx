@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 
 import CreateForm from '../../../../../../components/common/forms/CreateForm/CreateForm'
-import useLeadOnChange from '../../hooks/change/useLeadOnChange'
+import useCustomerOnChange from '../../hooks/change/useCustomerOnChange'
 
-const LeadCreateForm: FC = () => {
-    const { isConfirmEnabled, fields, onClickConfirmCreate, onClickCancel } = useLeadOnChange()
+const CustomerCreateForm: FC = () => {
+    const { isConfirmEnabled, fields, onClickConfirmCreate, onClickCancel } = useCustomerOnChange()
 
     return (
         <CreateForm
@@ -16,4 +16,4 @@ const LeadCreateForm: FC = () => {
     )
 }
 
-export default LeadCreateForm
+export default CustomerCreateForm

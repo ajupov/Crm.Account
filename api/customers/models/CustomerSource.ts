@@ -1,4 +1,4 @@
-export default interface LeadSource {
+export default interface CustomerSource {
     id?: string
     accountId?: string
     name?: string

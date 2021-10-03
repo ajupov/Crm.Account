@@ -2,10 +2,10 @@ import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { CreateFormFieldProps } from '../../../../../../components/common/forms/CreateForm/CreateForm'
 import { InputOnChangeData } from 'semantic-ui-react'
-import LeadSourceContext from '../../contexts/LeadSourceContext/LeadSourceContext'
+import CustomerSourceContext from '../../contexts/CustomerSourceContext/CustomerSourceContext'
 import { useHistory } from 'react-router'
 
-interface UseLeadSourceOnChangeReturn {
+interface UseCustomerSourceOnChangeReturn {
     fields: CreateFormFieldProps[]
     isConfirmEnabled: boolean
     onClickConfirmCreate: () => void
@@ -14,9 +14,9 @@ interface UseLeadSourceOnChangeReturn {
 }
 
 // TODO: Move to l10n
-const useLeadSourceOnChange = (): UseLeadSourceOnChangeReturn => {
+const useCustomerSourceOnChange = (): UseCustomerSourceOnChangeReturn => {
     const history = useHistory()
-    const state = useContext(LeadSourceContext)
+    const state = useContext(CustomerSourceContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeName = useCallback(
@@ -69,4 +69,4 @@ const useLeadSourceOnChange = (): UseLeadSourceOnChangeReturn => {
     return { fields, isConfirmEnabled, onClickConfirmCreate, onClickConfirmUpdate, onClickCancel }
 }
 
-export default useLeadSourceOnChange
+export default useCustomerSourceOnChange

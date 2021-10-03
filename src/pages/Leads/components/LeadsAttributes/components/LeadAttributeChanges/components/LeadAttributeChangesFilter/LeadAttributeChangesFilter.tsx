@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 
 import FilterForm from '../../../../../../../../components/common/forms/FilterForm/FilterForm'
-import useLeadAttributeChangesFilters from '../../../../contexts/LeadAttributeChangesFiltersContext/hooks/useLeadAttributeChangesFilters'
+import useCustomerAttributeChangesFilters from '../../../../contexts/CustomerAttributeChangesFiltersContext/hooks/useCustomerAttributeChangesFilters'
 
-const LeadAttributeChangesFilter: FC = () => {
-    const { fields, isApplyEnabled, onApply, isResetEnabled, onReset } = useLeadAttributeChangesFilters()
+const CustomerAttributeChangesFilter: FC = () => {
+    const { fields, isApplyEnabled, onApply, isResetEnabled, onReset } = useCustomerAttributeChangesFilters()
 
     return (
         <FilterForm
@@ -17,4 +17,4 @@ const LeadAttributeChangesFilter: FC = () => {
     )
 }
 
-export default LeadAttributeChangesFilter
+export default CustomerAttributeChangesFilter

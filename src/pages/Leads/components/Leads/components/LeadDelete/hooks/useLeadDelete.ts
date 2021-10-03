@@ -1,26 +1,26 @@
 import { useCallback, useContext } from 'react'
 
-import LeadsActionsContext from '../../../contexts/LeadsActionsContext/LeadsActionsContext'
-import LeadsContext from '../../../contexts/LeadsContext/LeadsContext'
-import LeadsRoutes from '../../../routes/LeadsRoutes'
+import CustomersActionsContext from '../../../contexts/CustomersActionsContext/CustomersActionsContext'
+import CustomersContext from '../../../contexts/CustomersContext/CustomersContext'
+import CustomersRoutes from '../../../routes/CustomersRoutes'
 import { useHistory } from 'react-router'
 
-interface UseLeadDelete {
+interface UseCustomerDelete {
     onClickConfirm: () => void
     onClickCancel: () => void
 }
 
-const useLeadDelete = (): UseLeadDelete => {
+const useCustomerDelete = (): UseCustomerDelete => {
     const history = useHistory()
-    const actionsState = useContext(LeadsActionsContext)
-    const leadsState = useContext(LeadsContext)
+    const actionsState = useContext(CustomersActionsContext)
+    const customersState = useContext(CustomersContext)
 
     const onClickConfirm = useCallback(async () => {
         await actionsState.delete()
         actionsState.setIsDeleting(false)
-        history.push(LeadsRoutes.Index)
-        await leadsState.getPagedList()
-    }, [actionsState, history, leadsState])
+        history.push(CustomersRoutes.Index)
+        await customersState.getPagedList()
+    }, [actionsState, history, customersState])
 
     const onClickCancel = useCallback(() => {
         actionsState.setIds([])
@@ -30,4 +30,4 @@ const useLeadDelete = (): UseLeadDelete => {
     return { onClickConfirm, onClickCancel }
 }
 
-export default useLeadDelete
+export default useCustomerDelete

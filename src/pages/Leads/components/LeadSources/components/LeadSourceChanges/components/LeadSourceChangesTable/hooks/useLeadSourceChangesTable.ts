@@ -2,26 +2,26 @@ import { calculateOffset, calculatePage } from '../../../../../../../../../utils
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import LeadSource from '../../../../../../../../../../api/customers/models/LeadSource'
-import LeadSourceChange from '../../../../../../../../../../api/customers/models/LeadSourceChange'
-import LeadSourceChangesContext from '../../../../../contexts/LeadSourceChangesContext/LeadSourceChangesContext'
+import CustomerSource from '../../../../../../../../../../api/customers/models/CustomerSource'
+import CustomerSourceChange from '../../../../../../../../../../api/customers/models/CustomerSourceChange'
+import CustomerSourceChangesContext from '../../../../../contexts/CustomerSourceChangesContext/CustomerSourceChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../../components/common/collections/Table/TableHeader'
 import { getDateTimeAsRecently } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../../../helpers/fileNameHelper'
 import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
 
-interface UseLeadSourceChangesTableReturn {
+interface UseCustomerSourceChangesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (sources: LeadSourceChange[]) => TableBodyRowProps[]
+    map: (sources: CustomerSourceChange[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
 
 // TODO: Move to l10n
-const useLeadSourceChangesTable = (): UseLeadSourceChangesTableReturn => {
-    const state = useContext(LeadSourceChangesContext)
+const useCustomerSourceChangesTable = (): UseCustomerSourceChangesTableReturn => {
+    const state = useContext(CustomerSourceChangesContext)
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const changes = (await state.getAll())?.changes
@@ -41,7 +41,7 @@ const useLeadSourceChangesTable = (): UseLeadSourceChangesTableReturn => {
         [state]
     )
 
-    const getChangeName = useCallback((change: LeadSourceChange) => {
+    const getChangeName = useCallback((change: CustomerSourceChange) => {
         if (!change.oldValueJson && change.newValueJson) {
             return 'Создан'
         }
@@ -57,9 +57,9 @@ const useLeadSourceChangesTable = (): UseLeadSourceChangesTableReturn => {
         return ''
     }, [])
 
-    const getChangeValue = useCallback((change: LeadSourceChange) => {
-        const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as LeadSource) : void 0
-        const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as LeadSource) : void 0
+    const getChangeValue = useCallback((change: CustomerSourceChange) => {
+        const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as CustomerSource) : void 0
+        const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as CustomerSource) : void 0
 
         return [
             `Наименование: ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
@@ -68,7 +68,7 @@ const useLeadSourceChangesTable = (): UseLeadSourceChangesTableReturn => {
     }, [])
 
     const map = useCallback(
-        (changes: LeadSourceChange[]) =>
+        (changes: CustomerSourceChange[]) =>
             changes.map(
                 change =>
                     ({
@@ -117,4 +117,4 @@ const useLeadSourceChangesTable = (): UseLeadSourceChangesTableReturn => {
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
-export default useLeadSourceChangesTable
+export default useCustomerSourceChangesTable

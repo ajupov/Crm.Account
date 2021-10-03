@@ -6,11 +6,11 @@ import {
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
-import LeadAttributeContext from '../contexts/LeadAttributeContext/LeadAttributeContext'
-import LeadAttributeType from '../../../../../../api/customers/models/LeadAttributeType'
+import CustomerAttributeContext from '../contexts/CustomerAttributeContext/CustomerAttributeContext'
+import CustomerAttributeType from '../../../../../../api/customers/models/CustomerAttributeType'
 import { useHistory } from 'react-router'
 
-interface UseLeadAttributeOnChangeReturn {
+interface UseCustomerAttributeOnChangeReturn {
     fields: CreateFormFieldProps[]
     isConfirmEnabled: boolean
     onClickConfirmCreate: () => void
@@ -19,14 +19,14 @@ interface UseLeadAttributeOnChangeReturn {
 }
 
 // TODO: Move to l10n
-const useLeadAttributeOnChange = (): UseLeadAttributeOnChangeReturn => {
+const useCustomerAttributeOnChange = (): UseCustomerAttributeOnChangeReturn => {
     const history = useHistory()
-    const state = useContext(LeadAttributeContext)
+    const state = useContext(CustomerAttributeContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeType = useCallback(
         (_, data: DropdownProps) => {
-            state.setAttribute({ ...state.attribute, type: data.value as LeadAttributeType })
+            state.setAttribute({ ...state.attribute, type: data.value as CustomerAttributeType })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -98,4 +98,4 @@ const useLeadAttributeOnChange = (): UseLeadAttributeOnChangeReturn => {
     return { fields, isConfirmEnabled, onClickConfirmCreate, onClickConfirmUpdate, onClickCancel }
 }
 
-export default useLeadAttributeOnChange
+export default useCustomerAttributeOnChange

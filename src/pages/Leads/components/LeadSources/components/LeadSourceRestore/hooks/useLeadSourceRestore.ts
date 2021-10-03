@@ -1,24 +1,24 @@
 import { useCallback, useContext } from 'react'
 
-import LeadSourcesActionsContext from '../../../contexts/LeadSourcesActionsContext/LeadSourcesActionsContext'
-import LeadSourcesContext from '../../../contexts/LeadSourcesContext/LeadSourcesContext'
-import LeadSourcesRoutes from '../../../routes/LeadSourcesRoutes'
+import CustomerSourcesActionsContext from '../../../contexts/CustomerSourcesActionsContext/CustomerSourcesActionsContext'
+import CustomerSourcesContext from '../../../contexts/CustomerSourcesContext/CustomerSourcesContext'
+import CustomerSourcesRoutes from '../../../routes/CustomerSourcesRoutes'
 import { useHistory } from 'react-router'
 
-interface UseLeadSourceRestore {
+interface UseCustomerSourceRestore {
     onClickConfirm: () => void
     onClickCancel: () => void
 }
 
-const useLeadSourceRestore = (): UseLeadSourceRestore => {
+const useCustomerSourceRestore = (): UseCustomerSourceRestore => {
     const history = useHistory()
-    const actionsState = useContext(LeadSourcesActionsContext)
-    const sourcesState = useContext(LeadSourcesContext)
+    const actionsState = useContext(CustomerSourcesActionsContext)
+    const sourcesState = useContext(CustomerSourcesContext)
 
     const onClickConfirm = useCallback(async () => {
         await actionsState.restore()
         actionsState.setIsRestoring(false)
-        history.push(LeadSourcesRoutes.Index)
+        history.push(CustomerSourcesRoutes.Index)
         await sourcesState.getPagedList()
     }, [actionsState, history, sourcesState])
 
@@ -30,4 +30,4 @@ const useLeadSourceRestore = (): UseLeadSourceRestore => {
     return { onClickConfirm, onClickCancel }
 }
 
-export default useLeadSourceRestore
+export default useCustomerSourceRestore

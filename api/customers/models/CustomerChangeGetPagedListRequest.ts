@@ -1,5 +1,5 @@
-export default interface LeadSourceChangeGetPagedListRequest {
-    sourceId: string
+export default interface CustomerChangeGetPagedListRequest {
+    customerId: string
     minCreateDate?: string
     maxCreateDate?: string
     offset: number

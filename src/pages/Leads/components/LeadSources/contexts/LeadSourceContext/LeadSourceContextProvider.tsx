@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 
-import LeadSourceContext from './LeadSourceContext'
-import useLeadSource from './hooks/useLeadSource'
+import CustomerSourceContext from './CustomerSourceContext'
+import useCustomerSource from './hooks/useCustomerSource'
 
-const LeadSourceContextProvider: FC = ({ children }) => {
-    const state = useLeadSource()
+const CustomerSourceContextProvider: FC = ({ children }) => {
+    const state = useCustomerSource()
 
-    return <LeadSourceContext.Provider value={state}>{children}</LeadSourceContext.Provider>
+    return <CustomerSourceContext.Provider value={state}>{children}</CustomerSourceContext.Provider>
 }
 
-export default LeadSourceContextProvider
+export default CustomerSourceContextProvider

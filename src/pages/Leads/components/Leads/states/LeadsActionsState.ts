@@ -1,4 +1,4 @@
-export default interface LeadsActionsState {
+export default interface CustomersActionsState {
     isLoading: boolean
     ids: string[]
     setIds: (ids: string[]) => void
@@ -10,7 +10,7 @@ export default interface LeadsActionsState {
     restore: () => Promise<void>
 }
 
-export const leadsActionsInitialState: LeadsActionsState = {
+export const customersActionsInitialState: CustomersActionsState = {
     isLoading: false,
     ids: [],
     setIds: (_: string[]) => void 0,

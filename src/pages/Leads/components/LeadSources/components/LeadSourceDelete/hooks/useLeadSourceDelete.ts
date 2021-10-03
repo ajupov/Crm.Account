@@ -1,24 +1,24 @@
 import { useCallback, useContext } from 'react'
 
-import LeadSourcesActionsContext from '../../../contexts/LeadSourcesActionsContext/LeadSourcesActionsContext'
-import LeadSourcesContext from '../../../contexts/LeadSourcesContext/LeadSourcesContext'
-import LeadSourcesRoutes from '../../../routes/LeadSourcesRoutes'
+import CustomerSourcesActionsContext from '../../../contexts/CustomerSourcesActionsContext/CustomerSourcesActionsContext'
+import CustomerSourcesContext from '../../../contexts/CustomerSourcesContext/CustomerSourcesContext'
+import CustomerSourcesRoutes from '../../../routes/CustomerSourcesRoutes'
 import { useHistory } from 'react-router'
 
-interface UseLeadSourceDelete {
+interface UseCustomerSourceDelete {
     onClickConfirm: () => void
     onClickCancel: () => void
 }
 
-const useLeadSourceDelete = (): UseLeadSourceDelete => {
+const useCustomerSourceDelete = (): UseCustomerSourceDelete => {
     const history = useHistory()
-    const actionsState = useContext(LeadSourcesActionsContext)
-    const sourcesState = useContext(LeadSourcesContext)
+    const actionsState = useContext(CustomerSourcesActionsContext)
+    const sourcesState = useContext(CustomerSourcesContext)
 
     const onClickConfirm = useCallback(async () => {
         await actionsState.delete()
         actionsState.setIsDeleting(false)
-        history.push(LeadSourcesRoutes.Index)
+        history.push(CustomerSourcesRoutes.Index)
         await sourcesState.getPagedList()
     }, [actionsState, history, sourcesState])
 
@@ -30,4 +30,4 @@ const useLeadSourceDelete = (): UseLeadSourceDelete => {
     return { onClickConfirm, onClickCancel }
 }
 
-export default useLeadSourceDelete
+export default useCustomerSourceDelete

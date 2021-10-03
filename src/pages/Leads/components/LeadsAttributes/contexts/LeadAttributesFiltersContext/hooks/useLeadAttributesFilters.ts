@@ -1,17 +1,17 @@
 import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
-import LeadAttributesFiltersState, {
-    leadAttributesFiltersInitialState
-} from '../../../states/LeadAttributesFiltersState'
+import CustomerAttributesFiltersState, {
+    customerAttributesFiltersInitialState
+} from '../../../states/CustomerAttributesFiltersState'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { FilterFormFieldProps } from '../../../../../../../components/common/forms/FilterForm/FilterForm'
-import LeadAttributesContext from '../../LeadAttributesContext/LeadAttributesContext'
+import CustomerAttributesContext from '../../CustomerAttributesContext/CustomerAttributesContext'
 import { getAttributeTypesAsSelectOptions } from '../../../../../../../helpers/entityAttributeTypeHelper'
 import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
 
 // TODO: Move to l10n
-const useLeadAttributesFilters = (): LeadAttributesFiltersState => {
-    const state = useContext(LeadAttributesContext)
+const useCustomerAttributesFilters = (): CustomerAttributesFiltersState => {
+    const state = useContext(CustomerAttributesContext)
     const [types, setTypes] = useState(state.request.types ?? [])
     const [key, setKey] = useState(state.request.key ?? '')
     const [minCreateDate, setMinCreateDate] = useState(state.request.minCreateDate ?? '')
@@ -19,9 +19,9 @@ const useLeadAttributesFilters = (): LeadAttributesFiltersState => {
     const [minModifyDate, setMinModifyDate] = useState(state.request.minModifyDate ?? '')
     const [maxModifyDate, setMaxModifyDate] = useState(state.request.maxModifyDate ?? '')
     const [isDeleted, setIsDeleted] = useState(state.request.isDeleted)
-    const [isApplyEnabled, setIsApplyEnabled] = useState(leadAttributesFiltersInitialState.isApplyEnabled)
-    const [isResetEnabled, setIsResetEnabled] = useState(leadAttributesFiltersInitialState.isResetEnabled)
-    const [isShowMobile, setIsShowMobile] = useState(leadAttributesFiltersInitialState.isShowMobile)
+    const [isApplyEnabled, setIsApplyEnabled] = useState(customerAttributesFiltersInitialState.isApplyEnabled)
+    const [isResetEnabled, setIsResetEnabled] = useState(customerAttributesFiltersInitialState.isResetEnabled)
+    const [isShowMobile, setIsShowMobile] = useState(customerAttributesFiltersInitialState.isShowMobile)
 
     const onChangeTypes = useCallback((_: any, data: DropdownProps) => {
         setTypes(data.value as number[])
@@ -173,4 +173,4 @@ const useLeadAttributesFilters = (): LeadAttributesFiltersState => {
     return { fields, isApplyEnabled, onApply, isResetEnabled, onReset, isShowMobile, onShowMobile, onHideMobile }
 }
 
-export default useLeadAttributesFilters
+export default useCustomerAttributesFilters

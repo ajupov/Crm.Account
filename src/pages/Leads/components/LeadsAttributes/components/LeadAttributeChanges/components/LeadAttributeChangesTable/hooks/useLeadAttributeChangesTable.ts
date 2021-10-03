@@ -2,9 +2,9 @@ import { calculateOffset, calculatePage } from '../../../../../../../../../utils
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import LeadAttribute from '../../../../../../../../../../api/customers/models/LeadAttribute'
-import LeadAttributeChange from '../../../../../../../../../../api/customers/models/LeadAttributeChange'
-import LeadAttributeChangesContext from '../../../../../contexts/LeadAttributeChangesContext/LeadAttributeChangesContext'
+import CustomerAttribute from '../../../../../../../../../../api/customers/models/CustomerAttribute'
+import CustomerAttributeChange from '../../../../../../../../../../api/customers/models/CustomerAttributeChange'
+import CustomerAttributeChangesContext from '../../../../../contexts/CustomerAttributeChangesContext/CustomerAttributeChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../../components/common/collections/Table/TableHeader'
 import { getAttributeTypeName } from '../../../../../../../../../helpers/entityAttributeTypeHelper'
@@ -12,17 +12,17 @@ import { getDateTimeAsRecently } from '../../../../../../../../../utils/dateTime
 import { getFileNameWithDateTime } from '../../../../../../../../../helpers/fileNameHelper'
 import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
 
-interface UseLeadAttributeChangesTableReturn {
+interface UseCustomerAttributeChangesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (attributes: LeadAttributeChange[]) => TableBodyRowProps[]
+    map: (attributes: CustomerAttributeChange[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
 
 // TODO: Move to l10n
-const useLeadAttributeChangesTable = (): UseLeadAttributeChangesTableReturn => {
-    const state = useContext(LeadAttributeChangesContext)
+const useCustomerAttributeChangesTable = (): UseCustomerAttributeChangesTableReturn => {
+    const state = useContext(CustomerAttributeChangesContext)
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const changes = (await state.getAll())?.changes
@@ -42,7 +42,7 @@ const useLeadAttributeChangesTable = (): UseLeadAttributeChangesTableReturn => {
         [state]
     )
 
-    const getChangeName = useCallback((change: LeadAttributeChange) => {
+    const getChangeName = useCallback((change: CustomerAttributeChange) => {
         if (!change.oldValueJson && change.newValueJson) {
             return 'Создан'
         }
@@ -58,9 +58,9 @@ const useLeadAttributeChangesTable = (): UseLeadAttributeChangesTableReturn => {
         return ''
     }, [])
 
-    const getChangeValue = useCallback((change: LeadAttributeChange) => {
-        const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as LeadAttribute) : void 0
-        const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as LeadAttribute) : void 0
+    const getChangeValue = useCallback((change: CustomerAttributeChange) => {
+        const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as CustomerAttribute) : void 0
+        const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as CustomerAttribute) : void 0
 
         return [
             `Тип: ${getValueOrEmpty(getAttributeTypeName(oldValue?.type))} → ${getValueOrEmpty(
@@ -72,7 +72,7 @@ const useLeadAttributeChangesTable = (): UseLeadAttributeChangesTableReturn => {
     }, [])
 
     const map = useCallback(
-        (changes: LeadAttributeChange[]) =>
+        (changes: CustomerAttributeChange[]) =>
             changes.map(
                 change =>
                     ({
@@ -121,4 +121,4 @@ const useLeadAttributeChangesTable = (): UseLeadAttributeChangesTableReturn => {
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
-export default useLeadAttributeChangesTable
+export default useCustomerAttributeChangesTable

@@ -1,21 +1,21 @@
 import { useCallback, useContext } from 'react'
 
-import LeadSource from '../../../../../../../../api/customers/models/LeadSource'
-import LeadSourcesActionsContext from '../../../contexts/LeadSourcesActionsContext/LeadSourcesActionsContext'
+import CustomerSource from '../../../../../../../../api/customers/models/CustomerSource'
+import CustomerSourcesActionsContext from '../../../contexts/CustomerSourcesActionsContext/CustomerSourcesActionsContext'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { useHistory } from 'react-router'
 
-interface UseLeadSourceViewReturn {
-    map: (source: LeadSource) => ViewDataProps[]
+interface UseCustomerSourceViewReturn {
+    map: (source: CustomerSource) => ViewDataProps[]
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
     onClickCancel: () => void
 }
 
 // TODO: Move to l10n
-const useLeadSourceView = (): UseLeadSourceViewReturn => {
+const useCustomerSourceView = (): UseCustomerSourceViewReturn => {
     const history = useHistory()
-    const state = useContext(LeadSourcesActionsContext)
+    const state = useContext(CustomerSourcesActionsContext)
 
     const onClickDelete = useCallback(
         (id: string) => {
@@ -36,7 +36,7 @@ const useLeadSourceView = (): UseLeadSourceViewReturn => {
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
     const map = useCallback(
-        (source: LeadSource): ViewDataProps[] => [
+        (source: CustomerSource): ViewDataProps[] => [
             { label: 'Наименование', value: source.name },
             { label: 'Удален', value: source.isDeleted ? 'Да' : 'Нет' }
         ],
@@ -46,4 +46,4 @@ const useLeadSourceView = (): UseLeadSourceViewReturn => {
     return { map, onClickDelete, onClickRestore, onClickCancel }
 }
 
-export default useLeadSourceView
+export default useCustomerSourceView

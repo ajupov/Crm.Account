@@ -1,20 +1,20 @@
-import { LeadState, leadInitialState } from '../../../states/LeadState'
+import { CustomerState, customerInitialState } from '../../../states/CustomerState'
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
-import LeadAttributesClient from '../../../../../../../../api/customers/clients/LeadAttributesClient'
-import LeadsClient from '../../../../../../../../api/customers/clients/LeadsClient'
-import { leadAttributesInitialState } from '../../../../LeadsAttributes/states/LeadAttributesState'
+import CustomerAttributesClient from '../../../../../../../../api/customers/clients/CustomerAttributesClient'
+import CustomersClient from '../../../../../../../../api/customers/clients/CustomersClient'
+import { customerAttributesInitialState } from '../../../../CustomersAttributes/states/CustomerAttributesState'
 import { useParams } from 'react-router'
 
-const leadsClient = new LeadsClient(HttpClientFactory.Api)
-const leadAttributesClient = new LeadAttributesClient(HttpClientFactory.Api)
+const customersClient = new CustomersClient(HttpClientFactory.Api)
+const customerAttributesClient = new CustomerAttributesClient(HttpClientFactory.Api)
 
-const useLead = (): LeadState => {
+const useCustomer = (): CustomerState => {
     const { id }: { id: string } = useParams()
-    const [isLoading, setIsLoading] = useState(leadInitialState.isLoading)
-    const [lead, setLead] = useState(leadInitialState.lead)
-    const [attributes, setAttributes] = useState(leadAttributesInitialState.attributes)
+    const [isLoading, setIsLoading] = useState(customerInitialState.isLoading)
+    const [customer, setCustomer] = useState(customerInitialState.customer)
+    const [attributes, setAttributes] = useState(customerAttributesInitialState.attributes)
 
     const get = useCallback(async () => {
         if (!id) {
@@ -23,14 +23,14 @@ const useLead = (): LeadState => {
 
         setIsLoading(true)
 
-        const response = await leadsClient.GetAsync(id)
+        const response = await customersClient.GetAsync(id)
 
-        setLead(response)
+        setCustomer(response)
 
         if (response.attributeLinks && response.attributeLinks.length > 0) {
-            const ids = response.attributeLinks.map(x => x.leadAttributeId).filter(x => x) as string[]
+            const ids = response.attributeLinks.map(x => x.customerAttributeId).filter(x => x) as string[]
 
-            const attributes = await leadAttributesClient.GetListAsync(ids)
+            const attributes = await customerAttributesClient.GetListAsync(ids)
 
             setAttributes(attributes)
         }
@@ -41,24 +41,24 @@ const useLead = (): LeadState => {
     const create = useCallback(async () => {
         setIsLoading(true)
 
-        await leadsClient.CreateAsync(lead)
+        await customersClient.CreateAsync(customer)
 
         setIsLoading(false)
-    }, [lead])
+    }, [customer])
 
     const update = useCallback(async () => {
         setIsLoading(true)
 
-        await leadsClient.UpdateAsync(lead)
+        await customersClient.UpdateAsync(customer)
 
         setIsLoading(false)
-    }, [lead])
+    }, [customer])
 
     useEffect(() => {
         void get()
     }, [get])
 
-    return { isLoading, lead, setLead, attributes, create, update }
+    return { isLoading, customer, setCustomer, attributes, create, update }
 }
 
-export default useLead
+export default useCustomer

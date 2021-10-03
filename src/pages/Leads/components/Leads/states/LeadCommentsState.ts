@@ -1,35 +1,35 @@
-import LeadComment from '../../../../../../api/customers/models/LeadComment'
-import LeadCommentGetPagedListRequest from '../../../../../../api/customers/models/LeadCommentGetPagedListRequest'
+import CustomerComment from '../../../../../../api/customers/models/CustomerComment'
+import CustomerCommentGetPagedListRequest from '../../../../../../api/customers/models/CustomerCommentGetPagedListRequest'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'
 const DefaultOrderBy = 'desc'
 
-export default interface LeadCommentsState {
-    request: LeadCommentGetPagedListRequest
-    setRequest: (request: LeadCommentGetPagedListRequest) => void
+export default interface CustomerCommentsState {
+    request: CustomerCommentGetPagedListRequest
+    setRequest: (request: CustomerCommentGetPagedListRequest) => void
     isNeedLoadingBefore: boolean
     setIsNeedLoadingBefore: (value: boolean) => void
     isNeedLoadingAfter: boolean
     setIsNeedLoadingAfter: (value: boolean) => void
     isLoading: boolean
-    comments: LeadComment[]
+    comments: CustomerComment[]
     hasCommentsBefore: boolean
     getPagedList: () => Promise<void>
     getNext: () => Promise<void>
     getPrevious: () => Promise<void>
 }
 
-export const leadCommentsInitialState: LeadCommentsState = {
+export const customerCommentsInitialState: CustomerCommentsState = {
     request: {
-        leadId: '',
+        customerId: '',
         beforeCreateDateTime: void 0,
         afterCreateDateTime: void 0,
         limit: DefaultLimit,
         sortBy: DefaultSortBy,
         orderBy: DefaultOrderBy
     },
-    setRequest: (_: LeadCommentGetPagedListRequest) => void 0,
+    setRequest: (_: CustomerCommentGetPagedListRequest) => void 0,
     isNeedLoadingBefore: false,
     setIsNeedLoadingBefore: (_: boolean) => void 0,
     isNeedLoadingAfter: false,

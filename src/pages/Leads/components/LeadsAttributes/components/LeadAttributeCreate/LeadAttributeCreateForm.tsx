@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 
 import CreateForm from '../../../../../../components/common/forms/CreateForm/CreateForm'
-import useLeadAttributeOnChange from '../../hooks/useLeadAttributeOnChange'
+import useCustomerAttributeOnChange from '../../hooks/useCustomerAttributeOnChange'
 
-const LeadAttributeCreateForm: FC = () => {
-    const { isConfirmEnabled, fields, onClickConfirmCreate, onClickCancel } = useLeadAttributeOnChange()
+const CustomerAttributeCreateForm: FC = () => {
+    const { isConfirmEnabled, fields, onClickConfirmCreate, onClickCancel } = useCustomerAttributeOnChange()
 
     return (
         <CreateForm
@@ -16,4 +16,4 @@ const LeadAttributeCreateForm: FC = () => {
     )
 }
 
-export default LeadAttributeCreateForm
+export default CustomerAttributeCreateForm

@@ -1,16 +1,16 @@
 import React, { FC } from 'react'
 
-import LeadAttributeChangesFiltersContext from './LeadAttributeChangesFiltersContext'
-import useLeadAttributeChangesFilters from './hooks/useLeadAttributeChangesFilters'
+import CustomerAttributeChangesFiltersContext from './CustomerAttributeChangesFiltersContext'
+import useCustomerAttributeChangesFilters from './hooks/useCustomerAttributeChangesFilters'
 
-const LeadAttributeChangesFiltersContextProvider: FC = ({ children }) => {
-    const state = useLeadAttributeChangesFilters()
+const CustomerAttributeChangesFiltersContextProvider: FC = ({ children }) => {
+    const state = useCustomerAttributeChangesFilters()
 
     return (
-        <LeadAttributeChangesFiltersContext.Provider value={state}>
+        <CustomerAttributeChangesFiltersContext.Provider value={state}>
             {children}
-        </LeadAttributeChangesFiltersContext.Provider>
+        </CustomerAttributeChangesFiltersContext.Provider>
     )
 }
 
-export default LeadAttributeChangesFiltersContextProvider
+export default CustomerAttributeChangesFiltersContextProvider

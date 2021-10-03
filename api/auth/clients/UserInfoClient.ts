@@ -1,13 +1,14 @@
-import IHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
+import IJsonHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 import UserInfo from '../models/UserInfo'
 
 export default class UserInfoClient {
-    private readonly httpClientFactory: IHttpClientFactory
+    private readonly _host: string
+    private readonly _factory: IJsonHttpClientFactory
 
-    constructor(httpClientFactory: IHttpClientFactory) {
-        this.httpClientFactory = httpClientFactory
+    constructor(host: string, factory: IJsonHttpClientFactory) {
+        this._host = host
+        this._factory = factory
     }
 
-    public GetAsync = (): Promise<UserInfo> =>
-        this.httpClientFactory.createClient(this.httpClientFactory.host).get<UserInfo>('/UserInfo/Get')
+    public GetAsync = (): Promise<UserInfo> => this._factory.getAsync<UserInfo>(this._host + '/UserInfo/Get')
 }

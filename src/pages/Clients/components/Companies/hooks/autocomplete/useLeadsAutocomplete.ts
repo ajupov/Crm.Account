@@ -2,23 +2,23 @@ import { useCallback, useMemo, useState } from 'react'
 
 import { DropdownItemProps } from '../../../../../../components/common/fields/Dropdown/Dropdown'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
-import Lead from '../../../../../../../api/customers/models/Lead'
-import LeadsClient from '../../../../../../../api/customers/clients/LeadsClient'
+import Customer from '../../../../../../../api/customers/models/Customer'
+import CustomersClient from '../../../../../../../api/customers/clients/CustomersClient'
 
-const leadsClient = new LeadsClient(HttpClientFactory.Api)
+const customersClient = new CustomersClient(HttpClientFactory.Api)
 
-interface UseLeadsAutocompleteReturn {
-    loadLeads: (value?: string) => Promise<void>
-    leadsAsOptions: DropdownItemProps[]
+interface UseCustomersAutocompleteReturn {
+    loadCustomers: (value?: string) => Promise<void>
+    customersAsOptions: DropdownItemProps[]
 }
 
-const useLeadsAutocomplete = (): UseLeadsAutocompleteReturn => {
+const useCustomersAutocomplete = (): UseCustomersAutocompleteReturn => {
     const MaxLimit = 10
 
-    const [leads, setLeads] = useState<Lead[]>([])
+    const [customers, setCustomers] = useState<Customer[]>([])
 
-    const loadLeads = useCallback(async (value?: string) => {
-        const response = await leadsClient.GetPagedListAsync({
+    const loadCustomers = useCallback(async (value?: string) => {
+        const response = await customersClient.GetPagedListAsync({
             name: value,
             sortBy: 'Name',
             orderBy: 'asc',
@@ -27,17 +27,20 @@ const useLeadsAutocomplete = (): UseLeadsAutocompleteReturn => {
             limit: MaxLimit
         })
 
-        setLeads(response.leads ?? [])
+        setCustomers(response.customers ?? [])
     }, [])
 
     const map = useCallback(
-        (x: Lead) => ({ value: x.id ?? '', text: x?.name ? `${x?.surname} ${x?.name} ${x?.patronymic}`.trim() : '' }),
+        (x: Customer) => ({
+            value: x.id ?? '',
+            text: x?.name ? `${x?.surname} ${x?.name} ${x?.patronymic}`.trim() : ''
+        }),
         []
     )
 
-    const leadsAsOptions = useMemo(() => leads.map(map), [map, leads])
+    const customersAsOptions = useMemo(() => customers.map(map), [map, customers])
 
-    return { loadLeads, leadsAsOptions }
+    return { loadCustomers, customersAsOptions }
 }
 
-export default useLeadsAutocomplete
+export default useCustomersAutocomplete
