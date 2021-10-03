@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Route, Switch } from 'react-router'
 
-import Activities from '../../../pages/Activities/Activities'
+import Tasks from '../../../pages/Tasks/Tasks'
 import Calendar from '../../../pages/Calendar/Calendar'
 import Companies from '../../../pages/Clients/components/Companies/Companies'
 import CompaniesRoutes from '../../../pages/Clients/components/Companies/routes/CompaniesRoutes'
@@ -100,7 +100,7 @@ const Routes: FC = () => {
         <Switch>
             <Route path="/" exact component={Dashboard} />
             <Route path="/calendar" component={Calendar} />
-            <Route path="/activities" component={Activities} />
+            <Route path="/tasks" component={Tasks} />
             <Route path="/settings" component={Settings} />
 
             {/*  */}

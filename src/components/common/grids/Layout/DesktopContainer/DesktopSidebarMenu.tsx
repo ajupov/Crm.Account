@@ -21,7 +21,7 @@ const DesktopSidebarMenu: FC = () => {
         <>
             {renderItem('Инфопанель', '/', 'dashboard')}
             {renderItem('Календарь', '/calendar', 'calendar')}
-            {renderItem('Задачи', '/activities', 'tasks')}
+            {renderItem('Задачи', '/tasks', 'tasks')}
             {renderItem('Сделки', '/orders', 'handshake')}
             {renderItem('Лиды', '/customers', 'filter')}
             {renderItem('Клиенты', ContactsRoutes.Index, 'address book')}

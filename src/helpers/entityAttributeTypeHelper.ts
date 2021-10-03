@@ -1,13 +1,12 @@
 import CompanyAttributeType from '../../api/companies/models/CompanyAttributeType'
 import ContactAttributeType from '../../api/contacts/models/ContactAttributeType'
 import OrderAttributeType from '../../api/orders/models/OrderAttributeType'
-import { Dictionary } from '../utils/dictionary/dictionaryUtils'
 import { DropdownItemProps } from '../components/common/fields/Dropdown/Dropdown'
 import CustomerAttributeType from '../../api/customers/models/CustomerAttributeType'
 import ProductAttributeType from '../../api/products/models/ProductAttributeType'
 
 // TODO: Move to l10n
-const AttributeTypeWithNames: Dictionary<string> = {
+const AttributeTypeWithNames: { [key in string]: string } = {
     1: 'Тег',
     2: 'Флаг',
     3: 'Целое число от 0 до 255',

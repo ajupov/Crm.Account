@@ -20,5 +20,5 @@ export default class OrderCommentsClient {
         )
 
     public CreateAsync = (comment?: OrderComment): Promise<void> =>
-        this._factory.putAsync(this._host + '/Orders/Comments/v1/Create', void 0, comment)
+        this._factory.postAsync(this._host + '/Orders/Comments/v1/Create', void 0, comment)
 }

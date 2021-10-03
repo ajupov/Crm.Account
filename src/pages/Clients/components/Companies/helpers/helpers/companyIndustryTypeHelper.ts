@@ -3,7 +3,7 @@ import { Dictionary } from '../../../../../../utils/dictionary/dictionaryUtils'
 import { DropdownItemProps } from '../../../../../../components/common/fields/Dropdown/Dropdown'
 
 // TODO: Move to l10n
-const CompanyIndustryTypeWithNames: Dictionary<string> = {
+const CompanyIndustryTypeWithNames: { [key in string]: string } = {
     0: 'Прочее',
     1: 'Транспорт',
     2: 'Информационные технологии',

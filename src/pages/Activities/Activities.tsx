@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 
-const Activities: FC = () => {
+const Tasks: FC = () => {
     useEffect(() => {
         document.title = 'Задачи'
     })
@@ -8,4 +8,4 @@ const Activities: FC = () => {
     return <h1>Задачи</h1>
 }
 
-export default Activities
+export default Tasks
