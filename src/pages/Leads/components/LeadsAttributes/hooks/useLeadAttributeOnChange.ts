@@ -7,7 +7,7 @@ import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
 import LeadAttributeContext from '../contexts/LeadAttributeContext/LeadAttributeContext'
-import LeadAttributeType from '../../../../../../api/leads/models/LeadAttributeType'
+import LeadAttributeType from '../../../../../../api/customers/models/LeadAttributeType'
 import { useHistory } from 'react-router'
 
 interface UseLeadAttributeOnChangeReturn {

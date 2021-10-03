@@ -1,4 +1,4 @@
-import LeadComment from '../../../../../../api/leads/models/LeadComment'
+import LeadComment from '../../../../../../api/customers/models/LeadComment'
 
 export default interface LeadCommentState {
     isLoading: boolean

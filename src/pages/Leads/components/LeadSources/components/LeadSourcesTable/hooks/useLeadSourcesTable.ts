@@ -2,7 +2,7 @@ import { calculateOffset, calculatePage } from '../../../../../../../utils/pagin
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import LeadSource from '../../../../../../../../api/leads/models/LeadSource'
+import LeadSource from '../../../../../../../../api/customers/models/LeadSource'
 import LeadSourcesContext from '../../../contexts/LeadSourcesContext/LeadSourcesContext'
 import LeadSourcesRoutes from '../../../routes/LeadSourcesRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
@@ -109,10 +109,10 @@ const useLeadSourcesTable = (): UseLeadSourcesTableReturn => {
         [getOrderBy, onClickSort]
     )
 
-    const page = useMemo(() => calculatePage(state.request.offset, state.request.limit), [
-        state.request.limit,
-        state.request.offset
-    ])
+    const page = useMemo(
+        () => calculatePage(state.request.offset, state.request.limit),
+        [state.request.limit, state.request.offset]
+    )
 
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }

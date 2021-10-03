@@ -1,5 +1,5 @@
-import LeadAttribute from '../../../../../../api/leads/models/LeadAttribute'
-import LeadAttributeType from '../../../../../../api/leads/models/LeadAttributeType'
+import LeadAttribute from '../../../../../../api/customers/models/LeadAttribute'
+import LeadAttributeType from '../../../../../../api/customers/models/LeadAttributeType'
 
 export interface LeadAttributeState {
     isLoading: boolean

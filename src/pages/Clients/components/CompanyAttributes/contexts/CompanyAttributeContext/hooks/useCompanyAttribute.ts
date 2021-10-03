@@ -2,10 +2,10 @@ import { CompanyAttributeState, companyAttributeInitialState } from '../../../st
 import { useCallback, useEffect, useState } from 'react'
 
 import CompanyAttributesClient from '../../../../../../../../api/companies/clients/CompanyAttributesClient'
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
-const companyAttributesClient = new CompanyAttributesClient(HttpClientFactoryInstance.Api)
+const companyAttributesClient = new CompanyAttributesClient(HttpClientFactory.Api)
 
 const useCompanyAttribute = (): CompanyAttributeState => {
     const { id }: { id: string } = useParams()

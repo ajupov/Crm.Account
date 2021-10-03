@@ -1,11 +1,11 @@
 import { LeadSourceState, leadSourceInitialState } from '../../../states/LeadSourceState'
 import { useCallback, useEffect, useState } from 'react'
 
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import LeadSourcesClient from '../../../../../../../../api/leads/clients/LeadSourcesClient'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
+import LeadSourcesClient from '../../../../../../../../api/customers/clients/LeadSourcesClient'
 import { useParams } from 'react-router'
 
-const leadSourcesClient = new LeadSourcesClient(HttpClientFactoryInstance.Api)
+const leadSourcesClient = new LeadSourcesClient(HttpClientFactory.Api)
 
 const useLeadSource = (): LeadSourceState => {
     const { id }: { id: string } = useParams()

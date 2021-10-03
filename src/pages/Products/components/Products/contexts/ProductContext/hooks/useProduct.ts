@@ -1,7 +1,7 @@
 import { ProductState, productInitialState } from '../../../states/ProductState'
 import { useCallback, useEffect, useState } from 'react'
 
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 import ProductAttributesClient from '../../../../../../../../api/products/clients/ProductAttributesClient'
 import ProductCategoriesClient from '../../../../../../../../api/products/clients/ProductCategoriesClient'
 import ProductsClient from '../../../../../../../../api/products/clients/ProductsClient'
@@ -9,9 +9,9 @@ import { productAttributesInitialState } from '../../../../ProductAttributes/sta
 import { productCategoriesInitialState } from '../../../../ProductCategories/states/ProductCategoriesState'
 import { useParams } from 'react-router'
 
-const productsClient = new ProductsClient(HttpClientFactoryInstance.Api)
-const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
-const productAttributesClient = new ProductAttributesClient(HttpClientFactoryInstance.Api)
+const productsClient = new ProductsClient(HttpClientFactory.Api)
+const productCategoriesClient = new ProductCategoriesClient(HttpClientFactory.Api)
+const productAttributesClient = new ProductAttributesClient(HttpClientFactory.Api)
 
 const useProduct = (): ProductState => {
     const { id }: { id: string } = useParams()

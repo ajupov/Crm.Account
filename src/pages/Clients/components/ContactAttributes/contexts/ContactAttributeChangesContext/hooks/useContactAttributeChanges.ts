@@ -4,10 +4,10 @@ import ContactAttributeChangesState, {
 import { useCallback, useEffect, useState } from 'react'
 
 import ContactAttributeChangesClient from '../../../../../../../../api/contacts/clients/ContactAttributeChangesClient'
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
-const contactAttributeChangesClient = new ContactAttributeChangesClient(HttpClientFactoryInstance.Api)
+const contactAttributeChangesClient = new ContactAttributeChangesClient(HttpClientFactory.Api)
 
 const useContactAttributeChanges = (): ContactAttributeChangesState => {
     const MaxLimit = 1048576

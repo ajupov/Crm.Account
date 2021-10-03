@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react'
 
-import DealStatus from '../../../../../../../api/deals/models/DealStatus'
+import DealStatus from '../../../../../../../api/orders/models/DealStatus'
 import DealStatusesActionsContext from '../../../contexts/DealStatusesActionsContext/DealStatusesActionsContext'
 import { ViewDataProps } from '../../../../../../components/common/grids/View/View'
 import { useHistory } from 'react-router'

@@ -7,7 +7,7 @@ import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
 import DealAttributeContext from '../../contexts/DealAttributeContext/DealAttributeContext'
-import DealAttributeType from '../../../../../../api/deals/models/DealAttributeType'
+import DealAttributeType from '../../../../../../api/orders/models/DealAttributeType'
 import { useHistory } from 'react-router'
 
 interface UseDealAttributeOnChangeReturn {

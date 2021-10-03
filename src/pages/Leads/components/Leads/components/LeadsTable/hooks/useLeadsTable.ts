@@ -2,7 +2,7 @@ import { calculateOffset, calculatePage } from '../../../../../../../utils/pagin
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import Lead from '../../../../../../../../api/leads/models/Lead'
+import Lead from '../../../../../../../../api/customers/models/Lead'
 import LeadsContext from '../../../contexts/LeadsContext/LeadsContext'
 import LeadsRoutes from '../../../routes/LeadsRoutes'
 import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
@@ -170,10 +170,10 @@ const useLeadsTable = (): UseLeadsTableReturn => {
         [getOrderBy, onClickSort]
     )
 
-    const page = useMemo(() => calculatePage(state.request.offset, state.request.limit), [
-        state.request.limit,
-        state.request.offset
-    ])
+    const page = useMemo(
+        () => calculatePage(state.request.offset, state.request.limit),
+        [state.request.limit, state.request.offset]
+    )
 
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }

@@ -2,8 +2,8 @@ import { calculateOffset, calculatePage } from '../../../../../../../../utils/pa
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import DealStatus from '../../../../../../../../../api/deals/models/DealStatus'
-import DealStatusChange from '../../../../../../../../../api/deals/models/DealStatusChange'
+import DealStatus from '../../../../../../../../../api/orders/models/DealStatus'
+import DealStatusChange from '../../../../../../../../../api/orders/models/DealStatusChange'
 import DealStatusChangesContext from '../../../../../contexts/DealStatusChangesContext/DealStatusChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../components/common/collections/Table/TableHeader'
@@ -109,10 +109,10 @@ const useDealStatusChangesTable = (): UseDealStatusChangesTableReturn => {
         []
     )
 
-    const page = useMemo(() => calculatePage(state.request.offset, state.request.limit), [
-        state.request.limit,
-        state.request.offset
-    ])
+    const page = useMemo(
+        () => calculatePage(state.request.offset, state.request.limit),
+        [state.request.limit, state.request.offset]
+    )
 
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }

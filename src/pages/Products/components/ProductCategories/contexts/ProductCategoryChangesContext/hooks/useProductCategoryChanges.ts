@@ -3,11 +3,11 @@ import ProductCategoryChangesState, {
 } from '../../../states/ProductCategoryChangesState'
 import { useCallback, useEffect, useState } from 'react'
 
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 import ProductCategoryChangesClient from '../../../../../../../../api/products/clients/ProductCategoryChangesClient'
 import { useParams } from 'react-router'
 
-const productCategoryChangesClient = new ProductCategoryChangesClient(HttpClientFactoryInstance.Api)
+const productCategoryChangesClient = new ProductCategoryChangesClient(HttpClientFactory.Api)
 
 const useProductCategoryChanges = (): ProductCategoryChangesState => {
     const MaxLimit = 1048576

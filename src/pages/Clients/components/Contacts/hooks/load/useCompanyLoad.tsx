@@ -2,9 +2,9 @@ import { useCallback, useEffect, useState } from 'react'
 
 import CompaniesClient from '../../../../../../../api/companies/clients/CompaniesClient'
 import Company from '../../../../../../../api/companies/models/Company'
-import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const companiesClient = new CompaniesClient(HttpClientFactoryInstance.Api)
+const companiesClient = new CompaniesClient(HttpClientFactory.Api)
 
 interface UseCompanyLoadReturn {
     company?: Company

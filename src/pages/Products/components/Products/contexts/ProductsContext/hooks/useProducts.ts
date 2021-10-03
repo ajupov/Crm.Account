@@ -1,10 +1,10 @@
 import ProductsState, { productsInitialState } from '../../../states/ProductsState'
 import { useCallback, useEffect, useState } from 'react'
 
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 import ProductsClient from '../../../../../../../../api/products/clients/ProductsClient'
 
-const productsClient = new ProductsClient(HttpClientFactoryInstance.Api)
+const productsClient = new ProductsClient(HttpClientFactory.Api)
 
 const useProducts = (): ProductsState => {
     const MaxLimit = 1048576

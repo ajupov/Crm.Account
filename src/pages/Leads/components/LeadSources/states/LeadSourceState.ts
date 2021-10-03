@@ -1,4 +1,4 @@
-import LeadSource from '../../../../../../api/leads/models/LeadSource'
+import LeadSource from '../../../../../../api/customers/models/LeadSource'
 
 export interface LeadSourceState {
     isLoading: boolean

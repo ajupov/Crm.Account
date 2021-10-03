@@ -2,10 +2,10 @@ import CompanyChangesState, { companyChangesInitialState } from '../../../states
 import { useCallback, useEffect, useState } from 'react'
 
 import CompanyChangesClient from '../../../../../../../../api/companies/clients/CompanyChangesClient'
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
-const companyChangesClient = new CompanyChangesClient(HttpClientFactoryInstance.Api)
+const companyChangesClient = new CompanyChangesClient(HttpClientFactory.Api)
 
 const useCompanyChanges = (): CompanyChangesState => {
     const MaxLimit = 1048576

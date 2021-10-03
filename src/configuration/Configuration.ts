@@ -13,7 +13,7 @@ export default class Configuration {
         return this.combineUrl(authHost, logoutPath)
     }
 
-    get ApiUrl(): string {
+    get ApiHost(): string {
         const apiHost = process.env.API_HOST
 
         return this.combineUrl(apiHost)

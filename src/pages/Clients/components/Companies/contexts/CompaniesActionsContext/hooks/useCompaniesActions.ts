@@ -2,9 +2,9 @@ import CompaniesActionsState, { companiesActionsInitialState } from '../../../st
 import { useCallback, useState } from 'react'
 
 import CompaniesClient from '../../../../../../../../api/companies/clients/CompaniesClient'
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const companiesClient = new CompaniesClient(HttpClientFactoryInstance.Api)
+const companiesClient = new CompaniesClient(HttpClientFactory.Api)
 
 const useCompaniesActions = (): CompaniesActionsState => {
     const [ids, setIds] = useState(companiesActionsInitialState.ids)

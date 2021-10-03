@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
 
-import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import Product from '../../../../../../../api/products/models/Product'
 import ProductsClient from '../../../../../../../api/products/clients/ProductsClient'
 
-const productsClient = new ProductsClient(HttpClientFactoryInstance.Api)
+const productsClient = new ProductsClient(HttpClientFactory.Api)
 
 interface UseProductLoadReturn {
     product?: Product

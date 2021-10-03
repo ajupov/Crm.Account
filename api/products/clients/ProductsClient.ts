@@ -1,72 +1,41 @@
-import IHttpClientFactory from '../../IHttpClientFactory'
+import IJsonHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 import Product from '../models/Product'
 import ProductGetPagedListRequest from '../models/ProductGetPagedListRequest'
 import ProductGetPagedListResponse from '../models/ProductGetPagedListResponse'
 
 export default class ProductsClient {
-    private readonly httpClientFactory: IHttpClientFactory
+    private readonly _host: string
+    private readonly _factory: IJsonHttpClientFactory
 
-    constructor(httpClientFactory: IHttpClientFactory) {
-        this.httpClientFactory = httpClientFactory
+    constructor(host: string, factory: IJsonHttpClientFactory) {
+        this._host = host
+        this._factory = factory
     }
 
-    // prettier-ignore
-    public GetTypesAsync = (): Promise<object> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .get<object>('/Products/v1/GetTypes')
-
-    // prettier-ignore
     public GetAsync = (id: string): Promise<Product> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .get<Product>('/Products/v1/Get', { id })
+        this._factory.getAsync<Product>(this._host + '/Products/v1/Get', { id })
 
-    // prettier-ignore
     public GetListAsync = (values?: string[]): Promise<Product[]> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .post<Product[]>('/Products/v1/GetList', values)
+        this._factory.postAsync<Product[]>(this._host + '/Products/v1/GetList', void 0, values)
 
-    // prettier-ignore
     public GetPagedListAsync = (request?: ProductGetPagedListRequest): Promise<ProductGetPagedListResponse> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .post<ProductGetPagedListResponse>('/Products/v1/GetPagedList', request)
+        this._factory.postAsync<ProductGetPagedListResponse>(this._host + '/Products/v1/GetPagedList', void 0, request)
 
-    // prettier-ignore
     public CreateAsync = (product?: Product): Promise<string> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .put<string>('/Products/v1/Create', product)
+        this._factory.postAsync<string>(this._host + '/Products/v1/Create', void 0, product)
 
-    // prettier-ignore
     public UpdateAsync = (product?: Product): Promise<void> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .patch('/Products/v1/Update', product)
+        this._factory.patchAsync(this._host + '/Products/v1/Update', void 0, product)
 
-    // prettier-ignore
     public HideAsync = (values?: string[]): Promise<void> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .post('/Products/v1/Hide', values)
+        this._factory.patchAsync(this._host + '/Products/v1/Hide', void 0, values)
 
-    // prettier-ignore
     public ShowAsync = (values?: string[]): Promise<void> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .post('/Products/v1/Show', values)
+        this._factory.patchAsync(this._host + '/Products/v1/Show', void 0, values)
 
-    // prettier-ignore
     public DeleteAsync = (values?: string[]): Promise<void> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .patch('/Products/v1/Delete', values)
+        this._factory.patchAsync(this._host + '/Products/v1/Delete', void 0, values)
 
-    // prettier-ignore
     public RestoreAsync = (values?: string[]): Promise<void> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .patch('/Products/v1/Restore', values)
+        this._factory.patchAsync(this._host + '/Products/v1/Restore', void 0, values)
 }

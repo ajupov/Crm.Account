@@ -1,11 +1,11 @@
 import { useCallback, useMemo, useState } from 'react'
 
 import { DropdownItemProps } from '../../../../../../components/common/fields/Dropdown/Dropdown'
-import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import Product from '../../../../../../../api/products/models/Product'
 import ProductsClient from '../../../../../../../api/products/clients/ProductsClient'
 
-const productsClient = new ProductsClient(HttpClientFactoryInstance.Api)
+const productsClient = new ProductsClient(HttpClientFactory.Api)
 
 interface UseProductsAutocompleteReturn {
     loadProducts: (value?: string) => Promise<void>

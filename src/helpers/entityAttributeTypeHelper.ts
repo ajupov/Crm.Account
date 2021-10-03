@@ -1,9 +1,9 @@
 import CompanyAttributeType from '../../api/companies/models/CompanyAttributeType'
 import ContactAttributeType from '../../api/contacts/models/ContactAttributeType'
-import DealAttributeType from '../../api/deals/models/DealAttributeType'
+import DealAttributeType from '../../api/orders/models/DealAttributeType'
 import { Dictionary } from '../utils/dictionary/dictionaryUtils'
 import { DropdownItemProps } from '../components/common/fields/Dropdown/Dropdown'
-import LeadAttributeType from '../../api/leads/models/LeadAttributeType'
+import LeadAttributeType from '../../api/customers/models/LeadAttributeType'
 import ProductAttributeType from '../../api/products/models/ProductAttributeType'
 
 // TODO: Move to l10n

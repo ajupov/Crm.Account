@@ -1,11 +1,11 @@
 import DealAttributeChangesState, { dealAttributeChangesInitialState } from '../../../states/DealAttributeChangesState'
 import { useCallback, useEffect, useState } from 'react'
 
-import DealAttributeChangesClient from '../../../../../../../api/deals/clients/DealAttributeChangesClient'
-import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import DealAttributeChangesClient from '../../../../../../../api/orders/clients/DealAttributeChangesClient'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
-const dealAttributeChangesClient = new DealAttributeChangesClient(HttpClientFactoryInstance.Api)
+const dealAttributeChangesClient = new DealAttributeChangesClient(HttpClientFactory.Api)
 
 const useDealAttributeChanges = (): DealAttributeChangesState => {
     const MaxLimit = 1048576

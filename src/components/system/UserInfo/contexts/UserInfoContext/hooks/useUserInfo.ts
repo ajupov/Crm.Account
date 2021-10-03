@@ -3,11 +3,11 @@ import { useCallback, useEffect, useState } from 'react'
 
 import AuthClient from '../../../../../../../api/auth/clients/AuthClient'
 import Configuration from '../../../../../../configuration/Configuration'
-import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import UserInfoClient from '../../../../../../../api/userinfo/clients/UserInfoClient'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
+import UserInfoClient from '../../../../../../../api/auth/clients/UserInfoClient'
 
-const authClient = new AuthClient(HttpClientFactoryInstance.Api)
-const userInfoClient = new UserInfoClient(HttpClientFactoryInstance.Api)
+const authClient = new AuthClient(HttpClientFactory.Api)
+const userInfoClient = new UserInfoClient(HttpClientFactory.Api)
 const configuration = new Configuration()
 
 const useUserInfo = (): UserInfoState => {

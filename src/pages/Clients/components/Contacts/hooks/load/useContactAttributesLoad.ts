@@ -3,9 +3,9 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import ContactAttribute from '../../../../../../../api/contacts/models/ContactAttribute'
 import ContactAttributesClient from '../../../../../../../api/contacts/clients/ContactAttributesClient'
 import { DropdownItemProps } from '../../../../../../components/common/fields/Dropdown/Dropdown'
-import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const contactAttributesClient = new ContactAttributesClient(HttpClientFactoryInstance.Api)
+const contactAttributesClient = new ContactAttributesClient(HttpClientFactory.Api)
 
 interface UseContactAttributesLoadReturn {
     attributesAsOptions: DropdownItemProps[]

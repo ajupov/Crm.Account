@@ -1,10 +1,10 @@
 import DealTypesState, { dealTypesInitialState } from '../../../states/DealTypesState'
 import { useCallback, useEffect, useState } from 'react'
 
-import DealTypesClient from '../../../../../../../api/deals/clients/DealTypesClient'
-import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import DealTypesClient from '../../../../../../../api/orders/clients/DealTypesClient'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const dealTypesClient = new DealTypesClient(HttpClientFactoryInstance.Api)
+const dealTypesClient = new DealTypesClient(HttpClientFactory.Api)
 
 const useDealTypes = (): DealTypesState => {
     const MaxLimit = 1048576

@@ -1,10 +1,10 @@
 import LeadsActionsState, { leadsActionsInitialState } from '../../../states/LeadsActionsState'
 import { useCallback, useState } from 'react'
 
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import LeadsClient from '../../../../../../../../api/leads/clients/LeadsClient'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
+import LeadsClient from '../../../../../../../../api/customers/clients/LeadsClient'
 
-const leadsClient = new LeadsClient(HttpClientFactoryInstance.Api)
+const leadsClient = new LeadsClient(HttpClientFactory.Api)
 
 const useLeadsActions = (): LeadsActionsState => {
     const [ids, setIds] = useState(leadsActionsInitialState.ids)

@@ -1,4 +1,4 @@
-import IHttpClientFactory from '../../IHttpClientFactory'
+import IHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 
 export default class AuthClient {
     private readonly httpClientFactory: IHttpClientFactory
@@ -7,9 +7,6 @@ export default class AuthClient {
         this.httpClientFactory = httpClientFactory
     }
 
-    // prettier-ignore
     public IsAuthenticatedAsync = (): Promise<boolean> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .get<boolean>('/Auth/IsAuthenticated')
+        this.httpClientFactory.createClient(this.httpClientFactory.host).get<boolean>('/Auth/IsAuthenticated')
 }

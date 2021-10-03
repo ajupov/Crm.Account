@@ -2,7 +2,7 @@ import { calculateOffset, calculatePage } from '../../../../../../utils/paginati
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import DealType from '../../../../../../../api/deals/models/DealType'
+import DealType from '../../../../../../../api/orders/models/DealType'
 import DealTypesContext from '../../../contexts/DealTypesContext/DealTypesContext'
 import DealTypesRoutes from '../../../routes/DealTypesRoutes'
 import { TableBodyRowProps } from '../../../../../../components/common/collections/Table/TableBody'
@@ -107,10 +107,10 @@ const useDealTypesTable = (): UseDealTypesTableReturn => {
         [getOrderBy, onClickSort]
     )
 
-    const page = useMemo(() => calculatePage(state.request.offset, state.request.limit), [
-        state.request.limit,
-        state.request.offset
-    ])
+    const page = useMemo(
+        () => calculatePage(state.request.offset, state.request.limit),
+        [state.request.limit, state.request.offset]
+    )
 
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }

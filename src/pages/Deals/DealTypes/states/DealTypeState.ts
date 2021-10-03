@@ -1,4 +1,4 @@
-import DealType from '../../../../../api/deals/models/DealType'
+import DealType from '../../../../../api/orders/models/DealType'
 
 export interface DealTypeState {
     isLoading: boolean

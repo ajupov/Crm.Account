@@ -1,6 +1,6 @@
-import LeadSource from '../../../../../../api/leads/models/LeadSource'
-import LeadSourceGetPagedListRequest from '../../../../../../api/leads/models/LeadSourceGetPagedListRequest'
-import LeadSourceGetPagedListResponse from '../../../../../../api/leads/models/LeadSourceGetPagedListResponse'
+import LeadSource from '../../../../../../api/customers/models/LeadSource'
+import LeadSourceGetPagedListRequest from '../../../../../../api/customers/models/LeadSourceGetPagedListRequest'
+import LeadSourceGetPagedListResponse from '../../../../../../api/customers/models/LeadSourceGetPagedListResponse'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'

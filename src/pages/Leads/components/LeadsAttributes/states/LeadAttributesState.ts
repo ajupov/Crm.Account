@@ -1,6 +1,6 @@
-import LeadAttribute from '../../../../../../api/leads/models/LeadAttribute'
-import LeadAttributeGetPagedListRequest from '../../../../../../api/leads/models/LeadAttributeGetPagedListRequest'
-import LeadAttributeGetPagedListResponse from '../../../../../../api/leads/models/LeadAttributeGetPagedListResponse'
+import LeadAttribute from '../../../../../../api/customers/models/LeadAttribute'
+import LeadAttributeGetPagedListRequest from '../../../../../../api/customers/models/LeadAttributeGetPagedListRequest'
+import LeadAttributeGetPagedListResponse from '../../../../../../api/customers/models/LeadAttributeGetPagedListResponse'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'

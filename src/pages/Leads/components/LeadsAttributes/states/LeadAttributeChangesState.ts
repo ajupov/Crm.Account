@@ -1,6 +1,6 @@
-import LeadAttributeChange from '../../../../../../api/leads/models/LeadAttributeChange'
-import LeadAttributeChangeGetPagedListRequest from '../../../../../../api/leads/models/LeadAttributeChangeGetPagedListRequest'
-import LeadAttributeChangeGetPagedListResponse from '../../../../../../api/leads/models/LeadAttributeChangeGetPagedListResponse'
+import LeadAttributeChange from '../../../../../../api/customers/models/LeadAttributeChange'
+import LeadAttributeChangeGetPagedListRequest from '../../../../../../api/customers/models/LeadAttributeChangeGetPagedListRequest'
+import LeadAttributeChangeGetPagedListResponse from '../../../../../../api/customers/models/LeadAttributeChangeGetPagedListResponse'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'

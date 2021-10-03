@@ -1,11 +1,11 @@
 import { ProductCategoryState, productCategoryInitialState } from '../../../states/ProductCategoryState'
 import { useCallback, useEffect, useState } from 'react'
 
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 import ProductCategoriesClient from '../../../../../../../../api/products/clients/ProductCategoriesClient'
 import { useParams } from 'react-router'
 
-const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
+const productCategoriesClient = new ProductCategoriesClient(HttpClientFactory.Api)
 
 const useProductCategory = (): ProductCategoryState => {
     const { id }: { id: string } = useParams()

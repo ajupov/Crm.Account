@@ -1,4 +1,4 @@
-import IHttpClientFactory from '../../IHttpClientFactory'
+import IHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 import ProductChangeGetPagedListRequest from '../models/ProductChangeGetPagedListRequest'
 import ProductChangeGetPagedListResponse from '../models/ProductChangeGetPagedListResponse'
 
@@ -9,8 +9,9 @@ export default class ProductChangesClient {
         this.httpClientFactory = httpClientFactory
     }
 
-    // prettier-ignore
-    public GetPagedListAsync = (request?: ProductChangeGetPagedListRequest): Promise<ProductChangeGetPagedListResponse> =>
+    public GetPagedListAsync = (
+        request?: ProductChangeGetPagedListRequest
+    ): Promise<ProductChangeGetPagedListResponse> =>
         this.httpClientFactory
             .createClient(this.httpClientFactory.host)
             .post<ProductChangeGetPagedListResponse>('/Products/Changes/v1/GetPagedList', request)

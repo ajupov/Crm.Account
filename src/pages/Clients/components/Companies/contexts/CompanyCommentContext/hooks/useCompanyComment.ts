@@ -2,10 +2,10 @@ import CompanyCommentState, { companyCommentInitialState } from '../../../states
 import { useCallback, useState } from 'react'
 
 import CompanyCommentsClient from '../../../../../../../../api/companies/clients/CompanyCommentsClient'
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
-const companyCommentsClient = new CompanyCommentsClient(HttpClientFactoryInstance.Api)
+const companyCommentsClient = new CompanyCommentsClient(HttpClientFactory.Api)
 
 const useCompanyComment = (): CompanyCommentState => {
     const { id }: { id: string } = useParams()

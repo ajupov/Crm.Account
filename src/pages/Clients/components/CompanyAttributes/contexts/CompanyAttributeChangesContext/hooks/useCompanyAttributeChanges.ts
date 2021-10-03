@@ -4,10 +4,10 @@ import CompanyAttributeChangesState, {
 import { useCallback, useEffect, useState } from 'react'
 
 import CompanyAttributeChangesClient from '../../../../../../../../api/companies/clients/CompanyAttributeChangesClient'
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
-const companyAttributeChangesClient = new CompanyAttributeChangesClient(HttpClientFactoryInstance.Api)
+const companyAttributeChangesClient = new CompanyAttributeChangesClient(HttpClientFactory.Api)
 
 const useCompanyAttributeChanges = (): CompanyAttributeChangesState => {
     const MaxLimit = 1048576

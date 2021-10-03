@@ -3,9 +3,9 @@ import { useCallback, useMemo, useState } from 'react'
 import CompaniesClient from '../../../../../../../api/companies/clients/CompaniesClient'
 import Company from '../../../../../../../api/companies/models/Company'
 import { DropdownItemProps } from '../../../../../../components/common/fields/Dropdown/Dropdown'
-import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const companiesClient = new CompaniesClient(HttpClientFactoryInstance.Api)
+const companiesClient = new CompaniesClient(HttpClientFactory.Api)
 
 interface UseCompaniesAutocompleteReturn {
     loadCompanies: (value?: string) => Promise<void>

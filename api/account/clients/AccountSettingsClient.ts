@@ -1,29 +1,18 @@
 import AccountSetting from '../../account/models/AccountSetting'
 import AccountSettingActivityIndustry from '../models/AccountSettingActivityIndustry'
-import IHttpClientFactory from '../../IHttpClientFactory'
+import IJsonHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 
 export default class AccountSettingsClient {
-    private readonly httpClientFactory: IHttpClientFactory
+    private readonly _host: string
+    private readonly _factory: IJsonHttpClientFactory
 
-    constructor(httpClientFactory: IHttpClientFactory) {
-        this.httpClientFactory = httpClientFactory
+    constructor(host: string, factory: IJsonHttpClientFactory) {
+        this._host = host
+        this._factory = factory
     }
-
-    // prettier-ignore
     public GetAsync = (): Promise<AccountSetting> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .get<AccountSetting>('/Account/Settings/v1/Get')
+        this._factory.getAsync<AccountSetting>(this._host + '/Account/Settings/v1/Get')
 
-    // prettier-ignore
-    public GetActivityIndustriesAsync = (): Promise<object> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .get<object>('Account//Settings/v1/GetActivityIndustries')
-
-    // prettier-ignore
     public SetActivityIndustryAsync = (industry: AccountSettingActivityIndustry): Promise<void> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .patch('/Account/Settings/v1/SetActivityIndustry', { industry })
+        this._factory.putAsync('/Account/Settings/v1/SetActivityIndustry', void 0, { industry })
 }

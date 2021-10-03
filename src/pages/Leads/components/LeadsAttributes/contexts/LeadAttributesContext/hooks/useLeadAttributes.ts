@@ -1,10 +1,10 @@
 import LeadAttributesState, { leadAttributesInitialState } from '../../../states/LeadAttributesState'
 import { useCallback, useEffect, useState } from 'react'
 
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import LeadAttributesClient from '../../../../../../../../api/leads/clients/LeadAttributesClient'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
+import LeadAttributesClient from '../../../../../../../../api/customers/clients/LeadAttributesClient'
 
-const leadAttributesClient = new LeadAttributesClient(HttpClientFactoryInstance.Api)
+const leadAttributesClient = new LeadAttributesClient(HttpClientFactory.Api)
 
 const useLeadAttributes = (): LeadAttributesState => {
     const MaxLimit = 1048576

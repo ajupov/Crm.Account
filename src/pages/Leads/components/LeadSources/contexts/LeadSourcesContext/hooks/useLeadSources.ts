@@ -1,10 +1,10 @@
 import LeadSourcesState, { leadSourcesInitialState } from '../../../states/LeadSourcesState'
 import { useCallback, useEffect, useState } from 'react'
 
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import LeadSourcesClient from '../../../../../../../../api/leads/clients/LeadSourcesClient'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
+import LeadSourcesClient from '../../../../../../../../api/customers/clients/LeadSourcesClient'
 
-const leadSourcesClient = new LeadSourcesClient(HttpClientFactoryInstance.Api)
+const leadSourcesClient = new LeadSourcesClient(HttpClientFactory.Api)
 
 const useLeadSources = (): LeadSourcesState => {
     const MaxLimit = 1048576

@@ -1,11 +1,11 @@
 import { ProductAttributeState, productAttributeInitialState } from '../../../states/ProductAttributeState'
 import { useCallback, useEffect, useState } from 'react'
 
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 import ProductAttributesClient from '../../../../../../../../api/products/clients/ProductAttributesClient'
 import { useParams } from 'react-router'
 
-const productAttributesClient = new ProductAttributesClient(HttpClientFactoryInstance.Api)
+const productAttributesClient = new ProductAttributesClient(HttpClientFactory.Api)
 
 const useProductAttribute = (): ProductAttributeState => {
     const { id }: { id: string } = useParams()

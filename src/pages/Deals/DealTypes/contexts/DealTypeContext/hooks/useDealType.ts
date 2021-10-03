@@ -1,11 +1,11 @@
 import { DealTypeState, dealTypeInitialState } from '../../../states/DealTypeState'
 import { useCallback, useEffect, useState } from 'react'
 
-import DealTypesClient from '../../../../../../../api/deals/clients/DealTypesClient'
-import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import DealTypesClient from '../../../../../../../api/orders/clients/DealTypesClient'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
-const dealTypesClient = new DealTypesClient(HttpClientFactoryInstance.Api)
+const dealTypesClient = new DealTypesClient(HttpClientFactory.Api)
 
 const useDealType = (): DealTypeState => {
     const { id }: { id: string } = useParams()

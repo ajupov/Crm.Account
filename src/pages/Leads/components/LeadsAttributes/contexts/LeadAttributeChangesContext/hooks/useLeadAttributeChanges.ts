@@ -1,11 +1,11 @@
 import LeadAttributeChangesState, { leadAttributeChangesInitialState } from '../../../states/LeadAttributeChangesState'
 import { useCallback, useEffect, useState } from 'react'
 
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import LeadAttributeChangesClient from '../../../../../../../../api/leads/clients/LeadAttributeChangesClient'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
+import LeadAttributeChangesClient from '../../../../../../../../api/customers/clients/LeadAttributeChangesClient'
 import { useParams } from 'react-router'
 
-const leadAttributeChangesClient = new LeadAttributeChangesClient(HttpClientFactoryInstance.Api)
+const leadAttributeChangesClient = new LeadAttributeChangesClient(HttpClientFactory.Api)
 
 const useLeadAttributeChanges = (): LeadAttributeChangesState => {
     const MaxLimit = 1048576

@@ -3,9 +3,9 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import CompanyAttribute from '../../../../../../../api/companies/models/CompanyAttribute'
 import CompanyAttributesClient from '../../../../../../../api/companies/clients/CompanyAttributesClient'
 import { DropdownItemProps } from '../../../../../../components/common/fields/Dropdown/Dropdown'
-import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const companyAttributesClient = new CompanyAttributesClient(HttpClientFactoryInstance.Api)
+const companyAttributesClient = new CompanyAttributesClient(HttpClientFactory.Api)
 
 interface UseCompanyAttributesLoadReturn {
     attributesAsOptions: DropdownItemProps[]

@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { DropdownItemProps } from '../../../../../../components/common/fields/Dropdown/Dropdown'
-import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import LeadAttribute from '../../../../../../../api/leads/models/LeadAttribute'
-import LeadAttributesClient from '../../../../../../../api/leads/clients/LeadAttributesClient'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
+import LeadAttribute from '../../../../../../../api/customers/models/LeadAttribute'
+import LeadAttributesClient from '../../../../../../../api/customers/clients/LeadAttributesClient'
 
-const leadAttributesClient = new LeadAttributesClient(HttpClientFactoryInstance.Api)
+const leadAttributesClient = new LeadAttributesClient(HttpClientFactory.Api)
 
 interface UseLeadAttributesLoadReturn {
     attributesAsOptions: DropdownItemProps[]

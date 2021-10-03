@@ -6,11 +6,11 @@ import {
 } from '../../../../../../../helpers/createDateTimeHelper'
 import { useCallback, useEffect, useState } from 'react'
 
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import LeadCommentsClient from '../../../../../../../../api/leads/clients/LeadCommentsClient'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
+import LeadCommentsClient from '../../../../../../../../api/customers/clients/LeadCommentsClient'
 import { useParams } from 'react-router'
 
-const leadCommentsClient = new LeadCommentsClient(HttpClientFactoryInstance.Api)
+const leadCommentsClient = new LeadCommentsClient(HttpClientFactory.Api)
 
 const useLeadComments = (): LeadCommentsState => {
     const { id }: { id: string } = useParams()

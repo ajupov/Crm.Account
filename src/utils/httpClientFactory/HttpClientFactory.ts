@@ -1,19 +1,24 @@
-import IHttpClientFactory, { IHttpClient } from '../../../api/IHttpClientFactory'
+import Configuration from '../../configuration/Configuration'
+import IJsonHttpClientFactory from '../http/jsonHttpClient/IJsonHttpClientFactory'
+import JsonHttpClientFactory from '../http/jsonHttpClient/JsonHttpClientFactory'
 
-import HttpClient from '../httpClient/HttpClient'
+export default class HttpClientFactory {
+    private static _host: string
+    private static _api: IJsonHttpClientFactory
 
-export default class HttpClientFactory implements IHttpClientFactory {
-    private readonly _host: string
+    public static get Api(): IJsonHttpClientFactory {
+        if (!this._api) {
+            this._api = new JsonHttpClientFactory()
+        }
 
-    constructor(host: string) {
-        this._host = host
+        return this._api
     }
 
-    get host(): string {
+    public static get Host(): string {
+        if (!this._host) {
+            this._host = new Configuration().ApiHost
+        }
+
         return this._host
-    }
-
-    createClient(host?: string): IHttpClient {
-        return new HttpClient(host)
     }
 }

@@ -1,6 +1,6 @@
-import DealAttribute from '../../../../../api/deals/models/DealAttribute'
-import DealAttributeGetPagedListRequest from '../../../../../api/deals/models/DealAttributeGetPagedListRequest'
-import DealAttributeGetPagedListResponse from '../../../../../api/deals/models/DealAttributeGetPagedListResponse'
+import DealAttribute from '../../../../../api/orders/models/DealAttribute'
+import DealAttributeGetPagedListRequest from '../../../../../api/orders/models/DealAttributeGetPagedListRequest'
+import DealAttributeGetPagedListResponse from '../../../../../api/orders/models/DealAttributeGetPagedListResponse'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'

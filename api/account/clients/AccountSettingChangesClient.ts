@@ -1,17 +1,22 @@
 import AccountSettingGetPagedListRequest from '../models/AccountSettingChangeGetPagedListRequest'
 import AccountSettingGetPagedListResponse from '../models/AccountSettingChangeGetPagedListResponse'
-import IHttpClientFactory from '../../IHttpClientFactory'
+import IJsonHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 
 export default class AccountSettingChangesClient {
-    private readonly httpClientFactory: IHttpClientFactory
+    private readonly _host: string
+    private readonly _factory: IJsonHttpClientFactory
 
-    constructor(httpClientFactory: IHttpClientFactory) {
-        this.httpClientFactory = httpClientFactory
+    constructor(host: string, factory: IJsonHttpClientFactory) {
+        this._host = host
+        this._factory = factory
     }
 
-    // prettier-ignore
-    public GetPagedListAsync = (request?: AccountSettingGetPagedListRequest): Promise<AccountSettingGetPagedListResponse> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .post<AccountSettingGetPagedListResponse>('/Account/Settings/Changes/v1/GetPagedList', request)
+    public GetPagedListAsync = (
+        request?: AccountSettingGetPagedListRequest
+    ): Promise<AccountSettingGetPagedListResponse> =>
+        this._factory.postAsync<AccountSettingGetPagedListResponse>(
+            this._host + '/Account/Settings/Changes/v1/GetPagedList',
+            void 0,
+            request
+        )
 }

@@ -1,6 +1,6 @@
-import DealStatus from '../../../../../api/deals/models/DealStatus'
-import DealStatusGetPagedListRequest from '../../../../../api/deals/models/DealStatusGetPagedListRequest'
-import DealStatusGetPagedListResponse from '../../../../../api/deals/models/DealStatusGetPagedListResponse'
+import DealStatus from '../../../../../api/orders/models/DealStatus'
+import DealStatusGetPagedListRequest from '../../../../../api/orders/models/DealStatusGetPagedListRequest'
+import DealStatusGetPagedListResponse from '../../../../../api/orders/models/DealStatusGetPagedListResponse'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'

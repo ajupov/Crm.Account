@@ -2,9 +2,9 @@ import CompanyAttributesState, { companyAttributesInitialState } from '../../../
 import { useCallback, useEffect, useState } from 'react'
 
 import CompanyAttributesClient from '../../../../../../../../api/companies/clients/CompanyAttributesClient'
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const companyAttributesClient = new CompanyAttributesClient(HttpClientFactoryInstance.Api)
+const companyAttributesClient = new CompanyAttributesClient(HttpClientFactory.Api)
 
 const useCompanyAttributes = (): CompanyAttributesState => {
     const MaxLimit = 1048576

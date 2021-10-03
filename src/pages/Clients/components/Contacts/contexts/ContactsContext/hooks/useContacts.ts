@@ -2,9 +2,9 @@ import ContactsState, { conactsInitialState } from '../../../states/ContactsStat
 import { useCallback, useEffect, useState } from 'react'
 
 import ContactsClient from '../../../../../../../../api/contacts/clients/ContactsClient'
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const contactsClient = new ContactsClient(HttpClientFactoryInstance.Api)
+const contactsClient = new ContactsClient(HttpClientFactory.Api)
 
 const useContacts = (): ContactsState => {
     const MaxLimit = 1048576

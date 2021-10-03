@@ -3,11 +3,11 @@ import ProductAttributeChangesState, {
 } from '../../../states/ProductAttributeChangesState'
 import { useCallback, useEffect, useState } from 'react'
 
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 import ProductAttributeChangesClient from '../../../../../../../../api/products/clients/ProductAttributeChangesClient'
 import { useParams } from 'react-router'
 
-const productAttributeChangesClient = new ProductAttributeChangesClient(HttpClientFactoryInstance.Api)
+const productAttributeChangesClient = new ProductAttributeChangesClient(HttpClientFactory.Api)
 
 const useProductAttributeChanges = (): ProductAttributeChangesState => {
     const MaxLimit = 1048576

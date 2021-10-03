@@ -1,7 +1,7 @@
 import { useCallback, useContext } from 'react'
 
 import { CommentProps } from '../../../../../../../components/common/collections/Comments/Comment'
-import LeadComment from '../../../../../../../../api/leads/models/LeadComment'
+import LeadComment from '../../../../../../../../api/customers/models/LeadComment'
 import LeadCommentContext from '../../../contexts/LeadCommentContext/LeadCommentContext'
 import LeadCommentsContext from '../../../contexts/LeadCommentsContext/LeadCommentsContext'
 import UserInfoContext from '../../../../../../../components/system/UserInfo/contexts/UserInfoContext/UserInfoContext'
@@ -31,9 +31,10 @@ const useLeadComments = (): UseLeadCommentsTableReturn => {
         [name, commentsState.comments]
     )
 
-    const onChangeCommentToSend = useCallback((value: string) => commentState.setComment({ ...commentState.comment, value }), [
-        commentState
-    ])
+    const onChangeCommentToSend = useCallback(
+        (value: string) => commentState.setComment({ ...commentState.comment, value }),
+        [commentState]
+    )
 
     const onClickSend = useCallback(async () => {
         await commentState.create()

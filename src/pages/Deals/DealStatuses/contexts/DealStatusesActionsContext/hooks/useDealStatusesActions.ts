@@ -1,10 +1,10 @@
 import DealStatusesActionsState, { dealStatusesActionsInitialState } from '../../../states/DealStatusesActionsState'
 import { useCallback, useState } from 'react'
 
-import DealStatusesClient from '../../../../../../../api/deals/clients/DealStatusesClient'
-import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import DealStatusesClient from '../../../../../../../api/orders/clients/DealStatusesClient'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const dealStatusesClient = new DealStatusesClient(HttpClientFactoryInstance.Api)
+const dealStatusesClient = new DealStatusesClient(HttpClientFactory.Api)
 
 const useDealStatusesActions = (): DealStatusesActionsState => {
     const [ids, setIds] = useState(dealStatusesActionsInitialState.ids)

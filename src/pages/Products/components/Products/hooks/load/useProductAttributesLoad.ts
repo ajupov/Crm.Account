@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { DropdownItemProps } from '../../../../../../components/common/fields/Dropdown/Dropdown'
-import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import ProductAttribute from '../../../../../../../api/products/models/ProductAttribute'
 import ProductAttributesClient from '../../../../../../../api/products/clients/ProductAttributesClient'
 
-const productAttributesClient = new ProductAttributesClient(HttpClientFactoryInstance.Api)
+const productAttributesClient = new ProductAttributesClient(HttpClientFactory.Api)
 
 interface UseProductAttributesLoadReturn {
     attributesAsOptions: DropdownItemProps[]

@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { DropdownItemProps } from '../../../../../../components/common/fields/Dropdown/Dropdown'
-import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import LeadSource from '../../../../../../../api/leads/models/LeadSource'
-import LeadSourcesClient from '../../../../../../../api/leads/clients/LeadSourcesClient'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
+import LeadSource from '../../../../../../../api/customers/models/LeadSource'
+import LeadSourcesClient from '../../../../../../../api/customers/clients/LeadSourcesClient'
 
-const leadSourcesClient = new LeadSourcesClient(HttpClientFactoryInstance.Api)
+const leadSourcesClient = new LeadSourcesClient(HttpClientFactory.Api)
 
 interface UseLeadSourcesLoadReturn {
     sourcesAsOptions: DropdownItemProps[]

@@ -2,9 +2,9 @@ import CompaniesState, { conactsInitialState } from '../../../states/CompaniesSt
 import { useCallback, useEffect, useState } from 'react'
 
 import CompaniesClient from '../../../../../../../../api/companies/clients/CompaniesClient'
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const companiesClient = new CompaniesClient(HttpClientFactoryInstance.Api)
+const companiesClient = new CompaniesClient(HttpClientFactory.Api)
 
 const useCompanies = (): CompaniesState => {
     const MaxLimit = 1048576

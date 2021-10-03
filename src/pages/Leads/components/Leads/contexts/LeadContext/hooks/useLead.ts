@@ -1,14 +1,14 @@
 import { LeadState, leadInitialState } from '../../../states/LeadState'
 import { useCallback, useEffect, useState } from 'react'
 
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import LeadAttributesClient from '../../../../../../../../api/leads/clients/LeadAttributesClient'
-import LeadsClient from '../../../../../../../../api/leads/clients/LeadsClient'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
+import LeadAttributesClient from '../../../../../../../../api/customers/clients/LeadAttributesClient'
+import LeadsClient from '../../../../../../../../api/customers/clients/LeadsClient'
 import { leadAttributesInitialState } from '../../../../LeadsAttributes/states/LeadAttributesState'
 import { useParams } from 'react-router'
 
-const leadsClient = new LeadsClient(HttpClientFactoryInstance.Api)
-const leadAttributesClient = new LeadAttributesClient(HttpClientFactoryInstance.Api)
+const leadsClient = new LeadsClient(HttpClientFactory.Api)
+const leadAttributesClient = new LeadAttributesClient(HttpClientFactory.Api)
 
 const useLead = (): LeadState => {
     const { id }: { id: string } = useParams()

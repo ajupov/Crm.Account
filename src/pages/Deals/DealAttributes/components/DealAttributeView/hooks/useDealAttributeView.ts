@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react'
 
-import DealAttribute from '../../../../../../../api/deals/models/DealAttribute'
+import DealAttribute from '../../../../../../../api/orders/models/DealAttribute'
 import DealAttributesActionsContext from '../../../contexts/DealAttributesActionsContext/DealAttributesActionsContext'
 import { ViewDataProps } from '../../../../../../components/common/grids/View/View'
 import { getAttributeTypeName } from '../../../../../../helpers/entityAttributeTypeHelper'

@@ -1,4 +1,4 @@
-import DealStatus from '../../../../../api/deals/models/DealStatus'
+import DealStatus from '../../../../../api/orders/models/DealStatus'
 
 export default interface DealStatusesState {
     isLoading: boolean

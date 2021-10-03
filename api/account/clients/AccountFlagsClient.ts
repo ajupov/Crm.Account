@@ -1,28 +1,21 @@
 import AccountFlagType from '../models/AccountFlagType'
-import IHttpClientFactory from '../../IHttpClientFactory'
+import IJsonHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 
 export default class AccountFlagsClient {
-    private readonly httpClientFactory: IHttpClientFactory
+    private readonly _host: string
+    private readonly _factory: IJsonHttpClientFactory
 
-    constructor(httpClientFactory: IHttpClientFactory) {
-        this.httpClientFactory = httpClientFactory
+    constructor(host: string, factory: IJsonHttpClientFactory) {
+        this._host = host
+        this._factory = factory
     }
 
-    // prettier-ignore
     public IsSetAsync = (type: AccountFlagType): Promise<boolean> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .get<boolean>('/Account/Flags/v1/IsSet', { type })
+        this._factory.getAsync<boolean>(this._host + '/Account/Flags/v1/IsSet', { type })
 
-    // prettier-ignore
     public GetNotSetListAsync = (): Promise<AccountFlagType[]> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .get<AccountFlagType[]>('/Account/Flags/v1/GetNotSetList')
+        this._factory.getAsync<AccountFlagType[]>(this._host + '/Account/Flags/v1/GetNotSetList')
 
-    // prettier-ignore
     public SetAsync = (type: AccountFlagType): Promise<void> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .put('/Account/Flags/v1/Set', { type })
+        this._factory.putAsync(this._host + '/Account/Flags/v1/Set', void 0, { type })
 }

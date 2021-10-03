@@ -1,4 +1,4 @@
-import IHttpClientFactory from '../../IHttpClientFactory'
+import IHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 import UserSettingGetPagedListRequest from '../models/UserSettingChangeGetPagedListRequest'
 import UserSettingGetPagedListResponse from '../../user/models/UserSettingChangeGetPagedListResponse'
 
@@ -9,7 +9,6 @@ export default class UserSettingChangesClient {
         this.httpClientFactory = httpClientFactory
     }
 
-    // prettier-ignore
     public GetPagedListAsync = (request?: UserSettingGetPagedListRequest): Promise<UserSettingGetPagedListResponse> =>
         this.httpClientFactory
             .createClient(this.httpClientFactory.host)

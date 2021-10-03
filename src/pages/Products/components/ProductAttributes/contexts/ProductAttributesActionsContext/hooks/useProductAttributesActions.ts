@@ -3,10 +3,10 @@ import ProductAttributesActionsState, {
 } from '../../../states/ProductAttributesActionsState'
 import { useCallback, useState } from 'react'
 
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 import ProductAttributesClient from '../../../../../../../../api/products/clients/ProductAttributesClient'
 
-const productAttributesClient = new ProductAttributesClient(HttpClientFactoryInstance.Api)
+const productAttributesClient = new ProductAttributesClient(HttpClientFactory.Api)
 
 const useProductAttributesActions = (): ProductAttributesActionsState => {
     const [ids, setIds] = useState(productAttributesActionsInitialState.ids)

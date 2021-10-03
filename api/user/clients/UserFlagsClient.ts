@@ -1,4 +1,4 @@
-import IHttpClientFactory from '../../IHttpClientFactory'
+import IHttpClientFactory from '../../../src/utils/http/jsonHttpClient/IJsonHttpClientFactory'
 import UserFlagType from '../models/UserFlagType'
 
 export default class UserFlagsClient {
@@ -8,21 +8,14 @@ export default class UserFlagsClient {
         this.httpClientFactory = httpClientFactory
     }
 
-    // prettier-ignore
     public IsSetAsync = (type: UserFlagType): Promise<boolean> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .get<boolean>('/User/Flags/v1/IsSet', { type })
+        this.httpClientFactory.createClient(this.httpClientFactory.host).get<boolean>('/User/Flags/v1/IsSet', { type })
 
-    // prettier-ignore
     public GetNotSetListAsync = (): Promise<UserFlagType[]> =>
         this.httpClientFactory
             .createClient(this.httpClientFactory.host)
             .get<UserFlagType[]>('/User/Flags/v1/GetNotSetList')
 
-    // prettier-ignore
     public SetAsync = (type: UserFlagType): Promise<void> =>
-        this.httpClientFactory
-            .createClient(this.httpClientFactory.host)
-            .put('/User/Flags/v1/Set', { type })
+        this.httpClientFactory.createClient(this.httpClientFactory.host).put('/User/Flags/v1/Set', { type })
 }

@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { DropdownItemProps } from '../../../../../../components/common/fields/Dropdown/Dropdown'
-import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import ProductCategoriesClient from '../../../../../../../api/products/clients/ProductCategoriesClient'
 import ProductCategory from '../../../../../../../api/products/models/ProductCategory'
 
-const productCategoriesClient = new ProductCategoriesClient(HttpClientFactoryInstance.Api)
+const productCategoriesClient = new ProductCategoriesClient(HttpClientFactory.Api)
 
 interface UseProductCategoriesLoadReturn {
     categoriesAsOptions: DropdownItemProps[]

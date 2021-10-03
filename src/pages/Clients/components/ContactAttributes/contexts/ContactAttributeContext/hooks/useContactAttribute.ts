@@ -2,10 +2,10 @@ import { ContactAttributeState, contactAttributeInitialState } from '../../../st
 import { useCallback, useEffect, useState } from 'react'
 
 import ContactAttributesClient from '../../../../../../../../api/contacts/clients/ContactAttributesClient'
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
-const contactAttributesClient = new ContactAttributesClient(HttpClientFactoryInstance.Api)
+const contactAttributesClient = new ContactAttributesClient(HttpClientFactory.Api)
 
 const useContactAttribute = (): ContactAttributeState => {
     const { id }: { id: string } = useParams()

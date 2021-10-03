@@ -4,9 +4,9 @@ import ContactAttributesActionsState, {
 import { useCallback, useState } from 'react'
 
 import ContactAttributesClient from '../../../../../../../../api/contacts/clients/ContactAttributesClient'
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const contactAttributesClient = new ContactAttributesClient(HttpClientFactoryInstance.Api)
+const contactAttributesClient = new ContactAttributesClient(HttpClientFactory.Api)
 
 const useContactAttributesActions = (): ContactAttributesActionsState => {
     const [ids, setIds] = useState(contactAttributesActionsInitialState.ids)

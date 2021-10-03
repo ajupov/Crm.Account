@@ -7,10 +7,10 @@ import {
 import { useCallback, useEffect, useState } from 'react'
 
 import ContactCommentsClient from '../../../../../../../../api/contacts/clients/ContactCommentsClient'
-import HttpClientFactoryInstance from '../../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
-const contactCommentsClient = new ContactCommentsClient(HttpClientFactoryInstance.Api)
+const contactCommentsClient = new ContactCommentsClient(HttpClientFactory.Api)
 
 const useContactComments = (): ContactCommentsState => {
     const { id }: { id: string } = useParams()

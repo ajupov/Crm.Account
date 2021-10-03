@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react'
 
-import LeadSource from '../../../../../../../../api/leads/models/LeadSource'
+import LeadSource from '../../../../../../../../api/customers/models/LeadSource'
 import LeadSourcesActionsContext from '../../../contexts/LeadSourcesActionsContext/LeadSourcesActionsContext'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { useHistory } from 'react-router'

@@ -3,9 +3,9 @@ import { useCallback, useEffect, useState } from 'react'
 
 import AccountFlagType from '../../../../../../../api/account/models/AccountFlagType'
 import AccountFlagsClient from '../../../../../../../api/account/clients/AccountFlagsClient'
-import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const accountFlagsClient = new AccountFlagsClient(HttpClientFactoryInstance.Api)
+const accountFlagsClient = new AccountFlagsClient(HttpClientFactory.Api)
 
 const useAccountFlags = (): AccountFlagsState => {
     const [notSetFlags, setNotSetFlags] = useState(accountFlagsInitialState.notSetFlags)

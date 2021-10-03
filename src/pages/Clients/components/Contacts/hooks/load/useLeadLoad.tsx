@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
 
-import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
-import Lead from '../../../../../../../api/leads/models/Lead'
-import LeadsClient from '../../../../../../../api/leads/clients/LeadsClient'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
+import Lead from '../../../../../../../api/customers/models/Lead'
+import LeadsClient from '../../../../../../../api/customers/clients/LeadsClient'
 
-const leadsClient = new LeadsClient(HttpClientFactoryInstance.Api)
+const leadsClient = new LeadsClient(HttpClientFactory.Api)
 
 interface UseLeadLoadReturn {
     lead?: Lead

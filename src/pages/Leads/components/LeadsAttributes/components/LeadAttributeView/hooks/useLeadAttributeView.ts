@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react'
 
-import LeadAttribute from '../../../../../../../../api/leads/models/LeadAttribute'
+import LeadAttribute from '../../../../../../../../api/customers/models/LeadAttribute'
 import LeadAttributesActionsContext from '../../../contexts/LeadAttributesActionsContext/LeadAttributesActionsContext'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
 import { getAttributeTypeName } from '../../../../../../../helpers/entityAttributeTypeHelper'

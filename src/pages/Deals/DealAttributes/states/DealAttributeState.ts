@@ -1,5 +1,5 @@
-import DealAttribute from '../../../../../api/deals/models/DealAttribute'
-import DealAttributeType from '../../../../../api/deals/models/DealAttributeType'
+import DealAttribute from '../../../../../api/orders/models/DealAttribute'
+import DealAttributeType from '../../../../../api/orders/models/DealAttributeType'
 
 export interface DealAttributeState {
     isLoading: boolean

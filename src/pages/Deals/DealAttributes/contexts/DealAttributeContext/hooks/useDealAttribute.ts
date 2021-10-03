@@ -1,11 +1,11 @@
 import { DealAttributeState, dealAttributeInitialState } from '../../../states/DealAttributeState'
 import { useCallback, useEffect, useState } from 'react'
 
-import DealAttributesClient from '../../../../../../../api/deals/clients/DealAttributesClient'
-import HttpClientFactoryInstance from '../../../../../../utils/httpClientFactory/HttpClientFactoryInstance'
+import DealAttributesClient from '../../../../../../../api/orders/clients/DealAttributesClient'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
-const dealAttributesClient = new DealAttributesClient(HttpClientFactoryInstance.Api)
+const dealAttributesClient = new DealAttributesClient(HttpClientFactory.Api)
 
 const useDealAttribute = (): DealAttributeState => {
     const { id }: { id: string } = useParams()

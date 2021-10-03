@@ -2,9 +2,9 @@ import { calculateOffset, calculatePage } from '../../../../../../../../../utils
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import Lead from '../../../../../../../../../../api/leads/models/Lead'
-import LeadAttributeLink from '../../../../../../../../../../api/leads/models/LeadAttributeLink'
-import LeadChange from '../../../../../../../../../../api/leads/models/LeadChange'
+import Lead from '../../../../../../../../../../api/customers/models/Lead'
+import LeadAttributeLink from '../../../../../../../../../../api/customers/models/LeadAttributeLink'
+import LeadChange from '../../../../../../../../../../api/customers/models/LeadChange'
 import LeadChangesContext from '../../../../../contexts/LeadChangesContext/LeadChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../../components/common/collections/Table/TableHeader'
@@ -136,10 +136,10 @@ const useLeadChangesTable = (): UseLeadChangesTableReturn => {
         []
     )
 
-    const page = useMemo(() => calculatePage(state.request.offset, state.request.limit), [
-        state.request.limit,
-        state.request.offset
-    ])
+    const page = useMemo(
+        () => calculatePage(state.request.offset, state.request.limit),
+        [state.request.limit, state.request.offset]
+    )
 
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }

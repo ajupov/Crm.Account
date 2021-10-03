@@ -1,5 +1,5 @@
-import LeadComment from '../../../../../../api/leads/models/LeadComment'
-import LeadCommentGetPagedListRequest from '../../../../../../api/leads/models/LeadCommentGetPagedListRequest'
+import LeadComment from '../../../../../../api/customers/models/LeadComment'
+import LeadCommentGetPagedListRequest from '../../../../../../api/customers/models/LeadCommentGetPagedListRequest'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'

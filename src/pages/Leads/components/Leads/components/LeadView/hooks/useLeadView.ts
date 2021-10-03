@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react'
 
-import Lead from '../../../../../../../../api/leads/models/Lead'
+import Lead from '../../../../../../../../api/customers/models/Lead'
 import LeadContext from '../../../contexts/LeadContext/LeadContext'
 import LeadsActionsContext from '../../../contexts/LeadsActionsContext/LeadsActionsContext'
 import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
@@ -38,9 +38,10 @@ const useLeadView = (): UseLeadViewReturn => {
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const mapAttributes = useCallback(() => joinAttributes(leadState.lead.attributeLinks), [
-        leadState.lead.attributeLinks
-    ])
+    const mapAttributes = useCallback(
+        () => joinAttributes(leadState.lead.attributeLinks),
+        [leadState.lead.attributeLinks]
+    )
 
     const map = useCallback(
         (lead: Lead): ViewDataProps[] => [
