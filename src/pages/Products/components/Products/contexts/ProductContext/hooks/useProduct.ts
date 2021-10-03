@@ -9,9 +9,9 @@ import { productAttributesInitialState } from '../../../../ProductAttributes/sta
 import { productCategoriesInitialState } from '../../../../ProductCategories/states/ProductCategoriesState'
 import { useParams } from 'react-router'
 
-const productsClient = new ProductsClient(HttpClientFactory.Api)
-const productCategoriesClient = new ProductCategoriesClient(HttpClientFactory.Api)
-const productAttributesClient = new ProductAttributesClient(HttpClientFactory.Api)
+const productsClient = new ProductsClient(HttpClientFactory.Host, HttpClientFactory.Api)
+const productCategoriesClient = new ProductCategoriesClient(HttpClientFactory.Host, HttpClientFactory.Api)
+const productAttributesClient = new ProductAttributesClient(HttpClientFactory.Host, HttpClientFactory.Api)
 
 const useProduct = (): ProductState => {
     const { id }: { id: string } = useParams()

@@ -5,7 +5,7 @@ import HttpClientFactory from '../../../../../../../utils/httpClientFactory/Http
 import ProductStatusesChangesClient from '../../../../../../../../api/products/clients/ProductStatusesChangesClient'
 import { useParams } from 'react-router'
 
-const productStatusesChangesClient = new ProductStatusesChangesClient(HttpClientFactory.Api)
+const productStatusesChangesClient = new ProductStatusesChangesClient(HttpClientFactory.Host, HttpClientFactory.Api)
 
 const useProductStatusChanges = (): ProductStatusChangesState => {
     const MaxLimit = 1048576

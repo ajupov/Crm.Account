@@ -7,7 +7,7 @@ import HttpClientFactory from '../../../../../../../utils/httpClientFactory/Http
 import ProductCategoryChangesClient from '../../../../../../../../api/products/clients/ProductCategoryChangesClient'
 import { useParams } from 'react-router'
 
-const productCategoryChangesClient = new ProductCategoryChangesClient(HttpClientFactory.Api)
+const productCategoryChangesClient = new ProductCategoryChangesClient(HttpClientFactory.Host, HttpClientFactory.Api)
 
 const useProductCategoryChanges = (): ProductCategoryChangesState => {
     const MaxLimit = 1048576

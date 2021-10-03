@@ -1,7 +1,7 @@
 import { Icon, Menu, SemanticICONS } from 'semantic-ui-react'
 import React, { FC, useCallback } from 'react'
 
-import ContactsRoutes from '../../../../../pages/Clients/components/Contacts/routes/ContactsRoutes'
+import ContactsRoutes from '../../../../../pages/Customers/components/Contacts/routes/ContactsRoutes'
 import { Link } from 'react-router-dom'
 import ProductsRoutes from '../../../../../pages/Products/components/Products/routes/ProductsRoutes'
 

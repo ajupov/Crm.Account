@@ -5,7 +5,7 @@ import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpCli
 import ProductStatus from '../../../../../../../api/products/models/ProductStatus'
 import ProductStatusesClient from '../../../../../../../api/products/clients/ProductStatusesClient'
 
-const productStatusesClient = new ProductStatusesClient(HttpClientFactory.Api)
+const productStatusesClient = new ProductStatusesClient(HttpClientFactory.Host, HttpClientFactory.Api)
 
 interface UseProductStatusesLoadReturn {
     statusesAsOptions: DropdownItemProps[]

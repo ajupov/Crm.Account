@@ -5,7 +5,7 @@ import AccountFlagType from '../../../../../../../api/account/models/AccountFlag
 import AccountFlagsClient from '../../../../../../../api/account/clients/AccountFlagsClient'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const accountFlagsClient = new AccountFlagsClient(HttpClientFactory.Api)
+const accountFlagsClient = new AccountFlagsClient(HttpClientFactory.Host, HttpClientFactory.Api)
 
 const useAccountFlags = (): AccountFlagsState => {
     const [notSetFlags, setNotSetFlags] = useState(accountFlagsInitialState.notSetFlags)

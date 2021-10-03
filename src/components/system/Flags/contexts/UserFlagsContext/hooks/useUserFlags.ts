@@ -5,7 +5,7 @@ import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpCli
 import UserFlagType from '../../../../../../../api/user/models/UserFlagType'
 import UserFlagsClient from '../../../../../../../api/user/clients/UserFlagsClient'
 
-const userFlagsClient = new UserFlagsClient(HttpClientFactory.Api)
+const userFlagsClient = new UserFlagsClient(HttpClientFactory.Host, HttpClientFactory.Api)
 
 const useUserFlags = (): UserFlagsState => {
     const [notSetFlags, setNotSetFlags] = useState(userFlagsInitialState.notSetFlags)

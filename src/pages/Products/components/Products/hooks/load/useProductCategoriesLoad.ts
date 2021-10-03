@@ -5,7 +5,7 @@ import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpCli
 import ProductCategoriesClient from '../../../../../../../api/products/clients/ProductCategoriesClient'
 import ProductCategory from '../../../../../../../api/products/models/ProductCategory'
 
-const productCategoriesClient = new ProductCategoriesClient(HttpClientFactory.Api)
+const productCategoriesClient = new ProductCategoriesClient(HttpClientFactory.Host, HttpClientFactory.Api)
 
 interface UseProductCategoriesLoadReturn {
     categoriesAsOptions: DropdownItemProps[]

@@ -2,7 +2,7 @@ import { Icon, Menu, SemanticICONS } from 'semantic-ui-react'
 import React, { FC, useCallback, useContext, useMemo } from 'react'
 
 import Configuration from '../../../../../configuration/Configuration'
-import ContactsRoutes from '../../../../../pages/Clients/components/Contacts/routes/ContactsRoutes'
+import ContactsRoutes from '../../../../../pages/Customers/components/Contacts/routes/ContactsRoutes'
 import { Link } from 'react-router-dom'
 import ProductsRoutes from '../../../../../pages/Products/components/Products/routes/ProductsRoutes'
 import UserInfoContext from '../../../../system/UserInfo/contexts/UserInfoContext/UserInfoContext'

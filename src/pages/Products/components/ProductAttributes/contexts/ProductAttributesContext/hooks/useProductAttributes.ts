@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 import ProductAttributesClient from '../../../../../../../../api/products/clients/ProductAttributesClient'
 
-const productAttributesClient = new ProductAttributesClient(HttpClientFactory.Api)
+const productAttributesClient = new ProductAttributesClient(HttpClientFactory.Host, HttpClientFactory.Api)
 
 const useProductAttributes = (): ProductAttributesState => {
     const MaxLimit = 1048576

@@ -5,7 +5,7 @@ import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpCli
 import ProductAttribute from '../../../../../../../api/products/models/ProductAttribute'
 import ProductAttributesClient from '../../../../../../../api/products/clients/ProductAttributesClient'
 
-const productAttributesClient = new ProductAttributesClient(HttpClientFactory.Api)
+const productAttributesClient = new ProductAttributesClient(HttpClientFactory.Host, HttpClientFactory.Api)
 
 interface UseProductAttributesLoadReturn {
     attributesAsOptions: DropdownItemProps[]

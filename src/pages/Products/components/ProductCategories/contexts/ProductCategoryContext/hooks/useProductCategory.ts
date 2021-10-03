@@ -5,7 +5,7 @@ import HttpClientFactory from '../../../../../../../utils/httpClientFactory/Http
 import ProductCategoriesClient from '../../../../../../../../api/products/clients/ProductCategoriesClient'
 import { useParams } from 'react-router'
 
-const productCategoriesClient = new ProductCategoriesClient(HttpClientFactory.Api)
+const productCategoriesClient = new ProductCategoriesClient(HttpClientFactory.Host, HttpClientFactory.Api)
 
 const useProductCategory = (): ProductCategoryState => {
     const { id }: { id: string } = useParams()

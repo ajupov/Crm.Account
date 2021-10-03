@@ -6,8 +6,8 @@ import Configuration from '../../../../../../configuration/Configuration'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import UserInfoClient from '../../../../../../../api/auth/clients/UserInfoClient'
 
-const authClient = new AuthClient(HttpClientFactory.Api)
-const userInfoClient = new UserInfoClient(HttpClientFactory.Api)
+const authClient = new AuthClient(HttpClientFactory.Host, HttpClientFactory.Api)
+const userInfoClient = new UserInfoClient(HttpClientFactory.Host, HttpClientFactory.Api)
 const configuration = new Configuration()
 
 const useUserInfo = (): UserInfoState => {

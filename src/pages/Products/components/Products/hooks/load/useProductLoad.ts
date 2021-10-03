@@ -4,7 +4,7 @@ import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpCli
 import Product from '../../../../../../../api/products/models/Product'
 import ProductsClient from '../../../../../../../api/products/clients/ProductsClient'
 
-const productsClient = new ProductsClient(HttpClientFactory.Api)
+const productsClient = new ProductsClient(HttpClientFactory.Host, HttpClientFactory.Api)
 
 interface UseProductLoadReturn {
     product?: Product

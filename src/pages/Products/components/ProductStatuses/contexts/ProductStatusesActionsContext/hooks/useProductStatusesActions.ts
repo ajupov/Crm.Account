@@ -6,7 +6,7 @@ import { useCallback, useState } from 'react'
 import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
 import ProductStatusesClient from '../../../../../../../../api/products/clients/ProductStatusesClient'
 
-const productStatusesClient = new ProductStatusesClient(HttpClientFactory.Api)
+const productStatusesClient = new ProductStatusesClient(HttpClientFactory.Host, HttpClientFactory.Api)
 
 const useProductStatusesActions = (): ProductStatusesActionsState => {
     const [ids, setIds] = useState(productStatusesActionsInitialState.ids)

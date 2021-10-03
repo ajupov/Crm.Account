@@ -5,7 +5,7 @@ import HttpClientFactory from '../../../../../../../utils/httpClientFactory/Http
 import ProductAttributesClient from '../../../../../../../../api/products/clients/ProductAttributesClient'
 import { useParams } from 'react-router'
 
-const productAttributesClient = new ProductAttributesClient(HttpClientFactory.Api)
+const productAttributesClient = new ProductAttributesClient(HttpClientFactory.Host, HttpClientFactory.Api)
 
 const useProductAttribute = (): ProductAttributeState => {
     const { id }: { id: string } = useParams()
