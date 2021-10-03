@@ -8,8 +8,6 @@ export default interface OrderGetPagedListRequest {
     maxSum?: number
     minSumWithoutDiscount?: number
     maxSumWithoutDiscount?: number
-    minFinishProbability?: number
-    maxFinishProbability?: number
     isDeleted?: boolean
     minCreateDate?: string
     maxCreateDate?: string
@@ -17,13 +15,12 @@ export default interface OrderGetPagedListRequest {
     maxModifyDate?: string
     typeIds?: string[]
     statusIds?: string[]
-    companyIds?: string[]
-    contactIds?: string[]
+    customerIds?: string[]
     createUserIds?: string[]
     responsibleUserIds?: string[]
     allAttributes?: boolean
     attributes?: { [key: string]: string }
-    positionsProductIds?: string[]
+    itemsProductIds?: string[]
     offset: number
     limit: number
     sortBy?: string

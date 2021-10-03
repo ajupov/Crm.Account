@@ -8,42 +8,34 @@ export default class ProductCategoriesClient {
     private readonly _factory: IJsonHttpClientFactory
 
     constructor(host: string, factory: IJsonHttpClientFactory) {
-                this._host = host
+        this._host = host
         this._factory = factory
     }
 
     public GetAsync = (id: string): Promise<ProductCategory> =>
-        this._factory
-            .
-            .getAsync<ProductCategory>('/Products/Categories/v1/Get', { id })
+        this._factory.getAsync<ProductCategory>(this._host + '/Products/Categories/v1/Get', { id })
 
     public GetListAsync = (values?: string[]): Promise<ProductCategory[]> =>
-        this._factory
-            .
-            .postAsync<ProductCategory[]>('/Products/Categories/v1/GetList', values)
+        this._factory.postAsync<ProductCategory[]>(this._host + '/Products/Categories/v1/GetList', void 0, values)
 
     public GetPagedListAsync = (
         request?: ProductCategoryGetPagedListRequest
     ): Promise<ProductCategoryGetPagedListResponse> =>
-        this._factory
-            .
-            .postAsync<ProductCategoryGetPagedListResponse>('/Products/Categories/v1/GetPagedList', request)
+        this._factory.postAsync<ProductCategoryGetPagedListResponse>(
+            this._host + '/Products/Categories/v1/GetPagedList',
+            void 0,
+            request
+        )
 
     public CreateAsync = (category?: ProductCategory): Promise<string> =>
-        this._factory
-            .
-            .put<string>('/Products/Categories/v1/Create', category)
+        this._factory.postAsync<string>(this._host + '/Products/Categories/v1/Create', void 0, category)
 
     public UpdateAsync = (category?: ProductCategory): Promise<void> =>
-        this._factory
-            .
-            .patch('/Products/Categories/v1/Update', category)
+        this._factory.patchAsync(this._host + '/Products/Categories/v1/Update', void 0, category)
 
     public DeleteAsync = (values?: string[]): Promise<void> =>
-        this._factory.patchAsync('/Products/Categories/v1/Delete', values)
+        this._factory.patchAsync(this._host + '/Products/Categories/v1/Delete', void 0, values)
 
     public RestoreAsync = (values?: string[]): Promise<void> =>
-        this._factory
-            .
-            .patch('/Products/Categories/v1/Restore', values)
+        this._factory.patchAsync(this._host + '/Products/Categories/v1/Restore', void 0, values)
 }

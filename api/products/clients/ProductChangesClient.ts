@@ -16,6 +16,7 @@ export default class ProductChangesClient {
     ): Promise<ProductChangeGetPagedListResponse> =>
         this._factory.postAsync<ProductChangeGetPagedListResponse>(
             this._host + '/Products/Changes/v1/GetPagedList',
+            void 0,
             request
         )
 }

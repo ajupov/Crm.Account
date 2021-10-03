@@ -8,16 +8,14 @@ export default interface Order {
     accountId?: string
     typeId?: string
     statusId?: string
-    companyId?: string
-    contactId?: string
     createUserId?: string
     responsibleUserId?: string
+    customerId?: string
     name?: string
     startDateTime?: string
     endDateTime?: string
     sum: number
     sumWithoutDiscount: number
-    finishProbability: number
     isDeleted: boolean
     createDateTime?: string
     modifyDateTime?: string

@@ -7,14 +7,16 @@ export default class ProductStatusesChangesClient {
     private readonly _factory: IJsonHttpClientFactory
 
     constructor(host: string, factory: IJsonHttpClientFactory) {
-                this._host = host
+        this._host = host
         this._factory = factory
     }
 
     public GetPagedListAsync = (
         request?: ProductStatusChangeGetPagedListRequest
     ): Promise<ProductStatusChangeGetPagedListResponse> =>
-        this._factory
-            .
-            .postAsync<ProductStatusChangeGetPagedListResponse>('/Products/Statuses/Changes/v1/GetPagedList', request)
+        this._factory.postAsync<ProductStatusChangeGetPagedListResponse>(
+            this._host + '/Products/Statuses/Changes/v1/GetPagedList',
+            void 0,
+            request
+        )
 }
