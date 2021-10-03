@@ -1,13 +1,13 @@
 import React, { FC, useContext } from 'react'
 
-import DealStatusesActionsContext from '../../contexts/DealStatusesActionsContext/DealStatusesActionsContext'
+import OrderStatusesActionsContext from '../../contexts/OrderStatusesActionsContext/OrderStatusesActionsContext'
 import DeleteModal from '../../../../../components/common/modals/DeleteModal/DeleteModal'
-import useDealStatusDelete from './hooks/useDealStatusDelete'
+import useOrderStatusDelete from './hooks/useOrderStatusDelete'
 
 // TODO: Move to l10n
-const DealStatusDelete: FC = () => {
-    const state = useContext(DealStatusesActionsContext)
-    const { onClickConfirm, onClickCancel } = useDealStatusDelete()
+const OrderStatusDelete: FC = () => {
+    const state = useContext(OrderStatusesActionsContext)
+    const { onClickConfirm, onClickCancel } = useOrderStatusDelete()
 
     return (
         <DeleteModal
@@ -20,4 +20,4 @@ const DealStatusDelete: FC = () => {
     )
 }
 
-export default DealStatusDelete
+export default OrderStatusDelete

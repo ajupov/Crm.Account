@@ -1,26 +1,26 @@
-import DealAttribute from '../../../../../api/orders/models/DealAttribute'
-import DealAttributeType from '../../../../../api/orders/models/DealAttributeType'
+import OrderAttribute from '../../../../../api/orders/models/OrderAttribute'
+import OrderAttributeType from '../../../../../api/orders/models/OrderAttributeType'
 
-export interface DealAttributeState {
+export interface OrderAttributeState {
     isLoading: boolean
-    attribute: DealAttribute
-    setAttribute: (attribute: DealAttribute) => void
+    attribute: OrderAttribute
+    setAttribute: (attribute: OrderAttribute) => void
     create: () => Promise<void>
     update: () => Promise<void>
 }
 
-export const dealAttributeInitialState: DealAttributeState = {
+export const orderAttributeInitialState: OrderAttributeState = {
     isLoading: false,
     attribute: {
         id: void 0,
         accountId: void 0,
-        type: DealAttributeType.Text,
+        type: OrderAttributeType.Text,
         key: void 0,
         isDeleted: false,
         createDateTime: void 0,
         modifyDateTime: void 0
     },
-    setAttribute: (_: DealAttribute) => void 0,
+    setAttribute: (_: OrderAttribute) => void 0,
     create: () => Promise.resolve(void 0),
     update: () => Promise.resolve(void 0)
 }

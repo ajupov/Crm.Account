@@ -1,16 +1,16 @@
-import { DealAttributeState, dealAttributeInitialState } from '../../../states/DealAttributeState'
+import { OrderAttributeState, orderAttributeInitialState } from '../../../states/OrderAttributeState'
 import { useCallback, useEffect, useState } from 'react'
 
-import DealAttributesClient from '../../../../../../../api/orders/clients/DealAttributesClient'
+import OrderAttributesClient from '../../../../../../../api/orders/clients/OrderAttributesClient'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
-const dealAttributesClient = new DealAttributesClient(HttpClientFactory.Api)
+const orderAttributesClient = new OrderAttributesClient(HttpClientFactory.Api)
 
-const useDealAttribute = (): DealAttributeState => {
+const useOrderAttribute = (): OrderAttributeState => {
     const { id }: { id: string } = useParams()
-    const [isLoading, setIsLoading] = useState(dealAttributeInitialState.isLoading)
-    const [attribute, setAttribute] = useState(dealAttributeInitialState.attribute)
+    const [isLoading, setIsLoading] = useState(orderAttributeInitialState.isLoading)
+    const [attribute, setAttribute] = useState(orderAttributeInitialState.attribute)
 
     const get = useCallback(async () => {
         if (!id) {
@@ -19,7 +19,7 @@ const useDealAttribute = (): DealAttributeState => {
 
         setIsLoading(true)
 
-        const response = await dealAttributesClient.GetAsync(id)
+        const response = await orderAttributesClient.GetAsync(id)
 
         setAttribute(response)
 
@@ -29,7 +29,7 @@ const useDealAttribute = (): DealAttributeState => {
     const create = useCallback(async () => {
         setIsLoading(true)
 
-        await dealAttributesClient.CreateAsync(attribute)
+        await orderAttributesClient.CreateAsync(attribute)
 
         setIsLoading(false)
     }, [attribute])
@@ -37,7 +37,7 @@ const useDealAttribute = (): DealAttributeState => {
     const update = useCallback(async () => {
         setIsLoading(true)
 
-        await dealAttributesClient.UpdateAsync(attribute)
+        await orderAttributesClient.UpdateAsync(attribute)
 
         setIsLoading(false)
     }, [attribute])
@@ -49,4 +49,4 @@ const useDealAttribute = (): DealAttributeState => {
     return { isLoading, attribute, setAttribute, create, update }
 }
 
-export default useDealAttribute
+export default useOrderAttribute

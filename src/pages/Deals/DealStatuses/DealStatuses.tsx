@@ -1,44 +1,44 @@
 import React, { FC, useEffect } from 'react'
 
-import DealStatusContextProvider from './contexts/DealStatusContext/DealStatusContextProvider'
-import DealStatusDelete from './components/DealStatusDelete/DealStatusDelete'
-import DealStatusRestore from './components/DealStatusRestore/DealStatusRestore'
-import DealStatusesActionsContextProvider from './contexts/DealStatusesActionsContext/DealStatusesActionsContextProvider'
-import DealStatusesContextProvider from './contexts/DealStatusesContext/DealStatusesContextProvider'
-import DealStatusesFilter from './components/DealStatusesFilter/DealStatusesFilter'
-import DealStatusesFilterMobile from './components/DealStatusesFilterMobile/DealStatusesFilterMobile'
-import DealStatusesFiltersContextProvider from './contexts/DealStatusesFiltersContext/DealStatusesFiltersContextProvider'
-import DealStatusesTable from './components/DealStatusesTable/DealStatusesTable'
-import DealsMenu from '../DealsMenu/DealsMenu'
+import OrderStatusContextProvider from './contexts/OrderStatusContext/OrderStatusContextProvider'
+import OrderStatusDelete from './components/OrderStatusDelete/OrderStatusDelete'
+import OrderStatusRestore from './components/OrderStatusRestore/OrderStatusRestore'
+import OrderStatusesActionsContextProvider from './contexts/OrderStatusesActionsContext/OrderStatusesActionsContextProvider'
+import OrderStatusesContextProvider from './contexts/OrderStatusesContext/OrderStatusesContextProvider'
+import OrderStatusesFilter from './components/OrderStatusesFilter/OrderStatusesFilter'
+import OrderStatusesFilterMobile from './components/OrderStatusesFilterMobile/OrderStatusesFilterMobile'
+import OrderStatusesFiltersContextProvider from './contexts/OrderStatusesFiltersContext/OrderStatusesFiltersContextProvider'
+import OrderStatusesTable from './components/OrderStatusesTable/OrderStatusesTable'
+import OrdersMenu from '../OrdersMenu/OrdersMenu'
 import Page from '../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
-const DealStatuses: FC = () => {
+const OrderStatuses: FC = () => {
     const title = 'Статусы'
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <DealStatusesContextProvider>
-            <DealStatusesActionsContextProvider>
-                <DealStatusesFiltersContextProvider>
-                    <DealStatusContextProvider>
+        <OrderStatusesContextProvider>
+            <OrderStatusesActionsContextProvider>
+                <OrderStatusesFiltersContextProvider>
+                    <OrderStatusContextProvider>
                         <Page
                             title={title}
-                            firstSidebar={<DealsMenu />}
-                            secondSidebar={<DealStatusesFilter />}
-                            secondSidebarMobile={<DealStatusesFilterMobile />}
+                            firstSidebar={<OrdersMenu />}
+                            secondSidebar={<OrderStatusesFilter />}
+                            secondSidebarMobile={<OrderStatusesFilterMobile />}
                         >
-                            <DealStatusesTable />
-                            <DealStatusDelete />
-                            <DealStatusRestore />
+                            <OrderStatusesTable />
+                            <OrderStatusDelete />
+                            <OrderStatusRestore />
                         </Page>
-                    </DealStatusContextProvider>
-                </DealStatusesFiltersContextProvider>
-            </DealStatusesActionsContextProvider>
-        </DealStatusesContextProvider>
+                    </OrderStatusContextProvider>
+                </OrderStatusesFiltersContextProvider>
+            </OrderStatusesActionsContextProvider>
+        </OrderStatusesContextProvider>
     )
 }
 
-export default DealStatuses
+export default OrderStatuses

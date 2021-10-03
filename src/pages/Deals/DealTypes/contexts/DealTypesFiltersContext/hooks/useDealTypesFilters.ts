@@ -1,23 +1,23 @@
 import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
-import DealTypesFiltersState, { dealTypesFiltersInitialState } from '../../../states/DealTypesFiltersState'
+import OrderTypesFiltersState, { orderTypesFiltersInitialState } from '../../../states/OrderTypesFiltersState'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import DealTypesContext from '../../DealTypesContext/DealTypesContext'
+import OrderTypesContext from '../../OrderTypesContext/OrderTypesContext'
 import { FilterFormFieldProps } from '../../../../../../components/common/forms/FilterForm/FilterForm'
 import { toBooleanNullable } from '../../../../../../utils/boolean/booleanUtils'
 
 // TODO: Move to l10n
-const useDealTypesFilters = (): DealTypesFiltersState => {
-    const state = useContext(DealTypesContext)
+const useOrderTypesFilters = (): OrderTypesFiltersState => {
+    const state = useContext(OrderTypesContext)
     const [name, setName] = useState(state.request.name ?? '')
     const [minCreateDate, setMinCreateDate] = useState(state.request.minCreateDate ?? '')
     const [maxCreateDate, setMaxCreateDate] = useState(state.request.maxCreateDate ?? '')
     const [minModifyDate, setMinModifyDate] = useState(state.request.minModifyDate ?? '')
     const [maxModifyDate, setMaxModifyDate] = useState(state.request.maxModifyDate ?? '')
     const [isDeleted, setIsDeleted] = useState(state.request.isDeleted)
-    const [isApplyEnabled, setIsApplyEnabled] = useState(dealTypesFiltersInitialState.isApplyEnabled)
-    const [isResetEnabled, setIsResetEnabled] = useState(dealTypesFiltersInitialState.isResetEnabled)
-    const [isShowMobile, setIsShowMobile] = useState(dealTypesFiltersInitialState.isShowMobile)
+    const [isApplyEnabled, setIsApplyEnabled] = useState(orderTypesFiltersInitialState.isApplyEnabled)
+    const [isResetEnabled, setIsResetEnabled] = useState(orderTypesFiltersInitialState.isResetEnabled)
+    const [isShowMobile, setIsShowMobile] = useState(orderTypesFiltersInitialState.isShowMobile)
 
     const onChangeName = useCallback((_, data: InputOnChangeData) => {
         setName(data.value)
@@ -151,4 +151,4 @@ const useDealTypesFilters = (): DealTypesFiltersState => {
     return { fields, isApplyEnabled, onApply, isResetEnabled, onReset, isShowMobile, onShowMobile, onHideMobile }
 }
 
-export default useDealTypesFilters
+export default useOrderTypesFilters

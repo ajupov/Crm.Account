@@ -1,13 +1,13 @@
 import React, { FC, useContext } from 'react'
 
-import DealAttributesActionsContext from '../../contexts/DealAttributesActionsContext/DealAttributesActionsContext'
+import OrderAttributesActionsContext from '../../contexts/OrderAttributesActionsContext/OrderAttributesActionsContext'
 import RestoreModal from '../../../../../components/common/modals/RestoreModal/RestoreModal'
-import useDealAttributeRestore from './hooks/useDealAttributeRestore'
+import useOrderAttributeRestore from './hooks/useOrderAttributeRestore'
 
 // TODO: Move to l10n
-const DealAttributeRestore: FC = () => {
-    const state = useContext(DealAttributesActionsContext)
-    const { onClickConfirm, onClickCancel } = useDealAttributeRestore()
+const OrderAttributeRestore: FC = () => {
+    const state = useContext(OrderAttributesActionsContext)
+    const { onClickConfirm, onClickCancel } = useOrderAttributeRestore()
 
     return (
         <RestoreModal
@@ -20,4 +20,4 @@ const DealAttributeRestore: FC = () => {
     )
 }
 
-export default DealAttributeRestore
+export default OrderAttributeRestore

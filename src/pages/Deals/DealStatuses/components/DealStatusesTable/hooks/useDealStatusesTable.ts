@@ -2,27 +2,27 @@ import { calculateOffset, calculatePage } from '../../../../../../utils/paginati
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import DealStatus from '../../../../../../../api/orders/models/DealStatus'
-import DealStatusesContext from '../../../contexts/DealStatusesContext/DealStatusesContext'
-import DealStatusesRoutes from '../../../routes/DealStatusesRoutes'
+import OrderStatus from '../../../../../../../api/orders/models/OrderStatus'
+import OrderStatusesContext from '../../../contexts/OrderStatusesContext/OrderStatusesContext'
+import OrderStatusesRoutes from '../../../routes/OrderStatusesRoutes'
 import { TableBodyRowProps } from '../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../components/common/collections/Table/TableHeader'
 import { getDateTimeAsRecently } from '../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../helpers/fileNameHelper'
-import useDealStatusView from '../../DealStatusView/hooks/useDealStatusView'
+import useOrderStatusView from '../../OrderStatusView/hooks/useOrderStatusView'
 
-interface UseDealStatusesTableReturn {
+interface UseOrderStatusesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (statuses: DealStatus[]) => TableBodyRowProps[]
+    map: (statuses: OrderStatus[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
 
 // TODO: Move to l10n
-const useDealStatusesTable = (): UseDealStatusesTableReturn => {
-    const state = useContext(DealStatusesContext)
-    const { onClickDelete, onClickRestore } = useDealStatusView()
+const useOrderStatusesTable = (): UseOrderStatusesTableReturn => {
+    const state = useContext(OrderStatusesContext)
+    const { onClickDelete, onClickRestore } = useOrderStatusView()
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const statuses = (await state.getAll())?.statuses
@@ -65,7 +65,7 @@ const useDealStatusesTable = (): UseDealStatusesTableReturn => {
     )
 
     const map = useCallback(
-        (statuses: DealStatus[]) =>
+        (statuses: OrderStatus[]) =>
             statuses.map(
                 status =>
                     ({
@@ -80,8 +80,8 @@ const useDealStatusesTable = (): UseDealStatusesTableReturn => {
                             }
                         ],
                         isDeleted: status.isDeleted,
-                        viewLink: DealStatusesRoutes.View,
-                        editLink: DealStatusesRoutes.Edit,
+                        viewLink: OrderStatusesRoutes.View,
+                        editLink: OrderStatusesRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
@@ -117,4 +117,4 @@ const useDealStatusesTable = (): UseDealStatusesTableReturn => {
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
-export default useDealStatusesTable
+export default useOrderStatusesTable

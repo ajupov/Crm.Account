@@ -1,21 +1,21 @@
 import { useCallback, useContext } from 'react'
 
-import DealType from '../../../../../../../api/orders/models/DealType'
-import DealTypesActionsContext from '../../../contexts/DealTypesActionsContext/DealTypesActionsContext'
+import OrderType from '../../../../../../../api/orders/models/OrderType'
+import OrderTypesActionsContext from '../../../contexts/OrderTypesActionsContext/OrderTypesActionsContext'
 import { ViewDataProps } from '../../../../../../components/common/grids/View/View'
 import { useHistory } from 'react-router'
 
-interface UseDealTypeViewReturn {
-    map: (type: DealType) => ViewDataProps[]
+interface UseOrderTypeViewReturn {
+    map: (type: OrderType) => ViewDataProps[]
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
     onClickCancel: () => void
 }
 
 // TODO: Move to l10n
-const useDealTypeView = (): UseDealTypeViewReturn => {
+const useOrderTypeView = (): UseOrderTypeViewReturn => {
     const history = useHistory()
-    const state = useContext(DealTypesActionsContext)
+    const state = useContext(OrderTypesActionsContext)
 
     const onClickDelete = useCallback(
         (id: string) => {
@@ -36,7 +36,7 @@ const useDealTypeView = (): UseDealTypeViewReturn => {
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
     const map = useCallback(
-        (type: DealType): ViewDataProps[] => [
+        (type: OrderType): ViewDataProps[] => [
             { label: 'Наименование', value: type.name },
             { label: 'Удален', value: type.isDeleted ? 'Да' : 'Нет' }
         ],
@@ -46,4 +46,4 @@ const useDealTypeView = (): UseDealTypeViewReturn => {
     return { map, onClickDelete, onClickRestore, onClickCancel }
 }
 
-export default useDealTypeView
+export default useOrderTypeView

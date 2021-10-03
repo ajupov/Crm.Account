@@ -1,13 +1,13 @@
 import React, { FC, useContext } from 'react'
 
-import DealAttributesContext from '../../contexts/DealAttributesContext/DealAttributesContext'
-import DealAttributesRoutes from '../../routes/DealAttributesRoutes'
+import OrderAttributesContext from '../../contexts/OrderAttributesContext/OrderAttributesContext'
+import OrderAttributesRoutes from '../../routes/OrderAttributesRoutes'
 import Table from '../../../../../components/common/collections/Table/Table'
-import useDealAttributesTable from './hooks/useDealAttributesTable'
+import useOrderAttributesTable from './hooks/useOrderAttributesTable'
 
-const DealAttributesTable: FC = () => {
-    const state = useContext(DealAttributesContext)
-    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useDealAttributesTable()
+const OrderAttributesTable: FC = () => {
+    const state = useContext(OrderAttributesContext)
+    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useOrderAttributesTable()
 
     return (
         <Table
@@ -17,10 +17,10 @@ const DealAttributesTable: FC = () => {
             rows={map(state.attributes)}
             footer={{ page, limit: state.request.limit, total: state.total, onClickChangePage }}
             lastModifyDateTime={state.lastModifyDateTime}
-            createLink={DealAttributesRoutes.Create}
+            createLink={OrderAttributesRoutes.Create}
             onClickDownloadAsCsv={onClickDownloadAsCsv}
         />
     )
 }
 
-export default DealAttributesTable
+export default OrderAttributesTable

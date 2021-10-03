@@ -1,10 +1,10 @@
 import React, { FC, useContext } from 'react'
 
-import DealAttributeChangesFiltersContext from '../../../../contexts/DealAttributeChangesFiltersContext/DealAttributeChangesFiltersContext'
+import OrderAttributeChangesFiltersContext from '../../../../contexts/OrderAttributeChangesFiltersContext/OrderAttributeChangesFiltersContext'
 import FilterMobileModal from '../../../../../../../components/common/modals/FilterMobileModal/FilterMobileModal'
 
-const DealsAttributeChangesFilterMobile: FC = () => {
-    const state = useContext(DealAttributeChangesFiltersContext)
+const OrdersAttributeChangesFilterMobile: FC = () => {
+    const state = useContext(OrderAttributeChangesFiltersContext)
 
     return (
         <FilterMobileModal
@@ -20,4 +20,4 @@ const DealsAttributeChangesFilterMobile: FC = () => {
     )
 }
 
-export default DealsAttributeChangesFilterMobile
+export default OrdersAttributeChangesFilterMobile

@@ -1,20 +1,20 @@
-import DealStatusChangesState, { dealStatusChangesInitialState } from '../../../states/DealStatusChangesState'
+import OrderStatusChangesState, { orderStatusChangesInitialState } from '../../../states/OrderStatusChangesState'
 import { useCallback, useEffect, useState } from 'react'
 
-import DealStatusesChangesClient from '../../../../../../../api/orders/clients/DealStatusesChangesClient'
+import OrderStatusesChangesClient from '../../../../../../../api/orders/clients/OrderStatusesChangesClient'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
-const dealStatusesChangesClient = new DealStatusesChangesClient(HttpClientFactory.Api)
+const orderStatusesChangesClient = new OrderStatusesChangesClient(HttpClientFactory.Api)
 
-const useDealStatusChanges = (): DealStatusChangesState => {
+const useOrderStatusChanges = (): OrderStatusChangesState => {
     const MaxLimit = 1048576
 
     const { id }: { id: string } = useParams()
-    const [request, setRequest] = useState(dealStatusChangesInitialState.request)
-    const [isLoading, setIsLoading] = useState(dealStatusChangesInitialState.isLoading)
-    const [changes, setChanges] = useState(dealStatusChangesInitialState.changes)
-    const [total, setTotal] = useState(dealStatusChangesInitialState.total)
+    const [request, setRequest] = useState(orderStatusChangesInitialState.request)
+    const [isLoading, setIsLoading] = useState(orderStatusChangesInitialState.isLoading)
+    const [changes, setChanges] = useState(orderStatusChangesInitialState.changes)
+    const [total, setTotal] = useState(orderStatusChangesInitialState.total)
 
     const getPagedList = useCallback(async () => {
         if (!id) {
@@ -23,7 +23,7 @@ const useDealStatusChanges = (): DealStatusChangesState => {
 
         setIsLoading(true)
 
-        const response = await dealStatusesChangesClient.GetPagedListAsync({ ...request, statusId: id })
+        const response = await orderStatusesChangesClient.GetPagedListAsync({ ...request, statusId: id })
 
         setChanges(response.changes ?? [])
         setTotal(response.totalCount)
@@ -38,7 +38,7 @@ const useDealStatusChanges = (): DealStatusChangesState => {
 
         setIsLoading(true)
 
-        const response = await dealStatusesChangesClient.GetPagedListAsync({
+        const response = await orderStatusesChangesClient.GetPagedListAsync({
             ...request,
             statusId: id,
             offset: 0,
@@ -63,4 +63,4 @@ const useDealStatusChanges = (): DealStatusChangesState => {
     return { request, setRequest, isLoading, total, changes, getAll }
 }
 
-export default useDealStatusChanges
+export default useOrderStatusChanges

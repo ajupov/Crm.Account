@@ -15,11 +15,11 @@ export type RenderCardState = {
     removeCard: () => void
 }
 
-interface DealsBoardCardProps {
+interface OrdersBoardCardProps {
     content: RenderCardContent
 }
 
-const DealsBoardCard: FC<DealsBoardCardProps> = ({ content }) => {
+const OrdersBoardCard: FC<OrdersBoardCardProps> = ({ content }) => {
     const _100Percent = 100
 
     const getProgres = (value?: number): string => (value ? `${Math.round(value / _100Percent)}%` : '')
@@ -37,4 +37,4 @@ const DealsBoardCard: FC<DealsBoardCardProps> = ({ content }) => {
     )
 }
 
-export default DealsBoardCard
+export default OrdersBoardCard

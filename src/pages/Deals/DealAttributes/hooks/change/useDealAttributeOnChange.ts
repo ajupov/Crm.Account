@@ -6,11 +6,11 @@ import {
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
-import DealAttributeContext from '../../contexts/DealAttributeContext/DealAttributeContext'
-import DealAttributeType from '../../../../../../api/orders/models/DealAttributeType'
+import OrderAttributeContext from '../../contexts/OrderAttributeContext/OrderAttributeContext'
+import OrderAttributeType from '../../../../../../api/orders/models/OrderAttributeType'
 import { useHistory } from 'react-router'
 
-interface UseDealAttributeOnChangeReturn {
+interface UseOrderAttributeOnChangeReturn {
     fields: CreateFormFieldProps[]
     isConfirmEnabled: boolean
     onClickConfirmCreate: () => void
@@ -19,14 +19,14 @@ interface UseDealAttributeOnChangeReturn {
 }
 
 // TODO: Move to l10n
-const useDealAttributeOnChange = (): UseDealAttributeOnChangeReturn => {
+const useOrderAttributeOnChange = (): UseOrderAttributeOnChangeReturn => {
     const history = useHistory()
-    const state = useContext(DealAttributeContext)
+    const state = useContext(OrderAttributeContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeType = useCallback(
         (_, data: DropdownProps) => {
-            state.setAttribute({ ...state.attribute, type: data.value as DealAttributeType })
+            state.setAttribute({ ...state.attribute, type: data.value as OrderAttributeType })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -98,4 +98,4 @@ const useDealAttributeOnChange = (): UseDealAttributeOnChangeReturn => {
     return { fields, isConfirmEnabled, onClickConfirmCreate, onClickConfirmUpdate, onClickCancel }
 }
 
-export default useDealAttributeOnChange
+export default useOrderAttributeOnChange

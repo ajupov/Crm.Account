@@ -1,21 +1,21 @@
-import DealStatusesActionsState, { dealStatusesActionsInitialState } from '../../../states/DealStatusesActionsState'
+import OrderStatusesActionsState, { orderStatusesActionsInitialState } from '../../../states/OrderStatusesActionsState'
 import { useCallback, useState } from 'react'
 
-import DealStatusesClient from '../../../../../../../api/orders/clients/DealStatusesClient'
+import OrderStatusesClient from '../../../../../../../api/orders/clients/OrderStatusesClient'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const dealStatusesClient = new DealStatusesClient(HttpClientFactory.Api)
+const orderStatusesClient = new OrderStatusesClient(HttpClientFactory.Api)
 
-const useDealStatusesActions = (): DealStatusesActionsState => {
-    const [ids, setIds] = useState(dealStatusesActionsInitialState.ids)
-    const [isLoading, setIsLoading] = useState(dealStatusesActionsInitialState.isLoading)
-    const [isDeleting, setIsDeleting] = useState(dealStatusesActionsInitialState.isDeleting)
-    const [isRestoring, setIsRestoring] = useState(dealStatusesActionsInitialState.isRestoring)
+const useOrderStatusesActions = (): OrderStatusesActionsState => {
+    const [ids, setIds] = useState(orderStatusesActionsInitialState.ids)
+    const [isLoading, setIsLoading] = useState(orderStatusesActionsInitialState.isLoading)
+    const [isDeleting, setIsDeleting] = useState(orderStatusesActionsInitialState.isDeleting)
+    const [isRestoring, setIsRestoring] = useState(orderStatusesActionsInitialState.isRestoring)
 
     const _delete = useCallback(async () => {
         setIsLoading(true)
 
-        await dealStatusesClient.DeleteAsync(ids)
+        await orderStatusesClient.DeleteAsync(ids)
 
         setIsDeleting(false)
         setIsLoading(false)
@@ -24,7 +24,7 @@ const useDealStatusesActions = (): DealStatusesActionsState => {
     const restore = useCallback(async () => {
         setIsLoading(true)
 
-        await dealStatusesClient.RestoreAsync(ids)
+        await orderStatusesClient.RestoreAsync(ids)
 
         setIsRestoring(false)
         setIsLoading(false)
@@ -33,4 +33,4 @@ const useDealStatusesActions = (): DealStatusesActionsState => {
     return { isLoading, ids, setIds, isDeleting, setIsDeleting, delete: _delete, isRestoring, setIsRestoring, restore }
 }
 
-export default useDealStatusesActions
+export default useOrderStatusesActions

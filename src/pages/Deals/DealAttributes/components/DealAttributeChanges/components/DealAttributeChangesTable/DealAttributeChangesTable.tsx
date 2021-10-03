@@ -1,12 +1,12 @@
 import React, { FC, useContext } from 'react'
 
-import DealAttributeChangesContext from '../../../../contexts/DealAttributeChangesContext/DealAttributeChangesContext'
+import OrderAttributeChangesContext from '../../../../contexts/OrderAttributeChangesContext/OrderAttributeChangesContext'
 import Table from '../../../../../../../components/common/collections/Table/Table'
-import useDealAttributeChangesTable from './hooks/useDealAttributeChangesTable'
+import useOrderAttributeChangesTable from './hooks/useOrderAttributeChangesTable'
 
-const DealAttributeChangesTable: FC = () => {
-    const state = useContext(DealAttributeChangesContext)
-    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useDealAttributeChangesTable()
+const OrderAttributeChangesTable: FC = () => {
+    const state = useContext(OrderAttributeChangesContext)
+    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useOrderAttributeChangesTable()
 
     return (
         <Table
@@ -19,4 +19,4 @@ const DealAttributeChangesTable: FC = () => {
     )
 }
 
-export default DealAttributeChangesTable
+export default OrderAttributeChangesTable

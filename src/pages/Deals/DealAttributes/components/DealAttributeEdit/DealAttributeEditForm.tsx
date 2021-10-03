@@ -1,15 +1,15 @@
 import React, { FC, useContext } from 'react'
 
-import DealAttributeContext from '../../contexts/DealAttributeContext/DealAttributeContext'
-import DealAttributesRoutes from '../../routes/DealAttributesRoutes'
+import OrderAttributeContext from '../../contexts/OrderAttributeContext/OrderAttributeContext'
+import OrderAttributesRoutes from '../../routes/OrderAttributesRoutes'
 import EditForm from '../../../../../components/common/forms/EditForm/EditForm'
-import useDealAttributeOnChange from '../../hooks/change/useDealAttributeOnChange'
-import useDealAttributesActions from '../../contexts/DealAttributesActionsContext/hooks/useDealAttributesActions'
+import useOrderAttributeOnChange from '../../hooks/change/useOrderAttributeOnChange'
+import useOrderAttributesActions from '../../contexts/OrderAttributesActionsContext/hooks/useOrderAttributesActions'
 
-const DealAttributeEditForm: FC = () => {
-    const state = useContext(DealAttributeContext)
-    const { isLoading } = useDealAttributesActions()
-    const { fields, isConfirmEnabled, onClickConfirmUpdate, onClickCancel } = useDealAttributeOnChange()
+const OrderAttributeEditForm: FC = () => {
+    const state = useContext(OrderAttributeContext)
+    const { isLoading } = useOrderAttributesActions()
+    const { fields, isConfirmEnabled, onClickConfirmUpdate, onClickCancel } = useOrderAttributeOnChange()
 
     return state.attribute.id ? (
         <EditForm
@@ -19,11 +19,11 @@ const DealAttributeEditForm: FC = () => {
             isConfirmEnabled={isConfirmEnabled}
             createDate={state.attribute.createDateTime}
             lastModifyDateTime={state.attribute.modifyDateTime}
-            historyLink={DealAttributesRoutes.Changes}
+            historyLink={OrderAttributesRoutes.Changes}
             onClickConfirm={onClickConfirmUpdate}
             onClickCancel={onClickCancel}
         />
     ) : null
 }
 
-export default DealAttributeEditForm
+export default OrderAttributeEditForm

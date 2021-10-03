@@ -1,24 +1,24 @@
-import DealAttributesState, { dealAttributesInitialState } from '../../../states/DealAttributesState'
+import OrderAttributesState, { orderAttributesInitialState } from '../../../states/OrderAttributesState'
 import { useCallback, useEffect, useState } from 'react'
 
-import DealAttributesClient from '../../../../../../../api/orders/clients/DealAttributesClient'
+import OrderAttributesClient from '../../../../../../../api/orders/clients/OrderAttributesClient'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const dealAttributesClient = new DealAttributesClient(HttpClientFactory.Api)
+const orderAttributesClient = new OrderAttributesClient(HttpClientFactory.Api)
 
-const useDealAttributes = (): DealAttributesState => {
+const useOrderAttributes = (): OrderAttributesState => {
     const MaxLimit = 1048576
 
-    const [request, setRequest] = useState(dealAttributesInitialState.request)
-    const [isLoading, setIsLoading] = useState(dealAttributesInitialState.isLoading)
-    const [attributes, setAttributes] = useState(dealAttributesInitialState.attributes)
-    const [total, setTotal] = useState(dealAttributesInitialState.total)
-    const [lastModifyDateTime, setLastModifyDateTime] = useState(dealAttributesInitialState.lastModifyDateTime)
+    const [request, setRequest] = useState(orderAttributesInitialState.request)
+    const [isLoading, setIsLoading] = useState(orderAttributesInitialState.isLoading)
+    const [attributes, setAttributes] = useState(orderAttributesInitialState.attributes)
+    const [total, setTotal] = useState(orderAttributesInitialState.total)
+    const [lastModifyDateTime, setLastModifyDateTime] = useState(orderAttributesInitialState.lastModifyDateTime)
 
     const getPagedList = useCallback(async () => {
         setIsLoading(true)
 
-        const response = await dealAttributesClient.GetPagedListAsync(request)
+        const response = await orderAttributesClient.GetPagedListAsync(request)
 
         setAttributes(response.attributes ?? [])
         setTotal(response.totalCount)
@@ -30,7 +30,7 @@ const useDealAttributes = (): DealAttributesState => {
     const getAll = useCallback(async () => {
         setIsLoading(true)
 
-        const response = await dealAttributesClient.GetPagedListAsync({ ...request, offset: 0, limit: MaxLimit })
+        const response = await orderAttributesClient.GetPagedListAsync({ ...request, offset: 0, limit: MaxLimit })
         if (response.attributes) {
             response.attributes.forEach(v => {
                 delete v.accountId
@@ -49,4 +49,4 @@ const useDealAttributes = (): DealAttributesState => {
     return { request, setRequest, isLoading, attributes, total, lastModifyDateTime, getPagedList, getAll }
 }
 
-export default useDealAttributes
+export default useOrderAttributes

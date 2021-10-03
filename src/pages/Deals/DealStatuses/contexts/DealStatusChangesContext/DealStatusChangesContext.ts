@@ -1,7 +1,7 @@
-import DealStatusChangesState, { dealStatusChangesInitialState } from '../../states/DealStatusChangesState'
+import OrderStatusChangesState, { orderStatusChangesInitialState } from '../../states/OrderStatusChangesState'
 
 import { createContext } from 'react'
 
-const DealStatusChangesContext = createContext<DealStatusChangesState>(dealStatusChangesInitialState)
+const OrderStatusChangesContext = createContext<OrderStatusChangesState>(orderStatusChangesInitialState)
 
-export default DealStatusChangesContext
+export default OrderStatusChangesContext

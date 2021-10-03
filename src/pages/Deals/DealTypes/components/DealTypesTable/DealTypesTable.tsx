@@ -1,13 +1,13 @@
 import React, { FC, useContext } from 'react'
 
-import DealTypesContext from '../../contexts/DealTypesContext/DealTypesContext'
-import DealTypesRoutes from '../../routes/DealTypesRoutes'
+import OrderTypesContext from '../../contexts/OrderTypesContext/OrderTypesContext'
+import OrderTypesRoutes from '../../routes/OrderTypesRoutes'
 import Table from '../../../../../components/common/collections/Table/Table'
-import useDealTypesTable from './hooks/useDealTypesTable'
+import useOrderTypesTable from './hooks/useOrderTypesTable'
 
-const DealTypesTable: FC = () => {
-    const state = useContext(DealTypesContext)
-    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useDealTypesTable()
+const OrderTypesTable: FC = () => {
+    const state = useContext(OrderTypesContext)
+    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useOrderTypesTable()
 
     return (
         <Table
@@ -17,10 +17,10 @@ const DealTypesTable: FC = () => {
             rows={map(state.types)}
             footer={{ page, limit: state.request.limit, total: state.total, onClickChangePage }}
             lastModifyDateTime={state.lastModifyDateTime}
-            createLink={DealTypesRoutes.Create}
+            createLink={OrderTypesRoutes.Create}
             onClickDownloadAsCsv={onClickDownloadAsCsv}
         />
     )
 }
 
-export default DealTypesTable
+export default OrderTypesTable

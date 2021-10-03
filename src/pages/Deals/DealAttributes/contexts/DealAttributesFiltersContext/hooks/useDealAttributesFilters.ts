@@ -1,17 +1,17 @@
 import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
-import DealAttributesFiltersState, {
-    dealAttributesFiltersInitialState
-} from '../../../states/DealAttributesFiltersState'
+import OrderAttributesFiltersState, {
+    orderAttributesFiltersInitialState
+} from '../../../states/OrderAttributesFiltersState'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import DealAttributesContext from '../../DealAttributesContext/DealAttributesContext'
+import OrderAttributesContext from '../../OrderAttributesContext/OrderAttributesContext'
 import { FilterFormFieldProps } from '../../../../../../components/common/forms/FilterForm/FilterForm'
 import { getAttributeTypesAsSelectOptions } from '../../../../../../helpers/entityAttributeTypeHelper'
 import { toBooleanNullable } from '../../../../../../utils/boolean/booleanUtils'
 
 // TODO: Move to l10n
-const useDealAttributesFilters = (): DealAttributesFiltersState => {
-    const state = useContext(DealAttributesContext)
+const useOrderAttributesFilters = (): OrderAttributesFiltersState => {
+    const state = useContext(OrderAttributesContext)
     const [types, setTypes] = useState(state.request.types ?? [])
     const [key, setKey] = useState(state.request.key ?? '')
     const [minCreateDate, setMinCreateDate] = useState(state.request.minCreateDate ?? '')
@@ -19,9 +19,9 @@ const useDealAttributesFilters = (): DealAttributesFiltersState => {
     const [minModifyDate, setMinModifyDate] = useState(state.request.minModifyDate ?? '')
     const [maxModifyDate, setMaxModifyDate] = useState(state.request.maxModifyDate ?? '')
     const [isDeleted, setIsDeleted] = useState(state.request.isDeleted)
-    const [isApplyEnabled, setIsApplyEnabled] = useState(dealAttributesFiltersInitialState.isApplyEnabled)
-    const [isResetEnabled, setIsResetEnabled] = useState(dealAttributesFiltersInitialState.isResetEnabled)
-    const [isShowMobile, setIsShowMobile] = useState(dealAttributesFiltersInitialState.isShowMobile)
+    const [isApplyEnabled, setIsApplyEnabled] = useState(orderAttributesFiltersInitialState.isApplyEnabled)
+    const [isResetEnabled, setIsResetEnabled] = useState(orderAttributesFiltersInitialState.isResetEnabled)
+    const [isShowMobile, setIsShowMobile] = useState(orderAttributesFiltersInitialState.isShowMobile)
 
     const onChangeTypes = useCallback((_: any, data: DropdownProps) => {
         setTypes(data.value as [])
@@ -173,4 +173,4 @@ const useDealAttributesFilters = (): DealAttributesFiltersState => {
     return { fields, isApplyEnabled, onApply, isResetEnabled, onReset, isShowMobile, onShowMobile, onHideMobile }
 }
 
-export default useDealAttributesFilters
+export default useOrderAttributesFilters

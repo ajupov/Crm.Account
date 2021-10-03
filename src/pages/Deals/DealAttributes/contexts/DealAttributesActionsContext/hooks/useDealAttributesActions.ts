@@ -1,23 +1,23 @@
-import DealAttributesActionsState, {
-    dealAttributesActionsInitialState
-} from '../../../states/DealAttributesActionsState'
+import OrderAttributesActionsState, {
+    orderAttributesActionsInitialState
+} from '../../../states/OrderAttributesActionsState'
 import { useCallback, useState } from 'react'
 
-import DealAttributesClient from '../../../../../../../api/orders/clients/DealAttributesClient'
+import OrderAttributesClient from '../../../../../../../api/orders/clients/OrderAttributesClient'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const dealAttributesClient = new DealAttributesClient(HttpClientFactory.Api)
+const orderAttributesClient = new OrderAttributesClient(HttpClientFactory.Api)
 
-const useDealAttributesActions = (): DealAttributesActionsState => {
-    const [ids, setIds] = useState(dealAttributesActionsInitialState.ids)
-    const [isLoading, setIsLoading] = useState(dealAttributesActionsInitialState.isLoading)
-    const [isDeleting, setIsDeleting] = useState(dealAttributesActionsInitialState.isDeleting)
-    const [isRestoring, setIsRestoring] = useState(dealAttributesActionsInitialState.isRestoring)
+const useOrderAttributesActions = (): OrderAttributesActionsState => {
+    const [ids, setIds] = useState(orderAttributesActionsInitialState.ids)
+    const [isLoading, setIsLoading] = useState(orderAttributesActionsInitialState.isLoading)
+    const [isDeleting, setIsDeleting] = useState(orderAttributesActionsInitialState.isDeleting)
+    const [isRestoring, setIsRestoring] = useState(orderAttributesActionsInitialState.isRestoring)
 
     const _delete = useCallback(async () => {
         setIsLoading(true)
 
-        await dealAttributesClient.DeleteAsync(ids)
+        await orderAttributesClient.DeleteAsync(ids)
 
         setIsDeleting(false)
         setIsLoading(false)
@@ -26,7 +26,7 @@ const useDealAttributesActions = (): DealAttributesActionsState => {
     const restore = useCallback(async () => {
         setIsLoading(true)
 
-        await dealAttributesClient.RestoreAsync(ids)
+        await orderAttributesClient.RestoreAsync(ids)
 
         setIsRestoring(false)
         setIsLoading(false)
@@ -35,4 +35,4 @@ const useDealAttributesActions = (): DealAttributesActionsState => {
     return { isLoading, ids, setIds, isDeleting, setIsDeleting, delete: _delete, isRestoring, setIsRestoring, restore }
 }
 
-export default useDealAttributesActions
+export default useOrderAttributesActions

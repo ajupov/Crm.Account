@@ -1,14 +1,14 @@
 import { CheckboxProps, InputOnChangeData } from 'semantic-ui-react'
-import DealStatusesFiltersState, { dealStatusesFiltersInitialState } from '../../../states/DealStatusesFiltersState'
+import OrderStatusesFiltersState, { orderStatusesFiltersInitialState } from '../../../states/OrderStatusesFiltersState'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import DealStatusesContext from '../../DealStatusesContext/DealStatusesContext'
+import OrderStatusesContext from '../../OrderStatusesContext/OrderStatusesContext'
 import { FilterFormFieldProps } from '../../../../../../components/common/forms/FilterForm/FilterForm'
 import { toBooleanNullable } from '../../../../../../utils/boolean/booleanUtils'
 
 // TODO: Move to l10n
-const useDealStatusesFilters = (): DealStatusesFiltersState => {
-    const state = useContext(DealStatusesContext)
+const useOrderStatusesFilters = (): OrderStatusesFiltersState => {
+    const state = useContext(OrderStatusesContext)
     const [name, setName] = useState(state.request.name ?? '')
     const [minCreateDate, setMinCreateDate] = useState(state.request.minCreateDate ?? '')
     const [maxCreateDate, setMaxCreateDate] = useState(state.request.maxCreateDate ?? '')
@@ -16,9 +16,9 @@ const useDealStatusesFilters = (): DealStatusesFiltersState => {
     const [maxModifyDate, setMaxModifyDate] = useState(state.request.maxModifyDate ?? '')
     const [isFinish, setIsFinish] = useState(state.request.isFinish)
     const [isDeleted, setIsDeleted] = useState(state.request.isDeleted)
-    const [isApplyEnabled, setIsApplyEnabled] = useState(dealStatusesFiltersInitialState.isApplyEnabled)
-    const [isResetEnabled, setIsResetEnabled] = useState(dealStatusesFiltersInitialState.isResetEnabled)
-    const [isShowMobile, setIsShowMobile] = useState(dealStatusesFiltersInitialState.isShowMobile)
+    const [isApplyEnabled, setIsApplyEnabled] = useState(orderStatusesFiltersInitialState.isApplyEnabled)
+    const [isResetEnabled, setIsResetEnabled] = useState(orderStatusesFiltersInitialState.isResetEnabled)
+    const [isShowMobile, setIsShowMobile] = useState(orderStatusesFiltersInitialState.isShowMobile)
 
     const onChangeName = useCallback((_, data: InputOnChangeData) => {
         setName(data.value)
@@ -176,4 +176,4 @@ const useDealStatusesFilters = (): DealStatusesFiltersState => {
     return { fields, isApplyEnabled, onApply, isResetEnabled, onReset, isShowMobile, onShowMobile, onHideMobile }
 }
 
-export default useDealStatusesFilters
+export default useOrderStatusesFilters

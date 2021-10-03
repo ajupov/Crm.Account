@@ -2,27 +2,27 @@ import { calculateOffset, calculatePage } from '../../../../../../utils/paginati
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import DealType from '../../../../../../../api/orders/models/DealType'
-import DealTypesContext from '../../../contexts/DealTypesContext/DealTypesContext'
-import DealTypesRoutes from '../../../routes/DealTypesRoutes'
+import OrderType from '../../../../../../../api/orders/models/OrderType'
+import OrderTypesContext from '../../../contexts/OrderTypesContext/OrderTypesContext'
+import OrderTypesRoutes from '../../../routes/OrderTypesRoutes'
 import { TableBodyRowProps } from '../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../components/common/collections/Table/TableHeader'
 import { getDateTimeAsRecently } from '../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../helpers/fileNameHelper'
-import useDealTypeView from '../../DealTypeView/hooks/useDealTypeView'
+import useOrderTypeView from '../../OrderTypeView/hooks/useOrderTypeView'
 
-interface UseDealTypesTableReturn {
+interface UseOrderTypesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (types: DealType[]) => TableBodyRowProps[]
+    map: (types: OrderType[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
 
 // TODO: Move to l10n
-const useDealTypesTable = (): UseDealTypesTableReturn => {
-    const state = useContext(DealTypesContext)
-    const { onClickDelete, onClickRestore } = useDealTypeView()
+const useOrderTypesTable = (): UseOrderTypesTableReturn => {
+    const state = useContext(OrderTypesContext)
+    const { onClickDelete, onClickRestore } = useOrderTypeView()
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const types = (await state.getAll())?.types
@@ -65,7 +65,7 @@ const useDealTypesTable = (): UseDealTypesTableReturn => {
     )
 
     const map = useCallback(
-        (types: DealType[]) =>
+        (types: OrderType[]) =>
             types.map(
                 type =>
                     ({
@@ -78,8 +78,8 @@ const useDealTypesTable = (): UseDealTypesTableReturn => {
                             }
                         ],
                         isDeleted: type.isDeleted,
-                        viewLink: DealTypesRoutes.View,
-                        editLink: DealTypesRoutes.Edit,
+                        viewLink: OrderTypesRoutes.View,
+                        editLink: OrderTypesRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
@@ -115,4 +115,4 @@ const useDealTypesTable = (): UseDealTypesTableReturn => {
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
-export default useDealTypesTable
+export default useOrderTypesTable

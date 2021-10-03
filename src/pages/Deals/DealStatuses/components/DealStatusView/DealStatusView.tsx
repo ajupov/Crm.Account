@@ -1,31 +1,31 @@
 import React, { FC, useEffect } from 'react'
 
-import DealStatusContextProvider from '../../contexts/DealStatusContext/DealStatusContextProvider'
-import DealStatusDelete from '../DealStatusDelete/DealStatusDelete'
-import DealStatusRestore from '../DealStatusRestore/DealStatusRestore'
-import DealStatusViewForm from './DealStatusViewForm'
-import DealStatusesActionsContextProvider from '../../contexts/DealStatusesActionsContext/DealStatusesActionsContextProvider'
-import DealsMenu from '../../../DealsMenu/DealsMenu'
+import OrderStatusContextProvider from '../../contexts/OrderStatusContext/OrderStatusContextProvider'
+import OrderStatusDelete from '../OrderStatusDelete/OrderStatusDelete'
+import OrderStatusRestore from '../OrderStatusRestore/OrderStatusRestore'
+import OrderStatusViewForm from './OrderStatusViewForm'
+import OrderStatusesActionsContextProvider from '../../contexts/OrderStatusesActionsContext/OrderStatusesActionsContextProvider'
+import OrdersMenu from '../../../OrdersMenu/OrdersMenu'
 import Page from '../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
-const DealStatusView: FC = () => {
+const OrderStatusView: FC = () => {
     const title = 'Просмотр статуса'
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <DealStatusesActionsContextProvider>
-            <DealStatusContextProvider>
-                <Page title={title} firstSidebar={<DealsMenu />}>
-                    <DealStatusViewForm />
-                    <DealStatusDelete />
-                    <DealStatusRestore />
+        <OrderStatusesActionsContextProvider>
+            <OrderStatusContextProvider>
+                <Page title={title} firstSidebar={<OrdersMenu />}>
+                    <OrderStatusViewForm />
+                    <OrderStatusDelete />
+                    <OrderStatusRestore />
                 </Page>
-            </DealStatusContextProvider>
-        </DealStatusesActionsContextProvider>
+            </OrderStatusContextProvider>
+        </OrderStatusesActionsContextProvider>
     )
 }
 
-export default DealStatusView
+export default OrderStatusView

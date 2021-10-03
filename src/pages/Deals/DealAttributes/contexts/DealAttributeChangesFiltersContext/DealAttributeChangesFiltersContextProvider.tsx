@@ -1,16 +1,16 @@
 import React, { FC } from 'react'
 
-import DealAttributeChangesFiltersContext from './DealAttributeChangesFiltersContext'
-import useDealAttributeChangesFilters from './hooks/useDealAttributeChangesFilters'
+import OrderAttributeChangesFiltersContext from './OrderAttributeChangesFiltersContext'
+import useOrderAttributeChangesFilters from './hooks/useOrderAttributeChangesFilters'
 
-const DealAttributeChangesFiltersContextProvider: FC = ({ children }) => {
-    const state = useDealAttributeChangesFilters()
+const OrderAttributeChangesFiltersContextProvider: FC = ({ children }) => {
+    const state = useOrderAttributeChangesFilters()
 
     return (
-        <DealAttributeChangesFiltersContext.Provider value={state}>
+        <OrderAttributeChangesFiltersContext.Provider value={state}>
             {children}
-        </DealAttributeChangesFiltersContext.Provider>
+        </OrderAttributeChangesFiltersContext.Provider>
     )
 }
 
-export default DealAttributeChangesFiltersContextProvider
+export default OrderAttributeChangesFiltersContextProvider

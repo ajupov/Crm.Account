@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 
 import FilterForm from '../../../../../../../components/common/forms/FilterForm/FilterForm'
-import useDealStatusChangesFilters from '../../../../contexts/DealStatusChangesFiltersContext/hooks/useDealStatusChangesFilters'
+import useOrderStatusChangesFilters from '../../../../contexts/OrderStatusChangesFiltersContext/hooks/useOrderStatusChangesFilters'
 
-const DealStatusChangesFilter: FC = () => {
-    const { fields, isApplyEnabled, onApply, isResetEnabled, onReset } = useDealStatusChangesFilters()
+const OrderStatusChangesFilter: FC = () => {
+    const { fields, isApplyEnabled, onApply, isResetEnabled, onReset } = useOrderStatusChangesFilters()
 
     return (
         <FilterForm
@@ -17,4 +17,4 @@ const DealStatusChangesFilter: FC = () => {
     )
 }
 
-export default DealStatusChangesFilter
+export default OrderStatusChangesFilter

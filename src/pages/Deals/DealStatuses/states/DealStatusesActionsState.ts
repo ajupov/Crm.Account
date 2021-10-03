@@ -1,4 +1,4 @@
-export default interface DealStatusesActionsState {
+export default interface OrderStatusesActionsState {
     isLoading: boolean
     ids: string[]
     setIds: (ids: string[]) => void
@@ -10,7 +10,7 @@ export default interface DealStatusesActionsState {
     restore: () => Promise<void>
 }
 
-export const dealStatusesActionsInitialState: DealStatusesActionsState = {
+export const orderStatusesActionsInitialState: OrderStatusesActionsState = {
     isLoading: false,
     ids: [],
     setIds: (_: string[]) => void 0,

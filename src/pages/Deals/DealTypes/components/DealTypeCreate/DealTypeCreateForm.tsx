@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 
 import CreateForm from '../../../../../components/common/forms/CreateForm/CreateForm'
-import useDealTypeOnChange from '../../hooks/change/useDealTypeOnChange'
+import useOrderTypeOnChange from '../../hooks/change/useOrderTypeOnChange'
 
-const DealTypeCreateForm: FC = () => {
-    const { isConfirmEnabled, fields, onClickConfirmCreate, onClickCancel } = useDealTypeOnChange()
+const OrderTypeCreateForm: FC = () => {
+    const { isConfirmEnabled, fields, onClickConfirmCreate, onClickCancel } = useOrderTypeOnChange()
 
     return (
         <CreateForm
@@ -16,4 +16,4 @@ const DealTypeCreateForm: FC = () => {
     )
 }
 
-export default DealTypeCreateForm
+export default OrderTypeCreateForm

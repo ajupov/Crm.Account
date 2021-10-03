@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 
-import DealTypesFiltersContext from './DealTypesFiltersContext'
-import useDealTypesFilters from './hooks/useDealTypesFilters'
+import OrderTypesFiltersContext from './OrderTypesFiltersContext'
+import useOrderTypesFilters from './hooks/useOrderTypesFilters'
 
-const DealTypesFiltersContextProvider: FC = ({ children }) => {
-    const state = useDealTypesFilters()
+const OrderTypesFiltersContextProvider: FC = ({ children }) => {
+    const state = useOrderTypesFilters()
 
-    return <DealTypesFiltersContext.Provider value={state}>{children}</DealTypesFiltersContext.Provider>
+    return <OrderTypesFiltersContext.Provider value={state}>{children}</OrderTypesFiltersContext.Provider>
 }
 
-export default DealTypesFiltersContextProvider
+export default OrderTypesFiltersContextProvider

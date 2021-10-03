@@ -1,16 +1,16 @@
-import { DealTypeState, dealTypeInitialState } from '../../../states/DealTypeState'
+import { OrderTypeState, orderTypeInitialState } from '../../../states/OrderTypeState'
 import { useCallback, useEffect, useState } from 'react'
 
-import DealTypesClient from '../../../../../../../api/orders/clients/DealTypesClient'
+import OrderTypesClient from '../../../../../../../api/orders/clients/OrderTypesClient'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
-const dealTypesClient = new DealTypesClient(HttpClientFactory.Api)
+const orderTypesClient = new OrderTypesClient(HttpClientFactory.Api)
 
-const useDealType = (): DealTypeState => {
+const useOrderType = (): OrderTypeState => {
     const { id }: { id: string } = useParams()
-    const [isLoading, setIsLoading] = useState(dealTypeInitialState.isLoading)
-    const [type, setType] = useState(dealTypeInitialState.type)
+    const [isLoading, setIsLoading] = useState(orderTypeInitialState.isLoading)
+    const [type, setType] = useState(orderTypeInitialState.type)
 
     const get = useCallback(async () => {
         if (!id) {
@@ -19,7 +19,7 @@ const useDealType = (): DealTypeState => {
 
         setIsLoading(true)
 
-        const response = await dealTypesClient.GetAsync(id)
+        const response = await orderTypesClient.GetAsync(id)
 
         setType(response)
 
@@ -29,7 +29,7 @@ const useDealType = (): DealTypeState => {
     const create = useCallback(async () => {
         setIsLoading(true)
 
-        await dealTypesClient.CreateAsync(type)
+        await orderTypesClient.CreateAsync(type)
 
         setIsLoading(false)
     }, [type])
@@ -37,7 +37,7 @@ const useDealType = (): DealTypeState => {
     const update = useCallback(async () => {
         setIsLoading(true)
 
-        await dealTypesClient.UpdateAsync(type)
+        await orderTypesClient.UpdateAsync(type)
 
         setIsLoading(false)
     }, [type])
@@ -49,4 +49,4 @@ const useDealType = (): DealTypeState => {
     return { isLoading, type, setType, create, update }
 }
 
-export default useDealType
+export default useOrderType

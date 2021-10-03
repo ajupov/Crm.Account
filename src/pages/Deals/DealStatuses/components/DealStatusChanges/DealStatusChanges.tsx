@@ -1,38 +1,38 @@
 import React, { FC, useEffect } from 'react'
 
-import DealStatusChangesContextProvider from '../../contexts/DealStatusChangesContext/DealStatusChangesContextProvider'
-import DealStatusChangesFilter from './components/DealStatusChangesFilter/DealStatusChangesFilter'
-import DealStatusChangesFiltersContextProvider from '../../contexts/DealStatusChangesFiltersContext/DealStatusChangesFiltersContextProvider'
-import DealStatusChangesTable from './components/DealStatusChangesTable/DealStatusChangesTable'
-import DealsMenu from '../../../DealsMenu/DealsMenu'
-import DealsStatusChangesFilterMobile from './components/DealsStatusChangesFilterMobile/DealsStatusChangesFilterMobile'
+import OrderStatusChangesContextProvider from '../../contexts/OrderStatusChangesContext/OrderStatusChangesContextProvider'
+import OrderStatusChangesFilter from './components/OrderStatusChangesFilter/OrderStatusChangesFilter'
+import OrderStatusChangesFiltersContextProvider from '../../contexts/OrderStatusChangesFiltersContext/OrderStatusChangesFiltersContextProvider'
+import OrderStatusChangesTable from './components/OrderStatusChangesTable/OrderStatusChangesTable'
+import OrdersMenu from '../../../OrdersMenu/OrdersMenu'
+import OrdersStatusChangesFilterMobile from './components/OrdersStatusChangesFilterMobile/OrdersStatusChangesFilterMobile'
 import Page from '../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../helpers/productNameHelper'
-import useDealStatusChangesView from './hooks/useDealStatusChangesView'
+import useOrderStatusChangesView from './hooks/useOrderStatusChangesView'
 
 // TODO: Move to l10n
-const DealStatusChanges: FC = () => {
+const OrderStatusChanges: FC = () => {
     const title = 'История изменений'
 
-    const { onClickCancel } = useDealStatusChangesView()
+    const { onClickCancel } = useOrderStatusChangesView()
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <DealStatusChangesContextProvider>
-            <DealStatusChangesFiltersContextProvider>
+        <OrderStatusChangesContextProvider>
+            <OrderStatusChangesFiltersContextProvider>
                 <Page
                     title={title}
-                    firstSidebar={<DealsMenu />}
-                    secondSidebar={<DealStatusChangesFilter />}
-                    secondSidebarMobile={<DealsStatusChangesFilterMobile />}
+                    firstSidebar={<OrdersMenu />}
+                    secondSidebar={<OrderStatusChangesFilter />}
+                    secondSidebarMobile={<OrdersStatusChangesFilterMobile />}
                     onClickCancel={onClickCancel}
                 >
-                    <DealStatusChangesTable />
+                    <OrderStatusChangesTable />
                 </Page>
-            </DealStatusChangesFiltersContextProvider>
-        </DealStatusChangesContextProvider>
+            </OrderStatusChangesFiltersContextProvider>
+        </OrderStatusChangesContextProvider>
     )
 }
 
-export default DealStatusChanges
+export default OrderStatusChanges

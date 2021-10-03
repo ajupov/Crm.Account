@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 
-import DealStatusesContext from './DealStatusesContext'
-import useDealStatuses from './hooks/useDealStatuses'
+import OrderStatusesContext from './OrderStatusesContext'
+import useOrderStatuses from './hooks/useOrderStatuses'
 
-const DealStatusesContextProvider: FC = ({ children }) => {
-    const state = useDealStatuses()
+const OrderStatusesContextProvider: FC = ({ children }) => {
+    const state = useOrderStatuses()
 
-    return <DealStatusesContext.Provider value={state}>{children}</DealStatusesContext.Provider>
+    return <OrderStatusesContext.Provider value={state}>{children}</OrderStatusesContext.Provider>
 }
 
-export default DealStatusesContextProvider
+export default OrderStatusesContextProvider

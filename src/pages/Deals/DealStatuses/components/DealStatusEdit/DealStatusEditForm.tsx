@@ -1,15 +1,15 @@
 import React, { FC, useContext } from 'react'
 
-import DealStatusContext from '../../contexts/DealStatusContext/DealStatusContext'
-import DealStatusesRoutes from '../../routes/DealStatusesRoutes'
+import OrderStatusContext from '../../contexts/OrderStatusContext/OrderStatusContext'
+import OrderStatusesRoutes from '../../routes/OrderStatusesRoutes'
 import EditForm from '../../../../../components/common/forms/EditForm/EditForm'
-import useDealStatusOnChange from '../../hooks/change/useDealStatusOnChange'
-import useDealStatusesActions from '../../contexts/DealStatusesActionsContext/hooks/useDealStatusesActions'
+import useOrderStatusOnChange from '../../hooks/change/useOrderStatusOnChange'
+import useOrderStatusesActions from '../../contexts/OrderStatusesActionsContext/hooks/useOrderStatusesActions'
 
-const DealStatusEditForm: FC = () => {
-    const state = useContext(DealStatusContext)
-    const { isLoading } = useDealStatusesActions()
-    const { fields, isConfirmEnabled, onClickConfirmUpdate, onClickCancel } = useDealStatusOnChange()
+const OrderStatusEditForm: FC = () => {
+    const state = useContext(OrderStatusContext)
+    const { isLoading } = useOrderStatusesActions()
+    const { fields, isConfirmEnabled, onClickConfirmUpdate, onClickCancel } = useOrderStatusOnChange()
 
     return state.status.id ? (
         <EditForm
@@ -19,11 +19,11 @@ const DealStatusEditForm: FC = () => {
             isConfirmEnabled={isConfirmEnabled}
             createDate={state.status.createDateTime}
             lastModifyDateTime={state.status.modifyDateTime}
-            historyLink={DealStatusesRoutes.Changes}
+            historyLink={OrderStatusesRoutes.Changes}
             onClickConfirm={onClickConfirmUpdate}
             onClickCancel={onClickCancel}
         />
     ) : null
 }
 
-export default DealStatusEditForm
+export default OrderStatusEditForm

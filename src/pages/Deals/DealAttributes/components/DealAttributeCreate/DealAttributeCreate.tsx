@@ -1,24 +1,24 @@
 import React, { FC, useEffect } from 'react'
 
-import DealAttributeContextProvider from '../../contexts/DealAttributeContext/DealAttributeContextProvider'
-import DealAttributeCreateForm from './DealAttributeCreateForm'
-import DealsMenu from '../../../DealsMenu/DealsMenu'
+import OrderAttributeContextProvider from '../../contexts/OrderAttributeContext/OrderAttributeContextProvider'
+import OrderAttributeCreateForm from './OrderAttributeCreateForm'
+import OrdersMenu from '../../../OrdersMenu/OrdersMenu'
 import Page from '../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
-const DealAttributeCreate: FC = () => {
+const OrderAttributeCreate: FC = () => {
     const title = 'Добавление атрибута'
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <DealAttributeContextProvider>
-            <Page title={title} firstSidebar={<DealsMenu />}>
-                <DealAttributeCreateForm />
+        <OrderAttributeContextProvider>
+            <Page title={title} firstSidebar={<OrdersMenu />}>
+                <OrderAttributeCreateForm />
             </Page>
-        </DealAttributeContextProvider>
+        </OrderAttributeContextProvider>
     )
 }
 
-export default DealAttributeCreate
+export default OrderAttributeCreate

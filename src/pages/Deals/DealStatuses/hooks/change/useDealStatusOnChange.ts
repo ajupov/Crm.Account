@@ -1,11 +1,11 @@
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
-import DealStatusContext from '../../contexts/DealStatusContext/DealStatusContext'
+import OrderStatusContext from '../../contexts/OrderStatusContext/OrderStatusContext'
 import { InputOnChangeData } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
 
-interface UseDealStatusOnChangeReturn {
+interface UseOrderStatusOnChangeReturn {
     fields: CreateFormFieldProps[]
     isConfirmEnabled: boolean
     onClickConfirmCreate: () => void
@@ -14,9 +14,9 @@ interface UseDealStatusOnChangeReturn {
 }
 
 // TODO: Move to l10n
-const useDealStatusOnChange = (): UseDealStatusOnChangeReturn => {
+const useOrderStatusOnChange = (): UseOrderStatusOnChangeReturn => {
     const history = useHistory()
-    const state = useContext(DealStatusContext)
+    const state = useContext(OrderStatusContext)
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeName = useCallback(
@@ -90,4 +90,4 @@ const useDealStatusOnChange = (): UseDealStatusOnChangeReturn => {
     return { fields, isConfirmEnabled, onClickConfirmCreate, onClickConfirmUpdate, onClickCancel }
 }
 
-export default useDealStatusOnChange
+export default useOrderStatusOnChange

@@ -1,44 +1,44 @@
 import React, { FC, useEffect } from 'react'
 
-import DealTypeContextProvider from './contexts/DealTypeContext/DealTypeContextProvider'
-import DealTypeDelete from './components/DealTypeDelete/DealTypeDelete'
-import DealTypeRestore from './components/DealTypeRestore/DealTypeRestore'
-import DealTypesActionsContextProvider from './contexts/DealTypesActionsContext/DealTypesActionsContextProvider'
-import DealTypesContextProvider from './contexts/DealTypesContext/DealTypesContextProvider'
-import DealTypesFilter from './components/DealTypesFilter/DealTypesFilter'
-import DealTypesFilterMobile from './components/DealTypesFilterMobile/DealTypesFilterMobile'
-import DealTypesFiltersContextProvider from './contexts/DealTypesFiltersContext/DealTypesFiltersContextProvider'
-import DealTypesTable from './components/DealTypesTable/DealTypesTable'
-import DealsMenu from '../DealsMenu/DealsMenu'
+import OrderTypeContextProvider from './contexts/OrderTypeContext/OrderTypeContextProvider'
+import OrderTypeDelete from './components/OrderTypeDelete/OrderTypeDelete'
+import OrderTypeRestore from './components/OrderTypeRestore/OrderTypeRestore'
+import OrderTypesActionsContextProvider from './contexts/OrderTypesActionsContext/OrderTypesActionsContextProvider'
+import OrderTypesContextProvider from './contexts/OrderTypesContext/OrderTypesContextProvider'
+import OrderTypesFilter from './components/OrderTypesFilter/OrderTypesFilter'
+import OrderTypesFilterMobile from './components/OrderTypesFilterMobile/OrderTypesFilterMobile'
+import OrderTypesFiltersContextProvider from './contexts/OrderTypesFiltersContext/OrderTypesFiltersContextProvider'
+import OrderTypesTable from './components/OrderTypesTable/OrderTypesTable'
+import OrdersMenu from '../OrdersMenu/OrdersMenu'
 import Page from '../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
-const DealTypes: FC = () => {
+const OrderTypes: FC = () => {
     const title = 'Типы'
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <DealTypesContextProvider>
-            <DealTypesActionsContextProvider>
-                <DealTypesFiltersContextProvider>
-                    <DealTypeContextProvider>
+        <OrderTypesContextProvider>
+            <OrderTypesActionsContextProvider>
+                <OrderTypesFiltersContextProvider>
+                    <OrderTypeContextProvider>
                         <Page
                             title={title}
-                            firstSidebar={<DealsMenu />}
-                            secondSidebar={<DealTypesFilter />}
-                            secondSidebarMobile={<DealTypesFilterMobile />}
+                            firstSidebar={<OrdersMenu />}
+                            secondSidebar={<OrderTypesFilter />}
+                            secondSidebarMobile={<OrderTypesFilterMobile />}
                         >
-                            <DealTypesTable />
-                            <DealTypeDelete />
-                            <DealTypeRestore />
+                            <OrderTypesTable />
+                            <OrderTypeDelete />
+                            <OrderTypeRestore />
                         </Page>
-                    </DealTypeContextProvider>
-                </DealTypesFiltersContextProvider>
-            </DealTypesActionsContextProvider>
-        </DealTypesContextProvider>
+                    </OrderTypeContextProvider>
+                </OrderTypesFiltersContextProvider>
+            </OrderTypesActionsContextProvider>
+        </OrderTypesContextProvider>
     )
 }
 
-export default DealTypes
+export default OrderTypes

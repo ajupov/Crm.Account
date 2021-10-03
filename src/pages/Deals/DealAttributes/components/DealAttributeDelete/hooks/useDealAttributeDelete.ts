@@ -1,24 +1,24 @@
 import { useCallback, useContext } from 'react'
 
-import DealAttributesActionsContext from '../../../contexts/DealAttributesActionsContext/DealAttributesActionsContext'
-import DealAttributesContext from '../../../contexts/DealAttributesContext/DealAttributesContext'
-import DealAttributesRoutes from '../../../routes/DealAttributesRoutes'
+import OrderAttributesActionsContext from '../../../contexts/OrderAttributesActionsContext/OrderAttributesActionsContext'
+import OrderAttributesContext from '../../../contexts/OrderAttributesContext/OrderAttributesContext'
+import OrderAttributesRoutes from '../../../routes/OrderAttributesRoutes'
 import { useHistory } from 'react-router'
 
-interface UseDealAttributeDelete {
+interface UseOrderAttributeDelete {
     onClickConfirm: () => void
     onClickCancel: () => void
 }
 
-const useDealAttributeDelete = (): UseDealAttributeDelete => {
+const useOrderAttributeDelete = (): UseOrderAttributeDelete => {
     const history = useHistory()
-    const actionsState = useContext(DealAttributesActionsContext)
-    const attributesState = useContext(DealAttributesContext)
+    const actionsState = useContext(OrderAttributesActionsContext)
+    const attributesState = useContext(OrderAttributesContext)
 
     const onClickConfirm = useCallback(async () => {
         await actionsState.delete()
         actionsState.setIsDeleting(false)
-        history.push(DealAttributesRoutes.Index)
+        history.push(OrderAttributesRoutes.Index)
         await attributesState.getPagedList()
     }, [actionsState, history, attributesState])
 
@@ -30,4 +30,4 @@ const useDealAttributeDelete = (): UseDealAttributeDelete => {
     return { onClickConfirm, onClickCancel }
 }
 
-export default useDealAttributeDelete
+export default useOrderAttributeDelete

@@ -9,7 +9,7 @@ export default interface Activity {
     customerId?: string
     companyId?: string
     contactId?: string
-    dealId?: string
+    orderId?: string
     createUserId?: string
     responsibleUserId?: string
     name?: string

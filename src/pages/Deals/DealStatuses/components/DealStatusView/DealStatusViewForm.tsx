@@ -1,15 +1,15 @@
 import React, { FC, useContext } from 'react'
 
-import DealStatusContext from '../../contexts/DealStatusContext/DealStatusContext'
-import DealStatusesRoutes from '../../routes/DealStatusesRoutes'
+import OrderStatusContext from '../../contexts/OrderStatusContext/OrderStatusContext'
+import OrderStatusesRoutes from '../../routes/OrderStatusesRoutes'
 import View from '../../../../../components/common/grids/View/View'
-import useDealStatusView from './hooks/useDealStatusView'
-import useDealStatusesActions from '../../contexts/DealStatusesActionsContext/hooks/useDealStatusesActions'
+import useOrderStatusView from './hooks/useOrderStatusView'
+import useOrderStatusesActions from '../../contexts/OrderStatusesActionsContext/hooks/useOrderStatusesActions'
 
-const DealStatusViewForm: FC = () => {
-    const state = useContext(DealStatusContext)
-    const { isLoading } = useDealStatusesActions()
-    const { map, onClickDelete, onClickRestore, onClickCancel } = useDealStatusView()
+const OrderStatusViewForm: FC = () => {
+    const state = useContext(OrderStatusContext)
+    const { isLoading } = useOrderStatusesActions()
+    const { map, onClickDelete, onClickRestore, onClickCancel } = useOrderStatusView()
 
     return (
         <View
@@ -19,13 +19,13 @@ const DealStatusViewForm: FC = () => {
             createDate={state.status.createDateTime}
             lastModifyDateTime={state.status.modifyDateTime}
             data={map(state.status)}
-            editLink={DealStatusesRoutes.Edit}
+            editLink={OrderStatusesRoutes.Edit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
-            historyLink={DealStatusesRoutes.Changes}
+            historyLink={OrderStatusesRoutes.Changes}
             onClickCancel={onClickCancel}
         />
     )
 }
 
-export default DealStatusViewForm
+export default OrderStatusViewForm

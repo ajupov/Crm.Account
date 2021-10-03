@@ -1,24 +1,24 @@
 import React, { FC, useEffect } from 'react'
 
-import DealTypeContextProvider from '../../contexts/DealTypeContext/DealTypeContextProvider'
-import DealTypeCreateForm from './DealTypeCreateForm'
-import DealsMenu from '../../../DealsMenu/DealsMenu'
+import OrderTypeContextProvider from '../../contexts/OrderTypeContext/OrderTypeContextProvider'
+import OrderTypeCreateForm from './OrderTypeCreateForm'
+import OrdersMenu from '../../../OrdersMenu/OrdersMenu'
 import Page from '../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
-const DealTypeCreate: FC = () => {
+const OrderTypeCreate: FC = () => {
     const title = 'Добавление типа'
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <DealTypeContextProvider>
-            <Page title={title} firstSidebar={<DealsMenu />}>
-                <DealTypeCreateForm />
+        <OrderTypeContextProvider>
+            <Page title={title} firstSidebar={<OrdersMenu />}>
+                <OrderTypeCreateForm />
             </Page>
-        </DealTypeContextProvider>
+        </OrderTypeContextProvider>
     )
 }
 
-export default DealTypeCreate
+export default OrderTypeCreate

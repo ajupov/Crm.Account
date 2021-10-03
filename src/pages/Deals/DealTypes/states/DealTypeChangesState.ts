@@ -1,21 +1,21 @@
-import DealTypeChange from '../../../../../api/orders/models/DealTypeChange'
-import DealTypeChangeGetPagedListRequest from '../../../../../api/orders/models/DealTypeChangeGetPagedListRequest'
-import DealTypeChangeGetPagedListResponse from '../../../../../api/orders/models/DealTypeChangeGetPagedListResponse'
+import OrderTypeChange from '../../../../../api/orders/models/OrderTypeChange'
+import OrderTypeChangeGetPagedListRequest from '../../../../../api/orders/models/OrderTypeChangeGetPagedListRequest'
+import OrderTypeChangeGetPagedListResponse from '../../../../../api/orders/models/OrderTypeChangeGetPagedListResponse'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'
 const DefaultOrderBy = 'desc'
 
-export default interface DealTypeChangesState {
-    request: DealTypeChangeGetPagedListRequest
-    setRequest: (request: DealTypeChangeGetPagedListRequest) => void
+export default interface OrderTypeChangesState {
+    request: OrderTypeChangeGetPagedListRequest
+    setRequest: (request: OrderTypeChangeGetPagedListRequest) => void
     isLoading: boolean
-    changes: DealTypeChange[]
+    changes: OrderTypeChange[]
     total: number
-    getAll: () => Promise<DealTypeChangeGetPagedListResponse | undefined>
+    getAll: () => Promise<OrderTypeChangeGetPagedListResponse | undefined>
 }
 
-export const dealTypeChangesInitialState: DealTypeChangesState = {
+export const orderTypeChangesInitialState: OrderTypeChangesState = {
     request: {
         typeId: '',
         minCreateDate: void 0,
@@ -25,7 +25,7 @@ export const dealTypeChangesInitialState: DealTypeChangesState = {
         sortBy: DefaultSortBy,
         orderBy: DefaultOrderBy
     },
-    setRequest: (_: DealTypeChangeGetPagedListRequest) => void 0,
+    setRequest: (_: OrderTypeChangeGetPagedListRequest) => void 0,
     isLoading: false,
     changes: [],
     total: 0,

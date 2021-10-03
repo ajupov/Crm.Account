@@ -1,16 +1,16 @@
-import { DealStatusState, dealStatusInitialState } from '../../../states/DealStatusState'
+import { OrderStatusState, orderStatusInitialState } from '../../../states/OrderStatusState'
 import { useCallback, useEffect, useState } from 'react'
 
-import DealStatusesClient from '../../../../../../../api/orders/clients/DealStatusesClient'
+import OrderStatusesClient from '../../../../../../../api/orders/clients/OrderStatusesClient'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
-const dealStatusesClient = new DealStatusesClient(HttpClientFactory.Api)
+const orderStatusesClient = new OrderStatusesClient(HttpClientFactory.Api)
 
-const useDealStatus = (): DealStatusState => {
+const useOrderStatus = (): OrderStatusState => {
     const { id }: { id: string } = useParams()
-    const [isLoading, setIsLoading] = useState(dealStatusInitialState.isLoading)
-    const [status, setStatus] = useState(dealStatusInitialState.status)
+    const [isLoading, setIsLoading] = useState(orderStatusInitialState.isLoading)
+    const [status, setStatus] = useState(orderStatusInitialState.status)
 
     const get = useCallback(async () => {
         if (!id) {
@@ -19,7 +19,7 @@ const useDealStatus = (): DealStatusState => {
 
         setIsLoading(true)
 
-        const response = await dealStatusesClient.GetAsync(id)
+        const response = await orderStatusesClient.GetAsync(id)
 
         setStatus(response)
 
@@ -29,7 +29,7 @@ const useDealStatus = (): DealStatusState => {
     const create = useCallback(async () => {
         setIsLoading(true)
 
-        await dealStatusesClient.CreateAsync(status)
+        await orderStatusesClient.CreateAsync(status)
 
         setIsLoading(false)
     }, [status])
@@ -37,7 +37,7 @@ const useDealStatus = (): DealStatusState => {
     const update = useCallback(async () => {
         setIsLoading(true)
 
-        await dealStatusesClient.UpdateAsync(status)
+        await orderStatusesClient.UpdateAsync(status)
 
         setIsLoading(false)
     }, [status])
@@ -49,4 +49,4 @@ const useDealStatus = (): DealStatusState => {
     return { isLoading, status, setStatus, create, update }
 }
 
-export default useDealStatus
+export default useOrderStatus

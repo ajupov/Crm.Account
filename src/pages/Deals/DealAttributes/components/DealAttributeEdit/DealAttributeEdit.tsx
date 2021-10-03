@@ -1,24 +1,24 @@
 import React, { FC, useEffect } from 'react'
 
-import DealAttributeContextProvider from '../../contexts/DealAttributeContext/DealAttributeContextProvider'
-import DealAttributeEditForm from './DealAttributeEditForm'
-import DealsMenu from '../../../DealsMenu/DealsMenu'
+import OrderAttributeContextProvider from '../../contexts/OrderAttributeContext/OrderAttributeContextProvider'
+import OrderAttributeEditForm from './OrderAttributeEditForm'
+import OrdersMenu from '../../../OrdersMenu/OrdersMenu'
 import Page from '../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
-const DealAttributeEdit: FC = () => {
+const OrderAttributeEdit: FC = () => {
     const title = 'Изменение атрибута'
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <DealAttributeContextProvider>
-            <Page title={title} firstSidebar={<DealsMenu />}>
-                <DealAttributeEditForm />
+        <OrderAttributeContextProvider>
+            <Page title={title} firstSidebar={<OrdersMenu />}>
+                <OrderAttributeEditForm />
             </Page>
-        </DealAttributeContextProvider>
+        </OrderAttributeContextProvider>
     )
 }
 
-export default DealAttributeEdit
+export default OrderAttributeEdit

@@ -1,9 +1,7 @@
-import DealTypesActionsState, {
-    dealTypesActionsInitialState
-} from '../../states/DealTypesActionsState'
+import OrderTypesActionsState, { orderTypesActionsInitialState } from '../../states/OrderTypesActionsState'
 
 import { createContext } from 'react'
 
-const DealTypesActionsContext = createContext<DealTypesActionsState>(dealTypesActionsInitialState)
+const OrderTypesActionsContext = createContext<OrderTypesActionsState>(orderTypesActionsInitialState)
 
-export default DealTypesActionsContext
+export default OrderTypesActionsContext

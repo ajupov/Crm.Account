@@ -1,21 +1,21 @@
 import { useCallback, useContext } from 'react'
 
-import DealStatus from '../../../../../../../api/orders/models/DealStatus'
-import DealStatusesActionsContext from '../../../contexts/DealStatusesActionsContext/DealStatusesActionsContext'
+import OrderStatus from '../../../../../../../api/orders/models/OrderStatus'
+import OrderStatusesActionsContext from '../../../contexts/OrderStatusesActionsContext/OrderStatusesActionsContext'
 import { ViewDataProps } from '../../../../../../components/common/grids/View/View'
 import { useHistory } from 'react-router'
 
-interface UseDealStatusViewReturn {
-    map: (status: DealStatus) => ViewDataProps[]
+interface UseOrderStatusViewReturn {
+    map: (status: OrderStatus) => ViewDataProps[]
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
     onClickCancel: () => void
 }
 
 // TODO: Move to l10n
-const useDealStatusView = (): UseDealStatusViewReturn => {
+const useOrderStatusView = (): UseOrderStatusViewReturn => {
     const history = useHistory()
-    const state = useContext(DealStatusesActionsContext)
+    const state = useContext(OrderStatusesActionsContext)
 
     const onClickDelete = useCallback(
         (id: string) => {
@@ -36,7 +36,7 @@ const useDealStatusView = (): UseDealStatusViewReturn => {
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
     const map = useCallback(
-        (status: DealStatus): ViewDataProps[] => [
+        (status: OrderStatus): ViewDataProps[] => [
             { label: 'Наименование', value: status.name },
             { label: 'Конечный', value: status.isFinish ? 'Да' : 'Нет' },
             { label: 'Удален', value: status.isDeleted ? 'Да' : 'Нет' }
@@ -47,4 +47,4 @@ const useDealStatusView = (): UseDealStatusViewReturn => {
     return { map, onClickDelete, onClickRestore, onClickCancel }
 }
 
-export default useDealStatusView
+export default useOrderStatusView

@@ -1,15 +1,15 @@
 import React, { FC, useContext } from 'react'
 
-import DealTypeContext from '../../contexts/DealTypeContext/DealTypeContext'
-import DealTypesRoutes from '../../routes/DealTypesRoutes'
+import OrderTypeContext from '../../contexts/OrderTypeContext/OrderTypeContext'
+import OrderTypesRoutes from '../../routes/OrderTypesRoutes'
 import View from '../../../../../components/common/grids/View/View'
-import useDealTypeView from './hooks/useDealTypeView'
-import useDealTypesActions from '../../contexts/DealTypesActionsContext/hooks/useDealTypesActions'
+import useOrderTypeView from './hooks/useOrderTypeView'
+import useOrderTypesActions from '../../contexts/OrderTypesActionsContext/hooks/useOrderTypesActions'
 
-const DealTypeViewForm: FC = () => {
-    const state = useContext(DealTypeContext)
-    const { isLoading } = useDealTypesActions()
-    const { map, onClickDelete, onClickRestore, onClickCancel } = useDealTypeView()
+const OrderTypeViewForm: FC = () => {
+    const state = useContext(OrderTypeContext)
+    const { isLoading } = useOrderTypesActions()
+    const { map, onClickDelete, onClickRestore, onClickCancel } = useOrderTypeView()
 
     return (
         <View
@@ -19,13 +19,13 @@ const DealTypeViewForm: FC = () => {
             createDate={state.type.createDateTime}
             lastModifyDateTime={state.type.modifyDateTime}
             data={map(state.type)}
-            editLink={DealTypesRoutes.Edit}
+            editLink={OrderTypesRoutes.Edit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
-            historyLink={DealTypesRoutes.Changes}
+            historyLink={OrderTypesRoutes.Changes}
             onClickCancel={onClickCancel}
         />
     )
 }
 
-export default DealTypeViewForm
+export default OrderTypeViewForm

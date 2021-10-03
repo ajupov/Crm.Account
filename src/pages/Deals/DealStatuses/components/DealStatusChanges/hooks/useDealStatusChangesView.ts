@@ -1,11 +1,11 @@
 import { useCallback } from 'react'
 import { useHistory } from 'react-router'
 
-interface UseDealStatusViewReturn {
+interface UseOrderStatusViewReturn {
     onClickCancel: () => void
 }
 
-const useDealStatusChangesView = (): UseDealStatusViewReturn => {
+const useOrderStatusChangesView = (): UseOrderStatusViewReturn => {
     const history = useHistory()
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
@@ -13,4 +13,4 @@ const useDealStatusChangesView = (): UseDealStatusViewReturn => {
     return { onClickCancel }
 }
 
-export default useDealStatusChangesView
+export default useOrderStatusChangesView

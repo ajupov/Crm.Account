@@ -5,12 +5,12 @@ export type RenderColumnTitle = {
     title: string
 }
 
-interface DealsBoardColumnProps {
+interface OrdersBoardColumnProps {
     title: string
     onClickAddCard?: () => void
 }
 
-const DealsBoardColumn: FC<DealsBoardColumnProps> = ({ title, onClickAddCard }) => (
+const OrdersBoardColumn: FC<OrdersBoardColumnProps> = ({ title, onClickAddCard }) => (
     <Grid>
         <Grid.Row column="2">
             <Grid.Column width="12">
@@ -25,4 +25,4 @@ const DealsBoardColumn: FC<DealsBoardColumnProps> = ({ title, onClickAddCard }) 
     </Grid>
 )
 
-export default DealsBoardColumn
+export default OrdersBoardColumn

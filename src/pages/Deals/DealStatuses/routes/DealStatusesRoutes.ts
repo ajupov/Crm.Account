@@ -1,9 +1,9 @@
-const DealStatusesRoutes = {
-    Index: '/deals/statuses',
-    View: '/deals/statuses/view',
-    Create: '/deals/statuses/create',
-    Edit: '/deals/statuses/edit',
-    Changes: '/deals/statuses/changes'
+const OrderStatusesRoutes = {
+    Index: '/orders/statuses',
+    View: '/orders/statuses/view',
+    Create: '/orders/statuses/create',
+    Edit: '/orders/statuses/edit',
+    Changes: '/orders/statuses/changes'
 }
 
-export default DealStatusesRoutes
+export default OrderStatusesRoutes

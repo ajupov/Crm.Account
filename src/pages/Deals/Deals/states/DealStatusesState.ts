@@ -1,12 +1,12 @@
-import DealStatus from '../../../../../api/orders/models/DealStatus'
+import OrderStatus from '../../../../../api/orders/models/OrderStatus'
 
-export default interface DealStatusesState {
+export default interface OrderStatusesState {
     isLoading: boolean
-    statuses: DealStatus[]
+    statuses: OrderStatus[]
     getAll: () => Promise<void>
 }
 
-export const dealStatusesInitialState: DealStatusesState = {
+export const orderStatusesInitialState: OrderStatusesState = {
     isLoading: false,
     statuses: [],
     getAll: () => Promise.resolve()

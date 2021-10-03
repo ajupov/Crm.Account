@@ -2,9 +2,9 @@ import { calculateOffset, calculatePage } from '../../../../../../../../utils/pa
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import DealAttribute from '../../../../../../../../../api/orders/models/DealAttribute'
-import DealAttributeChange from '../../../../../../../../../api/orders/models/DealAttributeChange'
-import DealAttributeChangesContext from '../../../../../contexts/DealAttributeChangesContext/DealAttributeChangesContext'
+import OrderAttribute from '../../../../../../../../../api/orders/models/OrderAttribute'
+import OrderAttributeChange from '../../../../../../../../../api/orders/models/OrderAttributeChange'
+import OrderAttributeChangesContext from '../../../../../contexts/OrderAttributeChangesContext/OrderAttributeChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../components/common/collections/Table/TableHeader'
 import { getAttributeTypeName } from '../../../../../../../../helpers/entityAttributeTypeHelper'
@@ -12,17 +12,17 @@ import { getDateTimeAsRecently } from '../../../../../../../../utils/dateTime/da
 import { getFileNameWithDateTime } from '../../../../../../../../helpers/fileNameHelper'
 import { getValueOrEmpty } from '../../../../../../../../helpers/entityFieldValueHelper'
 
-interface UseDealAttributeChangesTableReturn {
+interface UseOrderAttributeChangesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (attributes: DealAttributeChange[]) => TableBodyRowProps[]
+    map: (attributes: OrderAttributeChange[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
 
 // TODO: Move to l10n
-const useDealAttributeChangesTable = (): UseDealAttributeChangesTableReturn => {
-    const state = useContext(DealAttributeChangesContext)
+const useOrderAttributeChangesTable = (): UseOrderAttributeChangesTableReturn => {
+    const state = useContext(OrderAttributeChangesContext)
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const changes = (await state.getAll())?.changes
@@ -42,7 +42,7 @@ const useDealAttributeChangesTable = (): UseDealAttributeChangesTableReturn => {
         [state]
     )
 
-    const getChangeName = useCallback((change: DealAttributeChange) => {
+    const getChangeName = useCallback((change: OrderAttributeChange) => {
         if (!change.oldValueJson && change.newValueJson) {
             return 'Создан'
         }
@@ -58,9 +58,9 @@ const useDealAttributeChangesTable = (): UseDealAttributeChangesTableReturn => {
         return ''
     }, [])
 
-    const getChangeValue = useCallback((change: DealAttributeChange) => {
-        const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as DealAttribute) : void 0
-        const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as DealAttribute) : void 0
+    const getChangeValue = useCallback((change: OrderAttributeChange) => {
+        const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as OrderAttribute) : void 0
+        const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as OrderAttribute) : void 0
 
         return [
             `Тип: ${getValueOrEmpty(getAttributeTypeName(oldValue?.type))} → ${getValueOrEmpty(
@@ -72,7 +72,7 @@ const useDealAttributeChangesTable = (): UseDealAttributeChangesTableReturn => {
     }, [])
 
     const map = useCallback(
-        (changes: DealAttributeChange[]) =>
+        (changes: OrderAttributeChange[]) =>
             changes.map(
                 change =>
                     ({
@@ -121,4 +121,4 @@ const useDealAttributeChangesTable = (): UseDealAttributeChangesTableReturn => {
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
-export default useDealAttributeChangesTable
+export default useOrderAttributeChangesTable

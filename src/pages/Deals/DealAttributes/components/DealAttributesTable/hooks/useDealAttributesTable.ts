@@ -2,28 +2,28 @@ import { calculateOffset, calculatePage } from '../../../../../../utils/paginati
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import DealAttribute from '../../../../../../../api/orders/models/DealAttribute'
-import DealAttributesContext from '../../../contexts/DealAttributesContext/DealAttributesContext'
-import DealAttributesRoutes from '../../../routes/DealAttributesRoutes'
+import OrderAttribute from '../../../../../../../api/orders/models/OrderAttribute'
+import OrderAttributesContext from '../../../contexts/OrderAttributesContext/OrderAttributesContext'
+import OrderAttributesRoutes from '../../../routes/OrderAttributesRoutes'
 import { TableBodyRowProps } from '../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../components/common/collections/Table/TableHeader'
 import { getAttributeTypeName } from '../../../../../../helpers/entityAttributeTypeHelper'
 import { getDateTimeAsRecently } from '../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../helpers/fileNameHelper'
-import useDealAttributeView from '../../DealAttributeView/hooks/useDealAttributeView'
+import useOrderAttributeView from '../../OrderAttributeView/hooks/useOrderAttributeView'
 
-interface UseDealAttributesTableReturn {
+interface UseOrderAttributesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (attributes: DealAttribute[]) => TableBodyRowProps[]
+    map: (attributes: OrderAttribute[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
 
 // TODO: Move to l10n
-const useDealAttributesTable = (): UseDealAttributesTableReturn => {
-    const state = useContext(DealAttributesContext)
-    const { onClickDelete, onClickRestore } = useDealAttributeView()
+const useOrderAttributesTable = (): UseOrderAttributesTableReturn => {
+    const state = useContext(OrderAttributesContext)
+    const { onClickDelete, onClickRestore } = useOrderAttributeView()
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const attributes = (await state.getAll())?.attributes
@@ -66,7 +66,7 @@ const useDealAttributesTable = (): UseDealAttributesTableReturn => {
     )
 
     const map = useCallback(
-        (attributes: DealAttribute[]) =>
+        (attributes: OrderAttribute[]) =>
             attributes.map(
                 attribute =>
                     ({
@@ -82,8 +82,8 @@ const useDealAttributesTable = (): UseDealAttributesTableReturn => {
                             }
                         ],
                         isDeleted: attribute.isDeleted,
-                        viewLink: DealAttributesRoutes.View,
-                        editLink: DealAttributesRoutes.Edit,
+                        viewLink: OrderAttributesRoutes.View,
+                        editLink: OrderAttributesRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
@@ -126,4 +126,4 @@ const useDealAttributesTable = (): UseDealAttributesTableReturn => {
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
-export default useDealAttributesTable
+export default useOrderAttributesTable

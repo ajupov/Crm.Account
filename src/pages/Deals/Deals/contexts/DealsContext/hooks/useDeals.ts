@@ -1,21 +1,21 @@
-import DealsState, { dealsInitialState } from '../../../states/DealsState'
+import OrdersState, { ordersInitialState } from '../../../states/OrdersState'
 import { useCallback, useEffect, useState } from 'react'
 
-import DealsClient from '../../../../../../../api/orders/clients/DealsClient'
+import OrdersClient from '../../../../../../../api/orders/clients/OrdersClient'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const dealsClient = new DealsClient(HttpClientFactory.Api)
+const ordersClient = new OrdersClient(HttpClientFactory.Api)
 
-const useDeals = (): DealsState => {
+const useOrders = (): OrdersState => {
     const MaxLimit = 2147483647
 
-    const [isLoading, setIsLoading] = useState(dealsInitialState.isLoading)
-    const [deals, setDeals] = useState(dealsInitialState.deals)
+    const [isLoading, setIsLoading] = useState(ordersInitialState.isLoading)
+    const [orders, setOrders] = useState(ordersInitialState.orders)
 
     const getAll = useCallback(async () => {
         setIsLoading(true)
 
-        const response = await dealsClient.GetPagedListAsync({
+        const response = await ordersClient.GetPagedListAsync({
             isDeleted: false,
             limit: MaxLimit,
             offset: 0,
@@ -23,7 +23,7 @@ const useDeals = (): DealsState => {
             orderBy: 'desc'
         })
 
-        setDeals(response.deals ?? [])
+        setOrders(response.orders ?? [])
 
         setIsLoading(false)
     }, [])
@@ -32,7 +32,7 @@ const useDeals = (): DealsState => {
         void getAll()
     }, [getAll])
 
-    return { isLoading, deals, getAll }
+    return { isLoading, orders, getAll }
 }
 
-export default useDeals
+export default useOrders

@@ -1,21 +1,21 @@
-import DealAttributeChange from '../../../../../api/orders/models/DealAttributeChange'
-import DealAttributeChangeGetPagedListRequest from '../../../../../api/orders/models/DealAttributeChangeGetPagedListRequest'
-import DealAttributeChangeGetPagedListResponse from '../../../../../api/orders/models/DealAttributeChangeGetPagedListResponse'
+import OrderAttributeChange from '../../../../../api/orders/models/OrderAttributeChange'
+import OrderAttributeChangeGetPagedListRequest from '../../../../../api/orders/models/OrderAttributeChangeGetPagedListRequest'
+import OrderAttributeChangeGetPagedListResponse from '../../../../../api/orders/models/OrderAttributeChangeGetPagedListResponse'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'
 const DefaultOrderBy = 'desc'
 
-export default interface DealAttributeChangesState {
-    request: DealAttributeChangeGetPagedListRequest
-    setRequest: (request: DealAttributeChangeGetPagedListRequest) => void
+export default interface OrderAttributeChangesState {
+    request: OrderAttributeChangeGetPagedListRequest
+    setRequest: (request: OrderAttributeChangeGetPagedListRequest) => void
     isLoading: boolean
-    changes: DealAttributeChange[]
+    changes: OrderAttributeChange[]
     total: number
-    getAll: () => Promise<DealAttributeChangeGetPagedListResponse | undefined>
+    getAll: () => Promise<OrderAttributeChangeGetPagedListResponse | undefined>
 }
 
-export const dealAttributeChangesInitialState: DealAttributeChangesState = {
+export const orderAttributeChangesInitialState: OrderAttributeChangesState = {
     request: {
         attributeId: '',
         minCreateDate: void 0,
@@ -25,7 +25,7 @@ export const dealAttributeChangesInitialState: DealAttributeChangesState = {
         sortBy: DefaultSortBy,
         orderBy: DefaultOrderBy
     },
-    setRequest: (_: DealAttributeChangeGetPagedListRequest) => void 0,
+    setRequest: (_: OrderAttributeChangeGetPagedListRequest) => void 0,
     isLoading: false,
     changes: [],
     total: 0,

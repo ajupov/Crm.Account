@@ -1,11 +1,11 @@
 import { useCallback } from 'react'
 import { useHistory } from 'react-router'
 
-interface UseDealAttributeViewReturn {
+interface UseOrderAttributeViewReturn {
     onClickCancel: () => void
 }
 
-const useDealAttributeChangesView = (): UseDealAttributeViewReturn => {
+const useOrderAttributeChangesView = (): UseOrderAttributeViewReturn => {
     const history = useHistory()
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
@@ -13,4 +13,4 @@ const useDealAttributeChangesView = (): UseDealAttributeViewReturn => {
     return { onClickCancel }
 }
 
-export default useDealAttributeChangesView
+export default useOrderAttributeChangesView

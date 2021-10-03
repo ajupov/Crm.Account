@@ -21,7 +21,7 @@ export default interface ActivityGetPagedListRequest {
     customerIds?: string[]
     companyIds?: string[]
     contactIds?: string[]
-    dealIds?: string[]
+    orderIds?: string[]
     createUserIds?: string[]
     responsibleUserIds?: string[]
     priorities?: ActivityPriority[]

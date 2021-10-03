@@ -1,6 +1,6 @@
 import CompanyAttributeType from '../../api/companies/models/CompanyAttributeType'
 import ContactAttributeType from '../../api/contacts/models/ContactAttributeType'
-import DealAttributeType from '../../api/orders/models/DealAttributeType'
+import OrderAttributeType from '../../api/orders/models/OrderAttributeType'
 import { Dictionary } from '../utils/dictionary/dictionaryUtils'
 import { DropdownItemProps } from '../components/common/fields/Dropdown/Dropdown'
 import CustomerAttributeType from '../../api/customers/models/CustomerAttributeType'
@@ -50,7 +50,7 @@ export function getAttributeTypeName(
         | ContactAttributeType
         | CompanyAttributeType
         | CustomerAttributeType
-        | DealAttributeType
+        | OrderAttributeType
 ): string {
     return type ? AttributeTypeWithNames[type] : ''
 }

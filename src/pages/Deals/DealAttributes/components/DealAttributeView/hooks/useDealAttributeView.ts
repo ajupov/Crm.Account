@@ -1,22 +1,22 @@
 import { useCallback, useContext } from 'react'
 
-import DealAttribute from '../../../../../../../api/orders/models/DealAttribute'
-import DealAttributesActionsContext from '../../../contexts/DealAttributesActionsContext/DealAttributesActionsContext'
+import OrderAttribute from '../../../../../../../api/orders/models/OrderAttribute'
+import OrderAttributesActionsContext from '../../../contexts/OrderAttributesActionsContext/OrderAttributesActionsContext'
 import { ViewDataProps } from '../../../../../../components/common/grids/View/View'
 import { getAttributeTypeName } from '../../../../../../helpers/entityAttributeTypeHelper'
 import { useHistory } from 'react-router'
 
-interface UseDealAttributeViewReturn {
-    map: (attribute: DealAttribute) => ViewDataProps[]
+interface UseOrderAttributeViewReturn {
+    map: (attribute: OrderAttribute) => ViewDataProps[]
     onClickDelete: (id: string) => void
     onClickRestore: (id: string) => void
     onClickCancel: () => void
 }
 
 // TODO: Move to l10n
-const useDealAttributeView = (): UseDealAttributeViewReturn => {
+const useOrderAttributeView = (): UseOrderAttributeViewReturn => {
     const history = useHistory()
-    const state = useContext(DealAttributesActionsContext)
+    const state = useContext(OrderAttributesActionsContext)
 
     const onClickDelete = useCallback(
         (id: string) => {
@@ -37,7 +37,7 @@ const useDealAttributeView = (): UseDealAttributeViewReturn => {
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
     const map = useCallback(
-        (attribute: DealAttribute): ViewDataProps[] => [
+        (attribute: OrderAttribute): ViewDataProps[] => [
             { label: 'Тип', value: getAttributeTypeName(attribute.type) },
             { label: 'Наименование', value: attribute.key },
             { label: 'Удален', value: attribute.isDeleted ? 'Да' : 'Нет' }
@@ -48,4 +48,4 @@ const useDealAttributeView = (): UseDealAttributeViewReturn => {
     return { map, onClickDelete, onClickRestore, onClickCancel }
 }
 
-export default useDealAttributeView
+export default useOrderAttributeView

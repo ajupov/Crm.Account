@@ -1,13 +1,13 @@
 import React, { FC, useContext } from 'react'
 
-import DealStatusesContext from '../../contexts/DealStatusesContext/DealStatusesContext'
-import DealStatusesRoutes from '../../routes/DealStatusesRoutes'
+import OrderStatusesContext from '../../contexts/OrderStatusesContext/OrderStatusesContext'
+import OrderStatusesRoutes from '../../routes/OrderStatusesRoutes'
 import Table from '../../../../../components/common/collections/Table/Table'
-import useDealStatusesTable from './hooks/useDealStatusesTable'
+import useOrderStatusesTable from './hooks/useOrderStatusesTable'
 
-const DealStatusesTable: FC = () => {
-    const state = useContext(DealStatusesContext)
-    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useDealStatusesTable()
+const OrderStatusesTable: FC = () => {
+    const state = useContext(OrderStatusesContext)
+    const { page, headers, map, onClickDownloadAsCsv, onClickChangePage } = useOrderStatusesTable()
 
     return (
         <Table
@@ -17,10 +17,10 @@ const DealStatusesTable: FC = () => {
             rows={map(state.statuses)}
             footer={{ page, limit: state.request.limit, total: state.total, onClickChangePage }}
             lastModifyDateTime={state.lastModifyDateTime}
-            createLink={DealStatusesRoutes.Create}
+            createLink={OrderStatusesRoutes.Create}
             onClickDownloadAsCsv={onClickDownloadAsCsv}
         />
     )
 }
 
-export default DealStatusesTable
+export default OrderStatusesTable

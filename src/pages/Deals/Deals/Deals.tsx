@@ -1,27 +1,27 @@
 import React, { FC, useEffect } from 'react'
 
-import DealStatusesContextProvider from './contexts/DealStatusesContext/DealStatusesContextProvider'
-import DealsBoard from './components/DealsBoard/DealsBoard'
-import DealsContextProvider from './contexts/DealsContext/DealsContextProvider'
-import DealsMenu from '../DealsMenu/DealsMenu'
+import OrderStatusesContextProvider from './contexts/OrderStatusesContext/OrderStatusesContextProvider'
+import OrdersBoard from './components/OrdersBoard/OrdersBoard'
+import OrdersContextProvider from './contexts/OrdersContext/OrdersContextProvider'
+import OrdersMenu from '../OrdersMenu/OrdersMenu'
 import Page from '../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
-const Deals: FC = () => {
+const Orders: FC = () => {
     const title = 'Сделки'
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <DealStatusesContextProvider>
-            <DealsContextProvider>
-                <Page title={title} useFullHeight firstSidebar={<DealsMenu />}>
-                    <DealsBoard />
+        <OrderStatusesContextProvider>
+            <OrdersContextProvider>
+                <Page title={title} useFullHeight firstSidebar={<OrdersMenu />}>
+                    <OrdersBoard />
                 </Page>
-            </DealsContextProvider>
-        </DealStatusesContextProvider>
+            </OrdersContextProvider>
+        </OrderStatusesContextProvider>
     )
 }
 
-export default Deals
+export default Orders

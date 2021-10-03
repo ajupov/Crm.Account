@@ -2,26 +2,26 @@ import { calculateOffset, calculatePage } from '../../../../../../../../utils/pa
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import DealStatus from '../../../../../../../../../api/orders/models/DealStatus'
-import DealStatusChange from '../../../../../../../../../api/orders/models/DealStatusChange'
-import DealStatusChangesContext from '../../../../../contexts/DealStatusChangesContext/DealStatusChangesContext'
+import OrderStatus from '../../../../../../../../../api/orders/models/OrderStatus'
+import OrderStatusChange from '../../../../../../../../../api/orders/models/OrderStatusChange'
+import OrderStatusChangesContext from '../../../../../contexts/OrderStatusChangesContext/OrderStatusChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../components/common/collections/Table/TableHeader'
 import { getDateTimeAsRecently } from '../../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../../helpers/fileNameHelper'
 import { getValueOrEmpty } from '../../../../../../../../helpers/entityFieldValueHelper'
 
-interface UseDealStatusChangesTableReturn {
+interface UseOrderStatusChangesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (statuses: DealStatusChange[]) => TableBodyRowProps[]
+    map: (statuses: OrderStatusChange[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
 
 // TODO: Move to l10n
-const useDealStatusChangesTable = (): UseDealStatusChangesTableReturn => {
-    const state = useContext(DealStatusChangesContext)
+const useOrderStatusChangesTable = (): UseOrderStatusChangesTableReturn => {
+    const state = useContext(OrderStatusChangesContext)
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const changes = (await state.getAll())?.changes
@@ -41,7 +41,7 @@ const useDealStatusChangesTable = (): UseDealStatusChangesTableReturn => {
         [state]
     )
 
-    const getChangeName = useCallback((change: DealStatusChange) => {
+    const getChangeName = useCallback((change: OrderStatusChange) => {
         if (!change.oldValueJson && change.newValueJson) {
             return 'Создан'
         }
@@ -57,9 +57,9 @@ const useDealStatusChangesTable = (): UseDealStatusChangesTableReturn => {
         return ''
     }, [])
 
-    const getChangeValue = useCallback((change: DealStatusChange) => {
-        const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as DealStatus) : void 0
-        const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as DealStatus) : void 0
+    const getChangeValue = useCallback((change: OrderStatusChange) => {
+        const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as OrderStatus) : void 0
+        const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as OrderStatus) : void 0
 
         return [
             `Наименование: ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
@@ -68,7 +68,7 @@ const useDealStatusChangesTable = (): UseDealStatusChangesTableReturn => {
     }, [])
 
     const map = useCallback(
-        (changes: DealStatusChange[]) =>
+        (changes: OrderStatusChange[]) =>
             changes.map(
                 change =>
                     ({
@@ -117,4 +117,4 @@ const useDealStatusChangesTable = (): UseDealStatusChangesTableReturn => {
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
-export default useDealStatusChangesTable
+export default useOrderStatusChangesTable

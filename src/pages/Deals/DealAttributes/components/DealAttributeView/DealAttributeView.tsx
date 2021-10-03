@@ -1,31 +1,31 @@
 import React, { FC, useEffect } from 'react'
 
-import DealAttributeContextProvider from '../../contexts/DealAttributeContext/DealAttributeContextProvider'
-import DealAttributeDelete from '../DealAttributeDelete/DealAttributeDelete'
-import DealAttributeRestore from '../DealAttributeRestore/DealAttributeRestore'
-import DealAttributeViewForm from './DealAttributeViewForm'
-import DealAttributesActionsContextProvider from '../../contexts/DealAttributesActionsContext/DealAttributesActionsContextProvider'
-import DealsMenu from '../../../DealsMenu/DealsMenu'
+import OrderAttributeContextProvider from '../../contexts/OrderAttributeContext/OrderAttributeContextProvider'
+import OrderAttributeDelete from '../OrderAttributeDelete/OrderAttributeDelete'
+import OrderAttributeRestore from '../OrderAttributeRestore/OrderAttributeRestore'
+import OrderAttributeViewForm from './OrderAttributeViewForm'
+import OrderAttributesActionsContextProvider from '../../contexts/OrderAttributesActionsContext/OrderAttributesActionsContextProvider'
+import OrdersMenu from '../../../OrdersMenu/OrdersMenu'
 import Page from '../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
-const DealAttributeView: FC = () => {
+const OrderAttributeView: FC = () => {
     const title = 'Просмотр атрибута'
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <DealAttributesActionsContextProvider>
-            <DealAttributeContextProvider>
-                <Page title={title} firstSidebar={<DealsMenu />}>
-                    <DealAttributeViewForm />
-                    <DealAttributeDelete />
-                    <DealAttributeRestore />
+        <OrderAttributesActionsContextProvider>
+            <OrderAttributeContextProvider>
+                <Page title={title} firstSidebar={<OrdersMenu />}>
+                    <OrderAttributeViewForm />
+                    <OrderAttributeDelete />
+                    <OrderAttributeRestore />
                 </Page>
-            </DealAttributeContextProvider>
-        </DealAttributesActionsContextProvider>
+            </OrderAttributeContextProvider>
+        </OrderAttributesActionsContextProvider>
     )
 }
 
-export default DealAttributeView
+export default OrderAttributeView

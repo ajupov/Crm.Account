@@ -1,24 +1,24 @@
 import React, { FC, useEffect } from 'react'
 
-import DealTypeContextProvider from '../../contexts/DealTypeContext/DealTypeContextProvider'
-import DealTypeEditForm from './DealTypeEditForm'
-import DealsMenu from '../../../DealsMenu/DealsMenu'
+import OrderTypeContextProvider from '../../contexts/OrderTypeContext/OrderTypeContextProvider'
+import OrderTypeEditForm from './OrderTypeEditForm'
+import OrdersMenu from '../../../OrdersMenu/OrdersMenu'
 import Page from '../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
-const DealTypeEdit: FC = () => {
+const OrderTypeEdit: FC = () => {
     const title = 'Изменение типа'
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <DealTypeContextProvider>
-            <Page title={title} firstSidebar={<DealsMenu />}>
-                <DealTypeEditForm />
+        <OrderTypeContextProvider>
+            <Page title={title} firstSidebar={<OrdersMenu />}>
+                <OrderTypeEditForm />
             </Page>
-        </DealTypeContextProvider>
+        </OrderTypeContextProvider>
     )
 }
 
-export default DealTypeEdit
+export default OrderTypeEdit

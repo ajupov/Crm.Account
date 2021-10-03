@@ -1,24 +1,24 @@
-import DealTypesState, { dealTypesInitialState } from '../../../states/DealTypesState'
+import OrderTypesState, { orderTypesInitialState } from '../../../states/OrderTypesState'
 import { useCallback, useEffect, useState } from 'react'
 
-import DealTypesClient from '../../../../../../../api/orders/clients/DealTypesClient'
+import OrderTypesClient from '../../../../../../../api/orders/clients/OrderTypesClient'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const dealTypesClient = new DealTypesClient(HttpClientFactory.Api)
+const orderTypesClient = new OrderTypesClient(HttpClientFactory.Api)
 
-const useDealTypes = (): DealTypesState => {
+const useOrderTypes = (): OrderTypesState => {
     const MaxLimit = 1048576
 
-    const [request, setRequest] = useState(dealTypesInitialState.request)
-    const [isLoading, setIsLoading] = useState(dealTypesInitialState.isLoading)
-    const [types, setTypes] = useState(dealTypesInitialState.types)
-    const [total, setTotal] = useState(dealTypesInitialState.total)
-    const [lastModifyDateTime, setLastModifyDateTime] = useState(dealTypesInitialState.lastModifyDateTime)
+    const [request, setRequest] = useState(orderTypesInitialState.request)
+    const [isLoading, setIsLoading] = useState(orderTypesInitialState.isLoading)
+    const [types, setTypes] = useState(orderTypesInitialState.types)
+    const [total, setTotal] = useState(orderTypesInitialState.total)
+    const [lastModifyDateTime, setLastModifyDateTime] = useState(orderTypesInitialState.lastModifyDateTime)
 
     const getPagedList = useCallback(async () => {
         setIsLoading(true)
 
-        const response = await dealTypesClient.GetPagedListAsync(request)
+        const response = await orderTypesClient.GetPagedListAsync(request)
 
         setTypes(response.types ?? [])
         setTotal(response.totalCount)
@@ -30,7 +30,7 @@ const useDealTypes = (): DealTypesState => {
     const getAll = useCallback(async () => {
         setIsLoading(true)
 
-        const response = await dealTypesClient.GetPagedListAsync({ ...request, offset: 0, limit: MaxLimit })
+        const response = await orderTypesClient.GetPagedListAsync({ ...request, offset: 0, limit: MaxLimit })
         if (response.types) {
             response.types.forEach(v => {
                 delete v.accountId
@@ -49,4 +49,4 @@ const useDealTypes = (): DealTypesState => {
     return { request, setRequest, isLoading, types, total, lastModifyDateTime, getPagedList, getAll }
 }
 
-export default useDealTypes
+export default useOrderTypes

@@ -1,38 +1,38 @@
 import React, { FC, useEffect } from 'react'
 
-import DealAttributeChangesContextProvider from '../../contexts/DealAttributeChangesContext/DealAttributeChangesContextProvider'
-import DealAttributeChangesFilter from './components/DealAttributeChangesFilter/DealAttributeChangesFilter'
-import DealAttributeChangesFiltersContextProvider from '../../contexts/DealAttributeChangesFiltersContext/DealAttributeChangesFiltersContextProvider'
-import DealAttributeChangesTable from './components/DealAttributeChangesTable/DealAttributeChangesTable'
-import DealsAttributeChangesFilterMobile from './components/DealsAttributeChangesFilterMobile/DealsAttributeChangesFilterMobile'
-import DealsMenu from '../../../DealsMenu/DealsMenu'
+import OrderAttributeChangesContextProvider from '../../contexts/OrderAttributeChangesContext/OrderAttributeChangesContextProvider'
+import OrderAttributeChangesFilter from './components/OrderAttributeChangesFilter/OrderAttributeChangesFilter'
+import OrderAttributeChangesFiltersContextProvider from '../../contexts/OrderAttributeChangesFiltersContext/OrderAttributeChangesFiltersContextProvider'
+import OrderAttributeChangesTable from './components/OrderAttributeChangesTable/OrderAttributeChangesTable'
+import OrdersAttributeChangesFilterMobile from './components/OrdersAttributeChangesFilterMobile/OrdersAttributeChangesFilterMobile'
+import OrdersMenu from '../../../OrdersMenu/OrdersMenu'
 import Page from '../../../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../../../helpers/productNameHelper'
-import useDealAttributeChangesView from './hooks/useDealAttributeChangesView'
+import useOrderAttributeChangesView from './hooks/useOrderAttributeChangesView'
 
 // TODO: Move to l10n
-const DealAttributeChanges: FC = () => {
+const OrderAttributeChanges: FC = () => {
     const title = 'История изменений'
 
-    const { onClickCancel } = useDealAttributeChangesView()
+    const { onClickCancel } = useOrderAttributeChangesView()
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <DealAttributeChangesContextProvider>
-            <DealAttributeChangesFiltersContextProvider>
+        <OrderAttributeChangesContextProvider>
+            <OrderAttributeChangesFiltersContextProvider>
                 <Page
                     title={title}
-                    firstSidebar={<DealsMenu />}
-                    secondSidebar={<DealAttributeChangesFilter />}
-                    secondSidebarMobile={<DealsAttributeChangesFilterMobile />}
+                    firstSidebar={<OrdersMenu />}
+                    secondSidebar={<OrderAttributeChangesFilter />}
+                    secondSidebarMobile={<OrdersAttributeChangesFilterMobile />}
                     onClickCancel={onClickCancel}
                 >
-                    <DealAttributeChangesTable />
+                    <OrderAttributeChangesTable />
                 </Page>
-            </DealAttributeChangesFiltersContextProvider>
-        </DealAttributeChangesContextProvider>
+            </OrderAttributeChangesFiltersContextProvider>
+        </OrderAttributeChangesContextProvider>
     )
 }
 
-export default DealAttributeChanges
+export default OrderAttributeChanges

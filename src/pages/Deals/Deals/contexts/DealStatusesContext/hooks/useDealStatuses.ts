@@ -1,21 +1,21 @@
-import DealStatusesState, { dealStatusesInitialState } from '../../../states/DealStatusesState'
+import OrderStatusesState, { orderStatusesInitialState } from '../../../states/OrderStatusesState'
 import { useCallback, useEffect, useState } from 'react'
 
-import DealStatusesClient from '../../../../../../../api/orders/clients/DealStatusesClient'
+import OrderStatusesClient from '../../../../../../../api/orders/clients/OrderStatusesClient'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 
-const dealStatusesClient = new DealStatusesClient(HttpClientFactory.Api)
+const orderStatusesClient = new OrderStatusesClient(HttpClientFactory.Api)
 
-const useDealStatuses = (): DealStatusesState => {
+const useOrderStatuses = (): OrderStatusesState => {
     const MaxLimit = 2147483647
 
-    const [isLoading, setIsLoading] = useState(dealStatusesInitialState.isLoading)
-    const [statuses, setStatuses] = useState(dealStatusesInitialState.statuses)
+    const [isLoading, setIsLoading] = useState(orderStatusesInitialState.isLoading)
+    const [statuses, setStatuses] = useState(orderStatusesInitialState.statuses)
 
     const getAll = useCallback(async () => {
         setIsLoading(true)
 
-        const response = await dealStatusesClient.GetPagedListAsync({
+        const response = await orderStatusesClient.GetPagedListAsync({
             isDeleted: false,
             limit: MaxLimit,
             offset: 0,
@@ -35,4 +35,4 @@ const useDealStatuses = (): DealStatusesState => {
     return { isLoading, statuses, getAll }
 }
 
-export default useDealStatuses
+export default useOrderStatuses

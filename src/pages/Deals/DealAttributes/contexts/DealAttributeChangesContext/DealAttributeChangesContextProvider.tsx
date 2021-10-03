@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 
-import DealAttributeChangesContext from './DealAttributeChangesContext'
-import useDealAttributeChanges from './hooks/useDealAttributeChanges'
+import OrderAttributeChangesContext from './OrderAttributeChangesContext'
+import useOrderAttributeChanges from './hooks/useOrderAttributeChanges'
 
-const DealAttributeChangesContextProvider: FC = ({ children }) => {
-    const state = useDealAttributeChanges()
+const OrderAttributeChangesContextProvider: FC = ({ children }) => {
+    const state = useOrderAttributeChanges()
 
-    return <DealAttributeChangesContext.Provider value={state}>{children}</DealAttributeChangesContext.Provider>
+    return <OrderAttributeChangesContext.Provider value={state}>{children}</OrderAttributeChangesContext.Provider>
 }
 
-export default DealAttributeChangesContextProvider
+export default OrderAttributeChangesContextProvider

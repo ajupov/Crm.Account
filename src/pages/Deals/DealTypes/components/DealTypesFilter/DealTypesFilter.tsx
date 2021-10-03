@@ -1,10 +1,10 @@
 import React, { FC, useContext } from 'react'
 
-import DealTypesFiltersContext from '../../contexts/DealTypesFiltersContext/DealTypesFiltersContext'
+import OrderTypesFiltersContext from '../../contexts/OrderTypesFiltersContext/OrderTypesFiltersContext'
 import FilterForm from '../../../../../components/common/forms/FilterForm/FilterForm'
 
-const DealTypesFilter: FC = () => {
-    const state = useContext(DealTypesFiltersContext)
+const OrderTypesFilter: FC = () => {
+    const state = useContext(OrderTypesFiltersContext)
 
     return (
         <FilterForm
@@ -17,4 +17,4 @@ const DealTypesFilter: FC = () => {
     )
 }
 
-export default DealTypesFilter
+export default OrderTypesFilter

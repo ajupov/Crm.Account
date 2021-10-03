@@ -1,44 +1,44 @@
 import React, { FC, useEffect } from 'react'
 
-import DealAttributeContextProvider from './contexts/DealAttributeContext/DealAttributeContextProvider'
-import DealAttributeDelete from './components/DealAttributeDelete/DealAttributeDelete'
-import DealAttributeRestore from './components/DealAttributeRestore/DealAttributeRestore'
-import DealAttributesActionsContextProvider from './contexts/DealAttributesActionsContext/DealAttributesActionsContextProvider'
-import DealAttributesContextProvider from './contexts/DealAttributesContext/DealAttributesContextProvider'
-import DealAttributesFilter from './components/DealAttributesFilter/DealAttributesFilter'
-import DealAttributesFilterMobile from './components/DealAttributesFilterMobile/DealAttributesFilterMobile'
-import DealAttributesFiltersContextProvider from './contexts/DealAttributesFiltersContext/DealAttributesFiltersContextProvider'
-import DealAttributesTable from './components/DealAttributesTable/DealAttributesTable'
-import DealsMenu from '../DealsMenu/DealsMenu'
+import OrderAttributeContextProvider from './contexts/OrderAttributeContext/OrderAttributeContextProvider'
+import OrderAttributeDelete from './components/OrderAttributeDelete/OrderAttributeDelete'
+import OrderAttributeRestore from './components/OrderAttributeRestore/OrderAttributeRestore'
+import OrderAttributesActionsContextProvider from './contexts/OrderAttributesActionsContext/OrderAttributesActionsContextProvider'
+import OrderAttributesContextProvider from './contexts/OrderAttributesContext/OrderAttributesContextProvider'
+import OrderAttributesFilter from './components/OrderAttributesFilter/OrderAttributesFilter'
+import OrderAttributesFilterMobile from './components/OrderAttributesFilterMobile/OrderAttributesFilterMobile'
+import OrderAttributesFiltersContextProvider from './contexts/OrderAttributesFiltersContext/OrderAttributesFiltersContextProvider'
+import OrderAttributesTable from './components/OrderAttributesTable/OrderAttributesTable'
+import OrdersMenu from '../OrdersMenu/OrdersMenu'
 import Page from '../../../components/common/grids/Page/Page'
 import { setPageTitle } from '../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
-const DealAttributes: FC = () => {
+const OrderAttributes: FC = () => {
     const title = 'Аттрибуты'
 
     useEffect(() => setPageTitle(title), [])
 
     return (
-        <DealAttributesContextProvider>
-            <DealAttributesActionsContextProvider>
-                <DealAttributesFiltersContextProvider>
-                    <DealAttributeContextProvider>
+        <OrderAttributesContextProvider>
+            <OrderAttributesActionsContextProvider>
+                <OrderAttributesFiltersContextProvider>
+                    <OrderAttributeContextProvider>
                         <Page
                             title={title}
-                            firstSidebar={<DealsMenu />}
-                            secondSidebar={<DealAttributesFilter />}
-                            secondSidebarMobile={<DealAttributesFilterMobile />}
+                            firstSidebar={<OrdersMenu />}
+                            secondSidebar={<OrderAttributesFilter />}
+                            secondSidebarMobile={<OrderAttributesFilterMobile />}
                         >
-                            <DealAttributesTable />
-                            <DealAttributeDelete />
-                            <DealAttributeRestore />
+                            <OrderAttributesTable />
+                            <OrderAttributeDelete />
+                            <OrderAttributeRestore />
                         </Page>
-                    </DealAttributeContextProvider>
-                </DealAttributesFiltersContextProvider>
-            </DealAttributesActionsContextProvider>
-        </DealAttributesContextProvider>
+                    </OrderAttributeContextProvider>
+                </OrderAttributesFiltersContextProvider>
+            </OrderAttributesActionsContextProvider>
+        </OrderAttributesContextProvider>
     )
 }
 
-export default DealAttributes
+export default OrderAttributes

@@ -1,14 +1,14 @@
-import DealStatus from '../../../../../api/orders/models/DealStatus'
+import OrderStatus from '../../../../../api/orders/models/OrderStatus'
 
-export interface DealStatusState {
+export interface OrderStatusState {
     isLoading: boolean
-    status: DealStatus
-    setStatus: (Status: DealStatus) => void
+    status: OrderStatus
+    setStatus: (Status: OrderStatus) => void
     create: () => Promise<void>
     update: () => Promise<void>
 }
 
-export const dealStatusInitialState: DealStatusState = {
+export const orderStatusInitialState: OrderStatusState = {
     isLoading: false,
     status: {
         id: void 0,
@@ -19,7 +19,7 @@ export const dealStatusInitialState: DealStatusState = {
         createDateTime: void 0,
         modifyDateTime: void 0
     },
-    setStatus: (_: DealStatus) => void 0,
+    setStatus: (_: OrderStatus) => void 0,
     create: () => Promise.resolve(void 0),
     update: () => Promise.resolve(void 0)
 }

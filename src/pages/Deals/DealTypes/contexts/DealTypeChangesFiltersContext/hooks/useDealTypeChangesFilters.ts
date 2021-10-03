@@ -1,20 +1,20 @@
-import DealTypeChangesFiltersState, {
-    dealTypeChangesFiltersInitialState
-} from '../../../states/DealTypeChangesFiltersState'
+import OrderTypeChangesFiltersState, {
+    orderTypeChangesFiltersInitialState
+} from '../../../states/OrderTypeChangesFiltersState'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import DealTypeChangesContext from '../../DealTypeChangesContext/DealTypeChangesContext'
+import OrderTypeChangesContext from '../../OrderTypeChangesContext/OrderTypeChangesContext'
 import { FilterFormFieldProps } from '../../../../../../components/common/forms/FilterForm/FilterForm'
 import { InputOnChangeData } from 'semantic-ui-react'
 
 // TODO: Move to l10n
-const useDealTypeChangesFilters = (): DealTypeChangesFiltersState => {
-    const state = useContext(DealTypeChangesContext)
+const useOrderTypeChangesFilters = (): OrderTypeChangesFiltersState => {
+    const state = useContext(OrderTypeChangesContext)
     const [minCreateDate, setMinCreateDate] = useState('')
     const [maxCreateDate, setMaxCreateDate] = useState('')
     const [isApplyEnabled, setIsApplyEnabled] = useState(false)
     const [isResetEnabled, setIsResetEnabled] = useState(false)
-    const [isShowMobile, setIsShowMobile] = useState(dealTypeChangesFiltersInitialState.isShowMobile)
+    const [isShowMobile, setIsShowMobile] = useState(orderTypeChangesFiltersInitialState.isShowMobile)
 
     const onChangeMinCreateDate = useCallback((_, data: InputOnChangeData) => {
         setMinCreateDate(data.value)
@@ -75,4 +75,4 @@ const useDealTypeChangesFilters = (): DealTypeChangesFiltersState => {
     return { fields, isApplyEnabled, onApply, isResetEnabled, onReset, isShowMobile, onShowMobile, onHideMobile }
 }
 
-export default useDealTypeChangesFilters
+export default useOrderTypeChangesFilters

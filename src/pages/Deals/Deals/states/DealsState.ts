@@ -1,13 +1,13 @@
-import Deal from '../../../../../api/orders/models/Deal'
+import Order from '../../../../../api/orders/models/Order'
 
-export default interface DealsState {
+export default interface OrdersState {
     isLoading: boolean
-    deals: Deal[]
+    orders: Order[]
     getAll: () => Promise<void>
 }
 
-export const dealsInitialState: DealsState = {
+export const ordersInitialState: OrdersState = {
     isLoading: false,
-    deals: [],
+    orders: [],
     getAll: () => Promise.resolve()
 }

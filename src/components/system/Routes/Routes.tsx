@@ -28,26 +28,26 @@ import ContactView from '../../../pages/Clients/components/Contacts/components/C
 import Contacts from '../../../pages/Clients/components/Contacts/Contacts'
 import ContactsRoutes from '../../../pages/Clients/components/Contacts/routes/ContactsRoutes'
 import Dashboard from '../../../pages/Dashboard/Dashboard'
-import DealAttributeChanges from '../../../pages/Deals/DealAttributes/components/DealAttributeChanges/DealAttributeChanges'
-import DealAttributeCreate from '../../../pages/Deals/DealAttributes/components/DealAttributeCreate/DealAttributeCreate'
-import DealAttributeEdit from '../../../pages/Deals/DealAttributes/components/DealAttributeEdit/DealAttributeEdit'
-import DealAttributeView from '../../../pages/Deals/DealAttributes/components/DealAttributeView/DealAttributeView'
-import DealAttributes from '../../../pages/Deals/DealAttributes/DealAttributes'
-import DealAttributesRoutes from '../../../pages/Deals/DealAttributes/routes/DealAttributesRoutes'
-import DealStatusChanges from '../../../pages/Deals/DealStatuses/components/DealStatusChanges/DealStatusChanges'
-import DealStatusCreate from '../../../pages/Deals/DealStatuses/components/DealStatusCreate/DealStatusCreate'
-import DealStatusEdit from '../../../pages/Deals/DealStatuses/components/DealStatusEdit/DealStatusEdit'
-import DealStatusView from '../../../pages/Deals/DealStatuses/components/DealStatusView/DealStatusView'
-import DealStatuses from '../../../pages/Deals/DealStatuses/DealStatuses'
-import DealStatusesRoutes from '../../../pages/Deals/DealStatuses/routes/DealStatusesRoutes'
-import DealTypeChanges from '../../../pages/Deals/DealTypes/components/DealTypeChanges/DealTypeChanges'
-import DealTypeCreate from '../../../pages/Deals/DealTypes/components/DealTypeCreate/DealTypeCreate'
-import DealTypeEdit from '../../../pages/Deals/DealTypes/components/DealTypeEdit/DealTypeEdit'
-import DealTypeView from '../../../pages/Deals/DealTypes/components/DealTypeView/DealTypeView'
-import DealTypes from '../../../pages/Deals/DealTypes/DealTypes'
-import DealTypesRoutes from '../../../pages/Deals/DealTypes/routes/DealTypesRoutes'
-import Deals from '../../../pages/Deals/Deals/Deals'
-import DealsRoutes from '../../../pages/Deals/Deals/routes/DealsRoutes'
+import OrderAttributeChanges from '../../../pages/Orders/OrderAttributes/components/OrderAttributeChanges/OrderAttributeChanges'
+import OrderAttributeCreate from '../../../pages/Orders/OrderAttributes/components/OrderAttributeCreate/OrderAttributeCreate'
+import OrderAttributeEdit from '../../../pages/Orders/OrderAttributes/components/OrderAttributeEdit/OrderAttributeEdit'
+import OrderAttributeView from '../../../pages/Orders/OrderAttributes/components/OrderAttributeView/OrderAttributeView'
+import OrderAttributes from '../../../pages/Orders/OrderAttributes/OrderAttributes'
+import OrderAttributesRoutes from '../../../pages/Orders/OrderAttributes/routes/OrderAttributesRoutes'
+import OrderStatusChanges from '../../../pages/Orders/OrderStatuses/components/OrderStatusChanges/OrderStatusChanges'
+import OrderStatusCreate from '../../../pages/Orders/OrderStatuses/components/OrderStatusCreate/OrderStatusCreate'
+import OrderStatusEdit from '../../../pages/Orders/OrderStatuses/components/OrderStatusEdit/OrderStatusEdit'
+import OrderStatusView from '../../../pages/Orders/OrderStatuses/components/OrderStatusView/OrderStatusView'
+import OrderStatuses from '../../../pages/Orders/OrderStatuses/OrderStatuses'
+import OrderStatusesRoutes from '../../../pages/Orders/OrderStatuses/routes/OrderStatusesRoutes'
+import OrderTypeChanges from '../../../pages/Orders/OrderTypes/components/OrderTypeChanges/OrderTypeChanges'
+import OrderTypeCreate from '../../../pages/Orders/OrderTypes/components/OrderTypeCreate/OrderTypeCreate'
+import OrderTypeEdit from '../../../pages/Orders/OrderTypes/components/OrderTypeEdit/OrderTypeEdit'
+import OrderTypeView from '../../../pages/Orders/OrderTypes/components/OrderTypeView/OrderTypeView'
+import OrderTypes from '../../../pages/Orders/OrderTypes/OrderTypes'
+import OrderTypesRoutes from '../../../pages/Orders/OrderTypes/routes/OrderTypesRoutes'
+import Orders from '../../../pages/Orders/Orders/Orders'
+import OrdersRoutes from '../../../pages/Orders/Orders/routes/OrdersRoutes'
 import CustomerAttributeChanges from '../../../pages/Customers/components/CustomersAttributes/components/CustomerAttributeChanges/CustomerAttributeChanges'
 import CustomerAttributeCreate from '../../../pages/Customers/components/CustomersAttributes/components/CustomerAttributeCreate/CustomerAttributeCreate'
 import CustomerAttributeEdit from '../../../pages/Customers/components/CustomersAttributes/components/CustomerAttributeEdit/CustomerAttributeEdit'
@@ -105,29 +105,29 @@ const Routes: FC = () => {
 
             {/*  */}
 
-            <Route path={DealsRoutes.Index} exact component={Deals} />
-            <Route path={DealsRoutes.Create} exact component={CustomerCreate} />
-            <Route path={withId(DealsRoutes.View)} exact component={CustomerView} />
-            <Route path={withId(DealsRoutes.Edit)} exact component={CustomerEdit} />
-            <Route path={withId(DealsRoutes.Changes)} exact component={CustomerChanges} />
+            <Route path={OrdersRoutes.Index} exact component={Orders} />
+            <Route path={OrdersRoutes.Create} exact component={CustomerCreate} />
+            <Route path={withId(OrdersRoutes.View)} exact component={CustomerView} />
+            <Route path={withId(OrdersRoutes.Edit)} exact component={CustomerEdit} />
+            <Route path={withId(OrdersRoutes.Changes)} exact component={CustomerChanges} />
 
-            <Route path={DealStatusesRoutes.Index} exact component={DealStatuses} />
-            <Route path={DealStatusesRoutes.Create} exact component={DealStatusCreate} />
-            <Route path={withId(DealStatusesRoutes.View)} exact component={DealStatusView} />
-            <Route path={withId(DealStatusesRoutes.Edit)} exact component={DealStatusEdit} />
-            <Route path={withId(DealStatusesRoutes.Changes)} exact component={DealStatusChanges} />
+            <Route path={OrderStatusesRoutes.Index} exact component={OrderStatuses} />
+            <Route path={OrderStatusesRoutes.Create} exact component={OrderStatusCreate} />
+            <Route path={withId(OrderStatusesRoutes.View)} exact component={OrderStatusView} />
+            <Route path={withId(OrderStatusesRoutes.Edit)} exact component={OrderStatusEdit} />
+            <Route path={withId(OrderStatusesRoutes.Changes)} exact component={OrderStatusChanges} />
 
-            <Route path={DealTypesRoutes.Index} exact component={DealTypes} />
-            <Route path={DealTypesRoutes.Create} exact component={DealTypeCreate} />
-            <Route path={withId(DealTypesRoutes.View)} exact component={DealTypeView} />
-            <Route path={withId(DealTypesRoutes.Edit)} exact component={DealTypeEdit} />
-            <Route path={withId(DealTypesRoutes.Changes)} exact component={DealTypeChanges} />
+            <Route path={OrderTypesRoutes.Index} exact component={OrderTypes} />
+            <Route path={OrderTypesRoutes.Create} exact component={OrderTypeCreate} />
+            <Route path={withId(OrderTypesRoutes.View)} exact component={OrderTypeView} />
+            <Route path={withId(OrderTypesRoutes.Edit)} exact component={OrderTypeEdit} />
+            <Route path={withId(OrderTypesRoutes.Changes)} exact component={OrderTypeChanges} />
 
-            <Route path={DealAttributesRoutes.Index} exact component={DealAttributes} />
-            <Route path={DealAttributesRoutes.Create} exact component={DealAttributeCreate} />
-            <Route path={withId(DealAttributesRoutes.View)} exact component={DealAttributeView} />
-            <Route path={withId(DealAttributesRoutes.Edit)} exact component={DealAttributeEdit} />
-            <Route path={withId(DealAttributesRoutes.Changes)} exact component={DealAttributeChanges} />
+            <Route path={OrderAttributesRoutes.Index} exact component={OrderAttributes} />
+            <Route path={OrderAttributesRoutes.Create} exact component={OrderAttributeCreate} />
+            <Route path={withId(OrderAttributesRoutes.View)} exact component={OrderAttributeView} />
+            <Route path={withId(OrderAttributesRoutes.Edit)} exact component={OrderAttributeEdit} />
+            <Route path={withId(OrderAttributesRoutes.Changes)} exact component={OrderAttributeChanges} />
 
             {/*  */}
 

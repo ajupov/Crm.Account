@@ -1,11 +1,11 @@
-import DealStatusChangesFiltersState, {
-    dealStatusChangesFiltersInitialState
-} from '../../states/DealStatusChangesFiltersState'
+import OrderStatusChangesFiltersState, {
+    orderStatusChangesFiltersInitialState
+} from '../../states/OrderStatusChangesFiltersState'
 
 import { createContext } from 'react'
 
-const DealStatusChangesFiltersContext = createContext<DealStatusChangesFiltersState>(
-    dealStatusChangesFiltersInitialState
+const OrderStatusChangesFiltersContext = createContext<OrderStatusChangesFiltersState>(
+    orderStatusChangesFiltersInitialState
 )
 
-export default DealStatusChangesFiltersContext
+export default OrderStatusChangesFiltersContext

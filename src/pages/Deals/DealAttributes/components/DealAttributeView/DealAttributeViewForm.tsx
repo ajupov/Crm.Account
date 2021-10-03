@@ -1,15 +1,15 @@
 import React, { FC, useContext } from 'react'
 
-import DealAttributeContext from '../../contexts/DealAttributeContext/DealAttributeContext'
-import DealAttributesRoutes from '../../routes/DealAttributesRoutes'
+import OrderAttributeContext from '../../contexts/OrderAttributeContext/OrderAttributeContext'
+import OrderAttributesRoutes from '../../routes/OrderAttributesRoutes'
 import View from '../../../../../components/common/grids/View/View'
-import useDealAttributeView from './hooks/useDealAttributeView'
-import useDealAttributesActions from '../../contexts/DealAttributesActionsContext/hooks/useDealAttributesActions'
+import useOrderAttributeView from './hooks/useOrderAttributeView'
+import useOrderAttributesActions from '../../contexts/OrderAttributesActionsContext/hooks/useOrderAttributesActions'
 
-const DealAttributeViewForm: FC = () => {
-    const state = useContext(DealAttributeContext)
-    const { isLoading } = useDealAttributesActions()
-    const { map, onClickDelete, onClickRestore, onClickCancel } = useDealAttributeView()
+const OrderAttributeViewForm: FC = () => {
+    const state = useContext(OrderAttributeContext)
+    const { isLoading } = useOrderAttributesActions()
+    const { map, onClickDelete, onClickRestore, onClickCancel } = useOrderAttributeView()
 
     return (
         <View
@@ -19,13 +19,13 @@ const DealAttributeViewForm: FC = () => {
             createDate={state.attribute.createDateTime}
             lastModifyDateTime={state.attribute.modifyDateTime}
             data={map(state.attribute)}
-            editLink={DealAttributesRoutes.Edit}
+            editLink={OrderAttributesRoutes.Edit}
             onClickDelete={onClickDelete}
             onClickRestore={onClickRestore}
-            historyLink={DealAttributesRoutes.Changes}
+            historyLink={OrderAttributesRoutes.Changes}
             onClickCancel={onClickCancel}
         />
     )
 }
 
-export default DealAttributeViewForm
+export default OrderAttributeViewForm
