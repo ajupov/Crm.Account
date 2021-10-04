@@ -1,7 +1,7 @@
 import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { CreateFormFieldProps } from '../../../../../../components/common/forms/CreateForm/CreateForm'
+import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
 import CustomerContext from '../../contexts/CustomerContext/CustomerContext'
 import useCustomerAttributesLoad from '../load/useCustomerAttributesLoad'
 import useCustomerSourcesLoad from '../load/useCustomerSourcesLoad'
@@ -71,81 +71,9 @@ const useCustomerOnChange = (): UseCustomerOnChangeReturn => {
         [state]
     )
 
-    const onChangePost = useCallback(
+    const onChangeBirthDate = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setCustomer({ ...state.customer, post: data.value })
-            setIsConfirmEnabled(true)
-        },
-        [state]
-    )
-
-    const onChangePostcode = useCallback(
-        (_, data: InputOnChangeData) => {
-            state.setCustomer({ ...state.customer, postcode: data.value })
-            setIsConfirmEnabled(true)
-        },
-        [state]
-    )
-
-    const onChangeCountry = useCallback(
-        (_, data: InputOnChangeData) => {
-            state.setCustomer({ ...state.customer, country: data.value })
-            setIsConfirmEnabled(true)
-        },
-        [state]
-    )
-
-    const onChangeRegion = useCallback(
-        (_, data: InputOnChangeData) => {
-            state.setCustomer({ ...state.customer, region: data.value })
-            setIsConfirmEnabled(true)
-        },
-        [state]
-    )
-
-    const onChangeProvince = useCallback(
-        (_, data: InputOnChangeData) => {
-            state.setCustomer({ ...state.customer, province: data.value })
-            setIsConfirmEnabled(true)
-        },
-        [state]
-    )
-
-    const onChangeCity = useCallback(
-        (_, data: InputOnChangeData) => {
-            state.setCustomer({ ...state.customer, city: data.value })
-            setIsConfirmEnabled(true)
-        },
-        [state]
-    )
-
-    const onChangeStreet = useCallback(
-        (_, data: InputOnChangeData) => {
-            state.setCustomer({ ...state.customer, street: data.value })
-            setIsConfirmEnabled(true)
-        },
-        [state]
-    )
-
-    const onChangeHouse = useCallback(
-        (_, data: InputOnChangeData) => {
-            state.setCustomer({ ...state.customer, house: data.value })
-            setIsConfirmEnabled(true)
-        },
-        [state]
-    )
-
-    const onChangeApartment = useCallback(
-        (_, data: InputOnChangeData) => {
-            state.setCustomer({ ...state.customer, apartment: data.value })
-            setIsConfirmEnabled(true)
-        },
-        [state]
-    )
-
-    const onChangeOpportunitySum = useCallback(
-        (_, data: InputOnChangeData) => {
-            state.setCustomer({ ...state.customer, opportunitySum: parseInt(data.value, 10) })
+            state.setCustomer({ ...state.customer, birthDate: data.value })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -272,74 +200,11 @@ const useCustomerOnChange = (): UseCustomerOnChangeReturn => {
                 onChange: onChangeEmail
             },
             {
-                type: 'text',
+                type: 'date',
                 required: true,
-                topLabel: 'Должность',
-                value: state.customer.post,
-                onChange: onChangePost
-            },
-            {
-                type: 'text',
-                required: true,
-                topLabel: 'Почтовый индекс',
-                value: state.customer.postcode,
-                onChange: onChangePostcode
-            },
-            {
-                type: 'text',
-                required: true,
-                topLabel: 'Страна',
-                value: state.customer.country,
-                onChange: onChangeCountry
-            },
-            {
-                type: 'text',
-                required: true,
-                topLabel: 'Регион',
-                value: state.customer.region,
-                onChange: onChangeRegion
-            },
-            {
-                type: 'text',
-                required: true,
-                topLabel: 'Район/провинция',
-                value: state.customer.province,
-                onChange: onChangeProvince
-            },
-            {
-                type: 'text',
-                required: true,
-                topLabel: 'Город/населенный пункт',
-                value: state.customer.city,
-                onChange: onChangeCity
-            },
-            {
-                type: 'text',
-                required: true,
-                topLabel: 'Улица',
-                value: state.customer.street,
-                onChange: onChangeStreet
-            },
-            {
-                type: 'text',
-                required: true,
-                topLabel: 'Дом/строение',
-                value: state.customer.house,
-                onChange: onChangeHouse
-            },
-            {
-                type: 'text',
-                required: true,
-                topLabel: 'Квартира',
-                value: state.customer.apartment,
-                onChange: onChangeApartment
-            },
-            {
-                type: 'number',
-                required: true,
-                topLabel: 'Сумма потенциальной сделки',
-                value: state.customer.opportunitySum,
-                onChange: onChangeOpportunitySum
+                topLabel: 'Дата рождения',
+                value: state.customer.birthDate,
+                onChange: onChangeBirthDate
             },
             {
                 type: 'attributes',
@@ -364,47 +229,29 @@ const useCustomerOnChange = (): UseCustomerOnChangeReturn => {
             }
         ],
         [
-            attributesAsOptions,
-            onChangeApartment,
-            onChangeAttributeKey,
-            onChangeAttributeValue,
-            onChangeCity,
-            onChangeCountry,
-            onChangeEmail,
-            onChangeHouse,
-            onChangeIsDeleted,
-            onChangeName,
-            onChangeOpportunitySum,
-            onChangePatronymic,
-            onChangePhone,
-            onChangePost,
-            onChangePostcode,
-            onChangeProvince,
-            onChangeRegion,
-            onChangeSourceId,
-            onChangeStreet,
-            onChangeSurname,
-            onClickAddAttributeItem,
-            onDeleteAttribute,
-            sourcesAsOptions,
-            state.customer.apartment,
-            state.customer.attributeLinks,
-            state.customer.city,
-            state.customer.country,
-            state.customer.email,
-            state.customer.house,
-            state.customer.isDeleted,
+            state.customer.sourceId,
+            state.customer.surname,
             state.customer.name,
-            state.customer.opportunitySum,
             state.customer.patronymic,
             state.customer.phone,
-            state.customer.post,
-            state.customer.postcode,
-            state.customer.province,
-            state.customer.region,
-            state.customer.sourceId,
-            state.customer.street,
-            state.customer.surname
+            state.customer.email,
+            state.customer.birthDate,
+            state.customer.attributeLinks,
+            state.customer.isDeleted,
+            sourcesAsOptions,
+            onChangeSourceId,
+            onChangeSurname,
+            onChangeName,
+            onChangePatronymic,
+            onChangePhone,
+            onChangeEmail,
+            onChangeBirthDate,
+            attributesAsOptions,
+            onClickAddAttributeItem,
+            onChangeIsDeleted,
+            onChangeAttributeKey,
+            onChangeAttributeValue,
+            onDeleteAttribute
         ]
     )
 

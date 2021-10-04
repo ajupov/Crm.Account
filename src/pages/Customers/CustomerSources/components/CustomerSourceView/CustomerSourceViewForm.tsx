@@ -2,7 +2,7 @@ import React, { FC, useContext } from 'react'
 
 import CustomerSourceContext from '../../contexts/CustomerSourceContext/CustomerSourceContext'
 import CustomerSourcesRoutes from '../../routes/CustomerSourcesRoutes'
-import View from '../../../../../../components/common/grids/View/View'
+import View from '../../../../../components/common/grids/View/View'
 import useCustomerSourceView from './hooks/useCustomerSourceView'
 import useCustomerSourcesActions from '../../contexts/CustomerSourcesActionsContext/hooks/useCustomerSourcesActions'
 

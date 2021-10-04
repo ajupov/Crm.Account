@@ -1,10 +1,10 @@
 import { useCallback, useContext } from 'react'
 
-import Customer from '../../../../../../../../api/customers/models/Customer'
+import Customer from '../../../../../../../api/customers/models/Customer'
 import CustomerContext from '../../../contexts/CustomerContext/CustomerContext'
 import CustomersActionsContext from '../../../contexts/CustomersActionsContext/CustomersActionsContext'
-import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
-import { joinAttributes } from '../../../mappers/customerAttributesMapper'
+import { ViewDataProps } from '../../../../../../components/common/grids/View/View'
+import { joinAttributes } from '../../../mappers/leadAttributesMapper'
 import { useHistory } from 'react-router'
 
 interface UseCustomerViewReturn {
@@ -51,16 +51,7 @@ const useCustomerView = (): UseCustomerViewReturn => {
             { label: 'Отчество', value: customer.patronymic },
             { label: 'Телефон', value: customer.phone },
             { label: 'Email', value: customer.email },
-            { label: 'Должность', value: customer.post },
-            { label: 'Почтовый индекс', value: customer.postcode },
-            { label: 'Страна', value: customer.country },
-            { label: 'Регион', value: customer.region },
-            { label: 'Район/провинция', value: customer.province },
-            { label: 'Город/населенный пункт', value: customer.city },
-            { label: 'Улица', value: customer.street },
-            { label: 'Дом/строение', value: customer.house },
-            { label: 'Квартира', value: customer.apartment },
-            { label: 'Сумма потенциальной сделки', value: customer.opportunitySum.toString() },
+            { label: 'Дата рождения', value: customer.birthDate },
             { label: 'Атрибуты', value: mapAttributes() },
             { label: 'Удален', value: customer.isDeleted ? 'Да' : 'Нет' }
         ],

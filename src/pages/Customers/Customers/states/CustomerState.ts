@@ -1,5 +1,5 @@
-import Customer from '../../../../../../api/customers/models/Customer'
-import CustomerAttribute from '../../../../../../api/customers/models/CustomerAttribute'
+import Customer from '../../../../../api/customers/models/Customer'
+import CustomerAttribute from '../../../../../api/customers/models/CustomerAttribute'
 
 export interface CustomerState {
     isLoading: boolean

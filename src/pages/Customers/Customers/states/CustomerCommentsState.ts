@@ -1,5 +1,5 @@
-import CustomerComment from '../../../../../../api/customers/models/CustomerComment'
-import CustomerCommentGetPagedListRequest from '../../../../../../api/customers/models/CustomerCommentGetPagedListRequest'
+import CustomerComment from '../../../../../api/customers/models/CustomerComment'
+import CustomerCommentGetPagedListRequest from '../../../../../api/customers/models/CustomerCommentGetPagedListRequest'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'

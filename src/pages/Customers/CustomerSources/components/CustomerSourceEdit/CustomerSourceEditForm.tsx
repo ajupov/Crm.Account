@@ -2,7 +2,7 @@ import React, { FC, useContext } from 'react'
 
 import CustomerSourceContext from '../../contexts/CustomerSourceContext/CustomerSourceContext'
 import CustomerSourcesRoutes from '../../routes/CustomerSourcesRoutes'
-import EditForm from '../../../../../../components/common/forms/EditForm/EditForm'
+import EditForm from '../../../../../components/common/forms/EditForm/EditForm'
 import useCustomerSourceOnChange from '../../hooks/change/useCustomerSourceOnChange'
 import useCustomerSourcesActions from '../../contexts/CustomerSourcesActionsContext/hooks/useCustomerSourcesActions'
 

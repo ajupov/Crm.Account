@@ -10,7 +10,7 @@ export function combineUrl(host?: string, path?: string): string {
     return new URL(path || '', host).href.replace(/\/$/, '')
 }
 
-export function getFetchParams(method: HttpMethod, body?: any, headers?: HeadersInit): RequestInit {
+export function getFetchParams(method: HttpMethod, body?: Record<string, any>, headers?: HeadersInit): RequestInit {
     return {
         method,
         mode: 'cors',

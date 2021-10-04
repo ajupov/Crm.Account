@@ -4,7 +4,7 @@ import CustomerChangesFiltersState, {
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import CustomerChangesContext from '../../CustomerChangesContext/CustomerChangesContext'
-import { FilterFormFieldProps } from '../../../../../../../components/common/forms/FilterForm/FilterForm'
+import { FilterFormFieldProps } from '../../../../../../components/common/forms/FilterForm/FilterForm'
 import { InputOnChangeData } from 'semantic-ui-react'
 
 // TODO: Move to l10n

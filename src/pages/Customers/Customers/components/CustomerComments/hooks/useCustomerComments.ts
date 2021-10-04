@@ -1,10 +1,10 @@
 import { useCallback, useContext } from 'react'
 
-import { CommentProps } from '../../../../../../../components/common/collections/Comments/Comment'
-import CustomerComment from '../../../../../../../../api/customers/models/CustomerComment'
+import { CommentProps } from '../../../../../../components/common/collections/Comments/Comment'
+import CustomerComment from '../../../../../../../api/customers/models/CustomerComment'
 import CustomerCommentContext from '../../../contexts/CustomerCommentContext/CustomerCommentContext'
 import CustomerCommentsContext from '../../../contexts/CustomerCommentsContext/CustomerCommentsContext'
-import UserInfoContext from '../../../../../../../components/system/UserInfo/contexts/UserInfoContext/UserInfoContext'
+import UserInfoContext from '../../../../../../components/system/UserInfo/contexts/UserInfoContext/UserInfoContext'
 
 interface UseCustomerCommentsTableReturn {
     onChangeCommentToSend: (value: string) => void

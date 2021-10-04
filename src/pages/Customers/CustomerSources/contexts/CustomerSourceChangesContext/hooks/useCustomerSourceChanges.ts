@@ -3,8 +3,8 @@ import CustomerSourceChangesState, {
 } from '../../../states/CustomerSourceChangesState'
 import { useCallback, useEffect, useState } from 'react'
 
-import CustomerSourcesChangesClient from '../../../../../../../../api/customers/clients/CustomerSourcesChangesClient'
-import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
+import CustomerSourcesChangesClient from '../../../../../../../api/customers/clients/CustomerSourcesChangesClient'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
 const customerSourcesChangesClient = new CustomerSourcesChangesClient(HttpClientFactory.Host, HttpClientFactory.Api)

@@ -1,14 +1,14 @@
-import { calculateOffset, calculatePage } from '../../../../../../../utils/pagination/paginationUtils'
-import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../utils/csv/csvUtils'
+import { calculateOffset, calculatePage } from '../../../../../../utils/pagination/paginationUtils'
+import { convertObjectToCSV, downloadAsCsv } from '../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import Customer from '../../../../../../../../api/customers/models/Customer'
+import Customer from '../../../../../../../api/customers/models/Customer'
 import CustomersContext from '../../../contexts/CustomersContext/CustomersContext'
 import CustomersRoutes from '../../../routes/CustomersRoutes'
-import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
-import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
-import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateTimeUtils'
-import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
+import { TableBodyRowProps } from '../../../../../../components/common/collections/Table/TableBody'
+import { TableHeaderCellProps } from '../../../../../../components/common/collections/Table/TableHeader'
+import { getDateTimeAsRecently } from '../../../../../../utils/dateTime/dateTimeUtils'
+import { getFileNameWithDateTime } from '../../../../../../helpers/fileNameHelper'
 import useCustomerView from '../../CustomerView/hooks/useCustomerView'
 
 interface UseCustomersTableReturn {
@@ -97,7 +97,6 @@ const useCustomersTable = (): UseCustomersTableReturn => {
                             { value: customer.surname, textAlign: 'left' },
                             { value: customer.name, textAlign: 'left' },
                             { value: customer.patronymic, textAlign: 'left' },
-                            { value: customer.companyName, textAlign: 'left' },
                             { value: customer.phone, textAlign: 'left' },
                             { value: customer.email, textAlign: 'left' },
                             {

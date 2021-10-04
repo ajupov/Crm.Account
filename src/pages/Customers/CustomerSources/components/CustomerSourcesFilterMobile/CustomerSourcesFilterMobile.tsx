@@ -1,7 +1,7 @@
 import React, { FC, useContext } from 'react'
 
 import CustomerSourcesFiltersContext from '../../contexts/CustomerSourcesFiltersContext/CustomerSourcesFiltersContext'
-import FilterMobileModal from '../../../../../../components/common/modals/FilterMobileModal/FilterMobileModal'
+import FilterMobileModal from '../../../../../components/common/modals/FilterMobileModal/FilterMobileModal'
 
 const CustomerSourcesFilterMobile: FC = () => {
     const state = useContext(CustomerSourcesFiltersContext)

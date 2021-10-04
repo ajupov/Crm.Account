@@ -1,4 +1,3 @@
-import { Dictionary } from '../../../../../utils/dictionary/dictionaryUtils'
 import { DropdownItemProps } from '../../../../../components/common/fields/Dropdown/Dropdown'
 import ProductType from '../../../../../../api/products/models/ProductType'
 

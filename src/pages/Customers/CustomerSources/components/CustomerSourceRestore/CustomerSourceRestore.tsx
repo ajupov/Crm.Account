@@ -1,7 +1,7 @@
 import React, { FC, useContext } from 'react'
 
 import CustomerSourcesActionsContext from '../../contexts/CustomerSourcesActionsContext/CustomerSourcesActionsContext'
-import RestoreModal from '../../../../../../components/common/modals/RestoreModal/RestoreModal'
+import RestoreModal from '../../../../../components/common/modals/RestoreModal/RestoreModal'
 import useCustomerSourceRestore from './hooks/useCustomerSourceRestore'
 
 // TODO: Move to l10n

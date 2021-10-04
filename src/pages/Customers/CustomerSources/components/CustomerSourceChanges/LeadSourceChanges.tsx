@@ -6,8 +6,8 @@ import CustomerSourceChangesFiltersContextProvider from '../../contexts/Customer
 import CustomerSourceChangesTable from './components/CustomerSourceChangesTable/CustomerSourceChangesTable'
 import CustomersMenu from '../../../CustomersMenu/CustomersMenu'
 import CustomersSourceChangesFilterMobile from './components/CustomersSourceChangesFilterMobile/CustomersSourceChangesFilterMobile'
-import Page from '../../../../../../components/common/grids/Page/Page'
-import { setPageTitle } from '../../../../../../helpers/productNameHelper'
+import Page from '../../../../../components/common/grids/Page/Page'
+import { setPageTitle } from '../../../../../helpers/productNameHelper'
 import useCustomerSourceChangesView from './hooks/useCustomerSourceChangesView'
 
 // TODO: Move to l10n

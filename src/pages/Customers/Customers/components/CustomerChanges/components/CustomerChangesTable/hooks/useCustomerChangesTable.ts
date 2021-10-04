@@ -1,17 +1,17 @@
-import { calculateOffset, calculatePage } from '../../../../../../../../../utils/pagination/paginationUtils'
-import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../../utils/csv/csvUtils'
+import { calculateOffset, calculatePage } from '../../../../../../../../utils/pagination/paginationUtils'
+import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import Customer from '../../../../../../../../../../api/customers/models/Customer'
-import CustomerAttributeLink from '../../../../../../../../../../api/customers/models/CustomerAttributeLink'
-import CustomerChange from '../../../../../../../../../../api/customers/models/CustomerChange'
+import Customer from '../../../../../../../../../api/customers/models/Customer'
+import CustomerAttributeLink from '../../../../../../../../../api/customers/models/CustomerAttributeLink'
+import CustomerChange from '../../../../../../../../../api/customers/models/CustomerChange'
 import CustomerChangesContext from '../../../../../contexts/CustomerChangesContext/CustomerChangesContext'
-import { TableBodyRowProps } from '../../../../../../../../../components/common/collections/Table/TableBody'
-import { TableHeaderCellProps } from '../../../../../../../../../components/common/collections/Table/TableHeader'
-import { getDateTimeAsRecently } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
-import { getFileNameWithDateTime } from '../../../../../../../../../helpers/fileNameHelper'
-import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
-import { joinAttributes } from '../../../../../mappers/customerAttributesMapper'
+import { TableBodyRowProps } from '../../../../../../../../components/common/collections/Table/TableBody'
+import { TableHeaderCellProps } from '../../../../../../../../components/common/collections/Table/TableHeader'
+import { getDateTimeAsRecently } from '../../../../../../../../utils/dateTime/dateTimeUtils'
+import { getFileNameWithDateTime } from '../../../../../../../../helpers/fileNameHelper'
+import { getValueOrEmpty } from '../../../../../../../../helpers/entityFieldValueHelper'
+import { joinAttributes } from '../../../../../mappers/leadAttributesMapper'
 
 interface UseCustomerChangesTableReturn {
     page: number
@@ -73,18 +73,7 @@ const useCustomerChangesTable = (): UseCustomerChangesTableReturn => {
                 `Отчество: ${getValueOrEmpty(oldValue?.patronymic)} → ${getValueOrEmpty(newValue?.patronymic)}`,
                 `Телефон: ${getValueOrEmpty(oldValue?.phone)} → ${getValueOrEmpty(newValue?.phone)}`,
                 `Email: ${getValueOrEmpty(oldValue?.email)} → ${getValueOrEmpty(newValue?.email)}`,
-                `Должность: ${getValueOrEmpty(oldValue?.post)} → ${getValueOrEmpty(newValue?.post)}`,
-                `Почтовый индекс: ${getValueOrEmpty(oldValue?.postcode)} → ${getValueOrEmpty(newValue?.postcode)}`,
-                `Страна: ${getValueOrEmpty(oldValue?.country)} → ${getValueOrEmpty(newValue?.country)}`,
-                `Регион: ${getValueOrEmpty(oldValue?.region)} → ${getValueOrEmpty(newValue?.region)}`,
-                `Район/провинция: ${getValueOrEmpty(oldValue?.province)} → ${getValueOrEmpty(newValue?.province)}`,
-                `Город/населенный пункт: ${getValueOrEmpty(oldValue?.city)} → ${getValueOrEmpty(newValue?.city)}`,
-                `Улица: ${getValueOrEmpty(oldValue?.street)} → ${getValueOrEmpty(newValue?.street)}`,
-                `Дом/строение: ${getValueOrEmpty(oldValue?.house)} → ${getValueOrEmpty(newValue?.house)}`,
-                `Квартира: ${getValueOrEmpty(oldValue?.apartment)} → ${getValueOrEmpty(newValue?.apartment)}`,
-                `Сумма потенциальной сделки: ${getValueOrEmpty(oldValue?.opportunitySum)} → ${getValueOrEmpty(
-                    newValue?.opportunitySum
-                )}`,
+                `Дата рождения: ${getValueOrEmpty(oldValue?.birthDate)} → ${getValueOrEmpty(newValue?.birthDate)}`,
                 `Удален: ${getValueOrEmpty(oldValue?.isDeleted)} → ${getValueOrEmpty(newValue?.isDeleted)}`,
                 `Атрибуты: ${getValueOrEmpty(mapAttributes(oldValue?.attributeLinks))} → ${getValueOrEmpty(
                     mapAttributes(newValue?.attributeLinks)

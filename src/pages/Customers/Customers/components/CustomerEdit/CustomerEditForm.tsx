@@ -1,8 +1,8 @@
 import React, { FC, useContext } from 'react'
 
-import EditForm from '../../../../../../components/common/forms/EditForm/EditForm'
 import CustomerContext from '../../contexts/CustomerContext/CustomerContext'
 import CustomersRoutes from '../../routes/CustomersRoutes'
+import EditForm from '../../../../../components/common/forms/EditForm/EditForm'
 import useCustomerOnChange from '../../hooks/change/useCustomerOnChange'
 import useCustomersActions from '../../contexts/CustomersActionsContext/hooks/useCustomersActions'
 

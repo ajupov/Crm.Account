@@ -1,8 +1,8 @@
 import CustomerChangesState, { customerChangesInitialState } from '../../../states/CustomerChangesState'
 import { useCallback, useEffect, useState } from 'react'
 
-import CustomerChangesClient from '../../../../../../../../api/customers/clients/CustomerChangesClient'
-import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
+import CustomerChangesClient from '../../../../../../../api/customers/clients/CustomerChangesClient'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
 const customerChangesClient = new CustomerChangesClient(HttpClientFactory.Host, HttpClientFactory.Api)

@@ -5,6 +5,7 @@ import {
     getFetchParams,
     readResponseContentAsync
 } from '../httpExtensions'
+
 import IJsonHttpClientFactory from './IJsonHttpClientFactory'
 
 export default class JsonHttpClientFactory implements IJsonHttpClientFactory {
@@ -20,7 +21,7 @@ export default class JsonHttpClientFactory implements IJsonHttpClientFactory {
     public async postAsync<T>(
         uri: string,
         parameters?: Record<string, any>,
-        body?: any,
+        body?: Record<string, any>,
         headers?: HeadersInit
     ): Promise<T> {
         const response = await fetch(addParameters(uri, parameters), getFetchParams('POST', body, headers))
@@ -34,7 +35,7 @@ export default class JsonHttpClientFactory implements IJsonHttpClientFactory {
     public async putAsync<T>(
         uri: string,
         parameters?: Record<string, any>,
-        body?: any,
+        body?: Record<string, any>,
         headers?: HeadersInit
     ): Promise<T> {
         const response = await fetch(addParameters(uri, parameters), getFetchParams('PUT', body, headers))
@@ -48,7 +49,7 @@ export default class JsonHttpClientFactory implements IJsonHttpClientFactory {
     public async patchAsync<T>(
         uri: string,
         parameters?: Record<string, any>,
-        body?: any,
+        body?: Record<string, any>,
         headers?: HeadersInit
     ): Promise<T> {
         const response = await fetch(addParameters(uri, parameters), getFetchParams('PATCH', body, headers))
@@ -60,7 +61,7 @@ export default class JsonHttpClientFactory implements IJsonHttpClientFactory {
     }
 
     public async deleteAsync<T>(uri: string, parameters?: Record<string, any>, headers?: HeadersInit): Promise<T> {
-        const response = await fetch(addParameters(uri, parameters), getFetchParams('DELETE', body, headers))
+        const response = await fetch(addParameters(uri, parameters), getFetchParams('DELETE', void 0, headers))
 
         ensureSuccessStatusCode(response)
         ensureNoRedirect(response)

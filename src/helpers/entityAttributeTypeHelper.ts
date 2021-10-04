@@ -1,8 +1,6 @@
-import CompanyAttributeType from '../../api/companies/models/CompanyAttributeType'
-import ContactAttributeType from '../../api/contacts/models/ContactAttributeType'
-import OrderAttributeType from '../../api/orders/models/OrderAttributeType'
-import { DropdownItemProps } from '../components/common/fields/Dropdown/Dropdown'
 import CustomerAttributeType from '../../api/customers/models/CustomerAttributeType'
+import { DropdownItemProps } from '../components/common/fields/Dropdown/Dropdown'
+import OrderAttributeType from '../../api/orders/models/OrderAttributeType'
 import ProductAttributeType from '../../api/products/models/ProductAttributeType'
 
 // TODO: Move to l10n
@@ -43,13 +41,6 @@ export function getAttributeTypesAsSelectOptions(): DropdownItemProps[] {
     return Object.entries(AttributeTypeWithNames).map(x => ({ value: x[0], text: x[1] } as DropdownItemProps))
 }
 
-export function getAttributeTypeName(
-    type?:
-        | ProductAttributeType
-        | ContactAttributeType
-        | CompanyAttributeType
-        | CustomerAttributeType
-        | OrderAttributeType
-): string {
+export function getAttributeTypeName(type?: ProductAttributeType | CustomerAttributeType | OrderAttributeType): string {
     return type ? AttributeTypeWithNames[type] : ''
 }

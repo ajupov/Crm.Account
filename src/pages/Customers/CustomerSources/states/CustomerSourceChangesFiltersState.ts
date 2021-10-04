@@ -1,4 +1,4 @@
-import { FilterFormFieldProps } from '../../../../../components/common/forms/FilterForm/FilterForm'
+import { FilterFormFieldProps } from '../../../../components/common/forms/FilterForm/FilterForm'
 
 export default interface CustomerSourceChangesFiltersState {
     fields: FilterFormFieldProps[]

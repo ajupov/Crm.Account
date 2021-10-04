@@ -107,7 +107,6 @@
             }
         ], // Disallows magic numbers
         "@typescript-eslint/brace-style": ["error", "1tbs"], // Enforce consistent brace style for blocks
-        "@typescript-eslint/indent": ["error", 4],
         "@typescript-eslint/quotes": ["error", "single", { "avoidEscape": true }], // Enforce the consistent use of either backticks, double, or single quotes
         "@typescript-eslint/func-call-spacing": ["error", "never"], // Require or disallow spacing between function identifiers and their invocations
         "@typescript-eslint/no-useless-constructor": "error", // Disallow unnecessary constructors
@@ -149,8 +148,13 @@
             "rules": {
                 "no-confusing-arrow": "off",
                 "@typescript-eslint/camelcase": "off",
+                "@typescript-eslint/no-unsafe-assignment": "off",
+                "@typescript-eslint/no-unsafe-call": "off",
+                "@typescript-eslint/no-unsafe-member-access": "off",
                 "@typescript-eslint/restrict-template-expressions": "off",
                 "no-nested-ternary": "off",
+                "no-nested-template-literals": "off",
+                "sonarjs/no-nested-template-literals": "off",
                 "no-shadow": "off",
                 "react/jsx-no-literals": "off",
                 "id-match": "off",

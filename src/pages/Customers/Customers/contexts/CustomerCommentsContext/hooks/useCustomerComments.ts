@@ -3,11 +3,11 @@ import {
     getMaxCreateDateTime,
     getMinCreateDateTime,
     mergeAndSort
-} from '../../../../../../../helpers/createDateTimeHelper'
+} from '../../../../../../helpers/createDateTimeHelper'
 import { useCallback, useEffect, useState } from 'react'
 
-import CustomerCommentsClient from '../../../../../../../../api/customers/clients/CustomerCommentsClient'
-import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
+import CustomerCommentsClient from '../../../../../../../api/customers/clients/CustomerCommentsClient'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
 const customerCommentsClient = new CustomerCommentsClient(HttpClientFactory.Host, HttpClientFactory.Api)

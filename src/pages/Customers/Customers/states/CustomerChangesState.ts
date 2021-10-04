@@ -1,6 +1,6 @@
-import CustomerChange from '../../../../../../api/customers/models/CustomerChange'
-import CustomerChangeGetPagedListRequest from '../../../../../../api/customers/models/CustomerChangeGetPagedListRequest'
-import CustomerChangeGetPagedListResponse from '../../../../../../api/customers/models/CustomerChangeGetPagedListResponse'
+import CustomerChange from '../../../../../api/customers/models/CustomerChange'
+import CustomerChangeGetPagedListRequest from '../../../../../api/customers/models/CustomerChangeGetPagedListRequest'
+import CustomerChangeGetPagedListResponse from '../../../../../api/customers/models/CustomerChangeGetPagedListResponse'
 
 const DefaultLimit = 10
 const DefaultSortBy = 'CreateDateTime'

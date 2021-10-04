@@ -1,11 +1,11 @@
 import { CheckboxProps, DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import CustomersFiltersState, { customersFiltersInitialState } from '../../../states/CustomersFiltersState'
-import { arrayToDictionary, dictionaryToArray } from '../../../../../../../utils/dictionary/dictionaryUtils'
+import { arrayToDictionary, dictionaryToArray } from '../../../../../../utils/dictionary/dictionaryUtils'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import CustomersContext from '../../CustomersContext/CustomersContext'
-import { FilterFormFieldProps } from '../../../../../../../components/common/forms/FilterForm/FilterForm'
-import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
+import { FilterFormFieldProps } from '../../../../../../components/common/forms/FilterForm/FilterForm'
+import { toBooleanNullable } from '../../../../../../utils/boolean/booleanUtils'
 import useCustomerAttributesLoad from '../../../hooks/load/useCustomerAttributesLoad'
 import useCustomerSourcesLoad from '../../../hooks/load/useCustomerSourcesLoad'
 

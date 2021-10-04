@@ -1,9 +1,9 @@
 import { CustomerState, customerInitialState } from '../../../states/CustomerState'
 import { useCallback, useEffect, useState } from 'react'
 
-import CustomerAttributesClient from '../../../../../../../../api/customers/clients/CustomerAttributesClient'
-import CustomersClient from '../../../../../../../../api/customers/clients/CustomersClient'
-import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
+import CustomerAttributesClient from '../../../../../../../api/customers/clients/CustomerAttributesClient'
+import CustomersClient from '../../../../../../../api/customers/clients/CustomersClient'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { customerAttributesInitialState } from '../../../../CustomerAttributes/states/CustomerAttributesState'
 import { useParams } from 'react-router'
 

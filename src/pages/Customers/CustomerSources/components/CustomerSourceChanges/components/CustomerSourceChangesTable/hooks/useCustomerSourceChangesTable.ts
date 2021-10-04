@@ -1,15 +1,15 @@
-import { calculateOffset, calculatePage } from '../../../../../../../../../utils/pagination/paginationUtils'
-import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../../utils/csv/csvUtils'
+import { calculateOffset, calculatePage } from '../../../../../../../../utils/pagination/paginationUtils'
+import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import CustomerSource from '../../../../../../../../../../api/customers/models/CustomerSource'
-import CustomerSourceChange from '../../../../../../../../../../api/customers/models/CustomerSourceChange'
+import CustomerSource from '../../../../../../../../../api/customers/models/CustomerSource'
+import CustomerSourceChange from '../../../../../../../../../api/customers/models/CustomerSourceChange'
 import CustomerSourceChangesContext from '../../../../../contexts/CustomerSourceChangesContext/CustomerSourceChangesContext'
-import { TableBodyRowProps } from '../../../../../../../../../components/common/collections/Table/TableBody'
-import { TableHeaderCellProps } from '../../../../../../../../../components/common/collections/Table/TableHeader'
-import { getDateTimeAsRecently } from '../../../../../../../../../utils/dateTime/dateTimeUtils'
-import { getFileNameWithDateTime } from '../../../../../../../../../helpers/fileNameHelper'
-import { getValueOrEmpty } from '../../../../../../../../../helpers/entityFieldValueHelper'
+import { TableBodyRowProps } from '../../../../../../../../components/common/collections/Table/TableBody'
+import { TableHeaderCellProps } from '../../../../../../../../components/common/collections/Table/TableHeader'
+import { getDateTimeAsRecently } from '../../../../../../../../utils/dateTime/dateTimeUtils'
+import { getFileNameWithDateTime } from '../../../../../../../../helpers/fileNameHelper'
+import { getValueOrEmpty } from '../../../../../../../../helpers/entityFieldValueHelper'
 
 interface UseCustomerSourceChangesTableReturn {
     page: number

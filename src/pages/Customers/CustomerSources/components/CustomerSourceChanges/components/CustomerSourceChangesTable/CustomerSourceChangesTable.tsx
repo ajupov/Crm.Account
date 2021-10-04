@@ -1,7 +1,7 @@
 import React, { FC, useContext } from 'react'
 
 import CustomerSourceChangesContext from '../../../../contexts/CustomerSourceChangesContext/CustomerSourceChangesContext'
-import Table from '../../../../../../../../components/common/collections/Table/Table'
+import Table from '../../../../../../../components/common/collections/Table/Table'
 import useCustomerSourceChangesTable from './hooks/useCustomerSourceChangesTable'
 
 const CustomerSourceChangesTable: FC = () => {

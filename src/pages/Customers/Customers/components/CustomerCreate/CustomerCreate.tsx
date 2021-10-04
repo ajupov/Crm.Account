@@ -3,8 +3,8 @@ import React, { FC, useEffect } from 'react'
 import CustomerContextProvider from '../../contexts/CustomerContext/CustomerContextProvider'
 import CustomerCreateForm from './CustomerCreateForm'
 import CustomersMenu from '../../../CustomersMenu/CustomersMenu'
-import Page from '../../../../../../components/common/grids/Page/Page'
-import { setPageTitle } from '../../../../../../helpers/productNameHelper'
+import Page from '../../../../../components/common/grids/Page/Page'
+import { setPageTitle } from '../../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
 const CustomerCreate: FC = () => {

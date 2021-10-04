@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import CreateForm from '../../../../../../components/common/forms/CreateForm/CreateForm'
+import CreateForm from '../../../../../components/common/forms/CreateForm/CreateForm'
 import useCustomerOnChange from '../../hooks/change/useCustomerOnChange'
 
 const CustomerCreateForm: FC = () => {

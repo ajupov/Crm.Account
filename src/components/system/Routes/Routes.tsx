@@ -2,48 +2,24 @@ import React, { FC } from 'react'
 import { Route, Switch } from 'react-router'
 
 import Calendar from '../../../pages/Calendar/Calendar'
-import Companies from '../../../pages/Customers/components/Companies/Companies'
-import CompaniesRoutes from '../../../pages/Customers/components/Companies/routes/CompaniesRoutes'
-import CompanyAttributeChanges from '../../../pages/Customers/components/CompanyAttributes/components/CompanyAttributeChanges/CompanyAttributeChanges'
-import CompanyAttributeCreate from '../../../pages/Customers/components/CompanyAttributes/components/CompanyAttributeCreate/CompanyAttributeCreate'
-import CompanyAttributeEdit from '../../../pages/Customers/components/CompanyAttributes/components/CompanyAttributeEdit/CompanyAttributeEdit'
-import CompanyAttributeView from '../../../pages/Customers/components/CompanyAttributes/components/CompanyAttributeView/CompanyAttributeView'
-import CompanyAttributes from '../../../pages/Customers/components/CompanyAttributes/CompanyAttributes'
-import CompanyAttributesRoutes from '../../../pages/Customers/components/CompanyAttributes/routes/CompanyAttributesRoutes'
-import CompanyChanges from '../../../pages/Customers/components/Companies/components/CompanyChanges/CompanyChanges'
-import CompanyCreate from '../../../pages/Customers/components/Companies/components/CompanyCreate/CompanyCreate'
-import CompanyEdit from '../../../pages/Customers/components/Companies/components/CompanyEdit/CompanyEdit'
-import CompanyView from '../../../pages/Customers/components/Companies/components/CompanyView/CompanyView'
-import ContactAttributeChanges from '../../../pages/Customers/components/ContactAttributes/components/ContactAttributeChanges/ContactAttributeChanges'
-import ContactAttributeCreate from '../../../pages/Customers/components/ContactAttributes/components/ContactAttributeCreate/ContactAttributeCreate'
-import ContactAttributeEdit from '../../../pages/Customers/components/ContactAttributes/components/ContactAttributeEdit/ContactAttributeEdit'
-import ContactAttributeView from '../../../pages/Customers/components/ContactAttributes/components/ContactAttributeView/ContactAttributeView'
-import ContactAttributes from '../../../pages/Customers/components/ContactAttributes/ContactAttributes'
-import ContactAttributesRoutes from '../../../pages/Customers/components/ContactAttributes/routes/ContactAttributesRoutes'
-import ContactChanges from '../../../pages/Customers/components/Contacts/components/ContactChanges/ContactChanges'
-import ContactCreate from '../../../pages/Customers/components/Contacts/components/ContactCreate/ContactCreate'
-import ContactEdit from '../../../pages/Customers/components/Contacts/components/ContactEdit/ContactEdit'
-import ContactView from '../../../pages/Customers/components/Contacts/components/ContactView/ContactView'
-import Contacts from '../../../pages/Customers/components/Contacts/Contacts'
-import ContactsRoutes from '../../../pages/Customers/components/Contacts/routes/ContactsRoutes'
 import CustomerAttributeChanges from '../../../pages/Customers/CustomerAttributes/components/CustomerAttributeChanges/CustomerAttributeChanges'
 import CustomerAttributeCreate from '../../../pages/Customers/CustomerAttributes/components/CustomerAttributeCreate/CustomerAttributeCreate'
 import CustomerAttributeEdit from '../../../pages/Customers/CustomerAttributes/components/CustomerAttributeEdit/CustomerAttributeEdit'
 import CustomerAttributeView from '../../../pages/Customers/CustomerAttributes/components/CustomerAttributeView/CustomerAttributeView'
 import CustomerAttributes from '../../../pages/Customers/CustomerAttributes/CustomerAttributes'
 import CustomerAttributesRoutes from '../../../pages/Customers/CustomerAttributes/routes/CustomerAttributesRoutes'
-import CustomerChanges from '../../../pages/Customers/components/Customers/components/CustomerChanges/CustomerChanges'
-import CustomerCreate from '../../../pages/Customers/components/Customers/components/CustomerCreate/CustomerCreate'
-import CustomerEdit from '../../../pages/Customers/components/Customers/components/CustomerEdit/CustomerEdit'
-import CustomerSourceChanges from '../../../pages/Customers/components/CustomerSources/components/CustomerSourceChanges/CustomerSourceChanges'
-import CustomerSourceCreate from '../../../pages/Customers/components/CustomerSources/components/CustomerSourceCreate/CustomerSourceCreate'
-import CustomerSourceEdit from '../../../pages/Customers/components/CustomerSources/components/CustomerSourceEdit/CustomerSourceEdit'
-import CustomerSourceView from '../../../pages/Customers/components/CustomerSources/components/CustomerSourceView/CustomerSourceView'
-import CustomerSources from '../../../pages/Customers/components/CustomerSources/CustomerSources'
-import CustomerSourcesRoutes from '../../../pages/Customers/components/CustomerSources/routes/CustomerSourcesRoutes'
-import CustomerView from '../../../pages/Customers/components/Customers/components/CustomerView/CustomerView'
-import Customers from '../../../pages/Customers/components/Customers/Customers'
-import CustomersRoutes from '../../../pages/Customers/components/Customers/routes/CustomersRoutes'
+import CustomerChanges from '../../../pages/Customers/Customers/components/CustomerChanges/CustomerChanges'
+import CustomerCreate from '../../../pages/Customers/Customers/components/CustomerCreate/CustomerCreate'
+import CustomerEdit from '../../../pages/Customers/Customers/components/CustomerEdit/CustomerEdit'
+import CustomerSourceChanges from '../../../pages/Customers/CustomerSources/components/CustomerSourceChanges/LeadSourceChanges'
+import CustomerSourceCreate from '../../../pages/Customers/CustomerSources/components/CustomerSourceCreate/CustomerSourceCreate'
+import CustomerSourceEdit from '../../../pages/Customers/CustomerSources/components/CustomerSourceEdit/CustomerSourceEdit'
+import CustomerSourceView from '../../../pages/Customers/CustomerSources/components/CustomerSourceView/CustomerSourceView'
+import CustomerSources from '../../../pages/Customers/CustomerSources/CustomerSources'
+import CustomerSourcesRoutes from '../../../pages/Customers/CustomerSources/routes/CustomerSourcesRoutes'
+import CustomerView from '../../../pages/Customers/Customers/components/CustomerView/CustomerView'
+import Customers from '../../../pages/Customers/Customers/Customers'
+import CustomersRoutes from '../../../pages/Customers/Customers/routes/CustomersRoutes'
 import Dashboard from '../../../pages/Dashboard/Dashboard'
 import NotFound from '../../../pages/NotFound/NotFound'
 import OrderAttributeChanges from '../../../pages/Orders/OrderAttributes/components/OrderAttributeChanges/OrderAttributeChanges'
@@ -148,34 +124,6 @@ const Routes: FC = () => {
             <Route path={withId(CustomerAttributesRoutes.View)} exact component={CustomerAttributeView} />
             <Route path={withId(CustomerAttributesRoutes.Edit)} exact component={CustomerAttributeEdit} />
             <Route path={withId(CustomerAttributesRoutes.Changes)} exact component={CustomerAttributeChanges} />
-
-            {/*  */}
-
-            <Route path={ContactsRoutes.Index} exact component={Contacts} />
-            <Route path={ContactsRoutes.Create} exact component={ContactCreate} />
-            <Route path={withId(ContactsRoutes.View)} exact component={ContactView} />
-            <Route path={withId(ContactsRoutes.Edit)} exact component={ContactEdit} />
-            <Route path={withId(ContactsRoutes.Changes)} exact component={ContactChanges} />
-
-            <Route path={ContactAttributesRoutes.Index} exact component={ContactAttributes} />
-            <Route path={ContactAttributesRoutes.Create} exact component={ContactAttributeCreate} />
-            <Route path={withId(ContactAttributesRoutes.View)} exact component={ContactAttributeView} />
-            <Route path={withId(ContactAttributesRoutes.Edit)} exact component={ContactAttributeEdit} />
-            <Route path={withId(ContactAttributesRoutes.Changes)} exact component={ContactAttributeChanges} />
-
-            {/*  */}
-
-            <Route path={CompaniesRoutes.Index} exact component={Companies} />
-            <Route path={CompaniesRoutes.Create} exact component={CompanyCreate} />
-            <Route path={withId(CompaniesRoutes.View)} exact component={CompanyView} />
-            <Route path={withId(CompaniesRoutes.Edit)} exact component={CompanyEdit} />
-            <Route path={withId(CompaniesRoutes.Changes)} exact component={CompanyChanges} />
-
-            <Route path={CompanyAttributesRoutes.Index} exact component={CompanyAttributes} />
-            <Route path={CompanyAttributesRoutes.Create} exact component={CompanyAttributeCreate} />
-            <Route path={withId(CompanyAttributesRoutes.View)} exact component={CompanyAttributeView} />
-            <Route path={withId(CompanyAttributesRoutes.Edit)} exact component={CompanyAttributeEdit} />
-            <Route path={withId(CompanyAttributesRoutes.Changes)} exact component={CompanyAttributeChanges} />
 
             {/*  */}
 

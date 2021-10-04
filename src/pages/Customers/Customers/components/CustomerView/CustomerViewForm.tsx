@@ -2,7 +2,7 @@ import React, { FC, useContext } from 'react'
 
 import CustomerContext from '../../contexts/CustomerContext/CustomerContext'
 import CustomersRoutes from '../../routes/CustomersRoutes'
-import View from '../../../../../../components/common/grids/View/View'
+import View from '../../../../../components/common/grids/View/View'
 import useCustomerView from './hooks/useCustomerView'
 import useCustomersActions from '../../contexts/CustomersActionsContext/hooks/useCustomersActions'
 

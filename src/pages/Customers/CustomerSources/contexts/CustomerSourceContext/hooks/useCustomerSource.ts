@@ -1,8 +1,8 @@
 import { CustomerSourceState, customerSourceInitialState } from '../../../states/CustomerSourceState'
 import { useCallback, useEffect, useState } from 'react'
 
-import CustomerSourcesClient from '../../../../../../../../api/customers/clients/CustomerSourcesClient'
-import HttpClientFactory from '../../../../../../../utils/httpClientFactory/HttpClientFactory'
+import CustomerSourcesClient from '../../../../../../../api/customers/clients/CustomerSourcesClient'
+import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
 const customerSourcesClient = new CustomerSourcesClient(HttpClientFactory.Host, HttpClientFactory.Api)

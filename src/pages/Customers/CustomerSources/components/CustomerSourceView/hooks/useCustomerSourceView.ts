@@ -1,8 +1,8 @@
 import { useCallback, useContext } from 'react'
 
-import CustomerSource from '../../../../../../../../api/customers/models/CustomerSource'
+import CustomerSource from '../../../../../../../api/customers/models/CustomerSource'
 import CustomerSourcesActionsContext from '../../../contexts/CustomerSourcesActionsContext/CustomerSourcesActionsContext'
-import { ViewDataProps } from '../../../../../../../components/common/grids/View/View'
+import { ViewDataProps } from '../../../../../../components/common/grids/View/View'
 import { useHistory } from 'react-router'
 
 interface UseCustomerSourceViewReturn {

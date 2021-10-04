@@ -1,4 +1,4 @@
-import CustomerSource from '../../../../../../api/customers/models/CustomerSource'
+import CustomerSource from '../../../../../api/customers/models/CustomerSource'
 
 export interface CustomerSourceState {
     isLoading: boolean

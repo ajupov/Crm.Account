@@ -73,8 +73,7 @@ const webpackConfig: (env: any, options: any) => Configuration = (_, { mode }) =
             patterns: [
                 {
                     from: 'public/content/**/*',
-                    to: 'content/',
-                    flatten: true
+                    to: 'content/'
                 }
             ]
         })

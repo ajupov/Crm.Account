@@ -1,4 +1,4 @@
-import CustomerComment from '../../../../../../api/customers/models/CustomerComment'
+import CustomerComment from '../../../../../api/customers/models/CustomerComment'
 
 export default interface CustomerCommentState {
     isLoading: boolean

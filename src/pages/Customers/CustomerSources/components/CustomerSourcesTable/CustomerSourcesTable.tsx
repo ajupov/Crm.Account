@@ -2,7 +2,7 @@ import React, { FC, useContext } from 'react'
 
 import CustomerSourcesContext from '../../contexts/CustomerSourcesContext/CustomerSourcesContext'
 import CustomerSourcesRoutes from '../../routes/CustomerSourcesRoutes'
-import Table from '../../../../../../components/common/collections/Table/Table'
+import Table from '../../../../../components/common/collections/Table/Table'
 import useCustomerSourcesTable from './hooks/useCustomerSourcesTable'
 
 const CustomerSourcesTable: FC = () => {

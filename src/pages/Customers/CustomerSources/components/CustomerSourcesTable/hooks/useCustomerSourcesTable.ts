@@ -1,14 +1,14 @@
-import { calculateOffset, calculatePage } from '../../../../../../../utils/pagination/paginationUtils'
-import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../utils/csv/csvUtils'
+import { calculateOffset, calculatePage } from '../../../../../../utils/pagination/paginationUtils'
+import { convertObjectToCSV, downloadAsCsv } from '../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import CustomerSource from '../../../../../../../../api/customers/models/CustomerSource'
+import CustomerSource from '../../../../../../../api/customers/models/CustomerSource'
 import CustomerSourcesContext from '../../../contexts/CustomerSourcesContext/CustomerSourcesContext'
 import CustomerSourcesRoutes from '../../../routes/CustomerSourcesRoutes'
-import { TableBodyRowProps } from '../../../../../../../components/common/collections/Table/TableBody'
-import { TableHeaderCellProps } from '../../../../../../../components/common/collections/Table/TableHeader'
-import { getDateTimeAsRecently } from '../../../../../../../utils/dateTime/dateTimeUtils'
-import { getFileNameWithDateTime } from '../../../../../../../helpers/fileNameHelper'
+import { TableBodyRowProps } from '../../../../../../components/common/collections/Table/TableBody'
+import { TableHeaderCellProps } from '../../../../../../components/common/collections/Table/TableHeader'
+import { getDateTimeAsRecently } from '../../../../../../utils/dateTime/dateTimeUtils'
+import { getFileNameWithDateTime } from '../../../../../../helpers/fileNameHelper'
 import useCustomerSourceView from '../../CustomerSourceView/hooks/useCustomerSourceView'
 
 interface UseCustomerSourcesTableReturn {

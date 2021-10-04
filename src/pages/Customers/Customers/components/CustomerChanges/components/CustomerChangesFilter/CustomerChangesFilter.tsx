@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import FilterForm from '../../../../../../../../components/common/forms/FilterForm/FilterForm'
+import FilterForm from '../../../../../../../components/common/forms/FilterForm/FilterForm'
 import useCustomerChangesFilters from '../../../../contexts/CustomerChangesFiltersContext/hooks/useCustomerChangesFilters'
 
 const CustomerChangesFilter: FC = () => {

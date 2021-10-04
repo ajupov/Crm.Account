@@ -2,7 +2,7 @@ import { Icon, Menu, SemanticICONS } from 'semantic-ui-react'
 import React, { FC, useCallback, useContext, useMemo } from 'react'
 
 import Configuration from '../../../../../configuration/Configuration'
-import ContactsRoutes from '../../../../../pages/Customers/components/Contacts/routes/ContactsRoutes'
+import CustomersRoutes from '../../../../../pages/Customers/Customers/routes/CustomersRoutes'
 import { Link } from 'react-router-dom'
 import ProductsRoutes from '../../../../../pages/Products/components/Products/routes/ProductsRoutes'
 import UserInfoContext from '../../../../system/UserInfo/contexts/UserInfoContext/UserInfoContext'
@@ -46,7 +46,7 @@ const MobileSidebarMenu: FC<MobileSidebarMenuProps> = ({ onClickItem }) => {
             {renderItem('Задачи', '/tasks', 'tasks')}
             {renderItem('Сделки', '/orders', 'handshake')}
             {renderItem('Лиды', '/customers', 'filter')}
-            {renderItem('Клиенты', ContactsRoutes.Index, 'address book')}
+            {renderItem('Клиенты', CustomersRoutes.Index, 'address book')}
             {renderItem('Продукты', ProductsRoutes.Index, 'list ol')}
             {renderItem('Настройки аккаунта', '/settings', 'user circle')}
             <Menu.Item as="a" href={configuration.LogoutUrl}>

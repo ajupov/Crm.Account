@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import CustomerAttribute from '../../../../../../../api/customers/models/CustomerAttribute'
-import CustomerAttributesClient from '../../../../../../../api/customers/clients/CustomerAttributesClient'
-import { DropdownItemProps } from '../../../../../../components/common/fields/Dropdown/Dropdown'
-import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
+import CustomerAttribute from '../../../../../../api/customers/models/CustomerAttribute'
+import CustomerAttributesClient from '../../../../../../api/customers/clients/CustomerAttributesClient'
+import { DropdownItemProps } from '../../../../../components/common/fields/Dropdown/Dropdown'
+import HttpClientFactory from '../../../../../utils/httpClientFactory/HttpClientFactory'
 
 const customerAttributesClient = new CustomerAttributesClient(HttpClientFactory.Host, HttpClientFactory.Api)
 

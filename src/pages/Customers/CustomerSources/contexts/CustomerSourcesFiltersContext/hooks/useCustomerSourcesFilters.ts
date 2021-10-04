@@ -5,8 +5,8 @@ import CustomerSourcesFiltersState, {
 import { useCallback, useContext, useMemo, useState } from 'react'
 
 import CustomerSourcesContext from '../../CustomerSourcesContext/CustomerSourcesContext'
-import { FilterFormFieldProps } from '../../../../../../../components/common/forms/FilterForm/FilterForm'
-import { toBooleanNullable } from '../../../../../../../utils/boolean/booleanUtils'
+import { FilterFormFieldProps } from '../../../../../../components/common/forms/FilterForm/FilterForm'
+import { toBooleanNullable } from '../../../../../../utils/boolean/booleanUtils'
 
 // TODO: Move to l10n
 const useCustomerSourcesFilters = (): CustomerSourcesFiltersState => {

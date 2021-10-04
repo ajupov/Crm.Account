@@ -1,7 +1,7 @@
 import React, { FC, useContext } from 'react'
 
 import CustomerSourcesFiltersContext from '../../contexts/CustomerSourcesFiltersContext/CustomerSourcesFiltersContext'
-import FilterForm from '../../../../../../components/common/forms/FilterForm/FilterForm'
+import FilterForm from '../../../../../components/common/forms/FilterForm/FilterForm'
 
 const CustomerSourcesFilter: FC = () => {
     const state = useContext(CustomerSourcesFiltersContext)

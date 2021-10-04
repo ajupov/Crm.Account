@@ -1,6 +1,6 @@
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { CreateFormFieldProps } from '../../../../../../components/common/forms/CreateForm/CreateForm'
+import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
 import CustomerSourceContext from '../../contexts/CustomerSourceContext/CustomerSourceContext'
 import { InputOnChangeData } from 'semantic-ui-react'
 import { useHistory } from 'react-router'

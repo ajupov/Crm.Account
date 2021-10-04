@@ -1,6 +1,6 @@
 import React, { FC, useContext } from 'react'
 
-import Comments from '../../../../../../components/common/collections/Comments/Comments'
+import Comments from '../../../../../components/common/collections/Comments/Comments'
 import CustomerCommentContext from '../../contexts/CustomerCommentContext/CustomerCommentContext'
 import CustomerCommentsContext from '../../contexts/CustomerCommentsContext/CustomerCommentsContext'
 import useCustomerComments from './hooks/useCustomerComments'

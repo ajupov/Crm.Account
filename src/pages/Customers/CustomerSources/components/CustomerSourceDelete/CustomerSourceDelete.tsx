@@ -1,7 +1,7 @@
 import React, { FC, useContext } from 'react'
 
 import CustomerSourcesActionsContext from '../../contexts/CustomerSourcesActionsContext/CustomerSourcesActionsContext'
-import DeleteModal from '../../../../../../components/common/modals/DeleteModal/DeleteModal'
+import DeleteModal from '../../../../../components/common/modals/DeleteModal/DeleteModal'
 import useCustomerSourceDelete from './hooks/useCustomerSourceDelete'
 
 // TODO: Move to l10n
