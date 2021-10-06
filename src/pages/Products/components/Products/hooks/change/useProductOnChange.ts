@@ -89,7 +89,7 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
 
     const onChangePrice = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setProduct({ ...state.product, price: (data.value as unknown) as number })
+            state.setProduct({ ...state.product, price: data.value as unknown as number })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -257,7 +257,7 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
             state.product.price,
             state.product.attributeLinks,
             state.product.isHidden,
-            parentProduct?.name,
+            parentProduct,
             loadProducts,
             productsAsOptions,
             onChangeParentProductId,

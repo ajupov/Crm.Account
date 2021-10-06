@@ -45,9 +45,10 @@ const useProductView = (): UseProductViewReturn => {
 
     const mapCategories = useCallback(() => joinCategoryNames(productState.categories), [productState.categories])
 
-    const mapAttributes = useCallback(() => joinAttributes(productState.product.attributeLinks), [
-        productState.product.attributeLinks
-    ])
+    const mapAttributes = useCallback(
+        () => joinAttributes(productState.product.attributeLinks),
+        [productState.product.attributeLinks]
+    )
 
     const map = useCallback(
         (product: Product): ViewDataProps[] => [
@@ -62,7 +63,7 @@ const useProductView = (): UseProductViewReturn => {
             { label: 'Черновик', value: product.isHidden ? 'Да' : 'Нет' },
             { label: 'Удален', value: product.isDeleted ? 'Да' : 'Нет' }
         ],
-        [mapAttributes, mapCategories, parentProduct?.name]
+        [mapAttributes, mapCategories, parentProduct]
     )
 
     return { map, onClickDelete, onClickRestore, onClickCancel }

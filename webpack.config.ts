@@ -3,6 +3,7 @@ import { join, resolve } from 'path'
 
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import Dotenv from 'dotenv-webpack'
+import DotenvWebpackPlugin from 'dotenv-webpack'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import copyWebpackPlugin from 'copy-webpack-plugin'
@@ -13,7 +14,7 @@ const webpackConfig: (env: any, options: any) => Configuration = (_, { mode }) =
     output: {
         filename: '[name].[hash].js',
         path: resolve(__dirname, 'dist'),
-        publicPath: '/'
+        publicPath: ''
     },
     devtool: mode === 'development' ? 'inline-source-map' : false,
     resolve: {
@@ -40,7 +41,7 @@ const webpackConfig: (env: any, options: any) => Configuration = (_, { mode }) =
         splitChunks: {
             cacheGroups: {
                 vendors: {
-                    test: /[/\\]node_modules[/\\]/,
+                    test: /[\\/]node_modules[\\/]/,
                     name: 'vendor',
                     chunks: 'all'
                 }
@@ -65,18 +66,17 @@ const webpackConfig: (env: any, options: any) => Configuration = (_, { mode }) =
             template: resolve(__dirname, 'public/index.html'),
             favicon: resolve(__dirname, 'public/content/images/favicon.ico')
         }),
-        new ForkTsCheckerWebpackPlugin({ eslint: { enabled: true, files: './src/**/*.{ts,tsx}' } }),
         new Dotenv({
             path: resolve(__dirname, `./config/${mode}.env`)
         }),
-        new copyWebpackPlugin({
-            patterns: [
-                {
-                    from: 'public/content/**/*',
-                    to: 'content/'
-                }
-            ]
-        })
+        new ForkTsCheckerWebpackPlugin({ eslint: true, useTypescriptIncrementalApi: false }),
+        new copyWebpackPlugin([
+            {
+                from: 'public/content/**/*',
+                to: 'content/',
+                flatten: true
+            }
+        ])
     ]
 })
 
