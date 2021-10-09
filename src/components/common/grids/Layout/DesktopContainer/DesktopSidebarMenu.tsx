@@ -3,7 +3,7 @@ import React, { FC, useCallback } from 'react'
 
 import CustomersRoutes from '../../../../../pages/Customers/Customers/routes/CustomersRoutes'
 import { Link } from 'react-router-dom'
-import ProductsRoutes from '../../../../../pages/Products/components/Products/routes/ProductsRoutes'
+import ProductsRoutes from '../../../../../pages/Products/Products/routes/ProductsRoutes'
 
 // TODO: Move to l10n
 const DesktopSidebarMenu: FC = () => {
