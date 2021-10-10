@@ -34,6 +34,9 @@ const useProducts = (): ProductsState => {
         if (response.products) {
             response.products.forEach(v => {
                 delete v.accountId
+                delete v.parentProductId
+                delete v.statusId
+                delete v.image
                 delete v.status
                 delete v.attributeLinks
                 delete v.categoryLinks

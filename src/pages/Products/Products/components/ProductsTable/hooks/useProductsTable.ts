@@ -32,7 +32,17 @@ const useProductsTable = (): UseProductsTableReturn => {
         }
 
         const fileName = getFileNameWithDateTime('Продукты')
-        const headers = ['Идентификатор', 'Тип', 'Наименование', 'Удален', 'Создан', 'Изменен']
+        const headers = [
+            'Идентификатор',
+            'Тип',
+            'Наименование',
+            'Артикул',
+            'Цена',
+            'Черновик',
+            'Удален',
+            'Создан',
+            'Изменен'
+        ]
         const csv = convertObjectToCSV([headers, ...products])
 
         downloadAsCsv(fileName, csv)

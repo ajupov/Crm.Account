@@ -16,6 +16,9 @@ import { getValueOrEmpty } from '../../../../../../../../helpers/entityFieldValu
 import { joinAttributes } from '../../../../../mappers/productAttributesMapper'
 import { joinCategoryIds } from '../../../../../mappers/productCategoriesMapper'
 import { toCurrency } from '../../../../../../../../utils/currency/currencyUtils'
+import useProductAttributesLoad from '../../../../../hooks/load/useProductAttributesLoad'
+import useProductCategoriesLoad from '../../../../../hooks/load/useProductCategoriesLoad'
+import useProductStatusesLoad from '../../../../../hooks/load/useProductStatusesLoad'
 
 interface UseProductChangesTableReturn {
     page: number
@@ -28,6 +31,9 @@ interface UseProductChangesTableReturn {
 // TODO: Move to l10n
 const useProductChangesTable = (): UseProductChangesTableReturn => {
     const state = useContext(ProductChangesContext)
+    const { attributesAsOptions } = useProductAttributesLoad()
+    const { categoriesAsOptions } = useProductCategoriesLoad()
+    const { statusesAsOptions } = useProductStatusesLoad()
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const changes = (await state.getAll())?.changes
@@ -63,9 +69,20 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
         return ''
     }, [])
 
-    const mapCategories = useCallback((links?: ProductCategoryLink[]) => joinCategoryIds(links), [])
+    const mapCategories = useCallback(
+        (links?: ProductCategoryLink[]) => joinCategoryIds(links, categoriesAsOptions),
+        [categoriesAsOptions]
+    )
 
-    const mapAttributes = useCallback((links?: ProductAttributeLink[]) => joinAttributes(links), [])
+    const mapAttributes = useCallback(
+        (links?: ProductAttributeLink[]) => joinAttributes(links, attributesAsOptions),
+        [attributesAsOptions]
+    )
+
+    const mapStatus = useCallback(
+        (statusId?: string) => statusesAsOptions.find(x => x.value === statusId)?.text ?? '',
+        [statusesAsOptions]
+    )
 
     const getChangeValue = useCallback(
         (change: ProductChange) => {
@@ -79,8 +96,10 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
                 `Тип: ${getValueOrEmpty(getProductTypeName(oldValue?.type))} → ${getValueOrEmpty(
                     getProductTypeName(newValue?.type)
                 )}`,
-                `ID Статуса: ${getValueOrEmpty(oldValue?.statusId)} → ${getValueOrEmpty(newValue?.statusId)}`,
-                `ID Категорий: ${getValueOrEmpty(mapCategories(oldValue?.categoryLinks))} → ${getValueOrEmpty(
+                `Статус: ${getValueOrEmpty(mapStatus(oldValue?.statusId))} → ${getValueOrEmpty(
+                    mapStatus(newValue?.statusId)
+                )}`,
+                `Категории: ${getValueOrEmpty(mapCategories(oldValue?.categoryLinks))} → ${getValueOrEmpty(
                     mapCategories(newValue?.categoryLinks)
                 )}`,
                 `Наименование: ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
@@ -95,7 +114,7 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
                 )}`
             ]
         },
-        [mapAttributes, mapCategories]
+        [mapAttributes, mapCategories, mapStatus]
     )
 
     const map = useCallback(

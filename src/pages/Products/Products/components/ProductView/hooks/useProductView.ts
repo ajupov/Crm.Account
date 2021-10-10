@@ -9,6 +9,7 @@ import { joinAttributes } from '../../../mappers/productAttributesMapper'
 import { joinCategoryNames } from '../../../mappers/productCategoriesMapper'
 import { toCurrency } from '../../../../../../utils/currency/currencyUtils'
 import { useHistory } from 'react-router'
+import useProductAttributesLoad from '../../../hooks/load/useProductAttributesLoad'
 import useProductLoad from '../../../hooks/load/useProductLoad'
 
 interface UseProductViewReturn {
@@ -24,6 +25,7 @@ const useProductView = (): UseProductViewReturn => {
     const productState = useContext(ProductContext)
     const actionsState = useContext(ProductsActionsContext)
     const { product: parentProduct } = useProductLoad(productState.product.parentProductId)
+    const { attributesAsOptions } = useProductAttributesLoad()
 
     const onClickDelete = useCallback(
         (id: string) => {
@@ -46,8 +48,8 @@ const useProductView = (): UseProductViewReturn => {
     const mapCategories = useCallback(() => joinCategoryNames(productState.categories), [productState.categories])
 
     const mapAttributes = useCallback(
-        () => joinAttributes(productState.product.attributeLinks),
-        [productState.product.attributeLinks]
+        () => joinAttributes(productState.product.attributeLinks, attributesAsOptions),
+        [attributesAsOptions, productState.product.attributeLinks]
     )
 
     const map = useCallback(
