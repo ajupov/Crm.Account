@@ -2,13 +2,13 @@ import { DropdownItemProps } from '../../../../components/common/fields/Dropdown
 import ProductType from '../../../../../api/products/models/ProductType'
 
 // TODO: Move to l10n
-const ProductTypeWithNames: { [key in string]: string } = {
+const ProductTypeWithNames: { [key in number]: string } = {
     1: 'Товары',
     2: 'Услуги'
 }
 
 export function getProductTypesAsSelectOptions(): DropdownItemProps[] {
-    return Object.entries(ProductTypeWithNames).map(x => ({ value: x[0], text: x[1] } as DropdownItemProps))
+    return Object.entries(ProductTypeWithNames).map(x => ({ value: parseInt(x[0]), text: x[1] } as DropdownItemProps))
 }
 
 export function getProductTypeName(type?: ProductType): string {

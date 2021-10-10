@@ -1,3 +1,4 @@
+import { Guid } from 'guid-typescript'
 import Product from '../../../../../api/products/models/Product'
 import ProductAttribute from '../../../../../api/products/models/ProductAttribute'
 import ProductCategory from '../../../../../api/products/models/ProductCategory'
@@ -16,7 +17,7 @@ export interface ProductState {
 export const productInitialState: ProductState = {
     isLoading: false,
     product: {
-        id: void 0,
+        id: Guid.create().toString(),
         accountId: void 0,
         parentProductId: void 0,
         type: ProductType.Material,
@@ -29,14 +30,7 @@ export const productInitialState: ProductState = {
         isDeleted: false,
         createDateTime: void 0,
         modifyDateTime: void 0,
-        status: {
-            id: void 0,
-            accountId: void 0,
-            name: void 0,
-            isDeleted: false,
-            createDateTime: void 0,
-            modifyDateTime: void 0
-        },
+        status: void 0,
         attributeLinks: [],
         categoryLinks: []
     },
