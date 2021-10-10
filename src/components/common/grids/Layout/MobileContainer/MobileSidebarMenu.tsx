@@ -41,12 +41,11 @@ const MobileSidebarMenu: FC<MobileSidebarMenuProps> = ({ onClickItem }) => {
             <Menu.Item as={Link} to="settings" onClick={onClickItem} style={{ height: '68px', lineHeight: '48px' }}>
                 {AvatarAndUserElement}
             </Menu.Item>
-            {renderItem('Инфопанель', '', 'dashboard')}
-            {renderItem('Календарь', '/calendar', 'calendar')}
-            {renderItem('Задачи', '/tasks', 'tasks')}
-            {renderItem('Сделки', '/orders', 'handshake')}
-            {renderItem('Лиды', '/customers', 'filter')}
-            {renderItem('Клиенты', CustomersRoutes.Index, 'address book')}
+            {renderItem('Дашборд', '', 'line graph')}
+            {renderItem('Календарь', '/calendar', 'calendar alternate outline')}
+            {renderItem('Задачи', '/tasks', 'columns')}
+            {renderItem('Заказы', '/orders', 'boxes')}
+            {renderItem('Клиенты', CustomersRoutes.Index, 'users')}
             {renderItem('Продукты', ProductsRoutes.Index, 'list ol')}
             {renderItem('Настройки аккаунта', '/settings', 'user circle')}
             <Menu.Item as="a" href={configuration.LogoutUrl}>

@@ -19,12 +19,11 @@ const DesktopSidebarMenu: FC = () => {
 
     return (
         <>
-            {renderItem('Инфопанель', '/', 'dashboard')}
-            {renderItem('Календарь', '/calendar', 'calendar')}
-            {renderItem('Задачи', '/tasks', 'tasks')}
-            {renderItem('Сделки', '/orders', 'handshake')}
-            {renderItem('Лиды', '/customers', 'filter')}
-            {renderItem('Клиенты', CustomersRoutes.Index, 'address book')}
+            {renderItem('Дашборд', '/', 'line graph')}
+            {renderItem('Календарь', '/calendar', 'calendar alternate outline')}
+            {renderItem('Задачи', '/tasks', 'columns')}
+            {renderItem('Заказы', '/orders', 'boxes')}
+            {renderItem('Клиенты', CustomersRoutes.Index, 'users')}
             {renderItem('Продукты', ProductsRoutes.Index, 'list ol')}
         </>
     )
