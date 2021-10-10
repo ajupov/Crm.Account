@@ -1,3 +1,4 @@
+import { addUtcKind, getDateTimeAsRecently } from '../../../../../../../../utils/dateTime/dateTimeUtils'
 import { calculateOffset, calculatePage } from '../../../../../../../../utils/pagination/paginationUtils'
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
@@ -8,7 +9,6 @@ import ProductAttributeChangesContext from '../../../../../contexts/ProductAttri
 import { TableBodyRowProps } from '../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../components/common/collections/Table/TableHeader'
 import { getAttributeTypeName } from '../../../../../../../../helpers/entityAttributeTypeHelper'
-import { getDateTimeAsRecently } from '../../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../../helpers/fileNameHelper'
 import { getValueOrEmpty } from '../../../../../../../../helpers/entityFieldValueHelper'
 
@@ -82,7 +82,7 @@ const useProductAttributeChangesTable = (): UseProductAttributeChangesTableRetur
                             { value: getChangeValue(change), textAlign: 'left' },
                             {
                                 value: change.createDateTime
-                                    ? getDateTimeAsRecently(new Date(change.createDateTime))
+                                    ? getDateTimeAsRecently(addUtcKind(change.createDateTime))
                                     : '',
                                 textAlign: 'center'
                             }

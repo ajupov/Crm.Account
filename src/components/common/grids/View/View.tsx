@@ -92,7 +92,7 @@ const View: FC<ViewProps> = ({
                     <Button.Group basic floated="right">
                         {id && editLink && (
                             <Button as={Link} to={`${editLink}/${id}`}>
-                                <Icon name="edit" /> Редактировать
+                                <Icon name="edit" /> Изменить
                             </Button>
                         )}
                         <Button onClick={_onClickDelete}>

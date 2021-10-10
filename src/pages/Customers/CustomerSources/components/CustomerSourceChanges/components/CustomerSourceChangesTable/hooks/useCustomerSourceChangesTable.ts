@@ -1,3 +1,4 @@
+import { addUtcKind, getDateTimeAsRecently } from '../../../../../../../../utils/dateTime/dateTimeUtils'
 import { calculateOffset, calculatePage } from '../../../../../../../../utils/pagination/paginationUtils'
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
@@ -7,7 +8,6 @@ import CustomerSourceChange from '../../../../../../../../../api/customers/model
 import CustomerSourceChangesContext from '../../../../../contexts/CustomerSourceChangesContext/CustomerSourceChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../components/common/collections/Table/TableHeader'
-import { getDateTimeAsRecently } from '../../../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../../../helpers/fileNameHelper'
 import { getValueOrEmpty } from '../../../../../../../../helpers/entityFieldValueHelper'
 
@@ -78,7 +78,7 @@ const useCustomerSourceChangesTable = (): UseCustomerSourceChangesTableReturn =>
                             { value: getChangeValue(change), textAlign: 'left' },
                             {
                                 value: change.createDateTime
-                                    ? getDateTimeAsRecently(new Date(change.createDateTime))
+                                    ? getDateTimeAsRecently(addUtcKind(change.createDateTime))
                                     : '',
                                 textAlign: 'center'
                             }

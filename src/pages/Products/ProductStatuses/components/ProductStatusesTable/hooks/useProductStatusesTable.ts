@@ -1,3 +1,4 @@
+import { addUtcKind, getDateTimeAsRecently } from '../../../../../../utils/dateTime/dateTimeUtils'
 import { calculateOffset, calculatePage } from '../../../../../../utils/pagination/paginationUtils'
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
@@ -7,7 +8,6 @@ import ProductStatusesContext from '../../../contexts/ProductStatusesContext/Pro
 import ProductStatusesRoutes from '../../../routes/ProductStatusesRoutes'
 import { TableBodyRowProps } from '../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../components/common/collections/Table/TableHeader'
-import { getDateTimeAsRecently } from '../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../helpers/fileNameHelper'
 import useProductStatusView from '../../ProductStatusView/hooks/useProductStatusView'
 
@@ -74,7 +74,7 @@ const useProductStatusesTable = (): UseProductStatusesTableReturn => {
                             { value: status.name, textAlign: 'left' },
                             {
                                 value: status.createDateTime
-                                    ? getDateTimeAsRecently(new Date(status.createDateTime))
+                                    ? getDateTimeAsRecently(addUtcKind(status.createDateTime))
                                     : '',
                                 textAlign: 'center'
                             }

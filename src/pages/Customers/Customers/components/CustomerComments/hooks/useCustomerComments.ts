@@ -5,6 +5,7 @@ import CustomerComment from '../../../../../../../api/customers/models/CustomerC
 import CustomerCommentContext from '../../../contexts/CustomerCommentContext/CustomerCommentContext'
 import CustomerCommentsContext from '../../../contexts/CustomerCommentsContext/CustomerCommentsContext'
 import UserInfoContext from '../../../../../../components/system/UserInfo/contexts/UserInfoContext/UserInfoContext'
+import { addUtcKind } from '../../../../../../utils/dateTime/dateTimeUtils'
 
 interface UseCustomerCommentsTableReturn {
     onChangeCommentToSend: (value: string) => void
@@ -24,7 +25,7 @@ const useCustomerComments = (): UseCustomerCommentsTableReturn => {
                 x =>
                     ({
                         author: name,
-                        dateTime: new Date(x.createDateTime!),
+                        dateTime: addUtcKind(x.createDateTime),
                         text: x.value
                     } as CommentProps)
             ),

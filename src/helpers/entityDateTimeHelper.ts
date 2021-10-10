@@ -1,11 +1,11 @@
-import { getDateTimeAsRecently } from '../utils/dateTime/dateTimeUtils'
+import { addUtcKind, getDateTimeAsRecently } from '../utils/dateTime/dateTimeUtils'
 
 export function getCreateDateTimeText(value?: string): string {
     if (!value) {
         return ''
     }
 
-    const lastModifyDateTime = getDateTimeAsRecently(new Date(value))
+    const lastModifyDateTime = getDateTimeAsRecently(addUtcKind(value))
 
     if (!lastModifyDateTime) {
         return ''
@@ -20,7 +20,7 @@ export function getLastChangeDateTimeText(value?: string): string {
         return ''
     }
 
-    const lastModifyDateTime = getDateTimeAsRecently(new Date(value))
+    const lastModifyDateTime = getDateTimeAsRecently(addUtcKind(value))
 
     if (!lastModifyDateTime) {
         return ''

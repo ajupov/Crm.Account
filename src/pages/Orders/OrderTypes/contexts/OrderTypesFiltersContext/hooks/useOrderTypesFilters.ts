@@ -10,10 +10,10 @@ import { toBooleanNullable } from '../../../../../../utils/boolean/booleanUtils'
 const useOrderTypesFilters = (): OrderTypesFiltersState => {
     const state = useContext(OrderTypesContext)
     const [name, setName] = useState(state.request.name ?? '')
-    const [minCreateDate, setMinCreateDate] = useState(state.request.minCreateDate ?? '')
-    const [maxCreateDate, setMaxCreateDate] = useState(state.request.maxCreateDate ?? '')
-    const [minModifyDate, setMinModifyDate] = useState(state.request.minModifyDate ?? '')
-    const [maxModifyDate, setMaxModifyDate] = useState(state.request.maxModifyDate ?? '')
+    const [minCreateDate, setMinCreateDate] = useState(state.request.minCreateDate)
+    const [maxCreateDate, setMaxCreateDate] = useState(state.request.maxCreateDate)
+    const [minModifyDate, setMinModifyDate] = useState(state.request.minModifyDate)
+    const [maxModifyDate, setMaxModifyDate] = useState(state.request.maxModifyDate)
     const [isDeleted, setIsDeleted] = useState(state.request.isDeleted)
     const [isApplyEnabled, setIsApplyEnabled] = useState(orderTypesFiltersInitialState.isApplyEnabled)
     const [isResetEnabled, setIsResetEnabled] = useState(orderTypesFiltersInitialState.isResetEnabled)
@@ -68,10 +68,10 @@ const useOrderTypesFilters = (): OrderTypesFiltersState => {
 
     const onReset = useCallback(() => {
         setName('')
-        setMinCreateDate('')
-        setMaxCreateDate('')
-        setMinModifyDate('')
-        setMaxModifyDate('')
+        setMinCreateDate(void 0)
+        setMaxCreateDate(void 0)
+        setMinModifyDate(void 0)
+        setMaxModifyDate(void 0)
         setIsDeleted(false)
 
         state.setRequest({

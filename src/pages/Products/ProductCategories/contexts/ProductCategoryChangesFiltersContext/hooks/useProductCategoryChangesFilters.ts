@@ -10,8 +10,8 @@ import ProductCategoryChangesContext from '../../ProductCategoryChangesContext/P
 // TODO: Move to l10n
 const useProductCategoryChangesFilters = (): ProductCategoryChangesFiltersState => {
     const state = useContext(ProductCategoryChangesContext)
-    const [minCreateDate, setMinCreateDate] = useState('')
-    const [maxCreateDate, setMaxCreateDate] = useState('')
+    const [minCreateDate, setMinCreateDate] = useState<string>()
+    const [maxCreateDate, setMaxCreateDate] = useState<string>()
     const [isApplyEnabled, setIsApplyEnabled] = useState(false)
     const [isResetEnabled, setIsResetEnabled] = useState(false)
     const [isShowMobile, setIsShowMobile] = useState(productCategoryChangesFiltersInitialState.isShowMobile)
@@ -40,8 +40,8 @@ const useProductCategoryChangesFilters = (): ProductCategoryChangesFiltersState 
     }, [maxCreateDate, minCreateDate, state])
 
     const onReset = useCallback(() => {
-        setMinCreateDate('')
-        setMaxCreateDate('')
+        setMinCreateDate(void 0)
+        setMaxCreateDate(void 0)
 
         state.setRequest({
             ...state.request,

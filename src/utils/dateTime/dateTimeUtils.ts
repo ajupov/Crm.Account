@@ -22,6 +22,18 @@ export function toLocaleDateTime(value: string | Date | undefined): string {
     return `${value.toLocaleDateString()} в ${toLocalTime(value)}`
 }
 
+export function addUtcKind(value: string | undefined): Date {
+    if (!value) {
+        return new Date()
+    }
+
+    if (typeof value === 'string') {
+        return new Date(value + 'Z')
+    }
+
+    return new Date()
+}
+
 export function getDateTimeAsRecently(
     value?: Date,
     translateOptions: DateTimeAsRecentlyTranslateOptions = defaultTranslateOptions

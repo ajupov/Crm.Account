@@ -1,3 +1,4 @@
+import { addUtcKind, getDateTimeAsRecently } from '../../../../../../utils/dateTime/dateTimeUtils'
 import { calculateOffset, calculatePage } from '../../../../../../utils/pagination/paginationUtils'
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
@@ -8,7 +9,6 @@ import OrderAttributesRoutes from '../../../routes/OrderAttributesRoutes'
 import { TableBodyRowProps } from '../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../components/common/collections/Table/TableHeader'
 import { getAttributeTypeName } from '../../../../../../helpers/entityAttributeTypeHelper'
-import { getDateTimeAsRecently } from '../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../helpers/fileNameHelper'
 import useOrderAttributeView from '../../OrderAttributeView/hooks/useOrderAttributeView'
 
@@ -76,7 +76,7 @@ const useOrderAttributesTable = (): UseOrderAttributesTableReturn => {
                             { value: attribute.key, textAlign: 'left' },
                             {
                                 value: attribute.createDateTime
-                                    ? getDateTimeAsRecently(new Date(attribute.createDateTime))
+                                    ? getDateTimeAsRecently(addUtcKind(attribute.createDateTime))
                                     : '',
                                 textAlign: 'center'
                             }

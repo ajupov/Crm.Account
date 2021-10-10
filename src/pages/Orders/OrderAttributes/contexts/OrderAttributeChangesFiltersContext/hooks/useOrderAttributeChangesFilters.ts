@@ -10,8 +10,8 @@ import OrderAttributeChangesContext from '../../OrderAttributeChangesContext/Ord
 // TODO: Move to l10n
 const useOrderAttributeChangesFilters = (): OrderAttributeChangesFiltersState => {
     const state = useContext(OrderAttributeChangesContext)
-    const [minCreateDate, setMinCreateDate] = useState('')
-    const [maxCreateDate, setMaxCreateDate] = useState('')
+    const [minCreateDate, setMinCreateDate] = useState<string>()
+    const [maxCreateDate, setMaxCreateDate] = useState<string>()
     const [isApplyEnabled, setIsApplyEnabled] = useState(false)
     const [isResetEnabled, setIsResetEnabled] = useState(false)
     const [isShowMobile, setIsShowMobile] = useState(orderAttributeChangesFiltersInitialState.isShowMobile)
@@ -40,8 +40,8 @@ const useOrderAttributeChangesFilters = (): OrderAttributeChangesFiltersState =>
     }, [maxCreateDate, minCreateDate, state])
 
     const onReset = useCallback(() => {
-        setMinCreateDate('')
-        setMaxCreateDate('')
+        setMinCreateDate(void 0)
+        setMaxCreateDate(void 0)
 
         state.setRequest({
             ...state.request,

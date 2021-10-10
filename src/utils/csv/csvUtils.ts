@@ -6,7 +6,7 @@ export function convertObjectToCSV(objectArray: (string[] | Record<string, any>)
 
         for (const property of Object.entries(object)) {
             if (row !== '') {
-                row += ','
+                row += ';'
             }
 
             row += property[1] ?? ''

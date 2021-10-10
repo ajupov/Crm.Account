@@ -16,10 +16,10 @@ const RestoreModal: FC<RestoreModalProps> = ({ isRestoring, title, content, onCl
         <Modal.Content>{content}</Modal.Content>
         <Modal.Actions>
             <Button.Group>
-                <Button type="reset" basic onClick={onClickCancel}>
+                <Button type="reset" onClick={onClickCancel}>
                     Нет
                 </Button>
-                <Button type="submit" onClick={onClickConfirm}>
+                <Button type="submit" basic onClick={onClickConfirm}>
                     Да
                 </Button>
             </Button.Group>

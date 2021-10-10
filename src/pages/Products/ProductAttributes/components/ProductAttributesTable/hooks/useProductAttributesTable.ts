@@ -1,3 +1,4 @@
+import { addUtcKind, getDateTimeAsRecently } from '../../../../../../utils/dateTime/dateTimeUtils'
 import { calculateOffset, calculatePage } from '../../../../../../utils/pagination/paginationUtils'
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
@@ -8,7 +9,6 @@ import ProductAttributesRoutes from '../../../routes/ProductAttributesRoutes'
 import { TableBodyRowProps } from '../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../components/common/collections/Table/TableHeader'
 import { getAttributeTypeName } from '../../../../../../helpers/entityAttributeTypeHelper'
-import { getDateTimeAsRecently } from '../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../helpers/fileNameHelper'
 import useProductAttributeView from '../../ProductAttributeView/hooks/useProductAttributeView'
 
@@ -72,11 +72,11 @@ const useProductAttributesTable = (): UseProductAttributesTableReturn => {
                     ({
                         id: attribute.id,
                         cells: [
-                            { value: getAttributeTypeName(attribute.type), textAlign: 'left' },
                             { value: attribute.key, textAlign: 'left' },
+                            { value: getAttributeTypeName(attribute.type), textAlign: 'left' },
                             {
                                 value: attribute.createDateTime
-                                    ? getDateTimeAsRecently(new Date(attribute.createDateTime))
+                                    ? getDateTimeAsRecently(addUtcKind(attribute.createDateTime))
                                     : '',
                                 textAlign: 'center'
                             }
@@ -94,18 +94,18 @@ const useProductAttributesTable = (): UseProductAttributesTableReturn => {
     const headers: TableHeaderCellProps[] = useMemo(
         () => [
             {
-                key: 'Type',
-                label: 'Тип',
-                width: 4,
-                onClick: () => onClickSort('Type'),
-                orderBy: getOrderBy('Type')
-            },
-            {
                 key: 'Key',
                 label: 'Наименование',
                 width: 6,
                 onClick: () => onClickSort('Key'),
                 orderBy: getOrderBy('Key')
+            },
+            {
+                key: 'Type',
+                label: 'Тип',
+                width: 4,
+                onClick: () => onClickSort('Type'),
+                orderBy: getOrderBy('Type')
             },
             {
                 key: 'CreateDateTime',

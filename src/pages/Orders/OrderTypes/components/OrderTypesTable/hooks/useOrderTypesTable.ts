@@ -1,3 +1,4 @@
+import { addUtcKind, getDateTimeAsRecently } from '../../../../../../utils/dateTime/dateTimeUtils'
 import { calculateOffset, calculatePage } from '../../../../../../utils/pagination/paginationUtils'
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
@@ -7,7 +8,6 @@ import OrderTypesContext from '../../../contexts/OrderTypesContext/OrderTypesCon
 import OrderTypesRoutes from '../../../routes/OrderTypesRoutes'
 import { TableBodyRowProps } from '../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../components/common/collections/Table/TableHeader'
-import { getDateTimeAsRecently } from '../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../helpers/fileNameHelper'
 import useOrderTypeView from '../../OrderTypeView/hooks/useOrderTypeView'
 
@@ -73,7 +73,9 @@ const useOrderTypesTable = (): UseOrderTypesTableReturn => {
                         cells: [
                             { value: type.name, textAlign: 'left' },
                             {
-                                value: type.createDateTime ? getDateTimeAsRecently(new Date(type.createDateTime)) : '',
+                                value: type.createDateTime
+                                    ? getDateTimeAsRecently(addUtcKind(type.createDateTime))
+                                    : '',
                                 textAlign: 'center'
                             }
                         ],

@@ -1,3 +1,4 @@
+import { addUtcKind, getDateTimeAsRecently } from '../../../../../../utils/dateTime/dateTimeUtils'
 import { calculateOffset, calculatePage } from '../../../../../../utils/pagination/paginationUtils'
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
@@ -7,7 +8,6 @@ import CustomerSourcesContext from '../../../contexts/CustomerSourcesContext/Cus
 import CustomerSourcesRoutes from '../../../routes/CustomerSourcesRoutes'
 import { TableBodyRowProps } from '../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../components/common/collections/Table/TableHeader'
-import { getDateTimeAsRecently } from '../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../helpers/fileNameHelper'
 import useCustomerSourceView from '../../CustomerSourceView/hooks/useCustomerSourceView'
 
@@ -74,7 +74,7 @@ const useCustomerSourcesTable = (): UseCustomerSourcesTableReturn => {
                             { value: source.name, textAlign: 'left' },
                             {
                                 value: source.createDateTime
-                                    ? getDateTimeAsRecently(new Date(source.createDateTime))
+                                    ? getDateTimeAsRecently(addUtcKind(source.createDateTime))
                                     : '',
                                 textAlign: 'center'
                             }

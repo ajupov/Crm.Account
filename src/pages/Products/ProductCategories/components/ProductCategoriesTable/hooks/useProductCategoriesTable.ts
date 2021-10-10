@@ -1,3 +1,4 @@
+import { addUtcKind, getDateTimeAsRecently } from '../../../../../../utils/dateTime/dateTimeUtils'
 import { calculateOffset, calculatePage } from '../../../../../../utils/pagination/paginationUtils'
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
@@ -7,7 +8,6 @@ import ProductCategoriesRoutes from '../../../routes/ProductCategoriesRoutes'
 import ProductCategory from '../../../../../../../api/products/models/ProductCategory'
 import { TableBodyRowProps } from '../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../components/common/collections/Table/TableHeader'
-import { getDateTimeAsRecently } from '../../../../../../utils/dateTime/dateTimeUtils'
 import { getFileNameWithDateTime } from '../../../../../../helpers/fileNameHelper'
 import useProductCategoryView from '../../ProductCategoryView/hooks/useProductCategoryView'
 
@@ -74,7 +74,7 @@ const useProductCategoriesTable = (): UseProductCategoriesTableReturn => {
                             { value: category.name, textAlign: 'left' },
                             {
                                 value: category.createDateTime
-                                    ? getDateTimeAsRecently(new Date(category.createDateTime))
+                                    ? getDateTimeAsRecently(addUtcKind(category.createDateTime))
                                     : '',
                                 textAlign: 'center'
                             }
