@@ -85,10 +85,10 @@ const useOrderStatusesFilters = (): OrderStatusesFiltersState => {
         state.setRequest({
             ...state.request,
             name: '',
-            minCreateDate: '',
-            maxCreateDate: '',
-            minModifyDate: '',
-            maxModifyDate: '',
+            minCreateDate: void 0,
+            maxCreateDate: void 0,
+            minModifyDate: void 0,
+            maxModifyDate: void 0,
             isFinish: false,
             isDeleted: false,
             offset: 0

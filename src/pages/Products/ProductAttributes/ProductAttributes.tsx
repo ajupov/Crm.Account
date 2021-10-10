@@ -15,7 +15,7 @@ import { setPageTitle } from '../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
 const ProductAttributes: FC = () => {
-    const title = 'Аттрибуты'
+    const title = 'Атрибуты'
 
     useEffect(() => setPageTitle(title), [])
 

@@ -188,10 +188,10 @@ const useProductsFilters = (): ProductsFiltersState => {
             allAttributes: true,
             attributes: void 0,
             isHidden: false,
-            minCreateDate: '',
-            maxCreateDate: '',
-            minModifyDate: '',
-            maxModifyDate: '',
+            minCreateDate: void 0,
+            maxCreateDate: void 0,
+            minModifyDate: void 0,
+            maxModifyDate: void 0,
             isDeleted: false,
             offset: 0
         })

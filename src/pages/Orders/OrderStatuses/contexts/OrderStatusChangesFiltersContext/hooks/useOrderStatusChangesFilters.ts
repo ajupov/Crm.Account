@@ -45,8 +45,8 @@ const useOrderStatusChangesFilters = (): OrderStatusChangesFiltersState => {
 
         state.setRequest({
             ...state.request,
-            minCreateDate: '',
-            maxCreateDate: '',
+            minCreateDate: void 0,
+            maxCreateDate: void 0,
             offset: 0
         })
 
