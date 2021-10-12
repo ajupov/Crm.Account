@@ -30,7 +30,7 @@ const useCustomerSourcesTable = (): UseCustomerSourcesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('Источники лида')
+        const fileName = getFileNameWithDateTime('Источники клиента')
         const headers = ['Идентификатор', 'Наименование', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...sources])
 

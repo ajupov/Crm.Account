@@ -31,7 +31,7 @@ const useCustomerChangesTable = (): UseCustomerChangesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('История изменений контакта')
+        const fileName = getFileNameWithDateTime('История изменений клиента')
         const headers = ['Идентификатор', 'Идентификатор контакта', 'Дата и время', 'Старое значение', 'Новое значение']
         const csv = convertObjectToCSV([headers, ...changes])
 

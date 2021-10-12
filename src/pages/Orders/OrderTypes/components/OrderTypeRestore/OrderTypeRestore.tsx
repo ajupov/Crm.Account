@@ -12,8 +12,8 @@ const OrderTypeRestore: FC = () => {
     return (
         <RestoreModal
             isRestoring={state.isRestoring}
-            title="Восстановление статуса"
-            content="Вы уверены, что хотите восстановить статус?"
+            title="Восстановление типа"
+            content="Вы уверены, что хотите восстановить тип?"
             onClickCancel={onClickCancel}
             onClickConfirm={onClickConfirm}
         />

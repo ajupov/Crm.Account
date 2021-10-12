@@ -29,7 +29,7 @@ const useOrderTypeChangesTable = (): UseOrderTypeChangesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('История изменений статусов продукта')
+        const fileName = getFileNameWithDateTime('История изменений типов заказа')
         const headers = ['Идентификатор', 'Идентификатор статуса', 'Дата и время', 'Старое значение', 'Новое значение']
         const csv = convertObjectToCSV([headers, ...changes])
 

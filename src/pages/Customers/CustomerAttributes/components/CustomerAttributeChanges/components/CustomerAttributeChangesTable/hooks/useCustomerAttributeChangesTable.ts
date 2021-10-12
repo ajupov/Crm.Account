@@ -30,7 +30,7 @@ const useCustomerAttributeChangesTable = (): UseCustomerAttributeChangesTableRet
             return
         }
 
-        const fileName = getFileNameWithDateTime('История изменений атрибутов контакта')
+        const fileName = getFileNameWithDateTime('История изменений атрибутов клиента')
         const headers = ['Идентификатор', 'Идентификатор атрибута', 'Дата и время', 'Старое значение', 'Новое значение']
         const csv = convertObjectToCSV([headers, ...changes])
 

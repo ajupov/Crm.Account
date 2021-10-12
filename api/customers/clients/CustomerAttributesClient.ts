@@ -23,6 +23,7 @@ export default class CustomerAttributesClient {
     ): Promise<CustomerAttributeGetPagedListResponse> =>
         this._factory.postAsync<CustomerAttributeGetPagedListResponse>(
             this._host + '/Customers/Attributes/v1/GetPagedList',
+            void 0,
             request
         )
 

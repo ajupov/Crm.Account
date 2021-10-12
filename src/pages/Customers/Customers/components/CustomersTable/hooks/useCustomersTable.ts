@@ -30,10 +30,10 @@ const useCustomersTable = (): UseCustomersTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('Лиды')
+        const fileName = getFileNameWithDateTime('Клиенты')
         const headers = [
             'Идентификатор',
-            'Идентификатор лида',
+            'Идентификатор клиента',
             'Идентификатор компании',
             'Источник',
             'Фамилия',
@@ -94,9 +94,8 @@ const useCustomersTable = (): UseCustomersTableReturn => {
                     ({
                         id: customer.id,
                         cells: [
-                            { value: customer.surname, textAlign: 'left' },
+                            { value: customer.source?.name, textAlign: 'left' },
                             { value: customer.name, textAlign: 'left' },
-                            { value: customer.patronymic, textAlign: 'left' },
                             { value: customer.phone, textAlign: 'left' },
                             { value: customer.email, textAlign: 'left' },
                             {
@@ -119,51 +118,35 @@ const useCustomersTable = (): UseCustomersTableReturn => {
     const headers: TableHeaderCellProps[] = useMemo(
         () => [
             {
-                key: 'Surname',
-                label: 'Фамилия',
-                width: 2,
-                onClick: () => onClickSort('Surname'),
-                orderBy: getOrderBy('Surname')
+                key: 'Source',
+                label: 'Источник',
+                width: 2
             },
             {
                 key: 'Name',
                 label: 'Имя',
-                width: 2,
+                width: 3,
                 onClick: () => onClickSort('Name'),
                 orderBy: getOrderBy('Name')
             },
             {
-                key: 'Patronymic',
-                label: 'Отчетство',
-                width: 2,
-                onClick: () => onClickSort('Patronymic'),
-                orderBy: getOrderBy('Patronymic')
-            },
-            {
-                key: 'CompanyName',
-                label: 'Компания',
-                width: 3,
-                onClick: () => onClickSort('CompanyName'),
-                orderBy: getOrderBy('CompanyName')
-            },
-            {
                 key: 'Phone',
                 label: 'Телефон',
-                width: 2,
+                width: 1,
                 onClick: () => onClickSort('Phone'),
                 orderBy: getOrderBy('Phone')
             },
             {
                 key: 'Email',
                 label: 'Email',
-                width: 2,
+                width: 3,
                 onClick: () => onClickSort('Email'),
                 orderBy: getOrderBy('Email')
             },
             {
                 key: 'CreateDateTime',
                 label: 'Создан',
-                width: 3,
+                width: 2,
                 onClick: () => onClickSort('CreateDateTime'),
                 orderBy: getOrderBy('CreateDateTime')
             }

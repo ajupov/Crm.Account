@@ -11,8 +11,8 @@ const ProductsMenu: FC = () => (
         items={[
             { name: 'Продукты', path: ProductsRoutes.Index },
             { name: 'Категории', path: ProductCategoriesRoutes.Index },
-            { name: 'Атрибуты', path: ProductAttributesRoutes.Index },
-            { name: 'Статусы', path: ProductStatusesRoutes.Index }
+            { name: 'Статусы', path: ProductStatusesRoutes.Index },
+            { name: 'Атрибуты', path: ProductAttributesRoutes.Index }
         ]}
     />
 )

@@ -31,7 +31,7 @@ const useCustomerAttributesTable = (): UseCustomerAttributesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('Атрибуты лида')
+        const fileName = getFileNameWithDateTime('Атрибуты клиента')
         const headers = ['Идентификатор', 'Тип', 'Наименование', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...attributes])
 
@@ -72,8 +72,8 @@ const useCustomerAttributesTable = (): UseCustomerAttributesTableReturn => {
                     ({
                         id: attribute.id,
                         cells: [
-                            { value: getAttributeTypeName(attribute.type), textAlign: 'left' },
                             { value: attribute.key, textAlign: 'left' },
+                            { value: getAttributeTypeName(attribute.type), textAlign: 'left' },
                             {
                                 value: attribute.createDateTime
                                     ? getDateTimeAsRecently(addUtcKind(attribute.createDateTime))
@@ -94,18 +94,18 @@ const useCustomerAttributesTable = (): UseCustomerAttributesTableReturn => {
     const headers: TableHeaderCellProps[] = useMemo(
         () => [
             {
-                key: 'Type',
-                label: 'Тип',
-                width: 4,
-                onClick: () => onClickSort('Type'),
-                orderBy: getOrderBy('Type')
-            },
-            {
                 key: 'Key',
                 label: 'Наименование',
                 width: 6,
                 onClick: () => onClickSort('Key'),
                 orderBy: getOrderBy('Key')
+            },
+            {
+                key: 'Type',
+                label: 'Тип',
+                width: 4,
+                onClick: () => onClickSort('Type'),
+                orderBy: getOrderBy('Type')
             },
             {
                 key: 'CreateDateTime',

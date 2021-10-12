@@ -42,8 +42,22 @@ export async function readResponseContentAsync<TResult>(response: Response): Pro
     return result as TResult
 }
 
-export function ensureSuccessStatusCode(response: Response): void {
+export async function ensureSuccessStatusCode(response: Response): Promise<void> {
     if (!response.ok) {
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+        if (response.status >= 400 && response.status < 600) {
+            const responseText = await response.json()
+
+            let result = ''
+
+            for (const iterator of Object.entries(responseText.errors)) {
+                result += (iterator[0] ? iterator[0] + ': ' : '') + iterator[1] + '\r\n'
+            }
+
+            // eslint-disable-next-line no-alert
+            alert(response.statusText + ' (' + response.status + '):\r\n' + result)
+        }
+
         throw Error(response.statusText)
     }
 }

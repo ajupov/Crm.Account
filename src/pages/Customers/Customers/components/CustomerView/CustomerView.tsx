@@ -14,7 +14,7 @@ import { setPageTitle } from '../../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
 const CustomerView: FC = () => {
-    const title = 'Просмотр лида'
+    const title = 'Просмотр клиента'
 
     useEffect(() => setPageTitle(title), [])
 

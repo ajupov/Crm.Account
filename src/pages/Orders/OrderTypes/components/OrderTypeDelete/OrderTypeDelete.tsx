@@ -12,8 +12,8 @@ const OrderTypeDelete: FC = () => {
     return (
         <DeleteModal
             isDeleting={state.isDeleting}
-            title="Удаление статуса"
-            content="Вы уверены, что хотите удалить статус?"
+            title="Удаление типа"
+            content="Вы уверены, что хотите удалить тип?"
             onClickConfirm={onClickConfirm}
             onClickCancel={onClickCancel}
         />

@@ -12,7 +12,7 @@ export default class JsonHttpClientFactory implements IJsonHttpClientFactory {
     public async getAsync<T>(uri: string, parameters?: Record<string, any>, headers?: HeadersInit): Promise<T> {
         const response = await fetch(addParameters(uri, parameters), getFetchParams('GET', void 0, headers))
 
-        ensureSuccessStatusCode(response)
+        await ensureSuccessStatusCode(response)
         ensureNoRedirect(response)
 
         return readResponseContentAsync(response)
@@ -26,7 +26,7 @@ export default class JsonHttpClientFactory implements IJsonHttpClientFactory {
     ): Promise<T> {
         const response = await fetch(addParameters(uri, parameters), getFetchParams('POST', body, headers))
 
-        ensureSuccessStatusCode(response)
+        await ensureSuccessStatusCode(response)
         ensureNoRedirect(response)
 
         return readResponseContentAsync(response)
@@ -40,7 +40,7 @@ export default class JsonHttpClientFactory implements IJsonHttpClientFactory {
     ): Promise<T> {
         const response = await fetch(addParameters(uri, parameters), getFetchParams('PUT', body, headers))
 
-        ensureSuccessStatusCode(response)
+        await ensureSuccessStatusCode(response)
         ensureNoRedirect(response)
 
         return readResponseContentAsync(response)
@@ -54,7 +54,7 @@ export default class JsonHttpClientFactory implements IJsonHttpClientFactory {
     ): Promise<T> {
         const response = await fetch(addParameters(uri, parameters), getFetchParams('PATCH', body, headers))
 
-        ensureSuccessStatusCode(response)
+        await ensureSuccessStatusCode(response)
         ensureNoRedirect(response)
 
         return readResponseContentAsync(response)
@@ -63,7 +63,7 @@ export default class JsonHttpClientFactory implements IJsonHttpClientFactory {
     public async deleteAsync<T>(uri: string, parameters?: Record<string, any>, headers?: HeadersInit): Promise<T> {
         const response = await fetch(addParameters(uri, parameters), getFetchParams('DELETE', void 0, headers))
 
-        ensureSuccessStatusCode(response)
+        await ensureSuccessStatusCode(response)
         ensureNoRedirect(response)
 
         return readResponseContentAsync(response)
