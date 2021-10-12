@@ -1,4 +1,5 @@
 import CustomerComment from '../../../../../api/customers/models/CustomerComment'
+import { Guid } from 'guid-typescript'
 
 export default interface CustomerCommentState {
     isLoading: boolean
@@ -10,7 +11,7 @@ export default interface CustomerCommentState {
 export const customerCommentInitialState: CustomerCommentState = {
     isLoading: false,
     comment: {
-        id: void 0,
+        id: Guid.create().toString(),
         value: void 0
     },
     setComment: (_: CustomerComment) => Promise.resolve(void 0),

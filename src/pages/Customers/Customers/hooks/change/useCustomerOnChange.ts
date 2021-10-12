@@ -158,7 +158,6 @@ const useCustomerOnChange = (): UseCustomerOnChangeReturn => {
         () => [
             {
                 type: 'dropdown',
-                required: true,
                 label: 'Источник',
                 value: state.customer.sourceId,
                 options: sourcesAsOptions,
@@ -166,42 +165,36 @@ const useCustomerOnChange = (): UseCustomerOnChangeReturn => {
             },
             {
                 type: 'text',
-                required: true,
                 topLabel: 'Фамилия',
                 value: state.customer.surname,
                 onChange: onChangeSurname
             },
             {
                 type: 'text',
-                required: true,
                 topLabel: 'Имя',
                 value: state.customer.name,
                 onChange: onChangeName
             },
             {
                 type: 'text',
-                required: true,
                 topLabel: 'Отчество',
                 value: state.customer.patronymic,
                 onChange: onChangePatronymic
             },
             {
                 type: 'text',
-                required: true,
                 topLabel: 'Телефон',
                 value: state.customer.phone,
                 onChange: onChangePhone
             },
             {
                 type: 'text',
-                required: true,
                 topLabel: 'Email',
                 value: state.customer.email,
                 onChange: onChangeEmail
             },
             {
                 type: 'date',
-                required: true,
                 topLabel: 'Дата рождения',
                 value: state.customer.birthDate,
                 onChange: onChangeBirthDate

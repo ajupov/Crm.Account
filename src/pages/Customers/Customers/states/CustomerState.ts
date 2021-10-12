@@ -1,5 +1,6 @@
 import Customer from '../../../../../api/customers/models/Customer'
 import CustomerAttribute from '../../../../../api/customers/models/CustomerAttribute'
+import { Guid } from 'guid-typescript'
 
 export interface CustomerState {
     isLoading: boolean
@@ -13,7 +14,7 @@ export interface CustomerState {
 export const customerInitialState: CustomerState = {
     isLoading: false,
     customer: {
-        id: void 0,
+        id: Guid.create().toString(),
         accountId: void 0,
         sourceId: void 0,
         createUserId: void 0,

@@ -11,7 +11,7 @@ import CustomerAttributesRoutes from '../../../pages/Customers/CustomerAttribute
 import CustomerChanges from '../../../pages/Customers/Customers/components/CustomerChanges/CustomerChanges'
 import CustomerCreate from '../../../pages/Customers/Customers/components/CustomerCreate/CustomerCreate'
 import CustomerEdit from '../../../pages/Customers/Customers/components/CustomerEdit/CustomerEdit'
-import CustomerSourceChanges from '../../../pages/Customers/CustomerSources/components/CustomerSourceChanges/LeadSourceChanges'
+import CustomerSourceChanges from '../../../pages/Customers/CustomerSources/components/CustomerSourceChanges/CustomerSourceChanges'
 import CustomerSourceCreate from '../../../pages/Customers/CustomerSources/components/CustomerSourceCreate/CustomerSourceCreate'
 import CustomerSourceEdit from '../../../pages/Customers/CustomerSources/components/CustomerSourceEdit/CustomerSourceEdit'
 import CustomerSourceView from '../../../pages/Customers/CustomerSources/components/CustomerSourceView/CustomerSourceView'

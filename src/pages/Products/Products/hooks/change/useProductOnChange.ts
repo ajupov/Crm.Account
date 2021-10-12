@@ -215,7 +215,6 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
             },
             {
                 type: 'text',
-                required: true,
                 topLabel: 'Артикул',
                 value: state.product.vendorCode,
                 onChange: onChangeVendorCode

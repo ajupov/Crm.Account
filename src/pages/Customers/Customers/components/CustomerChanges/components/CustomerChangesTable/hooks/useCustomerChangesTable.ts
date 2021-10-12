@@ -11,7 +11,8 @@ import { TableBodyRowProps } from '../../../../../../../../components/common/col
 import { TableHeaderCellProps } from '../../../../../../../../components/common/collections/Table/TableHeader'
 import { getFileNameWithDateTime } from '../../../../../../../../helpers/fileNameHelper'
 import { getValueOrEmpty } from '../../../../../../../../helpers/entityFieldValueHelper'
-import { joinAttributes } from '../../../../../mappers/leadAttributesMapper'
+import { joinAttributes } from '../../../../../mappers/customerAttributesMapper'
+import useCustomerAttributesLoad from '../../../../../hooks/load/useCustomerAttributesLoad'
 
 interface UseCustomerChangesTableReturn {
     page: number
@@ -24,6 +25,7 @@ interface UseCustomerChangesTableReturn {
 // TODO: Move to l10n
 const useCustomerChangesTable = (): UseCustomerChangesTableReturn => {
     const state = useContext(CustomerChangesContext)
+    const { attributesAsOptions } = useCustomerAttributesLoad()
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const changes = (await state.getAll())?.changes
@@ -32,7 +34,7 @@ const useCustomerChangesTable = (): UseCustomerChangesTableReturn => {
         }
 
         const fileName = getFileNameWithDateTime('История изменений клиента')
-        const headers = ['Идентификатор', 'Идентификатор контакта', 'Дата и время', 'Старое значение', 'Новое значение']
+        const headers = ['Идентификатор', 'Идентификатор клиента', 'Дата и время', 'Старое значение', 'Новое значение']
         const csv = convertObjectToCSV([headers, ...changes])
 
         downloadAsCsv(fileName, csv)
@@ -59,7 +61,10 @@ const useCustomerChangesTable = (): UseCustomerChangesTableReturn => {
         return ''
     }, [])
 
-    const mapAttributes = useCallback((links?: CustomerAttributeLink[]) => joinAttributes(links), [])
+    const mapAttributes = useCallback(
+        (links?: CustomerAttributeLink[]) => joinAttributes(links, attributesAsOptions),
+        [attributesAsOptions]
+    )
 
     const getChangeValue = useCallback(
         (change: CustomerChange) => {
@@ -67,7 +72,7 @@ const useCustomerChangesTable = (): UseCustomerChangesTableReturn => {
             const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as Customer) : void 0
 
             return [
-                `ID Источника: ${getValueOrEmpty(oldValue?.sourceId)} → ${getValueOrEmpty(newValue?.sourceId)}`,
+                `Источник: ${getValueOrEmpty(oldValue?.source?.name)} → ${getValueOrEmpty(newValue?.source?.name)}`,
                 `Фамилия: ${getValueOrEmpty(oldValue?.surname)} → ${getValueOrEmpty(newValue?.surname)}`,
                 `Имя: ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
                 `Отчество: ${getValueOrEmpty(oldValue?.patronymic)} → ${getValueOrEmpty(newValue?.patronymic)}`,

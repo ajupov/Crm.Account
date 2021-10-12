@@ -12,7 +12,7 @@ export interface DateInputProps {
 const DateInput: FC<DateInputProps> = ({ required, topLabel, value, onChange }) => (
     <Form.Field required={required ?? false}>
         <label>{topLabel}:</label>
-        <Input type="text" required={required} placeholder={topLabel} value={value ?? ''} onChange={onChange} fluid />
+        <Input type="date" required={required} placeholder={topLabel} value={value ?? ''} onChange={onChange} fluid />
     </Form.Field>
 )
 

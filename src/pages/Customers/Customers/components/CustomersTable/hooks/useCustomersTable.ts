@@ -33,24 +33,13 @@ const useCustomersTable = (): UseCustomersTableReturn => {
         const fileName = getFileNameWithDateTime('Клиенты')
         const headers = [
             'Идентификатор',
-            'Идентификатор клиента',
-            'Идентификатор компании',
-            'Источник',
+            'Идентификатор источника',
             'Фамилия',
             'Имя',
             'Отчество',
             'Телефон',
             'Email',
-            'Должность',
-            'Почтовый индекс',
-            'Страна',
-            'Регион',
-            'Район/провинция',
-            'Город/населенный пункт',
-            'Улица',
-            'Дом/строение',
-            'Квартира',
-            'Сумма потенциальной сделки',
+            'Дата рождения',
             'Удален',
             'Создан',
             'Изменен'
@@ -132,7 +121,7 @@ const useCustomersTable = (): UseCustomersTableReturn => {
             {
                 key: 'Phone',
                 label: 'Телефон',
-                width: 1,
+                width: 2,
                 onClick: () => onClickSort('Phone'),
                 orderBy: getOrderBy('Phone')
             },

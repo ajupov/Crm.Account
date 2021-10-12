@@ -18,7 +18,6 @@ import { joinCategoryIds } from '../../../../../mappers/productCategoriesMapper'
 import { toCurrency } from '../../../../../../../../utils/currency/currencyUtils'
 import useProductAttributesLoad from '../../../../../hooks/load/useProductAttributesLoad'
 import useProductCategoriesLoad from '../../../../../hooks/load/useProductCategoriesLoad'
-import useProductStatusesLoad from '../../../../../hooks/load/useProductStatusesLoad'
 
 interface UseProductChangesTableReturn {
     page: number
@@ -33,7 +32,6 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
     const state = useContext(ProductChangesContext)
     const { attributesAsOptions } = useProductAttributesLoad()
     const { categoriesAsOptions } = useProductCategoriesLoad()
-    const { statusesAsOptions } = useProductStatusesLoad()
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const changes = (await state.getAll())?.changes
@@ -79,11 +77,6 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
         [attributesAsOptions]
     )
 
-    const mapStatus = useCallback(
-        (statusId?: string) => statusesAsOptions.find(x => x.value === statusId)?.text ?? '',
-        [statusesAsOptions]
-    )
-
     const getChangeValue = useCallback(
         (change: ProductChange) => {
             const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as Product) : void 0
@@ -96,9 +89,7 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
                 `Тип: ${getValueOrEmpty(getProductTypeName(oldValue?.type))} → ${getValueOrEmpty(
                     getProductTypeName(newValue?.type)
                 )}`,
-                `Статус: ${getValueOrEmpty(mapStatus(oldValue?.statusId))} → ${getValueOrEmpty(
-                    mapStatus(newValue?.statusId)
-                )}`,
+                `Статус: ${getValueOrEmpty(oldValue?.status?.name)} → ${getValueOrEmpty(oldValue?.status?.name)}`,
                 `Категории: ${getValueOrEmpty(mapCategories(oldValue?.categoryLinks))} → ${getValueOrEmpty(
                     mapCategories(newValue?.categoryLinks)
                 )}`,
@@ -114,7 +105,7 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
                 )}`
             ]
         },
-        [mapAttributes, mapCategories, mapStatus]
+        [mapAttributes, mapCategories]
     )
 
     const map = useCallback(

@@ -36,6 +36,7 @@ const useCustomers = (): CustomersState => {
                 delete v.accountId
                 delete v.createUserId
                 delete v.responsibleUserId
+                delete v.image
                 delete v.source
                 delete v.attributeLinks
             })

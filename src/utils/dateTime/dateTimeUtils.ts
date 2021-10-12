@@ -4,6 +4,10 @@ import { DateTimeAsRecentlyTranslateOptions, defaultTranslateOptions } from './D
 
 import { getPluralform } from '../pluralize/pluralizeUtils'
 
+export function toDate(value?: string): string {
+    return value ? new Date(value).toLocaleDateString() : ''
+}
+
 export function toLocalTime(value?: Date): string {
     return value ? value.toLocaleTimeString().slice(0, -3) : ''
 }

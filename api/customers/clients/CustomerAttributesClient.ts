@@ -16,7 +16,7 @@ export default class CustomerAttributesClient {
         this._factory.getAsync<CustomerAttribute>(this._host + '/Customers/Attributes/v1/Get', { id })
 
     public GetListAsync = (values?: string[]): Promise<CustomerAttribute[]> =>
-        this._factory.postAsync<CustomerAttribute[]>(this._host + '/Customers/Attributes/v1/GetList', values)
+        this._factory.postAsync<CustomerAttribute[]>(this._host + '/Customers/Attributes/v1/GetList', void 0, values)
 
     public GetPagedListAsync = (
         request?: CustomerAttributeGetPagedListRequest
