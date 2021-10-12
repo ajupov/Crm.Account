@@ -1,4 +1,4 @@
-import { addUtcKind, getDateTimeAsRecently } from '../../../../../../../../utils/dateTime/dateTimeUtils'
+import { addUtcKind, getDateTimeAsRecently, toDate } from '../../../../../../../../utils/dateTime/dateTimeUtils'
 import { calculateOffset, calculatePage } from '../../../../../../../../utils/pagination/paginationUtils'
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
@@ -78,7 +78,9 @@ const useCustomerChangesTable = (): UseCustomerChangesTableReturn => {
                 `Отчество: ${getValueOrEmpty(oldValue?.patronymic)} → ${getValueOrEmpty(newValue?.patronymic)}`,
                 `Телефон: ${getValueOrEmpty(oldValue?.phone)} → ${getValueOrEmpty(newValue?.phone)}`,
                 `Email: ${getValueOrEmpty(oldValue?.email)} → ${getValueOrEmpty(newValue?.email)}`,
-                `Дата рождения: ${getValueOrEmpty(oldValue?.birthDate)} → ${getValueOrEmpty(newValue?.birthDate)}`,
+                `Дата рождения: ${getValueOrEmpty(toDate(oldValue?.birthDate))} → ${getValueOrEmpty(
+                    toDate(newValue?.birthDate)
+                )}`,
                 `Удален: ${getValueOrEmpty(oldValue?.isDeleted)} → ${getValueOrEmpty(newValue?.isDeleted)}`,
                 `Атрибуты: ${getValueOrEmpty(mapAttributes(oldValue?.attributeLinks))} → ${getValueOrEmpty(
                     mapAttributes(newValue?.attributeLinks)
