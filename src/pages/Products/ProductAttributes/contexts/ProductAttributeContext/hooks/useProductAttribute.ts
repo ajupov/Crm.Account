@@ -1,6 +1,7 @@
 import { ProductAttributeState, productAttributeInitialState } from '../../../states/ProductAttributeState'
 import { useCallback, useEffect, useState } from 'react'
 
+import { Guid } from 'guid-typescript'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import ProductAttributesClient from '../../../../../../../api/products/clients/ProductAttributesClient'
 import { useParams } from 'react-router'
@@ -14,6 +15,7 @@ const useProductAttribute = (): ProductAttributeState => {
 
     const get = useCallback(async () => {
         if (!id) {
+            setAttribute({ ...productAttributeInitialState.attribute, id: Guid.create().toString() })
             return
         }
 

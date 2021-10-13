@@ -1,6 +1,7 @@
 import { OrderAttributeState, orderAttributeInitialState } from '../../../states/OrderAttributeState'
 import { useCallback, useEffect, useState } from 'react'
 
+import { Guid } from 'guid-typescript'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import OrderAttributesClient from '../../../../../../../api/orders/clients/OrderAttributesClient'
 import { useParams } from 'react-router'
@@ -14,6 +15,7 @@ const useOrderAttribute = (): OrderAttributeState => {
 
     const get = useCallback(async () => {
         if (!id) {
+            setAttribute({ ...orderAttributeInitialState.attribute, id: Guid.create().toString() })
             return
         }
 

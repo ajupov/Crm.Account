@@ -1,4 +1,3 @@
-import { Guid } from 'guid-typescript'
 import ProductAttribute from '../../../../../api/products/models/ProductAttribute'
 import ProductAttributeType from '../../../../../api/products/models/ProductAttributeType'
 
@@ -13,7 +12,7 @@ export interface ProductAttributeState {
 export const productAttributeInitialState: ProductAttributeState = {
     isLoading: false,
     attribute: {
-        id: Guid.create().toString(),
+        id: void 0,
         accountId: void 0,
         type: ProductAttributeType.Text,
         key: void 0,

@@ -1,4 +1,3 @@
-import { Guid } from 'guid-typescript'
 import OrderAttribute from '../../../../../api/orders/models/OrderAttribute'
 import OrderAttributeType from '../../../../../api/orders/models/OrderAttributeType'
 
@@ -13,7 +12,7 @@ export interface OrderAttributeState {
 export const orderAttributeInitialState: OrderAttributeState = {
     isLoading: false,
     attribute: {
-        id: Guid.create().toString(),
+        id: void 0,
         accountId: void 0,
         type: OrderAttributeType.Text,
         key: void 0,

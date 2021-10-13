@@ -1,6 +1,5 @@
 import CustomerAttribute from '../../../../../api/customers/models/CustomerAttribute'
 import CustomerAttributeType from '../../../../../api/customers/models/CustomerAttributeType'
-import { Guid } from 'guid-typescript'
 
 export interface CustomerAttributeState {
     isLoading: boolean
@@ -13,7 +12,7 @@ export interface CustomerAttributeState {
 export const customerAttributeInitialState: CustomerAttributeState = {
     isLoading: false,
     attribute: {
-        id: Guid.create().toString(),
+        id: void 0,
         accountId: void 0,
         type: CustomerAttributeType.Text,
         key: void 0,

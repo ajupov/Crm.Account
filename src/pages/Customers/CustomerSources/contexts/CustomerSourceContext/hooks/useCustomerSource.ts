@@ -2,6 +2,7 @@ import { CustomerSourceState, customerSourceInitialState } from '../../../states
 import { useCallback, useEffect, useState } from 'react'
 
 import CustomerSourcesClient from '../../../../../../../api/customers/clients/CustomerSourcesClient'
+import { Guid } from 'guid-typescript'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
@@ -14,6 +15,7 @@ const useCustomerSource = (): CustomerSourceState => {
 
     const get = useCallback(async () => {
         if (!id) {
+            setSource({ ...customerSourceInitialState.source, id: Guid.create().toString() })
             return
         }
 

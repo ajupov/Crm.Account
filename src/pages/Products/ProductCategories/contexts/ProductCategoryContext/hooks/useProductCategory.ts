@@ -1,6 +1,7 @@
 import { ProductCategoryState, productCategoryInitialState } from '../../../states/ProductCategoryState'
 import { useCallback, useEffect, useState } from 'react'
 
+import { Guid } from 'guid-typescript'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import ProductCategoriesClient from '../../../../../../../api/products/clients/ProductCategoriesClient'
 import { useParams } from 'react-router'
@@ -14,6 +15,7 @@ const useProductCategory = (): ProductCategoryState => {
 
     const get = useCallback(async () => {
         if (!id) {
+            setCategory({ ...productCategoryInitialState.category, id: Guid.create().toString() })
             return
         }
 

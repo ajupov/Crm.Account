@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 
 import CustomerAttributesClient from '../../../../../../../api/customers/clients/CustomerAttributesClient'
 import CustomersClient from '../../../../../../../api/customers/clients/CustomersClient'
+import { Guid } from 'guid-typescript'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { customerAttributesInitialState } from '../../../../CustomerAttributes/states/CustomerAttributesState'
 import { useParams } from 'react-router'
@@ -18,6 +19,7 @@ const useCustomer = (): CustomerState => {
 
     const get = useCallback(async () => {
         if (!id) {
+            setCustomer({ ...customerInitialState.customer, id: Guid.create().toString() })
             return
         }
 

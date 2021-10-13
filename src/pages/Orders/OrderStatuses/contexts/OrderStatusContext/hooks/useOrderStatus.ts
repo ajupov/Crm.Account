@@ -1,6 +1,7 @@
 import { OrderStatusState, orderStatusInitialState } from '../../../states/OrderStatusState'
 import { useCallback, useEffect, useState } from 'react'
 
+import { Guid } from 'guid-typescript'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import OrderStatusesClient from '../../../../../../../api/orders/clients/OrderStatusesClient'
 import { useParams } from 'react-router'
@@ -14,6 +15,7 @@ const useOrderStatus = (): OrderStatusState => {
 
     const get = useCallback(async () => {
         if (!id) {
+            setStatus({ ...orderStatusInitialState.status, id: Guid.create().toString() })
             return
         }
 

@@ -9,6 +9,7 @@ import OrderStatusesRoutes from '../../../routes/OrderStatusesRoutes'
 import { TableBodyRowProps } from '../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../components/common/collections/Table/TableHeader'
 import { getFileNameWithDateTime } from '../../../../../../helpers/fileNameHelper'
+import { toYesNo } from '../../../../../../utils/yesNo/yesNoUtils'
 import useOrderStatusView from '../../OrderStatusView/hooks/useOrderStatusView'
 
 interface UseOrderStatusesTableReturn {
@@ -72,6 +73,7 @@ const useOrderStatusesTable = (): UseOrderStatusesTableReturn => {
                         id: status.id,
                         cells: [
                             { value: status.name, textAlign: 'left' },
+                            { value: toYesNo(status.isFinish), textAlign: 'center' },
                             {
                                 value: status.createDateTime
                                     ? getDateTimeAsRecently(addUtcKind(status.createDateTime))
@@ -94,9 +96,16 @@ const useOrderStatusesTable = (): UseOrderStatusesTableReturn => {
             {
                 key: 'Name',
                 label: 'Наименование',
-                width: 10,
+                width: 8,
                 onClick: () => onClickSort('Name'),
                 orderBy: getOrderBy('Name')
+            },
+            {
+                key: 'IsFinish',
+                label: 'Конечный',
+                width: 2,
+                onClick: () => onClickSort('IsFinish'),
+                orderBy: getOrderBy('IsFinish')
             },
             {
                 key: 'CreateDateTime',

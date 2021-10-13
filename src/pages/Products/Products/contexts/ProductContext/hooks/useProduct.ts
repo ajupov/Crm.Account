@@ -1,6 +1,7 @@
 import { ProductState, productInitialState } from '../../../states/ProductState'
 import { useCallback, useEffect, useState } from 'react'
 
+import { Guid } from 'guid-typescript'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import ProductAttributesClient from '../../../../../../../api/products/clients/ProductAttributesClient'
 import ProductCategoriesClient from '../../../../../../../api/products/clients/ProductCategoriesClient'
@@ -22,6 +23,7 @@ const useProduct = (): ProductState => {
 
     const get = useCallback(async () => {
         if (!id) {
+            setProduct({ ...productInitialState.product, id: Guid.create().toString() })
             return
         }
 

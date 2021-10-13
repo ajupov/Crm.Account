@@ -1,6 +1,7 @@
 import { OrderTypeState, orderTypeInitialState } from '../../../states/OrderTypeState'
 import { useCallback, useEffect, useState } from 'react'
 
+import { Guid } from 'guid-typescript'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import OrderTypesClient from '../../../../../../../api/orders/clients/OrderTypesClient'
 import { useParams } from 'react-router'
@@ -14,6 +15,7 @@ const useOrderType = (): OrderTypeState => {
 
     const get = useCallback(async () => {
         if (!id) {
+            setType({ ...orderTypeInitialState.type, id: Guid.create().toString() })
             return
         }
 

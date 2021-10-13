@@ -2,6 +2,7 @@ import { CustomerAttributeState, customerAttributeInitialState } from '../../../
 import { useCallback, useEffect, useState } from 'react'
 
 import CustomerAttributesClient from '../../../../../../../api/customers/clients/CustomerAttributesClient'
+import { Guid } from 'guid-typescript'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
@@ -14,6 +15,7 @@ const useCustomerAttribute = (): CustomerAttributeState => {
 
     const get = useCallback(async () => {
         if (!id) {
+            setAttribute({ ...customerAttributeInitialState.attribute, id: Guid.create().toString() })
             return
         }
 
