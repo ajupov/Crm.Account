@@ -30,7 +30,7 @@ const useOrderTypesTable = (): UseOrderTypesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('Типы сделки')
+        const fileName = getFileNameWithDateTime('Типы заказа')
         const headers = ['Идентификатор', 'Наименование', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...types])
 

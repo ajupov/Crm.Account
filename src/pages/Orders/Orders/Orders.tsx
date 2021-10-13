@@ -9,7 +9,7 @@ import { setPageTitle } from '../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
 const Orders: FC = () => {
-    const title = 'Сделки'
+    const title = 'Заказы'
 
     useEffect(() => setPageTitle(title), [])
 

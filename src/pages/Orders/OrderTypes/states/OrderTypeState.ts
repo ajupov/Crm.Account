@@ -1,3 +1,4 @@
+import { Guid } from 'guid-typescript'
 import OrderType from '../../../../../api/orders/models/OrderType'
 
 export interface OrderTypeState {
@@ -11,7 +12,7 @@ export interface OrderTypeState {
 export const orderTypeInitialState: OrderTypeState = {
     isLoading: false,
     type: {
-        id: void 0,
+        id: Guid.create().toString(),
         accountId: void 0,
         name: void 0,
         isDeleted: false,

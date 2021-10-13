@@ -135,7 +135,7 @@ const useCustomersTable = (): UseCustomersTableReturn => {
             {
                 key: 'CreateDateTime',
                 label: 'Создан',
-                width: 2,
+                width: 3,
                 onClick: () => onClickSort('CreateDateTime'),
                 orderBy: getOrderBy('CreateDateTime')
             }

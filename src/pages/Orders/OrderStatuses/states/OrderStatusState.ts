@@ -1,3 +1,4 @@
+import { Guid } from 'guid-typescript'
 import OrderStatus from '../../../../../api/orders/models/OrderStatus'
 
 export interface OrderStatusState {
@@ -11,7 +12,7 @@ export interface OrderStatusState {
 export const orderStatusInitialState: OrderStatusState = {
     isLoading: false,
     status: {
-        id: void 0,
+        id: Guid.create().toString(),
         accountId: void 0,
         name: void 0,
         isFinish: false,

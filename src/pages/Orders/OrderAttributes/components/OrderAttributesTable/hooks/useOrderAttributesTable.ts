@@ -31,7 +31,7 @@ const useOrderAttributesTable = (): UseOrderAttributesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('Атрибуты сделки')
+        const fileName = getFileNameWithDateTime('Атрибуты заказа')
         const headers = ['Идентификатор', 'Тип', 'Наименование', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...attributes])
 

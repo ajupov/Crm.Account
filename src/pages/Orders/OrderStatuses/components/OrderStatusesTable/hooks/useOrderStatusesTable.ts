@@ -30,8 +30,8 @@ const useOrderStatusesTable = (): UseOrderStatusesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('Статусы сделки')
-        const headers = ['Идентификатор', 'Наименование', 'Удален', 'Создан', 'Изменен']
+        const fileName = getFileNameWithDateTime('Статусы заказа')
+        const headers = ['Идентификатор', 'Наименование', 'Удален', 'Конечный', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...statuses])
 
         downloadAsCsv(fileName, csv)

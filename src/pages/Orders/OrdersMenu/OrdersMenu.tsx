@@ -9,10 +9,10 @@ import OrdersRoutes from '../Orders/routes/OrdersRoutes'
 const OrdersMenu: FC = () => (
     <Menu
         items={[
-            { name: 'Сделки', path: OrdersRoutes.Index },
-            { name: 'Атрибуты', path: OrderAttributesRoutes.Index },
+            { name: 'Заказы', path: OrdersRoutes.Index },
             { name: 'Типы', path: OrderTypesRoutes.Index },
-            { name: 'Статусы', path: OrderStatusesRoutes.Index }
+            { name: 'Статусы', path: OrderStatusesRoutes.Index },
+            { name: 'Атрибуты', path: OrderAttributesRoutes.Index }
         ]}
     />
 )
