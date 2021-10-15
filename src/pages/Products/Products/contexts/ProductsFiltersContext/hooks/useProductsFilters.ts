@@ -42,7 +42,7 @@ const useProductsFilters = (): ProductsFiltersState => {
         setType(data.value as ProductType)
     }, [])
 
-    const ontParentProductId = useCallback((_: any, data: DropdownProps) => {
+    const onChangeParentProductId = useCallback((_: any, data: DropdownProps) => {
         setParentProductId(data.value as string)
         setIsApplyEnabled(true)
     }, [])
@@ -230,7 +230,7 @@ const useProductsFilters = (): ProductsFiltersState => {
                 value: parentProductId,
                 load: loadProducts,
                 options: productsAsOptions,
-                onChange: ontParentProductId
+                onChange: onChangeParentProductId
             },
             {
                 type: 'dropdown',
@@ -323,7 +323,7 @@ const useProductsFilters = (): ProductsFiltersState => {
             parentProductId,
             loadProducts,
             productsAsOptions,
-            ontParentProductId,
+            onChangeParentProductId,
             statusIds,
             statusesAsOptions,
             onChangeStatusIds,

@@ -192,7 +192,7 @@ const useCustomersFilters = (): CustomersFiltersState => {
         () => [
             {
                 type: 'dropdown',
-                label: 'Иточник',
+                label: 'Иcточник',
                 value: sourceIds ? sourceIds[0] : '',
                 options: sourcesAsOptions,
                 onChange: onChangeSourceId

@@ -2,6 +2,7 @@ import CustomerCommentState, { customerCommentInitialState } from '../../../stat
 import { useCallback, useState } from 'react'
 
 import CustomerCommentsClient from '../../../../../../../api/customers/clients/CustomerCommentsClient'
+import { Guid } from 'guid-typescript'
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
 import { useParams } from 'react-router'
 
@@ -19,7 +20,7 @@ const useCustomerComment = (): CustomerCommentState => {
 
         setIsLoading(true)
 
-        await customerCommentsClient.CreateAsync({ ...comment, customerId: id })
+        await customerCommentsClient.CreateAsync({ ...{ ...comment, id: Guid.create().toString() }, customerId: id })
 
         setComment({ ...comment, value: '' })
 

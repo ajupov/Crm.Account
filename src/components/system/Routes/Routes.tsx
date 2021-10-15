@@ -28,6 +28,9 @@ import OrderAttributeEdit from '../../../pages/Orders/OrderAttributes/components
 import OrderAttributeView from '../../../pages/Orders/OrderAttributes/components/OrderAttributeView/OrderAttributeView'
 import OrderAttributes from '../../../pages/Orders/OrderAttributes/OrderAttributes'
 import OrderAttributesRoutes from '../../../pages/Orders/OrderAttributes/routes/OrderAttributesRoutes'
+import OrderChanges from '../../../pages/Orders/Orders/components/OrderChanges/OrderChanges'
+import OrderCreate from '../../../pages/Orders/Orders/components/OrderCreate/OrderCreate'
+import OrderEdit from '../../../pages/Orders/Orders/components/OrderEdit/CustomerEdit'
 import OrderStatusChanges from '../../../pages/Orders/OrderStatuses/components/OrderStatusChanges/OrderStatusChanges'
 import OrderStatusCreate from '../../../pages/Orders/OrderStatuses/components/OrderStatusCreate/OrderStatusCreate'
 import OrderStatusEdit from '../../../pages/Orders/OrderStatuses/components/OrderStatusEdit/OrderStatusEdit'
@@ -40,6 +43,7 @@ import OrderTypeEdit from '../../../pages/Orders/OrderTypes/components/OrderType
 import OrderTypeView from '../../../pages/Orders/OrderTypes/components/OrderTypeView/OrderTypeView'
 import OrderTypes from '../../../pages/Orders/OrderTypes/OrderTypes'
 import OrderTypesRoutes from '../../../pages/Orders/OrderTypes/routes/OrderTypesRoutes'
+import OrderView from '../../../pages/Orders/Orders/components/OrderView/OrderView'
 import Orders from '../../../pages/Orders/Orders/Orders'
 import OrdersRoutes from '../../../pages/Orders/Orders/routes/OrdersRoutes'
 import ProductAttributeChanges from '../../../pages/Products/ProductAttributes/components/ProductAttributeChanges/ProductAttributeChanges'
@@ -82,10 +86,10 @@ const Routes: FC = () => {
             {/*  */}
 
             <Route path={OrdersRoutes.Index} exact component={Orders} />
-            <Route path={OrdersRoutes.Create} exact component={CustomerCreate} />
-            <Route path={withId(OrdersRoutes.View)} exact component={CustomerView} />
-            <Route path={withId(OrdersRoutes.Edit)} exact component={CustomerEdit} />
-            <Route path={withId(OrdersRoutes.Changes)} exact component={CustomerChanges} />
+            <Route path={OrdersRoutes.Create} exact component={OrderCreate} />
+            <Route path={withId(OrdersRoutes.View)} exact component={OrderView} />
+            <Route path={withId(OrdersRoutes.Edit)} exact component={OrderEdit} />
+            <Route path={withId(OrdersRoutes.Changes)} exact component={OrderChanges} />
 
             <Route path={OrderStatusesRoutes.Index} exact component={OrderStatuses} />
             <Route path={OrderStatusesRoutes.Create} exact component={OrderStatusCreate} />

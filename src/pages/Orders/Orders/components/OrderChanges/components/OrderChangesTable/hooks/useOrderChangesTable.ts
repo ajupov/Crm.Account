@@ -1,37 +1,31 @@
-import { addUtcKind, getDateTimeAsRecently } from '../../../../../../../../utils/dateTime/dateTimeUtils'
+import { addUtcKind, getDateTimeAsRecently, toDate } from '../../../../../../../../utils/dateTime/dateTimeUtils'
 import { calculateOffset, calculatePage } from '../../../../../../../../utils/pagination/paginationUtils'
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import Product from '../../../../../../../../../api/products/models/Product'
-import ProductAttributeLink from '../../../../../../../../../api/products/models/ProductAttributeLink'
-import ProductCategoryLink from '../../../../../../../../../api/products/models/ProductCategoryLink'
-import ProductChange from '../../../../../../../../../api/products/models/ProductChange'
-import ProductChangesContext from '../../../../../contexts/ProductChangesContext/ProductChangesContext'
+import Order from '../../../../../../../../../api/orders/models/Order'
+import OrderAttributeLink from '../../../../../../../../../api/orders/models/OrderAttributeLink'
+import OrderChange from '../../../../../../../../../api/orders/models/OrderChange'
+import OrderChangesContext from '../../../../../contexts/OrderChangesContext/OrderChangesContext'
 import { TableBodyRowProps } from '../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../components/common/collections/Table/TableHeader'
 import { getFileNameWithDateTime } from '../../../../../../../../helpers/fileNameHelper'
-import { getProductTypeName } from '../../../../../helpers/productTypeHelper'
 import { getValueOrEmpty } from '../../../../../../../../helpers/entityFieldValueHelper'
-import { joinAttributes } from '../../../../../mappers/productAttributesMapper'
-import { joinCategoryIds } from '../../../../../mappers/productCategoriesMapper'
-import { toCurrency } from '../../../../../../../../utils/currency/currencyUtils'
-import useProductAttributesLoad from '../../../../../hooks/load/useProductAttributesLoad'
-import useProductCategoriesLoad from '../../../../../hooks/load/useProductCategoriesLoad'
+import { joinAttributes } from '../../../../../mappers/orderAttributesMapper'
+import useOrderAttributesLoad from '../../../../../hooks/load/useOrderAttributesLoad'
 
-interface UseProductChangesTableReturn {
+interface UseOrderChangesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (products: ProductChange[]) => TableBodyRowProps[]
+    map: (orders: OrderChange[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
 
 // TODO: Move to l10n
-const useProductChangesTable = (): UseProductChangesTableReturn => {
-    const state = useContext(ProductChangesContext)
-    const { attributesAsOptions } = useProductAttributesLoad()
-    const { categoriesAsOptions } = useProductCategoriesLoad()
+const useOrderChangesTable = (): UseOrderChangesTableReturn => {
+    const state = useContext(OrderChangesContext)
+    const { attributesAsOptions } = useOrderAttributesLoad()
 
     const onClickDownloadAsCsv = useCallback(async () => {
         const changes = (await state.getAll())?.changes
@@ -39,8 +33,8 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('История изменений продукта')
-        const headers = ['Идентификатор', 'Идентификатор продукта', 'Дата и время', 'Старое значение', 'Новое значение']
+        const fileName = getFileNameWithDateTime('История изменений клиента')
+        const headers = ['Идентификатор', 'Идентификатор клиента', 'Дата и время', 'Старое значение', 'Новое значение']
         const csv = convertObjectToCSV([headers, ...changes])
 
         downloadAsCsv(fileName, csv)
@@ -51,7 +45,7 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
         [state]
     )
 
-    const getChangeName = useCallback((change: ProductChange) => {
+    const getChangeName = useCallback((change: OrderChange) => {
         if (!change.oldValueJson && change.newValueJson) {
             return 'Создан'
         }
@@ -67,49 +61,40 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
         return ''
     }, [])
 
-    const mapCategories = useCallback(
-        (links?: ProductCategoryLink[]) => joinCategoryIds(links, categoriesAsOptions),
-        [categoriesAsOptions]
-    )
-
     const mapAttributes = useCallback(
-        (links?: ProductAttributeLink[]) => joinAttributes(links, attributesAsOptions),
+        (links?: OrderAttributeLink[]) => joinAttributes(links, attributesAsOptions),
         [attributesAsOptions]
     )
 
     const getChangeValue = useCallback(
-        (change: ProductChange) => {
-            const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as Product) : void 0
-            const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as Product) : void 0
+        (change: OrderChange) => {
+            const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as Order) : void 0
+            const newValue = change.newValueJson ? (JSON.parse(change.newValueJson) as Order) : void 0
 
             return [
-                `ID родительского продукта: ${getValueOrEmpty(oldValue?.parentProductId)} → ${getValueOrEmpty(
-                    newValue?.parentProductId
+                `Тип: ${getValueOrEmpty(oldValue?.type?.name)} → ${getValueOrEmpty(newValue?.type?.name)}`,
+                `Статус: ${getValueOrEmpty(oldValue?.status?.name)} → ${getValueOrEmpty(newValue?.status?.name)}`,
+                `Имя: ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
+                `ID клиента: ${getValueOrEmpty(oldValue?.customerId)} → ${getValueOrEmpty(newValue?.customerId)}`,
+                `Дата начала: ${getValueOrEmpty(toDate(oldValue?.startDateTime))} → ${getValueOrEmpty(
+                    toDate(newValue?.startDateTime)
                 )}`,
-                `Тип: ${getValueOrEmpty(getProductTypeName(oldValue?.type))} → ${getValueOrEmpty(
-                    getProductTypeName(newValue?.type)
+                `Дата окончания: ${getValueOrEmpty(toDate(oldValue?.endDateTime))} → ${getValueOrEmpty(
+                    toDate(newValue?.endDateTime)
                 )}`,
-                `Статус: ${getValueOrEmpty(oldValue?.status?.name)} → ${getValueOrEmpty(oldValue?.status?.name)}`,
-                `Категории: ${getValueOrEmpty(mapCategories(oldValue?.categoryLinks))} → ${getValueOrEmpty(
-                    mapCategories(newValue?.categoryLinks)
-                )}`,
-                `Наименование: ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
-                `Артикул: ${getValueOrEmpty(oldValue?.vendorCode)} → ${getValueOrEmpty(newValue?.vendorCode)}`,
-                `Цена: ${getValueOrEmpty(toCurrency(oldValue?.price))} → ${getValueOrEmpty(
-                    toCurrency(newValue?.price)
-                )}`,
-                `Черновик: ${getValueOrEmpty(oldValue?.isHidden)} → ${getValueOrEmpty(newValue?.isHidden)}`,
+                `Сумма: ${getValueOrEmpty(oldValue?.sum)} → ${getValueOrEmpty(newValue?.sum)}`,
+                `Сумма без скидки: ${getValueOrEmpty(oldValue?.sum)} → ${getValueOrEmpty(newValue?.sum)}`,
                 `Удален: ${getValueOrEmpty(oldValue?.isDeleted)} → ${getValueOrEmpty(newValue?.isDeleted)}`,
                 `Атрибуты: ${getValueOrEmpty(mapAttributes(oldValue?.attributeLinks))} → ${getValueOrEmpty(
                     mapAttributes(newValue?.attributeLinks)
                 )}`
             ]
         },
-        [mapAttributes, mapCategories]
+        [mapAttributes]
     )
 
     const map = useCallback(
-        (changes: ProductChange[]) =>
+        (changes: OrderChange[]) =>
             changes.map(
                 change =>
                     ({
@@ -158,4 +143,4 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
-export default useProductChangesTable
+export default useOrderChangesTable
