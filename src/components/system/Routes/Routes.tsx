@@ -67,7 +67,7 @@ import ProductView from '../../../pages/Products/Products/components/ProductView
 import Products from '../../../pages/Products/Products/Products'
 import ProductsRoutes from '../../../pages/Products/Products/routes/ProductsRoutes'
 import Settings from '../../../pages/Settings/Settings'
-import Tasks from '../../../pages/Tasks/Tasks'
+import Tasks from '../../../pages/Tasks/Tasks/Tasks'
 
 const Routes: FC = () => {
     const withId = (route: string): string => `${route}/:id`

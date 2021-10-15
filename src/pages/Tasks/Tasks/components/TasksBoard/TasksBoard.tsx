@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import OrdersBoardCard, { RenderCardContent } from './components/OrdersBoardCard/OrdersBoardCard'
-import OrdersBoardColumn, { RenderColumnTitle } from './components/OrdersBoardColumn/OrdersBoardColumn'
 import React, { FC, useCallback, useContext } from 'react'
+import TasksBoardCard, { RenderCardContent } from './components/TasksBoardCard/TasksBoardCard'
+import TasksBoardColumn, { RenderColumnTitle } from './components/TasksBoardColumn/TasksBoardColumn'
 
 import Board from '@lourenci/react-kanban'
 import Loader from '../../../../../components/common/other/Loader/Loader'
-import OrderStatusesContext from '../../contexts/OrderStatusesContext/OrderStatusesContext'
-import OrdersContext from '../../contexts/OrdersContext/OrdersContext'
+import TaskStatusesContext from '../../contexts/TaskStatusesContext/TaskStatusesContext'
+import TasksContext from '../../contexts/TasksContext/TasksContext'
 
 export type BoardCardProps = {
     id: number
@@ -25,13 +25,13 @@ export type BoardProps = {
     columns: BoardColumnProps[]
 }
 
-const OrdersBoard: FC = () => {
-    const orderStatusesState = useContext(OrderStatusesContext)
-    const ordersState = useContext(OrdersContext)
+const TasksBoard: FC = () => {
+    const taskStatusesState = useContext(TaskStatusesContext)
+    const tasksState = useContext(TasksContext)
 
-    const onRenderColumn = useCallback(({ title }: RenderColumnTitle) => <OrdersBoardColumn title={title} />, [])
+    const onRenderColumn = useCallback(({ title }: RenderColumnTitle) => <TasksBoardColumn title={title} />, [])
 
-    const onRenderCard = useCallback((content: RenderCardContent) => <OrdersBoardCard content={content} />, [])
+    const onRenderCard = useCallback((content: RenderCardContent) => <TasksBoardCard content={content} />, [])
 
     const onCardDragEnd = useCallback((card: any, source: any, destination: any) => {
         global.console.log(card)
@@ -41,10 +41,10 @@ const OrdersBoard: FC = () => {
 
     const renderBoard = useCallback(() => {
         const board = {
-            columns: orderStatusesState.statuses.map(x => ({
+            columns: taskStatusesState.statuses.map(x => ({
                 id: x.id,
                 title: x.name ?? '',
-                cards: ordersState.orders
+                cards: tasksState.tasks
                     .filter(d => d.statusId === x.id)
                     .map(d => ({
                         id: d.id,
@@ -56,7 +56,7 @@ const OrdersBoard: FC = () => {
 
         return (
             <>
-                <Loader isLoading={orderStatusesState.isLoading || ordersState.isLoading} />
+                <Loader isLoading={taskStatusesState.isLoading || tasksState.isLoading} />
 
                 <Board renderColumnHeader={onRenderColumn} renderCard={onRenderCard} onCardDragEnd={onCardDragEnd}>
                     {board}
@@ -64,10 +64,10 @@ const OrdersBoard: FC = () => {
             </>
         )
     }, [
-        orderStatusesState.isLoading,
-        orderStatusesState.statuses,
-        ordersState.orders,
-        ordersState.isLoading,
+        taskStatusesState.isLoading,
+        taskStatusesState.statuses,
+        tasksState.tasks,
+        tasksState.isLoading,
         onCardDragEnd,
         onRenderCard,
         onRenderColumn
@@ -76,4 +76,4 @@ const OrdersBoard: FC = () => {
     return <>{renderBoard()}</>
 }
 
-export default OrdersBoard
+export default TasksBoard
