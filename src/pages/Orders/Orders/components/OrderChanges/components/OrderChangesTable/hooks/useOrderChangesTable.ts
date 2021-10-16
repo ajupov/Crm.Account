@@ -1,4 +1,4 @@
-import { addUtcKind, getDateTimeAsRecently, toDate } from '../../../../../../../../utils/dateTime/dateTimeUtils'
+import { addUtcKind, getDateTimeAsRecently, toLocaleDate } from '../../../../../../../../utils/dateTime/dateTimeUtils'
 import { calculateOffset, calculatePage } from '../../../../../../../../utils/pagination/paginationUtils'
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
@@ -76,11 +76,11 @@ const useOrderChangesTable = (): UseOrderChangesTableReturn => {
                 `Статус: ${getValueOrEmpty(oldValue?.status?.name)} → ${getValueOrEmpty(newValue?.status?.name)}`,
                 `Имя: ${getValueOrEmpty(oldValue?.name)} → ${getValueOrEmpty(newValue?.name)}`,
                 `ID клиента: ${getValueOrEmpty(oldValue?.customerId)} → ${getValueOrEmpty(newValue?.customerId)}`,
-                `Дата начала: ${getValueOrEmpty(toDate(oldValue?.startDateTime))} → ${getValueOrEmpty(
-                    toDate(newValue?.startDateTime)
+                `Дата начала: ${getValueOrEmpty(toLocaleDate(oldValue?.startDateTime))} → ${getValueOrEmpty(
+                    toLocaleDate(newValue?.startDateTime)
                 )}`,
-                `Дата окончания: ${getValueOrEmpty(toDate(oldValue?.endDateTime))} → ${getValueOrEmpty(
-                    toDate(newValue?.endDateTime)
+                `Дата окончания: ${getValueOrEmpty(toLocaleDate(oldValue?.endDateTime))} → ${getValueOrEmpty(
+                    toLocaleDate(newValue?.endDateTime)
                 )}`,
                 `Сумма: ${getValueOrEmpty(oldValue?.sum)} → ${getValueOrEmpty(newValue?.sum)}`,
                 `Сумма без скидки: ${getValueOrEmpty(oldValue?.sum)} → ${getValueOrEmpty(newValue?.sum)}`,

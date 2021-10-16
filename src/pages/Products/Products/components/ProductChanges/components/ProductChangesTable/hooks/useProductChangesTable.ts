@@ -89,7 +89,7 @@ const useProductChangesTable = (): UseProductChangesTableReturn => {
                 `Тип: ${getValueOrEmpty(getProductTypeName(oldValue?.type))} → ${getValueOrEmpty(
                     getProductTypeName(newValue?.type)
                 )}`,
-                `Статус: ${getValueOrEmpty(oldValue?.status?.name)} → ${getValueOrEmpty(oldValue?.status?.name)}`,
+                `Статус: ${getValueOrEmpty(oldValue?.status?.name)} → ${getValueOrEmpty(newValue?.status?.name)}`,
                 `Категории: ${getValueOrEmpty(mapCategories(oldValue?.categoryLinks))} → ${getValueOrEmpty(
                     mapCategories(newValue?.categoryLinks)
                 )}`,

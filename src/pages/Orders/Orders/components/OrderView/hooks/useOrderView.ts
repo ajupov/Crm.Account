@@ -6,7 +6,7 @@ import OrderContext from '../../../contexts/OrderContext/OrderContext'
 import OrdersActionsContext from '../../../contexts/OrdersActionsContext/OrdersActionsContext'
 import { ViewDataProps } from '../../../../../../components/common/grids/View/View'
 import { joinAttributes } from '../../../mappers/orderAttributesMapper'
-import { toDate } from '../../../../../../utils/dateTime/dateTimeUtils'
+import { toLocaleDate } from '../../../../../../utils/dateTime/dateTimeUtils'
 import useCustomerLoad from '../../../hooks/load/useCustomerLoad'
 import { useHistory } from 'react-router'
 import useOrderAttributesLoad from '../../../hooks/load/useOrderAttributesLoad'
@@ -68,8 +68,8 @@ const useOrderView = (): UseOrderViewReturn => {
             { label: 'Статус', value: order.status?.name ?? '' },
             { label: 'Клиент', value: mapCustomerText(customer) },
             { label: 'Имя', value: order.name },
-            { label: 'Дата начала', value: toDate(order.startDateTime) },
-            { label: 'Дата окончания', value: toDate(order.endDateTime) },
+            { label: 'Дата начала', value: toLocaleDate(order.startDateTime) },
+            { label: 'Дата окончания', value: toLocaleDate(order.endDateTime) },
             { label: 'Сумма', value: order.sum.toString() },
             { label: 'Сумма без скидки', value: order.sumWithoutDiscount.toString() },
             { label: 'Атрибуты', value: mapAttributes() },

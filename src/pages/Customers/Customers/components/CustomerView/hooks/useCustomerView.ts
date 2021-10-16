@@ -5,7 +5,7 @@ import CustomerContext from '../../../contexts/CustomerContext/CustomerContext'
 import CustomersActionsContext from '../../../contexts/CustomersActionsContext/CustomersActionsContext'
 import { ViewDataProps } from '../../../../../../components/common/grids/View/View'
 import { joinAttributes } from '../../../mappers/customerAttributesMapper'
-import { toDate } from '../../../../../../utils/dateTime/dateTimeUtils'
+import { toLocaleDate } from '../../../../../../utils/dateTime/dateTimeUtils'
 import useCustomerAttributesLoad from '../../../hooks/load/useCustomerAttributesLoad'
 import { useHistory } from 'react-router'
 
@@ -54,7 +54,7 @@ const useCustomerView = (): UseCustomerViewReturn => {
             { label: 'Отчество', value: customer.patronymic },
             { label: 'Телефон', value: customer.phone },
             { label: 'Email', value: customer.email },
-            { label: 'Дата рождения', value: toDate(customer.birthDate) },
+            { label: 'Дата рождения', value: toLocaleDate(customer.birthDate) },
             { label: 'Атрибуты', value: mapAttributes() },
             { label: 'Удален', value: customer.isDeleted ? 'Да' : 'Нет' }
         ],
