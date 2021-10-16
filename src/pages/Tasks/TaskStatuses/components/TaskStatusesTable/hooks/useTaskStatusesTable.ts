@@ -32,7 +32,7 @@ const useTaskStatusesTable = (): UseTaskStatusesTableReturn => {
         }
 
         const fileName = getFileNameWithDateTime('Статусы задачи')
-        const headers = ['Идентификатор', 'Наименование', 'Удален', 'Конечный', 'Создан', 'Изменен']
+        const headers = ['Идентификатор', 'Наименование', 'Конечный', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...statuses])
 
         downloadAsCsv(fileName, csv)
