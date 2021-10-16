@@ -2,6 +2,7 @@ import CustomerAttributeType from '../../api/customers/models/CustomerAttributeT
 import { DropdownItemProps } from '../components/common/fields/Dropdown/Dropdown'
 import OrderAttributeType from '../../api/orders/models/OrderAttributeType'
 import ProductAttributeType from '../../api/products/models/ProductAttributeType'
+import TaskAttributeType from '../../api/tasks/models/TaskAttributeType'
 
 // TODO: Move to l10n
 const AttributeTypeWithNames: { [key in string]: string } = {
@@ -41,6 +42,8 @@ export function getAttributeTypesAsSelectOptions(): DropdownItemProps[] {
     return Object.entries(AttributeTypeWithNames).map(x => ({ value: parseInt(x[0]), text: x[1] } as DropdownItemProps))
 }
 
-export function getAttributeTypeName(type?: ProductAttributeType | CustomerAttributeType | OrderAttributeType): string {
+export function getAttributeTypeName(
+    type?: ProductAttributeType | CustomerAttributeType | OrderAttributeType | TaskAttributeType
+): string {
     return type ? AttributeTypeWithNames[type] : ''
 }
