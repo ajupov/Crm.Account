@@ -31,7 +31,7 @@ const useTaskAttributesTable = (): UseTaskAttributesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('Атрибуты заказа')
+        const fileName = getFileNameWithDateTime('Атрибуты задачи')
         const headers = ['Идентификатор', 'Тип', 'Наименование', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...attributes])
 

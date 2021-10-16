@@ -30,7 +30,7 @@ const useTaskAttributeChangesTable = (): UseTaskAttributeChangesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('История изменений атрибутов заказа')
+        const fileName = getFileNameWithDateTime('История изменений атрибутов задачи')
         const headers = ['Идентификатор', 'Идентификатор атрибута', 'Дата и время', 'Старое значение', 'Новое значение']
         const csv = convertObjectToCSV([headers, ...changes])
 

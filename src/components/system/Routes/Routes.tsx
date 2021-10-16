@@ -71,7 +71,26 @@ import ProductView from '../../../pages/Products/Products/components/ProductView
 import Products from '../../../pages/Products/Products/Products'
 import ProductsRoutes from '../../../pages/Products/Products/routes/ProductsRoutes'
 import Settings from '../../../pages/Settings/Settings'
+import TaskAttributeChanges from '../../../pages/Tasks/TaskAttributes/components/TaskAttributeChanges/TaskAttributeChanges'
+import TaskAttributeCreate from '../../../pages/Tasks/TaskAttributes/components/TaskAttributeCreate/TaskAttributeCreate'
+import TaskAttributeEdit from '../../../pages/Tasks/TaskAttributes/components/TaskAttributeEdit/TaskAttributeEdit'
+import TaskAttributeView from '../../../pages/Tasks/TaskAttributes/components/TaskAttributeView/TaskAttributeView'
+import TaskAttributes from '../../../pages/Tasks/TaskAttributes/TaskAttributes'
+import TaskAttributesRoutes from '../../../pages/Tasks/TaskAttributes/routes/TaskAttributesRoutes'
+import TaskStatusChanges from '../../../pages/Tasks/TaskStatuses/components/TaskStatusChanges/TaskStatusChanges'
+import TaskStatusCreate from '../../../pages/Tasks/TaskStatuses/components/TaskStatusCreate/TaskStatusCreate'
+import TaskStatusEdit from '../../../pages/Tasks/TaskStatuses/components/TaskStatusEdit/TaskStatusEdit'
+import TaskStatusView from '../../../pages/Tasks/TaskStatuses/components/TaskStatusView/TaskStatusView'
+import TaskStatuses from '../../../pages/Tasks/TaskStatuses/TaskStatuses'
+import TaskStatusesRoutes from '../../../pages/Tasks/TaskStatuses/routes/TaskStatusesRoutes'
+import TaskTypeChanges from '../../../pages/Tasks/TaskTypes/components/TaskTypeChanges/TaskTypeChanges'
+import TaskTypeCreate from '../../../pages/Tasks/TaskTypes/components/TaskTypeCreate/TaskTypeCreate'
+import TaskTypeEdit from '../../../pages/Tasks/TaskTypes/components/TaskTypeEdit/TaskTypeEdit'
+import TaskTypeView from '../../../pages/Tasks/TaskTypes/components/TaskTypeView/TaskTypeView'
+import TaskTypes from '../../../pages/Tasks/TaskTypes/TaskTypes'
+import TaskTypesRoutes from '../../../pages/Tasks/TaskTypes/routes/TaskTypesRoutes'
 import Tasks from '../../../pages/Tasks/Tasks/Tasks'
+import TasksRoutes from '../../../pages/Tasks/Tasks/routes/TasksRoutes'
 
 const Routes: FC = () => {
     const withId = (route: string): string => `${route}/:id`
@@ -80,7 +99,6 @@ const Routes: FC = () => {
         <Switch>
             <Route path="/" exact component={Dashboard} />
             <Route path="/calendar" component={Calendar} />
-            <Route path="/tasks" component={Tasks} />
             <Route path="/settings" component={Settings} />
 
             {/*  */}
@@ -108,6 +126,32 @@ const Routes: FC = () => {
             <Route path={withId(OrderAttributesRoutes.View)} exact component={OrderAttributeView} />
             <Route path={withId(OrderAttributesRoutes.Edit)} exact component={OrderAttributeEdit} />
             <Route path={withId(OrderAttributesRoutes.Changes)} exact component={OrderAttributeChanges} />
+
+            {/*  */}
+
+            <Route path={TasksRoutes.Index} exact component={Tasks} />
+            {/* <Route path={TasksRoutes.Create} exact component={TaskCreate} /> */}
+            {/* <Route path={withId(TasksRoutes.View)} exact component={TaskView} /> */}
+            {/* <Route path={withId(TasksRoutes.Edit)} exact component={TaskEdit} /> */}
+            {/* <Route path={withId(TasksRoutes.Changes)} exact component={TaskChanges} /> */}
+
+            <Route path={TaskStatusesRoutes.Index} exact component={TaskStatuses} />
+            <Route path={TaskStatusesRoutes.Create} exact component={TaskStatusCreate} />
+            <Route path={withId(TaskStatusesRoutes.View)} exact component={TaskStatusView} />
+            <Route path={withId(TaskStatusesRoutes.Edit)} exact component={TaskStatusEdit} />
+            <Route path={withId(TaskStatusesRoutes.Changes)} exact component={TaskStatusChanges} />
+
+            <Route path={TaskTypesRoutes.Index} exact component={TaskTypes} />
+            <Route path={TaskTypesRoutes.Create} exact component={TaskTypeCreate} />
+            <Route path={withId(TaskTypesRoutes.View)} exact component={TaskTypeView} />
+            <Route path={withId(TaskTypesRoutes.Edit)} exact component={TaskTypeEdit} />
+            <Route path={withId(TaskTypesRoutes.Changes)} exact component={TaskTypeChanges} />
+
+            <Route path={TaskAttributesRoutes.Index} exact component={TaskAttributes} />
+            <Route path={TaskAttributesRoutes.Create} exact component={TaskAttributeCreate} />
+            <Route path={withId(TaskAttributesRoutes.View)} exact component={TaskAttributeView} />
+            <Route path={withId(TaskAttributesRoutes.Edit)} exact component={TaskAttributeEdit} />
+            <Route path={withId(TaskAttributesRoutes.Changes)} exact component={TaskAttributeChanges} />
 
             {/*  */}
 

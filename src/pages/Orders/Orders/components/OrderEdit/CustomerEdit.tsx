@@ -8,7 +8,7 @@ import { setPageTitle } from '../../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
 const OrderEdit: FC = () => {
-    const title = 'Изменение заказа'
+    const title = 'Изменение клиента'
 
     useEffect(() => setPageTitle(title), [])
 

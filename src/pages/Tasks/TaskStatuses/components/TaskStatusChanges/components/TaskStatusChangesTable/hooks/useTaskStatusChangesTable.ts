@@ -29,7 +29,7 @@ const useTaskStatusChangesTable = (): UseTaskStatusChangesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('История изменений статусов заказа')
+        const fileName = getFileNameWithDateTime('История изменений статусов задачи')
         const headers = ['Идентификатор', 'Идентификатор статуса', 'Дата и время', 'Старое значение', 'Новое значение']
         const csv = convertObjectToCSV([headers, ...changes])
 

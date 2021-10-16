@@ -30,7 +30,7 @@ const useTaskTypesTable = (): UseTaskTypesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('Типы заказа')
+        const fileName = getFileNameWithDateTime('Типы задачи')
         const headers = ['Идентификатор', 'Наименование', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...types])
 
