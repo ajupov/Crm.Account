@@ -16,6 +16,7 @@ const Tasks: FC = () => {
     return (
         <TaskStatusesContextProvider>
             <TasksContextProvider>
+                <h2>Этот раздел в настоящий момент находится в разработке</h2>
                 <Page title={title} useFullHeight firstSidebar={<TasksMenu />}>
                     <TasksBoard />
                 </Page>

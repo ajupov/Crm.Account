@@ -27,6 +27,7 @@ const Calendar: FC = () => {
     return (
         <>
             <h1>Календарь</h1>
+            <h2>Этот раздел в настоящий момент находится в разработке</h2>
             <div style={{ width: 'calc(100% - 155px)' }}>
                 <BigCalendar localizer={localizer} events={[]} startAccessor="start" endAccessor="end" />
             </div>
