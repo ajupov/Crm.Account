@@ -249,6 +249,7 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                     {
                         type: 'dropdown',
                         label: 'Тип',
+                        width: '5',
                         value: state.order.typeId,
                         options: typesAsOptions,
                         onChange: onChangeTypeId
@@ -256,11 +257,32 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                     {
                         type: 'dropdown',
                         label: 'Источник',
+                        width: '5',
                         value: state.order.statusId,
                         options: statusesAsOptions,
                         onChange: onChangeStatusId
+                    },
+                    {
+                        type: 'date',
+                        label: 'Дата начала',
+                        width: '3',
+                        value: state.order.startDateTime,
+                        onChange: onChangeStartDateTime
+                    },
+                    {
+                        type: 'date',
+                        label: 'Дата окончания',
+                        width: '3',
+                        value: state.order.endDateTime,
+                        onChange: onChangeEndDateTime
                     }
                 ]
+            },
+            {
+                type: 'text',
+                label: 'Название',
+                value: state.order.name,
+                onChange: onChangeName
             },
             {
                 type: 'autocomplete',
@@ -271,24 +293,7 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                 options: customersAsOptions,
                 onChange: onChangeCustomerId
             },
-            {
-                type: 'text',
-                label: 'Название',
-                value: state.order.name,
-                onChange: onChangeName
-            },
-            {
-                type: 'date',
-                label: 'Дата начала',
-                value: state.order.startDateTime,
-                onChange: onChangeStartDateTime
-            },
-            {
-                type: 'date',
-                label: 'Дата окончания',
-                value: state.order.endDateTime,
-                onChange: onChangeEndDateTime
-            },
+
             {
                 type: 'collection',
                 label: 'Позиции',
