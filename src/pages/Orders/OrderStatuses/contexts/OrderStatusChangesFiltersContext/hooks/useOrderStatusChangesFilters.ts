@@ -62,7 +62,7 @@ const useOrderStatusChangesFilters = (): OrderStatusChangesFiltersState => {
         () => [
             {
                 type: 'date',
-                topLabel: 'Дата создания',
+                label: 'Дата создания',
                 value1: minCreateDate,
                 onChange1: onChangeMinCreateDate,
                 value2: maxCreateDate,

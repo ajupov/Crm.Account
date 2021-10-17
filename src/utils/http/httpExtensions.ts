@@ -50,8 +50,8 @@ export async function ensureSuccessStatusCode(response: Response): Promise<void>
 
             let result = ''
 
-            for (const iterator of Object.entries(responseText.errors)) {
-                result += (iterator[0] ? iterator[0] + ': ' : '') + iterator[1] + '\r\n'
+            for (const error of Object.entries(responseText.errors)) {
+                result += (error[0] ? error[0] + ': ' : '') + error[1] + '\r\n'
             }
 
             // eslint-disable-next-line no-alert

@@ -38,7 +38,7 @@ const useOrders = (): OrdersState => {
                 delete v.responsibleUserId
                 delete v.type
                 delete v.status
-                delete v.positions
+                delete v.items
                 delete v.attributeLinks
             })
         }

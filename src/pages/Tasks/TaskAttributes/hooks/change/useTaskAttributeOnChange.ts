@@ -5,13 +5,13 @@ import {
 } from '../../../../../helpers/entityAttributeTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
+import { FormFieldProps } from '../../../../../components/common/forms/FormField'
 import TaskAttributeContext from '../../contexts/TaskAttributeContext/TaskAttributeContext'
 import TaskAttributeType from '../../../../../../api/tasks/models/TaskAttributeType'
 import { useHistory } from 'react-router'
 
 interface UseTaskAttributeOnChangeReturn {
-    fields: CreateFormFieldProps[]
+    fields: FormFieldProps[]
     isConfirmEnabled: boolean
     onClickConfirmCreate: () => void
     onClickConfirmUpdate: () => void
@@ -60,7 +60,7 @@ const useTaskAttributeOnChange = (): UseTaskAttributeOnChangeReturn => {
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const fields: CreateFormFieldProps[] = useMemo(
+    const fields: FormFieldProps[] = useMemo(
         () => [
             {
                 type: 'dropdown',
@@ -74,7 +74,7 @@ const useTaskAttributeOnChange = (): UseTaskAttributeOnChangeReturn => {
             {
                 type: 'text',
                 required: true,
-                topLabel: 'Наименование',
+                label: 'Наименование',
                 value: state.attribute.key,
                 onChange: onChangeKey
             },

@@ -1,14 +1,14 @@
 import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
 import CustomerContext from '../../contexts/CustomerContext/CustomerContext'
+import { FormFieldProps } from '../../../../../components/common/forms/FormField'
 import useCustomerAttributesLoad from '../load/useCustomerAttributesLoad'
 import useCustomerSourcesLoad from '../load/useCustomerSourcesLoad'
 import { useHistory } from 'react-router'
 
 interface UseCustomerOnChangeReturn {
-    fields: CreateFormFieldProps[]
+    fields: FormFieldProps[]
     isConfirmEnabled: boolean
     onClickConfirmCreate: () => void
     onClickConfirmUpdate: () => void
@@ -154,7 +154,7 @@ const useCustomerOnChange = (): UseCustomerOnChangeReturn => {
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const fields: CreateFormFieldProps[] = useMemo(
+    const fields: FormFieldProps[] = useMemo(
         () => [
             {
                 type: 'dropdown',
@@ -165,37 +165,37 @@ const useCustomerOnChange = (): UseCustomerOnChangeReturn => {
             },
             {
                 type: 'text',
-                topLabel: 'Фамилия',
+                label: 'Фамилия',
                 value: state.customer.surname,
                 onChange: onChangeSurname
             },
             {
                 type: 'text',
-                topLabel: 'Имя',
+                label: 'Имя',
                 value: state.customer.name,
                 onChange: onChangeName
             },
             {
                 type: 'text',
-                topLabel: 'Отчество',
+                label: 'Отчество',
                 value: state.customer.patronymic,
                 onChange: onChangePatronymic
             },
             {
                 type: 'text',
-                topLabel: 'Телефон',
+                label: 'Телефон',
                 value: state.customer.phone,
                 onChange: onChangePhone
             },
             {
                 type: 'text',
-                topLabel: 'Email',
+                label: 'Email',
                 value: state.customer.email,
                 onChange: onChangeEmail
             },
             {
                 type: 'date',
-                topLabel: 'Дата рождения',
+                label: 'Дата рождения',
                 value: state.customer.birthDate,
                 onChange: onChangeBirthDate
             },

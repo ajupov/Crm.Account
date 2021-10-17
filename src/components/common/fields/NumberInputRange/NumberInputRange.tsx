@@ -1,10 +1,10 @@
-import { Form, Input, InputOnChangeData } from 'semantic-ui-react'
+import { Form, Input, InputOnChangeData, SemanticWIDTHS } from 'semantic-ui-react'
 import React, { FC } from 'react'
 
 export interface NumberInputRangeProps {
     type: 'number'
     required?: boolean
-    topLabel?: string
+    label?: string
     label1?: string
     label2?: string
     value1?: number
@@ -12,6 +12,7 @@ export interface NumberInputRangeProps {
     precession?: number
     min?: number
     max?: number
+    width?: SemanticWIDTHS
     onChange1?: (_: any, data: InputOnChangeData) => void
     onChange2?: (_: any, data: InputOnChangeData) => void
 }
@@ -21,7 +22,7 @@ const MaxIntValue = 2147483647
 // TODO: Move to l10n
 const NumberInputRange: FC<NumberInputRangeProps> = ({
     required,
-    topLabel,
+    label,
     label1,
     label2,
     value1,
@@ -33,7 +34,7 @@ const NumberInputRange: FC<NumberInputRangeProps> = ({
     onChange2
 }) => (
     <Form.Field required={required ?? false}>
-        <label>{topLabel}:</label>
+        <label>{label}:</label>
         <Input
             type="number"
             required={required}

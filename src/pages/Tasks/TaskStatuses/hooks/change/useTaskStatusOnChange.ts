@@ -1,12 +1,12 @@
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
+import { FormFieldProps } from '../../../../../components/common/forms/FormField'
 import { InputOnChangeData } from 'semantic-ui-react'
 import TaskStatusContext from '../../contexts/TaskStatusContext/TaskStatusContext'
 import { useHistory } from 'react-router'
 
 interface UseTaskStatusOnChangeReturn {
-    fields: CreateFormFieldProps[]
+    fields: FormFieldProps[]
     isConfirmEnabled: boolean
     onClickConfirmCreate: () => void
     onClickConfirmUpdate: () => void
@@ -55,12 +55,12 @@ const useTaskStatusOnChange = (): UseTaskStatusOnChangeReturn => {
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const fields: CreateFormFieldProps[] = useMemo(
+    const fields: FormFieldProps[] = useMemo(
         () => [
             {
                 type: 'text',
                 required: true,
-                topLabel: 'Наименование',
+                label: 'Наименование',
                 value: state.status.name,
                 onChange: onChangeName
             },

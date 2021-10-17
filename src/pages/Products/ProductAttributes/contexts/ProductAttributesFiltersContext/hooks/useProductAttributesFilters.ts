@@ -117,13 +117,13 @@ const useProductAttributesFilters = (): ProductAttributesFiltersState => {
             },
             {
                 type: 'text',
-                topLabel: 'Наименование',
+                label: 'Наименование',
                 value: key,
                 onChange: onChangeKey
             },
             {
                 type: 'date',
-                topLabel: 'Дата создания',
+                label: 'Дата создания',
                 value1: minCreateDate,
                 onChange1: onChangeMinCreateDate,
                 value2: maxCreateDate,
@@ -131,7 +131,7 @@ const useProductAttributesFilters = (): ProductAttributesFiltersState => {
             },
             {
                 type: 'date',
-                topLabel: 'Дата изменения',
+                label: 'Дата изменения',
                 value1: minModifyDate,
                 onChange1: onChangeMinModifyDate,
                 value2: maxModifyDate,
@@ -139,7 +139,7 @@ const useProductAttributesFilters = (): ProductAttributesFiltersState => {
             },
             {
                 type: 'radio',
-                topLabel: 'Удаленность',
+                label: 'Удаленность',
                 label1: 'Все',
                 value1: void 0,
                 checked1: isDeleted === void 0,

@@ -21,6 +21,6 @@ export default interface Order {
     modifyDateTime?: string
     type?: OrderType
     status?: OrderStatus
-    positions?: OrderItem[]
+    items?: OrderItem[]
     attributeLinks?: OrderAttributeLink[]
 }

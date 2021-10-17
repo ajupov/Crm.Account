@@ -258,13 +258,13 @@ const useOrdersFilters = (): OrdersFiltersState => {
             },
             {
                 type: 'text',
-                topLabel: 'Имя',
+                label: 'Имя',
                 value: name,
                 onChange: onChangeName
             },
             {
                 type: 'date',
-                topLabel: 'Дата начала',
+                label: 'Дата начала',
                 value1: minStartDateTime,
                 onChange1: onChangeMinStartDateTime,
                 value2: maxStartDateTime,
@@ -272,7 +272,7 @@ const useOrdersFilters = (): OrdersFiltersState => {
             },
             {
                 type: 'date',
-                topLabel: 'Дата окончания',
+                label: 'Дата окончания',
                 value1: minEndDateTime,
                 onChange1: onChangeMinEndDateTime,
                 value2: maxEndDateTime,
@@ -280,7 +280,7 @@ const useOrdersFilters = (): OrdersFiltersState => {
             },
             {
                 type: 'number',
-                topLabel: 'Стоимость',
+                label: 'Стоимость',
                 value1: minSum,
                 onChange1: onChangeMinSum,
                 value2: maxSum,
@@ -288,7 +288,7 @@ const useOrdersFilters = (): OrdersFiltersState => {
             },
             {
                 type: 'number',
-                topLabel: 'Стоимость без скидки',
+                label: 'Стоимость без скидки',
                 value1: minSumWithoutDiscount,
                 onChange1: onChangeMinSumWithoutDiscount,
                 value2: maxSumWithoutDiscount,
@@ -304,7 +304,7 @@ const useOrdersFilters = (): OrdersFiltersState => {
             },
             {
                 type: 'date',
-                topLabel: 'Дата создания',
+                label: 'Дата создания',
                 value1: minCreateDate,
                 onChange1: onChangeMinCreateDate,
                 value2: maxCreateDate,
@@ -312,7 +312,7 @@ const useOrdersFilters = (): OrdersFiltersState => {
             },
             {
                 type: 'date',
-                topLabel: 'Дата изменения',
+                label: 'Дата изменения',
                 value1: minModifyDate,
                 onChange1: onChangeMinModifyDate,
                 value2: maxModifyDate,
@@ -320,7 +320,7 @@ const useOrdersFilters = (): OrdersFiltersState => {
             },
             {
                 type: 'radio',
-                topLabel: 'Удаленность',
+                label: 'Удаленность',
                 label1: 'Все',
                 value1: void 0,
                 checked1: isDeleted === void 0,

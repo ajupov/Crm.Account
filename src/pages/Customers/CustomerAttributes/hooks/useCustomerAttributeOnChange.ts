@@ -2,13 +2,13 @@ import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import { getAttributeTypeName, getAttributeTypesAsSelectOptions } from '../../../../helpers/entityAttributeTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { CreateFormFieldProps } from '../../../../components/common/forms/CreateForm/CreateForm'
 import CustomerAttributeContext from '../contexts/CustomerAttributeContext/CustomerAttributeContext'
 import CustomerAttributeType from '../../../../../api/customers/models/CustomerAttributeType'
+import { FormFieldProps } from '../../../../components/common/forms/FormField'
 import { useHistory } from 'react-router'
 
 interface UseCustomerAttributeOnChangeReturn {
-    fields: CreateFormFieldProps[]
+    fields: FormFieldProps[]
     isConfirmEnabled: boolean
     onClickConfirmCreate: () => void
     onClickConfirmUpdate: () => void
@@ -57,7 +57,7 @@ const useCustomerAttributeOnChange = (): UseCustomerAttributeOnChangeReturn => {
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const fields: CreateFormFieldProps[] = useMemo(
+    const fields: FormFieldProps[] = useMemo(
         () => [
             {
                 type: 'dropdown',
@@ -71,7 +71,7 @@ const useCustomerAttributeOnChange = (): UseCustomerAttributeOnChangeReturn => {
             {
                 type: 'text',
                 required: true,
-                topLabel: 'Наименование',
+                label: 'Наименование',
                 value: state.attribute.key,
                 onChange: onChangeKey
             },

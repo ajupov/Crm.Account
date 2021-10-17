@@ -250,19 +250,19 @@ const useProductsFilters = (): ProductsFiltersState => {
             },
             {
                 type: 'text',
-                topLabel: 'Наименование',
+                label: 'Наименование',
                 value: name,
                 onChange: onChangeName
             },
             {
                 type: 'text',
-                topLabel: 'Артикул',
+                label: 'Артикул',
                 value: vendorCode,
                 onChange: onChangeVendorCode
             },
             {
                 type: 'number',
-                topLabel: 'Цена',
+                label: 'Цена',
                 value1: minPrice,
                 onChange1: onChangeMinPrice,
                 value2: maxPrice,
@@ -278,7 +278,7 @@ const useProductsFilters = (): ProductsFiltersState => {
             },
             {
                 type: 'radio',
-                topLabel: 'Черновик',
+                label: 'Черновик',
                 label1: 'Да',
                 value1: 'true',
                 checked1: isHidden === true,
@@ -289,7 +289,7 @@ const useProductsFilters = (): ProductsFiltersState => {
             },
             {
                 type: 'date',
-                topLabel: 'Дата создания',
+                label: 'Дата создания',
                 value1: minCreateDate,
                 onChange1: onChangeMinCreateDate,
                 value2: maxCreateDate,
@@ -297,7 +297,7 @@ const useProductsFilters = (): ProductsFiltersState => {
             },
             {
                 type: 'date',
-                topLabel: 'Дата изменения',
+                label: 'Дата изменения',
                 value1: minModifyDate,
                 onChange1: onChangeMinModifyDate,
                 value2: maxModifyDate,
@@ -305,7 +305,7 @@ const useProductsFilters = (): ProductsFiltersState => {
             },
             {
                 type: 'radio',
-                topLabel: 'Удаленность',
+                label: 'Удаленность',
                 label1: 'Все',
                 value1: void 0,
                 checked1: isDeleted === void 0,

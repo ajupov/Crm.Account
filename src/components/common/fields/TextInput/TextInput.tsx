@@ -1,18 +1,19 @@
-import { Form, Input, InputOnChangeData } from 'semantic-ui-react'
+import { Form, Input, InputOnChangeData, SemanticWIDTHS } from 'semantic-ui-react'
 import React, { FC } from 'react'
 
 export interface TextInputProps {
     type: 'text'
     required?: boolean
-    topLabel?: string
+    label?: string
     value?: string
+    width?: SemanticWIDTHS
     onChange?: (_: any, data: InputOnChangeData) => void
 }
 
-const TextInput: FC<TextInputProps> = ({ required, topLabel, value, onChange }) => (
+const TextInput: FC<TextInputProps> = ({ required, label, value, onChange }) => (
     <Form.Field required={required ?? false}>
-        <label>{topLabel}:</label>
-        <Input type="text" required={required} placeholder={topLabel} value={value ?? ''} onChange={onChange} fluid />
+        <label>{label}:</label>
+        <Input type="text" required={required} placeholder={label} value={value ?? ''} onChange={onChange} fluid />
     </Form.Field>
 )
 

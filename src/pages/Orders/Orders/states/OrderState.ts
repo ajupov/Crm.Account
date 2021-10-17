@@ -30,7 +30,7 @@ export const orderInitialState: OrderState = {
         modifyDateTime: void 0,
         type: void 0,
         status: void 0,
-        positions: [],
+        items: [],
         attributeLinks: []
     },
     attributes: [],

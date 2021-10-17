@@ -1,10 +1,17 @@
-import { Form, Checkbox as SemanticCheckbox, CheckboxProps as SemanticCheckboxProps } from 'semantic-ui-react'
+import {
+    Form,
+    Checkbox as SemanticCheckbox,
+    CheckboxProps as SemanticCheckboxProps,
+    SemanticWIDTHS
+} from 'semantic-ui-react'
 import React, { FC } from 'react'
 
 export interface CheckboxProps {
     type: 'checkbox'
+    required?: boolean
     label?: string
     checked: boolean
+    width?: SemanticWIDTHS
     onChange: (_: any, data: SemanticCheckboxProps) => void
 }
 

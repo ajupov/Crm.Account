@@ -2,7 +2,7 @@ import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import { getProductTypeName, getProductTypesAsSelectOptions } from '../../helpers/productTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
+import { FormFieldProps } from '../../../../../components/common/forms/FormField'
 import ProductContext from '../../contexts/ProductContext/ProductContext'
 import ProductType from '../../../../../../api/products/models/ProductType'
 import { useHistory } from 'react-router'
@@ -13,7 +13,7 @@ import useProductStatusesLoad from '../load/useProductStatusesLoad'
 import useProductsAutocomplete from '../autocomplete/useProductsAutocomplete'
 
 interface UseProductOnChangeReturn {
-    fields: CreateFormFieldProps[]
+    fields: FormFieldProps[]
     isConfirmEnabled: boolean
     onClickConfirmCreate: () => void
     onClickConfirmUpdate: () => void
@@ -170,7 +170,7 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const fields: CreateFormFieldProps[] = useMemo(
+    const fields: FormFieldProps[] = useMemo(
         () => [
             {
                 type: 'autocomplete',
@@ -209,19 +209,19 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
             {
                 type: 'text',
                 required: true,
-                topLabel: 'Наименование',
+                label: 'Наименование',
                 value: state.product.name,
                 onChange: onChangeName
             },
             {
                 type: 'text',
-                topLabel: 'Артикул',
+                label: 'Артикул',
                 value: state.product.vendorCode,
                 onChange: onChangeVendorCode
             },
             {
                 type: 'number',
-                topLabel: 'Цена',
+                label: 'Цена',
                 value: state.product.price,
                 onChange: onChangePrice
             },

@@ -99,13 +99,13 @@ const useProductCategoriesFilters = (): ProductCategoriesFiltersState => {
         () => [
             {
                 type: 'text',
-                topLabel: 'Наименование',
+                label: 'Наименование',
                 value: name,
                 onChange: onChangeName
             },
             {
                 type: 'date',
-                topLabel: 'Дата создания',
+                label: 'Дата создания',
                 value1: minCreateDate,
                 onChange1: onChangeMinCreateDate,
                 value2: maxCreateDate,
@@ -113,7 +113,7 @@ const useProductCategoriesFilters = (): ProductCategoriesFiltersState => {
             },
             {
                 type: 'date',
-                topLabel: 'Дата изменения',
+                label: 'Дата изменения',
                 value1: minModifyDate,
                 onChange1: onChangeMinModifyDate,
                 value2: maxModifyDate,
@@ -121,7 +121,7 @@ const useProductCategoriesFilters = (): ProductCategoriesFiltersState => {
             },
             {
                 type: 'radio',
-                topLabel: 'Удаленность',
+                label: 'Удаленность',
                 label1: 'Все',
                 value1: void 0,
                 checked1: isDeleted === void 0,

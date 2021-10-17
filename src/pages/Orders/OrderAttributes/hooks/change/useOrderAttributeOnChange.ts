@@ -5,13 +5,13 @@ import {
 } from '../../../../../helpers/entityAttributeTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
+import { FormFieldProps } from '../../../../../components/common/forms/FormField'
 import OrderAttributeContext from '../../contexts/OrderAttributeContext/OrderAttributeContext'
 import OrderAttributeType from '../../../../../../api/orders/models/OrderAttributeType'
 import { useHistory } from 'react-router'
 
 interface UseOrderAttributeOnChangeReturn {
-    fields: CreateFormFieldProps[]
+    fields: FormFieldProps[]
     isConfirmEnabled: boolean
     onClickConfirmCreate: () => void
     onClickConfirmUpdate: () => void
@@ -60,7 +60,7 @@ const useOrderAttributeOnChange = (): UseOrderAttributeOnChangeReturn => {
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const fields: CreateFormFieldProps[] = useMemo(
+    const fields: FormFieldProps[] = useMemo(
         () => [
             {
                 type: 'dropdown',
@@ -74,7 +74,7 @@ const useOrderAttributeOnChange = (): UseOrderAttributeOnChangeReturn => {
             {
                 type: 'text',
                 required: true,
-                topLabel: 'Наименование',
+                label: 'Наименование',
                 value: state.attribute.key,
                 onChange: onChangeKey
             },

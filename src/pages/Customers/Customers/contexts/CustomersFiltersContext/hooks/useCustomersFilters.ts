@@ -199,37 +199,37 @@ const useCustomersFilters = (): CustomersFiltersState => {
             },
             {
                 type: 'text',
-                topLabel: 'Фамилия',
+                label: 'Фамилия',
                 value: surname,
                 onChange: onChangeSurname
             },
             {
                 type: 'text',
-                topLabel: 'Имя',
+                label: 'Имя',
                 value: name,
                 onChange: onChangeName
             },
             {
                 type: 'text',
-                topLabel: 'Отчество',
+                label: 'Отчество',
                 value: patronymic,
                 onChange: onChangePatronymic
             },
             {
                 type: 'text',
-                topLabel: 'Телефон',
+                label: 'Телефон',
                 value: phone,
                 onChange: onChangePhone
             },
             {
                 type: 'text',
-                topLabel: 'Email',
+                label: 'Email',
                 value: email,
                 onChange: onChangeEmail
             },
             {
                 type: 'date',
-                topLabel: 'Дата рождения',
+                label: 'Дата рождения',
                 value1: minBirthDate,
                 onChange1: onChangeMinBirthDate,
                 value2: maxBirthDate,
@@ -245,7 +245,7 @@ const useCustomersFilters = (): CustomersFiltersState => {
             },
             {
                 type: 'date',
-                topLabel: 'Дата создания',
+                label: 'Дата создания',
                 value1: minCreateDate,
                 onChange1: onChangeMinCreateDate,
                 value2: maxCreateDate,
@@ -253,7 +253,7 @@ const useCustomersFilters = (): CustomersFiltersState => {
             },
             {
                 type: 'date',
-                topLabel: 'Дата изменения',
+                label: 'Дата изменения',
                 value1: minModifyDate,
                 onChange1: onChangeMinModifyDate,
                 value2: maxModifyDate,
@@ -261,7 +261,7 @@ const useCustomersFilters = (): CustomersFiltersState => {
             },
             {
                 type: 'radio',
-                topLabel: 'Удаленность',
+                label: 'Удаленность',
                 label1: 'Все',
                 value1: void 0,
                 checked1: isDeleted === void 0,

@@ -1,14 +1,15 @@
-import { Form, Input, InputOnChangeData } from 'semantic-ui-react'
+import { Form, Input, InputOnChangeData, SemanticWIDTHS } from 'semantic-ui-react'
 import React, { FC } from 'react'
 
 export interface DateInputRangeProps {
     type: 'date'
     required?: boolean
-    topLabel?: string
+    label?: string
     label1?: string
     label2?: string
     value1?: string
     value2?: string
+    width?: SemanticWIDTHS
     onChange1?: (_: any, data: InputOnChangeData) => void
     onChange2?: (_: any, data: InputOnChangeData) => void
 }
@@ -16,7 +17,7 @@ export interface DateInputRangeProps {
 // TODO: Move to l10n
 const DateInputRange: FC<DateInputRangeProps> = ({
     required,
-    topLabel,
+    label,
     label1,
     label2,
     value1,
@@ -25,7 +26,7 @@ const DateInputRange: FC<DateInputRangeProps> = ({
     onChange2
 }) => (
     <Form.Field required={required ?? false}>
-        <label>{topLabel}:</label>
+        <label>{label}:</label>
         <Input
             type="date"
             required={required}

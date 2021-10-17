@@ -2,14 +2,14 @@ import AttributeLinks, {
     AttributeLinksItemProps,
     AttributeLinksOptionProps
 } from '../../collections/AttributeLinks/AttributeLinks'
+import { Form, SemanticWIDTHS } from 'semantic-ui-react'
 import React, { FC } from 'react'
-
-import { Form } from 'semantic-ui-react'
 
 export interface AttributesLinksGroupProps {
     type: 'attributes'
     required?: boolean
     label?: string
+    width?: SemanticWIDTHS
     options: AttributeLinksOptionProps[]
     items?: AttributeLinksItemProps[]
     onClickAddItem: () => void

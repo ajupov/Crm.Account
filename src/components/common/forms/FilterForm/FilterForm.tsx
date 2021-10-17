@@ -30,13 +30,13 @@ const FilterForm: FC<FilterFormProps> = ({ fields, isApplyEnabled, onApply, isRe
             fields.map(x => {
                 switch (x.type) {
                     case 'text':
-                        return <TextInput {...x} key={x.topLabel} />
+                        return <TextInput {...x} key={x.label} />
                     case 'number':
-                        return <NumberInputRange {...x} key={x.topLabel} />
+                        return <NumberInputRange {...x} key={x.label} />
                     case 'date':
-                        return <DateInputRange {...x} key={x.topLabel} />
+                        return <DateInputRange {...x} key={x.label} />
                     case 'radio':
-                        return <RadioGroup {...x} key={x.topLabel ?? x.label1} />
+                        return <RadioGroup {...x} key={x.label ?? x.label1} />
                     case 'dropdown':
                         return <Dropdown {...x} key={x.label} />
                     case 'autocomplete':

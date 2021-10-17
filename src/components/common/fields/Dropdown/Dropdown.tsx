@@ -1,4 +1,4 @@
-import { Form, Select, DropdownProps as SemanticDropdownProps } from 'semantic-ui-react'
+import { Form, Select, DropdownProps as SemanticDropdownProps, SemanticWIDTHS } from 'semantic-ui-react'
 import React, { FC } from 'react'
 
 export interface DropdownItemProps {
@@ -13,6 +13,7 @@ export interface DropdownProps {
     label: string
     value?: number | string | (number | string)[]
     text?: string
+    width?: SemanticWIDTHS
     options: DropdownItemProps[]
     onChange: (_: any, data: SemanticDropdownProps) => void
 }

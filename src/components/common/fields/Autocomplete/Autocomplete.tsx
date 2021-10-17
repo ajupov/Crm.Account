@@ -1,4 +1,4 @@
-import { Dropdown, DropdownOnSearchChangeData, DropdownProps, Form } from 'semantic-ui-react'
+import { Dropdown, DropdownOnSearchChangeData, DropdownProps, Form, SemanticWIDTHS } from 'semantic-ui-react'
 import React, { FC, useCallback, useState } from 'react'
 
 export interface AutocompleteItemProps {
@@ -10,16 +10,38 @@ export interface AutocompleteProps {
     type: 'autocomplete'
     required?: boolean
     multiple?: boolean
+    index?: number
     label: string
     value?: number | string | (number | string)[]
     text?: string
+    width?: SemanticWIDTHS
     options: AutocompleteItemProps[]
     load: (value?: string) => Promise<void>
     onChange: (_: any, data: DropdownProps) => void
 }
 
-const Autocomplete: FC<AutocompleteProps> = ({ required, multiple, label, value, text, options, load, onChange }) => {
+const Autocomplete: FC<AutocompleteProps> = ({
+    required,
+    multiple,
+    index,
+    label,
+    value,
+    text,
+    options,
+    load,
+    onChange
+}) => {
     const [isLoading, setIsLoading] = useState(false)
+
+    const _onChange = useCallback(
+        () => (event: React.SyntheticEvent, data: DropdownProps) => {
+            onChange(index, data)
+
+            event.stopPropagation()
+            event.preventDefault()
+        },
+        [index, onChange]
+    )
 
     const _load = useCallback(
         async (value?: string) => {
@@ -57,7 +79,7 @@ const Autocomplete: FC<AutocompleteProps> = ({ required, multiple, label, value,
                 }))}
                 onOpen={onOpen}
                 onSearchChange={onSearchChange}
-                onChange={onChange}
+                onChange={_onChange()}
                 noResultsMessage="Не найдено"
                 style={{ whiteSpace: 'nowrap' }}
             />

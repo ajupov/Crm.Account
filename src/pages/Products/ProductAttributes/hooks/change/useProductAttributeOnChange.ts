@@ -5,13 +5,13 @@ import {
 } from '../../../../../helpers/entityAttributeTypeHelper'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
+import { FormFieldProps } from '../../../../../components/common/forms/FormField'
 import ProductAttributeContext from '../../contexts/ProductAttributeContext/ProductAttributeContext'
 import ProductAttributeType from '../../../../../../api/products/models/ProductAttributeType'
 import { useHistory } from 'react-router'
 
 interface UseProductAttributeOnChangeReturn {
-    fields: CreateFormFieldProps[]
+    fields: FormFieldProps[]
     isConfirmEnabled: boolean
     onClickConfirmCreate: () => void
     onClickConfirmUpdate: () => void
@@ -60,7 +60,7 @@ const useProductAttributeOnChange = (): UseProductAttributeOnChangeReturn => {
 
     const onClickCancel = useCallback(() => history.goBack(), [history])
 
-    const fields: CreateFormFieldProps[] = useMemo(
+    const fields: FormFieldProps[] = useMemo(
         () => [
             {
                 type: 'dropdown',
@@ -74,7 +74,7 @@ const useProductAttributeOnChange = (): UseProductAttributeOnChangeReturn => {
             {
                 type: 'text',
                 required: true,
-                topLabel: 'Наименование',
+                label: 'Наименование',
                 value: state.attribute.key,
                 onChange: onChangeKey
             },

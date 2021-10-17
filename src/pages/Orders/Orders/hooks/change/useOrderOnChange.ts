@@ -1,8 +1,8 @@
 import { DropdownProps, InputOnChangeData } from 'semantic-ui-react'
 import { useCallback, useContext, useMemo, useState } from 'react'
 
-import { CreateFormFieldProps } from '../../../../../components/common/forms/CreateForm/CreateForm'
 import Customer from '../../../../../../api/customers/models/Customer'
+import { FormFieldProps } from '../../../../../components/common/forms/FormField'
 import OrderContext from '../../contexts/OrderContext/OrderContext'
 import useCustomerLoad from '../load/useCustomerLoad'
 import useCustomersAutocomplete from '../autocomplete/useCustomersAutocomplete'
@@ -10,9 +10,11 @@ import { useHistory } from 'react-router'
 import useOrderAttributesLoad from '../load/useOrderAttributesLoad'
 import useOrderStatusesLoad from '../load/useOrderStatusesLoad'
 import useOrderTypesLoad from '../load/useOrderTypesLoad'
+import useProductsAutocomplete from '../autocomplete/useProductsAutocomplete'
+import useProductsLoad from '../load/useProductsLoad'
 
 interface UseOrderOnChangeReturn {
-    fields: CreateFormFieldProps[]
+    fields: FormFieldProps[]
     isConfirmEnabled: boolean
     onClickConfirmCreate: () => void
     onClickConfirmUpdate: () => void
@@ -27,7 +29,9 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
     const { statusesAsOptions } = useOrderStatusesLoad()
     const { attributesAsOptions } = useOrderAttributesLoad()
     const { customer } = useCustomerLoad(state.order.customerId)
+    const { products } = useProductsLoad(state.order.items?.map(x => x.productId))
     const { loadCustomers, customersAsOptions } = useCustomersAutocomplete()
+    const { loadProducts, productsAsOptions } = useProductsAutocomplete()
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
 
     const onChangeTypeId = useCallback(
@@ -111,6 +115,43 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
         [state]
     )
 
+    const onChangeItemProductId = useCallback(
+        (index: number, data: DropdownProps) => {
+            if (!state.order.items) {
+                return
+            }
+
+            state.order.items[index].productId = data.value as string
+
+            state.setOrder({
+                ...state.order
+            })
+
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
+    const onChangeItemCount = useCallback(
+        (index: number, data: InputOnChangeData) => {
+            state.setOrder({ ...state.order, sumWithoutDiscount: parseInt(data.value) })
+            setIsConfirmEnabled(true)
+
+            if (!state.order.items) {
+                return
+            }
+
+            state.order.items[index].count = parseInt(data.value)
+
+            state.setOrder({
+                ...state.order
+            })
+
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
     const onChangeAttributeValue = useCallback(
         (index: number, value: string) => {
             if (!state.order.attributeLinks) {
@@ -142,6 +183,24 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
         },
         [state]
     )
+
+    // const onDeleteItem = useCallback(
+    //     (index: number) => {
+    //         state.setOrder({
+    //             ...state.order,
+    //             items: state.order.items?.filter((_, i) => i !== index)
+    //         })
+
+    //         setIsConfirmEnabled(true)
+    //     },
+    //     [state]
+    // )
+
+    const onClickAddItemItem = useCallback(() => {
+        state.setOrder({ ...state.order, items: [...(state.order.items ?? []), { count: 1, price: 0 }] })
+
+        setIsConfirmEnabled(true)
+    }, [state])
 
     const onClickAddAttributeItem = useCallback(() => {
         state.setOrder({ ...state.order, attributeLinks: [...(state.order.attributeLinks ?? []), {}] })
@@ -182,7 +241,7 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
         []
     )
 
-    const fields: CreateFormFieldProps[] = useMemo(
+    const fields: FormFieldProps[] = useMemo(
         () => [
             {
                 type: 'dropdown',
@@ -209,32 +268,55 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
             },
             {
                 type: 'text',
-                topLabel: 'Название',
+                label: 'Название',
                 value: state.order.name,
                 onChange: onChangeName
             },
-
             {
                 type: 'date',
-                topLabel: 'Дата начала',
+                label: 'Дата начала',
                 value: state.order.startDateTime,
                 onChange: onChangeStartDateTime
             },
             {
                 type: 'date',
-                topLabel: 'Дата окончания',
+                label: 'Дата окончания',
                 value: state.order.endDateTime,
                 onChange: onChangeEndDateTime
             },
             {
+                type: 'collection',
+                label: 'Позиции',
+                onClickAddItem: onClickAddItemItem,
+                fields: state.order.items?.map((x, i) => [
+                    {
+                        type: 'autocomplete',
+                        label: 'Продукт',
+                        index: i,
+                        value: x.productId,
+                        text: products.find(p => p.id === x.productId)?.name,
+                        load: loadProducts,
+                        options: productsAsOptions,
+                        onChange: onChangeItemProductId
+                    },
+                    {
+                        type: 'number',
+                        label: 'Количество',
+                        index: i,
+                        value: x.count,
+                        onChange: onChangeItemCount
+                    }
+                ])
+            },
+            {
                 type: 'number',
-                topLabel: 'Сумма',
+                label: 'Сумма',
                 value: state.order.sum,
                 onChange: onChangeSum
             },
             {
                 type: 'number',
-                topLabel: 'Сумма без скидки',
+                label: 'Сумма без скидки',
                 value: state.order.sumWithoutDiscount,
                 onChange: onChangeSumWithoutDiscount
             },
@@ -252,7 +334,6 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                 })),
                 onClickAddItem: onClickAddAttributeItem
             },
-
             {
                 type: 'checkbox',
                 label: 'Удален',
@@ -267,6 +348,7 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
             state.order.name,
             state.order.startDateTime,
             state.order.endDateTime,
+            state.order.items,
             state.order.sum,
             state.order.sumWithoutDiscount,
             state.order.attributeLinks,
@@ -283,11 +365,17 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
             onChangeName,
             onChangeStartDateTime,
             onChangeEndDateTime,
+            onClickAddItemItem,
             onChangeSum,
             onChangeSumWithoutDiscount,
             attributesAsOptions,
             onClickAddAttributeItem,
             onChangeIsDeleted,
+            products,
+            loadProducts,
+            productsAsOptions,
+            onChangeItemProductId,
+            onChangeItemCount,
             onChangeAttributeKey,
             onChangeAttributeValue,
             onDeleteAttribute
