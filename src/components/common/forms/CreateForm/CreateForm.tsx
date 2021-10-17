@@ -16,8 +16,8 @@ const CreateForm: FC<CreateFormProps> = ({ fields, isConfirmEnabled, onClickConf
     <>
         <BackLink onClick={onClickCancel} />
         <Form onSubmit={onClickConfirm}>
-            {fields.map(x => (
-                <FormField key={x.label} {...x} />
+            {fields.map((x, i) => (
+                <FormField key={i} {...x} />
             ))}
             <Form.Field>
                 <Button.Group basic floated="right">

@@ -14,8 +14,8 @@ const Group: FC<GroupProps> = ({ label, width, fields }) => (
     <Form.Field>
         {label && <label>{label}:</label>}
         <Form.Group widths={width ?? 'equal'} key={label} required={label}>
-            {fields?.map(x => (
-                <FormField key={x?.label} {...x} />
+            {fields?.map((x, i) => (
+                <FormField key={i} {...x} />
             ))}
         </Form.Group>
     </Form.Field>

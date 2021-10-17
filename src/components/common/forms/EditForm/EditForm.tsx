@@ -38,8 +38,8 @@ const EditForm: FC<EditFormProps> = ({
         <Card.Meta textAlign="right">{getCreateDateTimeText(createDate)}</Card.Meta>
         <Card.Meta textAlign="right">{getLastChangeDateTimeText(lastModifyDateTime)}</Card.Meta>
         <Form onSubmit={onClickConfirm}>
-            {fields.map(x => (
-                <FormField key={x.label} {...x} />
+            {fields.map((x, i) => (
+                <FormField key={i} {...x} />
             ))}
             <Form.Field>
                 <Button.Group basic floated="right">

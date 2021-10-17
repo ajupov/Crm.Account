@@ -184,17 +184,17 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
         [state]
     )
 
-    // const onDeleteItem = useCallback(
-    //     (index: number) => {
-    //         state.setOrder({
-    //             ...state.order,
-    //             items: state.order.items?.filter((_, i) => i !== index)
-    //         })
+    const onDeleteItem = useCallback(
+        (index: number) => {
+            state.setOrder({
+                ...state.order,
+                items: state.order.items?.filter((_, i) => i !== index)
+            })
 
-    //         setIsConfirmEnabled(true)
-    //     },
-    //     [state]
-    // )
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
 
     const onClickAddItemItem = useCallback(() => {
         state.setOrder({ ...state.order, items: [...(state.order.items ?? []), { count: 1, price: 0 }] })
@@ -244,18 +244,23 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
     const fields: FormFieldProps[] = useMemo(
         () => [
             {
-                type: 'dropdown',
-                label: 'Тип',
-                value: state.order.typeId,
-                options: typesAsOptions,
-                onChange: onChangeTypeId
-            },
-            {
-                type: 'dropdown',
-                label: 'Источник',
-                value: state.order.statusId,
-                options: statusesAsOptions,
-                onChange: onChangeStatusId
+                type: 'group',
+                fields: [
+                    {
+                        type: 'dropdown',
+                        label: 'Тип',
+                        value: state.order.typeId,
+                        options: typesAsOptions,
+                        onChange: onChangeTypeId
+                    },
+                    {
+                        type: 'dropdown',
+                        label: 'Источник',
+                        value: state.order.statusId,
+                        options: statusesAsOptions,
+                        onChange: onChangeStatusId
+                    }
+                ]
             },
             {
                 type: 'autocomplete',
@@ -287,12 +292,14 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
             {
                 type: 'collection',
                 label: 'Позиции',
-                onClickAddItem: onClickAddItemItem,
+                onClickAdd: onClickAddItemItem,
+                onClickDelete: onDeleteItem,
                 fields: state.order.items?.map((x, i) => [
                     {
                         type: 'autocomplete',
                         label: 'Продукт',
                         index: i,
+                        width: '3',
                         value: x.productId,
                         text: products.find(p => p.id === x.productId)?.name,
                         load: loadProducts,
@@ -302,6 +309,7 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                     {
                         type: 'number',
                         label: 'Количество',
+                        width: '8',
                         index: i,
                         value: x.count,
                         onChange: onChangeItemCount
@@ -366,6 +374,7 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
             onChangeStartDateTime,
             onChangeEndDateTime,
             onClickAddItemItem,
+            onDeleteItem,
             onChangeSum,
             onChangeSumWithoutDiscount,
             attributesAsOptions,
