@@ -193,17 +193,16 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
                         value: state.product.statusId,
                         options: statusesAsOptions,
                         onChange: onChangeStatusId
-                    },
-                    {
-                        type: 'dropdown',
-                        multiple: true,
-                        label: 'Категории',
-                        width: '8',
-                        value: state.product.categoryLinks?.map(x => x.productCategoryId ?? ''),
-                        options: categoriesAsOptions,
-                        onChange: onChangeCategoryIds
                     }
                 ]
+            },
+            {
+                type: 'dropdown',
+                multiple: true,
+                label: 'Категории',
+                value: state.product.categoryLinks?.map(x => x.productCategoryId ?? ''),
+                options: categoriesAsOptions,
+                onChange: onChangeCategoryIds
             },
             {
                 type: 'autocomplete',
@@ -227,14 +226,14 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
                     {
                         type: 'text',
                         label: 'Артикул',
-                        width: '12',
+                        width: '5',
                         value: state.product.vendorCode,
                         onChange: onChangeVendorCode
                     },
                     {
                         type: 'number',
                         label: 'Цена',
-                        width: '4',
+                        width: '3',
                         value: state.product.price,
                         onChange: onChangePrice
                     }

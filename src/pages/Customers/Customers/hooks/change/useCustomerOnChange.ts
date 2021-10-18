@@ -166,7 +166,12 @@ const useCustomerOnChange = (): UseCustomerOnChangeReturn => {
                         value: state.customer.sourceId,
                         options: sourcesAsOptions,
                         onChange: onChangeSourceId
-                    },
+                    }
+                ]
+            },
+            {
+                type: 'group',
+                fields: [
                     {
                         type: 'text',
                         label: 'Телефон',
@@ -206,7 +211,12 @@ const useCustomerOnChange = (): UseCustomerOnChangeReturn => {
                         width: '4',
                         value: state.customer.patronymic,
                         onChange: onChangePatronymic
-                    },
+                    }
+                ]
+            },
+            {
+                type: 'group',
+                fields: [
                     {
                         type: 'date',
                         label: 'Дата рождения',
@@ -216,7 +226,6 @@ const useCustomerOnChange = (): UseCustomerOnChangeReturn => {
                     }
                 ]
             },
-
             {
                 type: 'attributes',
                 label: 'Атрибуты',

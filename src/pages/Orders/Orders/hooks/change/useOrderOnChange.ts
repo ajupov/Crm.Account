@@ -249,7 +249,7 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                     {
                         type: 'dropdown',
                         label: 'Тип',
-                        width: '3',
+                        width: '4',
                         value: state.order.typeId,
                         options: typesAsOptions,
                         onChange: onChangeTypeId
@@ -257,7 +257,7 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                     {
                         type: 'dropdown',
                         label: 'Источник',
-                        width: '3',
+                        width: '4',
                         value: state.order.statusId,
                         options: statusesAsOptions,
                         onChange: onChangeStatusId
@@ -265,9 +265,17 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                 ]
             },
             {
+                type: 'autocomplete',
+                label: 'Клиент',
+                value: state.order.customerId,
+                text: mapCustomerText(customer),
+                load: loadCustomers,
+                options: customersAsOptions,
+                onChange: onChangeCustomerId
+            },
+            {
                 type: 'text',
                 label: 'Название',
-                width: '6',
                 value: state.order.name,
                 onChange: onChangeName
             },
@@ -275,30 +283,16 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                 type: 'group',
                 fields: [
                     {
-                        type: 'autocomplete',
-                        label: 'Клиент',
-                        value: state.order.customerId,
-                        text: mapCustomerText(customer),
-                        load: loadCustomers,
-                        options: customersAsOptions,
-                        onChange: onChangeCustomerId
-                    }
-                ]
-            },
-            {
-                type: 'group',
-                fields: [
-                    {
                         type: 'date',
                         label: 'Дата начала',
-                        width: '3',
+                        width: '4',
                         value: state.order.startDateTime,
                         onChange: onChangeStartDateTime
                     },
                     {
                         type: 'date',
                         label: 'Дата окончания',
-                        width: '3',
+                        width: '4',
                         value: state.order.endDateTime,
                         onChange: onChangeEndDateTime
                     }
