@@ -173,6 +173,39 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
     const fields: FormFieldProps[] = useMemo(
         () => [
             {
+                type: 'group',
+                fields: [
+                    {
+                        type: 'dropdown',
+                        required: true,
+                        label: 'Тип',
+                        width: '4',
+                        value: state.product.type,
+                        text: getProductTypeName(state.product.type),
+                        options: getProductTypesAsSelectOptions(),
+                        onChange: onChangeType
+                    },
+                    {
+                        type: 'dropdown',
+                        required: true,
+                        label: 'Статус',
+                        width: '4',
+                        value: state.product.statusId,
+                        options: statusesAsOptions,
+                        onChange: onChangeStatusId
+                    },
+                    {
+                        type: 'dropdown',
+                        multiple: true,
+                        label: 'Категории',
+                        width: '8',
+                        value: state.product.categoryLinks?.map(x => x.productCategoryId ?? ''),
+                        options: categoriesAsOptions,
+                        onChange: onChangeCategoryIds
+                    }
+                ]
+            },
+            {
                 type: 'autocomplete',
                 label: 'Родительский продукт',
                 value: state.product.parentProductId,
@@ -182,31 +215,6 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
                 onChange: onChangeParentProductId
             },
             {
-                type: 'dropdown',
-                required: true,
-                label: 'Тип',
-                value: state.product.type,
-                text: getProductTypeName(state.product.type),
-                options: getProductTypesAsSelectOptions(),
-                onChange: onChangeType
-            },
-            {
-                type: 'dropdown',
-                required: true,
-                label: 'Статус',
-                value: state.product.statusId,
-                options: statusesAsOptions,
-                onChange: onChangeStatusId
-            },
-            {
-                type: 'dropdown',
-                multiple: true,
-                label: 'Категории',
-                value: state.product.categoryLinks?.map(x => x.productCategoryId ?? ''),
-                options: categoriesAsOptions,
-                onChange: onChangeCategoryIds
-            },
-            {
                 type: 'text',
                 required: true,
                 label: 'Наименование',
@@ -214,16 +222,23 @@ const useProductOnChange = (): UseProductOnChangeReturn => {
                 onChange: onChangeName
             },
             {
-                type: 'text',
-                label: 'Артикул',
-                value: state.product.vendorCode,
-                onChange: onChangeVendorCode
-            },
-            {
-                type: 'number',
-                label: 'Цена',
-                value: state.product.price,
-                onChange: onChangePrice
+                type: 'group',
+                fields: [
+                    {
+                        type: 'text',
+                        label: 'Артикул',
+                        width: '12',
+                        value: state.product.vendorCode,
+                        onChange: onChangeVendorCode
+                    },
+                    {
+                        type: 'number',
+                        label: 'Цена',
+                        width: '4',
+                        value: state.product.price,
+                        onChange: onChangePrice
+                    }
+                ]
             },
             {
                 type: 'attributes',

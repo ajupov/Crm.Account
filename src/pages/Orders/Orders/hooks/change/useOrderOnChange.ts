@@ -249,7 +249,7 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                     {
                         type: 'dropdown',
                         label: 'Тип',
-                        width: '5',
+                        width: '3',
                         value: state.order.typeId,
                         options: typesAsOptions,
                         onChange: onChangeTypeId
@@ -257,11 +257,37 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                     {
                         type: 'dropdown',
                         label: 'Источник',
-                        width: '5',
+                        width: '3',
                         value: state.order.statusId,
                         options: statusesAsOptions,
                         onChange: onChangeStatusId
-                    },
+                    }
+                ]
+            },
+            {
+                type: 'text',
+                label: 'Название',
+                width: '6',
+                value: state.order.name,
+                onChange: onChangeName
+            },
+            {
+                type: 'group',
+                fields: [
+                    {
+                        type: 'autocomplete',
+                        label: 'Клиент',
+                        value: state.order.customerId,
+                        text: mapCustomerText(customer),
+                        load: loadCustomers,
+                        options: customersAsOptions,
+                        onChange: onChangeCustomerId
+                    }
+                ]
+            },
+            {
+                type: 'group',
+                fields: [
                     {
                         type: 'date',
                         label: 'Дата начала',
@@ -279,21 +305,24 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                 ]
             },
             {
-                type: 'text',
-                label: 'Название',
-                value: state.order.name,
-                onChange: onChangeName
+                type: 'group',
+                fields: [
+                    {
+                        type: 'number',
+                        label: 'Сумма',
+                        width: '3',
+                        value: state.order.sum,
+                        onChange: onChangeSum
+                    },
+                    {
+                        type: 'number',
+                        label: 'Сумма без скидки',
+                        width: '3',
+                        value: state.order.sumWithoutDiscount,
+                        onChange: onChangeSumWithoutDiscount
+                    }
+                ]
             },
-            {
-                type: 'autocomplete',
-                label: 'Клиент',
-                value: state.order.customerId,
-                text: mapCustomerText(customer),
-                load: loadCustomers,
-                options: customersAsOptions,
-                onChange: onChangeCustomerId
-            },
-
             {
                 type: 'collection',
                 label: 'Позиции',
@@ -320,18 +349,6 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                         onChange: onChangeItemCount
                     }
                 ])
-            },
-            {
-                type: 'number',
-                label: 'Сумма',
-                value: state.order.sum,
-                onChange: onChangeSum
-            },
-            {
-                type: 'number',
-                label: 'Сумма без скидки',
-                value: state.order.sumWithoutDiscount,
-                onChange: onChangeSumWithoutDiscount
             },
             {
                 type: 'attributes',

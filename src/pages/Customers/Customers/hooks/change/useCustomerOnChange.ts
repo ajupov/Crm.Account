@@ -157,48 +157,66 @@ const useCustomerOnChange = (): UseCustomerOnChangeReturn => {
     const fields: FormFieldProps[] = useMemo(
         () => [
             {
-                type: 'dropdown',
-                label: 'Источник',
-                value: state.customer.sourceId,
-                options: sourcesAsOptions,
-                onChange: onChangeSourceId
+                type: 'group',
+                fields: [
+                    {
+                        type: 'dropdown',
+                        label: 'Источник',
+                        width: '4',
+                        value: state.customer.sourceId,
+                        options: sourcesAsOptions,
+                        onChange: onChangeSourceId
+                    },
+                    {
+                        type: 'text',
+                        label: 'Телефон',
+                        width: '4',
+                        value: state.customer.phone,
+                        onChange: onChangePhone
+                    },
+                    {
+                        type: 'text',
+                        label: 'Email',
+                        width: '8',
+                        value: state.customer.email,
+                        onChange: onChangeEmail
+                    }
+                ]
             },
             {
-                type: 'text',
-                label: 'Фамилия',
-                value: state.customer.surname,
-                onChange: onChangeSurname
+                type: 'group',
+                fields: [
+                    {
+                        type: 'text',
+                        label: 'Фамилия',
+                        width: '4',
+                        value: state.customer.surname,
+                        onChange: onChangeSurname
+                    },
+                    {
+                        type: 'text',
+                        label: 'Имя',
+                        width: '4',
+                        value: state.customer.name,
+                        onChange: onChangeName
+                    },
+                    {
+                        type: 'text',
+                        label: 'Отчество',
+                        width: '4',
+                        value: state.customer.patronymic,
+                        onChange: onChangePatronymic
+                    },
+                    {
+                        type: 'date',
+                        label: 'Дата рождения',
+                        width: '4',
+                        value: state.customer.birthDate,
+                        onChange: onChangeBirthDate
+                    }
+                ]
             },
-            {
-                type: 'text',
-                label: 'Имя',
-                value: state.customer.name,
-                onChange: onChangeName
-            },
-            {
-                type: 'text',
-                label: 'Отчество',
-                value: state.customer.patronymic,
-                onChange: onChangePatronymic
-            },
-            {
-                type: 'text',
-                label: 'Телефон',
-                value: state.customer.phone,
-                onChange: onChangePhone
-            },
-            {
-                type: 'text',
-                label: 'Email',
-                value: state.customer.email,
-                onChange: onChangeEmail
-            },
-            {
-                type: 'date',
-                label: 'Дата рождения',
-                value: state.customer.birthDate,
-                onChange: onChangeBirthDate
-            },
+
             {
                 type: 'attributes',
                 label: 'Атрибуты',

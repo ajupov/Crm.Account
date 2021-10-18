@@ -60,20 +60,27 @@ const useCustomerAttributeOnChange = (): UseCustomerAttributeOnChangeReturn => {
     const fields: FormFieldProps[] = useMemo(
         () => [
             {
-                type: 'dropdown',
-                required: true,
-                label: 'Тип',
-                value: state.attribute.type,
-                text: getAttributeTypeName(state.attribute.type),
-                options: getAttributeTypesAsSelectOptions(),
-                onChange: onChangeType
-            },
-            {
-                type: 'text',
-                required: true,
-                label: 'Наименование',
-                value: state.attribute.key,
-                onChange: onChangeKey
+                type: 'group',
+                fields: [
+                    {
+                        type: 'dropdown',
+                        required: true,
+                        label: 'Тип',
+                        width: '4',
+                        value: state.attribute.type,
+                        text: getAttributeTypeName(state.attribute.type),
+                        options: getAttributeTypesAsSelectOptions(),
+                        onChange: onChangeType
+                    },
+                    {
+                        type: 'text',
+                        required: true,
+                        label: 'Наименование',
+                        width: '12',
+                        value: state.attribute.key,
+                        onChange: onChangeKey
+                    }
+                ]
             },
             {
                 type: 'checkbox',

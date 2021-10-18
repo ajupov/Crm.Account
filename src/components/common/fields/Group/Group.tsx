@@ -10,10 +10,10 @@ export interface GroupProps {
     fields?: FormFieldProps[]
 }
 
-const Group: FC<GroupProps> = ({ label, width, fields }) => (
+const Group: FC<GroupProps> = ({ label, fields }) => (
     <Form.Field>
         {label && <label>{label}:</label>}
-        <Form.Group widths={width ?? 'equal'} key={label} required={label}>
+        <Form.Group key={label} required={label}>
             {fields?.map((x, i) => (
                 <FormField key={i} {...x} />
             ))}
