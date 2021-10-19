@@ -29,10 +29,12 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
     const { statusesAsOptions } = useOrderStatusesLoad()
     const { attributesAsOptions } = useOrderAttributesLoad()
     const { customer } = useCustomerLoad(state.order.customerId)
-    const { products } = useProductsLoad(state.order.items?.map(x => x.productId))
     const { loadCustomers, customersAsOptions } = useCustomersAutocomplete()
     const { loadProducts, productsAsOptions } = useProductsAutocomplete()
     const [isConfirmEnabled, setIsConfirmEnabled] = useState(false)
+
+    const productIds = useMemo(() => state.order.items?.map(x => x.productId), [state.order.items])
+    const { products } = useProductsLoad(productIds)
 
     const onChangeTypeId = useCallback(
         (_, data: DropdownProps) => {
@@ -123,10 +125,12 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
 
             const productId = data.value as string
 
-            state.order.items[index].productId = productId
+            const items = [...state.order.items]
+            items[index].productId = productId
 
             state.setOrder({
-                ...state.order
+                ...state.order,
+                items
             })
 
             setIsConfirmEnabled(true)
@@ -349,25 +353,6 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                 ]
             },
             {
-                type: 'group',
-                fields: [
-                    {
-                        type: 'number',
-                        label: 'Сумма',
-                        width: '3',
-                        value: state.order.sum,
-                        onChange: onChangeSum
-                    },
-                    {
-                        type: 'number',
-                        label: 'Сумма без скидки',
-                        width: '3',
-                        value: state.order.sumWithoutDiscount,
-                        onChange: onChangeSumWithoutDiscount
-                    }
-                ]
-            },
-            {
                 type: 'collection',
                 label: 'Позиции',
                 onClickAdd: onClickAddItemItem,
@@ -405,7 +390,7 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                         label: 'Артикул позиции',
                         width: '4',
                         index: i,
-                        value: x.productVendorCode,
+                        value: x.productVendorCode ?? products.find(p => p.id === x.productId)?.vendorCode,
                         onChange: onChangeItemProductVendorCode
                     },
                     {
@@ -413,10 +398,31 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                         label: 'Стоимость',
                         width: '2',
                         index: i,
-                        value: x.price,
+                        value: x.price ? x.price : products.find(p => p.id === x.productId)?.price,
                         onChange: onChangeItemProductPrice
                     }
                 ])
+            },
+            {
+                type: 'group',
+                fields: [
+                    {
+                        type: 'number',
+                        label: 'Сумма',
+                        width: '3',
+                        value: state.order.sum
+                            ? state.order.sum
+                            : state.order.items?.reduce((x, y) => x + y.price, 0) ?? 0,
+                        onChange: onChangeSum
+                    },
+                    {
+                        type: 'number',
+                        label: 'Сумма без скидки',
+                        width: '3',
+                        value: state.order.sumWithoutDiscount,
+                        onChange: onChangeSumWithoutDiscount
+                    }
+                ]
             },
             {
                 type: 'attributes',
