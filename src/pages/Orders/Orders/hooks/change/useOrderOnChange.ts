@@ -121,7 +121,9 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                 return
             }
 
-            state.order.items[index].productId = data.value as string
+            const productId = data.value as string
+
+            state.order.items[index].productId = productId
 
             state.setOrder({
                 ...state.order
@@ -134,14 +136,62 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
 
     const onChangeItemCount = useCallback(
         (index: number, data: InputOnChangeData) => {
-            state.setOrder({ ...state.order, sumWithoutDiscount: parseInt(data.value) })
-            setIsConfirmEnabled(true)
-
             if (!state.order.items) {
                 return
             }
 
             state.order.items[index].count = parseInt(data.value)
+
+            state.setOrder({
+                ...state.order
+            })
+
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
+    const onChangeItemProductName = useCallback(
+        (index: number, data: InputOnChangeData) => {
+            if (!state.order.items) {
+                return
+            }
+
+            state.order.items[index].productName = data.value
+
+            state.setOrder({
+                ...state.order
+            })
+
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
+    const onChangeItemProductVendorCode = useCallback(
+        (index: number, data: InputOnChangeData) => {
+            if (!state.order.items) {
+                return
+            }
+
+            state.order.items[index].productVendorCode = data.value
+
+            state.setOrder({
+                ...state.order
+            })
+
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
+    const onChangeItemProductPrice = useCallback(
+        (index: number, data: InputOnChangeData) => {
+            if (!state.order.items) {
+                return
+            }
+
+            state.order.items[index].price = parseFloat(data.value)
 
             state.setOrder({
                 ...state.order
@@ -327,7 +377,7 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                         type: 'autocomplete',
                         label: 'Продукт',
                         index: i,
-                        width: '3',
+                        width: '4',
                         value: x.productId,
                         text: products.find(p => p.id === x.productId)?.name,
                         load: loadProducts,
@@ -337,10 +387,34 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                     {
                         type: 'number',
                         label: 'Количество',
-                        width: '8',
+                        width: '2',
                         index: i,
                         value: x.count,
                         onChange: onChangeItemCount
+                    },
+                    {
+                        type: 'text',
+                        label: 'Название позиции',
+                        width: '4',
+                        index: i,
+                        value: x.productName ?? products.find(p => p.id === x.productId)?.name,
+                        onChange: onChangeItemProductName
+                    },
+                    {
+                        type: 'text',
+                        label: 'Артикул позиции',
+                        width: '4',
+                        index: i,
+                        value: x.productVendorCode,
+                        onChange: onChangeItemProductVendorCode
+                    },
+                    {
+                        type: 'number',
+                        label: 'Стоимость',
+                        width: '2',
+                        index: i,
+                        value: x.price,
+                        onChange: onChangeItemProductPrice
                     }
                 ])
             },
@@ -372,9 +446,9 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
             state.order.name,
             state.order.startDateTime,
             state.order.endDateTime,
-            state.order.items,
             state.order.sum,
             state.order.sumWithoutDiscount,
+            state.order.items,
             state.order.attributeLinks,
             state.order.isDeleted,
             typesAsOptions,
@@ -389,10 +463,10 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
             onChangeName,
             onChangeStartDateTime,
             onChangeEndDateTime,
-            onClickAddItemItem,
-            onDeleteItem,
             onChangeSum,
             onChangeSumWithoutDiscount,
+            onClickAddItemItem,
+            onDeleteItem,
             attributesAsOptions,
             onClickAddAttributeItem,
             onChangeIsDeleted,
@@ -401,6 +475,9 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
             productsAsOptions,
             onChangeItemProductId,
             onChangeItemCount,
+            onChangeItemProductName,
+            onChangeItemProductVendorCode,
+            onChangeItemProductPrice,
             onChangeAttributeKey,
             onChangeAttributeValue,
             onDeleteAttribute
