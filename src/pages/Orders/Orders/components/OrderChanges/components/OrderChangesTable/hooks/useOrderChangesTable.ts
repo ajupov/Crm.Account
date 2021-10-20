@@ -7,11 +7,13 @@ import Order from '../../../../../../../../../api/orders/models/Order'
 import OrderAttributeLink from '../../../../../../../../../api/orders/models/OrderAttributeLink'
 import OrderChange from '../../../../../../../../../api/orders/models/OrderChange'
 import OrderChangesContext from '../../../../../contexts/OrderChangesContext/OrderChangesContext'
+import OrderItem from '../../../../../../../../../api/orders/models/OrderItem'
 import { TableBodyRowProps } from '../../../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../../../components/common/collections/Table/TableHeader'
 import { getFileNameWithDateTime } from '../../../../../../../../helpers/fileNameHelper'
 import { getValueOrEmpty } from '../../../../../../../../helpers/entityFieldValueHelper'
 import { joinAttributes } from '../../../../../mappers/orderAttributesMapper'
+import { joinItems } from '../../../../../mappers/orderItemsMapper'
 import useOrderAttributesLoad from '../../../../../hooks/load/useOrderAttributesLoad'
 
 interface UseOrderChangesTableReturn {
@@ -66,6 +68,12 @@ const useOrderChangesTable = (): UseOrderChangesTableReturn => {
         [attributesAsOptions]
     )
 
+    const mapItems = useCallback(
+        (items?: OrderItem[]) =>
+            joinItems(items?.sort((x, y) => ((x.productName ?? '') > (y.productName ?? '') ? 1 : 0))).join(', '),
+        []
+    )
+
     const getChangeValue = useCallback(
         (change: OrderChange) => {
             const oldValue = change.oldValueJson ? (JSON.parse(change.oldValueJson) as Order) : void 0
@@ -82,6 +90,9 @@ const useOrderChangesTable = (): UseOrderChangesTableReturn => {
                 `Дата окончания: ${getValueOrEmpty(toLocaleDate(oldValue?.endDateTime))} → ${getValueOrEmpty(
                     toLocaleDate(newValue?.endDateTime)
                 )}`,
+                `Позиции: ${getValueOrEmpty(mapItems(oldValue?.items))} → ${getValueOrEmpty(
+                    mapItems(newValue?.items)
+                )}`,
                 `Сумма: ${getValueOrEmpty(oldValue?.sum)} → ${getValueOrEmpty(newValue?.sum)}`,
                 `Сумма без скидки: ${getValueOrEmpty(oldValue?.sum)} → ${getValueOrEmpty(newValue?.sum)}`,
                 `Удален: ${getValueOrEmpty(oldValue?.isDeleted)} → ${getValueOrEmpty(newValue?.isDeleted)}`,
@@ -90,7 +101,7 @@ const useOrderChangesTable = (): UseOrderChangesTableReturn => {
                 )}`
             ]
         },
-        [mapAttributes]
+        [mapAttributes, mapItems]
     )
 
     const map = useCallback(

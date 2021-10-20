@@ -6,6 +6,7 @@ import OrderContext from '../../../contexts/OrderContext/OrderContext'
 import OrdersActionsContext from '../../../contexts/OrdersActionsContext/OrdersActionsContext'
 import { ViewDataProps } from '../../../../../../components/common/grids/View/View'
 import { joinAttributes } from '../../../mappers/orderAttributesMapper'
+import { joinItems } from '../../../mappers/orderItemsMapper'
 import { toLocaleDate } from '../../../../../../utils/dateTime/dateTimeUtils'
 import useCustomerLoad from '../../../hooks/load/useCustomerLoad'
 import { useHistory } from 'react-router'
@@ -49,6 +50,8 @@ const useOrderView = (): UseOrderViewReturn => {
         [attributesAsOptions, orderState.order.attributeLinks]
     )
 
+    const mapItems = useCallback(() => joinItems(orderState.order.items), [orderState.order.items])
+
     const mapCustomerText = useCallback(
         (customer?: Customer) =>
             customer
@@ -70,12 +73,13 @@ const useOrderView = (): UseOrderViewReturn => {
             { label: 'Имя', value: order.name },
             { label: 'Дата начала', value: toLocaleDate(order.startDateTime) },
             { label: 'Дата окончания', value: toLocaleDate(order.endDateTime) },
+            { label: 'Позиции', value: mapItems() },
             { label: 'Сумма', value: order.sum.toString() },
             { label: 'Сумма без скидки', value: order.sumWithoutDiscount.toString() },
             { label: 'Атрибуты', value: mapAttributes() },
             { label: 'Удален', value: order.isDeleted ? 'Да' : 'Нет' }
         ],
-        [customer, mapAttributes, mapCustomerText]
+        [customer, mapAttributes, mapCustomerText, mapItems]
     )
 
     return { map, onClickDelete, onClickRestore, onClickCancel }

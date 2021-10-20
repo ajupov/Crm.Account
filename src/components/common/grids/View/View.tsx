@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { Button, Card, Icon } from 'semantic-ui-react'
 import React, { FC, useCallback } from 'react'
 import {
@@ -12,7 +13,7 @@ import Loader from '../../other/Loader/Loader'
 
 export interface ViewDataProps {
     label: string
-    value?: string
+    value?: string | string[]
 }
 
 export interface ViewProps {
@@ -49,8 +50,20 @@ const View: FC<ViewProps> = ({
                 x =>
                     x.value && (
                         <div key={x.label} style={{ marginBottom: '20px' }}>
-                            {x.label && <b style={{ display: 'inline-block', minWidth: '180px' }}>{x.label}: </b>}
-                            {x.value && <span style={{ display: 'inline-block' }}> {x.value}</span>}
+                            <b style={{ display: 'inline-block', minWidth: '180px' }}>{x.label}: </b>
+                            {!Array.isArray(x.value) || x.value.length === 0 ? (
+                                <span style={{ display: 'inline-block' }}> {x.value}</span>
+                            ) : (
+                                <>
+                                    <hr style={{ marginLeft: '10px' }} />
+                                    {x.value.map((v, i) => (
+                                        <span key={i} style={{ display: 'block', marginLeft: '10px' }}>
+                                            {v}
+                                            <hr />
+                                        </span>
+                                    ))}
+                                </>
+                            )}
                         </div>
                     )
             ),
