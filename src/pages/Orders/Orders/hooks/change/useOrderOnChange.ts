@@ -346,7 +346,7 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                     },
                     {
                         type: 'dropdown',
-                        label: 'Источник',
+                        label: 'Статус',
                         width: '4',
                         value: state.order.statusId,
                         options: statusesAsOptions,
