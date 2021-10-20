@@ -1,34 +1,34 @@
-import { useCallback, useEffect, useState } from 'react'
-
 import HttpClientFactory from '../../../../../utils/httpClientFactory/HttpClientFactory'
 import Product from '../../../../../../api/products/models/Product'
 import ProductsClient from '../../../../../../api/products/clients/ProductsClient'
+import { useCallback } from 'react'
 
 const productsClient = new ProductsClient(HttpClientFactory.Host, HttpClientFactory.Api)
 
 interface UseOrderSourcesLoadReturn {
-    products: Product[]
+    loadProducts: (ids?: (string | undefined)[] | undefined) => Promise<Product[] | undefined>
+    loadProduct: (id?: string | undefined) => Promise<Product | undefined>
 }
 
-const useProductsLoad = (ids?: (string | undefined)[]): UseOrderSourcesLoadReturn => {
-    const [products, setProducts] = useState<Product[]>([])
-
-    const loadProducts = useCallback(async () => {
+const useProductsLoad = (): UseOrderSourcesLoadReturn => {
+    const loadProducts = useCallback(async (ids?: (string | undefined)[]) => {
         const filteredIds = ids?.filter(x => x).map(x => x!)
         if (!filteredIds || !filteredIds.length) {
-            return
+            return []
         }
 
-        const response = await productsClient.GetListAsync(filteredIds)
+        return (await productsClient.GetListAsync(filteredIds)) ?? []
+    }, [])
 
-        setProducts(response ?? [])
-    }, [ids])
+    const loadProduct = useCallback(async (id?: string | undefined) => {
+        if (!id) {
+            return void 0
+        }
 
-    useEffect(() => {
-        void loadProducts()
-    }, [loadProducts])
+        return (await productsClient.GetAsync(id)) ?? void 0
+    }, [])
 
-    return { products }
+    return { loadProducts, loadProduct }
 }
 
 export default useProductsLoad
