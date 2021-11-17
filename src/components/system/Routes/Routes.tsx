@@ -71,6 +71,18 @@ import ProductView from '../../../pages/Products/Products/components/ProductView
 import Products from '../../../pages/Products/Products/Products'
 import ProductsRoutes from '../../../pages/Products/Products/routes/ProductsRoutes'
 import Settings from '../../../pages/Settings/Settings'
+import SupplierAttributeChanges from '../../../pages/Suppliers/SupplierAttributes/components/SupplierAttributeChanges/SupplierAttributeChanges'
+import SupplierAttributeCreate from '../../../pages/Suppliers/SupplierAttributes/components/SupplierAttributeCreate/SupplierAttributeCreate'
+import SupplierAttributeEdit from '../../../pages/Suppliers/SupplierAttributes/components/SupplierAttributeEdit/SupplierAttributeEdit'
+import SupplierAttributeView from '../../../pages/Suppliers/SupplierAttributes/components/SupplierAttributeView/SupplierAttributeView'
+import SupplierAttributes from '../../../pages/Suppliers/SupplierAttributes/SupplierAttributes'
+import SupplierAttributesRoutes from '../../../pages/Suppliers/SupplierAttributes/routes/SupplierAttributesRoutes'
+import SupplierChanges from '../../../pages/Suppliers/Suppliers/components/SupplierChanges/SupplierChanges'
+import SupplierCreate from '../../../pages/Suppliers/Suppliers/components/SupplierCreate/SupplierCreate'
+import SupplierEdit from '../../../pages/Suppliers/Suppliers/components/SupplierEdit/SupplierEdit'
+import SupplierView from '../../../pages/Suppliers/Suppliers/components/SupplierView/SupplierView'
+import Suppliers from '../../../pages/Suppliers/Suppliers/Suppliers'
+import SuppliersRoutes from '../../../pages/Suppliers/Suppliers/routes/SuppliersRoutes'
 import TaskAttributeChanges from '../../../pages/Tasks/TaskAttributes/components/TaskAttributeChanges/TaskAttributeChanges'
 import TaskAttributeCreate from '../../../pages/Tasks/TaskAttributes/components/TaskAttributeCreate/TaskAttributeCreate'
 import TaskAttributeEdit from '../../../pages/Tasks/TaskAttributes/components/TaskAttributeEdit/TaskAttributeEdit'
@@ -198,6 +210,20 @@ const Routes: FC = () => {
             <Route path={withId(ProductStatusesRoutes.View)} exact component={ProductStatusView} />
             <Route path={withId(ProductStatusesRoutes.Edit)} exact component={ProductStatusEdit} />
             <Route path={withId(ProductStatusesRoutes.Changes)} exact component={ProductStatusChanges} />
+
+            {/*  */}
+
+            <Route path={SuppliersRoutes.Index} exact component={Suppliers} />
+            <Route path={SuppliersRoutes.Create} exact component={SupplierCreate} />
+            <Route path={withId(SuppliersRoutes.View)} exact component={SupplierView} />
+            <Route path={withId(SuppliersRoutes.Edit)} exact component={SupplierEdit} />
+            <Route path={withId(SuppliersRoutes.Changes)} exact component={SupplierChanges} />
+
+            <Route path={SupplierAttributesRoutes.Index} exact component={SupplierAttributes} />
+            <Route path={SupplierAttributesRoutes.Create} exact component={SupplierAttributeCreate} />
+            <Route path={withId(SupplierAttributesRoutes.View)} exact component={SupplierAttributeView} />
+            <Route path={withId(SupplierAttributesRoutes.Edit)} exact component={SupplierAttributeEdit} />
+            <Route path={withId(SupplierAttributesRoutes.Changes)} exact component={SupplierAttributeChanges} />
 
             {/*  */}
 

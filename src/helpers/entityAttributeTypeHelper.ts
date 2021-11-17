@@ -2,6 +2,7 @@ import CustomerAttributeType from '../../api/customers/models/CustomerAttributeT
 import { DropdownItemProps } from '../components/common/fields/Dropdown/Dropdown'
 import OrderAttributeType from '../../api/orders/models/OrderAttributeType'
 import ProductAttributeType from '../../api/products/models/ProductAttributeType'
+import SupplierAttributeType from '../../api/suppliers/models/SupplierAttributeType'
 import TaskAttributeType from '../../api/tasks/models/TaskAttributeType'
 
 // TODO: Move to l10n
@@ -43,7 +44,7 @@ export function getAttributeTypesAsSelectOptions(): DropdownItemProps[] {
 }
 
 export function getAttributeTypeName(
-    type?: ProductAttributeType | CustomerAttributeType | OrderAttributeType | TaskAttributeType
+    type?: ProductAttributeType | CustomerAttributeType | OrderAttributeType | TaskAttributeType | SupplierAttributeType
 ): string {
     return type ? AttributeTypeWithNames[type] : ''
 }
