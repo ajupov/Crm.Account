@@ -50,7 +50,7 @@ const MobileSidebarMenu: FC<MobileSidebarMenuProps> = ({ onClickItem }) => {
             {renderItem('Заказы', OrdersRoutes.Index, 'boxes')}
             {renderItem('Клиенты', CustomersRoutes.Index, 'users')}
             {renderItem('Продукты', ProductsRoutes.Index, 'list ol')}
-            {renderItem('Поставшики', SuppliersRoutes.Index, 'truck')}
+            {renderItem('Поставщики', SuppliersRoutes.Index, 'truck')}
             {renderItem('Настройки аккаунта', '/settings', 'user circle')}
             <Menu.Item as="a" href={configuration.LogoutUrl}>
                 <Icon name="log out" style={{ float: 'left', marginRight: '12px' }} />

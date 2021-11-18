@@ -28,7 +28,7 @@ const DesktopSidebarMenu: FC = () => {
             {renderItem('Заказы', OrdersRoutes.Index, 'boxes')}
             {renderItem('Клиенты', CustomersRoutes.Index, 'users')}
             {renderItem('Продукты', ProductsRoutes.Index, 'list ol')}
-            {renderItem('Поставшики', SuppliersRoutes.Index, 'truck')}
+            {renderItem('Поставщики', SuppliersRoutes.Index, 'truck')}
         </>
     )
 }
