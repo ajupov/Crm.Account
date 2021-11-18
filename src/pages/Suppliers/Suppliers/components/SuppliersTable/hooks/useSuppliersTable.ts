@@ -31,7 +31,7 @@ const useSuppliersTable = (): UseSuppliersTableReturn => {
         }
 
         const fileName = getFileNameWithDateTime('Поставщики')
-        const headers = ['Идентификатор', 'Имя', 'Телефон', 'Email', 'Удален', 'Создан', 'Изменен']
+        const headers = ['Идентификатор', 'Название', 'Телефон', 'Email', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...suppliers])
 
         downloadAsCsv(fileName, csv)

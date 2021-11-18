@@ -146,7 +146,7 @@ const useSupplierOnChange = (): UseSupplierOnChangeReturn => {
                 fields: [
                     {
                         type: 'text',
-                        label: 'Имя',
+                        label: 'Название',
                         width: '4',
                         value: state.supplier.name,
                         onChange: onChangeName

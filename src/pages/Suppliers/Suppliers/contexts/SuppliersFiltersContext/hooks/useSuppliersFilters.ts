@@ -129,7 +129,7 @@ const useSuppliersFilters = (): SuppliersFiltersState => {
         () => [
             {
                 type: 'text',
-                label: 'Имя',
+                label: 'Название',
                 value: name,
                 onChange: onChangeName
             },

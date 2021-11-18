@@ -47,7 +47,7 @@ const useSupplierView = (): UseSupplierViewReturn => {
 
     const map = useCallback(
         (supplier: Supplier): ViewDataProps[] => [
-            { label: 'Имя', value: supplier.name },
+            { label: 'Название', value: supplier.name },
             { label: 'Телефон', value: supplier.phone },
             { label: 'Email', value: supplier.email },
             { label: 'Атрибуты', value: mapAttributes() },
