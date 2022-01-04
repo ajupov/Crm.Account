@@ -3,36 +3,36 @@ import { calculateOffset, calculatePage } from '../../../../../../utils/paginati
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import StockBalance from '../../../../../../../api/stock/models/StockBalance'
-import StockBalancesContext from '../../../contexts/StockBalancesContext/StockBalancesContext'
-import StockBalancesRoutes from '../../../routes/StockBalancesRoutes'
+import StockRoom from '../../../../../../../api/stock/models/StockRoom'
+import StockRoomsContext from '../../../contexts/StockRoomsContext/StockRoomsContext'
+import StockRoomsRoutes from '../../../routes/StockRoomsRoutes'
 import { TableBodyRowProps } from '../../../../../../components/common/collections/Table/TableBody'
 import { TableHeaderCellProps } from '../../../../../../components/common/collections/Table/TableHeader'
 import { getFileNameWithDateTime } from '../../../../../../helpers/fileNameHelper'
-import useStockBalanceView from '../../StockBalanceView/hooks/useStockBalanceView'
+import useStockRoomView from '../../StockRoomView/hooks/useStockRoomView'
 
-interface UseStockBalancesTableReturn {
+interface UseStockRoomsTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (stockBalances: StockBalance[]) => TableBodyRowProps[]
+    map: (rooms: StockRoom[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
 
 // TODO: Move to l10n
-const useStockBalancesTable = (): UseStockBalancesTableReturn => {
-    const state = useContext(StockBalancesContext)
-    const { onClickDelete, onClickRestore } = useStockBalanceView()
+const useStockRoomsTable = (): UseStockRoomsTableReturn => {
+    const state = useContext(StockRoomsContext)
+    const { onClickDelete, onClickRestore } = useStockRoomView()
 
     const onClickDownloadAsCsv = useCallback(async () => {
-        const stockBalances = (await state.getAll())?.balances
-        if (!stockBalances) {
+        const rooms = (await state.getAll())?.rooms
+        if (!rooms) {
             return
         }
 
-        const fileName = getFileNameWithDateTime('Балансы')
-        const headers = ['Идентификатор', 'ID склада', 'ID продукта', 'Количество', 'Удален', 'Создан', 'Изменен']
-        const csv = convertObjectToCSV([headers, ...stockBalances])
+        const fileName = getFileNameWithDateTime('Склады')
+        const headers = ['Идентификатор', 'Наименование', 'Удален', 'Создан', 'Изменен']
+        const csv = convertObjectToCSV([headers, ...rooms])
 
         downloadAsCsv(fileName, csv)
     }, [state])
@@ -65,25 +65,23 @@ const useStockBalancesTable = (): UseStockBalancesTableReturn => {
     )
 
     const map = useCallback(
-        (stockBalances: StockBalance[]) =>
-            stockBalances.map(
-                stockBalance =>
+        (rooms: StockRoom[]) =>
+            rooms.map(
+                room =>
                     ({
-                        id: stockBalance.id,
+                        id: room.id,
                         cells: [
-                            { value: stockBalance.room?.name, textAlign: 'left' },
-                            { value: stockBalance.productId, textAlign: 'left' },
-                            { value: stockBalance.count, textAlign: 'left' },
+                            { value: room.name, textAlign: 'left' },
                             {
-                                value: stockBalance.createDateTime
-                                    ? getDateTimeAsRecently(addUtcKind(stockBalance.createDateTime))
+                                value: room.createDateTime
+                                    ? getDateTimeAsRecently(addUtcKind(room.createDateTime))
                                     : '',
                                 textAlign: 'center'
                             }
                         ],
-                        isDeleted: stockBalance.isDeleted,
-                        viewLink: StockBalancesRoutes.View,
-                        editLink: StockBalancesRoutes.Edit,
+                        isDeleted: room.isDeleted,
+                        viewLink: StockRoomsRoutes.View,
+                        editLink: StockRoomsRoutes.Edit,
                         onClickDeleteButton: onClickDelete,
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
@@ -94,31 +92,16 @@ const useStockBalancesTable = (): UseStockBalancesTableReturn => {
     const headers: TableHeaderCellProps[] = useMemo(
         () => [
             {
-                key: 'RoomId',
-                label: 'Склад',
-                width: 4,
-                onClick: () => onClickSort('RoomId'),
-                orderBy: getOrderBy('RoomId')
-            },
-            {
-                key: 'ProductId',
-                label: 'ID продукта',
-                width: 6,
-                onClick: () => onClickSort('ProductId'),
-                orderBy: getOrderBy('ProductId')
-            },
-            {
-                key: 'Count',
-                label: 'Количество',
-                align: 'right',
-                width: 2,
-                onClick: () => onClickSort('Count'),
-                orderBy: getOrderBy('Count')
+                key: 'Name',
+                label: 'Наименование',
+                width: 10,
+                onClick: () => onClickSort('Name'),
+                orderBy: getOrderBy('Name')
             },
             {
                 key: 'CreateDateTime',
                 label: 'Создан',
-                width: 3,
+                width: 4,
                 onClick: () => onClickSort('CreateDateTime'),
                 orderBy: getOrderBy('CreateDateTime')
             }
@@ -134,4 +117,4 @@ const useStockBalancesTable = (): UseStockBalancesTableReturn => {
     return { page, headers, map, onClickDownloadAsCsv, onClickChangePage }
 }
 
-export default useStockBalancesTable
+export default useStockRoomsTable

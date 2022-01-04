@@ -1,6 +1,6 @@
 export default interface StockRoomGetPagedListRequest {
-    name: string
-    isDeleted: boolean
+    name?: string
+    isDeleted?: boolean
     minCreateDate?: string
     maxCreateDate?: string
     minModifyDate?: string
