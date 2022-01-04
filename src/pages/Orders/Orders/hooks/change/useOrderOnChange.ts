@@ -89,7 +89,7 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
 
     const onChangeSum = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setOrder({ ...state.order, sum: parseInt(data.value) })
+            state.setOrder({ ...state.order, sum: parseFloat(data.value) })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -97,7 +97,7 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
 
     const onChangeSumWithoutDiscount = useCallback(
         (_, data: InputOnChangeData) => {
-            state.setOrder({ ...state.order, sumWithoutDiscount: parseInt(data.value) })
+            state.setOrder({ ...state.order, sumWithoutDiscount: parseFloat(data.value) })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -154,7 +154,7 @@ const useOrderOnChange = (): UseOrderOnChangeReturn => {
                 return
             }
 
-            state.order.items[index].count = parseInt(data.value)
+            state.order.items[index].count = parseFloat(data.value)
 
             state.setOrder({
                 ...state.order,

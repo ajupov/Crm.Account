@@ -5,6 +5,7 @@ import CustomersRoutes from '../../../../../pages/Customers/Customers/routes/Cus
 import { Link } from 'react-router-dom'
 import OrdersRoutes from '../../../../../pages/Orders/Orders/routes/OrdersRoutes'
 import ProductsRoutes from '../../../../../pages/Products/Products/routes/ProductsRoutes'
+import StockBalancesRoutes from '../../../../../pages/Stock/StockBalances/routes/StockBalancesRoutes'
 import SuppliersRoutes from '../../../../../pages/Suppliers/Suppliers/routes/SuppliersRoutes'
 import TasksRoutes from '../../../../../pages/Tasks/Tasks/routes/TasksRoutes'
 
@@ -29,6 +30,7 @@ const DesktopSidebarMenu: FC = () => {
             {renderItem('Клиенты', CustomersRoutes.Index, 'users')}
             {renderItem('Продукты', ProductsRoutes.Index, 'list ol')}
             {renderItem('Поставщики', SuppliersRoutes.Index, 'truck')}
+            {renderItem('Склад', StockBalancesRoutes.Index, 'warehouse')}
         </>
     )
 }

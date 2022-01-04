@@ -9,6 +9,7 @@ export default interface StockConsumptionGetPagedListRequest {
     types?: StockConsumptionType[]
     createUserIds?: string[]
     orderIds?: string[]
+    itemsRoomIds?: string[]
     itemsProductIds?: string[]
     offset: number
     limit: number

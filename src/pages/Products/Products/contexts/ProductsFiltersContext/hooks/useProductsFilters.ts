@@ -68,12 +68,12 @@ const useProductsFilters = (): ProductsFiltersState => {
     }, [])
 
     const onChangeMinPrice = useCallback((_, data: InputOnChangeData) => {
-        setMinPrice(parseInt(data.value))
+        setMinPrice(parseFloat(data.value))
         setIsApplyEnabled(true)
     }, [])
 
     const onChangeMaxPrice = useCallback((_, data: InputOnChangeData) => {
-        setMaxPrice(parseInt(data.value))
+        setMaxPrice(parseFloat(data.value))
         setIsApplyEnabled(true)
     }, [])
 

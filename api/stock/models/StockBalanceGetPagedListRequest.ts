@@ -1,5 +1,5 @@
 export default interface StockBalanceGetPagedListRequest {
-    isDeleted: boolean
+    isDeleted?: boolean
     minCreateDate?: string
     maxCreateDate?: string
     minModifyDate?: string
@@ -7,7 +7,6 @@ export default interface StockBalanceGetPagedListRequest {
     createUserIds?: string[]
     roomIds?: string[]
     productIds?: string[]
-    itemsProductIds?: string[]
     offset: number
     limit: number
     sortBy?: string

@@ -3,6 +3,7 @@ import { calculateOffset, calculatePage } from '../../../../../../utils/paginati
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
+import { Guid } from 'guid-typescript'
 import Order from '../../../../../../../api/orders/models/Order'
 import OrdersContext from '../../../contexts/OrdersContext/OrdersContext'
 import OrdersRoutes from '../../../routes/OrdersRoutes'
@@ -88,6 +89,10 @@ const useOrdersTable = (): UseOrdersTableReturn => {
                             { value: order.status?.name, textAlign: 'left' },
                             { value: order.name, textAlign: 'left' },
                             {
+                                value: order.customerId === Guid.EMPTY ? '' : order.customerId,
+                                textAlign: 'left'
+                            },
+                            {
                                 value: order.createDateTime
                                     ? getDateTimeAsRecently(addUtcKind(order.createDateTime))
                                     : '',
@@ -124,9 +129,14 @@ const useOrdersTable = (): UseOrdersTableReturn => {
                 orderBy: getOrderBy('Name')
             },
             {
+                key: 'CustomerId',
+                label: 'ID клиента',
+                width: 3
+            },
+            {
                 key: 'CreateDateTime',
                 label: 'Создан',
-                width: 3,
+                width: 2,
                 onClick: () => onClickSort('CreateDateTime'),
                 orderBy: getOrderBy('CreateDateTime')
             }

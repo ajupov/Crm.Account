@@ -1,4 +1,6 @@
-﻿export default interface StockArrival {
+﻿import StockRoom from './StockRoom'
+
+export default interface StockArrival {
     id?: string
     accountId?: string
     createUserId?: string
@@ -9,4 +11,5 @@
     createDateTime?: string
     modifyDateTime?: string
     uniqueElementIds?: string[]
+    room?: StockRoom
 }

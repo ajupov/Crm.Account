@@ -2,6 +2,6 @@ import StockBalance from './StockBalance'
 
 export default interface StockBalanceGetPagedListResponse {
     totalCount: number
-    lastModifyDateTime: string
+    lastModifyDateTime?: string
     balances?: StockBalance[]
 }

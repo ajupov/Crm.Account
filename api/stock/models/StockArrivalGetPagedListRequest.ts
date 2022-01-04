@@ -9,6 +9,7 @@ export default interface StockArrivalGetPagedListRequest {
     types?: StockArrivalType[]
     createUserIds?: string[]
     orderIds?: string[]
+    itemsRoomIds?: string[]
     itemsProductIds?: string[]
     offset: number
     limit: number

@@ -71,6 +71,12 @@ import ProductView from '../../../pages/Products/Products/components/ProductView
 import Products from '../../../pages/Products/Products/Products'
 import ProductsRoutes from '../../../pages/Products/Products/routes/ProductsRoutes'
 import Settings from '../../../pages/Settings/Settings'
+import StockBalanceChanges from '../../../pages/Stock/StockBalances/components/StockBalanceChanges/StockBalanceChanges'
+import StockBalanceCreate from '../../../pages/Stock/StockBalances/components/StockBalanceCreate/StockBalanceCreate'
+import StockBalanceEdit from '../../../pages/Stock/StockBalances/components/StockBalanceEdit/StockBalanceEdit'
+import StockBalanceView from '../../../pages/Stock/StockBalances/components/StockBalanceView/StockBalanceView'
+import StockBalances from '../../../pages/Stock/StockBalances/StockBalances'
+import StockBalancesRoutes from '../../../pages/Stock/StockBalances/routes/StockBalancesRoutes'
 import SupplierAttributeChanges from '../../../pages/Suppliers/SupplierAttributes/components/SupplierAttributeChanges/SupplierAttributeChanges'
 import SupplierAttributeCreate from '../../../pages/Suppliers/SupplierAttributes/components/SupplierAttributeCreate/SupplierAttributeCreate'
 import SupplierAttributeEdit from '../../../pages/Suppliers/SupplierAttributes/components/SupplierAttributeEdit/SupplierAttributeEdit'
@@ -224,6 +230,14 @@ const Routes: FC = () => {
             <Route path={withId(SupplierAttributesRoutes.View)} exact component={SupplierAttributeView} />
             <Route path={withId(SupplierAttributesRoutes.Edit)} exact component={SupplierAttributeEdit} />
             <Route path={withId(SupplierAttributesRoutes.Changes)} exact component={SupplierAttributeChanges} />
+
+            {/*  */}
+
+            <Route path={StockBalancesRoutes.Index} exact component={StockBalances} />
+            <Route path={StockBalancesRoutes.Create} exact component={StockBalanceCreate} />
+            <Route path={withId(StockBalancesRoutes.View)} exact component={StockBalanceView} />
+            <Route path={withId(StockBalancesRoutes.Edit)} exact component={StockBalanceEdit} />
+            <Route path={withId(StockBalancesRoutes.Changes)} exact component={StockBalanceChanges} />
 
             {/*  */}
 

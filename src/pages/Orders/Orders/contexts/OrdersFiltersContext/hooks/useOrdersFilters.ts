@@ -81,22 +81,22 @@ const useOrdersFilters = (): OrdersFiltersState => {
     }, [])
 
     const onChangeMinSum = useCallback((_, data: InputOnChangeData) => {
-        setMinSum(parseInt(data.value))
+        setMinSum(parseFloat(data.value))
         setIsApplyEnabled(true)
     }, [])
 
     const onChangeMaxSum = useCallback((_, data: InputOnChangeData) => {
-        setMaxSum(parseInt(data.value))
+        setMaxSum(parseFloat(data.value))
         setIsApplyEnabled(true)
     }, [])
 
     const onChangeMinSumWithoutDiscount = useCallback((_, data: InputOnChangeData) => {
-        setMinSumWithoutDiscount(parseInt(data.value))
+        setMinSumWithoutDiscount(parseFloat(data.value))
         setIsApplyEnabled(true)
     }, [])
 
     const onChangeMaxSumWithoutDiscount = useCallback((_, data: InputOnChangeData) => {
-        setMaxSumWithoutDiscount(parseInt(data.value))
+        setMaxSumWithoutDiscount(parseFloat(data.value))
         setIsApplyEnabled(true)
     }, [])
 
