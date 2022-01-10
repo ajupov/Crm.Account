@@ -73,7 +73,7 @@ const useStockBalancesTable = (): UseStockBalancesTableReturn => {
                         cells: [
                             { value: stockBalance.room?.name, textAlign: 'left' },
                             { value: stockBalance.productId, textAlign: 'left' },
-                            { value: stockBalance.count, textAlign: 'left' },
+                            { value: stockBalance.count, textAlign: 'right' },
                             {
                                 value: stockBalance.createDateTime
                                     ? getDateTimeAsRecently(addUtcKind(stockBalance.createDateTime))
