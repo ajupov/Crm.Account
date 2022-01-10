@@ -1,7 +1,7 @@
 import StockConsumptionType from './StockConsumptionType'
 
 export default interface StockConsumptionGetPagedListRequest {
-    isDeleted: boolean
+    isDeleted?: boolean
     minCreateDate?: string
     maxCreateDate?: string
     minModifyDate?: string

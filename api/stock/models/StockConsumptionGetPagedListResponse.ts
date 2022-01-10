@@ -2,6 +2,6 @@ import StockConsumption from './StockConsumption'
 
 export default interface StockConsumptionGetPagedListResponse {
     totalCount: number
-    lastModifyDateTime: string
+    lastModifyDateTime?: string
     consumptions?: StockConsumption[]
 }

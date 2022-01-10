@@ -121,6 +121,12 @@ import TaskTypes from '../../../pages/Tasks/TaskTypes/TaskTypes'
 import TaskTypesRoutes from '../../../pages/Tasks/TaskTypes/routes/TaskTypesRoutes'
 import Tasks from '../../../pages/Tasks/Tasks/Tasks'
 import TasksRoutes from '../../../pages/Tasks/Tasks/routes/TasksRoutes'
+import StockConsumptionChanges from '../../../pages/Stock/StockConsumptions/components/StockConsumptionChanges/StockConsumptionChanges'
+import StockConsumptionCreate from '../../../pages/Stock/StockConsumptions/components/StockConsumptionCreate/StockConsumptionCreate'
+import StockConsumptionEdit from '../../../pages/Stock/StockConsumptions/components/StockConsumptionEdit/StockConsumptionEdit'
+import StockConsumptionView from '../../../pages/Stock/StockConsumptions/components/StockConsumptionView/StockConsumptionView'
+import StockConsumptionsRoutes from '../../../pages/Stock/StockConsumptions/routes/StockConsumptionsRoutes'
+import StockConsumptions from '../../../pages/Stock/StockConsumptions/StockConsumptions'
 
 const Routes: FC = () => {
     const withId = (route: string): string => `${route}/:id`
@@ -256,6 +262,12 @@ const Routes: FC = () => {
             <Route path={withId(StockArrivalsRoutes.View)} exact component={StockArrivalView} />
             <Route path={withId(StockArrivalsRoutes.Edit)} exact component={StockArrivalEdit} />
             <Route path={withId(StockArrivalsRoutes.Changes)} exact component={StockArrivalChanges} />
+
+            <Route path={StockConsumptionsRoutes.Index} exact component={StockConsumptions} />
+            <Route path={StockConsumptionsRoutes.Create} exact component={StockConsumptionCreate} />
+            <Route path={withId(StockConsumptionsRoutes.View)} exact component={StockConsumptionView} />
+            <Route path={withId(StockConsumptionsRoutes.Edit)} exact component={StockConsumptionEdit} />
+            <Route path={withId(StockConsumptionsRoutes.Changes)} exact component={StockConsumptionChanges} />
 
             <Route path={StockRoomsRoutes.Index} exact component={StockRooms} />
             <Route path={StockRoomsRoutes.Create} exact component={StockRoomCreate} />
