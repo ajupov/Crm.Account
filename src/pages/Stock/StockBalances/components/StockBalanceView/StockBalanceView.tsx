@@ -11,7 +11,7 @@ import { setPageTitle } from '../../../../../helpers/productNameHelper'
 
 // TODO: Move to l10n
 const StockBalanceView: FC = () => {
-    const title = 'Просмотр баланса'
+    const title = 'Просмотр остатка'
 
     useEffect(() => setPageTitle(title), [])
 

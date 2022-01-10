@@ -1,9 +1,9 @@
 const StockRoomsRoutes = {
-    Index: '/products/rooms',
-    View: '/products/rooms/view',
-    Create: '/products/rooms/create',
-    Edit: '/products/rooms/edit',
-    Changes: '/products/rooms/changes'
+    Index: '/stock/rooms',
+    View: '/stock/rooms/view',
+    Create: '/stock/rooms/create',
+    Edit: '/stock/rooms/edit',
+    Changes: '/stock/rooms/changes'
 }
 
 export default StockRoomsRoutes

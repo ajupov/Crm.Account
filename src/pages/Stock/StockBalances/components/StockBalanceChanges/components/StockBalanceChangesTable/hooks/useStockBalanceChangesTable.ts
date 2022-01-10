@@ -29,8 +29,8 @@ const useStockBalanceChangesTable = (): UseStockBalanceChangesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('История изменений баланса')
-        const headers = ['Идентификатор', 'Идентификатор баланса', 'Дата и время', 'Старое значение', 'Новое значение']
+        const fileName = getFileNameWithDateTime('История изменений остатка')
+        const headers = ['Идентификатор', 'Идентификатор остатка', 'Дата и время', 'Старое значение', 'Новое значение']
         const csv = convertObjectToCSV([headers, ...changes])
 
         downloadAsCsv(fileName, csv)

@@ -71,6 +71,12 @@ import ProductView from '../../../pages/Products/Products/components/ProductView
 import Products from '../../../pages/Products/Products/Products'
 import ProductsRoutes from '../../../pages/Products/Products/routes/ProductsRoutes'
 import Settings from '../../../pages/Settings/Settings'
+import StockArrivalChanges from '../../../pages/Stock/StockArrivals/components/StockArrivalChanges/StockArrivalChanges'
+import StockArrivalCreate from '../../../pages/Stock/StockArrivals/components/StockArrivalCreate/StockArrivalCreate'
+import StockArrivalEdit from '../../../pages/Stock/StockArrivals/components/StockArrivalEdit/StockArrivalEdit'
+import StockArrivalView from '../../../pages/Stock/StockArrivals/components/StockArrivalView/StockArrivalView'
+import StockArrivals from '../../../pages/Stock/StockArrivals/StockArrivals'
+import StockArrivalsRoutes from '../../../pages/Stock/StockArrivals/routes/StockArrivalsRoutes'
 import StockBalanceChanges from '../../../pages/Stock/StockBalances/components/StockBalanceChanges/StockBalanceChanges'
 import StockBalanceCreate from '../../../pages/Stock/StockBalances/components/StockBalanceCreate/StockBalanceCreate'
 import StockBalanceEdit from '../../../pages/Stock/StockBalances/components/StockBalanceEdit/StockBalanceEdit'
@@ -244,6 +250,12 @@ const Routes: FC = () => {
             <Route path={withId(StockBalancesRoutes.View)} exact component={StockBalanceView} />
             <Route path={withId(StockBalancesRoutes.Edit)} exact component={StockBalanceEdit} />
             <Route path={withId(StockBalancesRoutes.Changes)} exact component={StockBalanceChanges} />
+
+            <Route path={StockArrivalsRoutes.Index} exact component={StockArrivals} />
+            <Route path={StockArrivalsRoutes.Create} exact component={StockArrivalCreate} />
+            <Route path={withId(StockArrivalsRoutes.View)} exact component={StockArrivalView} />
+            <Route path={withId(StockArrivalsRoutes.Edit)} exact component={StockArrivalEdit} />
+            <Route path={withId(StockArrivalsRoutes.Changes)} exact component={StockArrivalChanges} />
 
             <Route path={StockRoomsRoutes.Index} exact component={StockRooms} />
             <Route path={StockRoomsRoutes.Create} exact component={StockRoomCreate} />

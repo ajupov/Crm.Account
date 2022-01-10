@@ -12,8 +12,8 @@ const StockBalanceDelete: FC = () => {
     return (
         <DeleteModal
             isDeleting={state.isDeleting}
-            title="Удаление баланса"
-            content="Вы уверены, что хотите удалить баланс?"
+            title="Удаление остатка"
+            content="Вы уверены, что хотите удалить остаток?"
             onClickConfirm={onClickConfirm}
             onClickCancel={onClickCancel}
         />

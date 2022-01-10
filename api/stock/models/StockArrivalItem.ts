@@ -7,6 +7,6 @@ export default interface StockArrivalItem {
     roomId?: string
     productId?: string
     count: number
-    uniqueElementIds: string[]
+    uniqueElementIds?: string[]
     room?: StockRoom
 }

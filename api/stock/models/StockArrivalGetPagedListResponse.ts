@@ -2,6 +2,6 @@ import StockArrival from './StockArrival'
 
 export default interface StockArrivalGetPagedListResponse {
     totalCount: number
-    lastModifyDateTime: string
+    lastModifyDateTime?: string
     arrivals?: StockArrival[]
 }

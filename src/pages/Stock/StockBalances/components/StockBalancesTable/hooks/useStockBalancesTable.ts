@@ -30,7 +30,7 @@ const useStockBalancesTable = (): UseStockBalancesTableReturn => {
             return
         }
 
-        const fileName = getFileNameWithDateTime('Балансы')
+        const fileName = getFileNameWithDateTime('Остатки')
         const headers = ['Идентификатор', 'ID склада', 'ID продукта', 'Количество', 'Удален', 'Создан', 'Изменен']
         const csv = convertObjectToCSV([headers, ...stockBalances])
 

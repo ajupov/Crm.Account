@@ -12,8 +12,8 @@ const StockBalanceRestore: FC = () => {
     return (
         <RestoreModal
             isRestoring={state.isRestoring}
-            title="Восстановление баланса"
-            content="Вы уверены, что хотите восстановить баланс?"
+            title="Восстановление остатка"
+            content="Вы уверены, что хотите восстановить остаток?"
             onClickCancel={onClickCancel}
             onClickConfirm={onClickConfirm}
         />

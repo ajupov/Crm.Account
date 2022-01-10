@@ -1,7 +1,7 @@
 import StockArrivalType from './StockArrivalType'
 
 export default interface StockArrivalGetPagedListRequest {
-    isDeleted: boolean
+    isDeleted?: boolean
     minCreateDate?: string
     maxCreateDate?: string
     minModifyDate?: string
