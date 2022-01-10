@@ -19,8 +19,8 @@ export const stockBalanceInitialState: StockBalanceState = {
         count: 0,
         isDeleted: false,
         createDateTime: void 0,
-        modifyDateTime: void 0,
-        uniqueElementIds: []
+        modifyDateTime: void 0
+        // uniqueElementIds: []
     },
     setStockBalance: (_: StockBalance) => void 0,
     create: () => Promise.resolve(void 0),

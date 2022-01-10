@@ -10,6 +10,7 @@ import { joinItems } from '../../../mappers/stockArrivalItemsMapper'
 import { useHistory } from 'react-router'
 import useOrderLoad from '../../../hooks/load/useOrderLoad'
 import useProductsLoad from '../../../hooks/load/useProductsLoad'
+import useSupplierLoad from '../../../hooks/load/useSupplierLoad'
 
 interface UseStockArrivalViewReturn {
     map: (stockArrival: StockArrival) => ViewDataProps[]
@@ -23,6 +24,7 @@ const useStockArrivalView = (): UseStockArrivalViewReturn => {
     const history = useHistory()
     const stockArrivalState = useContext(StockArrivalContext)
     const actionsState = useContext(StockArrivalsActionsContext)
+    const { supplier } = useSupplierLoad(stockArrivalState.stockArrival.supplierId)
     const { order } = useOrderLoad(stockArrivalState.stockArrival.orderId)
     const { loadProducts } = useProductsLoad()
     const [products, setProducts] = useState<Product[]>([])
@@ -64,11 +66,12 @@ const useStockArrivalView = (): UseStockArrivalViewReturn => {
     const map = useCallback(
         (stockArrival: StockArrival): ViewDataProps[] => [
             { label: 'Тип', value: getStockArrivalTypeName(stockArrival.type) },
+            { label: 'Поставщик', value: supplier?.name },
             { label: 'Заказ', value: order?.name },
             { label: 'Позиции', value: mapItems() },
             { label: 'Удален', value: stockArrival.isDeleted ? 'Да' : 'Нет' }
         ],
-        [mapItems, order]
+        [mapItems, order, supplier]
     )
 
     return { map, onClickDelete, onClickRestore, onClickCancel }

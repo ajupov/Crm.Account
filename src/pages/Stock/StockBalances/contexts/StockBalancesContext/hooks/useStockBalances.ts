@@ -35,7 +35,7 @@ const useStockBalances = (): StockBalancesState => {
             response.balances.forEach(v => {
                 delete v.accountId
                 delete v.createUserId
-                delete v.uniqueElementIds
+                // delete v.uniqueElementIds
                 delete v.room
             })
         }

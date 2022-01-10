@@ -10,6 +10,6 @@ export default interface StockArrival {
     isDeleted: boolean
     createDateTime?: string
     modifyDateTime?: string
-    uniqueElementIds?: string[]
+    // uniqueElementIds?: string[]
     room?: StockRoom
 }

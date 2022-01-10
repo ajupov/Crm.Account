@@ -12,6 +12,8 @@ import useOrdersAutocomplete from '../autocomplete/useOrdersAutocomplete'
 import useProductsAutocomplete from '../autocomplete/useProductsAutocomplete'
 import useProductsLoad from '../load/useProductsLoad'
 import useStockRoomsLoad from '../load/useStockRoomsLoad'
+import useSupplierLoad from '../load/useSupplierLoad'
+import useSuppliersAutocomplete from '../autocomplete/useSuppliersAutocomplete'
 
 interface UseStockArrivalOnChangeReturn {
     fields: FormFieldProps[]
@@ -27,7 +29,9 @@ const useStockArrivalOnChange = (): UseStockArrivalOnChangeReturn => {
     const state = useContext(StockArrivalContext)
     const { roomsAsOptions } = useStockRoomsLoad()
     const { loadProduct, loadProducts } = useProductsLoad()
+    const { supplier } = useSupplierLoad(state.stockArrival.supplierId)
     const { order } = useOrderLoad(state.stockArrival.orderId)
+    const { loadSuppliers, suppliersAsOptions } = useSuppliersAutocomplete()
     const { loadOrders, ordersAsOptions } = useOrdersAutocomplete()
     const { loadProducts: loadProductsAutocomplete, productsAsOptions } = useProductsAutocomplete()
     const [products, setProducts] = useState<Product[]>([])
@@ -37,6 +41,14 @@ const useStockArrivalOnChange = (): UseStockArrivalOnChangeReturn => {
     const onChangeType = useCallback(
         (_, data: DropdownProps) => {
             state.setStockArrival({ ...state.stockArrival, type: data.value as StockArrivalType })
+            setIsConfirmEnabled(true)
+        },
+        [state]
+    )
+
+    const onChangeSupplierId = useCallback(
+        (_, data: DropdownProps) => {
+            state.setStockArrival({ ...state.stockArrival, supplierId: data.value as string })
             setIsConfirmEnabled(true)
         },
         [state]
@@ -186,6 +198,16 @@ const useStockArrivalOnChange = (): UseStockArrivalOnChangeReturn => {
                     },
                     {
                         type: 'autocomplete',
+                        label: 'Поставщик',
+                        width: '4',
+                        value: state.stockArrival.supplierId,
+                        text: supplier?.name,
+                        load: loadSuppliers,
+                        options: suppliersAsOptions,
+                        onChange: onChangeSupplierId
+                    },
+                    {
+                        type: 'autocomplete',
                         label: 'Заказ',
                         width: '4',
                         value: state.stockArrival.orderId,
@@ -242,10 +264,15 @@ const useStockArrivalOnChange = (): UseStockArrivalOnChangeReturn => {
         ],
         [
             state.stockArrival.type,
+            state.stockArrival.supplierId,
             state.stockArrival.orderId,
             state.stockArrival.items,
             state.stockArrival.isDeleted,
             onChangeType,
+            supplier,
+            loadSuppliers,
+            suppliersAsOptions,
+            onChangeSupplierId,
             order,
             loadOrders,
             ordersAsOptions,

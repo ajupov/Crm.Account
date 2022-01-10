@@ -66,7 +66,9 @@ const useStockArrivalChangesTable = (): UseStockArrivalChangesTableReturn => {
             `Тип: ${getValueOrEmpty(getStockArrivalTypeName(oldValue?.type))} → ${getValueOrEmpty(
                 getStockArrivalTypeName(newValue?.type)
             )}`,
+            `ID поставщика: ${getValueOrEmpty(oldValue?.supplierId)} → ${getValueOrEmpty(newValue?.supplierId)}`,
             `ID заказа: ${getValueOrEmpty(oldValue?.orderId)} → ${getValueOrEmpty(newValue?.orderId)}`,
+            `ID инвентаризации: ${getValueOrEmpty(oldValue?.inventoryId)} → ${getValueOrEmpty(newValue?.inventoryId)}`,
             `Удален: ${getValueOrEmpty(oldValue?.isDeleted)} → ${getValueOrEmpty(newValue?.isDeleted)}`
         ]
     }, [])

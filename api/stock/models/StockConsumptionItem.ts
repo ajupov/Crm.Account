@@ -5,7 +5,6 @@ export default interface StockConsumptionItem {
     stockConsumptionId?: string
     roomId?: string
     productId?: string
-    orderId?: string
     count: number
     uniqueElementIds?: string[]
     room?: StockRoom

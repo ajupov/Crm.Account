@@ -6,7 +6,9 @@ export default interface StockArrival {
     accountId?: string
     createUserId?: string
     type: StockArrivalType
+    supplierId?: string
     orderId?: string
+    inventoryId?: string
     isDeleted: boolean
     createDateTime?: string
     modifyDateTime?: string
