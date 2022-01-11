@@ -1,4 +1,4 @@
-import SuppliersState, { conactsInitialState } from '../../../states/SuppliersState'
+import SuppliersState, { suppliersInitialState } from '../../../states/SuppliersState'
 import { useCallback, useEffect, useState } from 'react'
 
 import HttpClientFactory from '../../../../../../utils/httpClientFactory/HttpClientFactory'
@@ -9,11 +9,11 @@ const suppliersClient = new SuppliersClient(HttpClientFactory.Host, HttpClientFa
 const useSuppliers = (): SuppliersState => {
     const MaxLimit = 1048576
 
-    const [request, setRequest] = useState(conactsInitialState.request)
-    const [isLoading, setIsLoading] = useState(conactsInitialState.isLoading)
-    const [suppliers, setSuppliers] = useState(conactsInitialState.suppliers)
-    const [total, setTotal] = useState(conactsInitialState.total)
-    const [lastModifyDateTime, setLastModifyDateTime] = useState(conactsInitialState.lastModifyDateTime)
+    const [request, setRequest] = useState(suppliersInitialState.request)
+    const [isLoading, setIsLoading] = useState(suppliersInitialState.isLoading)
+    const [suppliers, setSuppliers] = useState(suppliersInitialState.suppliers)
+    const [total, setTotal] = useState(suppliersInitialState.total)
+    const [lastModifyDateTime, setLastModifyDateTime] = useState(suppliersInitialState.lastModifyDateTime)
 
     const getPagedList = useCallback(async () => {
         setIsLoading(true)

@@ -3,7 +3,7 @@ import { calculateOffset, calculatePage } from '../../../../../../utils/paginati
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
-import { Guid } from 'guid-typescript'
+import Customer from '../../../../../../../api/customers/models/Customer'
 import Order from '../../../../../../../api/orders/models/Order'
 import OrdersContext from '../../../contexts/OrdersContext/OrdersContext'
 import OrdersRoutes from '../../../routes/OrdersRoutes'
@@ -15,7 +15,7 @@ import useOrderView from '../../OrderView/hooks/useOrderView'
 interface UseOrdersTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (orders: Order[]) => TableBodyRowProps[]
+    map: (orders: Order[], customers: Customer[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
@@ -78,8 +78,21 @@ const useOrdersTable = (): UseOrdersTableReturn => {
         [state]
     )
 
+    const mapCustomerText = useCallback(
+        (customer?: Customer) =>
+            customer
+                ? (
+                      (customer.surname ? `${customer.surname} ` : '') +
+                      (customer.name ? `${customer.name} ` : '') +
+                      (customer.patronymic ? `${customer.patronymic} ` : '') +
+                      (customer.phone ? ` (${customer.phone})` : '')
+                  ).trim()
+                : '',
+        []
+    )
+
     const map = useCallback(
-        (orders: Order[]) =>
+        (orders: Order[], customers: Customer[]) =>
             orders.map(
                 order =>
                     ({
@@ -89,7 +102,7 @@ const useOrdersTable = (): UseOrdersTableReturn => {
                             { value: order.status?.name, textAlign: 'left' },
                             { value: order.name, textAlign: 'left' },
                             {
-                                value: order.customerId === Guid.EMPTY ? '' : order.customerId,
+                                value: mapCustomerText(customers.find(x => x.id === order.customerId)),
                                 textAlign: 'left'
                             },
                             {
@@ -106,7 +119,7 @@ const useOrdersTable = (): UseOrdersTableReturn => {
                         onClickRestoreButton: onClickRestore
                     } as TableBodyRowProps)
             ),
-        [onClickDelete, onClickRestore]
+        [mapCustomerText, onClickDelete, onClickRestore]
     )
 
     const headers: TableHeaderCellProps[] = useMemo(

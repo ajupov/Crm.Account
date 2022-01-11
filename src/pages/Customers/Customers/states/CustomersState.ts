@@ -17,7 +17,7 @@ export default interface CustomersState {
     getAll: () => Promise<CustomerGetPagedListResponse>
 }
 
-export const conactsInitialState: CustomersState = {
+export const customersInitialState: CustomersState = {
     request: {
         isDeleted: false,
         offset: 0,

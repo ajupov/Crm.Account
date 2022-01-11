@@ -1,4 +1,4 @@
-import CustomersState, { conactsInitialState } from '../../../states/CustomersState'
+import CustomersState, { customersInitialState } from '../../../states/CustomersState'
 import { useCallback, useEffect, useState } from 'react'
 
 import CustomersClient from '../../../../../../../api/customers/clients/CustomersClient'
@@ -9,11 +9,11 @@ const customersClient = new CustomersClient(HttpClientFactory.Host, HttpClientFa
 const useCustomers = (): CustomersState => {
     const MaxLimit = 1048576
 
-    const [request, setRequest] = useState(conactsInitialState.request)
-    const [isLoading, setIsLoading] = useState(conactsInitialState.isLoading)
-    const [customers, setCustomers] = useState(conactsInitialState.customers)
-    const [total, setTotal] = useState(conactsInitialState.total)
-    const [lastModifyDateTime, setLastModifyDateTime] = useState(conactsInitialState.lastModifyDateTime)
+    const [request, setRequest] = useState(customersInitialState.request)
+    const [isLoading, setIsLoading] = useState(customersInitialState.isLoading)
+    const [customers, setCustomers] = useState(customersInitialState.customers)
+    const [total, setTotal] = useState(customersInitialState.total)
+    const [lastModifyDateTime, setLastModifyDateTime] = useState(customersInitialState.lastModifyDateTime)
 
     const getPagedList = useCallback(async () => {
         setIsLoading(true)

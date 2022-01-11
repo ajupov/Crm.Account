@@ -14,7 +14,7 @@ const OrdersTable: FC = () => {
             isLoading={state.isLoading}
             hasActions
             headers={headers}
-            rows={map(state.orders)}
+            rows={map(state.orders, state.customers)}
             footer={{ page, limit: state.request.limit, total: state.total, onClickChangePage }}
             lastModifyDateTime={state.lastModifyDateTime}
             createLink={OrdersRoutes.Create}

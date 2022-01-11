@@ -17,7 +17,7 @@ export default interface SuppliersState {
     getAll: () => Promise<SupplierGetPagedListResponse>
 }
 
-export const conactsInitialState: SuppliersState = {
+export const suppliersInitialState: SuppliersState = {
     request: {
         isDeleted: false,
         offset: 0,
