@@ -143,7 +143,7 @@ const useOrdersTable = (): UseOrdersTableReturn => {
             },
             {
                 key: 'CustomerId',
-                label: 'ID клиента',
+                label: 'Клиент',
                 width: 3
             },
             {
