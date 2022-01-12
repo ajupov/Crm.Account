@@ -3,6 +3,7 @@ import { calculateOffset, calculatePage } from '../../../../../../utils/paginati
 import { convertObjectToCSV, downloadAsCsv } from '../../../../../../utils/csv/csvUtils'
 import { useCallback, useContext, useMemo } from 'react'
 
+import Product from '../../../../../../../api/products/models/Product'
 import StockBalance from '../../../../../../../api/stock/models/StockBalance'
 import StockBalancesContext from '../../../contexts/StockBalancesContext/StockBalancesContext'
 import StockBalancesRoutes from '../../../routes/StockBalancesRoutes'
@@ -14,7 +15,7 @@ import useStockBalanceView from '../../StockBalanceView/hooks/useStockBalanceVie
 interface UseStockBalancesTableReturn {
     page: number
     headers: TableHeaderCellProps[]
-    map: (stockBalances: StockBalance[]) => TableBodyRowProps[]
+    map: (stockBalances: StockBalance[], products: Product[]) => TableBodyRowProps[]
     onClickDownloadAsCsv: () => void
     onClickChangePage: (page: number) => void
 }
@@ -65,14 +66,17 @@ const useStockBalancesTable = (): UseStockBalancesTableReturn => {
     )
 
     const map = useCallback(
-        (stockBalances: StockBalance[]) =>
+        (stockBalances: StockBalance[], products: Product[]) =>
             stockBalances.map(
                 stockBalance =>
                     ({
                         id: stockBalance.id,
                         cells: [
                             { value: stockBalance.room?.name, textAlign: 'left' },
-                            { value: stockBalance.productId, textAlign: 'left' },
+                            {
+                                value: products.find(x => x.id === stockBalance.productId)?.name,
+                                textAlign: 'left'
+                            },
                             { value: stockBalance.count, textAlign: 'right' },
                             {
                                 value: stockBalance.createDateTime
@@ -102,10 +106,8 @@ const useStockBalancesTable = (): UseStockBalancesTableReturn => {
             },
             {
                 key: 'ProductId',
-                label: 'ID продукта',
-                width: 6,
-                onClick: () => onClickSort('ProductId'),
-                orderBy: getOrderBy('ProductId')
+                label: 'Продукт',
+                width: 6
             },
             {
                 key: 'Count',

@@ -32,7 +32,16 @@ const useStockArrivalsTable = (): UseStockArrivalsTableReturn => {
         }
 
         const fileName = getFileNameWithDateTime('Приходы')
-        const headers = ['Идентификатор', 'Тип', 'ID заказа', 'Удален', 'Создан', 'Изменен']
+        const headers = [
+            'Идентификатор',
+            'Тип',
+            'ID поставщика',
+            'ID заказа',
+            'ID инвентаризации',
+            'Удален',
+            'Создан',
+            'Изменен'
+        ]
         const csv = convertObjectToCSV([headers, ...stockArrivals])
 
         downloadAsCsv(fileName, csv)
@@ -99,7 +108,6 @@ const useStockArrivalsTable = (): UseStockArrivalsTableReturn => {
                 onClick: () => onClickSort('Type'),
                 orderBy: getOrderBy('Type')
             },
-
             {
                 key: 'CreateDateTime',
                 label: 'Создан',

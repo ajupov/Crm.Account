@@ -14,7 +14,7 @@ const StockBalancesTable: FC = () => {
             isLoading={state.isLoading}
             hasActions
             headers={headers}
-            rows={map(state.stockBalances)}
+            rows={map(state.stockBalances, state.products)}
             footer={{ page, limit: state.request.limit, total: state.total, onClickChangePage }}
             lastModifyDateTime={state.lastModifyDateTime}
             createLink={StockBalancesRoutes.Create}

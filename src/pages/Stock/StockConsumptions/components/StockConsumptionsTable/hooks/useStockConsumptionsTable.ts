@@ -99,7 +99,6 @@ const useStockConsumptionsTable = (): UseStockConsumptionsTableReturn => {
                 onClick: () => onClickSort('Type'),
                 orderBy: getOrderBy('Type')
             },
-
             {
                 key: 'CreateDateTime',
                 label: 'Создан',
